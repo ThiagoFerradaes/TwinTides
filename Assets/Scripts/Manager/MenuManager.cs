@@ -3,10 +3,9 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuManager : MonoBehaviour {
+public class MenuManager : NetworkBehaviour {
     [SerializeField] GameObject loadingScreen;
     [SerializeField] float loadingTime;
-    [SerializeField] NetworkManager networkManager;
 
 
     #region Buttons
@@ -15,14 +14,18 @@ public class MenuManager : MonoBehaviour {
         Application.Quit();
     }
     public void PlayButton() {
-        if (networkManager.ConnectedClientsList.Count == 2)
+        if (NetworkManager.Singleton.IsHost && NetworkManager.Singleton.ConnectedClientsList.Count == 2)
         {
-            StartCoroutine(LoadScene(1));
+            LoadSceneClientRpc(1);
         }   
     }
 
-    IEnumerator LoadScene(int index) {
+    [ClientRpc]
+    void LoadSceneClientRpc(int index) {
+        StartCoroutine(LoadScene(index));
+    }
 
+    IEnumerator LoadScene(int index) {
         loadingScreen.SetActive(true);
 
 
@@ -30,5 +33,6 @@ public class MenuManager : MonoBehaviour {
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(index);
     }
+
     #endregion
 }
