@@ -26,10 +26,11 @@ public class MenuManager : NetworkBehaviour {
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
             NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconneted;
         }
+
     }
 
     void OnDisable() {
-        if (NetworkManager != null) {
+        if (NetworkManager.Singleton != null) {
             NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
             NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconneted;
         }
@@ -98,7 +99,10 @@ public class MenuManager : NetworkBehaviour {
     #endregion
 
     #region Buttons
-
+    [ServerRpc(RequireOwnership = false)]
+    public void ChangeCharacterButtonServerRpc(int indexOfTheButton) {
+        WhiteBoard.Singleton.ChangeCharactersServerRpc(indexOfTheButton);
+    }
     public void ExitButton() {
         Application.Quit();
     }
