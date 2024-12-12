@@ -17,6 +17,8 @@ public class MenuManager : NetworkBehaviour {
     [SerializeField] GameObject clientVisualIndicador;
     [SerializeField] TextMeshProUGUI hostTMP;
     [SerializeField] TextMeshProUGUI clientTMP;
+    [SerializeField] GameObject lobbyClosedScreen;
+    [SerializeField] GameObject lobbyScreen;
     ulong hostId;
 
     private void Start() {
@@ -35,6 +37,7 @@ public class MenuManager : NetworkBehaviour {
 
     #region Funções De Entrada no Lobby
     private void OnClientConnected(ulong obj) {
+
         if (NetworkManager.Singleton.IsHost) {
             switch (NetworkManager.Singleton.ConnectedClients.Count) {
                 case 0:
@@ -66,7 +69,16 @@ public class MenuManager : NetworkBehaviour {
     }
 
     private void OnClientDisconneted(ulong obj) {
-        HostClearVisualClientRpc(NetworkManager.Singleton.IsHost);
+        if (NetworkManager.Singleton.IsHost) {
+            switch (NetworkManager.Singleton.ConnectedClients.Count) {
+                case 0:
+                    HostClearVisualClientRpc(true);
+                    break;
+                case 1:
+                    HostClearVisualClientRpc(false);
+                    break;
+            }
+        }
     }
 
     [ClientRpc]
@@ -108,6 +120,29 @@ public class MenuManager : NetworkBehaviour {
         NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
 
         yield return null;
+    }
+
+    public void BackButtonHostInLobby() {
+        if (NetworkManager.Singleton.IsHost) {
+
+            CloseLobbyClientRpc();
+
+            NetworkManager.Singleton.Shutdown();
+        }
+    }
+
+    [ClientRpc]
+    void CloseLobbyClientRpc() {
+        hostVisualIndicador.SetActive(false);
+        hostTMP.text = "";
+
+        clientVisualIndicador.SetActive(false);
+        clientTMP.text = "";
+
+        if (!NetworkManager.Singleton.IsHost) {
+            lobbyScreen.SetActive(false);
+            lobbyClosedScreen.SetActive(true);
+        }
     }
 
     #endregion
