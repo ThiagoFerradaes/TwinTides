@@ -58,30 +58,10 @@ public class WhiteBoard: NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void CharacterReadyServerRpc(int player) {
         if (player == 1) {
-            if (PlayerOneReady.Value == true) { // Se vc ja ta pronto vc pode voltar
-                PlayerOneReady.Value = false;
-            }
-            else { // Se vc n ta pronto, vc só pode dar pronto se o seu personagem for diferente do outro
-                if (PlayerOneCharacter.Value != PlayerTwoCharacter.Value) {
-                    PlayerOneReady.Value = true;
-                }
-                else {
-                    Debug.Log("Personagem repetido");
-                }
-            }
+            PlayerOneReady.Value = !PlayerOneReady.Value;
         }
-        if (player == 2) {
-            if (PlayerTwoReady.Value == true) { // Se vc ja ta pronto vc pode voltar
-                PlayerTwoReady.Value = false;
-            }
-            else { // Se vc n ta pronto, vc só pode dar pronto se o seu personagem for diferente do outro
-                if (PlayerOneCharacter.Value != PlayerTwoCharacter.Value) {
-                    PlayerTwoReady.Value = true;
-                }
-                else {
-                    Debug.LogWarning("Personagem repetido");
-                }
-            }
+        else {
+            PlayerTwoReady.Value = !PlayerTwoReady.Value;
         }
     }
     #endregion

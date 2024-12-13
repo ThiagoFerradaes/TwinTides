@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using TMPro;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuManager : NetworkBehaviour {
 
@@ -25,6 +27,14 @@ public class MenuManager : NetworkBehaviour {
     [SerializeField] GameObject[] readyButton;
     [SerializeField] TextMeshProUGUI[] readyTexts;
     ulong hostId;
+
+    [Header("Pop-Ups")]
+    [SerializeField] Image notAllPlayersAreReadyPopUp;
+    [SerializeField] Image duplicatedCharactersPopUP;
+    [SerializeField] float timeToPopUpFadeOut;
+    [SerializeField] float waitTimeToPopUpFadeOut;
+    [Range(0f, 255f)][SerializeField] float popUpMaxAlpha;
+    bool popUpCoroutinePlaying;
 
     private void Start() {
         if (NetworkManager.Singleton != null) {
@@ -128,16 +138,67 @@ public class MenuManager : NetworkBehaviour {
             WhiteBoard.Singleton.ChangeCharactersServerRpc(player);
         }
     }
+
     public void ExitButton() {
         Application.Quit();
     }
+
     public void PlayButton() {
         if (WhiteBoard.Singleton.PlayerOneReady.Value && WhiteBoard.Singleton.PlayerTwoReady.Value) {
             StartCoroutine(LoadScene(nomeDaCena));
         }
         else {
-            Debug.LogWarning("Jogadores não estão prontos");
+            if (!popUpCoroutinePlaying) {
+                StartCoroutine(PopUpFadeInFadeOut(notAllPlayersAreReadyPopUp));
+            }
         }
+    }
+
+    IEnumerator PopUpFadeInFadeOut(Image popUp) {
+        popUpCoroutinePlaying = true;
+
+        Color original = popUp.color;
+        popUp.color = new Color(original.r, original.g, original.b, 0f);
+
+        TextMeshProUGUI textComponent = popUp.GetComponentInChildren<TextMeshProUGUI>(); 
+        Color originalText = textComponent.color; 
+        textComponent.color = new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, 0f);
+
+        popUp.gameObject.SetActive(true);
+
+        float maxAlpha = popUpMaxAlpha / 255f; 
+
+
+        for (float i = 0; i <= timeToPopUpFadeOut; i += Time.deltaTime) {
+            float alpha = Mathf.Lerp(0, maxAlpha, i / timeToPopUpFadeOut); 
+            float textAlpha = Mathf.Lerp(0, 1, i / timeToPopUpFadeOut); 
+
+            popUp.color = new Color(original.r, original.g, original.b, alpha);
+            textComponent.color = new Color(originalText.r, originalText.g, originalText.b, textAlpha);
+
+            yield return null;
+        }
+
+
+        yield return new WaitForSeconds(waitTimeToPopUpFadeOut);
+
+
+        for (float i = 0; i <= timeToPopUpFadeOut; i += Time.deltaTime) {
+            float alpha = Mathf.Lerp(maxAlpha, 0, i / timeToPopUpFadeOut); 
+            float textAlpha = Mathf.Lerp(1, 0, i / timeToPopUpFadeOut); 
+
+            popUp.color = new Color(original.r, original.g, original.b, alpha);
+            textComponent.color = new Color(originalText.r, originalText.g, originalText.b, textAlpha);
+
+            yield return null;
+        }
+
+        popUp.gameObject.SetActive(false);
+        popUp.color = original;
+        textComponent.color = originalText;
+
+        yield return new WaitForSeconds(0.2f);
+        popUpCoroutinePlaying = false;
     }
 
     [ClientRpc]
@@ -179,7 +240,32 @@ public class MenuManager : NetworkBehaviour {
 
     [ServerRpc(RequireOwnership = false)]
     public void ReadyButtonServerRpc(int player) {
-        WhiteBoard.Singleton.CharacterReadyServerRpc(player);
+        if (player == 1) {
+            if (WhiteBoard.Singleton.PlayerOneReady.Value == true) { // Se vc ja ta pronto vc pode voltar
+                WhiteBoard.Singleton.CharacterReadyServerRpc(player);
+            }
+            else { // Se vc n ta pronto, vc só pode dar pronto se o seu personagem for diferente do outro
+                if (WhiteBoard.Singleton.PlayerOneCharacter.Value != WhiteBoard.Singleton.PlayerTwoCharacter.Value) {
+                    WhiteBoard.Singleton.CharacterReadyServerRpc(player);
+                }
+                else {
+                    StartCoroutine(PopUpFadeInFadeOut(duplicatedCharactersPopUP));
+                }
+            }
+        }
+        if (player == 2) {
+            if (WhiteBoard.Singleton.PlayerTwoReady.Value == true) { // Se vc ja ta pronto vc pode voltar
+                WhiteBoard.Singleton.CharacterReadyServerRpc(player);
+            }
+            else { // Se vc n ta pronto, vc só pode dar pronto se o seu personagem for diferente do outro
+                if (WhiteBoard.Singleton.PlayerOneCharacter.Value != WhiteBoard.Singleton.PlayerTwoCharacter.Value) {
+                    WhiteBoard.Singleton.CharacterReadyServerRpc(player); ;
+                }
+                else {
+                    StartCoroutine(PopUpFadeInFadeOut(duplicatedCharactersPopUP));
+                }
+            }
+        }
     }
 
     #endregion
