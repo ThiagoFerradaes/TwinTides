@@ -19,6 +19,11 @@ public class MenuManager : NetworkBehaviour {
     [SerializeField] TextMeshProUGUI clientTMP;
     [SerializeField] GameObject lobbyClosedScreen;
     [SerializeField] GameObject lobbyScreen;
+    [SerializeField] GameObject changeCharacterOnButton;
+    [SerializeField] GameObject changeCHaracterTwoButton;
+    [SerializeField] GameObject playButton;
+    [SerializeField] GameObject[] readyButton;
+    [SerializeField] TextMeshProUGUI[] readyTexts;
     ulong hostId;
 
     private void Start() {
@@ -51,6 +56,9 @@ public class MenuManager : NetworkBehaviour {
                     break;
             }
         }
+        else {
+            EachPlayerButtonsOn(false);
+        }
     }
 
     [ClientRpc]
@@ -59,6 +67,7 @@ public class MenuManager : NetworkBehaviour {
             hostId = clientId;
             hostVisualIndicador.SetActive(true);
             hostTMP.text = $"Player 1: {hostId}";
+            EachPlayerButtonsOn(true);
         }
         else {
             hostVisualIndicador.SetActive(true);
@@ -66,7 +75,18 @@ public class MenuManager : NetworkBehaviour {
             clientVisualIndicador.SetActive(true);
             clientTMP.text = $"Player 2: {clientId}";
         }
+    }
 
+    void EachPlayerButtonsOn(bool isHost) {
+        if (isHost) {
+            changeCharacterOnButton.SetActive(true);
+            readyButton[0].SetActive(true);
+            playButton.SetActive(true);
+        }
+        else {
+            changeCHaracterTwoButton.SetActive(true);
+            readyButton[1].SetActive(true);
+        }
     }
 
     private void OnClientDisconneted(ulong obj) {
@@ -100,15 +120,23 @@ public class MenuManager : NetworkBehaviour {
 
     #region Buttons
     [ServerRpc(RequireOwnership = false)]
-    public void ChangeCharacterButtonServerRpc(int indexOfTheButton) {
-        WhiteBoard.Singleton.ChangeCharactersServerRpc(indexOfTheButton);
+    public void ChangeCharacterButtonServerRpc(int player) {
+        if (player == 1 && !WhiteBoard.Singleton.PlayerOneReady.Value) {
+            WhiteBoard.Singleton.ChangeCharactersServerRpc(player);
+        }
+        else if (player == 2 && !WhiteBoard.Singleton.PlayerTwoReady.Value) {
+            WhiteBoard.Singleton.ChangeCharactersServerRpc(player);
+        }
     }
     public void ExitButton() {
         Application.Quit();
     }
     public void PlayButton() {
-        if (NetworkManager.Singleton.IsHost && NetworkManager.Singleton.ConnectedClientsList.Count == 2) {
+        if (WhiteBoard.Singleton.PlayerOneReady.Value && WhiteBoard.Singleton.PlayerTwoReady.Value) {
             StartCoroutine(LoadScene(nomeDaCena));
+        }
+        else {
+            Debug.LogWarning("Jogadores não estão prontos");
         }
     }
 
@@ -147,6 +175,11 @@ public class MenuManager : NetworkBehaviour {
             lobbyScreen.SetActive(false);
             lobbyClosedScreen.SetActive(true);
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void ReadyButtonServerRpc(int player) {
+        WhiteBoard.Singleton.CharacterReadyServerRpc(player);
     }
 
     #endregion
