@@ -7,6 +7,7 @@ using Unity.Netcode;
 using Unity.Services.Multiplayer;
 using Unity.Services.Vivox;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -230,6 +231,13 @@ public class MenuManager : NetworkBehaviour {
 
     [ClientRpc]
     void CloseLobbyClientRpc() {
+
+        hostVisualIndicador.SetActive(false);
+        hostTMP.text = "";
+
+        clientVisualIndicador.SetActive(false);
+        clientTMP.text = "";
+
         if (!NetworkManager.Singleton.IsHost) {
             lobbyScreen.SetActive(false);
             lobbyClosedScreen.SetActive(true);
