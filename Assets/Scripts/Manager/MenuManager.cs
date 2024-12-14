@@ -71,34 +71,36 @@ public class MenuManager : NetworkBehaviour {
     }
 
     #region Funções De Entrada no Lobby
-    private void OnClientConnected(ulong obj) {
+    private void OnClientConnected(ulong obj) { // Quando um client se conecta
 
-        if (NetworkManager.Singleton.IsHost) {
+        if (NetworkManager.Singleton.IsHost) { // Só o host chama essa função
             switch (NetworkManager.Singleton.ConnectedClients.Count) {
                 case 0:
                     break;
                 case 1:
-                    HostUpdateVisualsClientRpc(obj, true);
+                    HostUpdateVisualsClientRpc(obj, true); // Host se conectou
                     break;
                 case 2:
-                    HostUpdateVisualsClientRpc(obj, false);
+                    HostUpdateVisualsClientRpc(obj, false); // Client se conectou
                     break;
             }
         }
         else {
-            EachPlayerButtonsOn(false);
+            EachPlayerButtonsOn(false); // O client chama essa função quando ele entra
         }
     }
 
     [ClientRpc]
     void HostUpdateVisualsClientRpc(ulong clientId, bool isHost) {
-        if (isHost) {
+        if (isHost) { // Ui que liga quando só o host entra na sal
             hostId = clientId;
             hostVisualIndicador.SetActive(true);
             hostTMP.text = $"Player 1: {hostId}";
-            EachPlayerButtonsOn(true);
+            EachPlayerButtonsOn(isHost);
+
+            WhiteBoard.Singleton.ResetWhiteBoardServerRpc(); // Resetar o whiteBoard quando o host entra
         }
-        else {
+        else { // Ui que liga quando o client entra na sala
             hostVisualIndicador.SetActive(true);
             hostTMP.text = $"Player 1: {hostId}";
             clientVisualIndicador.SetActive(true);
@@ -108,26 +110,25 @@ public class MenuManager : NetworkBehaviour {
 
     void EachPlayerButtonsOn(bool isHost) {
         if (isHost) {
-            changeCharacterOnButton.SetActive(true);
+            changeCHaracterTwoButton.SetActive(false); // Desligando os botões antigos caso o host tenha sido client
+            readyButton[1].SetActive(false);
+
+            changeCharacterOnButton.SetActive(true); // Ligando os botões certos
             readyButton[0].SetActive(true);
             playButton.SetActive(true);
         }
         else {
-            changeCHaracterTwoButton.SetActive(true);
+            changeCharacterOnButton.SetActive(false); // Desligando os botões antigos caso o client tenha sido host
+            readyButton[0].SetActive(false);
+            playButton.SetActive(false);
+
+
+            changeCHaracterTwoButton.SetActive(true); // Ligando os botões certos
             readyButton[1].SetActive(true);
         }
     }
 
-    private void OnClientDisconneted(ulong obj) {
-        if (NetworkManager.Singleton.IsHost) {
-            if (NetworkManager.Singleton.LocalClientId != obj) { // client saiu
-                HostClearVisualClientRpc();
-            }
-        }
-    }
-
-    [ClientRpc]
-    void HostClearVisualClientRpc() {
+    private void OnClientDisconneted(ulong obj) { // Se o client desconecta limpa a ui dele
         clientVisualIndicador.SetActive(false);
         clientTMP.text = "";
     }
@@ -135,7 +136,7 @@ public class MenuManager : NetworkBehaviour {
 
     #region Buttons
     [ServerRpc(RequireOwnership = false)]
-    public void ChangeCharacterButtonServerRpc(int player) {
+    public void ChangeCharacterButtonServerRpc(int player) { // Botão de mudar de personagem
         if (player == 1 && !WhiteBoard.Singleton.PlayerOneReady.Value) {
             WhiteBoard.Singleton.ChangeCharactersServerRpc(player);
         }
@@ -144,13 +145,13 @@ public class MenuManager : NetworkBehaviour {
         }
     }
 
-    public void ExitButton() {
+    public void ExitButton() { // Botão de sair do jogo
         Application.Quit();
     }
 
-    public void PlayButton() {
-        if (WhiteBoard.Singleton.PlayerOneReady.Value && WhiteBoard.Singleton.PlayerTwoReady.Value) {
-            StartCoroutine(LoadScene(nomeDaCena));
+    public void PlayButton() { // Botão de jogar
+        if (WhiteBoard.Singleton.PlayerOneReady.Value && WhiteBoard.Singleton.PlayerTwoReady.Value) { // só pode trocar se os dois jogadores estiverem prontos
+            StartCoroutine(LoadScene(nomeDaCena)); 
         }
         else {
             if (!popUpCoroutinePlaying) {
@@ -210,6 +211,7 @@ public class MenuManager : NetworkBehaviour {
     void LoadingScreenClientRpc() {
         loadingScreen.SetActive(true);
     }
+
     IEnumerator LoadScene(string sceneName) {
         LoadingScreenClientRpc();
 
@@ -220,23 +222,14 @@ public class MenuManager : NetworkBehaviour {
         yield return null;
     }
 
-    public void BackButtonHostInLobby() {
+    public void BackButtonHostInLobby() { // Botão de sair do host
         if (NetworkManager.Singleton.IsHost) {
-
             CloseLobbyClientRpc();
-
-            playButton.SetActive(false);
         }
     }
 
     [ClientRpc]
     void CloseLobbyClientRpc() {
-        hostVisualIndicador.SetActive(false);
-        hostTMP.text = "";
-
-        clientVisualIndicador.SetActive(false);
-        clientTMP.text = "";
-
         if (!NetworkManager.Singleton.IsHost) {
             lobbyScreen.SetActive(false);
             lobbyClosedScreen.SetActive(true);
@@ -292,9 +285,11 @@ public class MenuManager : NetworkBehaviour {
     void ServerStarted() {
         serverStarded = true;
     }
+
     void ServerStopped(bool qualquer) {
         serverStarded = false;
     }
+
     IEnumerator LoadingScreenCreatingLobbyOrJoin(bool host) {
         if (host) {
             waitForHostOrJoinScreen.SetActive(true);

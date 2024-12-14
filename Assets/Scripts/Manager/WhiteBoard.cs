@@ -64,5 +64,14 @@ public class WhiteBoard: NetworkBehaviour
             PlayerTwoReady.Value = !PlayerTwoReady.Value;
         }
     }
+
+    [ServerRpc (RequireOwnership =false)]
+    public void ResetWhiteBoardServerRpc() {
+        PlayerOneReady.Value = false;
+        PlayerTwoReady.Value = false;
+
+        PlayerOneCharacter.Value = Characters.Maevis;
+        PlayerTwoCharacter.Value = Characters.Moly;
+    }
     #endregion
 }
