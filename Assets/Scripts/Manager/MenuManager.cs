@@ -1,7 +1,11 @@
 using System;
 using System.Collections;
+using System.Linq;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.Netcode;
+using Unity.Services.Multiplayer;
+using Unity.Services.Vivox;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -36,10 +40,22 @@ public class MenuManager : NetworkBehaviour {
     [Range(0f, 255f)][SerializeField] float popUpMaxAlpha;
     bool popUpCoroutinePlaying;
 
+    [Header("Tela de carregamento pra host e join")]
+    [SerializeField] GameObject waitForHostOrJoinScreen;
+    [SerializeField] TextMeshProUGUI waitForHostOrJoinText;
+    [SerializeField] float timeBetweenDots;
+    private bool serverStarded;
+
+    [Header("Joining screen")]
+    [SerializeField] TMP_InputField[] inputFields;
+
     private void Start() {
         if (NetworkManager.Singleton != null) {
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
             NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconneted;
+
+            NetworkManager.Singleton.OnServerStarted += ServerStarted;
+            NetworkManager.Singleton.OnServerStopped += ServerStopped;
         }
 
     }
@@ -48,6 +64,9 @@ public class MenuManager : NetworkBehaviour {
         if (NetworkManager.Singleton != null) {
             NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
             NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconneted;
+
+            NetworkManager.Singleton.OnServerStarted -= ServerStarted;
+            NetworkManager.Singleton.OnServerStopped -= ServerStopped;
         }
     }
 
@@ -101,30 +120,16 @@ public class MenuManager : NetworkBehaviour {
 
     private void OnClientDisconneted(ulong obj) {
         if (NetworkManager.Singleton.IsHost) {
-            switch (NetworkManager.Singleton.ConnectedClients.Count) {
-                case 0:
-                    HostClearVisualClientRpc(true);
-                    break;
-                case 1:
-                    HostClearVisualClientRpc(false);
-                    break;
+            if (NetworkManager.Singleton.LocalClientId != obj) { // client saiu
+                HostClearVisualClientRpc();
             }
         }
     }
 
     [ClientRpc]
-    void HostClearVisualClientRpc(bool isHost) {
-        if (isHost) {
-            hostVisualIndicador.SetActive(false);
-            hostTMP.text = "";
-
-            clientVisualIndicador.SetActive(false);
-            clientTMP.text = "";
-        }
-        else {
-            clientVisualIndicador.SetActive(false);
-            clientTMP.text = "";
-        }
+    void HostClearVisualClientRpc() {
+        clientVisualIndicador.SetActive(false);
+        clientTMP.text = "";
     }
     #endregion
 
@@ -160,18 +165,18 @@ public class MenuManager : NetworkBehaviour {
         Color original = popUp.color;
         popUp.color = new Color(original.r, original.g, original.b, 0f);
 
-        TextMeshProUGUI textComponent = popUp.GetComponentInChildren<TextMeshProUGUI>(); 
-        Color originalText = textComponent.color; 
+        TextMeshProUGUI textComponent = popUp.GetComponentInChildren<TextMeshProUGUI>();
+        Color originalText = textComponent.color;
         textComponent.color = new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, 0f);
 
         popUp.gameObject.SetActive(true);
 
-        float maxAlpha = popUpMaxAlpha / 255f; 
+        float maxAlpha = popUpMaxAlpha / 255f;
 
 
         for (float i = 0; i <= timeToPopUpFadeOut; i += Time.deltaTime) {
-            float alpha = Mathf.Lerp(0, maxAlpha, i / timeToPopUpFadeOut); 
-            float textAlpha = Mathf.Lerp(0, 1, i / timeToPopUpFadeOut); 
+            float alpha = Mathf.Lerp(0, maxAlpha, i / timeToPopUpFadeOut);
+            float textAlpha = Mathf.Lerp(0, 1, i / timeToPopUpFadeOut);
 
             popUp.color = new Color(original.r, original.g, original.b, alpha);
             textComponent.color = new Color(originalText.r, originalText.g, originalText.b, textAlpha);
@@ -184,8 +189,8 @@ public class MenuManager : NetworkBehaviour {
 
 
         for (float i = 0; i <= timeToPopUpFadeOut; i += Time.deltaTime) {
-            float alpha = Mathf.Lerp(maxAlpha, 0, i / timeToPopUpFadeOut); 
-            float textAlpha = Mathf.Lerp(1, 0, i / timeToPopUpFadeOut); 
+            float alpha = Mathf.Lerp(maxAlpha, 0, i / timeToPopUpFadeOut);
+            float textAlpha = Mathf.Lerp(1, 0, i / timeToPopUpFadeOut);
 
             popUp.color = new Color(original.r, original.g, original.b, alpha);
             textComponent.color = new Color(originalText.r, originalText.g, originalText.b, textAlpha);
@@ -220,7 +225,7 @@ public class MenuManager : NetworkBehaviour {
 
             CloseLobbyClientRpc();
 
-            NetworkManager.Singleton.Shutdown();
+            playButton.SetActive(false);
         }
     }
 
@@ -249,7 +254,7 @@ public class MenuManager : NetworkBehaviour {
                     WhiteBoard.Singleton.CharacterReadyServerRpc(player);
                 }
                 else {
-                    StartCoroutine(PopUpFadeInFadeOut(duplicatedCharactersPopUP));
+                    ShowDuplicatePopUpClientRpc(player);
                 }
             }
         }
@@ -262,11 +267,74 @@ public class MenuManager : NetworkBehaviour {
                     WhiteBoard.Singleton.CharacterReadyServerRpc(player); ;
                 }
                 else {
-                    StartCoroutine(PopUpFadeInFadeOut(duplicatedCharactersPopUP));
+                    ShowDuplicatePopUpClientRpc(player);
                 }
             }
         }
     }
 
+    [ClientRpc]
+    void ShowDuplicatePopUpClientRpc(int player) {
+        if (player == 1) {
+            if (NetworkManager.Singleton.IsHost)
+                StartCoroutine(PopUpFadeInFadeOut(duplicatedCharactersPopUP));
+        }
+        else {
+            if (!NetworkManager.Singleton.IsHost)
+                StartCoroutine(PopUpFadeInFadeOut(duplicatedCharactersPopUP));
+        }
+    }
+
+    public void HostOrJoinButton(bool host) {
+        StartCoroutine(LoadingScreenCreatingLobbyOrJoin(host));
+    }
+
+    void ServerStarted() {
+        serverStarded = true;
+    }
+    void ServerStopped(bool qualquer) {
+        serverStarded = false;
+    }
+    IEnumerator LoadingScreenCreatingLobbyOrJoin(bool host) {
+        if (host) {
+            waitForHostOrJoinScreen.SetActive(true);
+
+            while (!serverStarded) {
+                waitForHostOrJoinText.text = "Creating lobby";
+                yield return new WaitForSeconds(timeBetweenDots);
+                waitForHostOrJoinText.text = "Creating lobby.";
+                yield return new WaitForSeconds(timeBetweenDots);
+                waitForHostOrJoinText.text = "Creating lobby..";
+                yield return new WaitForSeconds(timeBetweenDots);
+                waitForHostOrJoinText.text = "Creating lobby...";
+                yield return new WaitForSeconds(timeBetweenDots);
+            }
+
+            waitForHostOrJoinScreen.SetActive(false);
+        }
+        else {
+            waitForHostOrJoinScreen.SetActive(true);
+
+            while (NetworkManager.Singleton.ConnectedClientsList.Count < 2) {
+                waitForHostOrJoinText.text = "Joining lobby";
+                yield return new WaitForSeconds(timeBetweenDots);
+                waitForHostOrJoinText.text = "Joining lobby.";
+                yield return new WaitForSeconds(timeBetweenDots);
+                waitForHostOrJoinText.text = "Joining lobby..";
+                yield return new WaitForSeconds(timeBetweenDots);
+                waitForHostOrJoinText.text = "Joining lobby...";
+                yield return new WaitForSeconds(timeBetweenDots);
+            }
+
+            waitForHostOrJoinScreen.SetActive(false);
+        }
+    }
+
+    public void CleanInputTextArea() {
+        foreach (var item in inputFields)
+        {
+            item.text = "";
+        }
+    }
     #endregion
 }
