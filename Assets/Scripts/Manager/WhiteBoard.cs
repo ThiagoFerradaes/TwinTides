@@ -1,10 +1,7 @@
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public enum Characters {
-    Maevis,
-    Moly
-}
 public class WhiteBoard: NetworkBehaviour
 {
     public static WhiteBoard Singleton {  get; private set; }
@@ -16,6 +13,7 @@ public class WhiteBoard: NetworkBehaviour
 
     public NetworkVariable<bool> PlayerOneReady = new(false);
     public NetworkVariable<bool> PlayerTwoReady = new(false);
+
     #endregion
     #region Métodos
 
