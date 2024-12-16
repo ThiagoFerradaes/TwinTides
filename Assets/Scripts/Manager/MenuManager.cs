@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TMPro;
 using Unity.Netcode;
+using Unity.Services.Lobbies;
 using Unity.Services.Multiplayer;
 using Unity.Services.Vivox;
 using Unity.VisualScripting;
@@ -31,6 +32,8 @@ public class MenuManager : NetworkBehaviour {
     [SerializeField] GameObject playButton;
     [SerializeField] GameObject[] readyButton;
     [SerializeField] TextMeshProUGUI[] readyTexts;
+    [SerializeField] GameObject joinByCodeScreen;
+    [SerializeField] GameObject creatLobbyScreen;
     ulong hostId;
 
     [Header("Pop-Ups")]
@@ -43,6 +46,7 @@ public class MenuManager : NetworkBehaviour {
 
     [Header("Tela de carregamento pra host e join")]
     [SerializeField] GameObject waitForHostOrJoinScreen;
+    [SerializeField] GameObject failedToJoinLobbyScreen;
     [SerializeField] TextMeshProUGUI waitForHostOrJoinText;
     [SerializeField] float timeBetweenDots;
     private bool serverStarded;
@@ -152,7 +156,7 @@ public class MenuManager : NetworkBehaviour {
 
     public void PlayButton() { // Botão de jogar
         if (WhiteBoard.Singleton.PlayerOneReady.Value && WhiteBoard.Singleton.PlayerTwoReady.Value) { // só pode trocar se os dois jogadores estiverem prontos
-            StartCoroutine(LoadScene(nomeDaCena)); 
+            StartCoroutine(LoadScene(nomeDaCena));
         }
         else {
             if (!popUpCoroutinePlaying) {
@@ -299,7 +303,9 @@ public class MenuManager : NetworkBehaviour {
     }
 
     IEnumerator LoadingScreenCreatingLobbyOrJoin(bool host) {
+
         if (host) {
+            lobbyScreen.SetActive(true);
             waitForHostOrJoinScreen.SetActive(true);
 
             while (!serverStarded) {
@@ -313,12 +319,15 @@ public class MenuManager : NetworkBehaviour {
                 yield return new WaitForSeconds(timeBetweenDots);
             }
 
+            creatLobbyScreen.SetActive(false);
             waitForHostOrJoinScreen.SetActive(false);
+
         }
         else {
+            lobbyScreen.SetActive(true);
             waitForHostOrJoinScreen.SetActive(true);
 
-            while (NetworkManager.Singleton.ConnectedClientsList.Count < 2) {
+            while (!NetworkManager.Singleton.IsConnectedClient) {
                 waitForHostOrJoinText.text = "Joining lobby";
                 yield return new WaitForSeconds(timeBetweenDots);
                 waitForHostOrJoinText.text = "Joining lobby.";
@@ -329,15 +338,16 @@ public class MenuManager : NetworkBehaviour {
                 yield return new WaitForSeconds(timeBetweenDots);
             }
 
+            joinByCodeScreen.SetActive(false);
             waitForHostOrJoinScreen.SetActive(false);
         }
     }
 
     public void CleanInputTextArea() {
-        foreach (var item in inputFields)
-        {
+        foreach (var item in inputFields) {
             item.text = "";
         }
     }
+
     #endregion
 }
