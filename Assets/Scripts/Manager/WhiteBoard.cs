@@ -24,6 +24,7 @@ public class WhiteBoard: NetworkBehaviour
         }
 
         Singleton = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public override void OnDestroy() {
