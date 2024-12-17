@@ -9233,6 +9233,7 @@ GameObject:
   - component: {fileID: 1304967851}
   - component: {fileID: 1304967849}
   - component: {fileID: 1304967850}
+  - component: {fileID: 1304967852}
   m_Layer: 0
   m_Name: WhiteBoard
   m_TagString: Untagged
@@ -9301,6 +9302,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1304967852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304967848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52783708aae98a947be363e4c09e30ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerCharacter: 0
+  PlayerCommonRelicSkillOne: {fileID: 0}
+  PlayerCommonRelicSkillTwo: {fileID: 0}
+  PlayerNpcSkillOne: {fileID: 0}
+  PlayerNpcSkillTwo: {fileID: 0}
+  PlayerLegendarySkill: {fileID: 0}
+  PlayerAttackSkill: {fileID: 0}
+  AttackLevel: 0
+  Gold: 0
 --- !u!1 &1306112328
 GameObject:
   m_ObjectHideFlags: 0

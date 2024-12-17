@@ -11,7 +11,7 @@ public class PlayerSkillManager : NetworkBehaviour {
     public void UseSkill() {
         if (_skillOne_Cooldown <= 0) {
             UseSkillServerRpc(1); // ISSO AQUI FOI SÓ UM EXEMPLO
-            _skillOne_Cooldown = LocalWhiteBoard.PLAYER_NPC_SKILL_ONE.Cooldown;
+            _skillOne_Cooldown = LocalWhiteBoard.Instance.PlayerNpcSkillOne.Cooldown;
         }
     }
 
@@ -27,22 +27,22 @@ public class PlayerSkillManager : NetworkBehaviour {
 
         switch (skillId) {
             case 0:
-                LocalWhiteBoard.PLAYER_ATTACK_SKILL.UseSkill(skillContext);
+                LocalWhiteBoard.Instance.PlayerAttackSkill.UseSkill(skillContext);
                 break;
             case 1:
-                LocalWhiteBoard.PLAYER_NPC_SKILL_ONE.UseSkill(skillContext);
+                LocalWhiteBoard.Instance.PlayerNpcSkillOne.UseSkill(skillContext);
                 break;
             case 2:
-                LocalWhiteBoard.PLAYER_NPC_SKILL_TWO.UseSkill(skillContext);
+                LocalWhiteBoard.Instance.PlayerNpcSkillTwo.UseSkill(skillContext);
                 break;
             case 3:
-                LocalWhiteBoard.PLAYER_COMMON_RELIC_SKILL_ONE.UseSkill(skillContext);
+                LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne.UseSkill(skillContext);
                 break;
             case 4:
-                LocalWhiteBoard.PLAYER_COMMON_RELIC_SKILL_TWO.UseSkill(skillContext);
+                LocalWhiteBoard.Instance.PlayerCommonRelicSkillTwo.UseSkill(skillContext);
                 break;
             case 5:
-                LocalWhiteBoard.PLAYER_LEGENDARY_SKILL.UseSkill(skillContext);
+                LocalWhiteBoard.Instance.PlayerLegendarySkill.UseSkill(skillContext);
                 break;
         }
     }
