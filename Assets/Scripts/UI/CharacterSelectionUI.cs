@@ -11,7 +11,7 @@ public class CharacterSelectionUI : MonoBehaviour {
 
 
     private void OnEnable() {
-        ChangeCharacterUIClientRpc(Characters.Moly, Characters.Maevis);
+        ChangeCharacterUIClientRpc(Characters.Mel, Characters.Maevis);
         ChangeReadyTextClientRpc(false, false);
         WhiteBoard.Singleton.PlayerOneCharacter.OnValueChanged += ChangeCharacterUIClientRpc;
         WhiteBoard.Singleton.PlayerTwoCharacter.OnValueChanged += ChangeCharacterUIClientRpc;

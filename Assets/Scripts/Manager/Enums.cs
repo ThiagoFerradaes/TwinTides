@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum Characters {
     Maevis,
-    Moly
+    Mel
 }
 
 public enum SkillType {

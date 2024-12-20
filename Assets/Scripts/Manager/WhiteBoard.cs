@@ -9,7 +9,7 @@ public class WhiteBoard: NetworkBehaviour
 
     #region Variaveis
     public NetworkVariable<Characters> PlayerOneCharacter = new(Characters.Maevis);
-    public NetworkVariable<Characters> PlayerTwoCharacter = new(Characters.Moly);
+    public NetworkVariable<Characters> PlayerTwoCharacter = new(Characters.Mel);
 
     public NetworkVariable<bool> PlayerOneReady = new(false);
     public NetworkVariable<bool> PlayerTwoReady = new(false);
@@ -38,7 +38,7 @@ public class WhiteBoard: NetworkBehaviour
     public void ChangeCharactersServerRpc(int player) {
         if (player == 1) {
             if (PlayerOneCharacter.Value == Characters.Maevis) {
-                PlayerOneCharacter.Value = Characters.Moly;
+                PlayerOneCharacter.Value = Characters.Mel;
             }
             else {
                 PlayerOneCharacter.Value = Characters.Maevis;
@@ -46,7 +46,7 @@ public class WhiteBoard: NetworkBehaviour
         }
         else {
             if (PlayerTwoCharacter.Value == Characters.Maevis) {
-                PlayerTwoCharacter.Value = Characters.Moly;
+                PlayerTwoCharacter.Value = Characters.Mel;
             }
             else {
                 PlayerTwoCharacter.Value = Characters.Maevis;
@@ -70,7 +70,7 @@ public class WhiteBoard: NetworkBehaviour
         PlayerTwoReady.Value = false;
 
         PlayerOneCharacter.Value = Characters.Maevis;
-        PlayerTwoCharacter.Value = Characters.Moly;
+        PlayerTwoCharacter.Value = Characters.Mel;
     }
     #endregion
 }

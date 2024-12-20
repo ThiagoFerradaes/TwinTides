@@ -13,7 +13,6 @@ public class PlayerController : NetworkBehaviour {
     NetworkObject _netWorkObject;
 
     [Header("Camera")]
-    [SerializeField] private GameObject shoulder;
     [SerializeField] CinemachineCamera cameraOverTheShoulder;
 
     [Header("Movement")]
@@ -37,7 +36,7 @@ public class PlayerController : NetworkBehaviour {
 
     private void SetFollowCamera() {
         if (NetworkManager.Singleton.LocalClientId == _netWorkObject.OwnerClientId) {
-            cameraOverTheShoulder.Follow = shoulder.transform;
+            cameraOverTheShoulder.Follow = this.transform;
         }
     }
 
