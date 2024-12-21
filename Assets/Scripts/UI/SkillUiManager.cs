@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 public class SkillUiManager : MonoBehaviour {
     [Header("Sprites")]
     [SerializeField] Sprite maevisSprite;
-    [SerializeField] Sprite molySprite;
+    [SerializeField] Sprite melSprite;
     [SerializeField] Sprite noSkillSprite;
 
     [Header("Images to receive Sprites")]
@@ -42,16 +43,20 @@ public class SkillUiManager : MonoBehaviour {
 
     readonly Dictionary<SkillType,TextMeshProUGUI> _listOfCooldowns = new();
 
-    private void OnEnable() {
-        AddTextsToList();
-        SetCharacterSpriteInfo();
-        SetSkillsSpritesInfo();
+    private void Start() {
+        AddTextsToList(); // Criar um dicionario com os textMeshPros
+        SetCharacterSpriteInfo(); // Colocar a foto do personagem principal
+        SetSkillsSpritesInfo(); // Colocar sprite nas skills
+        SetInicialCooldowns(); // Zerar o texto de cooldowns
+        SetGoldText(); // Mudar o texto do gold
 
         // Colocar o evento que chama o SetCooldown
     }
+
+
     private void AddTextsToList() {
         _listOfCooldowns.Add(SkillType.NpcSkillOne, npcSkillOneCooldownText);
-        _listOfCooldowns.Add(SkillType.NpcSkillOne, npcSkillTwoCooldownText);
+        _listOfCooldowns.Add(SkillType.NpcSkillTwo, npcSkillTwoCooldownText);
         _listOfCooldowns.Add(SkillType.LegendaryRelic, legendaryRelicSkillCooldownText);
         _listOfCooldowns.Add(SkillType.CommonRelicOne, commonRelicSkillOneCooldownText);
         _listOfCooldowns.Add(SkillType.CommonRelicTwo, commonRelicSkillTwoCooldownText);
@@ -59,10 +64,14 @@ public class SkillUiManager : MonoBehaviour {
     }
     private void SetCharacterSpriteInfo() {
         if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
-            characterImage.sprite = maevisSprite;
+            if (maevisSprite != null) {
+                characterImage.sprite = maevisSprite;
+            }
         }
         else {
-            characterImage.sprite = molySprite;
+            if (melSprite != null) {
+                characterImage.sprite = melSprite;
+            }
         }
     }
     private void SetSkillsSpritesInfo() {
@@ -105,7 +114,15 @@ public class SkillUiManager : MonoBehaviour {
             attackSkillImage.sprite = noSkillSprite;
         }
     }
-
+    private void SetInicialCooldowns() {
+        foreach (var item in _listOfCooldowns)
+        {
+            item.Value.text = "";
+        }
+    }
+    private void SetGoldText() {
+        goldText.text = LocalWhiteBoard.Instance.Gold.ToString("F0");
+    }
     void SetCooldown(SkillType skillType, float cooldown) {
         if (_listOfCooldowns.ContainsKey(skillType)) {
             StartCoroutine(StartSkillCooldown(_listOfCooldowns[skillType], cooldown));

@@ -1,19 +1,50 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerSkillManager : NetworkBehaviour {
 
-    float _skillOne_Cooldown;
+    [SerializeField] bool teste;
 
-    private void Update() {
-        _skillOne_Cooldown = Time.time;
-    }
-    public void UseSkill() {
-        if (_skillOne_Cooldown <= 0) {
-            UseSkillServerRpc(1); // ISSO AQUI FOI SÓ UM EXEMPLO
-            _skillOne_Cooldown = LocalWhiteBoard.Instance.PlayerNpcSkillOne.Cooldown;
+    #region Inputs
+    public void InputBaseAttack(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            Debug.Log("Ataque");
+            UseSkillServerRpc(0);
         }
     }
+    public void InputNpcSkillOne(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            Debug.Log("NPC SKill One");
+            UseSkillServerRpc(1);
+        }
+    }
+    public void InputNpcSkillTwo(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            Debug.Log("NPC SKill Two");
+            UseSkillServerRpc(2);
+        }
+    }
+    public void InputCommonRelicSkillOne(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            Debug.Log("Common Relic 1");
+            UseSkillServerRpc(3);
+        }
+        
+    }
+    public void InputCommonRelicSkillTwo(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            Debug.Log("Common Relic 2");
+            UseSkillServerRpc(4);
+        }    
+    }
+    public void InputLegendarySkill(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            Debug.Log("Legendary Relic");
+            UseSkillServerRpc(5);
+        }  
+    }
+    #endregion
 
     [ServerRpc(RequireOwnership = false)] // A partir daqui já não é mais um exemplo, já é o real
     void UseSkillServerRpc(int skillId) {
@@ -27,22 +58,34 @@ public class PlayerSkillManager : NetworkBehaviour {
 
         switch (skillId) {
             case 0:
-                LocalWhiteBoard.Instance.PlayerAttackSkill.UseSkill(skillContext);
+                if (LocalWhiteBoard.Instance.PlayerAttackSkill != null)
+                    LocalWhiteBoard.Instance.PlayerAttackSkill.UseSkill(skillContext);
+                else Debug.Log("No Skill");
                 break;
             case 1:
-                LocalWhiteBoard.Instance.PlayerNpcSkillOne.UseSkill(skillContext);
+                if (LocalWhiteBoard.Instance.PlayerNpcSkillOne != null)
+                    LocalWhiteBoard.Instance.PlayerNpcSkillOne.UseSkill(skillContext);
+                else Debug.Log("No Skill");
                 break;
             case 2:
-                LocalWhiteBoard.Instance.PlayerNpcSkillTwo.UseSkill(skillContext);
+                if (LocalWhiteBoard.Instance.PlayerNpcSkillTwo != null)
+                    LocalWhiteBoard.Instance.PlayerNpcSkillTwo.UseSkill(skillContext);
+                else Debug.Log("No Skill");
                 break;
             case 3:
-                LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne.UseSkill(skillContext);
+                if (LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne != null)
+                    LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne.UseSkill(skillContext);
+                else Debug.Log("No Skill");
                 break;
             case 4:
-                LocalWhiteBoard.Instance.PlayerCommonRelicSkillTwo.UseSkill(skillContext);
+                if (LocalWhiteBoard.Instance.PlayerCommonRelicSkillTwo != null)
+                    LocalWhiteBoard.Instance.PlayerCommonRelicSkillTwo.UseSkill(skillContext);
+                else Debug.Log("No Skill");
                 break;
             case 5:
-                LocalWhiteBoard.Instance.PlayerLegendarySkill.UseSkill(skillContext);
+                if (LocalWhiteBoard.Instance.PlayerLegendarySkill != null)
+                    LocalWhiteBoard.Instance.PlayerLegendarySkill.UseSkill(skillContext);
+                else Debug.Log("No Skill");
                 break;
         }
     }

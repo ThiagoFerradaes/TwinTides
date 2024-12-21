@@ -9,14 +9,14 @@ public class LocalWhiteBoard : MonoBehaviour
 
     public Characters PlayerCharacter;
 
-    public ComonRelic PlayerCommonRelicSkillOne;
-    public ComonRelic PlayerCommonRelicSkillTwo;
+    public CommonRelic PlayerCommonRelicSkillOne;
+    public CommonRelic PlayerCommonRelicSkillTwo;
     public NPC_Skill PlayerNpcSkillOne;
     public NPC_Skill PlayerNpcSkillTwo;
     public LegendaryRelic PlayerLegendarySkill;
     public AttackSkill PlayerAttackSkill;
 
-    public Dictionary<ComonRelic, int> CommonRelicInventory;
+    public Dictionary<CommonRelic, int> CommonRelicInventory;
     public Dictionary<LegendaryRelic, int> LegendaryRelicInventory;
     public Dictionary<NPC_Skill, int> NpcSkillInventory;
     public int AttackLevel;

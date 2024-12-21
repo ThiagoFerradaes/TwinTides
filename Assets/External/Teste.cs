@@ -3,13 +3,19 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class teste : MonoBehaviour {
+public class Teste : MonoBehaviour {
+
+    // Movimento
     public float CharacterMoveSpeed;
-    public CinemachineCamera Camera;
     public float RotationSpeed;
+    public PlayerInput playerInput;
     float _rotationY;
     bool _isMoving;
+    Vector2 _moveInput;
+    Vector2 _rotationInput;
 
+    // Camera
+    public CinemachineCamera Camera;
     CinemachineInputAxisController _cameraInputController;
     CinemachineOrbitalFollow _cameraOrbital;
     
@@ -19,22 +25,17 @@ public class teste : MonoBehaviour {
         _cameraOrbital = Camera.GetComponent<CinemachineOrbitalFollow>();
     }
 
+    public void InputMove(Vector2 input) {
+        _moveInput = input;
+    }
+    public void InputRotate(Vector2 input) {
+        _rotationInput = input;
+    }
+
     private void FixedUpdate() {
 
-        if (Keyboard.current.wKey.isPressed) {
-            transform.Translate(CharacterMoveSpeed * Time.deltaTime * Vector3.forward.normalized);
-            _isMoving = true;
-        }
-        else if (Keyboard.current.sKey.isPressed) {
-            transform.Translate(CharacterMoveSpeed * Time.deltaTime * Vector3.back.normalized);
-            _isMoving = true;
-        }
-        else if (Keyboard.current.dKey.isPressed) {
-            transform.Translate(CharacterMoveSpeed * Time.deltaTime * Vector3.right.normalized);
-            _isMoving = true;
-        }
-        else if (Keyboard.current.aKey.isPressed) {
-            transform.Translate(CharacterMoveSpeed * Time.deltaTime * Vector3.left.normalized);
+        if (_moveInput.magnitude >= 0.1f) {
+            transform.Translate(CharacterMoveSpeed * Time.deltaTime * _moveInput);
             _isMoving = true;
         }
         else {
@@ -48,9 +49,7 @@ public class teste : MonoBehaviour {
             _cameraInputController.enabled = false;
             _cameraOrbital.HorizontalAxis.TriggerRecentering();
 
-            float mouseX = Input.GetAxis("Mouse X");
-
-            _rotationY += mouseX * RotationSpeed * Time.deltaTime;
+            _rotationY += _rotationInput.x * RotationSpeed * Time.deltaTime;
 
             transform.rotation = Quaternion.Euler(0, _rotationY, 0);
 
