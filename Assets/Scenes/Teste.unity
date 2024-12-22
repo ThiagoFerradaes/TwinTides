@@ -563,6 +563,7 @@ GameObject:
   - component: {fileID: 1242008017}
   - component: {fileID: 1242008018}
   - component: {fileID: 1242008019}
+  - component: {fileID: 1242008020}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -655,7 +656,7 @@ Transform:
   m_GameObject: {fileID: 1242008010}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3912644, y: 1.2312644, z: -2.8119383}
+  m_LocalPosition: {x: 1.3912644, y: 1.57, z: -2.8119383}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -741,11 +742,35 @@ MonoBehaviour:
     m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
     m_ActionName: 'Player/Interact[/Keyboard/e]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1242008017}
+        m_TargetAssemblyTypeName: Teste_Dois, Assembly-CSharp
+        m_MethodName: InputJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: f1ba0d36-48eb-4cd5-b651-1c94a6531f70
     m_ActionName: 'Player/Jump[/Keyboard/space]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1242008017}
+        m_TargetAssemblyTypeName: Teste_Dois, Assembly-CSharp
+        m_MethodName: InputSprint
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 641cd816-40e6-41b4-8c3d-04687c349290
     m_ActionName: 'Player/Sprint[/Keyboard/leftShift]'
   - m_PersistentCalls:
@@ -868,6 +893,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ecdd4fce-58d9-422b-a18d-ae797c1dc164
     m_ActionName: 'Player/LegendarySkill[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1242008017}
+        m_TargetAssemblyTypeName: Teste_Dois, Assembly-CSharp
+        m_MethodName: InputDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d8d44b48-5246-4303-bc48-4ec02f606687
+    m_ActionName: 'Player/Dash[/Keyboard/c]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -886,7 +927,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterMoveSpeed: 5
+  SprintSpeed: 10
   RotationSpeed: 4
+  JumpForce: 12
+  FloorLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  MaxJumps: 2
+  FallForce: 20
+  DashForce: 20
+  DashCooldown: 1
+  DashDuration: 0.25
   Camera: {fileID: 648505161}
 --- !u!114 &1242008018
 MonoBehaviour:
@@ -927,6 +978,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   teste: 0
+--- !u!54 &1242008020
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242008010}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!1 &1242495545
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,9 +1017,9 @@ GameObject:
   - component: {fileID: 1242495548}
   - component: {fileID: 1242495547}
   - component: {fileID: 1242495546}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: "Ch\xE3o "
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1121,8 +1199,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1397326212}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.101645194, y: -0.08594524, z: 0.0088147065, w: 0.99106205}
-  m_LocalPosition: {x: 3.3912644, y: 6.839734, z: -14.256541}
+  m_LocalRotation: {x: 0.10164516, y: -0.085945174, z: 0.008814697, w: 0.99106205}
+  m_LocalPosition: {x: 3.3912644, y: 7.17847, z: -14.256541}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1335,7 +1413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1135097783065006698, guid: e108ab70d0379a44985c09c1be54a299, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.839734
+      value: 7.17847
       objectReference: {fileID: 0}
     - target: {fileID: 1135097783065006698, guid: e108ab70d0379a44985c09c1be54a299, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1343,19 +1421,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1135097783065006698, guid: e108ab70d0379a44985c09c1be54a299, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9910621
+      value: 0.99106205
       objectReference: {fileID: 0}
     - target: {fileID: 1135097783065006698, guid: e108ab70d0379a44985c09c1be54a299, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.10164519
+      value: 0.10164516
       objectReference: {fileID: 0}
     - target: {fileID: 1135097783065006698, guid: e108ab70d0379a44985c09c1be54a299, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.08594524
+      value: -0.08594518
       objectReference: {fileID: 0}
     - target: {fileID: 1135097783065006698, guid: e108ab70d0379a44985c09c1be54a299, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.008814703
+      value: 0.008814696
       objectReference: {fileID: 0}
     - target: {fileID: 1135097783065006698, guid: e108ab70d0379a44985c09c1be54a299, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1376,6 +1454,10 @@ PrefabInstance:
     - target: {fileID: 5135390435956685778, guid: e108ab70d0379a44985c09c1be54a299, type: 3}
       propertyPath: m_Name
       value: CharacterFollowCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811537005697256142, guid: e108ab70d0379a44985c09c1be54a299, type: 3}
+      propertyPath: Composition.DeadZone.Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
