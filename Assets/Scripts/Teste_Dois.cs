@@ -10,7 +10,7 @@ public class Teste_Dois : MonoBehaviour
     public float CharacterMoveSpeed;
     public float SprintSpeed;
     public float RotationSpeed;
-    bool _canWalk;
+    bool _canWalk = true;
 
     [Header("Pulo")]
     public float JumpForce;

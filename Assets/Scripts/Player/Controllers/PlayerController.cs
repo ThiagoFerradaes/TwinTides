@@ -7,106 +7,131 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class PlayerController : NetworkBehaviour {
-
-    [Header("Ownership")]
-    [SerializeField] private Characters character;
-    NetworkObject _netWorkObject;
+public class PlayerController : MonoBehaviour {
 
     [Header("Camera")]
-    [SerializeField] CinemachineCamera cameraOverTheShoulder;
+    [SerializeField] CinemachineCamera cameraCineMachine;
     CinemachineInputAxisController _cameraInputController;
     CinemachineOrbitalFollow _cameraOrbital;
 
     [Header("Movement")]
-    public float CharacterMoveSpeed;
+    [SerializeField] float characterMoveSpeed;
+    [SerializeField] float sprintSpeed;
     [SerializeField] float rotationSpeed;
-    bool _isMoving;
+    float _currentCharacterMoveSpeed;
+    bool _canWalk = true;
     float _rotationY;
+    Vector2 _moveInput;
+    Vector2 _rotationInput;
+
+    [Header("Jump")]
+    [SerializeField] float jumpForce;
+    [SerializeField] float fallForce;
+    [SerializeField] int maxJumps;
+    [SerializeField] LayerMask floorLayer;
+    int _currentJumpsAlowed;
+
+    [Header("Dash")]
+    [SerializeField] float dashForce;
+    [SerializeField] float dashDuration;
+    [SerializeField] float dashCooldown;
+    bool _inDash;
+
+    Rigidbody _rb;
     void Start() {
-        _netWorkObject = GetComponent<NetworkObject>();
-
-        if (NetworkManager.Singleton.IsHost) {
-            StartCoroutine(nameof(DistributeOwnership));
-        }
-
-        StartCoroutine(nameof(WaitToSetCamera));
-
-        _cameraInputController = cameraOverTheShoulder.GetComponent<CinemachineInputAxisController>();
-        _cameraOrbital = cameraOverTheShoulder.GetComponent<CinemachineOrbitalFollow>();
+        _cameraInputController = cameraCineMachine.GetComponent<CinemachineInputAxisController>();
+        _cameraOrbital = cameraCineMachine.GetComponent<CinemachineOrbitalFollow>();
+        _rb = GetComponent<Rigidbody>();
+        _currentCharacterMoveSpeed = characterMoveSpeed;
     }
-    IEnumerator WaitToSetCamera() {
-        while (!_netWorkObject.IsOwner) {
-            yield return null;
+    public void InputMove(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed && _canWalk) {
+            _moveInput = context.ReadValue<Vector2>();
         }
-        SetFollowCamera();
-    }
-
-    private void SetFollowCamera() {
-        if (NetworkManager.Singleton.LocalClientId == _netWorkObject.OwnerClientId) {
-            cameraOverTheShoulder.Follow = this.transform;
+        else if (context.phase == InputActionPhase.Canceled) {
+            _moveInput = Vector2.zero;
         }
     }
+    public void InputRotate(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            _rotationInput = context.ReadValue<Vector2>();
+        }
+        else if (context.phase == InputActionPhase.Canceled) {
+            _rotationInput = Vector2.zero;
+        }
+    }
+    public void InputJump(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed && _currentJumpsAlowed > 0) {
+            _currentJumpsAlowed--;
+            _rb.linearVelocity = new(_rb.linearVelocity.x, 0, _rb.linearVelocity.z);
+            _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+    }
+    public void InputSprint(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Started) {
+            _currentCharacterMoveSpeed = sprintSpeed;
+        }
+        else if (context.phase == InputActionPhase.Canceled) {
+            _currentCharacterMoveSpeed = characterMoveSpeed;
+        }
+    }
+    public void InputDash(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed && !_inDash) {
+            StartCoroutine(DashCoroutine());
+        }
+    }
+    IEnumerator DashCoroutine() {
+        _inDash = true;
+        _canWalk = false;
+        float startTime = Time.time;
 
-    private IEnumerator DistributeOwnership() {
-
-        while (NetworkManager.Singleton.ConnectedClientsList.Count < 2) {
-            yield return null;
+        while (Time.time - startTime < dashDuration) {
+            if (_moveInput.magnitude >= 0.1f) {
+                Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
+                transform.Translate(dashForce * Time.deltaTime * moveDirection);
+                yield return null;
+            }
+            else {
+                transform.Translate(dashForce * Time.deltaTime * Vector3.forward);
+                yield return null;
+            }
         }
 
-        if (WhiteBoard.Singleton.PlayerOneCharacter.Value == character) {
-            _netWorkObject.ChangeOwnership(NetworkManager.Singleton.ConnectedClientsList[0].ClientId);
-        }
-        else if (WhiteBoard.Singleton.PlayerTwoCharacter.Value == character) {
-            _netWorkObject.ChangeOwnership(NetworkManager.Singleton.ConnectedClientsList[1].ClientId);
-        }
+        _canWalk = true;
 
+        yield return new WaitForSeconds(dashCooldown);
+        _inDash = false;
 
     }
-
     void FixedUpdate() {
-        MovementInputs();
+        MoveAndRotate();
     }
+    private void MoveAndRotate() {
+        if (_moveInput.magnitude >= 0.1f) {
+            // Movimentação
+            Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
+            transform.Translate(_currentCharacterMoveSpeed * Time.deltaTime * moveDirection);
 
-    private void MovementInputs() {
-        Move();
-        Rotate();
-
-    }
-
-    private void Move() {
-        if (Keyboard.current.wKey.isPressed) {
-            transform.Translate(CharacterMoveSpeed * Time.deltaTime * Vector3.forward.normalized);
-            _isMoving = true;
-        }
-        else if (Keyboard.current.sKey.isPressed) {
-            transform.Translate(CharacterMoveSpeed * Time.deltaTime * Vector3.back.normalized);
-            _isMoving = true;
-        }
-        else if (Keyboard.current.dKey.isPressed) {
-            transform.Translate(CharacterMoveSpeed * Time.deltaTime * Vector3.right.normalized);
-            _isMoving = true;
-        }
-        else if (Keyboard.current.aKey.isPressed) {
-            transform.Translate(CharacterMoveSpeed * Time.deltaTime * Vector3.left.normalized);
-            _isMoving = true;
-        }
-    }
-
-    void Rotate() {
-        if (!_isMoving) { // ta parado
-            _cameraInputController.enabled = true;
-        }
-        else { // ta se movendo
+            // Rotação de camera
             _cameraInputController.enabled = false;
             _cameraOrbital.HorizontalAxis.TriggerRecentering();
 
-            float mouseX = Input.GetAxis("Mouse X");
-
-            _rotationY += mouseX * rotationSpeed * Time.deltaTime;
-
+            // Rotação do personagem
+            _rotationY += _rotationInput.x * rotationSpeed * Time.deltaTime;
             transform.rotation = Quaternion.Euler(0, _rotationY, 0);
+        }
+        else {
+            _cameraInputController.enabled = true;
+        }
 
+
+        if (_rb.linearVelocity.y != 0) { // Durante o pulo aumenta a gravidade, serve para regular a duração do pulo
+            _rb.AddForce(Vector3.down * fallForce, ForceMode.Acceleration);
+        }
+    }
+    private void OnCollisionEnter(Collision collision) {
+        if (((1 << collision.gameObject.layer) & floorLayer.value) != 0) {
+            _currentJumpsAlowed = maxJumps;
         }
     }
 }

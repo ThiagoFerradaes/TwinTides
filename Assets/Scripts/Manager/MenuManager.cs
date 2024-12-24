@@ -290,8 +290,9 @@ public class MenuManager : NetworkBehaviour {
         }
     }
 
+    Coroutine _joinOrCreateLobbyCoroutine;
     public void HostOrJoinButton(bool host) {
-        StartCoroutine(LoadingScreenCreatingLobbyOrJoin(host));
+        _joinOrCreateLobbyCoroutine = StartCoroutine(LoadingScreenCreatingLobbyOrJoin(host));
     }
 
     void ServerStarted() {
@@ -341,6 +342,9 @@ public class MenuManager : NetworkBehaviour {
             joinByCodeScreen.SetActive(false);
             waitForHostOrJoinScreen.SetActive(false);
         }
+    }
+    public void FailedToJoinOrToCreate() {
+        StopCoroutine(_joinOrCreateLobbyCoroutine); ;
     }
 
     public void CleanInputTextArea() {
