@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour {
         _cameraOrbital = cameraCineMachine.GetComponent<CinemachineOrbitalFollow>();
         _rb = GetComponent<Rigidbody>();
         _currentCharacterMoveSpeed = characterMoveSpeed;
+        _currentJumpsAlowed = maxJumps;
     }
     public void InputMove(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed && _canWalk) {
@@ -107,7 +108,8 @@ public class PlayerController : MonoBehaviour {
         MoveAndRotate();
     }
     private void MoveAndRotate() {
-        if (_moveInput.magnitude >= 0.1f) {
+        if (_moveInput.magnitude != 0) {
+
             // Movimentação
             Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
             transform.Translate(_currentCharacterMoveSpeed * Time.deltaTime * moveDirection);

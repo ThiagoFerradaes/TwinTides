@@ -14,7 +14,6 @@ public class Ownership : NetworkBehaviour
 
     [Header("Camera")]
     [SerializeField] CinemachineCamera cameraCineMachine;
-    Coroutine _setCameraCoroutine;
 
     NetworkObject _netWorkObject;
     void Start() {
@@ -25,8 +24,7 @@ public class Ownership : NetworkBehaviour
             StartCoroutine(nameof(DistributeOwnership));
         }
 
-        _setCameraCoroutine = StartCoroutine(nameof(WaitToSetCamera));
-        StartCoroutine(nameof(WaitToSetInputMap));
+        StartCoroutine(nameof(WaitToSetCamera));
     }
     IEnumerator WaitToSetCamera() {
         while (!_netWorkObject.IsOwner) {
@@ -36,28 +34,24 @@ public class Ownership : NetworkBehaviour
             }
         }
         SetFollowCamera();
+        SetInputMap();
     }
     private void SetFollowCamera() {
         if (NetworkManager.Singleton.LocalClientId == _netWorkObject.OwnerClientId) {
             cameraCineMachine.Follow = this.transform;
         }
     }
-    IEnumerator WaitToSetInputMap() {
-        while (!_netWorkObject.IsOwner) {
-            yield return null;
-            if (secondCharacterObject.GetComponent<NetworkBehaviour>().OwnerClientId == NetworkManager.Singleton.LocalClientId) {
-                break;
-            }
-        }
-        SetInputMap();
-    }
     void SetInputMap() {
         if (IsOwner) {
             _input.enabled = true;
         }
         else {
-            _input.enabled = false;
+            DisableScripts(); // Desligando scripts do objeto que não tem dono local
         }
+    }
+    void DisableScripts() {
+        _input.enabled = false; // Desligando o player input
+        GetComponent<PlayerController>().enabled = false; // Desligando o PlayerController
     }
     private IEnumerator DistributeOwnership() {
 

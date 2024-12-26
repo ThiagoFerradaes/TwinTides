@@ -4,8 +4,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Teste_Dois : MonoBehaviour
-{
+public class Teste_Dois : MonoBehaviour {
     [Header("Movimento")]
     public float CharacterMoveSpeed;
     public float SprintSpeed;
@@ -17,6 +16,7 @@ public class Teste_Dois : MonoBehaviour
     public LayerMask FloorLayer;
     public int MaxJumps;
     public float FallForce;
+    int _currentJumpsAlowed;
 
     [Header("Dash")]
     public float DashForce;
@@ -29,8 +29,8 @@ public class Teste_Dois : MonoBehaviour
     float _rotationY;
     Vector2 _moveInput;
     Vector2 _rotationInput;
-    
-    int _currentJumpsAlowed;
+
+
     Rigidbody rb;
 
     // Camera
@@ -48,13 +48,13 @@ public class Teste_Dois : MonoBehaviour
     }
 
     public void InputMove(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed && _canWalk) 
-    {
+        if (context.phase == InputActionPhase.Performed && _canWalk) {
+            Debug.Log("IsMoving");
             _moveInput = context.ReadValue<Vector2>();
         }
-        else if (context.phase == InputActionPhase.Canceled) 
-        {
-            _moveInput = Vector2.zero; 
+        else if (context.phase == InputActionPhase.Canceled) {
+            Debug.Log("IsNotMoving");
+            _moveInput = Vector2.zero;
         }
     }
     public void InputRotate(InputAction.CallbackContext context) {
@@ -76,7 +76,7 @@ public class Teste_Dois : MonoBehaviour
         if (context.phase == InputActionPhase.Started) {
             _currentCharacterMoveSpeed = SprintSpeed;
         }
-        else if (context.phase == InputActionPhase.Canceled){
+        else if (context.phase == InputActionPhase.Canceled) {
             _currentCharacterMoveSpeed = CharacterMoveSpeed;
         }
     }
@@ -91,7 +91,7 @@ public class Teste_Dois : MonoBehaviour
         _canWalk = false;
         float startTime = Time.time;
 
-        while(Time.time - startTime < DashDuration) {
+        while (Time.time - startTime < DashDuration) {
             if (_moveInput.magnitude >= 0.1f) {
                 Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
                 transform.Translate(DashForce * Time.deltaTime * moveDirection);
@@ -111,6 +111,7 @@ public class Teste_Dois : MonoBehaviour
     }
     private void FixedUpdate() {
         if (_moveInput.magnitude >= 0.1f) {
+            Debug.Log("Moving" + _moveInput.magnitude);
             // Movimentação
             Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
             transform.Translate(_currentCharacterMoveSpeed * Time.deltaTime * moveDirection);
@@ -124,10 +125,11 @@ public class Teste_Dois : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, _rotationY, 0);
         }
         else {
+            Debug.Log("No moving" + _moveInput.magnitude);
             _cameraInputController.enabled = true;
         }
 
-        
+
         if (rb.linearVelocity.y != 0) { // Durante o pulo aumenta a gravidade, serve para regular a duração do pulo
             rb.AddForce(Vector3.down * FallForce, ForceMode.Acceleration);
         }
