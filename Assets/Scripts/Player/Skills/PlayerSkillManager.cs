@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerSkillManager : NetworkBehaviour {
 
-    [SerializeField] bool teste;
-
     #region Inputs
     public void InputBaseAttack(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
