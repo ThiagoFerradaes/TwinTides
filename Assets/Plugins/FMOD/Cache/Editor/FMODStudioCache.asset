@@ -15,7 +15,61 @@ MonoBehaviour:
   Path: Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638710372592191457
+  lastModified: 638710897103199402
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-5964313129115909455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 638710897103544005
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-5819652958376990923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFXs.bank
+  m_EditorClassIdentifier: 
+  Path: Desktop/SFXs.bank
+  Name: SFXs
+  StudioPath: bank:/SFXs
+  lastModified: 638710897103749016
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-5143049347302004422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Dialogue.bank
+  m_EditorClassIdentifier: 
+  Path: Desktop/Dialogue.bank
+  Name: Dialogue
+  StudioPath: bank:/Dialogue
+  lastModified: 638710897103678707
   FileSizes: []
   Exists: 1
 --- !u!114 &-358159203547477836
@@ -38,6 +92,7 @@ MonoBehaviour:
     Data4: 796129288
   Banks:
   - {fileID: -6378326184708481569}
+  - {fileID: -5964313129115909455}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -60,6 +115,10 @@ MonoBehaviour:
   EditorBanks:
   - {fileID: 7033191541010539315}
   - {fileID: -6378326184708481569}
+  - {fileID: 5662518714925561941}
+  - {fileID: -5143049347302004422}
+  - {fileID: -5964313129115909455}
+  - {fileID: -5819652958376990923}
   EditorEvents:
   - {fileID: -358159203547477836}
   EditorParameters: []
@@ -67,8 +126,26 @@ MonoBehaviour:
   - {fileID: -6378326184708481569}
   StringsBanks:
   - {fileID: 7033191541010539315}
-  cacheTime: 638710372592206661
+  cacheTime: 638710897103749016
   cacheVersion: 131621
+--- !u!114 &5662518714925561941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Ambience.bank
+  m_EditorClassIdentifier: 
+  Path: Desktop/Ambience.bank
+  Name: Ambience
+  StudioPath: bank:/Ambience
+  lastModified: 638710897103618815
+  FileSizes: []
+  Exists: 1
 --- !u!114 &7033191541010539315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,8 +161,8 @@ MonoBehaviour:
   Path: Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638710372592206661
+  lastModified: 638710897103234421
   FileSizes:
   - Name: 
-    Value: 754
+    Value: 1074
   Exists: 1

@@ -2,8 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class LocalWhiteBoard : MonoBehaviour
-{
+public class LocalWhiteBoard : MonoBehaviour {
     public static LocalWhiteBoard Instance;
 
 
@@ -22,6 +21,12 @@ public class LocalWhiteBoard : MonoBehaviour
     public int AttackLevel;
 
     public float Gold;
+
+    [HideInInspector] public float GeneralVolume = 0.5f;
+    [HideInInspector] public float MusicVolume = 0.5f;
+    [HideInInspector] public float SFXVolume = 0.5f;
+    [HideInInspector] public float AmbienceVolume = 0.5f;
+    [HideInInspector] public float DialogueVolume = 0.5f;
 
 
     private void Awake() {  // Singleton, só vai ter um LocalWhiteBoard no jogo
