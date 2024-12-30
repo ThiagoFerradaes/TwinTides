@@ -897,8 +897,8 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkRigidbodyBaseExpanded: 0
   UseRigidBodyForMotion: 0
-  AutoUpdateKinematicState: 1
-  AutoSetKinematicOnDespawn: 1
+  AutoUpdateKinematicState: 0
+  AutoSetKinematicOnDespawn: 0
 --- !u!1 &1856823160
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,6 +937,11 @@ MonoBehaviour:
   PlayerAttackSkill: {fileID: 0}
   AttackLevel: 1
   Gold: 10
+  GeneralVolume: 0.5
+  MusicVolume: 0.5
+  SFXVolume: 0.5
+  AmbienceVolume: 0.5
+  DialogueVolume: 0.5
 --- !u!4 &1856823162
 Transform:
   m_ObjectHideFlags: 0
