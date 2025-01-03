@@ -13,3 +13,4 @@ public enum SkillType {
     CommonRelicOne,
     CommonRelicTwo
 }
+

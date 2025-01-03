@@ -13,6 +13,7 @@ public class SkillUiManager : MonoBehaviour {
 
     [Header("Images to receive Sprites")]
     [SerializeField] Image characterImage;
+    [SerializeField] Image playerTwoCharacterImage;
     [SerializeField] Image characterHealthImage;
     [SerializeField] Image characterManaImage;
     [SerializeField] Image npcSkillOneImage;
@@ -32,6 +33,7 @@ public class SkillUiManager : MonoBehaviour {
 
     [Header("Texts")]
     [SerializeField] TextMeshProUGUI characterHealthText;
+    [SerializeField] TextMeshProUGUI playerTwoHealthText;
     [SerializeField] TextMeshProUGUI characterManaText;
     [SerializeField] TextMeshProUGUI goldText;
     [SerializeField] TextMeshProUGUI npcSkillOneCooldownText;
@@ -41,20 +43,31 @@ public class SkillUiManager : MonoBehaviour {
     [SerializeField] TextMeshProUGUI commonRelicSkillTwoCooldownText;
     [SerializeField] TextMeshProUGUI attackSkillCooldownText;
 
+    [Header("Player info")]
+    [SerializeField] GameObject maevisGameObject;
+    [SerializeField] GameObject melGameObject;
+    private GameObject _playerCharacter;
+    private GameObject _playerTwoCharacter;
+
     readonly Dictionary<SkillType,TextMeshProUGUI> _listOfCooldowns = new();
 
     private void Start() {
-        AddTextsToList(); // Criar um dicionario com os textMeshPros
+        AddTextsToListOfCooldowns(); // Criar um dicionario com os textMeshPros
         SetCharacterSpriteInfo(); // Colocar a foto do personagem principal
         SetSkillsSpritesInfo(); // Colocar sprite nas skills
         SetInicialCooldowns(); // Zerar o texto de cooldowns
         SetGoldText(); // Mudar o texto do gold
-
+        SetCharacterHealthManagerInfo();
         // Colocar o evento que chama o SetCooldown
     }
+    void UpdatePlayerHealth((float maxHealth, float currentHealth) health) {
+        characterHealthText.text = health.currentHealth.ToString("F0") + " / " + health.maxHealth.ToString("F0");
+    }
+    void UpdatePlayerTwoHealth((float maxHealth, float currentHealth) health) {
+        playerTwoHealthText.text = health.currentHealth.ToString("F0") + " / " + health.maxHealth.ToString("F0");
+    }
 
-
-    private void AddTextsToList() {
+    private void AddTextsToListOfCooldowns() {
         _listOfCooldowns.Add(SkillType.NpcSkillOne, npcSkillOneCooldownText);
         _listOfCooldowns.Add(SkillType.NpcSkillTwo, npcSkillTwoCooldownText);
         _listOfCooldowns.Add(SkillType.LegendaryRelic, legendaryRelicSkillCooldownText);
@@ -64,14 +77,30 @@ public class SkillUiManager : MonoBehaviour {
     }
     private void SetCharacterSpriteInfo() {
         if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
-            if (maevisSprite != null) {
+            if (melSprite != null && maevisSprite != null) {
                 characterImage.sprite = maevisSprite;
+                playerTwoCharacterImage.sprite = melSprite;
             }
         }
         else {
-            if (melSprite != null) {
+            if (melSprite != null && maevisSprite != null) {
                 characterImage.sprite = melSprite;
+                playerTwoCharacterImage.sprite = maevisSprite;
             }
+        }
+    }
+    private void SetCharacterHealthManagerInfo() {
+        if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
+            _playerCharacter = maevisGameObject;
+            _playerTwoCharacter = melGameObject;
+            _playerCharacter.GetComponent<HealthManager>().UpdateHealth += UpdatePlayerHealth;
+            _playerTwoCharacter.GetComponent<HealthManager>().UpdateHealth += UpdatePlayerTwoHealth;
+        }
+        else {
+            _playerCharacter = melGameObject;
+            _playerTwoCharacter = maevisGameObject;
+            _playerCharacter.GetComponent<HealthManager>().UpdateHealth += UpdatePlayerHealth;
+            _playerTwoCharacter.GetComponent<HealthManager>().UpdateHealth += UpdatePlayerTwoHealth;
         }
     }
     private void SetSkillsSpritesInfo() {
@@ -137,5 +166,9 @@ public class SkillUiManager : MonoBehaviour {
         }
 
         text.text = "";
+    }
+    private void OnDestroy() {
+        _playerCharacter.GetComponent<HealthManager>().UpdateHealth -= UpdatePlayerHealth;
+        _playerTwoCharacter.GetComponent<HealthManager>().UpdateHealth -= UpdatePlayerTwoHealth;
     }
 }
