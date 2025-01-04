@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SkillUiManager : MonoBehaviour {
+
+    #region Variables
     [Header("Sprites")]
     [SerializeField] Sprite maevisSprite;
     [SerializeField] Sprite melSprite;
@@ -34,6 +36,8 @@ public class SkillUiManager : MonoBehaviour {
     [Header("Texts")]
     [SerializeField] TextMeshProUGUI characterHealthText;
     [SerializeField] TextMeshProUGUI playerTwoHealthText;
+    [SerializeField] TextMeshProUGUI playerShieldText;
+    [SerializeField] TextMeshProUGUI playerTwoShieldText;
     [SerializeField] TextMeshProUGUI characterManaText;
     [SerializeField] TextMeshProUGUI goldText;
     [SerializeField] TextMeshProUGUI npcSkillOneCooldownText;
@@ -50,21 +54,29 @@ public class SkillUiManager : MonoBehaviour {
     private GameObject _playerTwoCharacter;
 
     readonly Dictionary<SkillType,TextMeshProUGUI> _listOfCooldowns = new();
+    #endregion
 
+    #region Methods
+    private void Awake() {
+        SetCharacterHealthManagerInfo(); // Inscrevendo evento de update de vida
+    }
     private void Start() {
         AddTextsToListOfCooldowns(); // Criar um dicionario com os textMeshPros
         SetCharacterSpriteInfo(); // Colocar a foto do personagem principal
         SetSkillsSpritesInfo(); // Colocar sprite nas skills
         SetInicialCooldowns(); // Zerar o texto de cooldowns
         SetGoldText(); // Mudar o texto do gold
-        SetCharacterHealthManagerInfo();
         // Colocar o evento que chama o SetCooldown
     }
-    void UpdatePlayerHealth((float maxHealth, float currentHealth) health) {
+    void UpdatePlayerHealth((float maxHealth, float currentHealth, float currentShield) health) {
         characterHealthText.text = health.currentHealth.ToString("F0") + " / " + health.maxHealth.ToString("F0");
+        if (health.currentShield != 0) playerShieldText.text = health.currentShield.ToString("F0");
+        else playerShieldText.text = "";
     }
-    void UpdatePlayerTwoHealth((float maxHealth, float currentHealth) health) {
+    void UpdatePlayerTwoHealth((float maxHealth, float currentHealth, float currentShield) health) {
         playerTwoHealthText.text = health.currentHealth.ToString("F0") + " / " + health.maxHealth.ToString("F0");
+        if (health.currentShield != 0) playerTwoShieldText.text = health.currentShield.ToString("F0");
+        else playerTwoShieldText.text = "";
     }
 
     private void AddTextsToListOfCooldowns() {
@@ -167,8 +179,10 @@ public class SkillUiManager : MonoBehaviour {
 
         text.text = "";
     }
-    private void OnDestroy() {
+    private void OnDisable() {
+        if (_playerCharacter == null || _playerTwoCharacter == null) return;
         _playerCharacter.GetComponent<HealthManager>().UpdateHealth -= UpdatePlayerHealth;
         _playerTwoCharacter.GetComponent<HealthManager>().UpdateHealth -= UpdatePlayerTwoHealth;
     }
+    #endregion
 }

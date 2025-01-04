@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Cinemachine;
 using Unity.Netcode;
@@ -7,6 +8,7 @@ using UnityEngine.TextCore.Text;
 
 public class Ownership : NetworkBehaviour
 {
+    #region Variables
     [Header("Character")]
     [SerializeField] Characters character;
     [SerializeField] GameObject secondCharacterObject;
@@ -16,6 +18,9 @@ public class Ownership : NetworkBehaviour
     [SerializeField] CinemachineCamera cameraCineMachine;
 
     NetworkObject _netWorkObject;
+    #endregion
+
+    #region Methods
     void Start() {
         _netWorkObject = GetComponent<NetworkObject>();
         _input = GetComponent<PlayerInput>();
@@ -66,4 +71,5 @@ public class Ownership : NetworkBehaviour
             _netWorkObject.ChangeOwnership(NetworkManager.Singleton.ConnectedClientsList[1].ClientId);
         }
     }
+    #endregion
 }

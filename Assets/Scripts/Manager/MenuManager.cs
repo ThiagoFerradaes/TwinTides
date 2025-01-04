@@ -214,7 +214,13 @@ public class MenuManager : NetworkBehaviour {
 
     [ClientRpc]
     void LoadingScreenClientRpc() {
-        loadingScreen.SetActive(true);
+        loadingScreen.SetActive(true); 
+        if (IsHost) {
+            LocalWhiteBoard.Instance.PlayerCharacter = WhiteBoard.Singleton.PlayerOneCharacter.Value;
+        }
+        else {
+            LocalWhiteBoard.Instance.PlayerCharacter = WhiteBoard.Singleton.PlayerTwoCharacter.Value;
+        }
     }
 
     IEnumerator LoadScene(string sceneName) {
