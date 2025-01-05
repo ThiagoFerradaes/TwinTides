@@ -19,6 +19,7 @@ public class HealthManager : NetworkBehaviour {
     [HideInInspector] public NetworkVariable<float> currentShieldAmount = new();
     readonly NetworkVariable<float> _healMultiply = new(1f);
     readonly NetworkVariable<float> _shieldMultiply = new(1f);
+    readonly NetworkVariable<float> _damageMultiply = new(1f);
 
     // Variaveis do tipo bool
     readonly NetworkVariable<bool> _canTakeDamage = new(true);
@@ -40,12 +41,25 @@ public class HealthManager : NetworkBehaviour {
 
     #region Methods
     void Start() {
-        if (IsServer) {
-            _currentHealth.Value = maxHealth.Value;
-        }
-        UpdateHealthClientRpc();
+        _currentHealth.OnValueChanged += UpdateHealthUI;
+        currentShieldAmount.OnValueChanged += UpdateHealthUI;
+        maxHealth.OnValueChanged += UpdateHealthUI;
+        SetMaxHealthServerRpc();
+        UpdateHealth?.Invoke((maxHealth.Value, _currentHealth.Value, currentShieldAmount.Value));
+    }
+    private void OnEnable() {
+        
+    }
+    private void OnDisable() {
+        _currentHealth.OnValueChanged -= UpdateHealthUI;
+        currentShieldAmount.OnValueChanged -= UpdateHealthUI;
+        maxHealth.OnValueChanged -= UpdateHealthUI;
+    }
+    void UpdateHealthUI(float old, float newValue) {
+        UpdateHealth?.Invoke((maxHealth.Value, _currentHealth.Value, currentShieldAmount.Value));
     }
     public void AddDebuffToList(HealthDebuff debuff) {
+        //if (!IsServer) return;
         if (_listOfActiveDebuffs.ContainsKey(debuff.GetType())) {
             StopCoroutine(_listOfActiveDebuffs[debuff.GetType()].Item2); // paramos a corrotina do debuff
             var stacks = _listOfActiveDebuffs[debuff.GetType()].Item1;
@@ -53,7 +67,7 @@ public class HealthManager : NetworkBehaviour {
             if (stacks <= debuff.MaxAmountOfStacks) {
                 stacks = Mathf.Min(stacks + debuff.AddStacks, debuff.MaxAmountOfStacks);
             }
-            
+
             // alteramos o dicionario
             _listOfActiveDebuffs[debuff.GetType()] = (stacks, debuff.ApplyDebuff(this, stacks));
 
@@ -85,8 +99,7 @@ public class HealthManager : NetworkBehaviour {
         if (!_canTakeDamage.Value) { Debug.Log("Can't take Damage" + gameObject.name); return; }
 
         if (isShielded.Value && hitShield) {
-            currentShieldAmount.Value -= damageTaken;
-            _currentHealth.Value = Mathf.Max(0, _currentHealth.Value);
+            currentShieldAmount.Value -= (damageTaken * _damageMultiply.Value);
 
             if (currentShieldAmount.Value <= 0) {
                 float overDamage = -currentShieldAmount.Value;
@@ -96,17 +109,13 @@ public class HealthManager : NetworkBehaviour {
             }
         }
         else {
-            _currentHealth.Value = Mathf.Clamp((_currentHealth.Value - damageTaken), 0, maxHealth.Value);
+            _currentHealth.Value = Mathf.Clamp((_currentHealth.Value - damageTaken * _damageMultiply.Value), 0, maxHealth.Value);
         }
-        UpdateHealthClientRpc();
         if (_currentHealth.Value <= 0) {
             Death();
         }
     }
-    [ClientRpc]
-    void UpdateHealthClientRpc() {
-        UpdateHealth?.Invoke((maxHealth.Value, _currentHealth.Value, currentShieldAmount.Value));
-    }
+
     void Death() {
         OnDeath?.Invoke();
         Debug.Log("Is dead: " + gameObject.name);
@@ -131,51 +140,69 @@ public class HealthManager : NetworkBehaviour {
         yield return new WaitForSeconds(time);
         _canTakeDamage.Value = true;
     }
-    public void ReceiveShield(float shieldAmount, float durationOfShield, bool isCumulative) {
+
+    [ServerRpc(RequireOwnership = false)]
+    public void ReceiveShieldServerRpc(float shieldAmount, float durationOfShield, bool isCumulative) {
 
         if (!_canReceiveShield.Value) return; // não pode receber escudo
 
-        if (isCumulative) currentShieldAmount.Value = Mathf.Clamp((currentShieldAmount.Value + shieldAmount * _shieldMultiply.Value)
+        if (IsServer) {
+            if (isCumulative) currentShieldAmount.Value = Mathf.Clamp((currentShieldAmount.Value + shieldAmount * _shieldMultiply.Value)
             , 0, maxShieldAmount); // o escudo recebido acumula com o escudo atual
 
-        // o escudo recebido não acumula com o escudo atual
-        else currentShieldAmount.Value = Mathf.Clamp(shieldAmount * _shieldMultiply.Value, 0, maxShieldAmount);
+            // o escudo recebido não acumula com o escudo atual
+            else currentShieldAmount.Value = Mathf.Clamp(shieldAmount * _shieldMultiply.Value, 0, maxShieldAmount);
 
-        isShielded.Value = currentShieldAmount.Value > 0;
+            isShielded.Value = currentShieldAmount.Value > 0;
 
-        if (_timeToEndShieldCoroutine != null) StopCoroutine(_timeToEndShieldCoroutine);
-        _timeToEndShieldCoroutine = StartCoroutine(TimeToEndShield(durationOfShield));
-
-        UpdateHealthClientRpc();
+            if (_timeToEndShieldCoroutine != null) StopCoroutine(_timeToEndShieldCoroutine);
+            _timeToEndShieldCoroutine = StartCoroutine(TimeToEndShield(durationOfShield));
+        }
     }
     IEnumerator TimeToEndShield(float time) {
         yield return new WaitForSeconds(time);
         currentShieldAmount.Value = 0;
         isShielded.Value = false;
-
-        UpdateHealthClientRpc();
     }
-    public void Heal(float healAmount) {
 
+    [ServerRpc(RequireOwnership = false)]
+    public void HealServerRpc(float healAmount) {
         if (!_canBeHealed.Value) return;
-
+        if (!IsServer) return;
         _currentHealth.Value = Mathf.Clamp((_currentHealth.Value + healAmount * _healMultiply.Value), 0, maxHealth.Value);
-
-        UpdateHealthClientRpc();
     }
-    public void SetMaxHealth(float newMaxHealthValue) {
+
+    [ServerRpc(RequireOwnership = false)]
+    public void ChangeMaxHealthServerRpc(float newMaxHealthValue) {
         if (IsServer) {
             float percentageOfCurrentHealth = _currentHealth.Value / maxHealth.Value;
             maxHealth.Value = newMaxHealthValue;
             _currentHealth.Value = Mathf.Min(percentageOfCurrentHealth * maxHealth.Value, maxHealth.Value);
         }
-        UpdateHealthClientRpc();
     }
-    public void SetHealMultiply(float newHealMultiply) {
-        _healMultiply.Value = Mathf.Max(0,newHealMultiply);
+    [ServerRpc(RequireOwnership = false)]
+    public void SetMaxHealthServerRpc() {
+        if (IsServer) {
+            _currentHealth.Value = maxHealth.Value;
+        }
     }
-    public void SetShieldMultiply(float newShieldMultiply) {
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SetHealMultiplyServerRpc(float newHealMultiply) {
+        if (!IsServer) return;
+        _healMultiply.Value = Mathf.Max(0, newHealMultiply);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SetDamageMultiplyServerRpc(float newShieldMultiply) {
+        if (!IsServer) return;
         _shieldMultiply.Value = Mathf.Max(0, newShieldMultiply);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SetShieldMultiplyServerRpc(float newDamageMultiply) {
+        if (!IsServer) return;
+        _damageMultiply.Value = Mathf.Clamp(newDamageMultiply, 0, 3);
     }
 
     #endregion

@@ -48,10 +48,8 @@ public class Ownership : NetworkBehaviour {
     }
 
     private void ConfigureObjectForLocalPlayer() {
-        // Configura câmera e input baseados no ownership e no personagem local
         if (LocalWhiteBoard.Instance.PlayerCharacter == this.character) {
             SetFollowCamera();
-            //EnablePlayerControl();
         }
         else {
             DisablePlayerControl();
@@ -62,14 +60,7 @@ public class Ownership : NetworkBehaviour {
         cameraCineMachine.Follow = transform;
     }
 
-    //private void EnablePlayerControl() {
-    //    _input.enabled = true;
-    //    GetComponent<PlayerController>().enabled = true;
-    //}
-
     private void DisablePlayerControl() {
-        //_input.enabled = false;
-        //GetComponent<PlayerController>().enabled = false;
         foreach(var s in scriptsToBeTurnedOff) {
             s.enabled = false;
         }

@@ -37,10 +37,10 @@ public class Teste_Um : MonoBehaviour
             _healthManager.AddDebuffToList(reducedShield);
         }
         if (Keyboard.current.pKey.wasPressedThisFrame) {
-            _healthManager.Heal(healAmount);
+            _healthManager.HealServerRpc(healAmount);
         }
         if (Keyboard.current.mKey.wasPressedThisFrame) {
-            _healthManager.ReceiveShield(shieldAmount, 20, false);
+            _healthManager.ReceiveShieldServerRpc(shieldAmount, 20, false);
         }
     }
 }
