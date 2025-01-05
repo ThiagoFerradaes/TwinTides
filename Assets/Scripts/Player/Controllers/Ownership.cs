@@ -6,13 +6,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.TextCore.Text;
 
-public class Ownership : NetworkBehaviour
-{
+public class Ownership : NetworkBehaviour {
     #region Variables
     [Header("Character")]
     [SerializeField] Characters character;
-    [SerializeField] GameObject secondCharacterObject;
-    PlayerInput _input;
+    [SerializeField] MonoBehaviour[] scriptsToBeTurnedOff;
 
     [Header("Camera")]
     [SerializeField] CinemachineCamera cameraCineMachine;
@@ -23,52 +21,57 @@ public class Ownership : NetworkBehaviour
     #region Methods
     void Start() {
         _netWorkObject = GetComponent<NetworkObject>();
-        _input = GetComponent<PlayerInput>();
 
         if (NetworkManager.Singleton.IsHost) {
-            StartCoroutine(nameof(DistributeOwnership));
+            AssignOwnership();
         }
 
-        StartCoroutine(nameof(WaitToSetCamera));
+        ConfigureObjectForLocalPlayer();
     }
-    IEnumerator WaitToSetCamera() {
-        while (!_netWorkObject.IsOwner) {
-            yield return null;
-            if (secondCharacterObject.GetComponent<NetworkBehaviour>().OwnerClientId == NetworkManager.Singleton.LocalClientId) {
-                break;
-            }
-        }
-        SetFollowCamera();
-        SetInputMap();
+    void AssignOwnership() {
+        if (LocalWhiteBoard.Instance.IsSinglePlayer) return;
+        else StartCoroutine(AssignOwnerMultiplayer());
     }
-    private void SetFollowCamera() {
-        if (NetworkManager.Singleton.LocalClientId == _netWorkObject.OwnerClientId) {
-            cameraCineMachine.Follow = this.transform;
-        }
-    }
-    void SetInputMap() {
-        if (IsOwner) {
-            _input.enabled = true;
-        }
-        else {
-            DisableScripts(); // Desligando scripts do objeto que não tem dono local
-        }
-    }
-    void DisableScripts() {
-        _input.enabled = false; // Desligando o player input
-        GetComponent<PlayerController>().enabled = false; // Desligando o PlayerController
-    }
-    private IEnumerator DistributeOwnership() {
-
+    private IEnumerator AssignOwnerMultiplayer() {
         while (NetworkManager.Singleton.ConnectedClientsList.Count < 2) {
             yield return null;
         }
 
+        // Ownership no modo multiplayer
         if (WhiteBoard.Singleton.PlayerOneCharacter.Value == character) {
             _netWorkObject.ChangeOwnership(NetworkManager.Singleton.ConnectedClientsList[0].ClientId);
         }
         else if (WhiteBoard.Singleton.PlayerTwoCharacter.Value == character) {
             _netWorkObject.ChangeOwnership(NetworkManager.Singleton.ConnectedClientsList[1].ClientId);
+        }
+
+    }
+
+    private void ConfigureObjectForLocalPlayer() {
+        // Configura câmera e input baseados no ownership e no personagem local
+        if (LocalWhiteBoard.Instance.PlayerCharacter == this.character) {
+            SetFollowCamera();
+            //EnablePlayerControl();
+        }
+        else {
+            DisablePlayerControl();
+        }
+    }
+
+    private void SetFollowCamera() {
+        cameraCineMachine.Follow = transform;
+    }
+
+    //private void EnablePlayerControl() {
+    //    _input.enabled = true;
+    //    GetComponent<PlayerController>().enabled = true;
+    //}
+
+    private void DisablePlayerControl() {
+        //_input.enabled = false;
+        //GetComponent<PlayerController>().enabled = false;
+        foreach(var s in scriptsToBeTurnedOff) {
+            s.enabled = false;
         }
     }
     #endregion

@@ -15,6 +15,11 @@ using UnityEngine.UI;
 
 public class MenuManager : NetworkBehaviour {
 
+    #region Variables
+
+    [Header("Atributes")]
+    [SerializeField] bool isSinglePlayer;
+
     [Header("Change scene")]
     [SerializeField] GameObject loadingScreen;
     [SerializeField] float loadingTime;
@@ -54,6 +59,9 @@ public class MenuManager : NetworkBehaviour {
     [Header("Joining screen")]
     [SerializeField] TMP_InputField[] inputFields;
 
+    #endregion
+
+    #region Methods
     private void Start() {
         if (NetworkManager.Singleton != null) {
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
@@ -74,6 +82,8 @@ public class MenuManager : NetworkBehaviour {
             NetworkManager.Singleton.OnServerStopped -= ServerStopped;
         }
     }
+
+    #endregion
 
     #region Funções De Entrada no Lobby
     private void OnClientConnected(ulong obj) { // Quando um client se conecta
@@ -155,7 +165,10 @@ public class MenuManager : NetworkBehaviour {
     }
 
     public void PlayButton() { // Botão de jogar
-        if (WhiteBoard.Singleton.PlayerOneReady.Value && WhiteBoard.Singleton.PlayerTwoReady.Value) { // só pode trocar se os dois jogadores estiverem prontos
+
+        // só pode trocar se os dois jogadores estiverem prontos ou for SinglePlayer
+        if ((WhiteBoard.Singleton.PlayerOneReady.Value && WhiteBoard.Singleton.PlayerTwoReady.Value) || isSinglePlayer) { 
+            LocalWhiteBoard.Instance.IsSinglePlayer = isSinglePlayer;
             StartCoroutine(LoadScene(nomeDaCena));
         }
         else {

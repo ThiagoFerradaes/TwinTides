@@ -7,6 +7,7 @@ public class LocalWhiteBoard : MonoBehaviour {
 
 
     public Characters PlayerCharacter;
+    public bool IsSinglePlayer;
 
     public CommonRelic PlayerCommonRelicSkillOne;
     public CommonRelic PlayerCommonRelicSkillTwo;

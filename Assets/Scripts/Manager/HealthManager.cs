@@ -51,7 +51,7 @@ public class HealthManager : NetworkBehaviour {
             var stacks = _listOfActiveDebuffs[debuff.GetType()].Item1;
 
             if (stacks <= debuff.MaxAmountOfStacks) {
-                stacks = Mathf.Max(stacks + debuff.AddStacks, debuff.MaxAmountOfStacks);
+                stacks = Mathf.Min(stacks + debuff.AddStacks, debuff.MaxAmountOfStacks);
             }
             
             // alteramos o dicionario
@@ -176,42 +176,6 @@ public class HealthManager : NetworkBehaviour {
     }
     public void SetShieldMultiply(float newShieldMultiply) {
         _shieldMultiply.Value = Mathf.Max(0, newShieldMultiply);
-    }
-
-    #endregion
-
-    #region Tests
-
-    public HealthDebuff burnDebuff;
-    public HealthDebuff posion;
-    public HealthDebuff bleed;
-    public HealthDebuff reducedHeal;
-    public HealthDebuff reducedShield;
-    public float healAmount;
-    public float shieldAmount;
-
-    private void Update() {
-        if (Keyboard.current.lKey.wasPressedThisFrame && IsOwner) {
-            AddDebuffToList(burnDebuff);
-        }
-        if (Keyboard.current.kKey.wasPressedThisFrame && IsOwner) {
-            AddDebuffToList(posion);
-        }
-        if (Keyboard.current.oKey.wasPressedThisFrame && IsOwner) {
-            AddDebuffToList(bleed);
-        }
-        if (Keyboard.current.nKey.wasPressedThisFrame && IsOwner) {
-            AddDebuffToList(reducedHeal);
-        }
-        if (Keyboard.current.iKey.wasPressedThisFrame && IsOwner) {
-            AddDebuffToList(reducedShield);
-        }
-        if (Keyboard.current.pKey.wasPressedThisFrame && IsOwner) {
-            Heal(healAmount);
-        }
-        if (Keyboard.current.mKey.wasPressedThisFrame && IsOwner) {
-            ReceiveShield(shieldAmount, 20, false);
-        }
     }
 
     #endregion

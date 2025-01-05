@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 4203650123197868152}
   - component: {fileID: 5911823821045647350}
   - component: {fileID: 1916852207886483597}
+  - component: {fileID: 2402475289913472152}
   m_Layer: 0
   m_Name: PlayerPreFab
   m_TagString: Untagged
@@ -250,7 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1302872352
+  GlobalObjectIdHash: 1136335845
   InScenePlacedSourceGlobalObjectIdHash: 1302872352
   DeferredDespawnTick: 0
   Ownership: 1
@@ -330,7 +331,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   character: 0
-  secondCharacterObject: {fileID: 0}
+  scriptsToBeTurnedOff:
+  - {fileID: 4203650123197868152}
+  - {fileID: 2402475289913472152}
   cameraCineMachine: {fileID: 0}
 --- !u!114 &-4439767094921606809
 MonoBehaviour:
@@ -390,13 +393,6 @@ MonoBehaviour:
     m_InternalValue: 0
   isShielded:
     m_InternalValue: 0
-  burnDebuff: {fileID: 11400000, guid: 86a385b2a33a4bf478a57b6cb16ca780, type: 2}
-  posion: {fileID: 11400000, guid: 07fecbce3982b1d48b25917e8424f895, type: 2}
-  bleed: {fileID: 11400000, guid: 811747b3cf3ece547a8d6f3bd782cfb3, type: 2}
-  reducedHeal: {fileID: 11400000, guid: 527c75793ac683c4e9560a575d901a69, type: 2}
-  reducedShield: {fileID: 11400000, guid: 3300d3fe75a7e6f4093968bf3be9dec0, type: 2}
-  healAmount: 40
-  shieldAmount: 40
 --- !u!114 &4203650123197868152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,7 +400,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7979977661230229930}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -697,6 +693,25 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2402475289913472152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7979977661230229930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab964788b12c3246a254fd41263ea4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  burnDebuff: {fileID: 11400000, guid: 86a385b2a33a4bf478a57b6cb16ca780, type: 2}
+  posion: {fileID: 11400000, guid: 07fecbce3982b1d48b25917e8424f895, type: 2}
+  bleed: {fileID: 11400000, guid: 811747b3cf3ece547a8d6f3bd782cfb3, type: 2}
+  reducedHeal: {fileID: 11400000, guid: 527c75793ac683c4e9560a575d901a69, type: 2}
+  reducedShield: {fileID: 11400000, guid: 3300d3fe75a7e6f4093968bf3be9dec0, type: 2}
+  healAmount: 20
+  shieldAmount: 40
 --- !u!1 &9085850524470032934
 GameObject:
   m_ObjectHideFlags: 0
