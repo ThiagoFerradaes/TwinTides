@@ -11,6 +11,13 @@ public class Teste_Um : MonoBehaviour
     public HealthDebuff bleed;
     public HealthDebuff reducedHeal;
     public HealthDebuff reducedShield;
+    public HealthDebuff shieldBlocker;
+    public HealthDebuff healBlocker;
+    public HealthBuff healOverTime;
+    public HealthBuff debuffBlock;
+    public HealthBuff invulnerable;
+    public HealthBuff healIncrease;
+    public HealthBuff damageDecreased;
     public float healAmount;
     public float shieldAmount;
 
@@ -37,10 +44,28 @@ public class Teste_Um : MonoBehaviour
             _healthManager.AddDebuffToList(reducedShield);
         }
         if (Keyboard.current.pKey.wasPressedThisFrame) {
-            _healthManager.HealServerRpc(healAmount);
+            _healthManager.AddBuffToList(healOverTime);
         }
         if (Keyboard.current.mKey.wasPressedThisFrame) {
-            _healthManager.ReceiveShieldServerRpc(shieldAmount, 20, false);
+            _healthManager.ApplyShieldServerRpc(shieldAmount, 20, false);
+        }
+        if (Keyboard.current.jKey.wasPressedThisFrame) {
+            _healthManager.AddDebuffToList(shieldBlocker);
+        }
+        if (Keyboard.current.bKey.wasPressedThisFrame) {
+            _healthManager.AddDebuffToList(healBlocker);
+        }
+        if (Keyboard.current.vKey.wasPressedThisFrame) {
+            _healthManager.AddBuffToList(invulnerable);
+        }
+        if (Keyboard.current.uKey.wasPressedThisFrame) {
+            _healthManager.AddBuffToList(debuffBlock);
+        }
+        if (Keyboard.current.xKey.wasPressedThisFrame) {
+            _healthManager.AddBuffToList(damageDecreased);
+        }
+        if (Keyboard.current.zKey.wasPressedThisFrame) {
+            _healthManager.AddBuffToList(healIncrease);
         }
     }
 }

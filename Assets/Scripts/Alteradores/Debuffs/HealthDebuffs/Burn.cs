@@ -13,15 +13,18 @@ public class Burn : HealthDebuff
         for (int i = 0; i < amountOfTicks; i++) {
             if (health.isShielded.Value) {
                 health.ApplyDamageOnServerRPC(damagePerTickOnShield * Mathf.Max(minimumShieldAmountToMultiplyDamage,
-                    health.currentShieldAmount.Value), true);
+                    health.currentShieldAmount.Value), true, false);
                 yield return new WaitForSeconds(timeBetweenDamage);
             }
             else {
-                health.ApplyDamageOnServerRPC(damagePerTickOffShield * health.maxHealth.Value, true);
+                health.ApplyDamageOnServerRPC(damagePerTickOffShield * health.maxHealth.Value, true, false);
                 yield return new WaitForSeconds(timeBetweenDamage);
             } 
         }
 
+        StopDebuff(health);
+    }
+    public override void StopDebuff(HealthManager health) {
         health.RemoveDebuff(this);
     }
 }

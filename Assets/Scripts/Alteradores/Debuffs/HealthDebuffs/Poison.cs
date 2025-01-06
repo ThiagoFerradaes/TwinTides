@@ -9,10 +9,12 @@ public class Poison : HealthDebuff {
     [SerializeField] int amountOfTicks;
     public override IEnumerator ApplyDebuff(HealthManager health, int currentStacks) {
         for (int i = 0; i < amountOfTicks; i++) {
-            health.ApplyDamageOnServerRPC((damagePerTick * currentStacks * health.maxHealth.Value), false);
+            health.ApplyDamageOnServerRPC((damagePerTick * currentStacks * health.maxHealth.Value), false, false);
             yield return new WaitForSeconds(timeBetweenDamage);
         }
-
+        StopDebuff(health);
+    }
+    public override void StopDebuff(HealthManager health) {
         health.RemoveDebuff(this);
     }
 }

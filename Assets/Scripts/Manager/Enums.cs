@@ -14,3 +14,18 @@ public enum SkillType {
     CommonRelicTwo
 }
 
+public enum HealthMultipliers {
+    Heal,
+    Shield,
+    Damage
+}
+
+public enum HealthPermissions {
+    CanBeHealed,
+    CanBeShielded,
+    CanTakeDamage,
+    CanBeInvulnerable,
+    CanBeDebuffed,
+    CanBeBuffed
+}
+

@@ -158,11 +158,11 @@ GameObject:
   - component: {fileID: -833004979012800985}
   - component: {fileID: -4439767094921606809}
   - component: {fileID: 2849821314780519991}
-  - component: {fileID: 3160352352417031265}
   - component: {fileID: 4203650123197868152}
+  - component: {fileID: 2402475289913472152}
+  - component: {fileID: 3160352352417031265}
   - component: {fileID: 5911823821045647350}
   - component: {fileID: 1916852207886483597}
-  - component: {fileID: 2402475289913472152}
   m_Layer: 0
   m_Name: PlayerPreFab
   m_TagString: Untagged
@@ -334,6 +334,8 @@ MonoBehaviour:
   scriptsToBeTurnedOff:
   - {fileID: 4203650123197868152}
   - {fileID: 2402475289913472152}
+  - {fileID: 2849821314780519991}
+  - {fileID: -4439767094921606809}
   cameraCineMachine: {fileID: 0}
 --- !u!114 &-4439767094921606809
 MonoBehaviour:
@@ -373,26 +375,6 @@ MonoBehaviour:
   dashForce: 20
   dashDuration: 0.25
   dashCooldown: 1
---- !u!114 &3160352352417031265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7979977661230229930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac683681a39e0ec42828994a9e9b3bdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  maxHealth:
-    m_InternalValue: 80
-  maxShieldAmount: 100
-  currentShieldAmount:
-    m_InternalValue: 0
-  isShielded:
-    m_InternalValue: 0
 --- !u!114 &4203650123197868152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,6 +625,52 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerOne
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &2402475289913472152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7979977661230229930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab964788b12c3246a254fd41263ea4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  burnDebuff: {fileID: 11400000, guid: 86a385b2a33a4bf478a57b6cb16ca780, type: 2}
+  posion: {fileID: 11400000, guid: 07fecbce3982b1d48b25917e8424f895, type: 2}
+  bleed: {fileID: 11400000, guid: 811747b3cf3ece547a8d6f3bd782cfb3, type: 2}
+  reducedHeal: {fileID: 11400000, guid: 527c75793ac683c4e9560a575d901a69, type: 2}
+  reducedShield: {fileID: 11400000, guid: 3300d3fe75a7e6f4093968bf3be9dec0, type: 2}
+  shieldBlocker: {fileID: 11400000, guid: 0ea2bd2b84f2810468211aebc677d78e, type: 2}
+  healBlocker: {fileID: 11400000, guid: 9e5b3091a73336a4aa11a9c635f0bc17, type: 2}
+  healOverTime: {fileID: 11400000, guid: f76a12aa5e44ede48b22fb304dc598e9, type: 2}
+  debuffBlock: {fileID: 11400000, guid: f5221119b6ed2a740b69deb30ed33caf, type: 2}
+  invulnerable: {fileID: 11400000, guid: 48a5b94b0cd5fd4468f115b02bd9c74b, type: 2}
+  healIncrease: {fileID: 11400000, guid: b1a570f16eb58dd4db1b50cedcea3399, type: 2}
+  damageDecreased: {fileID: 11400000, guid: ecea1f9befd606943b160f2fb3415ef6, type: 2}
+  healAmount: 20
+  shieldAmount: 40
+--- !u!114 &3160352352417031265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7979977661230229930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac683681a39e0ec42828994a9e9b3bdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  maxHealth:
+    m_InternalValue: 80
+  maxShieldAmount: 100
+  currentShieldAmount:
+    m_InternalValue: 0
+  isShielded:
+    m_InternalValue: 0
 --- !u!54 &5911823821045647350
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -693,25 +721,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2402475289913472152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7979977661230229930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aab964788b12c3246a254fd41263ea4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  burnDebuff: {fileID: 11400000, guid: 86a385b2a33a4bf478a57b6cb16ca780, type: 2}
-  posion: {fileID: 11400000, guid: 07fecbce3982b1d48b25917e8424f895, type: 2}
-  bleed: {fileID: 11400000, guid: 811747b3cf3ece547a8d6f3bd782cfb3, type: 2}
-  reducedHeal: {fileID: 11400000, guid: 527c75793ac683c4e9560a575d901a69, type: 2}
-  reducedShield: {fileID: 11400000, guid: 3300d3fe75a7e6f4093968bf3be9dec0, type: 2}
-  healAmount: 20
-  shieldAmount: 40
 --- !u!1 &9085850524470032934
 GameObject:
   m_ObjectHideFlags: 0
