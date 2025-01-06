@@ -37,6 +37,8 @@ public class HealthManager : NetworkBehaviour {
     // Eventos
     public event Action<(float maxHealth, float currentHealth, float currentShield)> UpdateHealth;
     public event Action OnDeath;
+    public event Action<Buff, int> OnBuffAdded, OnBuffRemoved;
+    public event Action<Debuff, int> OnDebuffAdded, OnDebuffRemoved;
     #endregion
 
     #region Methods
@@ -86,7 +88,7 @@ public class HealthManager : NetworkBehaviour {
         if (isShielded.Value && hitShield) {
 
             if(isAfectedByDamageMultiply) currentShieldAmount.Value -= (damageTaken * _damageMultiply.Value);
-            else currentShieldAmount.Value = damageTaken;
+            else currentShieldAmount.Value -= damageTaken;
 
             if (currentShieldAmount.Value <= 0) {
                 float overDamage = -currentShieldAmount.Value;
@@ -188,6 +190,8 @@ public class HealthManager : NetworkBehaviour {
             StartCoroutine(newDebuff.Coroutine); // começamos a corrotina 
             Debug.Log("Debuff added: " + debuff.name);
         }
+
+        OnDebuffAdded?.Invoke(debuff, _listOfActiveDebuffs[debuff.GetType()].Stack);
     }
     public void RemoveDebuff(HealthDebuff debuff) {
         if (_listOfActiveDebuffs.TryGetValue(debuff.GetType(), out ActiveDebuff currentDebuff)) {
@@ -195,6 +199,7 @@ public class HealthManager : NetworkBehaviour {
             _listOfActiveDebuffs.Remove(debuff.GetType());
         }
         Debug.Log("Debuff removed: " + debuff.name);
+        OnDebuffRemoved?.Invoke(debuff, 0);
     }
     public void CleanAllDebuffs() {
         foreach (var debuff in _listOfActiveDebuffs.Values) {
@@ -244,6 +249,8 @@ public class HealthManager : NetworkBehaviour {
             StartCoroutine(newBuff.Coroutine); // começamos a corrotina 
             Debug.Log("Buff added: " + buff.name);
         }
+
+        OnBuffAdded?.Invoke(buff, _listOfActiveBuffs[buff.GetType()].Stack);
     }
     public void RemoveBuff(HealthBuff buff) {
         if (_listOfActiveBuffs.TryGetValue(buff.GetType(), out ActiveBuff currentBuff)) {
@@ -251,6 +258,7 @@ public class HealthManager : NetworkBehaviour {
             _listOfActiveBuffs.Remove(buff.GetType());
         }
         Debug.Log("Buff removed: " + buff.name);
+        OnBuffRemoved?.Invoke(buff, 0);
     }
     public void CleanAllBuffs() {
         foreach (var buff in _listOfActiveBuffs.Values) {

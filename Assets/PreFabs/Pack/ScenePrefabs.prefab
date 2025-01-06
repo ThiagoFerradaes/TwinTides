@@ -132,6 +132,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea7cf58c9c399b94ca2bbbe07573d232, type: 3}
+--- !u!114 &2982305412470302160 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3160352352417031265, guid: ea7cf58c9c399b94ca2bbbe07573d232, type: 3}
+  m_PrefabInstance: {fileID: 196070688600572337}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7783915773042976795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac683681a39e0ec42828994a9e9b3bdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7783915773042976795 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7979977661230229930, guid: ea7cf58c9c399b94ca2bbbe07573d232, type: 3}
@@ -307,6 +318,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 817073885630004202, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: melHealthManager
+      value: 
+      objectReference: {fileID: 2982305412470302160}
+    - target: {fileID: 817073885630004202, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: maevisHealthManager
+      value: 
+      objectReference: {fileID: 1039035072738481875}
     - target: {fileID: 2662451705284672871, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: melGameObject
       value: 
@@ -315,12 +334,81 @@ PrefabInstance:
       propertyPath: maevisGameObject
       value: 
       objectReference: {fileID: 5408300040830769944}
+    - target: {fileID: 2814730636941766804, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814730636941766804, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814730636941766804, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -338
+      objectReference: {fileID: 0}
+    - target: {fileID: 3396576249073267567, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3396576249073267567, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: m_Spacing.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3396576249073267567, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: m_CellSize.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3396576249073267567, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: m_Constraint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3396576249073267567, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: m_ConstraintCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3850926657773964902, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: melHealthManager
+      value: 
+      objectReference: {fileID: 2982305412470302160}
+    - target: {fileID: 3850926657773964902, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: maevisHealthManager
+      value: 
+      objectReference: {fileID: 1039035072738481875}
+    - target: {fileID: 4597994234305882894, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: iconPrefab
+      value: 
+      objectReference: {fileID: 8166295928578009854, guid: fd0c5533668abe84a9a4c38fef174869, type: 3}
+    - target: {fileID: 4597994234305882894, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: melHealthManager
+      value: 
+      objectReference: {fileID: 2982305412470302160}
+    - target: {fileID: 4597994234305882894, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: maevisHealthManager
+      value: 
+      objectReference: {fileID: 1039035072738481875}
+    - target: {fileID: 7603627432599530526, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: m_CellSize.x
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 7603627432599530526, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: m_CellSize.y
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838875920368789469, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: m_CellSize.x
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838875920368789469, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: m_CellSize.y
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 9076130675839607190, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_Name
       value: CanvasUIDeCombate
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4859244164334112952, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
@@ -402,6 +490,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea7cf58c9c399b94ca2bbbe07573d232, type: 3}
+--- !u!114 &1039035072738481875 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3160352352417031265, guid: ea7cf58c9c399b94ca2bbbe07573d232, type: 3}
+  m_PrefabInstance: {fileID: 2715872183776506546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5408300040830769944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac683681a39e0ec42828994a9e9b3bdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5408300040830769944 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7979977661230229930, guid: ea7cf58c9c399b94ca2bbbe07573d232, type: 3}
