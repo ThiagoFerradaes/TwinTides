@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1192576115212914385}
   - component: {fileID: 5811537005697256142}
   - component: {fileID: 5830329958151546366}
+  - component: {fileID: 957467724197759712}
   m_Layer: 0
   m_Name: CharacterFollowCamera
   m_TagString: Untagged
@@ -228,3 +229,15 @@ MonoBehaviour:
         DecelTime: 0
   PlayerIndex: -1
   AutoEnableInputs: 1
+--- !u!114 &957467724197759712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5135390435956685778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186be62836e324e4e8cac3c2b240e4dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -153,8 +153,8 @@ GameObject:
   - component: {fileID: 4620659201611985856}
   - component: {fileID: 8966626773788947514}
   - component: {fileID: 6579332148412237645}
-  - component: {fileID: 3201890820333051219}
-  - component: {fileID: -6704330426717485368}
+  - component: {fileID: 8500474612837155833}
+  - component: {fileID: 5625713959861971478}
   - component: {fileID: -833004979012800985}
   - component: {fileID: -4439767094921606809}
   - component: {fileID: 2849821314780519991}
@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 5911823821045647350}
   - component: {fileID: 1916852207886483597}
   m_Layer: 0
-  m_Name: PlayerPreFab
+  m_Name: MavisPreFab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1136335845
+  GlobalObjectIdHash: 1302872352
   InScenePlacedSourceGlobalObjectIdHash: 1302872352
   DeferredDespawnTick: 0
   Ownership: 1
@@ -264,7 +264,7 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &3201890820333051219
+--- !u!114 &8500474612837155833
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -273,12 +273,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7979977661230229930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Script: {fileID: 11500000, guid: da52bf8bbc1de48cfb221a6ff30f7972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  NetworkTransformExpanded: 0
-  AuthorityMode: 1
+  NetworkTransformExpanded: 1
+  AuthorityMode: 0
   TickSyncChildren: 0
   UseUnreliableDeltas: 0
   SyncPositionX: 1
@@ -300,7 +300,7 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &-6704330426717485368
+--- !u!114 &5625713959861971478
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -315,8 +315,8 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkRigidbodyBaseExpanded: 0
   UseRigidBodyForMotion: 0
-  AutoUpdateKinematicState: 0
-  AutoSetKinematicOnDespawn: 0
+  AutoUpdateKinematicState: 1
+  AutoSetKinematicOnDespawn: 1
 --- !u!114 &-833004979012800985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,13 +330,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  character: 0
   scriptsToBeTurnedOff:
   - {fileID: 4203650123197868152}
   - {fileID: 2402475289913472152}
-  - {fileID: 2849821314780519991}
   - {fileID: -4439767094921606809}
-  cameraCineMachine: {fileID: 0}
 --- !u!114 &-4439767094921606809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,7 +341,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7979977661230229930}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 213840a9c47f0624c9d7f0d834a44589, type: 3}
   m_Name: 
@@ -362,7 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da89f7749d445174c9973c770269c8ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraCineMachine: {fileID: 0}
+  ShowTopMostFoldoutHeaderGroup: 1
   characterMoveSpeed: 8
   sprintSpeed: 16
   rotationSpeed: 4
@@ -632,7 +629,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7979977661230229930}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aab964788b12c3246a254fd41263ea4c, type: 3}
   m_Name: 
@@ -658,7 +655,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7979977661230229930}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac683681a39e0ec42828994a9e9b3bdf, type: 3}
   m_Name: 

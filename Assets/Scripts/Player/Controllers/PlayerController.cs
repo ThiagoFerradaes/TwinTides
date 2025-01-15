@@ -7,12 +7,12 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : NetworkBehaviour {
 
-    [Header("Camera")]
-    [SerializeField] CinemachineCamera cameraCineMachine;
-    CinemachineInputAxisController _cameraInputController;
-    CinemachineOrbitalFollow _cameraOrbital;
+    //[Header("Camera")]
+    //[SerializeField] CinemachineCamera cameraCineMachine;
+    //CinemachineInputAxisController _cameraInputController;
+    //CinemachineOrbitalFollow _cameraOrbital;
 
     [Header("Movement")]
     [SerializeField] float characterMoveSpeed;
@@ -38,9 +38,14 @@ public class PlayerController : MonoBehaviour {
     bool _inDash;
 
     Rigidbody _rb;
+
+    // eventos 
+    public static event Action OnMove;
+    public static event Action OnStop;
+
     void Start() {
-        _cameraInputController = cameraCineMachine.GetComponent<CinemachineInputAxisController>();
-        _cameraOrbital = cameraCineMachine.GetComponent<CinemachineOrbitalFollow>();
+        //_cameraInputController = cameraCineMachine.GetComponent<CinemachineInputAxisController>();
+        //_cameraOrbital = cameraCineMachine.GetComponent<CinemachineOrbitalFollow>();
         _rb = GetComponent<Rigidbody>();
         _currentCharacterMoveSpeed = characterMoveSpeed;
         _currentJumpsAlowed = maxJumps;
@@ -48,9 +53,11 @@ public class PlayerController : MonoBehaviour {
     public void InputMove(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed && _canWalk) {
             _moveInput = context.ReadValue<Vector2>();
+            OnMove?.Invoke();
         }
         else if (context.phase == InputActionPhase.Canceled) {
             _moveInput = Vector2.zero;
+            OnStop?.Invoke();
         }
     }
     public void InputRotate(InputAction.CallbackContext context) {
@@ -105,6 +112,7 @@ public class PlayerController : MonoBehaviour {
 
     }
     void FixedUpdate() {
+        if (!IsOwner) return;
         MoveAndRotate();
     }
     private void MoveAndRotate() {
@@ -115,22 +123,23 @@ public class PlayerController : MonoBehaviour {
             transform.Translate(_currentCharacterMoveSpeed * Time.deltaTime * moveDirection);
 
             // Rotação de camera
-            _cameraInputController.enabled = false;
-            _cameraOrbital.HorizontalAxis.TriggerRecentering();
+            //_cameraInputController.enabled = false;
+            //_cameraOrbital.HorizontalAxis.TriggerRecentering();
 
             // Rotação do personagem
             _rotationY += _rotationInput.x * rotationSpeed * Time.deltaTime;
             transform.rotation = Quaternion.Euler(0, _rotationY, 0);
         }
-        else {
-            _cameraInputController.enabled = true;
-        }
+        //else {
+        //    _cameraInputController.enabled = true;
+        //}
 
 
         if (_rb.linearVelocity.y != 0) { // Durante o pulo aumenta a gravidade, serve para regular a duração do pulo
             _rb.AddForce(Vector3.down * fallForce, ForceMode.Acceleration);
         }
     }
+
     private void OnCollisionEnter(Collision collision) {
         if (((1 << collision.gameObject.layer) & floorLayer.value) != 0) {
             _currentJumpsAlowed = maxJumps;
