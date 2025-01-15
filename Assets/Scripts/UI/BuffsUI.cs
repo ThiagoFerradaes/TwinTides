@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 public class BuffsUI : MonoBehaviour {
     [SerializeField] Image iconPrefab;
-    [SerializeField] HealthManager maevisHealthManager, melHealthManager;
+
+    HealthManager _characterHealthManager;
     readonly Dictionary<Buff, Image> activeBuffsList = new();
     readonly List<Image> listOfIcons = new();
 
@@ -12,26 +13,16 @@ public class BuffsUI : MonoBehaviour {
         CreatePooling();
     }
     private void OnEnable() {
-        if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
-            maevisHealthManager.OnBuffAdded += AddBuff;
-            maevisHealthManager.OnBuffRemoved += RemoveBuff;
-        }
-        else {
-            melHealthManager.OnBuffAdded += AddBuff;
-            melHealthManager.OnBuffRemoved += RemoveBuff;
-        }
+        PlayerSetUp.OnPlayerSpawned += SetUpHealthManager;
     }
     private void OnDisable() {
-        if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
-            maevisHealthManager.OnBuffAdded -= AddBuff;
-            maevisHealthManager.OnBuffRemoved -= RemoveBuff;
-        }
-        else {
-            melHealthManager.OnBuffAdded -= AddBuff;
-            melHealthManager.OnBuffRemoved -= RemoveBuff;
-        }
+        PlayerSetUp.OnPlayerSpawned -= SetUpHealthManager;
     }
-
+    void SetUpHealthManager(GameObject player) {
+        _characterHealthManager = player.GetComponent<HealthManager>();
+        _characterHealthManager.OnBuffAdded += AddBuff;
+        _characterHealthManager.OnBuffRemoved += RemoveBuff;
+    }
     void AddBuff(Buff buffAdded, int stacks) {
         if (activeBuffsList.ContainsKey(buffAdded)) {
             activeBuffsList[buffAdded].GetComponent<BuffAndDebuffIcon>().UpdateIcon(buffAdded.BuffColor, stacks);   

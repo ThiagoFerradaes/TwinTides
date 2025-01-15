@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -47,19 +48,19 @@ public class SkillUiManager : MonoBehaviour {
     [SerializeField] TextMeshProUGUI commonRelicSkillTwoCooldownText;
     [SerializeField] TextMeshProUGUI attackSkillCooldownText;
 
-    [Header("Player info")]
-    [SerializeField] GameObject maevisGameObject;
-    [SerializeField] GameObject melGameObject;
+    [Header("Player two Info")]
+    [SerializeField] GameObject playerTwoInfo;
+
     private GameObject _playerCharacter;
     private GameObject _playerTwoCharacter;
 
-    readonly Dictionary<SkillType,TextMeshProUGUI> _listOfCooldowns = new();
+    readonly Dictionary<SkillType, TextMeshProUGUI> _listOfCooldowns = new();
     #endregion
 
     #region Methods
-    private void Awake() {
-        SetCharacterHealthManagerInfo(); // Inscrevendo evento de update de vida
-    }
+    //private void Awake() {
+    //    SetCharacterHealthManagerInfo(); // Inscrevendo evento de update de vida
+    //}
     private void Start() {
         AddTextsToListOfCooldowns(); // Criar um dicionario com os textMeshPros
         SetCharacterSpriteInfo(); // Colocar a foto do personagem principal
@@ -67,6 +68,10 @@ public class SkillUiManager : MonoBehaviour {
         SetInicialCooldowns(); // Zerar o texto de cooldowns
         SetGoldText(); // Mudar o texto do gold
         // Colocar o evento que chama o SetCooldown
+    }
+    private void OnEnable() {
+        PlayerSetUp.OnPlayerSpawned += SetCharacterHealthManagerInfo;
+        PlayerSetUp.OnPlayerTwoSpawned += SetSecondCharacterHealthManagerInfo;
     }
     void UpdatePlayerHealth((float maxHealth, float currentHealth, float currentShield) health) {
         characterHealthText.text = health.currentHealth.ToString("F0") + " / " + health.maxHealth.ToString("F0");
@@ -101,19 +106,14 @@ public class SkillUiManager : MonoBehaviour {
             }
         }
     }
-    private void SetCharacterHealthManagerInfo() {
-        if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
-            _playerCharacter = maevisGameObject;
-            _playerTwoCharacter = melGameObject;
-            _playerCharacter.GetComponent<HealthManager>().UpdateHealth += UpdatePlayerHealth;
-            _playerTwoCharacter.GetComponent<HealthManager>().UpdateHealth += UpdatePlayerTwoHealth;
-        }
-        else {
-            _playerCharacter = melGameObject;
-            _playerTwoCharacter = maevisGameObject;
-            _playerCharacter.GetComponent<HealthManager>().UpdateHealth += UpdatePlayerHealth;
-            _playerTwoCharacter.GetComponent<HealthManager>().UpdateHealth += UpdatePlayerTwoHealth;
-        }
+    private void SetCharacterHealthManagerInfo(GameObject player) {
+        _playerCharacter = player;
+        _playerCharacter.GetComponent<HealthManager>().UpdateHealth += UpdatePlayerHealth;
+    }
+    private void SetSecondCharacterHealthManagerInfo(GameObject secondPlayer) {
+        playerTwoInfo.SetActive(true);
+        _playerTwoCharacter = secondPlayer;
+        _playerTwoCharacter.GetComponent<HealthManager>().UpdateHealth += UpdatePlayerTwoHealth;
     }
     private void SetSkillsSpritesInfo() {
         if (LocalWhiteBoard.Instance.PlayerNpcSkillOne != null) {
@@ -156,8 +156,7 @@ public class SkillUiManager : MonoBehaviour {
         }
     }
     private void SetInicialCooldowns() {
-        foreach (var item in _listOfCooldowns)
-        {
+        foreach (var item in _listOfCooldowns) {
             item.Value.text = "";
         }
     }
@@ -183,6 +182,9 @@ public class SkillUiManager : MonoBehaviour {
         if (_playerCharacter == null || _playerTwoCharacter == null) return;
         _playerCharacter.GetComponent<HealthManager>().UpdateHealth -= UpdatePlayerHealth;
         _playerTwoCharacter.GetComponent<HealthManager>().UpdateHealth -= UpdatePlayerTwoHealth;
+
+        PlayerSetUp.OnPlayerSpawned -= SetCharacterHealthManagerInfo;
+        PlayerSetUp.OnPlayerTwoSpawned -= SetSecondCharacterHealthManagerInfo;
     }
     #endregion
 }

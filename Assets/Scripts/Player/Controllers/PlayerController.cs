@@ -9,11 +9,6 @@ using UnityEngine.UIElements;
 
 public class PlayerController : NetworkBehaviour {
 
-    //[Header("Camera")]
-    //[SerializeField] CinemachineCamera cameraCineMachine;
-    //CinemachineInputAxisController _cameraInputController;
-    //CinemachineOrbitalFollow _cameraOrbital;
-
     [Header("Movement")]
     [SerializeField] float characterMoveSpeed;
     [SerializeField] float sprintSpeed;
@@ -44,8 +39,6 @@ public class PlayerController : NetworkBehaviour {
     public static event Action OnStop;
 
     void Start() {
-        //_cameraInputController = cameraCineMachine.GetComponent<CinemachineInputAxisController>();
-        //_cameraOrbital = cameraCineMachine.GetComponent<CinemachineOrbitalFollow>();
         _rb = GetComponent<Rigidbody>();
         _currentCharacterMoveSpeed = characterMoveSpeed;
         _currentJumpsAlowed = maxJumps;

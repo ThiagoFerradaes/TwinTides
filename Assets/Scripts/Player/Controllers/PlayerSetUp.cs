@@ -8,7 +8,7 @@ public class PlayerSetUp : NetworkBehaviour {
 
     public Characters _character;
 
-    public static event Action<GameObject> OnPlayerSpawned;
+    public static event Action<GameObject> OnPlayerSpawned, OnPlayerTwoSpawned;
     #endregion
 
     #region Methods
@@ -18,11 +18,10 @@ public class PlayerSetUp : NetworkBehaviour {
 
     private void ConfigureObjectForLocalPlayer() {
         if (LocalWhiteBoard.Instance.PlayerCharacter == _character) {
-            OnPlayerSpawned?.Invoke(this.gameObject);
-            Debug.Log("Owned: " +  gameObject.name);    
+            OnPlayerSpawned?.Invoke(this.gameObject);   
         }
         else {   
-            Debug.Log("Not owned: " + gameObject.name);
+            OnPlayerTwoSpawned?.Invoke(this.gameObject);
             DisablePlayerControl();
         }
     }

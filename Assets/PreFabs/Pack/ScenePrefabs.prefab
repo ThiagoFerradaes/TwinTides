@@ -155,10 +155,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1429956245790243939, guid: e108ab70d0379a44985c09c1be54a299, type: 3}
-      propertyPath: Target.TrackingTarget
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5135390435956685778, guid: e108ab70d0379a44985c09c1be54a299, type: 3}
       propertyPath: m_Name
       value: CharacterFollowCamera
@@ -313,13 +309,17 @@ PrefabInstance:
       propertyPath: m_CellSize.y
       value: 24
       objectReference: {fileID: 0}
+    - target: {fileID: 8690731570475138996, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9076130675839607190, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_Name
       value: CanvasUIDeCombate
       objectReference: {fileID: 0}
     - target: {fileID: 9076130675839607190, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

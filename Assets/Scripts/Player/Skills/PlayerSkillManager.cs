@@ -44,7 +44,7 @@ public class PlayerSkillManager : NetworkBehaviour {
     }
     #endregion
 
-    [ServerRpc(RequireOwnership = false)] // A partir daqui já não é mais um exemplo, já é o real
+    [ServerRpc(RequireOwnership = false)] 
     void UseSkillServerRpc(int skillId) {
         UseSkillClientRPc(skillId);
     }
