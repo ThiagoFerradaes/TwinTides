@@ -115,18 +115,10 @@ public class PlayerController : NetworkBehaviour {
             Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
             transform.Translate(_currentCharacterMoveSpeed * Time.deltaTime * moveDirection);
 
-            // Rotação de camera
-            //_cameraInputController.enabled = false;
-            //_cameraOrbital.HorizontalAxis.TriggerRecentering();
-
             // Rotação do personagem
             _rotationY += _rotationInput.x * rotationSpeed * Time.deltaTime;
             transform.rotation = Quaternion.Euler(0, _rotationY, 0);
         }
-        //else {
-        //    _cameraInputController.enabled = true;
-        //}
-
 
         if (_rb.linearVelocity.y != 0) { // Durante o pulo aumenta a gravidade, serve para regular a duração do pulo
             _rb.AddForce(Vector3.down * fallForce, ForceMode.Acceleration);

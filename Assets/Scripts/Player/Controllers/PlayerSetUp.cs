@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerSetUp : NetworkBehaviour {
     #region Variables
     [SerializeField] MonoBehaviour[] scriptsToBeTurnedOff;
-
+    public GameObject CameraObject;
     public Characters _character;
 
     public static event Action<GameObject> OnPlayerSpawned, OnPlayerTwoSpawned;
