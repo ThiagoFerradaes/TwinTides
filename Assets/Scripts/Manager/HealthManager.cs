@@ -82,7 +82,6 @@ public class HealthManager : NetworkBehaviour {
 
     [ServerRpc(RequireOwnership = false)]
     public void ApplyDamageOnServerRPC(float damageTaken, bool hitShield, bool isAfectedByDamageMultiply) {
-        if (!IsServer) return;
         if (!_canBeDamaged.Value) { Debug.Log("Can't take Damage" + gameObject.name); return; }
 
         if (isShielded.Value && hitShield) {
