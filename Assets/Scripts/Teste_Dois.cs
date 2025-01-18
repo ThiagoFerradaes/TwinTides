@@ -1,24 +1,34 @@
 using System.Collections;
-using System.Threading;
-using Unity.Cinemachine;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
+
 
 public class Teste_Dois : NetworkBehaviour {
-    [SerializeField] float damage;
-    [SerializeField] Debuff poison;
+    Vector3 rightPosition, leftPosition, targetPosition;
+    Vector3 patrolOffSet = new(10, 0, 0);
+    bool isMovingRight;
 
-    private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("Player")) {
+    private void Start() {
+        rightPosition = transform.position + patrolOffSet;
+        leftPosition = transform.position - patrolOffSet;
 
-            HealthManager playerHealth = other.gameObject.GetComponent<HealthManager>();
+        if (IsServer) StartCoroutine(MovementCoroutine());
+    }
 
-            if (other.TryGetComponent<NetworkObject>(out NetworkObject obj)) {
-                if (!obj.IsOwner) return;
-                playerHealth.ApplyDamageOnServerRPC(damage, true, true);
-                playerHealth.AddDebuffToList(poison as HealthDebuff);
+    IEnumerator MovementCoroutine() {
+        while (true) {
+
+            targetPosition = isMovingRight ? rightPosition : leftPosition;
+            Vector3 direction = targetPosition - transform.position;
+
+            while (Vector3.Distance(transform.position, targetPosition) >= 0.2f) {
+                transform.transform.Translate(3 * Time.deltaTime * direction.normalized);
+                yield return null;
             }
+
+            isMovingRight = !isMovingRight;
+
         }
     }
 
