@@ -2,10 +2,10 @@ using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.UI;
 
-public class PauseMenuInGame : NetworkBehaviour
-{
+public class PauseMenuInGame : NetworkBehaviour {
     [SerializeField] GameObject pauseScreen;
     [SerializeField] Button pauseButton;
+    [SerializeField] Button continueButton;
 
     readonly NetworkVariable<bool> _isPaused = new(false);
 
@@ -17,6 +17,7 @@ public class PauseMenuInGame : NetworkBehaviour
     }
     private void Start() {
         pauseButton.onClick.AddListener(ChangePauseState); // Apertei o botão
+        continueButton.onClick.AddListener(ChangePauseState);
         UpdatePauseScreen(_isPaused.Value); // no começo só pra garantir 
     }
     void IsPausedChanged(bool oldPause, bool newPause) {
@@ -33,10 +34,10 @@ public class PauseMenuInGame : NetworkBehaviour
         }
     }
     void ChangePauseState() {
-        //ChangePauseStateServerRpc();
-        Debug.Log("BOtao");
+        ChangePauseStateServerRpc();
+        Debug.Log("Botao");
     }
-    [ServerRpc (RequireOwnership = false)]
+    [ServerRpc(RequireOwnership = false)]
     public void ChangePauseStateServerRpc() {
         _isPaused.Value = !_isPaused.Value;
     }
