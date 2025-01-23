@@ -19,20 +19,18 @@ public class SkillUiManager : MonoBehaviour {
     [SerializeField] Image playerTwoCharacterImage;
     [SerializeField] Image characterHealthImage;
     [SerializeField] Image characterManaImage;
-    [SerializeField] Image npcSkillOneImage;
-    [SerializeField] Image npcSkillTwoImage;
     [SerializeField] Image legendaryRelicSkillImage;
     [SerializeField] Image commonRelicSkillOneImage;
     [SerializeField] Image commonRelicSkillTwoImage;
     [SerializeField] Image attackSkillImage;
+    [SerializeField] Image dashImage;
 
     [Header("Images to show cooldown")]
-    [SerializeField] Image npcSkillOneCooldownImage;
-    [SerializeField] Image npcSkillTwoCooldownImage;
     [SerializeField] Image legendaryRelicSkillCooldownImage;
     [SerializeField] Image commonRelicSkillOneCooldownImage;
     [SerializeField] Image commonRelicSkillTwoCooldownImage;
     [SerializeField] Image attackSkillCooldownImage;
+    [SerializeField] Image dashCooldownImage;
 
     [Header("Texts")]
     [SerializeField] TextMeshProUGUI characterHealthText;
@@ -41,12 +39,11 @@ public class SkillUiManager : MonoBehaviour {
     [SerializeField] TextMeshProUGUI playerTwoShieldText;
     [SerializeField] TextMeshProUGUI characterManaText;
     [SerializeField] TextMeshProUGUI goldText;
-    [SerializeField] TextMeshProUGUI npcSkillOneCooldownText;
-    [SerializeField] TextMeshProUGUI npcSkillTwoCooldownText;
     [SerializeField] TextMeshProUGUI legendaryRelicSkillCooldownText;
     [SerializeField] TextMeshProUGUI commonRelicSkillOneCooldownText;
     [SerializeField] TextMeshProUGUI commonRelicSkillTwoCooldownText;
     [SerializeField] TextMeshProUGUI attackSkillCooldownText;
+    [SerializeField] TextMeshProUGUI dashCooldownText;
 
     [Header("Player two Info")]
     [SerializeField] GameObject playerTwoInfo;
@@ -58,9 +55,6 @@ public class SkillUiManager : MonoBehaviour {
     #endregion
 
     #region Methods
-    //private void Awake() {
-    //    SetCharacterHealthManagerInfo(); // Inscrevendo evento de update de vida
-    //}
     private void Start() {
         AddTextsToListOfCooldowns(); // Criar um dicionario com os textMeshPros
         SetCharacterSpriteInfo(); // Colocar a foto do personagem principal
@@ -72,6 +66,7 @@ public class SkillUiManager : MonoBehaviour {
     private void OnEnable() {
         PlayerSetUp.OnPlayerSpawned += SetCharacterHealthManagerInfo;
         PlayerSetUp.OnPlayerTwoSpawned += SetSecondCharacterHealthManagerInfo;
+        PlayerController.OnDashCooldown += SetCooldown;
     }
     void UpdatePlayerHealth((float maxHealth, float currentHealth, float currentShield) health) {
         characterHealthText.text = health.currentHealth.ToString("F0") + " / " + health.maxHealth.ToString("F0");
@@ -85,12 +80,11 @@ public class SkillUiManager : MonoBehaviour {
     }
 
     private void AddTextsToListOfCooldowns() {
-        _listOfCooldowns.Add(SkillType.NpcSkillOne, npcSkillOneCooldownText);
-        _listOfCooldowns.Add(SkillType.NpcSkillTwo, npcSkillTwoCooldownText);
         _listOfCooldowns.Add(SkillType.LegendaryRelic, legendaryRelicSkillCooldownText);
         _listOfCooldowns.Add(SkillType.CommonRelicOne, commonRelicSkillOneCooldownText);
         _listOfCooldowns.Add(SkillType.CommonRelicTwo, commonRelicSkillTwoCooldownText);
         _listOfCooldowns.Add(SkillType.Attack, attackSkillCooldownText);
+        _listOfCooldowns.Add(SkillType.Dash, dashCooldownText);
     }
     private void SetCharacterSpriteInfo() {
         if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
@@ -116,18 +110,6 @@ public class SkillUiManager : MonoBehaviour {
         _playerTwoCharacter.GetComponent<HealthManager>().UpdateHealth += UpdatePlayerTwoHealth;
     }
     private void SetSkillsSpritesInfo() {
-        if (LocalWhiteBoard.Instance.PlayerNpcSkillOne != null) {
-            npcSkillOneImage.sprite = LocalWhiteBoard.Instance.PlayerNpcSkillOne.UiSprite;
-        }
-        else {
-            npcSkillOneImage.sprite = noSkillSprite;
-        }
-        if (LocalWhiteBoard.Instance.PlayerNpcSkillTwo != null) {
-            npcSkillTwoImage.sprite = LocalWhiteBoard.Instance.PlayerNpcSkillTwo.UiSprite;
-        }
-        else {
-            npcSkillTwoImage.sprite = noSkillSprite;
-        }
 
         if (LocalWhiteBoard.Instance.PlayerLegendarySkill != null) {
             legendaryRelicSkillImage.sprite = LocalWhiteBoard.Instance.PlayerLegendarySkill.UiSprite;
@@ -185,6 +167,7 @@ public class SkillUiManager : MonoBehaviour {
 
         PlayerSetUp.OnPlayerSpawned -= SetCharacterHealthManagerInfo;
         PlayerSetUp.OnPlayerTwoSpawned -= SetSecondCharacterHealthManagerInfo;
+        PlayerController.OnDashCooldown -= SetCooldown;
     }
     #endregion
 }

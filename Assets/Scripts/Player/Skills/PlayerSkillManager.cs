@@ -11,18 +11,6 @@ public class PlayerSkillManager : NetworkBehaviour {
             UseSkillServerRpc(0);
         }
     }
-    public void InputNpcSkillOne(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            Debug.Log("NPC SKill One");
-            UseSkillServerRpc(1);
-        }
-    }
-    public void InputNpcSkillTwo(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
-            Debug.Log("NPC SKill Two");
-            UseSkillServerRpc(2);
-        }
-    }
     public void InputCommonRelicSkillOne(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log("Common Relic 1");
@@ -61,26 +49,16 @@ public class PlayerSkillManager : NetworkBehaviour {
                 else Debug.Log("No Skill");
                 break;
             case 1:
-                if (LocalWhiteBoard.Instance.PlayerNpcSkillOne != null)
-                    LocalWhiteBoard.Instance.PlayerNpcSkillOne.UseSkill(skillContext);
-                else Debug.Log("No Skill");
-                break;
-            case 2:
-                if (LocalWhiteBoard.Instance.PlayerNpcSkillTwo != null)
-                    LocalWhiteBoard.Instance.PlayerNpcSkillTwo.UseSkill(skillContext);
-                else Debug.Log("No Skill");
-                break;
-            case 3:
                 if (LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne != null)
                     LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne.UseSkill(skillContext);
                 else Debug.Log("No Skill");
                 break;
-            case 4:
+            case 2:
                 if (LocalWhiteBoard.Instance.PlayerCommonRelicSkillTwo != null)
                     LocalWhiteBoard.Instance.PlayerCommonRelicSkillTwo.UseSkill(skillContext);
                 else Debug.Log("No Skill");
                 break;
-            case 5:
+            case 3:
                 if (LocalWhiteBoard.Instance.PlayerLegendarySkill != null)
                     LocalWhiteBoard.Instance.PlayerLegendarySkill.UseSkill(skillContext);
                 else Debug.Log("No Skill");

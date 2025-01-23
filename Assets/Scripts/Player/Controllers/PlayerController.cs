@@ -38,6 +38,7 @@ public class PlayerController : NetworkBehaviour {
     public static event Action OnMove;
     public static event Action OnStop;
     public static event Action OnPause;
+    public static event Action<SkillType,float> OnDashCooldown;
 
     void Start() {
         _rb = GetComponent<Rigidbody>();
@@ -91,6 +92,7 @@ public class PlayerController : NetworkBehaviour {
         _inDash = true;
         _canWalk = false;
         float startTime = Time.time;
+        OnDashCooldown?.Invoke(SkillType.Dash, dashCooldown);
 
         while (Time.time - startTime < dashDuration) {
             if (_moveInput.magnitude >= 0.1f) {
@@ -106,7 +108,7 @@ public class PlayerController : NetworkBehaviour {
 
         _canWalk = true;
 
-        yield return new WaitForSeconds(dashCooldown);
+        yield return new WaitForSeconds(dashCooldown - dashDuration);
         _inDash = false;
 
     }
