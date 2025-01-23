@@ -37,11 +37,17 @@ public class PlayerController : NetworkBehaviour {
     // eventos 
     public static event Action OnMove;
     public static event Action OnStop;
+    public static event Action OnPause;
 
     void Start() {
         _rb = GetComponent<Rigidbody>();
         _currentCharacterMoveSpeed = characterMoveSpeed;
         _currentJumpsAlowed = maxJumps;
+    }
+    public void InputMenuInGame(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            OnPause?.Invoke();
+        }
     }
     public void InputMove(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed && _canWalk) {
@@ -124,7 +130,6 @@ public class PlayerController : NetworkBehaviour {
             _rb.AddForce(Vector3.down * fallForce, ForceMode.Acceleration);
         }
     }
-
     private void OnCollisionEnter(Collision collision) {
         if (((1 << collision.gameObject.layer) & floorLayer.value) != 0) {
             _currentJumpsAlowed = maxJumps;

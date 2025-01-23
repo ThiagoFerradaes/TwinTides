@@ -11,9 +11,11 @@ public class PauseMenuInGame : NetworkBehaviour {
 
     private void OnEnable() {
         _isPaused.OnValueChanged += IsPausedChanged; // Quando o valor do isPaused muda ele chama a função
+        PlayerController.OnPause += ChangePauseState;
     }
     private void OnDisable() {
         _isPaused.OnValueChanged -= IsPausedChanged;
+        PlayerController.OnPause -= ChangePauseState;
     }
     private void Start() {
         pauseButton.onClick.AddListener(ChangePauseState); // Apertei o botão
@@ -35,7 +37,6 @@ public class PauseMenuInGame : NetworkBehaviour {
     }
     void ChangePauseState() {
         ChangePauseStateServerRpc();
-        Debug.Log("Botao");
     }
     [ServerRpc(RequireOwnership = false)]
     public void ChangePauseStateServerRpc() {
