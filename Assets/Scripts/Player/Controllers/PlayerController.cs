@@ -51,7 +51,7 @@ public class PlayerController : NetworkBehaviour {
         }
     }
     public void InputMove(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed && _canWalk) {
+        if (context.phase == InputActionPhase.Performed && _canWalk && Time.timeScale == 1) {
             _moveInput = context.ReadValue<Vector2>();
             OnMove?.Invoke();
         }
@@ -61,7 +61,7 @@ public class PlayerController : NetworkBehaviour {
         }
     }
     public void InputRotate(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed) {
+        if (context.phase == InputActionPhase.Performed && Time.timeScale == 1) {
             _rotationInput = context.ReadValue<Vector2>();
         }
         else if (context.phase == InputActionPhase.Canceled) {
@@ -69,14 +69,14 @@ public class PlayerController : NetworkBehaviour {
         }
     }
     public void InputJump(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed && _currentJumpsAlowed > 0) {
+        if (context.phase == InputActionPhase.Performed && _currentJumpsAlowed > 0 && Time.timeScale == 1) {
             _currentJumpsAlowed--;
             _rb.linearVelocity = new(_rb.linearVelocity.x, 0, _rb.linearVelocity.z);
             _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
     public void InputSprint(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Started) {
+        if (context.phase == InputActionPhase.Started && Time.timeScale == 1) {
             _currentCharacterMoveSpeed = sprintSpeed;
         }
         else if (context.phase == InputActionPhase.Canceled) {
@@ -84,7 +84,7 @@ public class PlayerController : NetworkBehaviour {
         }
     }
     public void InputDash(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed && !_inDash) {
+        if (context.phase == InputActionPhase.Performed && !_inDash && Time.timeScale == 1) {
             StartCoroutine(DashCoroutine());
         }
     }
