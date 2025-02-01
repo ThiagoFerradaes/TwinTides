@@ -545,38 +545,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: -4439767094921606809}
         m_TargetAssemblyTypeName: PlayerSkillManager, Assembly-CSharp
-        m_MethodName: InputNpcSkillOne
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: d0e628c7-66b4-49a2-9183-dca67952a7d3
-    m_ActionName: 'Player/NpcSkillOne[/Keyboard/f]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -4439767094921606809}
-        m_TargetAssemblyTypeName: PlayerSkillManager, Assembly-CSharp
-        m_MethodName: InputNpcSkillTwo
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 6c33cd24-4c85-4afe-a1c3-8b2118bfcada
-    m_ActionName: 'Player/NpcSkillTwo[/Keyboard/g]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -4439767094921606809}
-        m_TargetAssemblyTypeName: PlayerSkillManager, Assembly-CSharp
         m_MethodName: InputCommonRelicSkillOne
         m_Mode: 0
         m_Arguments:
@@ -710,20 +678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab964788b12c3246a254fd41263ea4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  burnDebuff: {fileID: 11400000, guid: 86a385b2a33a4bf478a57b6cb16ca780, type: 2}
-  posion: {fileID: 11400000, guid: 07fecbce3982b1d48b25917e8424f895, type: 2}
-  bleed: {fileID: 11400000, guid: 811747b3cf3ece547a8d6f3bd782cfb3, type: 2}
-  reducedHeal: {fileID: 11400000, guid: 527c75793ac683c4e9560a575d901a69, type: 2}
-  reducedShield: {fileID: 11400000, guid: 3300d3fe75a7e6f4093968bf3be9dec0, type: 2}
-  shieldBlocker: {fileID: 11400000, guid: 0ea2bd2b84f2810468211aebc677d78e, type: 2}
-  healBlocker: {fileID: 11400000, guid: 9e5b3091a73336a4aa11a9c635f0bc17, type: 2}
-  healOverTime: {fileID: 11400000, guid: f76a12aa5e44ede48b22fb304dc598e9, type: 2}
-  debuffBlock: {fileID: 11400000, guid: f5221119b6ed2a740b69deb30ed33caf, type: 2}
-  invulnerable: {fileID: 11400000, guid: 48a5b94b0cd5fd4468f115b02bd9c74b, type: 2}
-  healIncrease: {fileID: 11400000, guid: b1a570f16eb58dd4db1b50cedcea3399, type: 2}
-  damageDecreased: {fileID: 11400000, guid: ecea1f9befd606943b160f2fb3415ef6, type: 2}
-  healAmount: 20
-  shieldAmount: 40
+  soulSphere: {fileID: 11400000, guid: b4d2ec9fedfd5fd4f8ab687f60f14543, type: 2}
 --- !u!114 &3160352352417031265
 MonoBehaviour:
   m_ObjectHideFlags: 0

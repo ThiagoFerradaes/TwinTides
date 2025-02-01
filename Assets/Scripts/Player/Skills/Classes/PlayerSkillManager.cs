@@ -14,20 +14,20 @@ public class PlayerSkillManager : NetworkBehaviour {
     public void InputCommonRelicSkillOne(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log("Common Relic 1");
-            UseSkillServerRpc(3);
+            UseSkillServerRpc(1);
         }
         
     }
     public void InputCommonRelicSkillTwo(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log("Common Relic 2");
-            UseSkillServerRpc(4);
+            UseSkillServerRpc(2);
         }    
     }
     public void InputLegendarySkill(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed) {
             Debug.Log("Legendary Relic");
-            UseSkillServerRpc(5);
+            UseSkillServerRpc(3);
         }  
     }
     #endregion
@@ -40,7 +40,7 @@ public class PlayerSkillManager : NetworkBehaviour {
     [ClientRpc]
     void UseSkillClientRPc(int skillId) {
 
-        SkillContext skillContext = new();
+        SkillContext skillContext = new(this.transform);
 
         switch (skillId) {
             case 0:

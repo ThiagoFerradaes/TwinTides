@@ -19,7 +19,7 @@ public class PauseMenuInGame : NetworkBehaviour {
     [SerializeField] string menuSceneName;
     [SerializeField] float loadingTime;
     [SerializeField] GameObject loadingScreen, leavePopUp;
-    [SerializeField] Button leaveButton, yesButtonPopUpLeave, noButtonPopUpLeave;
+    [SerializeField] Button leaveButton, noButtonPopUpLeave;
 
     readonly NetworkVariable<bool> _isPaused = new(false);
     #endregion
@@ -29,14 +29,14 @@ public class PauseMenuInGame : NetworkBehaviour {
         _isPaused.OnValueChanged += IsPausedChanged; // Quando o valor do isPaused muda ele chama a função
         PlayerController.OnPause += ChangePauseState;
 
-        NetworkManager.Singleton.OnServerStopped += ReturnToMenu;
+        NetworkManager.Singleton.OnClientDisconnectCallback += ReturnToMenu;
     }
 
     private void OnDisable() {
         _isPaused.OnValueChanged -= IsPausedChanged;
         PlayerController.OnPause -= ChangePauseState;
 
-        NetworkManager.Singleton.OnServerStopped -= ReturnToMenu;
+        NetworkManager.Singleton.OnClientDisconnectCallback -= ReturnToMenu;
     }
     private void Start() {
         SetButtons();
@@ -56,7 +56,6 @@ public class PauseMenuInGame : NetworkBehaviour {
         // relacionados a sair do jogo e voltar para o menu
         leaveButton.onClick.AddListener(PopUpLeaveConfirmationOn);
         noButtonPopUpLeave.onClick.AddListener(PopUpLeaveConfirmationOff);
-        yesButtonPopUpLeave.onClick.AddListener(LeaveGame);
     }
     void OpenConfigurations() {
         configurationScreen.SetActive(true);
@@ -102,16 +101,7 @@ public class PauseMenuInGame : NetworkBehaviour {
         leavePopUp.SetActive(false);
     }
 
-    void LeaveGame() {
-        ServerShutdownServerRpc();
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    void ServerShutdownServerRpc() {
-        NetworkManager.Singleton.Shutdown();
-    }
-    void ReturnToMenu(bool serverStopped) {
-        Debug.Log("Server Stopped");
+    void ReturnToMenu(ulong playerID) {
         StartCoroutine(ServerShutdown());
     }
     IEnumerator ServerShutdown() {

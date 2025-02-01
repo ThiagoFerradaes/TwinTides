@@ -67,6 +67,7 @@ public class SkillUiManager : MonoBehaviour {
         PlayerSetUp.OnPlayerSpawned += SetCharacterHealthManagerInfo;
         PlayerSetUp.OnPlayerTwoSpawned += SetSecondCharacterHealthManagerInfo;
         PlayerController.OnDashCooldown += SetCooldown;
+
     }
     void UpdatePlayerHealth((float maxHealth, float currentHealth, float currentShield) health) {
         characterHealthText.text = health.currentHealth.ToString("F0") + " / " + health.maxHealth.ToString("F0");
