@@ -87,6 +87,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  melCommonSKillIndex:
+  - {fileID: 11400000, guid: 2ff41898e48869a4691c667466cb48e1, type: 2}
+  melLegendarySKillIndex: []
+  melAtackSKillIndex: []
+  maevisCommonSKillIndex: []
+  maevisLegendarySKillIndex: []
+  maevisAtackSKillIndex: []
 --- !u!1 &7214388736521335965
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,6 +277,10 @@ PrefabInstance:
     - target: {fileID: 137139705362260360, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949740367986292341, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2190202172
       objectReference: {fileID: 0}
     - target: {fileID: 9076130675839607190, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_Name

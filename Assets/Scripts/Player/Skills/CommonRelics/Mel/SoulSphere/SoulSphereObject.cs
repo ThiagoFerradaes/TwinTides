@@ -2,14 +2,19 @@ using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
-public class SoulSphereObject : NetworkBehaviour {
+public class SoulSphereObject : SkillObjectPrefab {
     SoulSphere _info;
     int _level;
-    public void ActivateSkill(SoulSphere info, int level) {
-        _info = info;
+    SkillContext _skillContext;
+    public override void ActivateSkill(Skill info, int level, SkillContext context) {
+        _info = info as SoulSphere;
         _level = level;
+        _skillContext = context;
 
         Debug.Log("Sphere Activate");
+
+        transform.SetPositionAndRotation(context.PlayerPosition, context.PlayerRotation);
+        gameObject.SetActive(true);
 
         StartCoroutine(Move());
     }
@@ -19,32 +24,32 @@ public class SoulSphereObject : NetworkBehaviour {
         float startTime = Time.time;
 
         while (Time.time < startTime + _info.SphereDuration) {
-            transform.Translate(_info.Speed * Time.deltaTime * transform.forward);
+            transform.Translate(_info.SphereSpeed * Time.deltaTime * transform.forward);
             yield return null;
         }
 
         if (_level > 1) {
             Explode();
         }
-        PlayersSkillPooling.Instance.ReturnObjetToQueue(gameObject);
+        ReturnObject();
     }
 
     private void OnTriggerEnter(Collider other) {
         if (_level == 1) {
             if (other.CompareTag("Enemy")) {
-                other.GetComponent<HealthManager>().ApplyDamageOnServerRPC(_info.DamagePassingThrowEnemy, true, true);
+                other.GetComponent<HealthManager>().ApplyDamageOnServerRPC(_info.DamagePassingThroughEnemy, true, true);
                 StopAllCoroutines();
-                PlayersSkillPooling.Instance.ReturnObjetToQueue(gameObject);
+                ReturnObject();
             }
             else if (other.CompareTag("Maevis")) {
                 other.GetComponent<HealthManager>().AddBuffToList(_info.invulnerabilityBuff);
                 StopAllCoroutines();
-                PlayersSkillPooling.Instance.ReturnObjetToQueue(gameObject);
+                ReturnObject();
             }
         }
         else {
             if (other.CompareTag("Enemy")) {
-                other.GetComponent<HealthManager>().ApplyDamageOnServerRPC(_info.DamagePassingThrowEnemy, true, true);
+                other.GetComponent<HealthManager>().ApplyDamageOnServerRPC(_info.DamagePassingThroughEnemy, true, true);
             }
             else if (other.CompareTag("Maevis")) {
                 other.GetComponent<HealthManager>().AddBuffToList(_info.invulnerabilityBuff);
@@ -56,7 +61,6 @@ public class SoulSphereObject : NetworkBehaviour {
 
     void Explode() {
         GameObject explosion = transform.GetChild(0).gameObject;
-        //explosion.GetComponent<>
         StartCoroutine(ExplosionTime(_info.ExplosionDuration, explosion));
     }
 
@@ -65,20 +69,17 @@ public class SoulSphereObject : NetworkBehaviour {
         yield return new WaitForSeconds(time);
         explosion.SetActive(false);
 
-        if (_level == 3) {
-            GameObject area = PlayersSkillPooling.Instance.GetObjectFromQueue(_info.sphereAreaPreFab);
-            area.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
-            area.SetActive(true);
-            //area.GetComponent<>;
-        }
-        else if (_level == 4) {
-            GameObject area = PlayersSkillPooling.Instance.GetObjectFromQueue(_info.sphereAreaPreFab);
-            area.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
-            area.transform.localScale *= _info.AreaScaleLevel4;
-            area.SetActive(true);
-            //area.GetComponent<>;
+        if (_level >= 3) {
+            int skillID = PlayersSkillPooling.Instance.TransformSkillInInt(_info);
+            PlayersSkillPooling.Instance.InstanciateObjectRpc(skillID,_skillContext, _level, 1);
         }
 
-        PlayersSkillPooling.Instance.ReturnObjetToQueue(gameObject);
+        ReturnObject();
+    }
+
+    void ReturnObject() {
+        if (IsServer) {
+            PlayersSkillPooling.Instance.ReturnObjetToQueue(gameObject);
+        }
     }
 }

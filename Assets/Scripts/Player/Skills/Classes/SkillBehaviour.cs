@@ -1,9 +1,11 @@
+using NUnit.Framework;
 using UnityEngine;
 
 public abstract class SkillBehaviour : ScriptableObject
 {
     [TextArea] public string[] SkillsDescriptions;
     [TextArea] public string[] UpgradesDescriptions;
+    public GameObject[] skillPrefabs;
 
     public abstract void UseSkill(SkillContext context, int skillLevel);
 

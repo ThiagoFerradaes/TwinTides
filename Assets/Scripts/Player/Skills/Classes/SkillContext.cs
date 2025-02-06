@@ -1,12 +1,17 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class SkillContext {
-    public Transform PlayerTransform;
+public struct SkillContext: INetworkSerializable {
+    public Vector3 PlayerPosition;
+    public Quaternion PlayerRotation;
 
-    public SkillContext() {
+    public SkillContext(Vector3 playerPosition, Quaternion playerRotation) {
+        PlayerPosition = playerPosition;
+        PlayerRotation = playerRotation;
     }
 
-    public SkillContext(Transform playerTransform) {
-        PlayerTransform = playerTransform;
+    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter {
+        serializer.SerializeValue( ref PlayerPosition);
+        serializer.SerializeValue( ref PlayerRotation);
     }
 }
