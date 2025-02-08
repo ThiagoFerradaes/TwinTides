@@ -36,7 +36,8 @@ public class PauseMenuInGame : NetworkBehaviour {
         _isPaused.OnValueChanged -= IsPausedChanged;
         PlayerController.OnPause -= ChangePauseState;
 
-        NetworkManager.Singleton.OnClientDisconnectCallback -= ReturnToMenu;
+        if (NetworkManager.Singleton != null)
+            NetworkManager.Singleton.OnClientDisconnectCallback -= ReturnToMenu;
     }
     private void Start() {
         SetButtons();

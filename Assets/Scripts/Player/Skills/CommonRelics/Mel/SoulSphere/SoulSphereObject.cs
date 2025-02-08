@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.Netcode;
 using UnityEngine;
 
 public class SoulSphereObject : SkillObjectPrefab {
@@ -54,7 +53,7 @@ public class SoulSphereObject : SkillObjectPrefab {
             else if (other.CompareTag("Maevis")) {
                 other.GetComponent<HealthManager>().AddBuffToList(_info.invulnerabilityBuff);
                 StopAllCoroutines();
-                Explode();
+                //Explode();
             }
         }
     }
@@ -70,8 +69,8 @@ public class SoulSphereObject : SkillObjectPrefab {
         explosion.SetActive(false);
 
         if (_level >= 3) {
-            int skillID = PlayersSkillPooling.Instance.TransformSkillInInt(_info);
-            PlayersSkillPooling.Instance.InstanciateObjectRpc(skillID,_skillContext, _level, 1);
+            int skillID = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+            //PlayerSkillConverter.Instance.InstanciateObjectRpc(skillID,_skillContext, _level, 1);
         }
 
         ReturnObject();
@@ -79,7 +78,7 @@ public class SoulSphereObject : SkillObjectPrefab {
 
     void ReturnObject() {
         if (IsServer) {
-            PlayersSkillPooling.Instance.ReturnObjetToQueue(gameObject);
+            PlayerSkillConverter.Instance.ReturnObjetToQueue(gameObject);
         }
     }
 }
