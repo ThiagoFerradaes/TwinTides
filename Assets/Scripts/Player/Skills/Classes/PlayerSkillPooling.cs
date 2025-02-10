@@ -26,7 +26,7 @@ public class PlayerSkillPooling : NetworkBehaviour {
             spawnedObject.GetComponent<NetworkObject>().Spawn();
         }
 
-        spawnedObject.GetComponent<SkillObjectPrefab>().TestRpc();
+        spawnedObject.GetComponent<SkillObjectPrefab>().TurnOnSkillRpc(skillId, skillsLevel, context);
     }
 
     GameObject ReturnObjectFroomPooling(GameObject prefab) {
@@ -47,11 +47,12 @@ public class PlayerSkillPooling : NetworkBehaviour {
     }
 
     public void ReturnObjectToPool(GameObject objectToReturn) {
-        if (!NetworkManager.Singleton.IsServer) return;
+        if (!IsServer) return;
 
         string objectName = objectToReturn.name.Replace("(Clone)", "");
         if (objectPooling.ContainsKey(objectName)) {
             objectPooling[objectName].Enqueue(objectToReturn);
+            objectToReturn.GetComponent<SkillObjectPrefab>().TurnOffSkillRpc();
         }
 
     }

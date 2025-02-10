@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2286058956107053135}
   - component: {fileID: 8781366132837524373}
   - component: {fileID: 6467021732819919562}
+  - component: {fileID: 3170282709163614867}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -86,7 +87,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4172001aeaac9b849b41e8554df546f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
   melCommonSklilIndex:
   - {fileID: 11400000, guid: 2ff41898e48869a4691c667466cb48e1, type: 2}
   melLegendarySkillIndex: []
@@ -94,6 +94,19 @@ MonoBehaviour:
   maevisCommonSkillIndex: []
   maevisLegendarySkillIndex: []
   maevisAtackSkillIndex: []
+--- !u!114 &3170282709163614867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4296963664878829859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e88b5aacaa6cc9a47b660d65e8294dbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1 &7214388736521335965
 GameObject:
   m_ObjectHideFlags: 0

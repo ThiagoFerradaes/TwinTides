@@ -11,5 +11,14 @@ public class SoulSphere : CommonRelic {
 
     [Header("Explosion")]
     public float ExplosionDuration;
+    public float ExplosionRadius;
+    public float ExplosionRadiusMultiplier;
+    public float ExplosionDamage;
+
+    [Header("Area")]
+    public float AreaDurationLevel3;
+    public float AreaDurationLevel4;
+    public Vector3 AreaRadius;
+    public Vector3 AreaRadiusLevel4;
 
 }

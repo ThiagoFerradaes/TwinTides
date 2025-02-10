@@ -52,10 +52,4 @@ public class PlayerSkillConverter : MonoBehaviour {
     public Skill TransformIdInSkill(int skillId) {
         return skillIndex[skillId];
     }
-
-    public void ReturnObjetToQueue(GameObject objectToReturn) {
-
-        //poolingDictioinary[objectToReturn.name].Enqueue(objectToReturn);
-        objectToReturn.GetComponent<SkillObjectPrefab>().TurnOffSkillRpc();
-    }
 }

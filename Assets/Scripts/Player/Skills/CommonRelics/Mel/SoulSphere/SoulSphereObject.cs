@@ -10,9 +10,7 @@ public class SoulSphereObject : SkillObjectPrefab {
         _level = level;
         _skillContext = context;
 
-        Debug.Log("Sphere Activate");
-
-        transform.SetPositionAndRotation(context.PlayerPosition, context.PlayerRotation);
+        transform.SetPositionAndRotation(_skillContext.PlayerPosition, _skillContext.PlayerRotation);
         gameObject.SetActive(true);
 
         StartCoroutine(Move());
@@ -23,7 +21,7 @@ public class SoulSphereObject : SkillObjectPrefab {
         float startTime = Time.time;
 
         while (Time.time < startTime + _info.SphereDuration) {
-            transform.Translate(_info.SphereSpeed * Time.deltaTime * transform.forward);
+            transform.Translate(_info.SphereSpeed * Time.deltaTime * Vector3.forward);
             yield return null;
         }
 
@@ -35,7 +33,7 @@ public class SoulSphereObject : SkillObjectPrefab {
 
     private void OnTriggerEnter(Collider other) {
         if (_level == 1) {
-            if (other.CompareTag("Enemy")) {
+            if (other.CompareTag("Enemy") && IsServer) {
                 other.GetComponent<HealthManager>().ApplyDamageOnServerRPC(_info.DamagePassingThroughEnemy, true, true);
                 StopAllCoroutines();
                 ReturnObject();
@@ -47,38 +45,20 @@ public class SoulSphereObject : SkillObjectPrefab {
             }
         }
         else {
-            if (other.CompareTag("Enemy")) {
+            if (other.CompareTag("Enemy") && IsServer) {
                 other.GetComponent<HealthManager>().ApplyDamageOnServerRPC(_info.DamagePassingThroughEnemy, true, true);
             }
             else if (other.CompareTag("Maevis")) {
                 other.GetComponent<HealthManager>().AddBuffToList(_info.invulnerabilityBuff);
                 StopAllCoroutines();
-                //Explode();
+                Explode();
             }
         }
     }
 
     void Explode() {
-        GameObject explosion = transform.GetChild(0).gameObject;
-        StartCoroutine(ExplosionTime(_info.ExplosionDuration, explosion));
-    }
-
-    IEnumerator ExplosionTime(float time, GameObject explosion) {
-        explosion.SetActive(true);
-        yield return new WaitForSeconds(time);
-        explosion.SetActive(false);
-
-        if (_level >= 3) {
-            int skillID = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-            //PlayerSkillConverter.Instance.InstanciateObjectRpc(skillID,_skillContext, _level, 1);
-        }
-
-        ReturnObject();
-    }
-
-    void ReturnObject() {
-        if (IsServer) {
-            PlayerSkillConverter.Instance.ReturnObjetToQueue(gameObject);
-        }
+        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+        SkillContext context = new(transform.position, transform.rotation);
+        PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId,context, _level, 1);
     }
 }
