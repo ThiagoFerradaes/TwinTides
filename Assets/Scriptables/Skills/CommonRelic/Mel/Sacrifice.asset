@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1e343d44fa3b84b838add6c22d6d44, type: 3}
+  m_Name: Sacrifice
+  m_EditorClassIdentifier: 
+  Name: Sacrifice
+  UiSprite: {fileID: 0}
+  MinLevel: 1
+  MaxLevel: 4
+  Cooldown: 10
+  SkillsDescriptions: []
+  UpgradesDescriptions: []
+  skillPrefabs:
+  - {fileID: 6149365999533392933, guid: 0a22855e6446e6e4cb4e16e550e6f668, type: 3}
+  Character: 0
+  SphereSpeed: 14
+  SphereBackSpeed: 20
+  Duration: 1
+  HealthLostPercent: 20
+  HealthGainPercent: 10
+  Healing: 20
+  StackAmount: 1
+  HealthGainPercentLevel2: 20
+  HealingLevel2: 40
+  StackAmountLevel2: 2
+  HealthGainPercentLevel3: 30
+  HealingOverTimeBuff: {fileID: 11400000, guid: f76a12aa5e44ede48b22fb304dc598e9, type: 2}

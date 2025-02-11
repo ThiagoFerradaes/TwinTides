@@ -124,6 +124,10 @@ public class HealthManager : NetworkBehaviour {
         if (!IsServer) return;
         _currentHealth.Value = Mathf.Clamp((_currentHealth.Value + healAmount * _healMultiply.Value), 0, maxHealth.Value);
     }
+
+    public float ReturnCurrentHealth() {
+        return _currentHealth.Value;
+    }
     #endregion
 
     #region ShieldManagement
@@ -200,7 +204,8 @@ public class HealthManager : NetworkBehaviour {
         Debug.Log("Debuff removed: " + debuff.name);
         OnDebuffRemoved?.Invoke(debuff, 0);
     }
-    public void CleanAllDebuffs() {
+    [Rpc(SendTo.ClientsAndHost)]
+    public void CleanAllDebuffsRpc() {
         foreach (var debuff in _listOfActiveDebuffs.Values) {
             if (debuff.Coroutine != null) {
                 StopCoroutine(debuff.Coroutine);

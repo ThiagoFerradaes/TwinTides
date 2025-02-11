@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -32,8 +33,9 @@ public class SoulSphereObject : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
+        if (!IsServer) return;
         if (_level == 1) {
-            if (other.CompareTag("Enemy") && IsServer) {
+            if (other.CompareTag("Enemy")) {
                 other.GetComponent<HealthManager>().ApplyDamageOnServerRPC(_info.DamagePassingThroughEnemy, true, true);
                 StopAllCoroutines();
                 ReturnObject();
@@ -45,7 +47,7 @@ public class SoulSphereObject : SkillObjectPrefab {
             }
         }
         else {
-            if (other.CompareTag("Enemy") && IsServer) {
+            if (other.CompareTag("Enemy")) {
                 other.GetComponent<HealthManager>().ApplyDamageOnServerRPC(_info.DamagePassingThroughEnemy, true, true);
             }
             else if (other.CompareTag("Maevis")) {

@@ -204,13 +204,13 @@ GameObject:
   - component: {fileID: -4439767094921606809}
   - component: {fileID: 2849821314780519991}
   - component: {fileID: 4203650123197868152}
-  - component: {fileID: 2402475289913472152}
   - component: {fileID: 3160352352417031265}
+  - component: {fileID: 2402475289913472152}
   - component: {fileID: 5911823821045647350}
   - component: {fileID: 1916852207886483597}
   m_Layer: 0
   m_Name: MavisPreFab
-  m_TagString: Player
+  m_TagString: Mel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -666,19 +666,6 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerOne
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &2402475289913472152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7979977661230229930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aab964788b12c3246a254fd41263ea4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soulSphere: {fileID: 11400000, guid: 51791cac042d7a6489f6bf71f361dadb, type: 2}
 --- !u!114 &3160352352417031265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -699,6 +686,19 @@ MonoBehaviour:
     m_InternalValue: 0
   isShielded:
     m_InternalValue: 0
+--- !u!114 &2402475289913472152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7979977661230229930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab964788b12c3246a254fd41263ea4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  relic: {fileID: 11400000, guid: 0fe99602af2050e45abd9f1085c9119e, type: 2}
 --- !u!54 &5911823821045647350
 Rigidbody:
   m_ObjectHideFlags: 0

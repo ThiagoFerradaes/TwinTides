@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f724635eeda6c44fbe24c6d541425ae, type: 3}
+  m_Name: PhatomAura
+  m_EditorClassIdentifier: 
+  Name: Phantom Aura
+  UiSprite: {fileID: 0}
+  MinLevel: 1
+  MaxLevel: 4
+  Cooldown: 10
+  SkillsDescriptions: []
+  UpgradesDescriptions: []
+  skillPrefabs:
+  - {fileID: 2219329152401619148, guid: ffcbd79cd22afc14cb8d684b832ee423, type: 3}
+  - {fileID: 2219329152401619148, guid: 9df58dc79e3621646be3c4d084de22c6, type: 3}
+  Character: 0
+  AuraSize: {x: 6, y: 6, z: 6}
+  Duration: 4
+  Damage: 5
+  DamageInterval: 0.4
+  HealingPercent: 25
+  AuraSizeLevel4: {x: 15, y: 15, z: 15}
+  DurationLevel4: 6
+  DamageLevel4: 10
