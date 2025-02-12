@@ -1,16 +1,24 @@
 using UnityEngine;
 
-public class BlackHole : MonoBehaviour
+[CreateAssetMenu(menuName = "CommonRelic/BlackHole")]
+public class BlackHole : CommonRelic
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [Header("Black Hole Level 1")]
+    public Vector3 Size;
+    public float Duration;
+    public float Damage;
+    [Range(0,100)]public float SlowPercent;
+    public float OffSett;
+    public float DamageInterval;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Black Hole Level 2")]
+    public float StunInterval;
+    public float StunDuration;
+
+    [Header("Black Hole Level 3")]
+    public float DurationLevel3;
+
+    [Header("Black Hole Level 4")]
+    public Vector3 SizeLevel4;
+    public float StunDurationLevel4;
 }
