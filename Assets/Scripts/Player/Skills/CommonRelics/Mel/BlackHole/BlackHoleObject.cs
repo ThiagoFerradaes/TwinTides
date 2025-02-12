@@ -67,6 +67,9 @@ public class BlackHoleObject : SkillObjectPrefab {
             }
         }
 
+        if (_canStun) {
+            Debug.Log("Stun");
+        }
         // APLICAR SLOW
         // APLICAR STUN
 
@@ -101,6 +104,7 @@ public class BlackHoleObject : SkillObjectPrefab {
         _canDealDamage = false;
         yield return new WaitForSeconds(_info.DamageInterval);
         _canDealDamage = true;
+        yield return null;
         StartCoroutine(DamageTimer());
     }
 

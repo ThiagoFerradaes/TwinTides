@@ -114,6 +114,7 @@ public class GhostlyWhispersObject : SkillObjectPrefab {
             yield return new WaitForSeconds(_info.DamageIntervalLevel4);
         }
         _canDealDamage = true;
+        yield return null;
         StartCoroutine(CheckDamageTimer());
     }
 }

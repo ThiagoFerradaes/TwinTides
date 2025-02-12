@@ -78,6 +78,7 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
         _canDamage = false;
         yield return new WaitForSeconds(_info.DamageInterval);
         _canDamage = true;
+        yield return null;
 
         StartCoroutine(DamageTimer());
     }

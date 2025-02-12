@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc9587a672b5a3f4b9780282dde39d6e, type: 3}
-  m_Name: HealIncrease
+  m_Script: {fileID: 11500000, guid: 6ca621020c9377943ad6b2d02cdfa645, type: 3}
+  m_Name: ShieldIncrease8Seconds
   m_EditorClassIdentifier: 
   BuffSprite: {fileID: 0}
-  BuffColor: {r: 0.8920768, g: 1, b: 0.39999998, a: 1}
+  BuffColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
   InicialStack: 1
   AddStacks: 0
   MaxAmountOfStacks: 1
-  duration: 5
-  increaseHeal: 0.4
+  duration: 8
+  increaseShield: 0.2

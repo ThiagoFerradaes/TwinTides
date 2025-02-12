@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed455beaec890bd4bbc96e980bcb8da6, type: 3}
+  m_Name: WardStone
+  m_EditorClassIdentifier: 
+  Name: WardStone
+  UiSprite: {fileID: 0}
+  MinLevel: 1
+  MaxLevel: 4
+  Cooldown: 10
+  SkillsDescriptions: []
+  UpgradesDescriptions: []
+  skillPrefabs:
+  - {fileID: 6896458585964205320, guid: bd5e0ee7507ef004c8ecf7a29231dd66, type: 3}
+  - {fileID: 6293810736354995997, guid: 1725e2d2690f80642af1dc863ef0ec1c, type: 3}
+  Character: 0
+  ExplosionRadius: {x: 10, y: 10, z: 10}
+  Debuffblocker: {fileID: 11400000, guid: f5221119b6ed2a740b69deb30ed33caf, type: 2}
+  ExplosionDuration: 0.1
+  HealingIncreaseBuff: {fileID: 11400000, guid: b1a570f16eb58dd4db1b50cedcea3399, type: 2}
+  ShieldIncreaseBuff: {fileID: 11400000, guid: ec99b0e5626bf2549ba351a6368cf18d, type: 2}
+  AmountOfShield: 20
+  ShieldDuration: 6
+  ExplosionRadiusLevel3: {x: 16, y: 16, z: 16}
+  AreaDuration: 5
+  BuffblockerLevel4: {fileID: 11400000, guid: f0d9ff885bbb60843b8b55676b37a7b3, type: 2}
+  HealingIncreaseBuffLevel4: {fileID: 11400000, guid: 64298f077be526b44bb2c6453878b865, type: 2}
+  ShieldIncreaseBuffLevel4: {fileID: 11400000, guid: eea75ede6a2ef0c488d2a721677236d2, type: 2}
+  AmountOfHealing: 0.3
+  HealingInterval: 0.1
+  PercentOfShieldFromExtraHealing: 50
+  AreaDurationLevel4: 8
+  ExtraShieldDuration: 3
