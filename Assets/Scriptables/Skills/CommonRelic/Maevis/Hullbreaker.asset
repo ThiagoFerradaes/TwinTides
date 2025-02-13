@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6189399e321729b4284b288281e397f5, type: 3}
+  m_Name: Hullbreaker
+  m_EditorClassIdentifier: 
+  Name: 
+  UiSprite: {fileID: 0}
+  MinLevel: 0
+  MaxLevel: 0
+  Cooldown: 0
+  SkillsDescriptions: []
+  UpgradesDescriptions: []
+  skillPrefabs:
+  - {fileID: 221680419640250693, guid: 62107aa32eaf20c46a6cfc420d74fbbf, type: 3}
+  - {fileID: 2115139789942485532, guid: 718a5a5636c99fc44acba88f2b8fe18a, type: 3}
+  - {fileID: 5266687347423813970, guid: f2f4092f23c8b994c9813f3843a35e91, type: 3}
+  Character: 0
+  ShieldAmount: 10
+  ShieldDuration: 6
+  ShieldAmountLevel2: 20
+  ExplosionDamage: 1
+  ExplosionDuration: 0.1
+  ShieldDurationLevel4: 8
+  ShieldAmountLevel4: 30
+  EarthquakeDamage: 1
+  EarthquakeDuration: 0.1
+  EarthquakeInterval: 1
