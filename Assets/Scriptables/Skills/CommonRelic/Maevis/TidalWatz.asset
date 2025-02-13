@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b0cd7d200da50446bf112affe946ff5, type: 3}
+  m_Name: TidalWatz
+  m_EditorClassIdentifier: 
+  Name: Tidal Watz
+  UiSprite: {fileID: 0}
+  MinLevel: 1
+  MaxLevel: 4
+  Cooldown: 10
+  SkillsDescriptions: []
+  UpgradesDescriptions: []
+  skillPrefabs:
+  - {fileID: 7064569682817774075, guid: e6cc4b4de02cbbc48ab42a8c50b0837a, type: 3}
+  - {fileID: 4948698788183770020, guid: 2ab1b4e6875084e4a9938769e09637aa, type: 3}
+  - {fileID: 4778089487178227976, guid: ed0cc71a39ea0ae499db03fe5a4d315a, type: 3}
+  Character: 0
+  CutSize: {x: 0, y: 0, z: 0}
+  CutPosition: {x: 0, y: 0, z: 0}
+  AmountOfCuts: 0
+  Damage: 0
+  CutDuration: 0
+  BleedingDebuff: {fileID: 0}
+  CutSizeLevel2: {x: 0, y: 0, z: 0}
+  AmountOfCutsLevel2: 0
+  CutInterval: 0
+  AmountOfCutsLevel3: 0
+  CutIntervalLevel3: 0
+  CutDurationLevel3: 0
+  AmountOfCutsLevel4: 0
+  BaseDamageImpact: 0
+  ImpactDuration: 0
+  ImpactOffset: 0
+  PercentOfDamageToAcumulate: 0
