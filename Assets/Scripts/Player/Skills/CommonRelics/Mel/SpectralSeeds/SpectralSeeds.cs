@@ -1,16 +1,34 @@
 using UnityEngine;
 
-public class SpectralSeeds : MonoBehaviour
+[CreateAssetMenu (menuName = "CommonRelic/SpectralSeeds")]
+public class SpectralSeeds : CommonRelic
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [Header("Atributes")]
+    public Vector3 RingPosition;
+    public float SeedRadius;
+    public float SeedInicialPosition;
+    public Vector3 RingSize;
+    public Vector3 SeedSize;
+    public float SeedSpeed;
+    public float RingRotationDuration;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Spectral Seeds Level 1")]
+    public int AmountOfSeeds;
+    public float Duration;
+    public float ExplosionRadius;
+    public float ExplosionDuration;
+    public float Damage;
+
+    [Header("Spectral Seeds Level 2")]
+    public int AmountOfSeedsLevel2;
+    public float ExplosionRadiusLevel2;
+
+    [Header("Spectral Seeds Level 3")]
+    public int AmountOfSeedsLevel3;
+    public float AmountOfHealToMaevis;
+    [Range(0,100)]public float PercentOfDamageToHeal;
+
+    [Header("Spectral Seeds Level 4")]
+    public float DurationLevel4;
+    public float ExplosionsInterval;
 }

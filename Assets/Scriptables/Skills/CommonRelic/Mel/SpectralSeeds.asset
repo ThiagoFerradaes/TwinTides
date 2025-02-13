@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99b171447ed88704197a4c28a52b79e8, type: 3}
+  m_Name: SpectralSeeds
+  m_EditorClassIdentifier: 
+  Name: 
+  UiSprite: {fileID: 0}
+  MinLevel: 1
+  MaxLevel: 4
+  Cooldown: 10
+  SkillsDescriptions: []
+  UpgradesDescriptions: []
+  skillPrefabs:
+  - {fileID: 6300359382281364699, guid: 43fa03125753d824ea60a3ac7cb22c08, type: 3}
+  - {fileID: 6300359382281364699, guid: ba1cf2261bd42964bbcc0e5797dd1434, type: 3}
+  - {fileID: 6300359382281364699, guid: b770732f5f1e00f45ab0fab009ea8fbd, type: 3}
+  Character: 0
+  RingPosition: {x: 0, y: 0.7, z: -1}
+  SeedRadius: 3
+  SeedInicialPosition: 135
+  RingSize: {x: 0.3, y: 0.3, z: 0.3}
+  SeedSize: {x: 0.5, y: 0.5, z: 0.5}
+  SeedSpeed: 16
+  RingRotationDuration: 0.3
+  AmountOfSeeds: 4
+  Duration: 8
+  ExplosionRadius: 4
+  ExplosionDuration: 0.1
+  Damage: 10
+  AmountOfSeedsLevel2: 6
+  ExplosionRadiusLevel2: 10
+  AmountOfSeedsLevel3: 8
+  AmountOfHealToMaevis: 10
+  PercentOfDamageToHeal: 40
+  DurationLevel4: 16
+  ExplosionsInterval: 0.2

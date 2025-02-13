@@ -4,7 +4,11 @@ using UnityEngine.UIElements;
 
 public class Teste_Um : MonoBehaviour {
     public CommonRelic relic;
-
+    public AttackSkill attack;
+    private void Start() {
+        LocalWhiteBoard.Instance.PlayerAttackSkill = attack;
+        LocalWhiteBoard.Instance.AttackLevel = 1;
+    }
     private void Update() {
         if (Keyboard.current.nKey.wasPressedThisFrame) {
             Debug.Log("1 dano");
