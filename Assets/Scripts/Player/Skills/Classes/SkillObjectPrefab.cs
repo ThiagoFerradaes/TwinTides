@@ -22,4 +22,8 @@ public abstract class SkillObjectPrefab : NetworkBehaviour {
             PlayerSkillPooling.Instance.ReturnObjectToPool(gameObject);
         }
     }
+    [Rpc(SendTo.ClientsAndHost)]
+    public virtual void AddStackRpc() {
+        return;
+    }
 }

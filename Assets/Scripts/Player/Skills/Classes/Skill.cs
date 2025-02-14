@@ -7,6 +7,7 @@ public abstract class Skill : ScriptableObject
     public Sprite UiSprite;
     public int MinLevel, MaxLevel;
     public float Cooldown;
+    public bool IsStackable = true;
 
     // Comportamental
     [TextArea] public string[] SkillsDescriptions;

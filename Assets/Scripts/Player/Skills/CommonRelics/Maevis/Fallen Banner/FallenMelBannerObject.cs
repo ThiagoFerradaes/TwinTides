@@ -1,0 +1,82 @@
+using System;
+using System.Collections;
+using UnityEngine;
+
+public class FallenMelBannerObject : SkillObjectPrefab {
+    FallenBanner _info;
+    int _level;
+    SkillContext _context;
+    GameObject _mel;
+    int _amountOfBuffs;
+
+    Coroutine durationCoroutine;
+
+    public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
+        _info = info as FallenBanner;
+        _level = skillLevel;
+        _context = context;
+
+        DefineParent();
+    }
+
+    private void DefineParent() {
+        if (_mel == null) {
+            if (PlayerSkillPooling.Instance.MelGameObject != null) {
+                _mel = PlayerSkillPooling.Instance.MelGameObject;
+            }
+            else {
+                End();
+                return;
+            }
+        }
+
+        FallenMaevisBannerObject.OnStacked += FallenMaevisBannerObject_OnStacked;
+
+        InvocateBanner();
+    }
+
+    private void FallenMaevisBannerObject_OnStacked(object sender, EventArgs e) {
+        AddBuffs();
+    }
+
+    private void InvocateBanner() {
+        transform.SetParent(_mel.transform);
+
+        transform.SetLocalPositionAndRotation(_info.BannerFollowPosition, Quaternion.Euler(0, 0, 0));
+
+        gameObject.SetActive(true);
+
+        durationCoroutine = StartCoroutine(BannerDuration());
+    }
+
+    IEnumerator BannerDuration() {
+        float duration;
+        if (_level < 4) duration = _info.BannerDuration;
+        else duration = _info.BannerDurationLevel4;
+
+        yield return new WaitForSeconds(duration);
+
+        End();
+    }
+
+    private void End() {
+        _amountOfBuffs = 0;
+        ReturnObject();
+    }
+
+    void AddBuffs() {
+        if (_level < 4) return;
+        if (_amountOfBuffs >= _info.BannerMaxStacks) {
+
+            Debug.Log("MasBuffs!");
+        }
+        else {
+            _amountOfBuffs++;
+            Debug.Log("BuffUP: " + _amountOfBuffs);
+        }
+
+        if (durationCoroutine != null) StopCoroutine(durationCoroutine);
+        durationCoroutine = StartCoroutine(BannerDuration());
+    }
+}
+

@@ -6,7 +6,7 @@ public class PlayerSetUp : NetworkBehaviour {
     #region Variables
     [SerializeField] MonoBehaviour[] scriptsToBeTurnedOff;
     public GameObject CameraObject;
-    public Characters _character;
+    public Characters Character;
 
     public static event Action<GameObject> OnPlayerSpawned, OnPlayerTwoSpawned;
     #endregion
@@ -17,7 +17,7 @@ public class PlayerSetUp : NetworkBehaviour {
     }
 
     private void ConfigureObjectForLocalPlayer() {
-        if (LocalWhiteBoard.Instance.PlayerCharacter == _character) {
+        if (LocalWhiteBoard.Instance.PlayerCharacter == Character) {
             OnPlayerSpawned?.Invoke(this.gameObject);   
         }
         else {   
