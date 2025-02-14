@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca35111215c2762428ffbe5e2330ee9d, type: 3}
+  m_Name: EchoBlast
+  m_EditorClassIdentifier: 
+  Name: Echo Blast
+  UiSprite: {fileID: 0}
+  MinLevel: 1
+  MaxLevel: 4
+  Cooldown: 10
+  SkillsDescriptions: []
+  UpgradesDescriptions: []
+  skillPrefabs:
+  - {fileID: 1216444296226801471, guid: 3cea9e0884da14740bc2f27a498834a4, type: 3}
+  - {fileID: 4584282225575128763, guid: 251a98b6af4d8be418a4f27bf41f0200, type: 3}
+  - {fileID: 1220545648562258304, guid: baa7c844b902abb4d9f109d1a7fed127, type: 3}
+  - {fileID: 7325298707147500695, guid: f1bee9de089b30b44a0939a8f0ced0d5, type: 3}
+  Character: 0
+  BulletDuration: 0.4
+  BulletSpeed: 20
+  ExplosionRadius: 4
+  ExplosionDuration: 0.1
+  ExplosionDamage: 1
+  StunTime: 3
+  ExplosionRadiusLevel2: 10
+  ExplosionAmountLevel3: 2
+  BleedDebuff: {fileID: 11400000, guid: 811747b3cf3ece547a8d6f3bd782cfb3, type: 2}
+  ExplodingDebuffDuration: 4
+  ExplodingDebuffExplosionCooldown: 0.5

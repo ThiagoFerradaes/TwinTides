@@ -39,6 +39,7 @@ public class HealthManager : NetworkBehaviour {
     public event Action OnDeath;
     public event Action<Buff, int> OnBuffAdded, OnBuffRemoved;
     public event Action<Debuff, int> OnDebuffAdded, OnDebuffRemoved;
+    public event EventHandler OnGeneralDamage;
     #endregion
 
     #region Methods
@@ -105,6 +106,9 @@ public class HealthManager : NetworkBehaviour {
         }
         if (_currentHealth.Value <= 0) {
             DeathHandler();
+        }
+        else {
+            OnGeneralDamage?.Invoke(this, EventArgs.Empty);
         }
     }
     void DeathHandler() {
