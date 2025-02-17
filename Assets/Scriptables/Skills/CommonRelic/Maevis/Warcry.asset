@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3047816a385192a45b0844c8b94cdf03, type: 3}
+  m_Name: Warcry
+  m_EditorClassIdentifier: 
+  Name: Warcry
+  UiSprite: {fileID: 0}
+  MinLevel: 1
+  MaxLevel: 4
+  Cooldown: 10
+  IsStackable: 1
+  SkillsDescriptions: []
+  UpgradesDescriptions: []
+  skillPrefabs:
+  - {fileID: 5383756882683347849, guid: 51035b909087d9a4f8cd630d2ec289d6, type: 3}
+  - {fileID: 5210610992638295791, guid: 32ddb45e81ed22044870a125584130d5, type: 3}
+  Character: 0
+  Duration: 6
+  PercentAttackSpeed: 10
+  ExplosionRadius: 4
+  ExplosionDuration: 0.1
+  PercentAttackSpeedLevel2: 20
+  StunDuration: 3
+  PercentMoveSpeedGain: 10
+  ExplosionRadiusLevel3: 12
+  NormalMaevisAttack: {fileID: 0}
+  EnhancedMaevisAttack: {fileID: 0}
+  BleedingDebuff: {fileID: 11400000, guid: 811747b3cf3ece547a8d6f3bd782cfb3, type: 2}
+  DurationLevel4: 10
