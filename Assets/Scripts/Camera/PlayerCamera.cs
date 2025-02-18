@@ -17,6 +17,6 @@ public class PlayerCamera : MonoBehaviour {
     }
 
     private void SetFollowTarget(GameObject target) {
-        _cameraCineMachine.Follow = target.GetComponent<PlayerSetUp>().CameraObject.transform;
+        _cameraCineMachine.Follow = target.transform;
     }
 }

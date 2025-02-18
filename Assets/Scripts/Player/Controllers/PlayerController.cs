@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -119,13 +120,10 @@ public class PlayerController : NetworkBehaviour {
     private void MoveAndRotate() {
         if (_moveInput.magnitude != 0) {
 
-            // Movimentação
-            Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
-            transform.Translate(_currentCharacterMoveSpeed * Time.deltaTime * moveDirection);
+            Moving();
 
-            // Rotação do personagem
-            _rotationY += _rotationInput.x * rotationSpeed * Time.deltaTime;
-            transform.rotation = Quaternion.Euler(0, _rotationY, 0);
+            Rotate();
+
         }
 
         if (_rb.linearVelocity.y != 0) { // Durante o pulo aumenta a gravidade, serve para regular a duração do pulo
@@ -136,5 +134,21 @@ public class PlayerController : NetworkBehaviour {
         if (((1 << collision.gameObject.layer) & floorLayer.value) != 0) {
             _currentJumpsAlowed = maxJumps;
         }
+    }
+
+    void Moving() {
+        Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
+        transform.Translate(_currentCharacterMoveSpeed * Time.deltaTime * moveDirection);
+    }
+
+    public void Rotate() {
+        //_rotationY += _rotationInput.x * rotationSpeed * Time.deltaTime;
+        //transform.rotation = Quaternion.Euler(0, _rotationY, 0);
+        RaycastHit hit;
+        if (Physics.Raycast(_rotationInput, Camera.main.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, floorLayer)) {
+
+        }
+        Vector3 direction = new(_rotationInput.x, 0, _rotationInput.y);
+        transform.LookAt(direction);
     }
 }

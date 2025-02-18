@@ -21,7 +21,7 @@ public class TidalWatzObject : SkillObjectPrefab {
 
     private void DefineParent() {
         if (_maevis == null) {
-            _maevis = GameObject.FindGameObjectWithTag("Maevis");
+            _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
         }
 
         transform.SetParent(_maevis.transform);
