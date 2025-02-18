@@ -42,6 +42,9 @@ public class MelNormalAttackObject : SkillObjectPrefab {
     }
 
     IEnumerator Move() {
+
+        transform.rotation = _mel.transform.rotation;
+
         Vector3 direction = transform.forward;
         Vector3 finalPosition = transform.position + _info.SphereDuration * _info.SphereSpeed * direction;
         OnNormalAttack?.Invoke(this, new NormalAtackEventArgs(finalPosition));

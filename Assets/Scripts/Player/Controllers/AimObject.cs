@@ -10,8 +10,8 @@ public class AimObject : MonoBehaviour {
 
     private void PlayerSetUp_OnPlayerSpawned(GameObject obj) {
         _father = obj.GetComponent<PlayerController>();
-        _father.OnAim += AimObject_OnAim;
         _father.aimObject = this.gameObject.transform;
+        _father.OnAim += AimObject_OnAim;
         gameObject.SetActive(false);
     }
 
@@ -22,21 +22,21 @@ public class AimObject : MonoBehaviour {
             aimAlive = null;
         }
         else {
-            transform.position = new Vector3(_father.transform.position.x, transform.position.y, _father.transform.position.z);
+            transform.position = _father.transform.position;
         }
-            aimAlive = StartCoroutine(AimDuration());
+        aimAlive = StartCoroutine(AimDuration());
     }
 
     IEnumerator AimDuration() {
         float elapsedTime = 0f;
 
-        while (elapsedTime < 2) {
-            elapsedTime += Time.deltaTime;
+        while (elapsedTime < 1.2f) {
             if (_father.isRotatingMouse) {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _father.floorLayer)) {
-                    transform.position = hit.point;
+                    Vector3 pos = new(hit.point.x, 0.5f, hit.point.z);
+                    transform.position = pos;
                 }
             }
             else {
@@ -46,8 +46,11 @@ public class AimObject : MonoBehaviour {
                     transform.position += (10 * Time.deltaTime * controlDirection);
                 }
             }
+            if (!_father.isAiming) {
+                elapsedTime += Time.deltaTime;
+            }
 
-                yield return null;
+            yield return null;
         }
 
         gameObject.SetActive(false);

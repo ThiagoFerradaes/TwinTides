@@ -20,6 +20,7 @@ public class PlayerController : NetworkBehaviour {
     [HideInInspector] public Vector2 _rotationInput;
     [HideInInspector] public Transform aimObject;
     [HideInInspector] public bool isRotatingMouse;
+    [HideInInspector] public bool isAiming;
 
     [Header("Jump")]
     [SerializeField] float jumpForce;
@@ -71,9 +72,15 @@ public class PlayerController : NetworkBehaviour {
     public void InputRotateController(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed && Time.timeScale == 1) {
             isRotatingMouse = false;
+            isAiming = true;
             _rotationInput = context.ReadValue<Vector2>();
+
+            if (!aimObject.gameObject.activeSelf) {
+                StartAimMode();
+            }
         }
         else if (context.phase == InputActionPhase.Canceled) {
+            isAiming = false;
             _rotationInput = Vector2.zero;
         }
     }
@@ -95,6 +102,17 @@ public class PlayerController : NetworkBehaviour {
     public void InputDash(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed && !_inDash && Time.timeScale == 1) {
             StartCoroutine(DashCoroutine());
+        }
+    }
+    public void InputAimMode(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Started && Time.timeScale == 1) {
+            if (isAiming) {
+                isAiming = false;
+            }
+            else {
+                StartAimMode();
+                isAiming = true;
+            }
         }
     }
     IEnumerator DashCoroutine() {
@@ -150,7 +168,7 @@ public class PlayerController : NetworkBehaviour {
     }
 
     public void Rotate() {
-        if (aimObject.gameObject.activeInHierarchy) {
+        if (aimObject.gameObject.activeInHierarchy && aimObject != null) {
             Vector3 objectPosition = new(aimObject.position.x, transform.position.y, aimObject.position.z);
             Vector3 aimDirection = (objectPosition - transform.position);
 
