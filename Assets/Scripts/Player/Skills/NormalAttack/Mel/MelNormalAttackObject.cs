@@ -8,6 +8,7 @@ public class MelNormalAttackObject : SkillObjectPrefab {
     SkillContext _context;
 
     public static event EventHandler<NormalAtackEventArgs> OnNormalAttack;
+    GameObject _mel;
 
     public class NormalAtackEventArgs : EventArgs {
         public Vector3 FinalPosition;
@@ -25,6 +26,12 @@ public class MelNormalAttackObject : SkillObjectPrefab {
     }
 
     private void DefineSizeAndPosition() {
+        if (_mel == null) {
+            _mel = GameObject.FindGameObjectWithTag("Mel");
+        }
+
+        _mel.GetComponent<PlayerController>().StartAimMode();
+
         transform.localScale = _info.SphereSize;
 
         transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);

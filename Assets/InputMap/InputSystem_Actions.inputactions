@@ -15,9 +15,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Look",
+                    "name": "RotateMouse",
                     "type": "Value",
                     "id": "6b444451-8a00-4d00-a97e-f47457f736a8",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RotateController",
+                    "type": "Value",
+                    "id": "22b49e00-a41e-45f0-ae35-14c4d2ae0d6f",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -251,34 +260,34 @@
                 },
                 {
                     "name": "",
-                    "id": "c1f7a91b-d0fd-4a62-997e-7fb9b69bf235",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8c8e490b-c610-4785-884f-f04217b23ca4",
                     "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse;Touch",
-                    "action": "Look",
+                    "action": "RotateMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "3e5f5442-8668-4b27-a940-df99bad7e831",
-                    "path": "<Joystick>/{Hatswitch}",
+                    "id": "0e279e9c-6333-43bf-92fe-e108754ee2b8",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick",
-                    "action": "Look",
+                    "groups": ";Gamepad",
+                    "action": "RotateController",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8eedbeb3-e161-497a-acdd-40f81f5a4b0e",
+                    "path": "<XInputController>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "RotateController",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -494,7 +503,7 @@
                 {
                     "name": "",
                     "id": "a8b10acd-6770-4c50-b9ca-c931c23f567b",
-                    "path": "<Keyboard>/c",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

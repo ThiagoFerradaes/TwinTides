@@ -1,50 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1512104048357216461
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7461150847880985506}
-  - component: {fileID: 8918122651702018307}
-  m_Layer: 0
-  m_Name: CameraFollow
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7461150847880985506
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1512104048357216461}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.35000002, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8273499317451383960}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8918122651702018307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1512104048357216461}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37b8c2f99490b4b448fcfa46c49be2ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 8
 --- !u!1 &5498539262994201418
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +184,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2991450062358523933}
-  - {fileID: 7461150847880985506}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4620659201611985856
@@ -380,8 +334,8 @@ MonoBehaviour:
   - {fileID: 4203650123197868152}
   - {fileID: 2402475289913472152}
   - {fileID: -4439767094921606809}
-  CameraObject: {fileID: 1512104048357216461}
-  _character: 1
+  CameraObject: {fileID: 0}
+  Character: 0
 --- !u!114 &-4439767094921606809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,6 +365,9 @@ MonoBehaviour:
   characterMoveSpeed: 8
   sprintSpeed: 16
   rotationSpeed: 8
+  _rotationInput: {x: 0, y: 0}
+  aimObject: {fileID: 0}
+  isRotatingMouse: 0
   jumpForce: 12
   fallForce: 20
   maxJumps: 1
@@ -465,19 +422,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2849821314780519991}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: InputRotate
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8918122651702018307}
-        m_TargetAssemblyTypeName: ShoulderObject, Assembly-CSharp
-        m_MethodName: InputRotate
+        m_MethodName: InputRotateMouse
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -541,38 +486,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 641cd816-40e6-41b4-8c3d-04687c349290
     m_ActionName: 'Player/Sprint[/Keyboard/leftShift]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -4439767094921606809}
-        m_TargetAssemblyTypeName: PlayerSkillManager, Assembly-CSharp
-        m_MethodName: InputNpcSkillOne
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: d0e628c7-66b4-49a2-9183-dca67952a7d3
-    m_ActionName: 'Player/NpcSkillOne[/Keyboard/f]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -4439767094921606809}
-        m_TargetAssemblyTypeName: PlayerSkillManager, Assembly-CSharp
-        m_MethodName: InputNpcSkillTwo
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 6c33cd24-4c85-4afe-a1c3-8b2118bfcada
-    m_ActionName: 'Player/NpcSkillTwo[/Keyboard/g]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -4439767094921606809}
@@ -693,6 +606,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a3856801-218c-4b08-886b-b1a64453a22c
     m_ActionName: 'PlayerOne/Pause[/Keyboard/escape,/XInputControllerWindows/start]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2849821314780519991}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: InputRotateController
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 22b49e00-a41e-45f0-ae35-14c4d2ae0d6f
+    m_ActionName: 'PlayerOne/RotateController[/XInputControllerWindows1/rightStick]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerOne
@@ -710,20 +639,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab964788b12c3246a254fd41263ea4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  burnDebuff: {fileID: 11400000, guid: 86a385b2a33a4bf478a57b6cb16ca780, type: 2}
-  posion: {fileID: 11400000, guid: 07fecbce3982b1d48b25917e8424f895, type: 2}
-  bleed: {fileID: 11400000, guid: 811747b3cf3ece547a8d6f3bd782cfb3, type: 2}
-  reducedHeal: {fileID: 11400000, guid: 527c75793ac683c4e9560a575d901a69, type: 2}
-  reducedShield: {fileID: 11400000, guid: 3300d3fe75a7e6f4093968bf3be9dec0, type: 2}
-  shieldBlocker: {fileID: 11400000, guid: 0ea2bd2b84f2810468211aebc677d78e, type: 2}
-  healBlocker: {fileID: 11400000, guid: 9e5b3091a73336a4aa11a9c635f0bc17, type: 2}
-  healOverTime: {fileID: 11400000, guid: f76a12aa5e44ede48b22fb304dc598e9, type: 2}
-  debuffBlock: {fileID: 11400000, guid: f5221119b6ed2a740b69deb30ed33caf, type: 2}
-  invulnerable: {fileID: 11400000, guid: 48a5b94b0cd5fd4468f115b02bd9c74b, type: 2}
-  healIncrease: {fileID: 11400000, guid: b1a570f16eb58dd4db1b50cedcea3399, type: 2}
-  damageDecreased: {fileID: 11400000, guid: ecea1f9befd606943b160f2fb3415ef6, type: 2}
-  healAmount: 20
-  shieldAmount: 40
+  relic: {fileID: 0}
+  attack: {fileID: 0}
 --- !u!114 &3160352352417031265
 MonoBehaviour:
   m_ObjectHideFlags: 0

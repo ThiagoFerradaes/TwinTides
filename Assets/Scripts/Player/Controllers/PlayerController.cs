@@ -16,15 +16,16 @@ public class PlayerController : NetworkBehaviour {
     [SerializeField] float rotationSpeed;
     float _currentCharacterMoveSpeed;
     bool _canWalk = true;
-    float _rotationY;
     Vector2 _moveInput;
-    Vector2 _rotationInput;
+    [HideInInspector] public Vector2 _rotationInput;
+    [HideInInspector] public Transform aimObject;
+    [HideInInspector] public bool isRotatingMouse;
 
     [Header("Jump")]
     [SerializeField] float jumpForce;
     [SerializeField] float fallForce;
     [SerializeField] int maxJumps;
-    [SerializeField] LayerMask floorLayer;
+    public LayerMask floorLayer;
     int _currentJumpsAlowed;
 
     [Header("Dash")]
@@ -39,7 +40,8 @@ public class PlayerController : NetworkBehaviour {
     public static event Action OnMove;
     public static event Action OnStop;
     public static event Action OnPause;
-    public static event Action<SkillType,float> OnDashCooldown;
+    public static event Action<SkillType, float> OnDashCooldown;
+    public event EventHandler OnAim;
 
     void Start() {
         _rb = GetComponent<Rigidbody>();
@@ -61,8 +63,14 @@ public class PlayerController : NetworkBehaviour {
             OnStop?.Invoke();
         }
     }
-    public void InputRotate(InputAction.CallbackContext context) {
+    public void InputRotateMouse(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed && Time.timeScale == 1) {
+            isRotatingMouse = true;
+        }
+    }
+    public void InputRotateController(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed && Time.timeScale == 1) {
+            isRotatingMouse = false;
             _rotationInput = context.ReadValue<Vector2>();
         }
         else if (context.phase == InputActionPhase.Canceled) {
@@ -98,11 +106,11 @@ public class PlayerController : NetworkBehaviour {
         while (Time.time - startTime < dashDuration) {
             if (_moveInput.magnitude >= 0.1f) {
                 Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
-                transform.Translate(dashForce * Time.deltaTime * moveDirection);
+                transform.position += (dashForce * Time.deltaTime * moveDirection);
                 yield return null;
             }
             else {
-                transform.Translate(dashForce * Time.deltaTime * Vector3.forward);
+                transform.position += (dashForce * Time.deltaTime * transform.forward);
                 yield return null;
             }
         }
@@ -120,11 +128,11 @@ public class PlayerController : NetworkBehaviour {
     private void MoveAndRotate() {
         if (_moveInput.magnitude != 0) {
 
-            Moving();
-
-            Rotate();
+            Moving();    
 
         }
+
+        Rotate();
 
         if (_rb.linearVelocity.y != 0) { // Durante o pulo aumenta a gravidade, serve para regular a duração do pulo
             _rb.AddForce(Vector3.down * fallForce, ForceMode.Acceleration);
@@ -138,17 +146,29 @@ public class PlayerController : NetworkBehaviour {
 
     void Moving() {
         Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
-        transform.Translate(_currentCharacterMoveSpeed * Time.deltaTime * moveDirection);
+        transform.position += (_currentCharacterMoveSpeed * Time.deltaTime * moveDirection);
     }
 
     public void Rotate() {
-        //_rotationY += _rotationInput.x * rotationSpeed * Time.deltaTime;
-        //transform.rotation = Quaternion.Euler(0, _rotationY, 0);
-        RaycastHit hit;
-        if (Physics.Raycast(_rotationInput, Camera.main.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, floorLayer)) {
+        if (aimObject.gameObject.activeInHierarchy) {
+            Vector3 objectPosition = new(aimObject.position.x, transform.position.y, aimObject.position.z);
+            Vector3 aimDirection = (objectPosition - transform.position);
 
+            if (aimDirection.sqrMagnitude > 0.01f) {
+                Quaternion direction = Quaternion.LookRotation(aimDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, direction, Time.deltaTime * rotationSpeed);
+            }
         }
-        Vector3 direction = new(_rotationInput.x, 0, _rotationInput.y);
-        transform.LookAt(direction);
+        else {
+            if (_moveInput.sqrMagnitude > 0.01f) {
+                float angle = Mathf.Atan2(_moveInput.x, _moveInput.y) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0, angle, 0);
+            }
+        }
+    }
+
+    public void StartAimMode() {
+        aimObject.gameObject.SetActive(true);
+        OnAim?.Invoke(this, EventArgs.Empty);
     }
 }
