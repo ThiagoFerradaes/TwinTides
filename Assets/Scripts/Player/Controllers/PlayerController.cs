@@ -108,6 +108,7 @@ public class PlayerController : NetworkBehaviour {
         if (context.phase == InputActionPhase.Started && Time.timeScale == 1) {
             if (isAiming) {
                 isAiming = false;
+                StopAimMode();
             }
             else {
                 StartAimMode();
@@ -189,5 +190,9 @@ public class PlayerController : NetworkBehaviour {
         if (aimObject == null) return;
         aimObject.gameObject.SetActive(true);
         OnAim?.Invoke(this, EventArgs.Empty);
+    }
+    public void StopAimMode() {
+        if (aimObject == null) return;
+        aimObject.gameObject.SetActive(false);
     }
 }

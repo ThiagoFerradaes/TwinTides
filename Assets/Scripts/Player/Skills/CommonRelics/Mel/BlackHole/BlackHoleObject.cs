@@ -9,6 +9,7 @@ public class BlackHoleObject : SkillObjectPrefab {
     int _level;
     SkillContext _context;
     List<GameObject> _enemies = new();
+    GameObject _mel;
 
     bool _canDealDamage;
     bool _canStun;
@@ -21,16 +22,28 @@ public class BlackHoleObject : SkillObjectPrefab {
     }
 
     private void DefineSizeAndPosition() {
-        if (_level < 4) {
+        if (_mel == null) { // Pegando referencia do objeto do jogador
+            _mel = PlayerSkillPooling.Instance.MaevisGameObject;
+        }
+
+        if (_level < 4) { // Definindo o tamanho da habilidade
             transform.localScale = _info.Size;
         }
         else {
             transform.localScale = _info.SizeLevel4;
         }
 
+        Transform aim = _mel.GetComponent<PlayerController>().aimObject;
+
         Vector3 direction = _context.PlayerRotation * Vector3.forward;
-        Vector3 position = _context.PlayerPosition + (direction * _info.OffSett);
-        transform.SetPositionAndRotation(position, _context.PlayerRotation);
+        Vector3 position = _context.PlayerPosition + (direction * _info.MaxRange);
+
+        if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_context.PlayerPosition, aim.position) <= _info.MaxRange) {
+            transform.SetPositionAndRotation(aim.position, _context.PlayerRotation);
+        }
+        else {
+            transform.SetPositionAndRotation(position, _context.PlayerRotation);
+        }
 
         gameObject.SetActive(true);
 

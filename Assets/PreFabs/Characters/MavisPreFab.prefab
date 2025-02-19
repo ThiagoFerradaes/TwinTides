@@ -368,6 +368,7 @@ MonoBehaviour:
   _rotationInput: {x: 0, y: 0}
   aimObject: {fileID: 0}
   isRotatingMouse: 0
+  isAiming: 0
   jumpForce: 12
   fallForce: 20
   maxJumps: 1
@@ -675,7 +676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab964788b12c3246a254fd41263ea4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relic: {fileID: 11400000, guid: e5f5345116b15fa4eaa155228dac6633, type: 2}
+  relic: {fileID: 11400000, guid: 51791cac042d7a6489f6bf71f361dadb, type: 2}
   attack: {fileID: 11400000, guid: ad764f61b860c7447aab5255dd321aee, type: 2}
 --- !u!54 &5911823821045647350
 Rigidbody:

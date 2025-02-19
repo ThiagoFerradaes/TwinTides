@@ -5,7 +5,7 @@ public class GhostlyWhispers : CommonRelic {
 
     [Header("Area Level 1")]
     public Vector3 Area;
-    public float PositionOffSet;
+    public float MaxRange;
     public float AreaDuration;
     public float DamageInterval;
     public float Damage;

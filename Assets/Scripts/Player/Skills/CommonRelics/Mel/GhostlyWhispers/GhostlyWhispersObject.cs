@@ -10,6 +10,8 @@ public class GhostlyWhispersObject : SkillObjectPrefab {
     int _areaLevel = 0; // 0 = normal, 1 = super, 2 = mega
     bool _canDealDamage = true;
 
+    GameObject _mel;
+
     MeshRenderer _mesh;
     [HideInInspector] public List<GhostlyWhispersObject> ActiveSkills;
     private void Awake() {
@@ -26,9 +28,9 @@ public class GhostlyWhispersObject : SkillObjectPrefab {
     }
 
     private void DefineSizeAndPlace() {
-        Vector3 direction = _context.PlayerRotation * Vector3.forward;
-        Vector3 position = _context.PlayerPosition + (direction * _info.PositionOffSet);
-        transform.SetPositionAndRotation(position, _context.PlayerRotation);
+        if (_mel == null) {
+            _mel = PlayerSkillPooling.Instance.MaevisGameObject;
+        }
 
         if (_level < 4) {
             transform.localScale = _info.Area;
@@ -36,6 +38,18 @@ public class GhostlyWhispersObject : SkillObjectPrefab {
         else {
             transform.localScale = _info.AreaLevel4;
         }
+
+        Transform aim = _mel.GetComponent<PlayerController>().aimObject;
+        Vector3 direction = _context.PlayerRotation * Vector3.forward;
+        Vector3 position = _context.PlayerPosition + (direction * _info.MaxRange);
+
+        if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_context.PlayerPosition, aim.position) <= _info.MaxRange) {
+            transform.SetPositionAndRotation(aim.position, _context.PlayerRotation);
+        }
+        else {
+            transform.SetPositionAndRotation(position, _context.PlayerRotation);
+        }
+
         gameObject.SetActive(true);
 
         StartCoroutine(AreaDuration());

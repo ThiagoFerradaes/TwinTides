@@ -57,4 +57,8 @@ public class AimObject : MonoBehaviour {
         gameObject.SetActive(false);
         aimAlive = null;
     }
+
+    private void OnDisable() {
+        aimAlive = null;
+    }
 }

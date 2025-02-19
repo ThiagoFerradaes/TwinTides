@@ -8,7 +8,7 @@ public class BlackHole : CommonRelic
     public float Duration;
     public float Damage;
     [Range(0,100)]public float SlowPercent;
-    public float OffSett;
+    public float MaxRange;
     public float DamageInterval;
 
     [Header("Black Hole Level 2")]
