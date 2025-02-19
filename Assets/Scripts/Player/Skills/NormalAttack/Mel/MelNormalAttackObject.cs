@@ -53,7 +53,7 @@ public class MelNormalAttackObject : SkillObjectPrefab {
             yield return null;
         }
 
-        ReturnObject();
+        End();
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -64,5 +64,9 @@ public class MelNormalAttackObject : SkillObjectPrefab {
         if (!other.TryGetComponent<HealthManager>(out HealthManager enemyHelath)) return;
 
         enemyHelath.ApplyDamageOnServerRPC(_info.SphereDamage, true, true);
+    }
+
+    void End() {
+        ReturnObject();
     }
 }

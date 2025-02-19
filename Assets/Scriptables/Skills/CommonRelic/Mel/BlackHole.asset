@@ -17,19 +17,20 @@ MonoBehaviour:
   MinLevel: 1
   MaxLevel: 4
   Cooldown: 10
+  IsStackable: 1
+  Character: 0
   SkillsDescriptions: []
   UpgradesDescriptions: []
   skillPrefabs:
   - {fileID: 3221236505909682620, guid: b8ac69ff26c7995438de07eff57b92a4, type: 3}
-  Character: 0
-  Size: {x: 12, y: 0.1, z: 12}
+  Size: {x: 8, y: 0.1, z: 8}
   Duration: 5
   Damage: 0.2
   SlowPercent: 25
-  OffSett: 12
+  MaxRange: 12
   DamageInterval: 0.1
   StunInterval: 2.5
   StunDuration: 1
   DurationLevel3: 8
-  SizeLevel4: {x: 20, y: 0.1, z: 20}
+  SizeLevel4: {x: 16, y: 0.1, z: 16}
   StunDurationLevel4: 2

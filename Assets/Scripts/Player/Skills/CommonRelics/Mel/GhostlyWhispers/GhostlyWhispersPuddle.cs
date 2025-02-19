@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class GhostlyWhispersObject : SkillObjectPrefab {
+public class GhostlyWhispersPuddle : SkillObjectPrefab {
     GhostlyWhispers _info;
     int _level;
     SkillContext _context;
@@ -13,7 +14,7 @@ public class GhostlyWhispersObject : SkillObjectPrefab {
     GameObject _mel;
 
     MeshRenderer _mesh;
-    [HideInInspector] public List<GhostlyWhispersObject> ActiveSkills;
+    [HideInInspector] public List<GhostlyWhispersPuddle> ActiveSkills;
     private void Awake() {
         _mesh = GetComponent<MeshRenderer>();
     }
@@ -50,6 +51,11 @@ public class GhostlyWhispersObject : SkillObjectPrefab {
             transform.SetPositionAndRotation(position, _context.PlayerRotation);
         }
 
+        if (_level >= 4) _areaLevel = 1;
+        else _areaLevel = 0;
+
+        DefineMaterial();
+
         gameObject.SetActive(true);
 
         StartCoroutine(AreaDuration());
@@ -74,7 +80,7 @@ public class GhostlyWhispersObject : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!other.TryGetComponent<GhostlyWhispersObject>(out GhostlyWhispersObject skill)) return;
+        if (!other.TryGetComponent<GhostlyWhispersPuddle>(out GhostlyWhispersPuddle skill)) return;
 
         if (!ActiveSkills.Contains(this)) ActiveSkills.Add(this);
         if (!ActiveSkills.Contains(skill)) ActiveSkills.Add(skill);
@@ -90,11 +96,18 @@ public class GhostlyWhispersObject : SkillObjectPrefab {
     void UpAreaLevel() {
         if (_level == 3) {
             _areaLevel = 1;
-            _mesh.material = _info.SuperAreaMaterial;
         }
         else if (_level == 4) {
             _areaLevel = 2;
-            _mesh.material = _info.MegaAreaMaterial;
+        }
+        DefineMaterial();
+    }
+
+    void DefineMaterial() {
+        switch (_areaLevel) {
+            case 0: _mesh.material = _info.NormalAreaMaterial; break;
+            case 1: _mesh.material = _info.SuperAreaMaterial; break;
+            case 2: _mesh.material = _info.MegaAreaMaterial; break;
         }
     }
     public void RestartDuration() {
@@ -130,5 +143,9 @@ public class GhostlyWhispersObject : SkillObjectPrefab {
         _canDealDamage = true;
         yield return null;
         StartCoroutine(CheckDamageTimer());
+    }
+
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
     }
 }

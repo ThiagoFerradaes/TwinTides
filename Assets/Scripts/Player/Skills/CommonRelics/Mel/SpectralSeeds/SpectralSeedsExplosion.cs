@@ -64,4 +64,7 @@ public class SpectralSeedsExplosion : SkillObjectPrefab {
         }
         
     }
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
+    }
 }

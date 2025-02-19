@@ -14,7 +14,8 @@ public class GhostlyWhispers : CommonRelic {
 
     [Header ("Area Level 2")]
     public float DamageLevel2;
-    public int AmountOfStacksLevel2; 
+    public int AmountOfStacksLevel2;
+    public float ObjectDurationLevel2;
 
     [Header("Area Level 3")]
     public float AreaDurationLevel3;
@@ -27,4 +28,5 @@ public class GhostlyWhispers : CommonRelic {
     public float DamageIntervalLevel4;
     public int AmountOfStacksLevel4;
     public Material MegaAreaMaterial;
+    public float ObjectDurationLevel4;
 }

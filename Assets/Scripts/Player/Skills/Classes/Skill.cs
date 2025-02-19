@@ -8,6 +8,7 @@ public abstract class Skill : ScriptableObject
     public int MinLevel, MaxLevel;
     public float Cooldown;
     public bool IsStackable = true;
+    public Characters Character;
 
     // Comportamental
     [TextArea] public string[] SkillsDescriptions;
@@ -20,6 +21,7 @@ public abstract class Skill : ScriptableObject
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(this);
 
         PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, context, skillLevel, 0);
+
     }
 
     public string ReturnSkillDescription(int skillLevel) {
@@ -28,5 +30,9 @@ public abstract class Skill : ScriptableObject
 
     public string ReturnUpgradeDescription(int skillLevel) {
         return UpgradesDescriptions[skillLevel - 1];
+    }
+
+    public virtual float ReturnCooldown() {
+        return Cooldown;
     }
 }

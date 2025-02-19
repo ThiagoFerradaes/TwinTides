@@ -90,7 +90,7 @@ public class SpectralSeedsObject : SkillObjectPrefab {
 
     private void Explode() {
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        SkillContext newContext = new(transform.position, transform.rotation);
+        SkillContext newContext = new(transform.position, transform.rotation, _contex.SkillIdInUI);
 
         PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 2);
 
@@ -103,7 +103,7 @@ public class SpectralSeedsObject : SkillObjectPrefab {
 
     private void ExplodeAgain() {
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        SkillContext newContext = new(transform.position, transform.rotation);
+        SkillContext newContext = new(transform.position, transform.rotation, _contex.SkillIdInUI);
 
         PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 2);
     }
@@ -114,5 +114,8 @@ public class SpectralSeedsObject : SkillObjectPrefab {
         if (!other.CompareTag("Enemy")) return;
 
         Explode();
+    }
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
     }
 }

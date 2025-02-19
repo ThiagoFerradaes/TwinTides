@@ -56,4 +56,8 @@ public class SoulSphereArea : SkillObjectPrefab {
             health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, true);
         }
     }
+
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
+    }
 }

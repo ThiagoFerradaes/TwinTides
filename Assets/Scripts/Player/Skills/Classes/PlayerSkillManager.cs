@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -64,7 +65,7 @@ public class PlayerSkillManager : NetworkBehaviour {
     #endregion
 
     void UseSkill(int skillId) {
-        SkillContext skillContext = new(this.transform.position, this.transform.rotation);
+        SkillContext skillContext = new(this.transform.position, this.transform.rotation, skillId);
 
         Debug.Log("UseSKill PlayerSkillManager");
         switch (skillId) {
@@ -72,8 +73,6 @@ public class PlayerSkillManager : NetworkBehaviour {
                 if (LocalWhiteBoard.Instance.PlayerAttackSkill != null) {
                     AttackSkill skill = LocalWhiteBoard.Instance.PlayerAttackSkill;
                     skill.UseSkill(skillContext, LocalWhiteBoard.Instance.AttackLevel);
-                    StartCoroutine(SetCooldown(0, skill.Cooldown));
-                    OnBaseAttack?.Invoke(this, new SkillEventHandler(SkillType.Attack, skill.Cooldown));
                 }
                 else Debug.Log("No Skill");
                 break;
@@ -81,8 +80,6 @@ public class PlayerSkillManager : NetworkBehaviour {
                 if (LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne != null) {
                     CommonRelic skill = LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne;
                     skill.UseSkill(skillContext, LocalWhiteBoard.Instance.CommonRelicInventory[skill]);
-                    StartCoroutine(SetCooldown(1, skill.Cooldown));
-                    OnCommonSkillOne?.Invoke(this, new SkillEventHandler(SkillType.CommonRelicOne, skill.Cooldown));
                 }      
                 else Debug.Log("No Skill");
                 break;
@@ -90,8 +87,6 @@ public class PlayerSkillManager : NetworkBehaviour {
                 if (LocalWhiteBoard.Instance.PlayerCommonRelicSkillTwo != null) {
                     CommonRelic skill = LocalWhiteBoard.Instance.PlayerCommonRelicSkillTwo;
                     skill.UseSkill(skillContext, LocalWhiteBoard.Instance.CommonRelicInventory[skill]);
-                    StartCoroutine(SetCooldown(2, skill.Cooldown));
-                    OnCommonSkillTwo?.Invoke(this, new SkillEventHandler(SkillType.CommonRelicTwo, skill.Cooldown));
                 }
                 else Debug.Log("No Skill");
                 break;
@@ -99,10 +94,28 @@ public class PlayerSkillManager : NetworkBehaviour {
                 if (LocalWhiteBoard.Instance.PlayerLegendarySkill != null) {
                     LegendaryRelic skill = LocalWhiteBoard.Instance.PlayerLegendarySkill;
                     skill.UseSkill(skillContext, LocalWhiteBoard.Instance.LegendaryRelicInventory[skill]);
-                    StartCoroutine(SetCooldown(3, skill.Cooldown));
-                    OnLegendary?.Invoke(this, new SkillEventHandler(SkillType.LegendaryRelic, skill.Cooldown));
                 }
                 else Debug.Log("No Skill");
+                break;
+        }
+    }
+    public void StartCooldown(int skillIdUI, Skill skill) {
+        switch (skillIdUI) {
+            case 0:
+                StartCoroutine(SetCooldown(0, skill.Cooldown));
+                OnBaseAttack?.Invoke(this, new SkillEventHandler(SkillType.Attack, skill.ReturnCooldown()));
+                break;
+            case 1:
+                StartCoroutine(SetCooldown(1, skill.Cooldown));
+                OnCommonSkillOne?.Invoke(this, new SkillEventHandler(SkillType.CommonRelicOne, skill.ReturnCooldown()));
+                break;
+            case 2:
+                StartCoroutine(SetCooldown(2, skill.Cooldown));
+                OnCommonSkillTwo?.Invoke(this, new SkillEventHandler(SkillType.CommonRelicTwo, skill.ReturnCooldown()));
+                break;
+            case 3:
+                StartCoroutine(SetCooldown(3, skill.Cooldown));
+                OnLegendary?.Invoke(this, new SkillEventHandler(SkillType.LegendaryRelic, skill.ReturnCooldown()));
                 break;
         }
     }

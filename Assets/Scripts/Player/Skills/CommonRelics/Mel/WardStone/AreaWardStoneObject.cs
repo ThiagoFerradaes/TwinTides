@@ -68,4 +68,7 @@ public class AreaWardStoneObject : SkillObjectPrefab {
 
         }
     }
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
+    }
 }

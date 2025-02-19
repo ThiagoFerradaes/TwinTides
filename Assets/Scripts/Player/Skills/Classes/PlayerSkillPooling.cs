@@ -44,7 +44,7 @@ public class PlayerSkillPooling : NetworkBehaviour {
         }
         else {
             spawnedObject = activeSkills[skill.skillPrefabs[objectIndex].name].Dequeue();
-            if(!spawnedObject.TryGetComponent<SkillObjectPrefab>(out SkillObjectPrefab obj)) return;
+            if (!spawnedObject.TryGetComponent<SkillObjectPrefab>(out SkillObjectPrefab obj)) return;
             obj.AddStackRpc();
 
             string objectName = spawnedObject.name.Replace("(Clone)", "");
@@ -52,6 +52,19 @@ public class PlayerSkillPooling : NetworkBehaviour {
                 activeSkills[objectName].Enqueue(spawnedObject);
             }
         }
+    }
+    [Rpc(SendTo.Server)]
+    public void InstantiateAndSpawnNoCheckRpc(int skillId, SkillContext context, int skillsLevel, int objectIndex) {
+        Skill skill = PlayerSkillConverter.Instance.TransformIdInSkill(skillId);
+        GameObject spawnedObject;
+
+        spawnedObject = ReturnObjectFroomPooling(skill.skillPrefabs[objectIndex]);
+
+        if (!spawnedObject.GetComponent<NetworkObject>().IsSpawned) {
+            spawnedObject.GetComponent<NetworkObject>().Spawn();
+        }
+
+        spawnedObject.GetComponent<SkillObjectPrefab>().TurnOnSkillRpc(skillId, skillsLevel, context);
     }
 
     GameObject ReturnObjectFroomPooling(GameObject prefab) {

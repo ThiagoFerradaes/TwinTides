@@ -35,7 +35,7 @@ public class WarCryObject : SkillObjectPrefab
 
     private void Explode() {
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        SkillContext newContex = new(transform.position, transform.rotation);
+        SkillContext newContex = new(transform.position, transform.rotation, _context.SkillIdInUI);
         PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContex, _level, 1);
     }
 

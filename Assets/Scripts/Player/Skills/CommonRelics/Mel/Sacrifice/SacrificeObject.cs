@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SacrificeObject : SkillObjectPrefab {
@@ -53,6 +54,8 @@ public class SacrificeObject : SkillObjectPrefab {
         RecoverHealth();
 
         ApllyBuffToMel();
+
+        Cooldown();
 
         ReturnObject();
     }
@@ -115,5 +118,10 @@ public class SacrificeObject : SkillObjectPrefab {
         }
     }
 
-
+    void Cooldown() {
+        _mel.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
+    }
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
+    }
 }

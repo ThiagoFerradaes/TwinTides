@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpectralSeedsRing : SkillObjectPrefab {
@@ -110,6 +111,15 @@ public class SpectralSeedsRing : SkillObjectPrefab {
     }
     void End() {
         listOfSeeds.Clear();
+        Cooldown();
         ReturnObject();
+    }
+
+    void Cooldown() {
+        _mel.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
+    }
+
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
     }
 }

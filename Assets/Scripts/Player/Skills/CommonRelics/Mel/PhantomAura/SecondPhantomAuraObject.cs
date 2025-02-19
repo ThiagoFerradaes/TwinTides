@@ -93,4 +93,7 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
         transform.SetParent(null);
         ReturnObject();
     }
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
+    }
 }

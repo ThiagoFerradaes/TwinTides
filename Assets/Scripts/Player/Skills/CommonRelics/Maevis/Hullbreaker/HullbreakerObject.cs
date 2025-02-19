@@ -69,7 +69,7 @@ public class HullbreakerObject : SkillObjectPrefab {
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         while (true) {
             yield return new WaitForSeconds(_info.EarthquakeInterval);
-            SkillContext newContext = new SkillContext(transform.position, transform.rotation);
+            SkillContext newContext = new SkillContext(transform.position, transform.rotation, _context.SkillIdInUI);
             PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 2);
         }
     }
@@ -77,7 +77,7 @@ public class HullbreakerObject : SkillObjectPrefab {
     void Explode() {
         if (_level < 3) return;
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        SkillContext newContext = new(transform.position, transform.rotation);
+        SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
         PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 1);
     }
 }

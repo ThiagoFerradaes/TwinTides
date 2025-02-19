@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public abstract class SkillObjectPrefab : NetworkBehaviour {
 
@@ -10,6 +11,8 @@ public abstract class SkillObjectPrefab : NetworkBehaviour {
         Skill skill = PlayerSkillConverter.Instance.TransformIdInSkill(skillId);
 
         ActivateSkill(skill, skillLevel, context);
+
+        StartSkillCooldown(context, skill);
     }
     public abstract void ActivateSkill(Skill info, int skillLevel, SkillContext context);
 
@@ -25,5 +28,13 @@ public abstract class SkillObjectPrefab : NetworkBehaviour {
     [Rpc(SendTo.ClientsAndHost)]
     public virtual void AddStackRpc() {
         return;
+    }
+    public virtual void StartSkillCooldown(SkillContext context, Skill skill) {
+        if (skill.Character == Characters.Mel) {
+            PlayerSkillPooling.Instance.MelGameObject.GetComponent<PlayerSkillManager>().StartCooldown(context.SkillIdInUI, skill);
+        }
+        else {
+            PlayerSkillPooling.Instance.MaevisGameObject.GetComponent<PlayerSkillManager>().StartCooldown(context.SkillIdInUI, skill);
+        }
     }
 }

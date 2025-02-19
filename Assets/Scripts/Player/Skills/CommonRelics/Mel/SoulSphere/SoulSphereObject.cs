@@ -5,13 +5,13 @@ using UnityEngine;
 public class SoulSphereObject : SkillObjectPrefab {
     SoulSphere _info;
     int _level;
-    SkillContext _skillContext;
+    SkillContext _context;
     public override void ActivateSkill(Skill info, int level, SkillContext context) {
         _info = info as SoulSphere;
         _level = level;
-        _skillContext = context;
+        _context = context;
 
-        transform.SetPositionAndRotation(_skillContext.PlayerPosition, _skillContext.PlayerRotation);
+        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
         gameObject.SetActive(true);
 
         StartCoroutine(Move());
@@ -60,7 +60,7 @@ public class SoulSphereObject : SkillObjectPrefab {
 
     void Explode() {
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        SkillContext context = new(transform.position, transform.rotation);
+        SkillContext context = new(transform.position, transform.rotation, _context.SkillIdInUI);
         PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId,context, _level, 1);
     }
 }

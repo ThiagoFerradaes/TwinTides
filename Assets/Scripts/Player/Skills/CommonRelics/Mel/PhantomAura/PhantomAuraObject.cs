@@ -57,7 +57,7 @@ public class PhantomAuraObject : SkillObjectPrefab {
     private void OnTriggerStay(Collider other) {
         if (!IsServer) return;
 
-        if (!_canDamage || other.CompareTag("Enemy")) return;
+        if (!_canDamage || !other.CompareTag("Enemy")) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager enemyHealth)) return;
 
@@ -99,6 +99,14 @@ public class PhantomAuraObject : SkillObjectPrefab {
             yield return new WaitForSeconds(_info.DurationLevel4);
         }
         transform.SetParent(null);
+        Cooldown();
         ReturnObject();
+    }
+
+    void Cooldown() {
+        _mel.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
+    }
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
     }
 }
