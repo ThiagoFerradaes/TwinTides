@@ -8,8 +8,6 @@ public enum Characters {
 public enum SkillType {
     Dash,
     Attack,
-    NpcSkillOne,
-    NpcSkillTwo,
     LegendaryRelic,
     CommonRelicOne,
     CommonRelicTwo

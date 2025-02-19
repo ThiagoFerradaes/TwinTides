@@ -30,8 +30,6 @@ public class MelNormalAttackObject : SkillObjectPrefab {
             _mel = GameObject.FindGameObjectWithTag("Mel");
         }
 
-        _mel.GetComponent<PlayerController>().StartAimMode();
-
         transform.localScale = _info.SphereSize;
 
         transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);

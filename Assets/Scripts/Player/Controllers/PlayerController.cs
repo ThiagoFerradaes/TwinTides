@@ -41,7 +41,7 @@ public class PlayerController : NetworkBehaviour {
     public static event Action OnMove;
     public static event Action OnStop;
     public static event Action OnPause;
-    public static event Action<SkillType, float> OnDashCooldown;
+    public event Action<SkillType, float> OnDashCooldown;
     public event EventHandler OnAim;
 
     void Start() {
@@ -75,7 +75,7 @@ public class PlayerController : NetworkBehaviour {
             isAiming = true;
             _rotationInput = context.ReadValue<Vector2>();
 
-            if (!aimObject.gameObject.activeSelf) {
+            if (!aimObject.gameObject.activeSelf && aimObject != null) {
                 StartAimMode();
             }
         }
@@ -146,13 +146,13 @@ public class PlayerController : NetworkBehaviour {
     private void MoveAndRotate() {
         if (_moveInput.magnitude != 0) {
 
-            Moving();    
+            Moving();
 
         }
 
         Rotate();
 
-        if (_rb.linearVelocity.y != 0) { // Durante o pulo aumenta a gravidade, serve para regular a duração do pulo
+        if (_rb.linearVelocity.y != 0) { 
             _rb.AddForce(Vector3.down * fallForce, ForceMode.Acceleration);
         }
     }
@@ -168,7 +168,7 @@ public class PlayerController : NetworkBehaviour {
     }
 
     public void Rotate() {
-        if (aimObject.gameObject.activeInHierarchy && aimObject != null) {
+        if (aimObject != null && aimObject.gameObject.activeInHierarchy) {
             Vector3 objectPosition = new(aimObject.position.x, transform.position.y, aimObject.position.z);
             Vector3 aimDirection = (objectPosition - transform.position);
 
@@ -186,6 +186,7 @@ public class PlayerController : NetworkBehaviour {
     }
 
     public void StartAimMode() {
+        if (aimObject == null) return;
         aimObject.gameObject.SetActive(true);
         OnAim?.Invoke(this, EventArgs.Empty);
     }

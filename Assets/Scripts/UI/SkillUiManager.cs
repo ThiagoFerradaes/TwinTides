@@ -8,7 +8,9 @@ using UnityEngine.UI;
 
 public class SkillUiManager : MonoBehaviour {
 
+
     #region Variables
+
     [Header("Sprites")]
     [SerializeField] Sprite maevisSprite;
     [SerializeField] Sprite melSprite;
@@ -61,13 +63,31 @@ public class SkillUiManager : MonoBehaviour {
         SetSkillsSpritesInfo(); // Colocar sprite nas skills
         SetInicialCooldowns(); // Zerar o texto de cooldowns
         SetGoldText(); // Mudar o texto do gold
-        // Colocar o evento que chama o SetCooldown
     }
     private void OnEnable() {
-        PlayerSetUp.OnPlayerSpawned += SetCharacterHealthManagerInfo;
-        PlayerSetUp.OnPlayerTwoSpawned += SetSecondCharacterHealthManagerInfo;
-        PlayerController.OnDashCooldown += SetCooldown;
+        PlayerSetUp.OnPlayerSpawned += SetPlayerOne;
+        PlayerSetUp.OnPlayerTwoSpawned += SetPlayerTwo;
+    }
+    void SetPlayerOne(GameObject player) {
+        _playerCharacter = player;
 
+        SetCharacterHealthManagerInfo();
+        _playerCharacter.GetComponent<PlayerController>().OnDashCooldown += SetCooldown;
+        PlayerSkillManager skillManager = _playerCharacter.GetComponent<PlayerSkillManager>();
+        skillManager.OnBaseAttack += SkillManager_SkillUSed;
+        skillManager.OnCommonSkillOne += SkillManager_SkillUSed;
+        skillManager.OnCommonSkillTwo += SkillManager_SkillUSed;
+        skillManager.OnLegendary += SkillManager_SkillUSed;
+    }
+
+    private void SkillManager_SkillUSed(object sender, PlayerSkillManager.SkillEventHandler e) {
+        SetCooldown(e.Type, e.SkillCooldown);
+    }
+
+    void SetPlayerTwo(GameObject player) {
+        _playerTwoCharacter = player;
+
+        SetSecondCharacterHealthManagerInfo();
     }
     void UpdatePlayerHealth((float maxHealth, float currentHealth, float currentShield) health) {
         characterHealthText.text = health.currentHealth.ToString("F0") + " / " + health.maxHealth.ToString("F0");
@@ -101,13 +121,11 @@ public class SkillUiManager : MonoBehaviour {
             }
         }
     }
-    private void SetCharacterHealthManagerInfo(GameObject player) {
-        _playerCharacter = player;
+    private void SetCharacterHealthManagerInfo() {
         _playerCharacter.GetComponent<HealthManager>().UpdateHealth += UpdatePlayerHealth;
     }
-    private void SetSecondCharacterHealthManagerInfo(GameObject secondPlayer) {
+    private void SetSecondCharacterHealthManagerInfo() {
         playerTwoInfo.SetActive(true);
-        _playerTwoCharacter = secondPlayer;
         _playerTwoCharacter.GetComponent<HealthManager>().UpdateHealth += UpdatePlayerTwoHealth;
     }
     private void SetSkillsSpritesInfo() {
@@ -166,9 +184,9 @@ public class SkillUiManager : MonoBehaviour {
         _playerCharacter.GetComponent<HealthManager>().UpdateHealth -= UpdatePlayerHealth;
         _playerTwoCharacter.GetComponent<HealthManager>().UpdateHealth -= UpdatePlayerTwoHealth;
 
-        PlayerSetUp.OnPlayerSpawned -= SetCharacterHealthManagerInfo;
-        PlayerSetUp.OnPlayerTwoSpawned -= SetSecondCharacterHealthManagerInfo;
-        PlayerController.OnDashCooldown -= SetCooldown;
+        PlayerSetUp.OnPlayerSpawned -= SetPlayerOne;
+        PlayerSetUp.OnPlayerTwoSpawned -= SetPlayerTwo;
+        _playerCharacter.GetComponent<PlayerController>().OnDashCooldown -= SetCooldown;
     }
     #endregion
 }

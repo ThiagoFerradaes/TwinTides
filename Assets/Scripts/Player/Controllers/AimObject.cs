@@ -4,7 +4,8 @@ using UnityEngine;
 public class AimObject : MonoBehaviour {
     Coroutine aimAlive;
     PlayerController _father;
-    void Start() {
+
+    void Awake() {
         PlayerSetUp.OnPlayerSpawned += PlayerSetUp_OnPlayerSpawned;
     }
 
