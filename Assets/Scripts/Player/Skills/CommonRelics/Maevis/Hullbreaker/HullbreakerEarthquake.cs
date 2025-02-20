@@ -37,4 +37,8 @@ public class HullbreakerEarthquake : SkillObjectPrefab {
 
         health.ApplyDamageOnServerRPC(_info.EarthquakeDamage, true, true);
     }
+
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
+    }
 }

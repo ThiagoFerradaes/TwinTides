@@ -78,5 +78,8 @@ public class FallenMelBannerObject : SkillObjectPrefab {
         if (durationCoroutine != null) StopCoroutine(durationCoroutine);
         durationCoroutine = StartCoroutine(BannerDuration());
     }
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
+    }
 }
 

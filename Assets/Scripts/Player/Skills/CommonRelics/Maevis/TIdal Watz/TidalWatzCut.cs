@@ -71,4 +71,7 @@ public class TidalWatzCut : SkillObjectPrefab
 
         _father.acumulativeDamage += _info.Damage * _info.PercentOfDamageToAcumulate / 100;
     }
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
+    }
 }

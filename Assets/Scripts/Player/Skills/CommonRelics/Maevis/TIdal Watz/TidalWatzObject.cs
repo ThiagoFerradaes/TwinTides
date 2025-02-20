@@ -86,6 +86,10 @@ public class TidalWatzObject : SkillObjectPrefab {
 
     void End() {
         acumulativeDamage = 0;
+        _maevis.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
         ReturnObject();
+    }
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
     }
 }

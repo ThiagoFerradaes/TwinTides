@@ -34,8 +34,17 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
     private void InvocateBanner() {
         if (_level < 2) {
             Vector3 direction = _context.PlayerRotation * Vector3.forward;
-            Vector3 position = _context.PlayerPosition + (direction * _info.Offset);
-            transform.SetPositionAndRotation(position, _context.PlayerRotation);
+            Vector3 position = _context.PlayerPosition + (direction * _info.MaxRange);
+            Transform aim = _maveis.GetComponent<PlayerController>().aimObject.transform;
+
+            if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_context.PlayerPosition, aim.position) < _info.MaxRange) {
+
+                transform.SetPositionAndRotation(aim.position, _context.PlayerRotation);
+            }
+            else {
+                transform.SetPositionAndRotation(position, _context.PlayerRotation);
+            }
+
 
             gameObject.SetActive(true);
 
@@ -107,7 +116,7 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
         }
     }
 
-        private void OnTriggerExit(Collider other) {
+    private void OnTriggerExit(Collider other) {
         if (!IsServer) return;
 
         if (!other.CompareTag("Maevis") && !other.CompareTag("Mel")) return;

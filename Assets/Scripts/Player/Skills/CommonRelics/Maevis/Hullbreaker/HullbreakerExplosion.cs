@@ -36,4 +36,8 @@ public class HullbreakerExplosion : SkillObjectPrefab {
 
         health.ApplyDamageOnServerRPC(_info.ExplosionDamage, true, true);
     }
+
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
+    }
 }

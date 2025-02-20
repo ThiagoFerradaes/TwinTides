@@ -73,4 +73,8 @@ public class EchoBlastStunExplosion : SkillObjectPrefab
             OnExploded?.Invoke(this, new ExplodedObject(other.gameObject));
         }
     }
+
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
+    }
 }

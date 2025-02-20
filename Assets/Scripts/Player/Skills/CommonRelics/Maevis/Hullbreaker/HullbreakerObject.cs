@@ -18,7 +18,7 @@ public class HullbreakerObject : SkillObjectPrefab {
 
     private void SetParentAndPosition() {
         if (_maevis == null) {
-            _maevis = GameObject.FindGameObjectWithTag("Maevis");
+            _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
         }
 
         transform.SetParent(_maevis.transform);
@@ -60,9 +60,7 @@ public class HullbreakerObject : SkillObjectPrefab {
             yield return null;
         }
 
-        Explode();
-
-        ReturnObject();
+        End();
     }
 
     IEnumerator Earthquake() {
@@ -79,5 +77,16 @@ public class HullbreakerObject : SkillObjectPrefab {
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
         PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 1);
+    }
+    void End() {
+        Explode();
+
+        _maevis.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
+
+        ReturnObject();
+    }
+
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
     }
 }

@@ -5,7 +5,7 @@ public class FallenBanner : CommonRelic
 {
     [Header("Fallen Banner Level 1")]
     public float BannerDuration;
-    public float Offset;
+    public float MaxRange;
 
     [Header("Fallen Banner Level 2")]
     public Vector3 BannerFollowPosition;

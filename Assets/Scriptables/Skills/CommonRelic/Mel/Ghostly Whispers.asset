@@ -16,28 +16,29 @@ MonoBehaviour:
   UiSprite: {fileID: 21300000, guid: 8ef64b2d23320d54eadbaf23f21035f4, type: 3}
   MinLevel: 1
   MaxLevel: 4
-  Cooldown: 12
-  IsStackable: 1
+  Cooldown: 6
+  IsStackable: 0
   Character: 0
   SkillsDescriptions: []
   UpgradesDescriptions: []
   skillPrefabs:
+  - {fileID: 1100393366828500542, guid: d477ed308cbb3ec4fb507264d691e8d5, type: 3}
   - {fileID: 137126704500169266, guid: 558de8981a35e884eb0654772caf8136, type: 3}
-  Area: {x: 6, y: 0.1, z: 6}
+  Area: {x: 5, y: 0.1, z: 5}
   MaxRange: 10
-  AreaDuration: 3
+  AreaDuration: 4
   DamageInterval: 1
   Damage: 5
   AmountOfStacks: 1
-  NormalAreaMaterial: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  NormalAreaMaterial: {fileID: 2100000, guid: 4d60f0ac7f39d9c46a15e883997a9cce, type: 2}
   DamageLevel2: 10
   AmountOfStacksLevel2: 2
   ObjectDurationLevel2: 4
   AreaDurationLevel3: 5
   DamageIntervalLevel3: 0.5
   SuperAreaMaterial: {fileID: 2100000, guid: 1c417fa53e7ec6c40a98957d2c6aacd9, type: 2}
-  AreaLevel4: {x: 10, y: 0.1, z: 10}
-  AreaDurationLevel4: 7
+  AreaLevel4: {x: 7, y: 0.1, z: 7}
+  AreaDurationLevel4: 6
   DamageIntervalLevel4: 0.2
   AmountOfStacksLevel4: 4
   MegaAreaMaterial: {fileID: 2100000, guid: d25b9d80db440d249972f6af7791cc43, type: 2}

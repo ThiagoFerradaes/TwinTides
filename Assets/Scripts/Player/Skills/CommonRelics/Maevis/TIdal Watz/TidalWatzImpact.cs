@@ -47,4 +47,7 @@ public class TidalWatzImpact : SkillObjectPrefab {
 
         health.ApplyDamageOnServerRPC(totalDamage, false, true);
     }
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
+    }
 }

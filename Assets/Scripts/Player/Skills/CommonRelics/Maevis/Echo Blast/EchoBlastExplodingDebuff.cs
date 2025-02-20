@@ -70,4 +70,8 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
         EchoBlastStunExplosion.OnExploded -= EchoBlastStunExplosion_OnExploded;
         ReturnObject();
     }
+
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
+    }
 }

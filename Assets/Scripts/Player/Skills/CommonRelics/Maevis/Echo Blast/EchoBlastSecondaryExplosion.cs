@@ -44,4 +44,8 @@ public class EchoBlastSecondaryExplosion : SkillObjectPrefab {
 
         health.AddDebuffToList(_info.BleedDebuff);
     }
+
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
+    }
 }
