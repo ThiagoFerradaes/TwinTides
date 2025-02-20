@@ -19,6 +19,6 @@ public class Warcry : CommonRelic {
     [Header("Warcry Level 4")]
     public AttackSkill NormalMaevisAttack;
     public AttackSkill EnhancedMaevisAttack;
-    public HealthDebuff BleedingDebuff;
+    public float PercentAttackSpeedLevel4;
     public float DurationLevel4;
 }

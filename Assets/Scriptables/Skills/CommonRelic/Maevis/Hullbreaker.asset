@@ -12,18 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6189399e321729b4284b288281e397f5, type: 3}
   m_Name: Hullbreaker
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Hullbreaker
   UiSprite: {fileID: 0}
-  MinLevel: 0
-  MaxLevel: 0
-  Cooldown: 0
+  MinLevel: 1
+  MaxLevel: 4
+  Cooldown: 5
+  IsStackable: 1
+  Character: 0
   SkillsDescriptions: []
   UpgradesDescriptions: []
   skillPrefabs:
   - {fileID: 221680419640250693, guid: 62107aa32eaf20c46a6cfc420d74fbbf, type: 3}
   - {fileID: 2115139789942485532, guid: 718a5a5636c99fc44acba88f2b8fe18a, type: 3}
   - {fileID: 5266687347423813970, guid: f2f4092f23c8b994c9813f3843a35e91, type: 3}
-  Character: 0
   ShieldAmount: 10
   ShieldDuration: 6
   ShieldAmountLevel2: 20
