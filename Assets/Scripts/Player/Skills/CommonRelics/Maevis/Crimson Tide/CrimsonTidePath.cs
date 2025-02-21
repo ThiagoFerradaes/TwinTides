@@ -1,4 +1,7 @@
+using NUnit.Framework;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 
@@ -9,6 +12,8 @@ public class CrimsonTidePath : SkillObjectPrefab
     SkillContext _context;
     GameObject _maevis;
     bool _canDamage;
+
+    private List<HealthManager> events = new();
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as CrimsonTide;
@@ -24,6 +29,8 @@ public class CrimsonTidePath : SkillObjectPrefab
     void SetPosition() {
         transform.localScale = _info.PathSize;
 
+        _context.PlayerPosition.y = GetGroundHeight(_context.PlayerPosition);
+
         transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
 
         gameObject.SetActive(true);
@@ -33,10 +40,18 @@ public class CrimsonTidePath : SkillObjectPrefab
         StartCoroutine(DamageCooldown());
     }
 
+    float GetGroundHeight(Vector3 position) {
+        Ray ray = new(position + Vector3.up * 5f, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f, LayerMask.GetMask("Floor"))) {
+            return hit.point.y + 0.1f;
+        }
+        return position.y; 
+    }
+
     IEnumerator Duration() {
         yield return new WaitForSeconds(_info.PathDuration);
 
-        ReturnObject();
+        End();
     }
 
     IEnumerator DamageCooldown() {
@@ -62,9 +77,33 @@ public class CrimsonTidePath : SkillObjectPrefab
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
+        if (!events.Contains(health)) {
+            health.OnDeath += Health_OnDeath;
+
+            events.Add(health);
+        }
+
         if (!_canDamage) return;
 
-        health.ApplyDamageOnServerRPC(_info.PathDamagePerTick, true, true);
+        if (health.ReturnCurrentHealth() > health.ReturnMaxHealth() * _info.PercentToExecute / 100) {
+            health.ApplyDamageOnServerRPC(_info.DashDamage, true, true);
+        }
+        else {
+            health.ApplyDamageOnServerRPC(9999, false, false);
+        }
 
+    }
+
+    private void Health_OnDeath() {
+        _maevis.GetComponent<PlayerSkillManager>().ResetCooldown(_context.SkillIdInUI);
+    }
+
+    void End() {
+        foreach(var enemy in events) {
+            enemy.OnDeath -= Health_OnDeath;
+        }
+        events.Clear();
+
+        ReturnObject();
     }
 }

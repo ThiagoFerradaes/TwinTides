@@ -58,26 +58,24 @@ public class CrimsonTideObject : SkillObjectPrefab {
             PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 3);
         }
 
-        _maevis.GetComponent<PlayerController>().AllowMovement();
-
         End();
     }
 
     IEnumerator SpawnPath() {
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+        Vector3 lastSpawnPosition = _maevis.transform.position;
         while (true) {
-            SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
-            PlayerSkillPooling.Instance.InstantiateAndSpawnNoCheckRpc(skillId, newContext, _level, 4);
-            yield return new WaitForSeconds(_info.PathSpawnInterval);
+            if (Vector3.Distance(lastSpawnPosition, _maevis.transform.position) >= _info.PathSpawnInterval) {
+                SkillContext newContext = new(_maevis.transform.position, transform.rotation, _context.SkillIdInUI);
+                PlayerSkillPooling.Instance.InstantiateAndSpawnNoCheckRpc(skillId, newContext, _level, 4);
+                lastSpawnPosition = _maevis.transform.position; 
+            }
+            yield return null;
         }
     }
 
     void End() {
-        _maevis.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
+        _maevis.GetComponent<PlayerController>().AllowMovement();
         ReturnObject();
-    }
-
-    public override void StartSkillCooldown(SkillContext context, Skill skill) {
-        return;
     }
 }

@@ -17,7 +17,7 @@ public class Burn : HealthDebuff
                 yield return new WaitForSeconds(timeBetweenDamage);
             }
             else {
-                health.ApplyDamageOnServerRPC(damagePerTickOffShield * health.maxHealth.Value, true, false);
+                health.ApplyDamageOnServerRPC(damagePerTickOffShield * health.ReturnMaxHealth(), true, false);
                 yield return new WaitForSeconds(timeBetweenDamage);
             } 
         }

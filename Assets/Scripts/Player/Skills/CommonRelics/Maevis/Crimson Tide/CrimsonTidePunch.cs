@@ -26,6 +26,7 @@ public class CrimsonTidePunch : SkillObjectPrefab
         Vector3 direction = _context.PlayerRotation * Vector3.forward;
         Vector3 position = _context.PlayerPosition + (direction * _info.PunchAreaOffSett);
         transform.SetPositionAndRotation(position, _context.PlayerRotation);
+        gameObject.SetActive(true);
 
         StartCoroutine(PunchDuration());
     }

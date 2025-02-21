@@ -16,7 +16,6 @@ public abstract class Skill : ScriptableObject
     public GameObject[] skillPrefabs;
 
     public void UseSkill(SkillContext context, int skillLevel) {
-        Debug.Log("Use Skill in Skill");
 
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(this);
 

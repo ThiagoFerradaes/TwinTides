@@ -54,6 +54,9 @@ public class SkillUiManager : MonoBehaviour {
     private GameObject _playerTwoCharacter;
 
     readonly Dictionary<SkillType, TextMeshProUGUI> _listOfCooldowns = new();
+
+    // Corrotinas
+    Coroutine baseAttackCoroutine, commonRelicOneCoroutine, commonRelicTwoCoroutine, legendaryRelicCoroutine;
     #endregion
 
     #region Methods
@@ -166,7 +169,36 @@ public class SkillUiManager : MonoBehaviour {
     }
     void SetCooldown(SkillType skillType, float cooldown) {
         if (_listOfCooldowns.ContainsKey(skillType)) {
-            StartCoroutine(StartSkillCooldown(_listOfCooldowns[skillType], cooldown));
+            switch (skillType) {
+                case SkillType.Attack:
+                    if (baseAttackCoroutine != null) {
+                        StopCoroutine(baseAttackCoroutine);
+                        baseAttackCoroutine = null;
+                    }
+                    baseAttackCoroutine = StartCoroutine(StartSkillCooldown(_listOfCooldowns[skillType], cooldown));
+                    break;
+                case SkillType.CommonRelicOne:
+                    if (commonRelicOneCoroutine != null) {
+                        StopCoroutine(commonRelicOneCoroutine);
+                        commonRelicOneCoroutine = null;
+                    }
+                    commonRelicOneCoroutine = StartCoroutine(StartSkillCooldown(_listOfCooldowns[skillType], cooldown));
+                    break;
+                case SkillType.CommonRelicTwo:
+                    if (commonRelicTwoCoroutine != null) {
+                        StopCoroutine(commonRelicTwoCoroutine);
+                        commonRelicTwoCoroutine = null;
+                    }
+                    commonRelicTwoCoroutine = StartCoroutine(StartSkillCooldown(_listOfCooldowns[skillType], cooldown));
+                    break;
+                case SkillType.LegendaryRelic:
+                    if (legendaryRelicCoroutine != null) {
+                        StopCoroutine(legendaryRelicCoroutine);
+                        legendaryRelicCoroutine = null;
+                    }
+                    legendaryRelicCoroutine = StartCoroutine(StartSkillCooldown(_listOfCooldowns[skillType], cooldown));
+                    break;
+            }
         }
     }
 

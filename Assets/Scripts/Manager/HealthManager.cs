@@ -8,8 +8,10 @@ public class HealthManager : NetworkBehaviour {
 
     #region Variables
     [Header("Atributes")]
-    public NetworkVariable<float> maxHealth;
+    [SerializeField] NetworkVariable<float> maxHealth;
     [SerializeField] private float maxShieldAmount;
+    [SerializeField] DeathBehaviour deathBehaviour;
+    [SerializeField] Material damageMaterial;
 
     // Variaveis do tipo float
     readonly NetworkVariable<float> _currentHealth = new();
@@ -26,6 +28,8 @@ public class HealthManager : NetworkBehaviour {
     readonly NetworkVariable<bool> _canBeInvulnerable = new(true);
     readonly NetworkVariable<bool> _canReceiveDebuff = new(true);
     readonly NetworkVariable<bool> _canReceiveBuff = new(true);
+    readonly NetworkVariable<bool> _isDead = new(false);
+    readonly NetworkVariable<bool> _isDamageInCooldown = new(false);
 
     // Dicionarios de Debuffs e buffs
     readonly Dictionary<Type, ActiveDebuff> _listOfActiveDebuffs = new();
@@ -74,6 +78,9 @@ public class HealthManager : NetworkBehaviour {
     #endregion
 
     #region HealthManagement
+    public float ReturnMaxHealth() {
+        return maxHealth.Value;
+    }
     [ServerRpc(RequireOwnership = false)]
     public void SetMaxHealthServerRpc() {
         if (!IsServer) return;
@@ -83,7 +90,10 @@ public class HealthManager : NetworkBehaviour {
 
     [ServerRpc(RequireOwnership = false)]
     public void ApplyDamageOnServerRPC(float damageTaken, bool hitShield, bool isAfectedByDamageMultiply) {
-        if (!_canBeDamaged.Value) { Debug.Log("Can't take Damage" + gameObject.name); return; }
+        if (!_canBeDamaged.Value || _isDamageInCooldown.Value) { Debug.Log("Can't take Damage" + gameObject.name); return; }
+        if (_isDead.Value == true) return;
+
+        TookDamage();
 
         if (isShielded.Value && hitShield) {
 
@@ -105,21 +115,59 @@ public class HealthManager : NetworkBehaviour {
             else _currentHealth.Value = Mathf.Clamp((_currentHealth.Value - damageTaken), 0, maxHealth.Value);
         }
         if (_currentHealth.Value <= 0) {
-            DeathHandler();
+            _isDead.Value = true;
+            DeathHandlerRpc();
         }
         else {
             OnGeneralDamage?.Invoke(this, EventArgs.Empty);
         }
     }
-    void DeathHandler() {
+
+    void TookDamage() {
+        //DamageIndicatorRpc();
+        StartCoroutine(DamageCooldown());
+       
+    }
+    IEnumerator DamageCooldown() {
+        _isDamageInCooldown.Value = true;
+        yield return new WaitForSeconds(0.06f);
+        _isDamageInCooldown.Value = false;
+    }
+    [Rpc(SendTo.ClientsAndHost)]
+    void DamageIndicatorRpc() {
+        StartCoroutine(DamageIndicator());
+    }
+    IEnumerator DamageIndicator() {
+        MeshRenderer mesh = GetComponent<MeshRenderer>();
+        Material original = mesh.material;
+        
+        for (int i = 0; i < 3; i++) {
+            mesh.material = damageMaterial;
+            yield return new WaitForSeconds(0.01f);
+            mesh.material = original;
+            yield return new WaitForSeconds(0.01f);
+        }
+        
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    void DeathHandlerRpc() {
         OnDeath?.Invoke();
-        Debug.Log("Is dead: " + gameObject.name);
+        Debug.Log("OnDeathInvoked");
+        StopCoroutine(DamageIndicator());
+        deathBehaviour.Death(this.gameObject);
+        
     }
     public void ReviveHandler(float percentOfMaxHealth) {
         _currentHealth.Value = Mathf.Clamp((percentOfMaxHealth / 100 * maxHealth.Value), 0.2f * maxHealth.Value, maxHealth.Value);
         _canBeDamaged.Value = true;
         currentShieldAmount.Value = 0f;
         isShielded.Value = false;
+        ReviveRpc();
+    }
+    [Rpc(SendTo.Server)]
+    void ReviveRpc() {
+        _isDead.Value = false;
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -131,6 +179,9 @@ public class HealthManager : NetworkBehaviour {
 
     public float ReturnCurrentHealth() {
         return _currentHealth.Value;
+    }
+    public bool ReturnDeathState() {
+        return _isDead.Value;
     }
     #endregion
 

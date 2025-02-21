@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CrimsonTideExplosion : SkillObjectPrefab
@@ -9,6 +10,7 @@ public class CrimsonTideExplosion : SkillObjectPrefab
     SkillContext _context;
     GameObject _maevis;
 
+    List<HealthManager> events = new();
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as CrimsonTide;
         _level = skillLevel;
@@ -34,7 +36,7 @@ public class CrimsonTideExplosion : SkillObjectPrefab
     IEnumerator Duration() {
         yield return new WaitForSeconds(_info.ExplosionDuration);
 
-        ReturnObject();
+        End();
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -44,7 +46,29 @@ public class CrimsonTideExplosion : SkillObjectPrefab
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        health.ApplyDamageOnServerRPC(_info.ExplosionDamage, true, true);
+        if (_level == 4 && !events.Contains(health)) {
+            health.OnDeath += Health_OnDeath;
+
+            events.Add(health);
+        }
+
+        if (health.ReturnCurrentHealth() > health.ReturnMaxHealth() * _info.PercentToExecute / 100 || _level < 4) {
+            health.ApplyDamageOnServerRPC(_info.DashDamage, true, true);
+        }
+        else {
+            health.ApplyDamageOnServerRPC(9999, false, false);
+        }
+    }
+
+    private void Health_OnDeath() {
+        _maevis.GetComponent<PlayerSkillManager>().ResetCooldown(_context.SkillIdInUI);
+    }
+
+    void End() {
+        foreach (var enemies in events) {
+            enemies.OnDeath -= Health_OnDeath;
+        }
+        ReturnObject();
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

@@ -24,4 +24,5 @@ public class CrimsonTide : CommonRelic
     public float PathDamageInterval;
     public float PathSpawnInterval;
     public Vector3 PathSize;
+    [Range(0,100)]public float PercentToExecute;
 }

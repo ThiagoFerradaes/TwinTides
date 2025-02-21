@@ -56,7 +56,7 @@ public class AreaWardStoneObject : SkillObjectPrefab {
 
             if (!_canHeal) return;
 
-            if (health.ReturnCurrentHealth() < health.maxHealth.Value) {
+            if (health.ReturnCurrentHealth() < health.ReturnMaxHealth()) {
                 Debug.Log("Heal");
                 health.HealServerRpc(_info.AmountOfHealing);
             }

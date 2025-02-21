@@ -64,7 +64,7 @@ public class SacrificeObject : SkillObjectPrefab {
         if (!_mel.TryGetComponent<HealthManager>(out HealthManager health)) return;
         if (!IsServer) return;
 
-        float healthLost = health.maxHealth.Value * _info.HealthLostPercent / 100;
+        float healthLost = health.ReturnMaxHealth() * _info.HealthLostPercent / 100;
 
         health.ApplyDamageOnServerRPC(healthLost, false, false);
 
@@ -73,9 +73,9 @@ public class SacrificeObject : SkillObjectPrefab {
         if (!_mel.TryGetComponent<HealthManager>(out HealthManager health)) return;
         if (!IsServer) return;
         var healthGain = _level switch {
-            1 => health.maxHealth.Value * _info.HealthGainPercent / 100,
-            2 => health.maxHealth.Value * _info.HealthGainPercentLevel2 / 100,
-            _ => health.maxHealth.Value * _info.HealthGainPercentLevel3 / 100,
+            1 => health.ReturnMaxHealth() * _info.HealthGainPercent / 100,
+            2 => health.ReturnMaxHealth() * _info.HealthGainPercentLevel2 / 100,
+            _ => health.ReturnMaxHealth() * _info.HealthGainPercentLevel3 / 100,
         };
         health.HealServerRpc(healthGain);
 
