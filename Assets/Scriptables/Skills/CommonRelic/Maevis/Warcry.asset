@@ -18,12 +18,12 @@ MonoBehaviour:
   MaxLevel: 4
   Cooldown: 10
   IsStackable: 1
+  Character: 0
   SkillsDescriptions: []
   UpgradesDescriptions: []
   skillPrefabs:
   - {fileID: 5383756882683347849, guid: 51035b909087d9a4f8cd630d2ec289d6, type: 3}
   - {fileID: 5210610992638295791, guid: 32ddb45e81ed22044870a125584130d5, type: 3}
-  Character: 0
   Duration: 6
   PercentAttackSpeed: 10
   ExplosionRadius: 4
@@ -32,7 +32,7 @@ MonoBehaviour:
   StunDuration: 3
   PercentMoveSpeedGain: 10
   ExplosionRadiusLevel3: 12
-  NormalMaevisAttack: {fileID: 0}
-  EnhancedMaevisAttack: {fileID: 0}
-  BleedingDebuff: {fileID: 11400000, guid: 811747b3cf3ece547a8d6f3bd782cfb3, type: 2}
+  NormalMaevisAttack: {fileID: 11400000, guid: 297f474b4b298df4a8359eeab6c49b15, type: 2}
+  EnhancedMaevisAttack: {fileID: 11400000, guid: 434ce1f79a30a9c48ae58e70dfe545e6, type: 2}
+  PercentAttackSpeedLevel4: 50
   DurationLevel4: 10

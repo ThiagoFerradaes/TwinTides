@@ -52,7 +52,7 @@ public class WarCryObject : SkillObjectPrefab
 
     void ApplyBuffs() {
         if (_level > 3) {
-            //LocalWhiteBoard.Instance.PlayerAttackSkill = _info.EnhancedMaevisAttack;
+            LocalWhiteBoard.Instance.PlayerAttackSkill = _info.EnhancedMaevisAttack;
         }
         if (_level > 2) {
             Debug.Log("Buff de velocidade de movimento aplicado a Maevis");
@@ -66,7 +66,7 @@ public class WarCryObject : SkillObjectPrefab
     }
     void RemoveBuffs() {
         if (_level > 3) {
-            //LocalWhiteBoard.Instance.PlayerAttackSkill = _info.NormalMaevisAttack;
+            LocalWhiteBoard.Instance.PlayerAttackSkill = _info.NormalMaevisAttack;
         }
         if (_level > 2) {
             Debug.Log("Buff de velocidade de movimento removido a Maevis");

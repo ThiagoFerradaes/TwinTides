@@ -16,6 +16,7 @@ public class PlayerController : NetworkBehaviour {
     [SerializeField] float rotationSpeed;
     float _currentCharacterMoveSpeed;
     bool _canWalk = true;
+    bool _canRotate = true;
     Vector2 _moveInput;
     [HideInInspector] public Vector2 _rotationInput;
     [HideInInspector] public Transform aimObject;
@@ -28,6 +29,7 @@ public class PlayerController : NetworkBehaviour {
     [SerializeField] int maxJumps;
     public LayerMask floorLayer;
     int _currentJumpsAlowed;
+    bool _canJump = true;
 
     [Header("Dash")]
     [SerializeField] float dashForce;
@@ -85,7 +87,7 @@ public class PlayerController : NetworkBehaviour {
         }
     }
     public void InputJump(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed && _currentJumpsAlowed > 0 && Time.timeScale == 1) {
+        if (context.phase == InputActionPhase.Performed && _currentJumpsAlowed > 0 && Time.timeScale == 1 && _canJump) {
             _currentJumpsAlowed--;
             _rb.linearVelocity = new(_rb.linearVelocity.x, 0, _rb.linearVelocity.z);
             _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -169,6 +171,7 @@ public class PlayerController : NetworkBehaviour {
     }
 
     public void Rotate() {
+        if (!_canRotate) return;
         if (aimObject != null && aimObject.gameObject.activeInHierarchy) {
             Vector3 objectPosition = new(aimObject.position.x, transform.position.y, aimObject.position.z);
             Vector3 aimDirection = (objectPosition - transform.position);
@@ -194,5 +197,19 @@ public class PlayerController : NetworkBehaviour {
     public void StopAimMode() {
         if (aimObject == null) return;
         aimObject.gameObject.SetActive(false);
+    }
+
+    public void BlockMovement() {
+        _inDash = true;
+        _canWalk = false;
+        _canRotate = false;
+        _canJump = false;
+    }
+
+    public void AllowMovement() {
+        _inDash = false;
+        _canWalk = true;
+        _canRotate = true;
+        _canJump = true;
     }
 }
