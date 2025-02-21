@@ -12,27 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0985728b22a32f94b9326ef92ef41098, type: 3}
   m_Name: CrimsonTide
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Crimson TIde
   UiSprite: {fileID: 0}
-  MinLevel: 0
-  MaxLevel: 0
-  Cooldown: 0
+  MinLevel: 1
+  MaxLevel: 4
+  Cooldown: 5
   IsStackable: 1
   Character: 0
   SkillsDescriptions: []
   UpgradesDescriptions: []
-  skillPrefabs: []
-  PunchDamage: 0
-  PunchAreaDuration: 0
-  PunchAreaOffSett: 0
-  DashDuration: 0
-  DashSpeed: 0
-  DashDamage: 0
-  ExplosionDamage: 0
-  ExplosionDuration: 0
-  ExplosionRadius: 0
-  PathDamagePerTick: 0
-  PathDuration: 0
-  PathDamageInterval: 0
-  PathSpawnInterval: 0
-  PathSize: {x: 0, y: 0, z: 0}
+  skillPrefabs:
+  - {fileID: 6846182603980596361, guid: a5576705016ee5a40a7322b2b0f7aa51, type: 3}
+  - {fileID: 4699854914714191910, guid: 37c4059757052bc4899a35fc129a2b55, type: 3}
+  - {fileID: 7330250002249305520, guid: 945641f4698269e4ab34b27bb811c501, type: 3}
+  - {fileID: 5886304405825794377, guid: 491fb94b68e579e4f9ffe93d81c00831, type: 3}
+  - {fileID: 7827558229107636768, guid: 1f2a9df7e5edf73408042e70ea45edc2, type: 3}
+  PunchDamage: 1
+  PunchAreaDuration: 0.1
+  PunchAreaOffSett: 1.8
+  DashDuration: 0.2
+  DashSpeed: 50
+  DashDamage: 1
+  ExplosionDamage: 1
+  ExplosionDuration: 0.1
+  ExplosionRadius: 10
+  PathDamagePerTick: 1
+  PathDuration: 3
+  PathDamageInterval: 0.1
+  PathSpawnInterval: 0.005
+  PathSize: {x: 2.5, y: 0.1, z: 0.35}
