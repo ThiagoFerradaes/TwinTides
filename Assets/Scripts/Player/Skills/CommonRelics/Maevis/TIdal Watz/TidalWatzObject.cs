@@ -29,7 +29,7 @@ public class TidalWatzObject : SkillObjectPrefab {
         transform.SetLocalPositionAndRotation(new Vector3(0, 0, 0), Quaternion.Euler(0,0,0));
 
         _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(true);
-        _maevis.GetComponent<PlayerSkillManager>().BlockSkills(true);
+        _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(true);
 
         gameObject.SetActive(true);
 
@@ -91,7 +91,7 @@ public class TidalWatzObject : SkillObjectPrefab {
     void End() {
         acumulativeDamage = 0;
         _maevis.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
-        _maevis.GetComponent<PlayerSkillManager>().BlockSkills(false);
+        _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
         _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
         ReturnObject();
     }

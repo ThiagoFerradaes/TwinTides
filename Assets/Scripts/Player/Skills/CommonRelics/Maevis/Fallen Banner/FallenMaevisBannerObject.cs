@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class FallenMaevisBannerObject : SkillObjectPrefab {
     FallenBanner _info;
@@ -75,27 +76,58 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
 
         yield return new WaitForSeconds(duration);
 
+        durationCoroutine = null;
+
         End();
     }
 
     void AddBuffs() {
+        if (!IsServer) return;
         if (_amountOfBuffs >= _info.BannerMaxStacks) {
-
             Debug.Log("MaxBuffs!");
         }
         else {
             _amountOfBuffs++;
             Debug.Log("BuffUP: " + _amountOfBuffs);
+            _maveis.GetComponent<DamageManager>().IncreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
         }
 
-        if (durationCoroutine != null) StopCoroutine(durationCoroutine);
+        if (durationCoroutine != null) {
+            StopCoroutine(durationCoroutine);
+            durationCoroutine = null;
+        }
         durationCoroutine = StartCoroutine(BannerDuration());
     }
 
     void End() {
+        EndBuffs();
         _amountOfBuffs = 0;
-        foreach (var player in activePlayers) Debug.Log("Buff Down");
         ReturnObject();
+    }
+
+    void EndBuffs() {
+        if (!IsServer) return;
+
+        List<GameObject> playersRemoved = new(activePlayers);
+        activePlayers.Clear();
+
+        if (_level == 4) {
+            _maveis.GetComponent<DamageManager>().DecreaseBaseAttackRpc(_amountOfBuffs * _info.BaseAttackIncreaseLevel2);
+            Debug.Log(_maveis.GetComponent<DamageManager>().ReturnBaseAttack());
+        }
+
+        else if (_level > 1) {
+            foreach (var player in playersRemoved) {
+                player.GetComponent<DamageManager>().DecreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
+            }
+            _maveis.GetComponent<DamageManager>().DecreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
+        }
+
+        else {
+            foreach (var player in playersRemoved) {
+                player.GetComponent<DamageManager>().DecreaseBaseAttackRpc(_info.BaseAttackIncrease);
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -104,12 +136,18 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
         if (!other.CompareTag("Maevis") && !other.CompareTag("Mel")) return;
 
         if (_level < 2) {
-            activePlayers.Add(other.gameObject);
-            Debug.Log("Buff Up in both");
+            if (!activePlayers.Contains(other.gameObject)) {
+                activePlayers.Add(other.gameObject);
+                Debug.Log("Buff Up in both");
+                other.GetComponent<DamageManager>().IncreaseBaseAttackRpc(_info.BaseAttackIncrease);
+            }
         }
         else if (_level < 3 && other.CompareTag("Mel")) {
-            activePlayers.Add(other.gameObject);
-            Debug.Log("Buff Up in Mel");
+            if (!activePlayers.Contains(other.gameObject)) {
+                activePlayers.Add(other.gameObject);
+                other.GetComponent<DamageManager>().IncreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
+                Debug.Log("Buff Up in Mel");
+            }
         }
         else {
             return;
@@ -122,12 +160,17 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
         if (!other.CompareTag("Maevis") && !other.CompareTag("Mel")) return;
 
         if (_level < 2) {
-            activePlayers.Remove(other.gameObject);
-            Debug.Log("Buff Down in both");
+            if (!activePlayers.Contains(other.gameObject)) {
+                activePlayers.Remove(other.gameObject);
+                Debug.Log("Buff Down in both");
+                other.GetComponent<DamageManager>().DecreaseBaseAttackRpc(_info.BaseAttackIncrease);
+            }
         }
         else if (_level < 3 && other.CompareTag("Mel")) {
-            activePlayers.Remove(other.gameObject);
-            Debug.Log("Buff Down in Mel");
+            if (!activePlayers.Contains(other.gameObject)) {
+                activePlayers.Remove(other.gameObject);
+                other.GetComponent<DamageManager>().DecreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
+            }
         }
         else {
             return;
@@ -139,5 +182,6 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
     public override void AddStackRpc() {
         OnStacked?.Invoke(this, EventArgs.Empty);
         AddBuffs();
+        _maveis.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
     }
 }

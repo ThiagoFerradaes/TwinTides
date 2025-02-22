@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474a1949af07c364f866bf2f05cccb02, type: 3}
   m_Name: FallenBanner
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Fallen Banner
   UiSprite: {fileID: 0}
-  MinLevel: 0
-  MaxLevel: 0
+  MinLevel: 1
+  MaxLevel: 4
   Cooldown: 6
   IsStackable: 0
   Character: 0
@@ -26,6 +26,8 @@ MonoBehaviour:
   - {fileID: 6695287440943807169, guid: 0e06ed49aab0a56479981783154d256f, type: 3}
   BannerDuration: 5
   MaxRange: 10
+  BaseAttackIncrease: 1.1
   BannerFollowPosition: {x: 0.5, y: 0.6, z: -1.15}
+  BaseAttackIncreaseLevel2: 1.2
   BannerDurationLevel4: 8
   BannerMaxStacks: 5

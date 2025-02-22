@@ -17,6 +17,10 @@ public class DamageManager : NetworkBehaviour {
         return (1 + baseAttack.Value) * skillDamage;
     }
 
+    /// <summary>
+    /// Multiplica o valor do ataque base. ELe normalmente é 1, e pode ir até 2
+    /// </summary>
+    /// <param name="damageIncreaseMultiplier"></param>
     [Rpc(SendTo.Server)]
     public void IncreaseBaseAttackRpc(float damageIncreaseMultiplier) {
         baseAttack.Value *= damageIncreaseMultiplier;
@@ -60,6 +64,10 @@ public class DamageManager : NetworkBehaviour {
         baseNormalAttackCooldown.Value *= damageIncreaseMultiplier;
     }
 
+    /// <summary>
+    /// Diminui o cooldown base dos ataques normais. A função divide o cooldown pelo DamageDecreaseMultiplier
+    /// </summary>
+    /// <param name="damageDecreaseMultiplier"></param>
     [Rpc(SendTo.Server)]
     public void DecreaseAttackCooldownRpc(float damageDecreaseMultiplier) {
         baseNormalAttackCooldown.Value /= damageDecreaseMultiplier;

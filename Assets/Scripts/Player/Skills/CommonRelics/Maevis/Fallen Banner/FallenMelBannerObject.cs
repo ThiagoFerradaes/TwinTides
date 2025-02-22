@@ -47,6 +47,8 @@ public class FallenMelBannerObject : SkillObjectPrefab {
         gameObject.SetActive(true);
 
         durationCoroutine = StartCoroutine(BannerDuration());
+
+        AddBuffs();
     }
 
     IEnumerator BannerDuration() {
@@ -60,19 +62,34 @@ public class FallenMelBannerObject : SkillObjectPrefab {
     }
 
     private void End() {
+        EndBuffs();
         _amountOfBuffs = 0;
         ReturnObject();
     }
-
-    void AddBuffs() {
-        if (_level < 4) return;
-        if (_amountOfBuffs >= _info.BannerMaxStacks) {
-
-            Debug.Log("MasBuffs!");
+    void EndBuffs() {
+        if (!IsServer) return;
+        if (_level == 4) {
+            _mel.GetComponent<DamageManager>().DecreaseBaseAttackRpc(_amountOfBuffs * _info.BaseAttackIncreaseLevel2);
+            Debug.Log(_mel.GetComponent<DamageManager>().ReturnBaseAttack());
         }
         else {
-            _amountOfBuffs++;
-            Debug.Log("BuffUP: " + _amountOfBuffs);
+            _mel.GetComponent<DamageManager>().DecreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
+            Debug.Log(_mel.GetComponent<DamageManager>().ReturnBaseAttack());
+        }
+    }
+    void AddBuffs() {
+        if (_level < 4) {
+            _mel.GetComponent<DamageManager>().IncreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
+        }
+        else {
+            if (_amountOfBuffs >= _info.BannerMaxStacks) {
+                Debug.Log("MaxBuffs!");
+            }
+            else {
+                _amountOfBuffs++;
+                _mel.GetComponent<DamageManager>().IncreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
+                Debug.Log("BuffUP: " + _amountOfBuffs);
+            }
         }
 
         if (durationCoroutine != null) StopCoroutine(durationCoroutine);

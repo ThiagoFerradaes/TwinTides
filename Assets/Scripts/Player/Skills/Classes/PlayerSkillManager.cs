@@ -158,7 +158,7 @@ public class PlayerSkillManager : NetworkBehaviour {
     /// </summary>
     /// <param name="block"></param>
     [Rpc(SendTo.Server)]
-    public void BlockSkills(bool block) {
+    public void BlockSkillsRpc(bool block) {
         if (block) _canUseSkill.Value = false;
         else _canUseSkill.Value = true;
     }

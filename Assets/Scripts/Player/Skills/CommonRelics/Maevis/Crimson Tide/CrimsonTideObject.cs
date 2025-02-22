@@ -29,7 +29,7 @@ public class CrimsonTideObject : SkillObjectPrefab {
         gameObject.SetActive(true);
 
         _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(true);
-        _maevis.GetComponent<PlayerSkillManager>().BlockSkills(true);
+        _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(true);
 
         if (_level < 2) {
             int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
@@ -79,7 +79,7 @@ public class CrimsonTideObject : SkillObjectPrefab {
 
     void End() {
         _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
-        _maevis.GetComponent<PlayerSkillManager>().BlockSkills(false);
+        _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
         _maevis.GetComponent<PlayerController>().AllowMovement();
         ReturnObject();
     }
