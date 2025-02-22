@@ -5,6 +5,7 @@ public class TidalWatzImpact : SkillObjectPrefab {
     TidalWatz _info;
     int _level;
     SkillContext _context;
+    GameObject _maevis;
 
     TidalWatzObject _father;
 
@@ -12,6 +13,9 @@ public class TidalWatzImpact : SkillObjectPrefab {
         _info = info as TidalWatz;
         _level = skillLevel;
         _context = context;
+        if (_maevis == null) {
+            _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
+        }
 
         SetSizeAndPosition();
     }
@@ -43,7 +47,9 @@ public class TidalWatzImpact : SkillObjectPrefab {
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        float totalDamage = _info.BaseDamageImpact + _father.acumulativeDamage;
+        float baseDamage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.BaseDamageImpact);
+
+        float totalDamage = baseDamage + _father.acumulativeDamage;
 
         health.ApplyDamageOnServerRPC(totalDamage, false, true);
     }

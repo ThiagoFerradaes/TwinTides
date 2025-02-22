@@ -6,12 +6,15 @@ public class TidalWatzCut : SkillObjectPrefab
 {
     TidalWatz _info;
     int _level;
-
+    GameObject _maevis;
     TidalWatzObject _father;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as TidalWatz;
         _level = skillLevel;
+        if (_maevis == null) {
+            _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
+        }
 
         SetSizeAndPosition();
     }
@@ -65,11 +68,13 @@ public class TidalWatzCut : SkillObjectPrefab
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager enemyHealth)) return;
 
+        float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.Damage);
+
         if (IsServer) enemyHealth.ApplyDamageOnServerRPC(_info.Damage, true, true);
         
         enemyHealth.AddDebuffToList(_info.BleedingDebuff);
 
-        _father.acumulativeDamage += _info.Damage * _info.PercentOfDamageToAcumulate / 100;
+        _father.acumulativeDamage += damage * _info.PercentOfDamageToAcumulate / 100;
     }
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
         return;

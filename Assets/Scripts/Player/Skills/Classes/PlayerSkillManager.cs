@@ -27,6 +27,8 @@ public class PlayerSkillManager : NetworkBehaviour {
     #endregion
 
     Dictionary<int, float> _dictionaryOfCooldowns;
+    NetworkVariable<bool> _canNormalAttack = new(true);
+    NetworkVariable<bool> _canUseSkill = new(true);
 
     private void Start() {
         _dictionaryOfCooldowns = new Dictionary<int, float> {
@@ -39,23 +41,23 @@ public class PlayerSkillManager : NetworkBehaviour {
 
     #region Inputs
     public void InputBaseAttack(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed && _dictionaryOfCooldowns[0] <= 0) {
+        if (context.phase == InputActionPhase.Performed && _dictionaryOfCooldowns[0] <= 0 && _canNormalAttack.Value) {
             UseSkill(0);
         }
     }
     public void InputCommonRelicSkillOne(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed && _dictionaryOfCooldowns[1] <= 0) {
+        if (context.phase == InputActionPhase.Performed && _dictionaryOfCooldowns[1] <= 0 && _canUseSkill.Value) {
             UseSkill(1);
         }
         
     }
     public void InputCommonRelicSkillTwo(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed && _dictionaryOfCooldowns[2] <= 0) {
+        if (context.phase == InputActionPhase.Performed && _dictionaryOfCooldowns[2] <= 0 && _canUseSkill.Value) {
             UseSkill(2);
         }    
     }
     public void InputLegendarySkill(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed && _dictionaryOfCooldowns[3] <= 0) {
+        if (context.phase == InputActionPhase.Performed && _dictionaryOfCooldowns[3] <= 0 && _canUseSkill.Value) {
             UseSkill(3);
         }  
     }
@@ -124,7 +126,6 @@ public class PlayerSkillManager : NetworkBehaviour {
     }
 
     public void ResetCooldown(int skillId) {
-        Debug.Log("ResetCooldown Called");
         _dictionaryOfCooldowns[skillId] = 0;
         switch (skillId) {
             case 0:
@@ -140,5 +141,25 @@ public class PlayerSkillManager : NetworkBehaviour {
                 OnLegendary?.Invoke(this, new SkillEventHandler(SkillType.LegendaryRelic, 0));
                 break;
         }
+    }
+
+    /// <summary>
+    /// Função para bloquear o ataque normal do personagem (se passar verdadeiro ele bloqueia, se passar falso ele desbloqueia)
+    /// </summary>
+    /// <param name="block"></param>
+    [Rpc(SendTo.Server)]
+    public void BlockNormalAttackRpc(bool block) {
+        if (block) _canNormalAttack.Value = false;
+        else _canNormalAttack.Value = true;
+    }
+
+    /// <summary>
+    /// Função para bloquear o uso de skills do personagem (se passar verdadeiro ele bloqueia, se passar falso ele desbloqueia)
+    /// </summary>
+    /// <param name="block"></param>
+    [Rpc(SendTo.Server)]
+    public void BlockSkills(bool block) {
+        if (block) _canUseSkill.Value = false;
+        else _canUseSkill.Value = true;
     }
 }

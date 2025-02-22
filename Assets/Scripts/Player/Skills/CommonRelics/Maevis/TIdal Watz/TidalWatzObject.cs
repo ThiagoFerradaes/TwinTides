@@ -26,7 +26,10 @@ public class TidalWatzObject : SkillObjectPrefab {
 
         transform.SetParent(_maevis.transform);
 
-        transform.SetLocalPositionAndRotation(new Vector3(0, 0, 0), Quaternion.Euler(0,0,0));   
+        transform.SetLocalPositionAndRotation(new Vector3(0, 0, 0), Quaternion.Euler(0,0,0));
+
+        _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(true);
+        _maevis.GetComponent<PlayerSkillManager>().BlockSkills(true);
 
         gameObject.SetActive(true);
 
@@ -43,10 +46,11 @@ public class TidalWatzObject : SkillObjectPrefab {
 
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
 
+
         for (int i = 0; i < amountOfCuts; i++) {
             PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 1);
 
-            float startAngle = transform.eulerAngles.y;
+            float startAngle = transform.localEulerAngles.y;
             float targetAngle = startAngle + 360;
 
             float elapsedTime = 0f;
@@ -61,12 +65,12 @@ public class TidalWatzObject : SkillObjectPrefab {
             while (elapsedTime < duration) {
                 elapsedTime += Time.deltaTime;
                 float t = elapsedTime / duration;
-                float yRotation = Mathf.Lerp(startAngle, targetAngle, t/duration) % 360;
+                float yRotation = Mathf.Lerp(startAngle, targetAngle, t);
                 transform.localRotation = Quaternion.Euler(0, yRotation, 0);
                 yield return null;
             }
 
-            transform.localRotation = Quaternion.Euler(0,0,0);
+            transform.localRotation = Quaternion.Euler(0,startAngle,0);
 
             if (_level < 3 && _level > 1) {
                 yield return new WaitForSeconds(_info.CutInterval);
@@ -87,6 +91,8 @@ public class TidalWatzObject : SkillObjectPrefab {
     void End() {
         acumulativeDamage = 0;
         _maevis.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
+        _maevis.GetComponent<PlayerSkillManager>().BlockSkills(false);
+        _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
         ReturnObject();
     }
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

@@ -54,7 +54,8 @@ public class CrimsonTideDashHitBox : SkillObjectPrefab
         }
 
         if (health.ReturnCurrentHealth() > health.ReturnMaxHealth() * _info.PercentToExecute / 100 || _level < 4) {
-            health.ApplyDamageOnServerRPC(_info.DashDamage, true, true);
+            float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.DashDamage);
+            health.ApplyDamageOnServerRPC(damage, true, true);
         }
         else {
             health.ApplyDamageOnServerRPC(9999, false, false);

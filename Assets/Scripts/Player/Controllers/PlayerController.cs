@@ -166,6 +166,7 @@ public class PlayerController : NetworkBehaviour {
     }
 
     void Moving() {
+        if (!_canWalk) return;
         Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
         transform.position += (_currentCharacterMoveSpeed * Time.deltaTime * moveDirection);
     }

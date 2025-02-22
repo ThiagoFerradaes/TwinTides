@@ -163,6 +163,8 @@ GameObject:
   - component: {fileID: 2402475289913472152}
   - component: {fileID: 5911823821045647350}
   - component: {fileID: 1916852207886483597}
+  - component: {fileID: 2513865034421056863}
+  - component: {fileID: 86682155894086494}
   m_Layer: 0
   m_Name: MavisPreFab
   m_TagString: Maevis
@@ -660,6 +662,8 @@ MonoBehaviour:
   maxHealth:
     m_InternalValue: 80
   maxShieldAmount: 100
+  deathBehaviour: {fileID: 0}
+  damageMaterial: {fileID: 0}
   currentShieldAmount:
     m_InternalValue: 0
   isShielded:
@@ -676,7 +680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab964788b12c3246a254fd41263ea4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relic: {fileID: 11400000, guid: 51804fe6b9c96a4458b3c2d84dd08c89, type: 2}
+  relic: {fileID: 11400000, guid: 82e4e18a4c1189b45830101ea00b5360, type: 2}
   attack: {fileID: 11400000, guid: 297f474b4b298df4a8359eeab6c49b15, type: 2}
 --- !u!54 &5911823821045647350
 Rigidbody:
@@ -728,6 +732,40 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2513865034421056863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7979977661230229930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e608c0f13ba42344290a335d911691a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  baseAttack:
+    m_InternalValue: 1
+  baseNormalAttackCooldown:
+    m_InternalValue: 1
+--- !u!114 &86682155894086494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7979977661230229930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d477c339f4f6e5b4c9e09a17059d6e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  baseMoveSpeed:
+    m_InternalValue: 0
+  adicionalMoveSpeed:
+    m_InternalValue: 0
 --- !u!1 &9085850524470032934
 GameObject:
   m_ObjectHideFlags: 0

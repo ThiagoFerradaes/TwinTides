@@ -13,6 +13,10 @@ public class DamageManager : NetworkBehaviour {
         return baseAttack.Value;
     }
 
+    public float ReturnTotalAttack(float skillDamage) {
+        return (1 + baseAttack.Value) * skillDamage;
+    }
+
     [Rpc(SendTo.Server)]
     public void IncreaseBaseAttackRpc(float damageIncreaseMultiplier) {
         baseAttack.Value *= damageIncreaseMultiplier;

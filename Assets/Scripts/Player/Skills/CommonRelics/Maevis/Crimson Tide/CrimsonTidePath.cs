@@ -86,7 +86,8 @@ public class CrimsonTidePath : SkillObjectPrefab
         if (!_canDamage) return;
 
         if (health.ReturnCurrentHealth() > health.ReturnMaxHealth() * _info.PercentToExecute / 100) {
-            health.ApplyDamageOnServerRPC(_info.DashDamage, true, true);
+            float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.PathDamagePerTick);
+            health.ApplyDamageOnServerRPC(damage, true, true);
         }
         else {
             health.ApplyDamageOnServerRPC(9999, false, false);

@@ -44,6 +44,9 @@ public class HealthManager : NetworkBehaviour {
     public event Action<Buff, int> OnBuffAdded, OnBuffRemoved;
     public event Action<Debuff, int> OnDebuffAdded, OnDebuffRemoved;
     public event EventHandler OnGeneralDamage;
+
+    // Corrotinas
+    Coroutine damageIndicatorCoroutine;
     #endregion
 
     #region Methods
@@ -93,8 +96,6 @@ public class HealthManager : NetworkBehaviour {
         if (!_canBeDamaged.Value || _isDamageInCooldown.Value) { Debug.Log("Can't take Damage" + gameObject.name); return; }
         if (_isDead.Value == true) return;
 
-        TookDamage();
-
         if (isShielded.Value && hitShield) {
 
             if(isAfectedByDamageMultiply) currentShieldAmount.Value -= (damageTaken * _damageMultiply.Value);
@@ -120,11 +121,12 @@ public class HealthManager : NetworkBehaviour {
         }
         else {
             OnGeneralDamage?.Invoke(this, EventArgs.Empty);
+            TookDamage();
         }
     }
 
     void TookDamage() {
-        //DamageIndicatorRpc();
+        DamageIndicatorRpc();
         StartCoroutine(DamageCooldown());
        
     }
@@ -135,7 +137,11 @@ public class HealthManager : NetworkBehaviour {
     }
     [Rpc(SendTo.ClientsAndHost)]
     void DamageIndicatorRpc() {
-        StartCoroutine(DamageIndicator());
+        if (damageIndicatorCoroutine != null) {
+            StopCoroutine(damageIndicatorCoroutine);
+            damageIndicatorCoroutine = null;
+        }
+        damageIndicatorCoroutine = StartCoroutine(DamageIndicator());
     }
     IEnumerator DamageIndicator() {
         MeshRenderer mesh = GetComponent<MeshRenderer>();
@@ -147,16 +153,13 @@ public class HealthManager : NetworkBehaviour {
             mesh.material = original;
             yield return new WaitForSeconds(0.01f);
         }
-        
+        damageIndicatorCoroutine = null;
     }
 
     [Rpc(SendTo.ClientsAndHost)]
     void DeathHandlerRpc() {
         OnDeath?.Invoke();
-        Debug.Log("OnDeathInvoked");
-        StopCoroutine(DamageIndicator());
-        deathBehaviour.Death(this.gameObject);
-        
+        deathBehaviour.Death(this.gameObject);   
     }
     public void ReviveHandler(float percentOfMaxHealth) {
         _currentHealth.Value = Mathf.Clamp((percentOfMaxHealth / 100 * maxHealth.Value), 0.2f * maxHealth.Value, maxHealth.Value);

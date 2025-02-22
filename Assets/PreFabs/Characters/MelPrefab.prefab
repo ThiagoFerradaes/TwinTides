@@ -163,6 +163,8 @@ GameObject:
   - component: {fileID: 3160352352417031265}
   - component: {fileID: 5911823821045647350}
   - component: {fileID: 1916852207886483597}
+  - component: {fileID: 5611954115521582333}
+  - component: {fileID: -771744815328285768}
   m_Layer: 0
   m_Name: MelPrefab
   m_TagString: Player
@@ -251,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 860857098
+  GlobalObjectIdHash: 2599662631
   InScenePlacedSourceGlobalObjectIdHash: 1302872352
   DeferredDespawnTick: 0
   Ownership: 1
@@ -368,6 +370,7 @@ MonoBehaviour:
   _rotationInput: {x: 0, y: 0}
   aimObject: {fileID: 0}
   isRotatingMouse: 0
+  isAiming: 0
   jumpForce: 12
   fallForce: 20
   maxJumps: 1
@@ -657,6 +660,8 @@ MonoBehaviour:
   maxHealth:
     m_InternalValue: 60
   maxShieldAmount: 100
+  deathBehaviour: {fileID: 0}
+  damageMaterial: {fileID: 0}
   currentShieldAmount:
     m_InternalValue: 0
   isShielded:
@@ -711,6 +716,40 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5611954115521582333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7979977661230229930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d477c339f4f6e5b4c9e09a17059d6e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  baseMoveSpeed:
+    m_InternalValue: 0
+  adicionalMoveSpeed:
+    m_InternalValue: 0
+--- !u!114 &-771744815328285768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7979977661230229930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e608c0f13ba42344290a335d911691a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  baseAttack:
+    m_InternalValue: 1
+  baseNormalAttackCooldown:
+    m_InternalValue: 1
 --- !u!1 &9085850524470032934
 GameObject:
   m_ObjectHideFlags: 0
