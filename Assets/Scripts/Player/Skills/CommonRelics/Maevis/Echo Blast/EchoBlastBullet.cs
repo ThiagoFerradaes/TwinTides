@@ -35,14 +35,6 @@ public class EchoBlastBullet : SkillObjectPrefab
         ReturnObject();
     }
     
-    void Explode() {
-        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
-
-        PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 1);
-
-        ReturnObject();
-    }
 
     private void OnTriggerEnter(Collider other) {
         if(!IsServer) return;
@@ -50,6 +42,18 @@ public class EchoBlastBullet : SkillObjectPrefab
         if (!other.CompareTag("Enemy")) return;
 
         Explode();
+    }
+    void Explode() {
+        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+        SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
+
+        PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 2);
+
+        ReturnObject();
+    }
+
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
     }
 
 }

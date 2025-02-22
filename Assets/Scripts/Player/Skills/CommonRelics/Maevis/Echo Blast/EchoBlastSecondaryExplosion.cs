@@ -7,10 +7,16 @@ public class EchoBlastSecondaryExplosion : SkillObjectPrefab {
     EchoBlast _info;
     int _level;
     SkillContext _context;
+    GameObject _maevis;
+
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as EchoBlast;
         _level = skillLevel;
         _context = context;
+
+        if (_maevis == null) {
+            _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
+        }
 
         DefineSizeAndPosition();
     }
@@ -34,15 +40,14 @@ public class EchoBlastSecondaryExplosion : SkillObjectPrefab {
 
     private void OnTriggerEnter(Collider other) {
 
-        if (!other.CompareTag("Enemey")) return;
+        if (!other.CompareTag("Enemy")) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
         if (IsServer) {
-            health.ApplyDamageOnServerRPC(_info.ExplosionDamage, true, true);
+            float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.ExplosionDamage);
+            health.ApplyDamageOnServerRPC(damage, true, true);
         }
-
-        health.AddDebuffToList(_info.BleedDebuff);
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

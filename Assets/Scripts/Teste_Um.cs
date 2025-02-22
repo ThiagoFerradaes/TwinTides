@@ -11,8 +11,10 @@ public class Teste_Um : MonoBehaviour {
     }
     private void Update() {
         if (Keyboard.current.nKey.wasPressedThisFrame) {
-            Debug.Log("1 dano");
             GetComponent<HealthManager>().ApplyDamageOnServerRPC(1, false, false);
+        }
+        if (Keyboard.current.pKey.wasPressedThisFrame) {
+            GetComponent<HealthManager>().ApplyDamageOnServerRPC(1, true, false);
         }
 
         if (!Keyboard.current.mKey.wasPressedThisFrame) return;

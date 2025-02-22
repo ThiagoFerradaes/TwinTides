@@ -6,9 +6,14 @@ public class HullbreakerExplosion : SkillObjectPrefab {
 
     Hullbreaker _info;
     SkillContext _context;
+    GameObject _maevis;
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as Hullbreaker;
         _context = context;
+
+        if (_maevis == null) {
+            _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
+        }
 
         DefinePosition();
     }
@@ -34,7 +39,9 @@ public class HullbreakerExplosion : SkillObjectPrefab {
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        health.ApplyDamageOnServerRPC(_info.ExplosionDamage, true, true);
+        float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.ExplosionDamage);
+
+        health.ApplyDamageOnServerRPC(damage, true, true);
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
