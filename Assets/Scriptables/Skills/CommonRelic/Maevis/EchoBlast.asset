@@ -16,7 +16,7 @@ MonoBehaviour:
   UiSprite: {fileID: 0}
   MinLevel: 1
   MaxLevel: 4
-  Cooldown: 10
+  Cooldown: 2
   IsStackable: 1
   Character: 0
   SkillsDescriptions: []
@@ -32,10 +32,12 @@ MonoBehaviour:
   ExplosionRadius: 4
   ExplosionDuration: 0.1
   ExplosionDamage: 1
-  ManagerDuration: 0
+  ManagerDuration: 1.8
   StunTime: 3
   ExplosionRadiusLevel2: 10
   ExplosionAmountLevel3: 2
-  TimeBetweenEachExplosion: 0.5
-  ExplodingDebuffDuration: 4
+  TimeBetweenEachExplosion: 0.3
+  ExplodingDebuffDuration: 6
   ExplodingDebuffExplosionCooldown: 0.5
+  ExplodingDebuffDelay: 1
+  ExplodingDebuffHeight: 1.2

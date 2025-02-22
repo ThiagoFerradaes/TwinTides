@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1136335845
+  GlobalObjectIdHash: 1302872352
   InScenePlacedSourceGlobalObjectIdHash: 1302872352
   DeferredDespawnTick: 0
   Ownership: 1
@@ -364,8 +364,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  characterMoveSpeed: 8
-  sprintSpeed: 16
   rotationSpeed: 8
   _rotationInput: {x: 0, y: 0}
   aimObject: {fileID: 0}
@@ -680,7 +678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab964788b12c3246a254fd41263ea4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relic: {fileID: 11400000, guid: 3ba05f67dc7d9b54abf770c8efa74e7b, type: 2}
+  relic: {fileID: 11400000, guid: f792eccfdf9313e4b972e836608d9e12, type: 2}
   attack: {fileID: 11400000, guid: 297f474b4b298df4a8359eeab6c49b15, type: 2}
 --- !u!54 &5911823821045647350
 Rigidbody:
@@ -747,7 +745,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   baseAttack:
     m_InternalValue: 1
-  baseNormalAttackCooldown:
+  attackSpeed:
     m_InternalValue: 1
 --- !u!114 &86682155894086494
 MonoBehaviour:
@@ -763,9 +761,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   baseMoveSpeed:
-    m_InternalValue: 0
-  adicionalMoveSpeed:
-    m_InternalValue: 0
+    m_InternalValue: 5
 --- !u!1 &9085850524470032934
 GameObject:
   m_ObjectHideFlags: 0

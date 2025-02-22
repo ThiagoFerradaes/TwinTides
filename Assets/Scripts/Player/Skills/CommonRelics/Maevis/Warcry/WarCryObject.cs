@@ -9,6 +9,8 @@ public class WarCryObject : SkillObjectPrefab
     int _level;
     SkillContext _context;
     GameObject _maevis;
+    DamageManager _dManager;
+    MovementManager _mManager;
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as Warcry;
         _level = skillLevel;
@@ -21,6 +23,9 @@ public class WarCryObject : SkillObjectPrefab
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
         }
+
+        _dManager = _maevis.GetComponent<DamageManager>();
+        _mManager = _maevis.GetComponent<MovementManager>();
 
         transform.SetParent(_maevis.transform);
 
@@ -51,32 +56,45 @@ public class WarCryObject : SkillObjectPrefab
     }
 
     void ApplyBuffs() {
+        if (!IsServer) return;
+
         if (_level > 3) {
             LocalWhiteBoard.Instance.PlayerAttackSkill = _info.EnhancedMaevisAttack;
-        }
-        if (_level > 2) {
-            Debug.Log("Buff de velocidade de movimento aplicado a Maevis");
-        }
-        if (_level > 1) {
-            Debug.Log("Buff de velocidade de ataque aumentada aplicado a Maevis");
+            _dManager.IncreaseAttackSpeedRpc(_info.PercentAttackSpeedLevel4);
         }
         else {
-            Debug.Log("Buff de velocidade de ataque aplicado a Maevis");
+            if (_level > 1) {
+                _dManager.IncreaseAttackSpeedRpc(_info.PercentAttackSpeedLevel2);
+            }
+            else {
+                _dManager.IncreaseAttackSpeedRpc(_info.PercentAttackSpeed);
+            }
+        }
+
+        if (_level > 2) {
+            _mManager.IncreaseMoveSpeedRpc(_info.PercentMoveSpeedGain);
         }
     }
     void RemoveBuffs() {
+        if (!IsServer) return;
+
         if (_level > 3) {
             LocalWhiteBoard.Instance.PlayerAttackSkill = _info.NormalMaevisAttack;
-        }
-        if (_level > 2) {
-            Debug.Log("Buff de velocidade de movimento removido a Maevis");
-        }
-        if (_level > 1) {
-            Debug.Log("Buff de velocidade de ataque removido aplicado a Maevis");
+            _dManager.DecreaseAttackSpeedRpc(_info.PercentAttackSpeedLevel4);
         }
         else {
-            Debug.Log("Buff de velocidade de ataque removido a Maevis");
+            if (_level > 1) {
+                _dManager.DecreaseAttackSpeedRpc(_info.PercentAttackSpeedLevel2);
+            }
+            else {
+                _dManager.DecreaseAttackSpeedRpc(_info.PercentAttackSpeed);
+            }
         }
+
+        if (_level > 2) {
+            _mManager.DecreaseMoveSpeedRpc(_info.PercentMoveSpeedGain);
+        }
+
     }
 
     private void End() {

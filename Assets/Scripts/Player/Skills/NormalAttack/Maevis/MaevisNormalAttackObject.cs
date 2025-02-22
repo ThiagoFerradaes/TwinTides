@@ -7,6 +7,7 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
     SkillContext _context;
     GameObject _maevis;
     GameObject _father;
+    DamageManager _dManager;
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as MaevisNormalAttack;
         _currentAttackCombo = skillLevel;
@@ -23,10 +24,14 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
             _father = GameObject.FindAnyObjectByType<MaevisNormalAttackManager>().gameObject;
         }
 
+        _dManager = _maevis.GetComponent<DamageManager>();
+
         transform.SetParent(_father.transform);
 
         transform.localPosition = _currentAttackCombo == 3 ? _info.ThirdAttackPosition : _info.AttackPosition;
         transform.localRotation = _currentAttackCombo == 3 ? Quaternion.Euler(_info.ThierdAttackRotation) : Quaternion.Euler(_info.AttackRotation);
+
+        transform.localScale = _currentAttackCombo == 3 ? _info.ThirdAttackSize : _info.FirstAndSecondAttackSize;
 
         gameObject.SetActive(true);
 
@@ -36,9 +41,9 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
     IEnumerator Duration() {
         float elapsedTime = 0;
         float duration = _currentAttackCombo switch {
-            1 => _info.DurationOfFirstAttack,
-            2 => _info.DurationOfSecondAttack,
-            _ => _info.DurationOfThirdAtack
+            1 => _dManager.ReturnDivisionAttackSpeed(_info.DurationOfFirstAttack),
+            2 => _dManager.ReturnDivisionAttackSpeed(_info.DurationOfSecondAttack),
+            _ => _dManager.ReturnDivisionAttackSpeed(_info.DurationOfThirdAtack)
         };
 
         while (elapsedTime < duration) {
@@ -61,9 +66,9 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
         float damage = _currentAttackCombo switch {
-            1 =>  _info.FirstAttackDamage,
-            2 => _info.SecondAttackDamage,
-            _ => _info.ThirdAttackDamage
+            1 =>  _dManager.ReturnTotalAttack(_info.FirstAttackDamage),
+            2 => _dManager.ReturnTotalAttack(_info.SecondAttackDamage),
+            _ => _dManager.ReturnTotalAttack(_info.ThirdAttackDamage)
         };
 
         health.ApplyDamageOnServerRPC(damage, true, true);

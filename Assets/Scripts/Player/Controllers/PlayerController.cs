@@ -11,10 +11,7 @@ using UnityEngine.UIElements;
 public class PlayerController : NetworkBehaviour {
 
     [Header("Movement")]
-    [SerializeField] float characterMoveSpeed;
-    [SerializeField] float sprintSpeed;
     [SerializeField] float rotationSpeed;
-    float _currentCharacterMoveSpeed;
     bool _canWalk = true;
     bool _canRotate = true;
     Vector2 _moveInput;
@@ -22,6 +19,7 @@ public class PlayerController : NetworkBehaviour {
     [HideInInspector] public Transform aimObject;
     [HideInInspector] public bool isRotatingMouse;
     [HideInInspector] public bool isAiming;
+    MovementManager _mManager;
 
     [Header("Jump")]
     [SerializeField] float jumpForce;
@@ -48,7 +46,7 @@ public class PlayerController : NetworkBehaviour {
 
     void Start() {
         _rb = GetComponent<Rigidbody>();
-        _currentCharacterMoveSpeed = characterMoveSpeed;
+        _mManager = GetComponent<MovementManager>();
         _currentJumpsAlowed = maxJumps;
     }
     public void InputMenuInGame(InputAction.CallbackContext context) {
@@ -91,14 +89,6 @@ public class PlayerController : NetworkBehaviour {
             _currentJumpsAlowed--;
             _rb.linearVelocity = new(_rb.linearVelocity.x, 0, _rb.linearVelocity.z);
             _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        }
-    }
-    public void InputSprint(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Started && Time.timeScale == 1) {
-            _currentCharacterMoveSpeed = sprintSpeed;
-        }
-        else if (context.phase == InputActionPhase.Canceled) {
-            _currentCharacterMoveSpeed = characterMoveSpeed;
         }
     }
     public void InputDash(InputAction.CallbackContext context) {
@@ -168,7 +158,7 @@ public class PlayerController : NetworkBehaviour {
     void Moving() {
         if (!_canWalk) return;
         Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
-        transform.position += (_currentCharacterMoveSpeed * Time.deltaTime * moveDirection);
+        transform.position += (_mManager.ReturnMoveSpeed() * Time.deltaTime * moveDirection);
     }
 
     public void Rotate() {

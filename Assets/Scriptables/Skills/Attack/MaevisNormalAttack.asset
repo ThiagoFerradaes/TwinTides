@@ -27,12 +27,14 @@ MonoBehaviour:
   DurationOfFirstAttack: 0.4
   DurationOfSecondAttack: 0.4
   DurationOfThirdAtack: 0.6
-  TimeBetweenEachAttack: 0.3
+  CooldownBetweenEachAttack: 0.2
   AttackPosition: {x: -1.8, y: 0, z: 0}
   ThirdAttackPosition: {x: 0, y: 2.5, z: 0}
   AttackRotation: {x: 0, y: 0, z: 0}
   ThierdAttackRotation: {x: 0, y: 90, z: 90}
+  FirstAndSecondAttackSize: {x: 2.4, y: 0.2, z: 0.5}
+  ThirdAttackSize: {x: 2.4, y: 0.2, z: 1}
   FirstAttackDamage: 1
   SecondAttackDamage: 1
   ThirdAttackDamage: 1
-  WindowBetweenEachAttack: 1
+  TimeLimitBetweenEachAttack: 0.5

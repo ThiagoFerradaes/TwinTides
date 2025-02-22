@@ -9,16 +9,16 @@ public class Warcry : CommonRelic {
     public float ExplosionDuration;
 
     [Header("Warcry Level 2")]
-    [Range(0, 100)] public float PercentAttackSpeedLevel2;
+    [Range(0, 200)] public float PercentAttackSpeedLevel2;
 
     [Header("Warcry Level 3")]
     public float StunDuration;
-    [Range(0, 100)] public float PercentMoveSpeedGain;
+    [Range(0, 200)] public float PercentMoveSpeedGain;
     public float ExplosionRadiusLevel3;
 
     [Header("Warcry Level 4")]
     public AttackSkill NormalMaevisAttack;
     public AttackSkill EnhancedMaevisAttack;
-    public float PercentAttackSpeedLevel4;
+    [Range(0,200)]public float PercentAttackSpeedLevel4;
     public float DurationLevel4;
 }

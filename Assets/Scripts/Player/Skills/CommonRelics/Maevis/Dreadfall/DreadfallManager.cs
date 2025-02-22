@@ -55,7 +55,7 @@ public class DreadfallManager : SkillObjectPrefab {
     }
 
     private void RecieveShield() {
-        if (_level < 2) return;
+        if (_level < 2 || !IsServer) return;
 
         if (!_maevis.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
@@ -67,11 +67,7 @@ public class DreadfallManager : SkillObjectPrefab {
         SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
         PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 1);
     }
-    public override void StartSkillCooldown(SkillContext context, Skill skill) {
-        return;
-    }
     void End() {
-        _maevis.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
         ReturnObject();
     }
 }

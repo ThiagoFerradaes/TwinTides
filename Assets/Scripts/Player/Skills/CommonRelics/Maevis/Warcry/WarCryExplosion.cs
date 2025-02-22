@@ -35,14 +35,21 @@ public class WarCryExplosion : SkillObjectPrefab {
         if (!IsServer) return;
 
         if (other.CompareTag("Mel") && _level > 1) {
-            Debug.Log("Buffs de velocidade de ataque aplicado a Mel");
+
+            if (_level > 3) {
+                other.GetComponent<DamageManager>().IncreaseBaseAttackWithTimeRpc(_info.PercentAttackSpeedLevel4, _info.DurationLevel4);
+            }
+            else {
+                other.GetComponent<DamageManager>().IncreaseBaseAttackWithTimeRpc(_info.PercentAttackSpeedLevel2, _info.Duration);
+            }
+
             if (_level > 2) {
-                Debug.Log("Buff de velocidade de movimento aplicado a Mel");
+                other.GetComponent<MovementManager>().IncreaseMoveSpeedWithTimeRpc(_info.PercentMoveSpeedGain, _info.Duration);
             }
         }
 
         if (other.CompareTag("Enemy") && _level > 2) {
-            Debug.Log("Inimigo Stunado");
+            other.GetComponent<MovementManager>().StunWithTimeRpc(_info.StunDuration);
         }
     }
 }

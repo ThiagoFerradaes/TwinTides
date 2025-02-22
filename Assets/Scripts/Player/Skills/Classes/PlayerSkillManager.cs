@@ -117,6 +117,27 @@ public class PlayerSkillManager : NetworkBehaviour {
         }
     }
 
+    public void StartCooldown(int skillIdUI, float cooldown) {
+        switch (skillIdUI) {
+            case 0:
+                StartCoroutine(SetCooldown(0, cooldown));
+                OnBaseAttack?.Invoke(this, new SkillEventHandler(SkillType.Attack, cooldown));
+                break;
+            case 1:
+                StartCoroutine(SetCooldown(1, cooldown));
+                OnCommonSkillOne?.Invoke(this, new SkillEventHandler(SkillType.CommonRelicOne, cooldown));
+                break;
+            case 2:
+                StartCoroutine(SetCooldown(2, cooldown));
+                OnCommonSkillTwo?.Invoke(this, new SkillEventHandler(SkillType.CommonRelicTwo, cooldown));
+                break;
+            case 3:
+                StartCoroutine(SetCooldown(3, cooldown));
+                OnLegendary?.Invoke(this, new SkillEventHandler(SkillType.LegendaryRelic, cooldown));
+                break;
+        }
+    }
+
     IEnumerator SetCooldown(int skillId,float cooldown) {
         _dictionaryOfCooldowns[skillId] = cooldown;
         while (_dictionaryOfCooldowns[skillId] >= 0) {

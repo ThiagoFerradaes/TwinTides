@@ -2,8 +2,7 @@ using System.Collections;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
-public class DreadfallExplosion : SkillObjectPrefab
-{
+public class DreadfallExplosion : SkillObjectPrefab {
     Dreadfall _info;
     int _level;
     SkillContext _context;
@@ -50,7 +49,9 @@ public class DreadfallExplosion : SkillObjectPrefab
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        float damage = _level < 3 ? _info.ExplosionDamage : _info.ExplosionDamageLevel3;
+        DamageManager dManager = _maevis.GetComponent<DamageManager>();
+
+        float damage = _level < 3 ? dManager.ReturnTotalAttack(_info.ExplosionDamage) : dManager.ReturnTotalAttack(_info.ExplosionDamageLevel3);
 
         health.ApplyDamageOnServerRPC(damage, true, true);
     }

@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
+using Unity.Multiplayer.Center.NetcodeForGameObjectsExample.DistributedAuthority;
 using Unity.Netcode;
 using UnityEngine;
 
 public class MaevisNormalAttackManager : SkillObjectPrefab {
     MaevisNormalAttack _info;
     SkillContext _context;
+    DamageManager _dManager;
 
     int _currentAttackCombo = 1;
     GameObject _maevis;
@@ -24,6 +26,8 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
         }
+
+        _dManager = _maevis.GetComponent<DamageManager>();
 
         transform.SetParent(_maevis.transform);
 
@@ -47,12 +51,15 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
 
         float elapsedTime = 0f;
         float duration = _currentAttackCombo switch {
-            1 => _info.DurationOfFirstAttack,
-            2 => _info.DurationOfSecondAttack,
-            _ => _info.DurationOfThirdAtack,
+            1 => _dManager.ReturnDivisionAttackSpeed(_info.DurationOfFirstAttack),
+            2 => _dManager.ReturnDivisionAttackSpeed(_info.DurationOfSecondAttack),
+            _ => _dManager.ReturnDivisionAttackSpeed(_info.DurationOfThirdAtack),
         };
 
-        _currentTime = duration + _info.TimeBetweenEachAttack + _info.WindowBetweenEachAttack;
+        _currentTime = duration + _dManager.ReturnDivisionAttackSpeed(_info.CooldownBetweenEachAttack) + _info.TimeLimitBetweenEachAttack;
+        Debug.Log(_currentTime);
+
+        _maevis.GetComponent<PlayerController>().BlockMovement();
 
         while (elapsedTime < duration) {
             elapsedTime += Time.deltaTime;
@@ -61,6 +68,8 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
             transform.localRotation = Quaternion.Euler(0, yRotation, 0);
             yield return null;
         }
+
+        _maevis.GetComponent<PlayerController>().AllowMovement();
 
         transform.localRotation = Quaternion.Euler(0, targetAngle, 0);
         _currentAttackCombo++;
@@ -77,9 +86,12 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
         float targetAngle = startAngle + 90;
 
         float elapsedTime = 0f;
-        float duration = _info.DurationOfThirdAtack;
+        float duration = _dManager.ReturnDivisionAttackSpeed(_info.DurationOfThirdAtack);
 
-        _currentTime = duration + _info.TimeBetweenEachAttack + _info.WindowBetweenEachAttack;
+        _currentTime = duration + _dManager.ReturnDivisionAttackSpeed(_info.CooldownBetweenEachAttack) + _info.TimeLimitBetweenEachAttack;
+
+        _maevis.GetComponent<PlayerController>().BlockMovement();
+        _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(true);
 
         while (elapsedTime < duration) {
             elapsedTime += Time.deltaTime;
@@ -89,6 +101,9 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
             yield return null;
         }
 
+        _maevis.GetComponent<PlayerController>().AllowMovement();
+        _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
+
         transform.localRotation = Quaternion.Euler(0, targetAngle, 0);
 
         yield return null;
@@ -97,7 +112,7 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
     }
 
     IEnumerator CooldownBetweenAttacks() {
-        yield return new WaitForSeconds(_info.TimeBetweenEachAttack);
+        yield return new WaitForSeconds(_dManager.ReturnDivisionAttackSpeed(_info.CooldownBetweenEachAttack));
         _canAttackAgain = true;
     }
 
@@ -112,8 +127,12 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
 
     void End() {
         _currentAttackCombo = 1;
+
         transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
-        _maevis.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
+
+        float cooldown = _dManager.ReturnDivisionAttackSpeed(_info.Cooldown);
+
+        _maevis.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, cooldown);
 
         ReturnObject();
     }

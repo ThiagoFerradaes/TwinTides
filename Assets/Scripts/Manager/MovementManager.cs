@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MovementManager : NetworkBehaviour {
 
-    [SerializeField] NetworkVariable<float> baseMoveSpeed = new();
-    [SerializeField] NetworkVariable<float> adicionalMoveSpeed = new();
+    [SerializeField] NetworkVariable<float> baseMoveSpeed = new(5);
+    NetworkVariable<float> adicionalMoveSpeed = new(1);
     private NetworkVariable<bool> _isStunned = new(false);
 
     /// <summary>
@@ -14,7 +14,7 @@ public class MovementManager : NetworkBehaviour {
     /// <returns></returns>
     public float ReturnMoveSpeed() {
         if (!_isStunned.Value) {
-            return adicionalMoveSpeed.Value + baseMoveSpeed.Value;
+            return Mathf.Clamp(baseMoveSpeed.Value * (1 + adicionalMoveSpeed.Value), baseMoveSpeed.Value, baseMoveSpeed.Value * 4) ;
         }
         else {
             return 0f;

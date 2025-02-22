@@ -5,8 +5,7 @@ using System.Collections;
 public class DamageManager : NetworkBehaviour {
 
     [SerializeField] private NetworkVariable<float> baseAttack = new(0);
-    [SerializeField] private NetworkVariable<float> baseNormalAttackCooldown = new(0);
-
+    [SerializeField] private NetworkVariable<float> attackSpeed = new(1);
 
     #region Métodos Relacionados ao Ataque Base
     public float ReturnBaseAttack() {
@@ -55,43 +54,60 @@ public class DamageManager : NetworkBehaviour {
     #endregion
 
     #region Métodos Relacionados ao Cooldown do Ataque/ Velocidade do Ataque
-    public float ReturnNormalAttackCooldown() {
-        return baseNormalAttackCooldown.Value;
+    /// <summary>
+    /// Retorna a divisão do número passado pela velocidade de ataque atual
+    /// </summary>
+    /// <returns></returns>
+    public float ReturnDivisionAttackSpeed(float numberToBeDivided) {
+        return numberToBeDivided / Mathf.Max(attackSpeed.Value, 0.1f);
     }
 
+    /// <summary>
+    /// Retorna a multiplicação do número passado pela velocidade de ataque atual
+    /// </summary>
+    /// <returns></returns>
+    public float ReturnMultipliedAttackSpeed(float numberToBeMultiplied) {
+        return numberToBeMultiplied * attackSpeed.Value;
+    }
+
+
+    /// <summary>
+    /// Aumenta a velocidade de ataque em X% 
+    /// </summary>
+    /// <param name="percentToIncrease"></param>
     [Rpc(SendTo.Server)]
-    public void IncreaseAttackCooldownRpc(float damageIncreaseMultiplier) {
-        baseNormalAttackCooldown.Value *= damageIncreaseMultiplier;
+    public void IncreaseAttackSpeedRpc(float percentToIncrease) {
+        attackSpeed.Value *=(1 + percentToIncrease/100);
     }
 
     /// <summary>
     /// Diminui o cooldown base dos ataques normais. A função divide o cooldown pelo DamageDecreaseMultiplier
     /// </summary>
-    /// <param name="damageDecreaseMultiplier"></param>
+    /// <param name="percentToDecrease"></param>
     [Rpc(SendTo.Server)]
-    public void DecreaseAttackCooldownRpc(float damageDecreaseMultiplier) {
-        baseNormalAttackCooldown.Value /= damageDecreaseMultiplier;
+    public void DecreaseAttackSpeedRpc(float percentToDecrease) {
+        attackSpeed.Value /= (1 + percentToDecrease/100);
     }
 
     [Rpc(SendTo.Server)]
-    public void IncreaseAttackCooldownRpc(float damageMultiplier, float duration) {
-        StartCoroutine(IncreaseAttackCoroutine(damageMultiplier, duration));
+    public void IncreaseAttackSpeedWithTimeRpc(float damageMultiplier, float duration) {
+        StartCoroutine(IncreaseAttackSpeedCoroutine(damageMultiplier, duration));
     }
 
     [Rpc(SendTo.Server)]
-    public void DecreaseAttackCooldownWithTimeRpc(float damageMultiplier, float duration) {
-        StartCoroutine(DecreaseAttackCoroutine(damageMultiplier, duration));
+    public void DecreaseAttackSpeedWithTimeRpc(float damageMultiplier, float duration) {
+        StartCoroutine(DecreaseAttackSpeedCoroutine(damageMultiplier, duration));
     }
 
-    IEnumerator IncreaseAttackCooldownCoroutine(float damageMultipiler, float duration) {
-        baseNormalAttackCooldown.Value *= damageMultipiler;
+    IEnumerator IncreaseAttackSpeedCoroutine(float damageMultipiler, float duration) {
+        attackSpeed.Value *= damageMultipiler;
         yield return new WaitForSeconds(duration);
-        baseNormalAttackCooldown.Value /= damageMultipiler;
+        attackSpeed.Value /= damageMultipiler;
     }
-    IEnumerator DecreaseAttackCooldownCoroutine(float damageMultipiler, float duration) {
-        baseNormalAttackCooldown.Value /= damageMultipiler;
+    IEnumerator DecreaseAttackSpeedCoroutine(float damageMultipiler, float duration) {
+        attackSpeed.Value /= damageMultipiler;
         yield return new WaitForSeconds(duration);
-        baseNormalAttackCooldown.Value *= damageMultipiler;
+        attackSpeed.Value *= damageMultipiler;
     }
 
     #endregion

@@ -26,6 +26,8 @@ public class DreadfallImpactArea : SkillObjectPrefab
 
     private void SetPosition() {
 
+        _context.PlayerPosition.y = GetGroundHeight(_context.PlayerPosition);
+
         transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
 
         gameObject.SetActive(true);
@@ -33,6 +35,14 @@ public class DreadfallImpactArea : SkillObjectPrefab
         StartCoroutine(Duration());
 
         StartCoroutine(DamageCooldown());
+    }
+
+    float GetGroundHeight(Vector3 position) {
+        Ray ray = new(position + Vector3.up * 5f, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f, LayerMask.GetMask("Floor"))) {
+            return hit.point.y + 0.1f;
+        }
+        return position.y;
     }
 
     IEnumerator Duration() {
@@ -57,9 +67,12 @@ public class DreadfallImpactArea : SkillObjectPrefab
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        if (IsServer) health.ApplyDamageOnServerRPC(_info.FieldDamagePerTick, true, true);
+        if (IsServer) {
+            float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.FieldDamagePerTick);
+            health.ApplyDamageOnServerRPC(damage, true, true);
+        }
 
-        health.AddDebuffToList(_info.BleedDebuff);
+            health.AddDebuffToList(_info.BleedDebuff);
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
