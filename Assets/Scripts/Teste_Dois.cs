@@ -8,10 +8,12 @@ public class Teste_Dois : NetworkBehaviour {
     Vector3 rightPosition, leftPosition, targetPosition;
     Vector3 patrolOffSet = new(10, 0, 0);
     bool isMovingRight;
+    MovementManager mManager;
 
     private void Start() {
         rightPosition = transform.position + patrolOffSet;
         leftPosition = transform.position - patrolOffSet;
+        mManager = GetComponent<MovementManager>();
 
         if (IsServer) StartCoroutine(MovementCoroutine());
     }
@@ -23,7 +25,7 @@ public class Teste_Dois : NetworkBehaviour {
             Vector3 direction = targetPosition - transform.position;
 
             while (Vector3.Distance(transform.position, targetPosition) >= 0.2f) {
-                transform.transform.Translate(3 * Time.deltaTime * direction.normalized);
+                transform.transform.Translate(mManager.ReturnMoveSpeed() * Time.deltaTime * direction.normalized);
                 yield return null;
             }
 

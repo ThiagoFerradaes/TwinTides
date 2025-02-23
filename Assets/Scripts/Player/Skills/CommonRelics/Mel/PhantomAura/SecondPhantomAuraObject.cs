@@ -1,24 +1,29 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SecondPhantomAuraObject : SkillObjectPrefab {
     PhantomAura _info;
     int _level;
     GameObject _maevis;
-    SkillContext _context;
 
-    bool _canDamage;
+    List<HealthManager> _listOfEnemies = new();
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as PhantomAura;
         _level = skillLevel;
 
-        SkillStart();
-    }
-
-    void SkillStart() {
+        if (_maevis == null) _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
 
         DefineSizeAndParent();
+    }
+
+    void DefineSizeAndParent() {
+        transform.localScale = _level < 4 ? _info.AuraSize : _info.AuraSizeLevel4;
+
+        transform.SetParent(_maevis.transform);
+
+        transform.SetLocalPositionAndRotation(Vector3.zero, _maevis.transform.rotation);
 
         gameObject.SetActive(true);
 
@@ -27,43 +32,24 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
         StartCoroutine(Duration());
     }
 
-    void DefineSizeAndParent() {
-        if (_level < 4) {
-            transform.localScale = _info.AuraSize;
-        }
-        else {
-            transform.localScale = _info.AuraSizeLevel4;
-        }
-
-        if (_maevis != null) {
-            transform.SetParent(_maevis.transform);
-        }
-        else {
-            _maevis = GameObject.FindGameObjectWithTag("Maevis");
-            transform.SetParent(_maevis.transform);
-        }
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
-    }
-
-
-    private void OnTriggerStay(Collider other) {
+    private void OnTriggerEnter(Collider other) {
         if (!IsServer) return;
 
-        if (!_canDamage || other.CompareTag("Enemy")) return;
+        if (other.CompareTag("Enemy")) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager enemyHealth)) return;
 
-        if (_level < 4) {
-            enemyHealth.ApplyDamageOnServerRPC(_info.Damage, true, true);
-            if (_level >= 2) {
-                HealPlayer(_info.Damage);
-            }
-        }
-        else {
-            enemyHealth.ApplyDamageOnServerRPC(_info.DamageLevel4, true, true);
+        if (!_listOfEnemies.Contains(enemyHealth)) _listOfEnemies.Add(enemyHealth);
+    }
 
-            HealPlayer(_info.DamageLevel4);
-        }
+    private void OnTriggerExit(Collider other) {
+        if (!IsServer) return;
+
+        if (other.CompareTag("Enemy")) return;
+
+        if (!other.TryGetComponent<HealthManager>(out HealthManager enemyHealth)) return;
+
+        if (_listOfEnemies.Contains(enemyHealth)) _listOfEnemies.Remove(enemyHealth);
     }
 
     private void HealPlayer(float damage) {
@@ -75,21 +61,30 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
     }
 
     IEnumerator DamageTimer() {
-        _canDamage = false;
-        yield return new WaitForSeconds(_info.DamageInterval);
-        _canDamage = true;
-        yield return null;
+        while (true) {
+            yield return new WaitForSeconds(_info.DamageInterval);
 
-        StartCoroutine(DamageTimer());
+            foreach (var enemyHealth in _listOfEnemies) {
+                float damage = _level < 4 ? _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.Damage) :
+                    _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.DamageLevel4);
+
+                enemyHealth.ApplyDamageOnServerRPC(damage, true, true);
+
+                HealPlayer(damage);
+            }
+        }
     }
 
     IEnumerator Duration() {
-        if (_level < 4) {
-            yield return new WaitForSeconds(_info.Duration);
-        }
-        else {
-            yield return new WaitForSeconds(_info.DurationLevel4);
-        }
+        float duration = _level < 4 ? _info.Duration : _info.DurationLevel4;
+
+        yield return new WaitForSeconds(duration);
+
+        End();
+    }
+
+    void End() {
+        _listOfEnemies.Clear();
         transform.SetParent(null);
         ReturnObject();
     }

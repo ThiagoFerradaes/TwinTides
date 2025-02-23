@@ -21,4 +21,5 @@ public class BlackHole : CommonRelic
     [Header("Black Hole Level 4")]
     public Vector3 SizeLevel4;
     public float StunDurationLevel4;
+    [Range(0,100)]public float HealReductionPercent;
 }

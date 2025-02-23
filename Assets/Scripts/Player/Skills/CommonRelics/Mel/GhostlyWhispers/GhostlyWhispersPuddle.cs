@@ -9,12 +9,12 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
     SkillContext _context;
 
     int _areaLevel = 0; // 0 = normal, 1 = super, 2 = mega
-    bool _canDealDamage = true;
 
     GameObject _mel;
 
     MeshRenderer _mesh;
     [HideInInspector] public List<GhostlyWhispersPuddle> ActiveSkills;
+    List<HealthManager> listOfEnemies = new();
     private void Awake() {
         _mesh = GetComponent<MeshRenderer>();
     }
@@ -30,7 +30,7 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
 
     private void DefineSizeAndPlace() {
         if (_mel == null) {
-            _mel = PlayerSkillPooling.Instance.MaevisGameObject;
+            _mel = PlayerSkillPooling.Instance.MelGameObject;
         }
 
         if (_level < 4) {
@@ -40,12 +40,14 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
             transform.localScale = _info.AreaLevel4;
         }
 
+        _context.PlayerPosition.y = GetFloorHeight(_context.PlayerPosition);
+
         Transform aim = _mel.GetComponent<PlayerController>().aimObject;
         Vector3 direction = _context.PlayerRotation * Vector3.forward;
         Vector3 position = _context.PlayerPosition + (direction * _info.MaxRange);
 
         if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_context.PlayerPosition, aim.position) <= _info.MaxRange) {
-            transform.SetPositionAndRotation(aim.position, _context.PlayerRotation);
+            transform.SetPositionAndRotation(new Vector3(aim.position.x, _context.PlayerPosition.y, aim.position.z), _context.PlayerRotation);
         }
         else {
             transform.SetPositionAndRotation(position, _context.PlayerRotation);
@@ -61,6 +63,12 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
         StartCoroutine(AreaDuration());
     }
 
+    float GetFloorHeight(Vector3 position) {
+        Ray ray = new(position + Vector3.up * 5f, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f, LayerMask.GetMask("Floor"))) return hit.point.y + 0.1f;
+        return position.y;
+    }
+
     IEnumerator AreaDuration() {
         StartCoroutine(CheckDamageTimer());
         if (_level < 3) {
@@ -73,23 +81,26 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
             yield return new WaitForSeconds(_info.AreaDurationLevel4);
         }
 
-        ActiveSkills.Clear();
-        _areaLevel = 0;
-        _mesh.material = _info.NormalAreaMaterial;
-        ReturnObject();
+        End();
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!other.TryGetComponent<GhostlyWhispersPuddle>(out GhostlyWhispersPuddle skill)) return;
+        if (other.TryGetComponent<GhostlyWhispersPuddle>(out GhostlyWhispersPuddle skill)) {
 
-        if (!ActiveSkills.Contains(this)) ActiveSkills.Add(this);
-        if (!ActiveSkills.Contains(skill)) ActiveSkills.Add(skill);
+            if (!ActiveSkills.Contains(this)) ActiveSkills.Add(this);
+            if (!ActiveSkills.Contains(skill)) ActiveSkills.Add(skill);
 
-        skill.ActiveSkills = ActiveSkills;
+            skill.ActiveSkills = ActiveSkills;
 
-        foreach (var g in ActiveSkills) g.RestartDuration();
+            foreach (var g in ActiveSkills) g.RestartDuration();
 
-        UpAreaLevel();
+            UpAreaLevel();
+        }
+
+        if (!IsServer) return;
+        if (!other.CompareTag("Enemy")) return;
+        if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
+        if (!listOfEnemies.Contains(health)) listOfEnemies.Add(health);
 
     }
 
@@ -116,33 +127,45 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
         StartCoroutine(AreaDuration());
     }
 
-    private void OnTriggerStay(Collider other) {
-        if (!other.CompareTag("Enemy") || !_canDealDamage) return;
+    IEnumerator CheckDamageTimer() {
+        while (true) {
 
-        if (other.TryGetComponent<HealthManager>(out HealthManager health)) {
-            if (_level < 2) {
-                health.ApplyDamageOnServerRPC(_info.Damage, true, true);
+            float damageInterval = _areaLevel switch {
+                0 => _info.DamageInterval,
+                1 => _info.DamageIntervalLevel3,
+                _ => _info.DamageIntervalLevel4
+            };
+
+            yield return new WaitForSeconds(damageInterval);
+
+            float damage = _level == 1 ? _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.Damage) :
+                _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.DamageLevel2);
+
+            foreach (var enemie in listOfEnemies) {
+                enemie.ApplyDamageOnServerRPC(damage, true, true);
             }
-            else {
-                health.ApplyDamageOnServerRPC(_info.DamageLevel2, true, true);
-            }
+
+            yield return null;
         }
     }
 
-    IEnumerator CheckDamageTimer() {
-        _canDealDamage = true;
-        if (_areaLevel == 0) {
-            yield return new WaitForSeconds(_info.DamageInterval);
-        }
-        else if (_areaLevel == 1) {
-            yield return new WaitForSeconds(_info.DamageIntervalLevel3);
-        }
-        else {
-            yield return new WaitForSeconds(_info.DamageIntervalLevel4);
-        }
-        _canDealDamage = true;
-        yield return null;
-        StartCoroutine(CheckDamageTimer());
+    private void OnTriggerExit(Collider other) {
+        if (!other.CompareTag("Enemy")) return;
+        if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
+
+        if (listOfEnemies.Contains(health)) listOfEnemies.Remove(health); 
+    }
+
+    void End() {
+        ActiveSkills.Clear();
+
+        _areaLevel = 0;
+
+        _mesh.material = _info.NormalAreaMaterial;
+
+        listOfEnemies.Clear();
+
+        ReturnObject();
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

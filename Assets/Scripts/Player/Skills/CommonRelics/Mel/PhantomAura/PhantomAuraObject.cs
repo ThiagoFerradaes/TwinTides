@@ -1,5 +1,5 @@
-using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PhantomAuraObject : SkillObjectPrefab {
@@ -10,41 +10,35 @@ public class PhantomAuraObject : SkillObjectPrefab {
 
     bool _canDamage;
 
+    List<HealthManager> _listOfEnemies = new();
+
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as PhantomAura;
         _level = skillLevel;
         _context = context;
-        SkillStart();
-    }
 
-    void SkillStart() {
+        if (_mel == null) {
+            _mel = PlayerSkillPooling.Instance.MelGameObject;
+        }
 
         DefineSizeAndParent();
+    }
+
+    void DefineSizeAndParent() {
+
+        transform.localScale = _level < 4 ? _info.AuraSize : _info.AuraSizeLevel4;
+
+        transform.SetParent(_mel.transform);
+
+        transform.SetLocalPositionAndRotation(Vector3.zero, _context.PlayerRotation);
 
         SecondAura();
 
         gameObject.SetActive(true);
 
-        StartCoroutine(DamageTimer());
+        if (IsServer) StartCoroutine(DamageTimer());
 
         StartCoroutine(Duration());
-    }
-
-    void DefineSizeAndParent() {
-        if (_level < 4) {
-            transform.localScale = _info.AuraSize;
-        }
-        else {
-            transform.localScale = _info.AuraSizeLevel4;
-        }
-        if (_mel != null) {
-            transform.SetParent(_mel.transform);
-        }
-        else {
-            _mel = GameObject.FindGameObjectWithTag("Mel");
-            transform.SetParent(_mel.transform);
-        }
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
     }
 
     void SecondAura() {
@@ -54,41 +48,47 @@ public class PhantomAuraObject : SkillObjectPrefab {
         }
     }
 
-    private void OnTriggerStay(Collider other) {
+    private void OnTriggerEnter(Collider other) {
         if (!IsServer) return;
 
-        if (!_canDamage || !other.CompareTag("Enemy")) return;
+        if (!other.CompareTag("Enemy")) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager enemyHealth)) return;
 
-        if (_level < 4) {
-            enemyHealth.ApplyDamageOnServerRPC(_info.Damage, true, true);
-            if (_level >= 2) {
-                HealPlayer(_info.Damage);
-            }
-        }
-        else {
-            enemyHealth.ApplyDamageOnServerRPC(_info.DamageLevel4, true, true);
+        if (!_listOfEnemies.Contains(enemyHealth)) _listOfEnemies.Add(enemyHealth);
+    }
 
-            HealPlayer(_info.DamageLevel4);
-        }
+    private void OnTriggerExit(Collider other) {
+        if (!IsServer) return;
+
+        if (!other.CompareTag("Enemy")) return;
+
+        if (!other.TryGetComponent<HealthManager>(out HealthManager enemyHealth)) return;
+
+        if (_listOfEnemies.Contains(enemyHealth)) _listOfEnemies.Remove(enemyHealth);
     }
 
     private void HealPlayer(float damage) {
         if (!_mel.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        float percentOfHealing = _info.HealingPercent / 100 * damage;
+        float percentOfHealing = (_info.HealingPercent / 100) * damage;
 
         health.HealServerRpc(percentOfHealing);
     }
 
     IEnumerator DamageTimer() {
-        _canDamage = false;
-        yield return new WaitForSeconds(_info.DamageInterval);
-        _canDamage = true;
-        yield return null;
+        while (true) {
+            yield return new WaitForSeconds(_info.DamageInterval);
 
-        StartCoroutine(DamageTimer());
+            foreach (var enemyHealth in _listOfEnemies) {
+                float damage = _level < 4 ? _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.Damage) :
+                            _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.DamageLevel4);
+
+                enemyHealth.ApplyDamageOnServerRPC(damage, true, true);
+
+                if (_level > 1) HealPlayer(damage);
+            }
+        }
     }
 
     IEnumerator Duration() {
@@ -98,15 +98,15 @@ public class PhantomAuraObject : SkillObjectPrefab {
         else {
             yield return new WaitForSeconds(_info.DurationLevel4);
         }
-        transform.SetParent(null);
-        Cooldown();
-        ReturnObject();
+        End();
     }
 
-    void Cooldown() {
-        _mel.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
-    }
-    public override void StartSkillCooldown(SkillContext context, Skill skill) {
-        return;
+
+    void End() {
+        _listOfEnemies.Clear();
+
+        transform.SetParent(null);
+
+        ReturnObject();
     }
 }

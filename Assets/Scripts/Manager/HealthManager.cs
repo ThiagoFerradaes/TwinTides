@@ -208,10 +208,18 @@ public class HealthManager : NetworkBehaviour {
             _timeToEndShieldCoroutine = StartCoroutine(RemoveShieldAfterDuration(durationOfShield));
         }
     }
+    [Rpc(SendTo.Server)]
+    public void BreakShieldRpc() {
+        currentShieldAmount.Value = 0;
+        isShielded.Value = false;
+    }
     IEnumerator RemoveShieldAfterDuration(float time) {
         yield return new WaitForSeconds(time);
         currentShieldAmount.Value = 0;
         isShielded.Value = false;
+    }
+    public bool ReturnShieldStatus() {
+        return isShielded.Value;
     }
     #endregion
 
@@ -345,6 +353,7 @@ public class HealthManager : NetworkBehaviour {
                 break;
             case HealthPermissions.CanBeShielded:
                 _canBeShielded.Value = state;
+                Debug.Log(gameObject.name + " Can be shielded: " + _canBeShielded.Value);
                 break;
             case HealthPermissions.CanTakeDamage: // fica invulneravel
                 if (_canBeInvulnerable.Value) _canBeDamaged.Value = state;
@@ -378,6 +387,7 @@ public class HealthManager : NetworkBehaviour {
         switch (multiplier) {
             case HealthMultipliers.Heal:
                 _healMultiply.Value *= Mathf.Clamp(newHealMultiply, 0, 2);
+                Debug.Log(gameObject.name + " Heal Multiply: " + _healMultiply.Value);
                 break;
             case HealthMultipliers.Shield:
                 _shieldMultiply.Value *= Mathf.Clamp(newHealMultiply, 0, 2);

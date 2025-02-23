@@ -1,16 +1,15 @@
-using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class DreadfallImpactArea : SkillObjectPrefab
-{
+public class DreadfallImpactArea : SkillObjectPrefab {
 
     Dreadfall _info;
     int _level;
     SkillContext _context;
     GameObject _maevis;
 
-    bool _canDamage = true;
+    List<HealthManager> _listOfEnemies = new();
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as Dreadfall;
@@ -48,31 +47,40 @@ public class DreadfallImpactArea : SkillObjectPrefab
     IEnumerator Duration() {
         yield return new WaitForSeconds(_info.FieldDuration);
 
-        ReturnObject();
+        End();
     }
 
     IEnumerator DamageCooldown() {
         while (true) {
-            yield return null;
-            _canDamage = false;
             yield return new WaitForSeconds(_info.DamageCooldown);
-            _canDamage = true;
+            float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.FieldDamagePerTick);
+
+            foreach (var health in _listOfEnemies) {
+                if (IsServer) health.ApplyDamageOnServerRPC(damage, true, true);
+
+                health.AddDebuffToList(_info.BleedDebuff);
+            }
         }
     }
-
-    private void OnTriggerStay(Collider other) {
-        if (!_canDamage) return;
-
+    private void OnTriggerEnter(Collider other) {
         if (!other.CompareTag("Enemy")) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        if (IsServer) {
-            float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.FieldDamagePerTick);
-            health.ApplyDamageOnServerRPC(damage, true, true);
-        }
+        if (!_listOfEnemies.Contains(health)) _listOfEnemies.Add(health);
+    }
 
-            health.AddDebuffToList(_info.BleedDebuff);
+    private void OnTriggerExit(Collider other) {
+        if (!other.CompareTag("Enemy")) return;
+
+        if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
+
+        if (_listOfEnemies.Contains(health)) _listOfEnemies.Remove(health);
+    }
+
+    void End() {
+        _listOfEnemies.Clear();
+        ReturnObject();
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

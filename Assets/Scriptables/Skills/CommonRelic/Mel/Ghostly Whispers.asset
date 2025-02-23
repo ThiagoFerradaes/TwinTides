@@ -24,11 +24,11 @@ MonoBehaviour:
   skillPrefabs:
   - {fileID: 1100393366828500542, guid: d477ed308cbb3ec4fb507264d691e8d5, type: 3}
   - {fileID: 137126704500169266, guid: 558de8981a35e884eb0654772caf8136, type: 3}
-  Area: {x: 5, y: 0.1, z: 5}
-  MaxRange: 10
+  Area: {x: 4, y: 0.1, z: 4}
+  MaxRange: 12
   AreaDuration: 4
   DamageInterval: 1
-  Damage: 5
+  Damage: 1
   AmountOfStacks: 1
   NormalAreaMaterial: {fileID: 2100000, guid: 4d60f0ac7f39d9c46a15e883997a9cce, type: 2}
   DamageLevel2: 10
@@ -37,7 +37,7 @@ MonoBehaviour:
   AreaDurationLevel3: 5
   DamageIntervalLevel3: 0.5
   SuperAreaMaterial: {fileID: 2100000, guid: 1c417fa53e7ec6c40a98957d2c6aacd9, type: 2}
-  AreaLevel4: {x: 7, y: 0.1, z: 7}
+  AreaLevel4: {x: 6, y: 0.1, z: 6}
   AreaDurationLevel4: 6
   DamageIntervalLevel4: 0.2
   AmountOfStacksLevel4: 4

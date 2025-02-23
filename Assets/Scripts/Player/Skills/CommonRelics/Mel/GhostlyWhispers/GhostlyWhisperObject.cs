@@ -15,7 +15,7 @@ public class GhostlyWhisperObject : SkillObjectPrefab {
         _context = context;
 
         if (_mel == null) {
-            _mel = PlayerSkillPooling.Instance.MaevisGameObject;
+            _mel = PlayerSkillPooling.Instance.MelGameObject;
         }
 
         DefinePosition();

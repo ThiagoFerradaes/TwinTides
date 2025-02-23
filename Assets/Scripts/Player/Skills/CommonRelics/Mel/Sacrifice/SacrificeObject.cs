@@ -17,11 +17,9 @@ public class SacrificeObject : SkillObjectPrefab {
         _level = skillLevel;
         _context = context;
 
+        if (_mel == null) _mel = PlayerSkillPooling.Instance.MelGameObject;
+
         DefinePosition();
-    }
-    void FindMel() {
-        if (_mel != null) return;
-        _mel = GameObject.FindGameObjectWithTag("Mel");
     }
     void DefinePosition() {
         transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
@@ -29,8 +27,6 @@ public class SacrificeObject : SkillObjectPrefab {
         gameObject.SetActive(true);
 
         _healedMaevis = false;
-
-        FindMel();
 
         StartCoroutine(Move());
 
@@ -55,14 +51,12 @@ public class SacrificeObject : SkillObjectPrefab {
 
         ApllyBuffToMel();
 
-        Cooldown();
-
         ReturnObject();
     }
 
     void DrainHealth() {
-        if (!_mel.TryGetComponent<HealthManager>(out HealthManager health)) return;
         if (!IsServer) return;
+        if (!_mel.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
         float healthLost = health.ReturnMaxHealth() * _info.HealthLostPercent / 100;
 
@@ -70,8 +64,8 @@ public class SacrificeObject : SkillObjectPrefab {
 
     }
     void RecoverHealth() {
-        if (!_mel.TryGetComponent<HealthManager>(out HealthManager health)) return;
         if (!IsServer) return;
+        if (!_mel.TryGetComponent<HealthManager>(out HealthManager health)) return;
         var healthGain = _level switch {
             1 => health.ReturnMaxHealth() * _info.HealthGainPercent / 100,
             2 => health.ReturnMaxHealth() * _info.HealthGainPercentLevel2 / 100,
@@ -116,12 +110,5 @@ public class SacrificeObject : SkillObjectPrefab {
         if (_level >= 3) {
             maevisHealthM.AddBuffToList(_info.HealingOverTimeBuff);
         }
-    }
-
-    void Cooldown() {
-        _mel.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
-    }
-    public override void StartSkillCooldown(SkillContext context, Skill skill) {
-        return;
     }
 }

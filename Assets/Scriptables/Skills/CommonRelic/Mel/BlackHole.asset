@@ -24,13 +24,14 @@ MonoBehaviour:
   skillPrefabs:
   - {fileID: 3221236505909682620, guid: b8ac69ff26c7995438de07eff57b92a4, type: 3}
   Size: {x: 8, y: 0.1, z: 8}
-  Duration: 5
+  Duration: 6
   Damage: 0.2
-  SlowPercent: 25
+  SlowPercent: 40
   MaxRange: 12
-  DamageInterval: 0.1
-  StunInterval: 2.5
+  DamageInterval: 1
+  StunInterval: 3
   StunDuration: 1
-  DurationLevel3: 8
+  DurationLevel3: 9
   SizeLevel4: {x: 16, y: 0.1, z: 16}
   StunDurationLevel4: 2
+  HealReductionPercent: 50

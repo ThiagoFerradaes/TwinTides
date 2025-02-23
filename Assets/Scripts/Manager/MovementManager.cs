@@ -30,21 +30,23 @@ public class MovementManager : NetworkBehaviour {
     }
 
     /// <summary>
-    /// Multiplica a velocidade adicional por um valor
+    /// Multiplica a velocidade adicional por uma porcentam - o valor passado tem que estar entre 0 e 100
     /// </summary>
-    /// <param name="speedMultiplier"></param>
+    /// <param name="speedPercent"></param>
     [Rpc(SendTo.Server)]
-    public void IncreaseMoveSpeedRpc(float speedMultiplier) {
-        adicionalMoveSpeed.Value *= speedMultiplier;
+    public void IncreaseMoveSpeedRpc(float speedPercent) {
+        speedPercent = Mathf.Clamp(speedPercent, 0, 100);
+        adicionalMoveSpeed.Value *= (1 + speedPercent/100);
     }
 
     /// <summary>
-    /// Divide a velocidade adicional por um valor
+    /// Divide a velocidade adicional por uma porcentam - o valor passado tem que estar entre 0 e 100
     /// </summary>
-    /// <param name="speedMultiplier"></param>
+    /// <param name="speedPercent"></param>
     [Rpc(SendTo.Server)]
-    public void DecreaseMoveSpeedRpc(float speedMultiplier) {
-        adicionalMoveSpeed.Value /= speedMultiplier;
+    public void DecreaseMoveSpeedRpc(float speedPercent) {
+        speedPercent = Mathf.Clamp(speedPercent, 0, 100);
+        adicionalMoveSpeed.Value /= (1 + speedPercent/100);
     }
 
     /// <summary>

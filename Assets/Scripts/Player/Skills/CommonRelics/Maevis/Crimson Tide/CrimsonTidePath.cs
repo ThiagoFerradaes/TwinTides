@@ -14,6 +14,7 @@ public class CrimsonTidePath : SkillObjectPrefab
     bool _canDamage;
 
     private List<HealthManager> events = new();
+    List<HealthManager> _listOfEnemies = new();
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as CrimsonTide;
@@ -56,11 +57,17 @@ public class CrimsonTidePath : SkillObjectPrefab
 
     IEnumerator DamageCooldown() {
         while (true) {
-            _canDamage = false;
-
             yield return new WaitForSeconds(_info.PathDamageInterval);
 
-            _canDamage = true;
+            foreach(var health in _listOfEnemies) {
+                if (health.ReturnCurrentHealth() > health.ReturnMaxHealth() * _info.PercentToExecute / 100) {
+                    float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.PathDamagePerTick);
+                    health.ApplyDamageOnServerRPC(damage, true, true);
+                }
+                else {
+                    health.ApplyDamageOnServerRPC(9999, false, false);
+                }
+            }
 
             yield return null;
         }
@@ -69,30 +76,35 @@ public class CrimsonTidePath : SkillObjectPrefab
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
         return;
     }
-
-    private void OnTriggerStay(Collider other) {
+    private void OnTriggerEnter(Collider other) {
         if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
+        if (!_listOfEnemies.Contains(health)) _listOfEnemies.Add(health);
+
         if (!events.Contains(health)) {
             health.OnDeath += Health_OnDeath;
 
             events.Add(health);
         }
+    }
+    private void OnTriggerExit(Collider other) {
+        if (!IsServer) return;
 
-        if (!_canDamage) return;
+        if (!other.CompareTag("Enemy")) return;
 
-        if (health.ReturnCurrentHealth() > health.ReturnMaxHealth() * _info.PercentToExecute / 100) {
-            float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.PathDamagePerTick);
-            health.ApplyDamageOnServerRPC(damage, true, true);
+        if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
+
+        if (_listOfEnemies.Contains(health)) _listOfEnemies.Remove(health);
+
+        if (events.Contains(health)) {
+            health.OnDeath -= Health_OnDeath;
+
+            events.Remove(health);
         }
-        else {
-            health.ApplyDamageOnServerRPC(9999, false, false);
-        }
-
     }
 
     private void Health_OnDeath() {
@@ -103,7 +115,10 @@ public class CrimsonTidePath : SkillObjectPrefab
         foreach(var enemy in events) {
             enemy.OnDeath -= Health_OnDeath;
         }
+
         events.Clear();
+
+        _listOfEnemies.Clear();
 
         ReturnObject();
     }
