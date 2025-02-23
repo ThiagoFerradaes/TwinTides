@@ -32,6 +32,7 @@ public class PlayerSkillPooling : NetworkBehaviour {
     [Rpc(SendTo.Server, RequireOwnership = false)]
     public void InstantiateAndSpawnRpc(int skillId, SkillContext context, int skillsLevel, int objectIndex) {
         if (!IsServer) return;
+        Debug.Log("InstantiateAndSpawnRpc");
         Skill skill = PlayerSkillConverter.Instance.TransformIdInSkill(skillId);
         GameObject spawnedObject;
 

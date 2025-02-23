@@ -7,6 +7,8 @@ public abstract class SkillObjectPrefab : NetworkBehaviour {
     [Rpc(SendTo.ClientsAndHost)]
     public void TurnOnSkillRpc(int skillId, int skillLevel, SkillContext context) {
 
+        Debug.Log("TurnOnSKillRpc");
+
         Skill skill = PlayerSkillConverter.Instance.TransformIdInSkill(skillId);
 
         ActivateSkill(skill, skillLevel, context);

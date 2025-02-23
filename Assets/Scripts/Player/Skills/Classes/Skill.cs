@@ -17,6 +17,8 @@ public abstract class Skill : ScriptableObject
 
     public void UseSkill(SkillContext context, int skillLevel) {
 
+        Debug.Log("Skill used");
+
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(this);
 
         PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, context, skillLevel, 0);
