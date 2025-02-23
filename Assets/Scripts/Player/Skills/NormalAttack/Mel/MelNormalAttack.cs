@@ -6,6 +6,6 @@ public class MelNormalAttack : AttackSkill
     [Header("Atributes")]
     public Vector3 SphereSize;
     public float SphereSpeed;
-    public float SphereDuration;
+    public float SphereDistance;
     public float SphereDamage;
 }

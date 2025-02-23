@@ -8,6 +8,8 @@ public class SpectralSeedsObject : SkillObjectPrefab {
     int _level;
     SkillContext _contex;
     SpectralSeedsRing _father;
+    GameObject _mel;
+    bool _active;
 
     public static event EventHandler OnSphereMoved;
 
@@ -17,13 +19,13 @@ public class SpectralSeedsObject : SkillObjectPrefab {
         _level = skillLevel;
         _contex = context;
 
+        if (_mel == null) _mel = PlayerSkillPooling.Instance.MelGameObject;
+        if (_father == null) _father = GameObject.FindAnyObjectByType<SpectralSeedsRing>();
+
         TurnSeedOn();
     }
 
     void TurnSeedOn() {
-        if (_father == null) {
-            _father = GameObject.FindAnyObjectByType<SpectralSeedsRing>();
-        }
 
         transform.localScale = _info.SeedSize;
 
@@ -36,6 +38,13 @@ public class SpectralSeedsObject : SkillObjectPrefab {
         gameObject.SetActive(true);
 
         MelNormalAttackObject.OnNormalAttack += MelNormalAttackObject_OnNormalAttack;
+        MelNormalAttackObject.OnNormalAttackHit += MelNormalAttackObject_OnNormalAttackHit;
+    }
+
+    private void MelNormalAttackObject_OnNormalAttackHit(object sender, EventArgs e) {
+        if (!_active) return;
+        StopAllCoroutines();
+        StartCoroutine(ExplodeCoroutine());        
     }
 
     private void MelNormalAttackObject_OnNormalAttack(object sender, MelNormalAttackObject.NormalAtackEventArgs e) {
@@ -43,6 +52,7 @@ public class SpectralSeedsObject : SkillObjectPrefab {
         if (_father.listOfSeeds.IndexOf(this) == 0) {
             StartCoroutine(Move(e.FinalPosition));
             StartCoroutine(WaitForUpdateNextSpeed());
+            _active = true;
         }
     }
 
@@ -80,41 +90,47 @@ public class SpectralSeedsObject : SkillObjectPrefab {
         transform.SetParent(null);
 
         Vector3 direction = (finalPosition - transform.position).normalized;
+
+        float speed = _mel.GetComponent<DamageManager>().ReturnMultipliedAttackSpeed(_info.SeedSpeed);
+
         while (Vector3.Distance(transform.position, finalPosition) >= 0.2f) {
-            transform.position += (_info.SeedSpeed * Time.deltaTime * direction);
+            transform.position += (speed * Time.deltaTime * direction);
             yield return null;
         }
 
+        StartCoroutine(ExplodeCoroutine());
+    }
+
+    IEnumerator ExplodeCoroutine() {
         Explode();
+
+        if (_level == 4) {
+            yield return new WaitForSeconds(_info.ExplosionsInterval);
+
+            Explode();
+        }
+
+        End();
     }
 
     private void Explode() {
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         SkillContext newContext = new(transform.position, transform.rotation, _contex.SkillIdInUI);
 
-        PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 2);
+        PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 2);     
+    }
 
-        if (_level == 4) {
-            Invoke(nameof(ExplodeAgain), _info.ExplosionsInterval);
-        }
+    public void End() {
+
+        MelNormalAttackObject.OnNormalAttack -= MelNormalAttackObject_OnNormalAttack;
+
+        MelNormalAttackObject.OnNormalAttackHit -= MelNormalAttackObject_OnNormalAttackHit;
+
+        _active = false;
 
         ReturnObject();
     }
 
-    private void ExplodeAgain() {
-        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        SkillContext newContext = new(transform.position, transform.rotation, _contex.SkillIdInUI);
-
-        PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 2);
-    }
-
-    private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
-
-        if (!other.CompareTag("Enemy")) return;
-
-        Explode();
-    }
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
         return;
     }

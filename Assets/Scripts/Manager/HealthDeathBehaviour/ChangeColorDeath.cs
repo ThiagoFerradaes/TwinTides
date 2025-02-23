@@ -7,7 +7,6 @@ public class ChangeColorDeath : DeathBehaviour {
 
     [SerializeField] float timeToRevive;
     [SerializeField] Material deadMaterial;
-    [SerializeField] Material aliveMaterial;
     public override void Death(GameObject deadObject) {
         deadObject.GetComponent<MeshRenderer>().material = deadMaterial;
 
@@ -17,7 +16,6 @@ public class ChangeColorDeath : DeathBehaviour {
     IEnumerator WaitToRevive(GameObject deadObject) {
         yield return new WaitForSeconds(timeToRevive);
 
-        deadObject.GetComponent<MeshRenderer>().material = aliveMaterial;
         deadObject.GetComponent<HealthManager>().ReviveHandler(100);
     }
 }

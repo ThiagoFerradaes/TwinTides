@@ -14,20 +14,13 @@ public class SpectralSeedsExplosion : SkillObjectPrefab {
         _level = skillLevel;
         _context = context;
 
+        if (_mel == null) _mel = PlayerSkillPooling.Instance.MelGameObject;
+
         DefineSizeAndPosition();
     }
 
     private void DefineSizeAndPosition() {
-        if (_mel == null) {
-            _mel = GameObject.FindGameObjectWithTag("Mel");
-        }
-
-        if (_level == 1) {
-            transform.localScale = Vector3.one * _info.ExplosionRadius;
-        }
-        else {
-            transform.localScale = Vector3.one * _info.ExplosionRadiusLevel2;
-        }
+        transform.localScale = _level == 1 ? Vector3.one * _info.ExplosionRadius : Vector3.one * _info.ExplosionRadiusLevel2;
 
         transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
 
@@ -48,9 +41,11 @@ public class SpectralSeedsExplosion : SkillObjectPrefab {
 
         float healing = 0;
 
-        if (other.CompareTag("Enemy")) {
-            health.ApplyDamageOnServerRPC(_info.Damage, true, true);
-            healing = _info.PercentOfDamageToHeal / 100 * _info.Damage;
+        if (other.CompareTag("Enemy") && !health.ReturnDeathState()) {
+            Debug.Log(health.ReturnDeathState());
+            float damage = _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.Damage);
+            health.ApplyDamageOnServerRPC(damage, true, true);
+            healing = damage * _info.PercentOfDamageToHeal / 100;
         }
 
         if (_level < 3) return;

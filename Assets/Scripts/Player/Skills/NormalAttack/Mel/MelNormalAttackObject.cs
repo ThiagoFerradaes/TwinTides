@@ -8,6 +8,7 @@ public class MelNormalAttackObject : SkillObjectPrefab {
     SkillContext _context;
 
     public static event EventHandler<NormalAtackEventArgs> OnNormalAttack;
+    public static event EventHandler OnNormalAttackHit;
     GameObject _mel;
     DamageManager _dManager;
 
@@ -52,12 +53,14 @@ public class MelNormalAttackObject : SkillObjectPrefab {
 
         float speed = _dManager.ReturnMultipliedAttackSpeed(_info.SphereSpeed);
 
+        float duration = _info.SphereDistance / speed;
+
         Vector3 direction = transform.forward;
-        Vector3 finalPosition = transform.position + _info.SphereDuration * speed * direction;
+        Vector3 finalPosition = transform.position + duration * speed * direction;
         OnNormalAttack?.Invoke(this, new NormalAtackEventArgs(finalPosition));
         float startTime = Time.time;
 
-        while(Time.time - startTime < _info.SphereDuration) {
+        while(Time.time - startTime < duration) {
             transform.Translate(speed * Time.deltaTime * Vector3.forward);
             yield return null;
         }
@@ -73,6 +76,10 @@ public class MelNormalAttackObject : SkillObjectPrefab {
         if (!other.TryGetComponent<HealthManager>(out HealthManager enemyHelath)) return;
 
         enemyHelath.ApplyDamageOnServerRPC(_info.SphereDamage, true, true);
+
+        OnNormalAttackHit?.Invoke(this, EventArgs.Empty);
+
+        End();
     }
 
     void End() {

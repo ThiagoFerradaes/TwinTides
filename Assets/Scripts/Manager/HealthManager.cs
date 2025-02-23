@@ -12,6 +12,7 @@ public class HealthManager : NetworkBehaviour {
     [SerializeField] private float maxShieldAmount;
     [SerializeField] DeathBehaviour deathBehaviour;
     [SerializeField] Material damageMaterial;
+    Material originalMaterial;
 
     // Variaveis do tipo float
     readonly NetworkVariable<float> _currentHealth = new();
@@ -29,7 +30,6 @@ public class HealthManager : NetworkBehaviour {
     readonly NetworkVariable<bool> _canReceiveDebuff = new(true);
     readonly NetworkVariable<bool> _canReceiveBuff = new(true);
     readonly NetworkVariable<bool> _isDead = new(false);
-    readonly NetworkVariable<bool> _isDamageInCooldown = new(false);
 
     // Dicionarios de Debuffs e buffs
     readonly Dictionary<Type, ActiveDebuff> _listOfActiveDebuffs = new();
@@ -54,6 +54,8 @@ public class HealthManager : NetworkBehaviour {
     #region Unity Lifecycle
     void Start() {
         Inicialize();
+
+        originalMaterial = GetComponent<MeshRenderer>().material;
     }
     void Inicialize() {
         SetMaxHealthServerRpc();
@@ -93,7 +95,7 @@ public class HealthManager : NetworkBehaviour {
 
     [ServerRpc(RequireOwnership = false)]
     public void ApplyDamageOnServerRPC(float damageTaken, bool hitShield, bool isAfectedByDamageMultiply) {
-        if (!_canBeDamaged.Value || _isDamageInCooldown.Value) { Debug.Log("Can't take Damage" + gameObject.name); return; }
+        if (!_canBeDamaged.Value) { Debug.Log("Can't take Damage" + gameObject.name); return; }
         if (_isDead.Value == true) return;
 
         if (isShielded.Value && hitShield) {
@@ -126,46 +128,49 @@ public class HealthManager : NetworkBehaviour {
     }
 
     void TookDamage() {
-        DamageIndicatorRpc();
-        StartCoroutine(DamageCooldown());
-       
-    }
-    IEnumerator DamageCooldown() {
-        _isDamageInCooldown.Value = true;
-        yield return new WaitForSeconds(0.06f);
-        _isDamageInCooldown.Value = false;
+        DamageIndicatorRpc();    
     }
     [Rpc(SendTo.ClientsAndHost)]
     void DamageIndicatorRpc() {
         if (damageIndicatorCoroutine != null) {
-            StopCoroutine(damageIndicatorCoroutine);
-            damageIndicatorCoroutine = null;
+            return;
         }
         damageIndicatorCoroutine = StartCoroutine(DamageIndicator());
     }
     IEnumerator DamageIndicator() {
         MeshRenderer mesh = GetComponent<MeshRenderer>();
-        Material original = mesh.material;
         
         for (int i = 0; i < 3; i++) {
             mesh.material = damageMaterial;
-            yield return new WaitForSeconds(0.01f);
-            mesh.material = original;
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.06f);
+            mesh.material = originalMaterial;
+            yield return new WaitForSeconds(0.06f);
         }
+
+        yield return new WaitForSeconds(0.1f);
         damageIndicatorCoroutine = null;
     }
 
     [Rpc(SendTo.ClientsAndHost)]
     void DeathHandlerRpc() {
+        if (damageIndicatorCoroutine != null) StopCoroutine(damageIndicatorCoroutine);
+
         OnDeath?.Invoke();
+
         deathBehaviour.Death(this.gameObject);   
     }
     public void ReviveHandler(float percentOfMaxHealth) {
+
         _currentHealth.Value = Mathf.Clamp((percentOfMaxHealth / 100 * maxHealth.Value), 0.2f * maxHealth.Value, maxHealth.Value);
+
         _canBeDamaged.Value = true;
+
         currentShieldAmount.Value = 0f;
+
         isShielded.Value = false;
+
+        GetComponent<MeshRenderer>().material = originalMaterial;
+
         ReviveRpc();
     }
     [Rpc(SendTo.Server)]

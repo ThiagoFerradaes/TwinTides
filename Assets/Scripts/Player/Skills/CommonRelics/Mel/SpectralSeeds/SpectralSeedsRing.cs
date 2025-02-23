@@ -19,57 +19,19 @@ public class SpectralSeedsRing : SkillObjectPrefab {
         _level = skillLevel;
         _context = context;
 
+        if (_mel == null) _mel = PlayerSkillPooling.Instance.MelGameObject;
+
         DefineSizeAndPosition();
+
         SpectralSeedsObject.OnSphereMoved += SpectralSeedsObject_OnSphereMoved;
     }
 
-    private void SpectralSeedsObject_OnSphereMoved(object sender, EventArgs e) {
-        if (listOfSeeds.Count > 0) {
-            StartCoroutine(UpdateRotation());
-        }
-        else {
-            End();
-        }
-    }
-
-    IEnumerator UpdateRotation() {
-        float anglePerSeed = 360f / _AmountOfSeeds;
-        float targetAngle = transform.eulerAngles.z + anglePerSeed;
-
-        Quaternion startRotation = transform.rotation;
-        Quaternion finalRotation = Quaternion.Euler(0, 0, targetAngle);
-
-        float elapsedTime = 0f;
-
-        while (elapsedTime < _info.RingRotationDuration) {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / _info.RingRotationDuration;
-            transform.rotation = Quaternion.Lerp(startRotation, finalRotation, t);
-            yield return null;
-        }
-
-        transform.rotation = finalRotation;
-
-        yield return null;
-
-        if (_level == 4 && listOfSeeds.Count < 8) {
-            InstantiateOneSeed();
-        }
-    }
-
     private void DefineSizeAndPosition() {
-        if (_mel == null) {
-            _mel = GameObject.FindGameObjectWithTag("Mel");
-            //_mel = PlayerSkillPooling.Instance.MelGameObject;
-        }
-
         transform.localScale = _info.RingSize;
 
         transform.SetParent(_mel.transform);
 
-        Quaternion rotation = Quaternion.Euler(0, 0, 0);
-
-        transform.SetLocalPositionAndRotation(_info.RingPosition, rotation);
+        transform.SetLocalPositionAndRotation(_info.RingPosition, Quaternion.Euler(0,0,0));
 
         gameObject.SetActive(true);
 
@@ -96,22 +58,58 @@ public class SpectralSeedsRing : SkillObjectPrefab {
     }
 
     IEnumerator Duration() {
-        if (_level < 4) {
-            yield return new WaitForSeconds(_info.Duration);
-        }
-        else {
-            yield return new WaitForSeconds(_info.DurationLevel4);
-        }
+        float duration = _level < 4 ? _info.Duration : _info.DurationLevel4;
+
+        yield return new WaitForSeconds(duration);
 
         foreach (var seed in listOfSeeds) {
             seed.transform.SetParent(null);
-            seed.ReturnObject();
+            seed.End();
         }
+
         End();
     }
+
+    private void SpectralSeedsObject_OnSphereMoved(object sender, EventArgs e) {
+        if (listOfSeeds.Count > 0) {
+            StartCoroutine(UpdateRotation());
+        }
+        else {
+            End();
+        }
+    }
+
+    IEnumerator UpdateRotation() {
+        float anglePerSeed = 360f / _AmountOfSeeds;
+
+        Quaternion inicialRotation = transform.localRotation;
+        Quaternion targetRotation = Quaternion.Euler(0, 0, transform.localEulerAngles.z + anglePerSeed);
+
+        float elapsedTime = 0f;
+        float duration = _mel.GetComponent<DamageManager>().ReturnDivisionAttackSpeed(_info.RingRotationDuration);
+
+        while (elapsedTime < duration) {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / duration;
+            transform.localRotation = Quaternion.Lerp(inicialRotation, targetRotation, t);
+            yield return null;
+        }
+
+        transform.localRotation = targetRotation; 
+
+        yield return null;
+
+        if (_level == 4 && listOfSeeds.Count < 8) {
+            InstantiateOneSeed();
+        }
+    }
     void End() {
+        SpectralSeedsObject.OnSphereMoved -= SpectralSeedsObject_OnSphereMoved;
+
         listOfSeeds.Clear();
+
         Cooldown();
+
         ReturnObject();
     }
 
