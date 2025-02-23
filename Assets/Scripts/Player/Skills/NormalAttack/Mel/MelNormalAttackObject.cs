@@ -9,6 +9,7 @@ public class MelNormalAttackObject : SkillObjectPrefab {
 
     public static event EventHandler<NormalAtackEventArgs> OnNormalAttack;
     GameObject _mel;
+    DamageManager _dManager;
 
     public class NormalAtackEventArgs : EventArgs {
         public Vector3 FinalPosition;
@@ -22,13 +23,19 @@ public class MelNormalAttackObject : SkillObjectPrefab {
         _info = info as MelNormalAttack;
         _context = context;
 
+        if (_mel == null) {
+            _mel = PlayerSkillPooling.Instance.MelGameObject;
+        }
+
+        _dManager = _mel.GetComponent<DamageManager>();
+
         DefineSizeAndPosition();
+
+        float cooldown = _dManager.ReturnDivisionAttackSpeed(_info.Cooldown);
+        _mel.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, cooldown);
     }
 
     private void DefineSizeAndPosition() {
-        if (_mel == null) {
-            _mel = GameObject.FindGameObjectWithTag("Mel");
-        }
 
         transform.localScale = _info.SphereSize;
 
@@ -43,13 +50,15 @@ public class MelNormalAttackObject : SkillObjectPrefab {
 
         transform.rotation = _mel.transform.rotation;
 
+        float speed = _dManager.ReturnMultipliedAttackSpeed(_info.SphereSpeed);
+
         Vector3 direction = transform.forward;
-        Vector3 finalPosition = transform.position + _info.SphereDuration * _info.SphereSpeed * direction;
+        Vector3 finalPosition = transform.position + _info.SphereDuration * speed * direction;
         OnNormalAttack?.Invoke(this, new NormalAtackEventArgs(finalPosition));
         float startTime = Time.time;
 
         while(Time.time - startTime < _info.SphereDuration) {
-            transform.Translate(_info.SphereSpeed * Time.deltaTime * Vector3.forward);
+            transform.Translate(speed * Time.deltaTime * Vector3.forward);
             yield return null;
         }
 
@@ -68,5 +77,8 @@ public class MelNormalAttackObject : SkillObjectPrefab {
 
     void End() {
         ReturnObject();
+    }
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
     }
 }

@@ -16,22 +16,23 @@ MonoBehaviour:
   UiSprite: {fileID: 21300000, guid: 27f14c344123ac54684c04c642035c47, type: 3}
   MinLevel: 1
   MaxLevel: 4
-  Cooldown: 10
+  Cooldown: 5
+  IsStackable: 1
+  Character: 1
   SkillsDescriptions: []
   UpgradesDescriptions: []
   skillPrefabs:
   - {fileID: 6149365999533392933, guid: b1b14f848575410439ed640974364940, type: 3}
   - {fileID: 5293092714886239603, guid: 4c4e8612b7a6ee742b461753c39b5169, type: 3}
   - {fileID: 1156135939849614537, guid: 012e992d53e254649af2b5eae6be7370, type: 3}
-  Character: 0
-  SphereDuration: 3
-  SphereSpeed: 8
-  DamagePassingThroughEnemy: 10
+  SphereDuration: 1
+  SphereSpeed: 12
+  DamagePassingThroughEnemy: 1
   invulnerabilityBuff: {fileID: 11400000, guid: 48a5b94b0cd5fd4468f115b02bd9c74b, type: 2}
-  ExplosionDuration: 0.2
+  ExplosionDuration: 0.1
   ExplosionRadius: 6
   ExplosionRadiusMultiplier: 1.5
-  ExplosionDamage: 10
+  ExplosionDamage: 1
   AreaDurationLevel3: 6
   AreaDurationLevel4: 10
   AreaRadius: {x: 6, y: 0.1, z: 6}

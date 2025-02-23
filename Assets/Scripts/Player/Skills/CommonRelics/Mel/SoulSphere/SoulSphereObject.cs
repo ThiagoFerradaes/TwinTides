@@ -6,10 +6,15 @@ public class SoulSphereObject : SkillObjectPrefab {
     SoulSphere _info;
     int _level;
     SkillContext _context;
+    GameObject _mel;
     public override void ActivateSkill(Skill info, int level, SkillContext context) {
         _info = info as SoulSphere;
         _level = level;
         _context = context;
+
+        if (_mel == null) {
+            _mel = PlayerSkillPooling.Instance.MelGameObject;
+        }
 
         transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
         gameObject.SetActive(true);
@@ -33,10 +38,10 @@ public class SoulSphereObject : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
         if (_level == 1) {
-            if (other.CompareTag("Enemy")) {
-                other.GetComponent<HealthManager>().ApplyDamageOnServerRPC(_info.DamagePassingThroughEnemy, true, true);
+            if (other.CompareTag("Enemy") && IsServer) {
+                float damage = _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.DamagePassingThroughEnemy);
+                other.GetComponent<HealthManager>().ApplyDamageOnServerRPC(damage, true, true);
                 StopAllCoroutines();
                 ReturnObject();
             }
@@ -47,11 +52,10 @@ public class SoulSphereObject : SkillObjectPrefab {
             }
         }
         else {
-            if (other.CompareTag("Enemy")) {
+            if (other.CompareTag("Enemy") && IsServer) {
                 other.GetComponent<HealthManager>().ApplyDamageOnServerRPC(_info.DamagePassingThroughEnemy, true, true);
             }
             else if (other.CompareTag("Maevis")) {
-                other.GetComponent<HealthManager>().AddBuffToList(_info.invulnerabilityBuff);
                 StopAllCoroutines();
                 Explode();
             }

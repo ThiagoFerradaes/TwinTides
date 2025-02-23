@@ -17,12 +17,13 @@ MonoBehaviour:
   MinLevel: 1
   MaxLevel: 4
   Cooldown: 10
+  IsStackable: 1
+  Character: 1
   SkillsDescriptions: []
   UpgradesDescriptions: []
   skillPrefabs:
   - {fileID: 6896458585964205320, guid: bd5e0ee7507ef004c8ecf7a29231dd66, type: 3}
   - {fileID: 6293810736354995997, guid: 1725e2d2690f80642af1dc863ef0ec1c, type: 3}
-  Character: 0
   ExplosionRadius: {x: 10, y: 10, z: 10}
   Debuffblocker: {fileID: 11400000, guid: f5221119b6ed2a740b69deb30ed33caf, type: 2}
   ExplosionDuration: 0.1

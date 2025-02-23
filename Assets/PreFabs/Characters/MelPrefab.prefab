@@ -163,11 +163,11 @@ GameObject:
   - component: {fileID: 3160352352417031265}
   - component: {fileID: 5911823821045647350}
   - component: {fileID: 1916852207886483597}
-  - component: {fileID: 5611954115521582333}
   - component: {fileID: -771744815328285768}
+  - component: {fileID: 5611954115521582333}
   m_Layer: 0
   m_Name: MelPrefab
-  m_TagString: Player
+  m_TagString: Mel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2599662631
+  GlobalObjectIdHash: 860857098
   InScenePlacedSourceGlobalObjectIdHash: 1302872352
   DeferredDespawnTick: 0
   Ownership: 1
@@ -337,7 +337,7 @@ MonoBehaviour:
   - {fileID: 2402475289913472152}
   - {fileID: -4439767094921606809}
   CameraObject: {fileID: 0}
-  Character: 0
+  Character: 1
 --- !u!114 &-4439767094921606809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,8 +364,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  characterMoveSpeed: 8
-  sprintSpeed: 16
   rotationSpeed: 8
   _rotationInput: {x: 0, y: 0}
   aimObject: {fileID: 0}
@@ -625,6 +623,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 22b49e00-a41e-45f0-ae35-14c4d2ae0d6f
     m_ActionName: 'PlayerOne/RotateController[/XInputControllerWindows1/rightStick]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2849821314780519991}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: InputAimMode
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b3f4c1d5-ed73-4508-b038-0fc8299e0474
+    m_ActionName: 'PlayerOne/Aim[/Keyboard/c]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerOne
@@ -642,8 +656,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab964788b12c3246a254fd41263ea4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relic: {fileID: 0}
-  attack: {fileID: 0}
+  relic: {fileID: 11400000, guid: 2ff41898e48869a4691c667466cb48e1, type: 2}
+  attack: {fileID: 11400000, guid: ad764f61b860c7447aab5255dd321aee, type: 2}
 --- !u!114 &3160352352417031265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -716,23 +730,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5611954115521582333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7979977661230229930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d477c339f4f6e5b4c9e09a17059d6e70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  baseMoveSpeed:
-    m_InternalValue: 0
-  adicionalMoveSpeed:
-    m_InternalValue: 0
 --- !u!114 &-771744815328285768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -748,8 +745,23 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   baseAttack:
     m_InternalValue: 1
-  baseNormalAttackCooldown:
+  attackSpeed:
     m_InternalValue: 1
+--- !u!114 &5611954115521582333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7979977661230229930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d477c339f4f6e5b4c9e09a17059d6e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  baseMoveSpeed:
+    m_InternalValue: 5
 --- !u!1 &9085850524470032934
 GameObject:
   m_ObjectHideFlags: 0

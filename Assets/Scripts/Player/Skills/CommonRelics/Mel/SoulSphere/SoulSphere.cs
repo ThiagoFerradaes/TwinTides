@@ -3,22 +3,25 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "CommonRelic/SoulSphere")]
 public class SoulSphere : CommonRelic {
 
-    [Header("Sphere")]
+    [Header("SoulSphere Level 1")]
     public float SphereDuration;
     public float SphereSpeed;
     public float DamagePassingThroughEnemy;
     public HealthBuff invulnerabilityBuff;
 
-    [Header("Explosion")]
+    [Header("SoulSphere Level 2")]
     public float ExplosionDuration;
     public float ExplosionRadius;
-    public float ExplosionRadiusMultiplier;
     public float ExplosionDamage;
 
-    [Header("Area")]
+    [Header("SoulSphere Level 3")]
     public float AreaDurationLevel3;
-    public float AreaDurationLevel4;
     public Vector3 AreaRadius;
-    public Vector3 AreaRadiusLevel4;
+    public float AreaDamage;
+    public float AreaDamageCooldown;
 
+    [Header("SoulSphere Level 4")]
+    public float ExplosionRadiusLevel4;
+    public float AreaDurationLevel4;
+    public Vector3 AreaRadiusLevel4;
 }

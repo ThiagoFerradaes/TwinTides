@@ -17,11 +17,12 @@ MonoBehaviour:
   MinLevel: 1
   MaxLevel: 4
   Cooldown: 10
+  IsStackable: 1
+  Character: 1
   SkillsDescriptions: []
   UpgradesDescriptions: []
   skillPrefabs:
   - {fileID: 6149365999533392933, guid: 0a22855e6446e6e4cb4e16e550e6f668, type: 3}
-  Character: 0
   SphereSpeed: 14
   SphereBackSpeed: 20
   Duration: 1

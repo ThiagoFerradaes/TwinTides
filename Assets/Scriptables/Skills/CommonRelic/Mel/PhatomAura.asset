@@ -17,12 +17,13 @@ MonoBehaviour:
   MinLevel: 1
   MaxLevel: 4
   Cooldown: 10
+  IsStackable: 1
+  Character: 1
   SkillsDescriptions: []
   UpgradesDescriptions: []
   skillPrefabs:
   - {fileID: 2219329152401619148, guid: ffcbd79cd22afc14cb8d684b832ee423, type: 3}
   - {fileID: 2219329152401619148, guid: 9df58dc79e3621646be3c4d084de22c6, type: 3}
-  Character: 0
   AuraSize: {x: 6, y: 6, z: 6}
   Duration: 4
   Damage: 5

@@ -1,15 +1,21 @@
 using System.Collections;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SoulSphereExplosionObject : SkillObjectPrefab {
     SoulSphere _info;
     int _level;
     SkillContext _context;
+    GameObject _mel;
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as SoulSphere;
         _level = skillLevel;
         _context = context;
+
+        if (_mel == null) {
+            _mel = PlayerSkillPooling.Instance.MelGameObject;
+        }
 
         DefineSize();
 
@@ -22,8 +28,7 @@ public class SoulSphereExplosionObject : SkillObjectPrefab {
             transform.localScale = Vector3.one * _info.ExplosionRadius;
         }
         else {
-            transform.localScale = Vector3.one * _info.ExplosionRadius;
-            transform.localScale *= _info.ExplosionRadiusMultiplier;
+            transform.localScale = Vector3.one * _info.ExplosionRadiusLevel4;
         }
 
         gameObject.SetActive(true);
@@ -41,11 +46,17 @@ public class SoulSphereExplosionObject : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
+        if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
+
+        if (other.CompareTag("Maevis") || other.CompareTag("Mel")) {
+            if (_level < 4) health.AddBuffToList(_info.invulnerabilityBuff);
+        }
+
         if (!other.CompareTag("Enemy") && !IsServer) return;
 
-        if (other.TryGetComponent<HealthManager>(out HealthManager health)) {
-            health.ApplyDamageOnServerRPC(_info.ExplosionDamage, true, true);
-        }
+        float damage = _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.ExplosionDamage);
+
+        health.ApplyDamageOnServerRPC(damage, true, true);
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
