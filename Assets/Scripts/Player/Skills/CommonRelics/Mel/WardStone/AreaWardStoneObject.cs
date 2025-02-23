@@ -1,18 +1,24 @@
+using NUnit.Framework;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AreaWardStoneObject : SkillObjectPrefab {
     WardStone _info;
     int _level;
     SkillContext _context;
+    GameObject _mel;
 
     bool _canHeal;
 
+    List<HealthManager> _listOfPlayers = new();
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as WardStone;
         _level = skillLevel;
         _context = context;
+
+        if (_mel == null) _mel = PlayerSkillPooling.Instance.MelGameObject;
 
         DefineSizeAndPosition();
 
@@ -26,7 +32,7 @@ public class AreaWardStoneObject : SkillObjectPrefab {
         gameObject.SetActive(true);
 
         StartCoroutine(AreaDuration());
-        StartCoroutine(HealingTimer());
+        if (_level > 3) StartCoroutine(HealingTimer());
     }
 
     IEnumerator AreaDuration() {
@@ -41,32 +47,38 @@ public class AreaWardStoneObject : SkillObjectPrefab {
     }
 
     IEnumerator HealingTimer() {
-        _canHeal = false;
-        yield return new WaitForSeconds(_info.HealingInterval);
-        _canHeal = true;
-        yield return null;
-        StartCoroutine(HealingTimer());
+        while (true) {
+            foreach(var player in _listOfPlayers) {
+                if (player.ReturnCurrentHealth() >= player.ReturnMaxHealth()) {
+                    float shieldAmount = _info.AmountOfHealing * _info.PercentOfShieldFromExtraHealing/100;
+                    player.ApplyShieldServerRpc(shieldAmount, _info.ExtraShieldDuration, true);
+                }
+                else {
+                    player.HealServerRpc(_info.AmountOfHealing);
+                }
+            }
+            yield return new WaitForSeconds(_info.HealingInterval);
+        } 
+    }
+    private void OnTriggerEnter(Collider other) {
+        if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
+        
+        if (!other.CompareTag("Mel") && !other.CompareTag("Maevis")) return;
+
+        if (!IsServer) return;
+
+        if (!_listOfPlayers.Contains(health)) _listOfPlayers.Add(health);
+
     }
 
-    private void OnTriggerStay(Collider other) {
-        if (other.CompareTag("Mel") || other.CompareTag("Maevis")) {
-            if (!IsServer) return;
+    private void OnTriggerExit(Collider other) {
+        if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-            if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
+        if (!other.CompareTag("Mel") && !other.CompareTag("Maevis")) return;
 
-            if (!_canHeal) return;
+        if (!IsServer) return;
 
-            if (health.ReturnCurrentHealth() < health.ReturnMaxHealth()) {
-                Debug.Log("Heal");
-                health.HealServerRpc(_info.AmountOfHealing);
-            }
-            else {
-                Debug.Log("Shield");
-                health.ApplyShieldServerRpc
-                    (_info.AmountOfHealing * _info.PercentOfShieldFromExtraHealing / 100, _info.ExtraShieldDuration, true);
-            }
-
-        }
+        if (_listOfPlayers.Contains(health)) _listOfPlayers.Remove(health);
     }
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
         return;

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7928995866137468015}
   - component: {fileID: 4870948956848854423}
   m_Layer: 0
-  m_Name: Explosion
+  m_Name: SoulSphereExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1365869360
+  GlobalObjectIdHash: 2700110638
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -172,7 +172,7 @@ MonoBehaviour:
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
   SwitchTransformSpaceWhenParented: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &7797736271846073536
 MonoBehaviour:

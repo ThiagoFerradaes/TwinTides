@@ -7,7 +7,7 @@ public class PlayerSkillPooling : NetworkBehaviour {
     Dictionary<string, Queue<GameObject>> objectPooling = new();
     Dictionary<string, Queue<GameObject>> activeSkills = new();
 
-    [HideInInspector] public GameObject MelGameObject, MaevisGameObject;
+    /*[HideInInspector]*/ public GameObject MelGameObject, MaevisGameObject;
 
     private void Awake() {
         if (Instance == null) {
@@ -19,6 +19,7 @@ public class PlayerSkillPooling : NetworkBehaviour {
     }
     private void Start() {
         PlayerSetUp.OnPlayerSpawned += PlayerSetUp_OnPlayerSpawned;
+        PlayerSetUp.OnPlayerTwoSpawned += PlayerSetUp_OnPlayerSpawned;
     }
 
     private void PlayerSetUp_OnPlayerSpawned(GameObject obj) {
@@ -28,8 +29,9 @@ public class PlayerSkillPooling : NetworkBehaviour {
         else MelGameObject = obj;
     }
 
-    [Rpc(SendTo.Server)]
+    [Rpc(SendTo.Server, RequireOwnership = false)]
     public void InstantiateAndSpawnRpc(int skillId, SkillContext context, int skillsLevel, int objectIndex) {
+        if (!IsServer) return;
         Skill skill = PlayerSkillConverter.Instance.TransformIdInSkill(skillId);
         GameObject spawnedObject;
 

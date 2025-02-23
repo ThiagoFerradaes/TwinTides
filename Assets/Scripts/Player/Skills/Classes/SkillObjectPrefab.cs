@@ -29,6 +29,7 @@ public abstract class SkillObjectPrefab : NetworkBehaviour {
         return;
     }
     public virtual void StartSkillCooldown(SkillContext context, Skill skill) {
+        if (skill.Character != LocalWhiteBoard.Instance.PlayerCharacter) return;
         if (skill.Character == Characters.Mel) {
             PlayerSkillPooling.Instance.MelGameObject.GetComponent<PlayerSkillManager>().StartCooldown(context.SkillIdInUI, skill);
         }

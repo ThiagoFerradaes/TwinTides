@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class WarCryObject : SkillObjectPrefab
-{
+public class WarCryObject : SkillObjectPrefab {
     Warcry _info;
     int _level;
     SkillContext _context;
@@ -27,7 +27,11 @@ public class WarCryObject : SkillObjectPrefab
         _dManager = _maevis.GetComponent<DamageManager>();
         _mManager = _maevis.GetComponent<MovementManager>();
 
-        transform.SetParent(_maevis.transform);
+        if (IsServer) {
+            if (_maevis.TryGetComponent<NetworkObject>(out NetworkObject net)) {
+                transform.SetParent(net.transform);
+            }
+        }
 
         transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
 

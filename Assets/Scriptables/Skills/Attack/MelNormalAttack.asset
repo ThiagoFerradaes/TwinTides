@@ -16,13 +16,14 @@ MonoBehaviour:
   UiSprite: {fileID: 0}
   MinLevel: 1
   MaxLevel: 1
-  Cooldown: 1
+  Cooldown: 0.8
   IsStackable: 1
+  Character: 0
   SkillsDescriptions: []
   UpgradesDescriptions: []
   skillPrefabs:
   - {fileID: 1244048917828174641, guid: a9e545f534d84f14eb2455188f1becad, type: 3}
   SphereSize: {x: 1, y: 1, z: 1}
-  SphereSpeed: 16
-  SphereDuration: 1
+  SphereSpeed: 20
+  SphereDistance: 12
   SphereDamage: 2

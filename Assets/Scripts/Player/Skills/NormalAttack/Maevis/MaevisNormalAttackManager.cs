@@ -57,7 +57,6 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
         };
 
         _currentTime = duration + _dManager.ReturnDivisionAttackSpeed(_info.CooldownBetweenEachAttack) + _info.TimeLimitBetweenEachAttack;
-        Debug.Log(_currentTime);
 
         _maevis.GetComponent<PlayerController>().BlockMovement();
 

@@ -42,7 +42,6 @@ public class SpectralSeedsExplosion : SkillObjectPrefab {
         float healing = 0;
 
         if (other.CompareTag("Enemy") && !health.ReturnDeathState()) {
-            Debug.Log(health.ReturnDeathState());
             float damage = _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.Damage);
             health.ApplyDamageOnServerRPC(damage, true, true);
             healing = damage * _info.PercentOfDamageToHeal / 100;

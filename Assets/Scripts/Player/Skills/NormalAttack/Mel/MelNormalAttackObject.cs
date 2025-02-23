@@ -44,7 +44,7 @@ public class MelNormalAttackObject : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        StartCoroutine(Move());
+        if (IsServer) StartCoroutine(Move());
     }
 
     IEnumerator Move() {
