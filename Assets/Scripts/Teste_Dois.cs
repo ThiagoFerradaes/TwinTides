@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 
 public class Teste_Dois : NetworkBehaviour {

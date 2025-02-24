@@ -16,23 +16,15 @@ public class FallenMelBannerObject : SkillObjectPrefab {
         _level = skillLevel;
         _context = context;
 
-        DefineParent();
-    }
-
-    private void DefineParent() {
         if (_mel == null) {
-            if (PlayerSkillPooling.Instance.MelGameObject != null) {
-                _mel = PlayerSkillPooling.Instance.MelGameObject;
-            }
-            else {
-                End();
-                return;
-            }
+            _mel = PlayerSkillPooling.Instance.MelGameObject;
         }
+
 
         FallenMaevisBannerObject.OnStacked += FallenMaevisBannerObject_OnStacked;
 
         InvocateBanner();
+
     }
 
     private void FallenMaevisBannerObject_OnStacked(object sender, EventArgs e) {
@@ -40,9 +32,11 @@ public class FallenMelBannerObject : SkillObjectPrefab {
     }
 
     private void InvocateBanner() {
-        transform.SetParent(_mel.transform);
+        if (IsServer) {
+            transform.SetParent(_mel.transform);
 
-        transform.SetLocalPositionAndRotation(_info.BannerFollowPosition, Quaternion.Euler(0, 0, 0));
+            transform.SetLocalPositionAndRotation(_info.BannerFollowPosition, Quaternion.Euler(0, 0, 0));
+        }
 
         gameObject.SetActive(true);
 
@@ -52,9 +46,7 @@ public class FallenMelBannerObject : SkillObjectPrefab {
     }
 
     IEnumerator BannerDuration() {
-        float duration;
-        if (_level < 4) duration = _info.BannerDuration;
-        else duration = _info.BannerDurationLevel4;
+        float duration = _level < 4 ? _info.BannerDuration : _info.BannerDurationLevel4;
 
         yield return new WaitForSeconds(duration);
 
@@ -82,13 +74,9 @@ public class FallenMelBannerObject : SkillObjectPrefab {
             _mel.GetComponent<DamageManager>().IncreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
         }
         else {
-            if (_amountOfBuffs >= _info.BannerMaxStacks) {
-                Debug.Log("MaxBuffs!");
-            }
-            else {
+            if (_amountOfBuffs < _info.BannerMaxStacks) {
                 _amountOfBuffs++;
                 _mel.GetComponent<DamageManager>().IncreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
-                Debug.Log("BuffUP: " + _amountOfBuffs);
             }
         }
 

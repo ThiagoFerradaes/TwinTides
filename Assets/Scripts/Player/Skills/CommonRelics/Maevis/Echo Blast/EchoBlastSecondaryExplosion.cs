@@ -44,10 +44,9 @@ public class EchoBlastSecondaryExplosion : SkillObjectPrefab {
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        if (IsServer) {
+        if (!IsServer) return;
             float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.ExplosionDamage);
             health.ApplyDamageOnServerRPC(damage, true, true);
-        }
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

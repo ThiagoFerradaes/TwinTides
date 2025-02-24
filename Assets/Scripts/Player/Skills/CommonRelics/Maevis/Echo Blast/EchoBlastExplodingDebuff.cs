@@ -33,11 +33,13 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
 
         _isPositioned = true;
 
-        transform.SetParent(parent.transform);
-
         _parent = parent;
 
-        transform.SetLocalPositionAndRotation(new Vector3(0,_info.ExplodingDebuffHeight,0), Quaternion.Euler(0, 0, 0));
+        if (IsServer) {
+            transform.SetParent(_parent.transform);
+
+            transform.SetLocalPositionAndRotation(new Vector3(0, _info.ExplodingDebuffHeight, 0), Quaternion.Euler(0, 0, 0));
+        }
 
         gameObject.SetActive(true);
 
@@ -89,7 +91,7 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
     }
 
     IEnumerator Explode() {
-        while (true) {
+        while (true && IsServer) {
             if (_canExplode && _parent != null) {
                 _canExplode = false;
                 _canSetUpExplosion = false;
@@ -121,7 +123,7 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
 
         events.Clear();
 
-        transform.parent = null;
+        if (IsServer) transform.parent = null;
         
         _isPositioned = false;
         

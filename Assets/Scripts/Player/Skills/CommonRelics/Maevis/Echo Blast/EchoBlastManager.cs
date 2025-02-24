@@ -21,14 +21,16 @@ public class EchoBlastManager : SkillObjectPrefab
 
         gameObject.SetActive(true);
 
-        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 1);
+        if (IsServer) {
+            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 1);
+        }
 
         StartCoroutine(Duration());
     }
 
     private void EchoBlastStunExplosion_OnSecondaryExplosion(object sender, EchoBlastStunExplosion.ExplosionPosition e) {
-        StartCoroutine(SecondaryExplosion(e.context));
+        if (IsServer) StartCoroutine(SecondaryExplosion(e.context));
     }
 
     IEnumerator Duration() {

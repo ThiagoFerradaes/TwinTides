@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrimsonTideDashHitBox : SkillObjectPrefab
-{
+public class CrimsonTideDashHitBox : SkillObjectPrefab {
     CrimsonTide _info;
     int _level;
     SkillContext _context;
@@ -25,13 +24,20 @@ public class CrimsonTideDashHitBox : SkillObjectPrefab
     }
 
     private void SetParent() {
-        transform.SetParent(_maevis.transform);
+        if (IsServer) {
+            transform.SetParent(_maevis.transform);
 
-        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
+            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
 
-        gameObject.SetActive(true);
+            gameObject.SetActive(true);
 
-        StartCoroutine(Duration());
+            StartCoroutine(Duration());
+        }
+        else {
+            gameObject.SetActive(true);
+        }
+        
+
     }
 
     IEnumerator Duration() {
@@ -64,7 +70,8 @@ public class CrimsonTideDashHitBox : SkillObjectPrefab
     }
 
     private void Health_OnDeath() {
-        _maevis.GetComponent<PlayerSkillManager>().ResetCooldown(_context.SkillIdInUI);
+        if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter)
+            _maevis.GetComponent<PlayerSkillManager>().ResetCooldown(_context.SkillIdInUI);
     }
 
     void End() {

@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrimsonTideExplosion : SkillObjectPrefab
-{
+public class CrimsonTideExplosion : SkillObjectPrefab {
     CrimsonTide _info;
     int _level;
     SkillContext _context;
@@ -62,7 +61,8 @@ public class CrimsonTideExplosion : SkillObjectPrefab
     }
 
     private void Health_OnDeath() {
-        _maevis.GetComponent<PlayerSkillManager>().ResetCooldown(_context.SkillIdInUI);
+        if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter)
+            _maevis.GetComponent<PlayerSkillManager>().ResetCooldown(_context.SkillIdInUI);
     }
 
     void End() {

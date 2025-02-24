@@ -289,9 +289,9 @@ MonoBehaviour:
   SyncRotAngleX: 1
   SyncRotAngleY: 1
   SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
@@ -678,8 +678,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab964788b12c3246a254fd41263ea4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relic: {fileID: 11400000, guid: f792eccfdf9313e4b972e836608d9e12, type: 2}
+  relic: {fileID: 11400000, guid: 51804fe6b9c96a4458b3c2d84dd08c89, type: 2}
   attack: {fileID: 11400000, guid: 297f474b4b298df4a8359eeab6c49b15, type: 2}
+  player: 1
 --- !u!54 &5911823821045647350
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -34,7 +34,7 @@ public class DreadfallExplosion : SkillObjectPrefab {
     IEnumerator Duration() {
         yield return new WaitForSeconds(_info.ExplosionDuration);
 
-        if (_level == 4) {
+        if (_level == 4 && IsServer) {
             int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
             PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 2);
         }

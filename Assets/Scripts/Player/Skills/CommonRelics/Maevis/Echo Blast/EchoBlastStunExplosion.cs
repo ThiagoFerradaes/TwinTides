@@ -3,8 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class EchoBlastStunExplosion : SkillObjectPrefab
-{
+public class EchoBlastStunExplosion : SkillObjectPrefab {
     EchoBlast _info;
     int _level;
     SkillContext _context;
@@ -41,12 +40,7 @@ public class EchoBlastStunExplosion : SkillObjectPrefab
     }
 
     void DefineSizeAndPosition() {
-        if (_level < 2) {
-            transform.localScale = _info.ExplosionRadius * Vector3.one;
-        }
-        else {
-            transform.localScale = Vector3.one * _info.ExplosionRadiusLevel2;
-        }
+        transform.localScale = _level < 2 ? Vector3.one * _info.ExplosionRadius : Vector3.one * _info.ExplosionRadiusLevel2;
 
         transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
 
@@ -85,7 +79,7 @@ public class EchoBlastStunExplosion : SkillObjectPrefab
             OnSecondaryExplosion?.Invoke(this, new ExplosionPosition(_context));
         }
 
-        if (_level > 3 && !health.ReturnDeathState()) {
+        if (_level > 3 && !health.ReturnDeathState() && IsServer) {
             int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
             PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 4);
             OnExploded?.Invoke(this, new ExplodedObject(other.gameObject));

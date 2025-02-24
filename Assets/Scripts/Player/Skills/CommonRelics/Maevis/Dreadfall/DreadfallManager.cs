@@ -22,9 +22,11 @@ public class DreadfallManager : SkillObjectPrefab {
     }
 
     private void SetParentAndPosition() {
-        transform.parent = _maevis.transform;
+        if (IsServer) {
+            transform.parent = _maevis.transform;
 
-        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
+            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
+        }
 
         gameObject.SetActive(true);
 
@@ -63,6 +65,7 @@ public class DreadfallManager : SkillObjectPrefab {
     }
 
     private void Explode() {
+        if (!IsServer) return;
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
         PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 1);

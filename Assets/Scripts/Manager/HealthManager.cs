@@ -161,21 +161,21 @@ public class HealthManager : NetworkBehaviour {
     }
     public void ReviveHandler(float percentOfMaxHealth) {
 
-        _currentHealth.Value = Mathf.Clamp((percentOfMaxHealth / 100 * maxHealth.Value), 0.2f * maxHealth.Value, maxHealth.Value);
+        if (IsServer) {
+            _currentHealth.Value = Mathf.Clamp((percentOfMaxHealth / 100 * maxHealth.Value), 0.2f * maxHealth.Value, maxHealth.Value);
 
-        _canBeDamaged.Value = true;
+            _canBeDamaged.Value = true;
 
-        currentShieldAmount.Value = 0f;
+            currentShieldAmount.Value = 0f;
 
-        isShielded.Value = false;
+            isShielded.Value = false;
 
+            _isDead.Value = false;
+
+        }
+ 
         GetComponent<MeshRenderer>().material = originalMaterial;
 
-        ReviveRpc();
-    }
-    [Rpc(SendTo.Server)]
-    void ReviveRpc() {
-        _isDead.Value = false;
     }
 
     [ServerRpc(RequireOwnership = false)]

@@ -29,9 +29,11 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
 
         _dManager = _maevis.GetComponent<DamageManager>();
 
-        transform.SetParent(_maevis.transform);
+        if (IsServer) {
+            transform.SetParent(_maevis.transform);
 
-        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
+            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
+        }
 
         gameObject.SetActive(true);
 
@@ -43,8 +45,10 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
 
     IEnumerator AttackCoroutine() {
         _canAttackAgain = false;
-        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _currentAttackCombo, 1);
+        if (IsServer) {
+            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _currentAttackCombo, 1);
+        }
 
         float startAngle = transform.localEulerAngles.y;
         float targetAngle = _currentAttackCombo == 1 ? startAngle + 180 : startAngle - 180;
@@ -78,8 +82,10 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
 
     IEnumerator ThirdAttackCoroutine() {
         _canAttackAgain = false;
-        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _currentAttackCombo, 1);
+        if (IsServer) {
+            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _currentAttackCombo, 1);
+        }
 
         float startAngle = transform.localEulerAngles.x;
         float targetAngle = startAngle + 90;
@@ -131,7 +137,9 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
 
         float cooldown = _dManager.ReturnDivisionAttackSpeed(_info.Cooldown);
 
-        _maevis.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, cooldown);
+        if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter) {
+            _maevis.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, cooldown);
+        }
 
         ReturnObject();
     }

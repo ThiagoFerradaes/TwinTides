@@ -26,12 +26,14 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
 
         _dManager = _maevis.GetComponent<DamageManager>();
 
-        transform.SetParent(_father.transform);
-
-        transform.localPosition = _currentAttackCombo == 3 ? _info.ThirdAttackPosition : _info.AttackPosition;
-        transform.localRotation = _currentAttackCombo == 3 ? Quaternion.Euler(_info.ThierdAttackRotation) : Quaternion.Euler(_info.AttackRotation);
-
         transform.localScale = _currentAttackCombo == 3 ? _info.ThirdAttackSize : _info.FirstAndSecondAttackSize;
+
+        if (IsServer) {
+            transform.SetParent(_father.transform);
+
+            transform.localPosition = _currentAttackCombo == 3 ? _info.ThirdAttackPosition : _info.AttackPosition;
+            transform.localRotation = _currentAttackCombo == 3 ? Quaternion.Euler(_info.ThierdAttackRotation) : Quaternion.Euler(_info.AttackRotation);
+        }
 
         gameObject.SetActive(true);
 
@@ -66,7 +68,7 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
         float damage = _currentAttackCombo switch {
-            1 =>  _dManager.ReturnTotalAttack(_info.FirstAttackDamage),
+            1 => _dManager.ReturnTotalAttack(_info.FirstAttackDamage),
             2 => _dManager.ReturnTotalAttack(_info.SecondAttackDamage),
             _ => _dManager.ReturnTotalAttack(_info.ThirdAttackDamage)
         };
