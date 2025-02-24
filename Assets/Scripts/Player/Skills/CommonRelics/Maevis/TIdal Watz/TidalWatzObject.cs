@@ -9,6 +9,8 @@ public class TidalWatzObject : SkillObjectPrefab {
     SkillContext _context;
 
     GameObject _maevis;
+    PlayerSkillManager _skillManager;
+    PlayerController _pController;
     [HideInInspector] public float acumulativeDamage;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
@@ -16,20 +18,25 @@ public class TidalWatzObject : SkillObjectPrefab {
         _level = skillLevel;
         _context = context;
 
+        if (_maevis == null) {
+            _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
+            _skillManager = _maevis.GetComponent<PlayerSkillManager>();
+            _pController = _maevis.GetComponent<PlayerController>();
+        }
+
         DefineParent();
     }
 
     private void DefineParent() {
-        if (_maevis == null) {
-            _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
+        if (IsServer) {
+            transform.SetParent(_maevis.transform);
+
+            transform.SetLocalPositionAndRotation(new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
         }
 
-        transform.SetParent(_maevis.transform);
-
-        transform.SetLocalPositionAndRotation(new Vector3(0, 0, 0), Quaternion.Euler(0,0,0));
-
-        _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(true);
-        _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(true);
+        _skillManager.BlockNormalAttackRpc(true);
+        _skillManager.BlockSkillsRpc(true);
+        _pController.BlockRotate(false);
 
         gameObject.SetActive(true);
 
@@ -48,19 +55,13 @@ public class TidalWatzObject : SkillObjectPrefab {
 
 
         for (int i = 0; i < amountOfCuts; i++) {
-            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 1);
+            if (IsServer) PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 1);
 
             float startAngle = transform.localEulerAngles.y;
             float targetAngle = startAngle + 360;
 
             float elapsedTime = 0f;
-            float duration;
-            if (_level < 3) {
-                duration = _info.CutDuration;
-            }
-            else {
-                duration = _info.CutDurationLevel3;
-            }
+            float duration = _level < 3 ? _info.CutDuration : _info.CutDurationLevel3;
 
             while (elapsedTime < duration) {
                 elapsedTime += Time.deltaTime;
@@ -70,7 +71,7 @@ public class TidalWatzObject : SkillObjectPrefab {
                 yield return null;
             }
 
-            transform.localRotation = Quaternion.Euler(0,startAngle,0);
+            transform.localRotation = Quaternion.Euler(0, startAngle, 0);
 
             if (_level < 3 && _level > 1) {
                 yield return new WaitForSeconds(_info.CutInterval);
@@ -80,7 +81,7 @@ public class TidalWatzObject : SkillObjectPrefab {
             }
         }
 
-        if (_level == 4) {
+        if (_level == 4 && IsServer) {
             PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 2);
             yield return new WaitForSeconds(_info.ImpactDuration);
         }
@@ -90,12 +91,9 @@ public class TidalWatzObject : SkillObjectPrefab {
 
     void End() {
         acumulativeDamage = 0;
-        _maevis.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
-        _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
-        _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
+        _skillManager.BlockSkillsRpc(false);
+        _skillManager.BlockNormalAttackRpc(false);
+        _pController.BlockRotate(true);
         ReturnObject();
-    }
-    public override void StartSkillCooldown(SkillContext context, Skill skill) {
-        return;
     }
 }

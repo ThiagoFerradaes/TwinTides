@@ -21,8 +21,7 @@ public class DreadfallExplosion : SkillObjectPrefab {
     }
 
     void SetPosition() {
-        if (_level < 3) transform.localScale = Vector3.one * _info.ExplosionRadius;
-        else transform.localScale = Vector3.one * _info.ExplosionRadiusLevel3;
+        transform.localScale = _level < 3?  Vector3.one * _info.ExplosionRadius : Vector3.one * _info.ExplosionRadiusLevel3;
 
         transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
 

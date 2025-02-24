@@ -90,19 +90,19 @@ public class DamageManager : NetworkBehaviour {
     }
 
     [Rpc(SendTo.Server)]
-    public void IncreaseAttackSpeedWithTimeRpc(float damageMultiplier, float duration) {
-        StartCoroutine(IncreaseAttackSpeedCoroutine(damageMultiplier, duration));
+    public void IncreaseAttackSpeedWithTimeRpc(float attackSpeedPercent, float duration) {
+        StartCoroutine(IncreaseAttackSpeedCoroutine((1 + attackSpeedPercent/100), duration));
     }
 
     [Rpc(SendTo.Server)]
-    public void DecreaseAttackSpeedWithTimeRpc(float damageMultiplier, float duration) {
-        StartCoroutine(DecreaseAttackSpeedCoroutine(damageMultiplier, duration));
+    public void DecreaseAttackSpeedWithTimeRpc(float attackSpeedPercent, float duration) {
+        StartCoroutine(DecreaseAttackSpeedCoroutine((1 + attackSpeedPercent/100), duration));
     }
 
-    IEnumerator IncreaseAttackSpeedCoroutine(float damageMultipiler, float duration) {
-        attackSpeed.Value *= damageMultipiler;
+    IEnumerator IncreaseAttackSpeedCoroutine(float attackSpeedMultiplier, float duration) {
+        attackSpeed.Value *= attackSpeedMultiplier;
         yield return new WaitForSeconds(duration);
-        attackSpeed.Value /= damageMultipiler;
+        attackSpeed.Value /= attackSpeedMultiplier;
     }
     IEnumerator DecreaseAttackSpeedCoroutine(float damageMultipiler, float duration) {
         attackSpeed.Value /= damageMultipiler;

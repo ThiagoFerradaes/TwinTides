@@ -9,6 +9,7 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
     int _level;
     SkillContext _context;
     GameObject _maveis;
+    DamageManager _damageManager;
     int _amountOfBuffs;
 
     List<GameObject> activePlayers = new();
@@ -22,6 +23,7 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
 
         if (_maveis == null) {
             _maveis = PlayerSkillPooling.Instance.MaevisGameObject;
+            _damageManager = _maveis.GetComponent<DamageManager>();
         }
 
         InvocateBanner();
@@ -32,16 +34,15 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
             Vector3 direction = _context.PlayerRotation * Vector3.forward;
             Vector3 position = _context.PlayerPosition + (direction * _info.MaxRange);
             Transform aim = _maveis.GetComponent<PlayerController>().aimObject.transform;
-            
-            if (IsServer) {
-                if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_context.PlayerPosition, aim.position) < _info.MaxRange) {
 
-                    transform.SetPositionAndRotation(aim.position, _context.PlayerRotation);
-                }
-                else {
-                    transform.SetPositionAndRotation(position, _context.PlayerRotation);
-                }
+            if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_context.PlayerPosition, aim.position) < _info.MaxRange) {
+
+                transform.SetPositionAndRotation(aim.position, _context.PlayerRotation);
             }
+            else {
+                transform.SetPositionAndRotation(position, _context.PlayerRotation);
+            }
+
 
             gameObject.SetActive(true);
 
@@ -79,9 +80,10 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
 
     void AddBuffs() {
         if (!IsServer) return;
+
         if (_amountOfBuffs < _info.BannerMaxStacks) {
             _amountOfBuffs++;
-            _maveis.GetComponent<DamageManager>().IncreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
+            _damageManager.IncreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
         }
 
         if (durationCoroutine != null) {
@@ -104,15 +106,16 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
         activePlayers.Clear();
 
         if (_level == 4) {
-            _maveis.GetComponent<DamageManager>().DecreaseBaseAttackRpc(_amountOfBuffs * _info.BaseAttackIncreaseLevel2);
-            Debug.Log(_maveis.GetComponent<DamageManager>().ReturnBaseAttack());
+            for (int i = 0; i < _amountOfBuffs; i++) {
+                _damageManager.DecreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
+            }
         }
 
         else if (_level > 1) {
             foreach (var player in playersRemoved) {
                 player.GetComponent<DamageManager>().DecreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
             }
-            _maveis.GetComponent<DamageManager>().DecreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
+            _damageManager.DecreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
         }
 
         else {
@@ -171,7 +174,11 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
     [Rpc(SendTo.ClientsAndHost)]
     public override void AddStackRpc() {
         OnStacked?.Invoke(this, EventArgs.Empty);
+
         AddBuffs();
-        _maveis.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
+
+        if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter) {
+            _maveis.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
+        }
     }
 }

@@ -7,6 +7,7 @@ public class FallenMelBannerObject : SkillObjectPrefab {
     int _level;
     SkillContext _context;
     GameObject _mel;
+    DamageManager _damageManager;
     int _amountOfBuffs;
 
     Coroutine durationCoroutine;
@@ -18,6 +19,7 @@ public class FallenMelBannerObject : SkillObjectPrefab {
 
         if (_mel == null) {
             _mel = PlayerSkillPooling.Instance.MelGameObject;
+            _damageManager = _mel.GetComponent<DamageManager>();
         }
 
 
@@ -60,24 +62,18 @@ public class FallenMelBannerObject : SkillObjectPrefab {
     }
     void EndBuffs() {
         if (!IsServer) return;
-        if (_level == 4) {
-            _mel.GetComponent<DamageManager>().DecreaseBaseAttackRpc(_amountOfBuffs * _info.BaseAttackIncreaseLevel2);
-            Debug.Log(_mel.GetComponent<DamageManager>().ReturnBaseAttack());
+
+        for (int i = 0; i < _amountOfBuffs; i++) {
+            _damageManager.DecreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
         }
-        else {
-            _mel.GetComponent<DamageManager>().DecreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
-            Debug.Log(_mel.GetComponent<DamageManager>().ReturnBaseAttack());
-        }
+
     }
     void AddBuffs() {
-        if (_level < 4) {
-            _mel.GetComponent<DamageManager>().IncreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
-        }
-        else {
-            if (_amountOfBuffs < _info.BannerMaxStacks) {
-                _amountOfBuffs++;
-                _mel.GetComponent<DamageManager>().IncreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
-            }
+        if (!IsServer) return;
+
+        if (_amountOfBuffs < _info.BannerMaxStacks) {
+            _amountOfBuffs++;
+            _damageManager.IncreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
         }
 
         if (durationCoroutine != null) StopCoroutine(durationCoroutine);

@@ -19,15 +19,15 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
         _info = info as MaevisNormalAttack;
         _context = context;
 
+        if (_maevis == null) {
+            _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
+            _dManager = _maevis.GetComponent<DamageManager>();
+        }
+
         DefineParent();
     }
 
     private void DefineParent() {
-        if (_maevis == null) {
-            _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
-        }
-
-        _dManager = _maevis.GetComponent<DamageManager>();
 
         if (IsServer) {
             transform.SetParent(_maevis.transform);

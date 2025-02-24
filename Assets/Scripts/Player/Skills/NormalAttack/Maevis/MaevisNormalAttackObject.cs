@@ -13,18 +13,18 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
         _currentAttackCombo = skillLevel;
         _context = context;
 
-        DefineParentAndPosition();
-    }
-
-    void DefineParentAndPosition() {
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
+            _dManager = _maevis.GetComponent<DamageManager>();
         }
         if (_father == null) {
             _father = GameObject.FindAnyObjectByType<MaevisNormalAttackManager>().gameObject;
         }
 
-        _dManager = _maevis.GetComponent<DamageManager>();
+        DefinePosition();
+    }
+
+    void DefinePosition() {
 
         transform.localScale = _currentAttackCombo == 3 ? _info.ThirdAttackSize : _info.FirstAndSecondAttackSize;
 

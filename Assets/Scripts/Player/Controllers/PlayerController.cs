@@ -203,4 +203,8 @@ public class PlayerController : NetworkBehaviour {
         _canRotate = true;
         _canJump = true;
     }
+
+    public void BlockRotate(bool canRotate) {
+        _canRotate = canRotate;
+    }
 }

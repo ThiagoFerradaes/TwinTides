@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -15,8 +14,7 @@ public class WarCryExplosion : SkillObjectPrefab {
     }
 
     private void DefineSizeAndPosition() {
-        if (_level < 3) transform.localScale = Vector3.one * _info.ExplosionRadius;
-        else transform.localScale = Vector3.one * _info.ExplosionRadiusLevel3;
+        transform.localScale = _level < 3 ? Vector3.one * _info.ExplosionRadius : Vector3.one * _info.ExplosionRadiusLevel3;
 
         transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
 
@@ -37,10 +35,10 @@ public class WarCryExplosion : SkillObjectPrefab {
         if (other.CompareTag("Mel") && _level > 1) {
 
             if (_level > 3) {
-                other.GetComponent<DamageManager>().IncreaseBaseAttackWithTimeRpc(_info.PercentAttackSpeedLevel4, _info.DurationLevel4);
+                other.GetComponent<DamageManager>().IncreaseAttackSpeedWithTimeRpc(_info.PercentAttackSpeedLevel4, _info.DurationLevel4);
             }
             else {
-                other.GetComponent<DamageManager>().IncreaseBaseAttackWithTimeRpc(_info.PercentAttackSpeedLevel2, _info.Duration);
+                other.GetComponent<DamageManager>().IncreaseAttackSpeedWithTimeRpc(_info.PercentAttackSpeedLevel2, _info.Duration);
             }
 
             if (_level > 2) {

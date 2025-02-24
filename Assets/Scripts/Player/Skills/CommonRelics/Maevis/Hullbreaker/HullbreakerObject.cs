@@ -13,23 +13,25 @@ public class HullbreakerObject : SkillObjectPrefab {
         _level = skillLevel;
         _context = context;
 
-        SetParentAndPosition();
-    }
-
-    private void SetParentAndPosition() {
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
         }
 
-        transform.SetParent(_maevis.transform);
+        SetParentAndPosition();
+    }
 
-        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
+    private void SetParentAndPosition() {
+        if (IsServer) {
+            transform.SetParent(_maevis.transform);
+
+            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
+        }
 
         gameObject.SetActive(true);
 
         StartCoroutine(ShieldDuration());
 
-        if (_level > 3) StartCoroutine(Earthquake());
+        if (_level > 3 && IsServer) StartCoroutine(Earthquake());
     }
 
     IEnumerator ShieldDuration() {
@@ -67,13 +69,13 @@ public class HullbreakerObject : SkillObjectPrefab {
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         while (true) {
             yield return new WaitForSeconds(_info.EarthquakeInterval);
-            SkillContext newContext = new SkillContext(transform.position, transform.rotation, _context.SkillIdInUI);
+            SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
             PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 2);
         }
     }
 
     void Explode() {
-        if (_level < 3) return;
+        if (_level < 3 || !IsServer) return;
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
         PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 1);
@@ -81,7 +83,9 @@ public class HullbreakerObject : SkillObjectPrefab {
     void End() {
         Explode();
 
-        _maevis.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
+        if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter) {
+            _maevis.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
+        }
 
         ReturnObject();
     }

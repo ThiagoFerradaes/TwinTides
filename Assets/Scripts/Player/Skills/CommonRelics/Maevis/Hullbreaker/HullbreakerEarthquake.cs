@@ -18,12 +18,21 @@ public class HullbreakerEarthquake : SkillObjectPrefab {
     }
 
     private void DefinePosition() {
+        _context.PlayerPosition.y = GetGroundHeight(_context.PlayerPosition);
+
         transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
         StartCoroutine(Duration());
 
+    }
+    float GetGroundHeight(Vector3 position) {
+        Ray ray = new(position + Vector3.up * 5f, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f, LayerMask.GetMask("Floor"))) {
+            return hit.point.y + 0.1f;
+        }
+        return position.y;
     }
 
     IEnumerator Duration() {

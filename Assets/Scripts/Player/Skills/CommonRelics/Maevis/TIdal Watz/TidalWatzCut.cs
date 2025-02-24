@@ -23,26 +23,15 @@ public class TidalWatzCut : SkillObjectPrefab
         if (_father == null) {
             _father = GameObject.FindAnyObjectByType<TidalWatzObject>();
         }
+        transform.localScale = _level == 1 ? _info.CutSize : _info.CutSizeLevel2;
 
-        if (_level == 1) {
-            transform.localScale = _info.CutSize;
+        if (IsServer) {
+            transform.SetParent(_father.transform);
+
+            Vector3 position = _level < 2 ? _info.CutPosition : _info.CutPositionLevel2;
+
+            transform.SetLocalPositionAndRotation(position, Quaternion.Euler(0, 0, 0));
         }
-        else {
-            transform.localScale = _info.CutSizeLevel2;
-        }
-
-        transform.SetParent(_father.transform);
-
-        Vector3 position;
-
-        if (_level < 2) {
-            position = _info.CutPosition;
-        }
-        else {
-            position = _info.CutPositionLevel2;
-        }
-
-        transform.SetLocalPositionAndRotation(position, Quaternion.Euler(0,0,0));
 
         gameObject.SetActive(true);
 
@@ -50,13 +39,7 @@ public class TidalWatzCut : SkillObjectPrefab
     }
 
     IEnumerator CutDuration() {
-        float duration;
-        if (_level < 3) {
-            duration = _info.CutDuration;
-        }
-        else {
-            duration = _info.CutDurationLevel3;
-        }
+        float duration = _level < 3 ? _info.CutDuration : _info.CutDurationLevel3;
 
         yield return new WaitForSeconds(duration);
 

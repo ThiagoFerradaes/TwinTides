@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class EchoBlastExplodingDebuff : SkillObjectPrefab {
@@ -41,7 +42,7 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
             transform.SetLocalPositionAndRotation(new Vector3(0, _info.ExplodingDebuffHeight, 0), Quaternion.Euler(0, 0, 0));
         }
 
-        gameObject.SetActive(true);
+        TurnObjectOnRpc();
 
         parent.TryGetComponent<HealthManager>(out HealthManager health);
 
@@ -57,6 +58,12 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
 
         StartCoroutine(WaitToStartExploding());
     }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    void TurnObjectOnRpc() {
+        gameObject.SetActive(true);
+    }
+
     private bool ParentAlreadyHasDebuff(GameObject parent) {
         foreach (Transform child in parent.transform) {
             if (child.GetComponent<EchoBlastExplodingDebuff>() != null) {

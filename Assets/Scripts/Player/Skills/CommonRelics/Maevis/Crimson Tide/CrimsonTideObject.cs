@@ -10,6 +10,8 @@ public class CrimsonTideObject : SkillObjectPrefab {
     int _level;
     SkillContext _context;
     GameObject _maevis;
+    PlayerSkillManager _skillManager;
+    PlayerController _playerController;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as CrimsonTide;
@@ -18,6 +20,8 @@ public class CrimsonTideObject : SkillObjectPrefab {
 
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
+            _skillManager = _maevis.GetComponent<PlayerSkillManager>();
+            _playerController = _maevis.GetComponent<PlayerController>();
         }
 
         DefineParent();
@@ -31,8 +35,8 @@ public class CrimsonTideObject : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(true);
-        _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(true);
+        _skillManager.BlockNormalAttackRpc(true);
+        _skillManager.BlockSkillsRpc(true);
 
         if (_level < 2) {
             if (IsServer) {
@@ -42,19 +46,15 @@ public class CrimsonTideObject : SkillObjectPrefab {
             End();
         }
         else {
-            if (IsServer) StartDashRpc();
+            StartCoroutine(Dash());
 
             if (_level == 4 && IsServer) StartCoroutine(SpawnPath());
         }
     }
-    [Rpc(SendTo.ClientsAndHost)]
-    void StartDashRpc() {
-        StartCoroutine(Dash());
-    }
     IEnumerator Dash() {
         float elapsedTime = 0f;
 
-        _maevis.GetComponent<PlayerController>().BlockMovement();
+        _playerController.BlockMovement();
 
         if (IsServer) {
             int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
@@ -72,9 +72,7 @@ public class CrimsonTideObject : SkillObjectPrefab {
             }
         }
         else {
-            while (elapsedTime < _info.DashDuration) {
-                yield return null;
-            }
+            yield return new WaitForSeconds(_info.DashDuration);
         }
 
         End();

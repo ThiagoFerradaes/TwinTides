@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class CrimsonTideDashHitBox : SkillObjectPrefab {
@@ -8,8 +9,6 @@ public class CrimsonTideDashHitBox : SkillObjectPrefab {
     int _level;
     SkillContext _context;
     GameObject _maevis;
-
-    List<HealthManager> events = new();
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as CrimsonTide;
@@ -26,18 +25,11 @@ public class CrimsonTideDashHitBox : SkillObjectPrefab {
     private void SetParent() {
         if (IsServer) {
             transform.SetParent(_maevis.transform);
-
-            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
-
-            gameObject.SetActive(true);
-
-            StartCoroutine(Duration());
+            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         }
-        else {
-            gameObject.SetActive(true);
-        }
-        
 
+        gameObject.SetActive(true);
+        StartCoroutine(Duration());
     }
 
     IEnumerator Duration() {
@@ -53,32 +45,29 @@ public class CrimsonTideDashHitBox : SkillObjectPrefab {
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        if (_level == 4 && !events.Contains(health)) {
-            health.OnDeath += Health_OnDeath;
+        bool shouldExecute = health.ReturnCurrentHealth() <= health.ReturnMaxHealth() * _info.PercentToExecute / 100 && _level >= 4;
+        float damage = shouldExecute ? 9999 : _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.ExplosionDamage);
 
-            events.Add(health);
-        }
+        bool wasAlive = !health.ReturnDeathState();
 
-        if (health.ReturnCurrentHealth() > health.ReturnMaxHealth() * _info.PercentToExecute / 100 || _level < 4) {
-            float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.DashDamage);
-            health.ApplyDamageOnServerRPC(damage, true, true);
-        }
-        else {
-            health.ApplyDamageOnServerRPC(9999, false, false);
+        health.ApplyDamageOnServerRPC(damage, true, true);
+
+        if (_level == 4 && shouldExecute) {
+            if (wasAlive && health.ReturnDeathState()) {
+                Health_OnDeathRpc();
+            }
         }
 
     }
 
-    private void Health_OnDeath() {
+    [Rpc(SendTo.ClientsAndHost)]
+    private void Health_OnDeathRpc() {
         if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter)
             _maevis.GetComponent<PlayerSkillManager>().ResetCooldown(_context.SkillIdInUI);
     }
 
     void End() {
-        foreach (var enemies in events) {
-            enemies.OnDeath -= Health_OnDeath;
-        }
-        events.Clear();
+
         ReturnObject();
     }
 

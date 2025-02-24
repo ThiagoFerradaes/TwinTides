@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WarCryObject : SkillObjectPrefab {
@@ -16,24 +14,20 @@ public class WarCryObject : SkillObjectPrefab {
         _level = skillLevel;
         _context = context;
 
+        if (_maevis == null) {
+            _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
+            _dManager = _maevis.GetComponent<DamageManager>();
+            _mManager = _maevis.GetComponent<MovementManager>();
+        }
+
         DefineParentAndPosition();
     }
 
     private void DefineParentAndPosition() {
-        if (_maevis == null) {
-            _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
-        }
-
-        _dManager = _maevis.GetComponent<DamageManager>();
-        _mManager = _maevis.GetComponent<MovementManager>();
-
         if (IsServer) {
-            if (_maevis.TryGetComponent<NetworkObject>(out NetworkObject net)) {
-                transform.SetParent(net.transform);
-            }
+            transform.SetParent(_maevis.transform);
+            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
         }
-
-        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
 
         gameObject.SetActive(true);
 
@@ -51,9 +45,8 @@ public class WarCryObject : SkillObjectPrefab {
 
     IEnumerator Duration() {
         ApplyBuffs();
-        float duration;
-        if (_level < 4) duration = _info.Duration;
-        else duration = _info.DurationLevel4;
+
+        float duration = _level < 4 ? _info.Duration : _info.DurationLevel4;
 
         yield return new WaitForSeconds(duration);
 
@@ -68,12 +61,8 @@ public class WarCryObject : SkillObjectPrefab {
             _dManager.IncreaseAttackSpeedRpc(_info.PercentAttackSpeedLevel4);
         }
         else {
-            if (_level > 1) {
-                _dManager.IncreaseAttackSpeedRpc(_info.PercentAttackSpeedLevel2);
-            }
-            else {
-                _dManager.IncreaseAttackSpeedRpc(_info.PercentAttackSpeed);
-            }
+            float percent = _level < 2 ? _info.PercentAttackSpeed : _info.PercentAttackSpeedLevel2;
+            _dManager.IncreaseAttackSpeedRpc(percent);
         }
 
         if (_level > 2) {
@@ -88,12 +77,8 @@ public class WarCryObject : SkillObjectPrefab {
             _dManager.DecreaseAttackSpeedRpc(_info.PercentAttackSpeedLevel4);
         }
         else {
-            if (_level > 1) {
-                _dManager.DecreaseAttackSpeedRpc(_info.PercentAttackSpeedLevel2);
-            }
-            else {
-                _dManager.DecreaseAttackSpeedRpc(_info.PercentAttackSpeed);
-            }
+            float percent = _level < 2 ? _info.PercentAttackSpeed : _info.PercentAttackSpeedLevel2;
+            _dManager.DecreaseAttackSpeedRpc(percent);
         }
 
         if (_level > 2) {

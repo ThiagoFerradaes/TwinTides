@@ -1,5 +1,8 @@
+using NUnit.Framework;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -54,7 +57,7 @@ public class EchoBlastStunExplosion : SkillObjectPrefab {
 
         _canExplodeAgain = true;
 
-        ReturnObject();
+        End();
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -79,11 +82,16 @@ public class EchoBlastStunExplosion : SkillObjectPrefab {
             OnSecondaryExplosion?.Invoke(this, new ExplosionPosition(_context));
         }
 
-        if (_level > 3 && !health.ReturnDeathState() && IsServer) {
+        if (_level > 3 && !health.ReturnDeathState()) {
             int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
             PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 4);
-            OnExploded?.Invoke(this, new ExplodedObject(other.gameObject));
+            OnExploded?.Invoke(this, new ExplodedObject(health.gameObject));
         }
+    }
+
+    void End() {
+
+        ReturnObject();
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
