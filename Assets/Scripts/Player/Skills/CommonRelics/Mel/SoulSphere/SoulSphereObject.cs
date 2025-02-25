@@ -58,11 +58,13 @@ public class SoulSphereObject : SkillObjectPrefab {
             else if (other.CompareTag("Maevis")) {
                 StopAllCoroutines();
                 Explode();
+                ReturnObject();
             }
         }
     }
 
     void Explode() {
+        if (!IsServer) return;
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         SkillContext context = new(transform.position, transform.rotation, _context.SkillIdInUI);
         PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId,context, _level, 1);

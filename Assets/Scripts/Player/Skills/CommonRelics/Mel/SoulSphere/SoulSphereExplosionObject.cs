@@ -24,12 +24,7 @@ public class SoulSphereExplosionObject : SkillObjectPrefab {
     void DefineSize() {
         transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
 
-        if (_level < 4) {
-            transform.localScale = Vector3.one * _info.ExplosionRadius;
-        }
-        else {
-            transform.localScale = Vector3.one * _info.ExplosionRadiusLevel4;
-        }
+        transform.localScale = _level < 4 ? Vector3.one * _info.ExplosionRadius : Vector3.one * _info.ExplosionRadiusLevel4;
 
         gameObject.SetActive(true);
     }
@@ -37,7 +32,7 @@ public class SoulSphereExplosionObject : SkillObjectPrefab {
 
         yield return new WaitForSeconds(_info.ExplosionDuration);
 
-        if (_level >= 3) {
+        if (_level >= 3 && IsServer) {
             int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
             PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 2);
         }
@@ -52,7 +47,7 @@ public class SoulSphereExplosionObject : SkillObjectPrefab {
             if (_level < 4) health.AddBuffToList(_info.invulnerabilityBuff);
         }
 
-        if (!other.CompareTag("Enemy") && !IsServer) return;
+        if (!other.CompareTag("Enemy") || !IsServer) return;
 
         float damage = _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.ExplosionDamage);
 

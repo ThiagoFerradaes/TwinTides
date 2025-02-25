@@ -10,8 +10,6 @@ public class AreaWardStoneObject : SkillObjectPrefab {
     SkillContext _context;
     GameObject _mel;
 
-    bool _canHeal;
-
     List<HealthManager> _listOfPlayers = new();
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as WardStone;
@@ -36,12 +34,8 @@ public class AreaWardStoneObject : SkillObjectPrefab {
     }
 
     IEnumerator AreaDuration() {
-        if (_level < 4) {
-            yield return new WaitForSeconds(_info.AreaDuration);
-        }
-        else {
-            yield return new WaitForSeconds(_info.AreaDurationLevel4);
-        }
+        float duration = _level < 4 ? _info.AreaDuration : _info.AreaDurationLevel4;
+        yield return new WaitForSeconds(duration);
 
         ReturnObject();
     }

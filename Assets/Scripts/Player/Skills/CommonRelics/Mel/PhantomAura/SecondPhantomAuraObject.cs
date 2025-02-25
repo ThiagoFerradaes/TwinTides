@@ -21,13 +21,15 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
     void DefineSizeAndParent() {
         transform.localScale = _level < 4 ? _info.AuraSize : _info.AuraSizeLevel4;
 
-        transform.SetParent(_maevis.transform);
+        if (IsServer) {
+            transform.SetParent(_maevis.transform);
 
-        transform.SetLocalPositionAndRotation(Vector3.zero, _maevis.transform.rotation);
+            transform.SetLocalPositionAndRotation(Vector3.zero, _maevis.transform.rotation);
+        }
 
         gameObject.SetActive(true);
 
-        StartCoroutine(DamageTimer());
+        if (IsServer) StartCoroutine(DamageTimer());
 
         StartCoroutine(Duration());
     }
@@ -35,7 +37,7 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
     private void OnTriggerEnter(Collider other) {
         if (!IsServer) return;
 
-        if (other.CompareTag("Enemy")) return;
+        if (!other.CompareTag("Enemy")) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager enemyHealth)) return;
 
@@ -45,7 +47,7 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
     private void OnTriggerExit(Collider other) {
         if (!IsServer) return;
 
-        if (other.CompareTag("Enemy")) return;
+        if (!other.CompareTag("Enemy")) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager enemyHealth)) return;
 
@@ -68,9 +70,13 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
                 float damage = _level < 4 ? _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.Damage) :
                     _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.DamageLevel4);
 
-                enemyHealth.ApplyDamageOnServerRPC(damage, true, true);
+                bool enemieDead = enemyHealth.ReturnDeathState();
 
-                HealPlayer(damage);
+                if (!enemieDead) {
+                    enemyHealth.ApplyDamageOnServerRPC(damage, true, true);
+
+                    HealPlayer(damage);
+                }
             }
         }
     }

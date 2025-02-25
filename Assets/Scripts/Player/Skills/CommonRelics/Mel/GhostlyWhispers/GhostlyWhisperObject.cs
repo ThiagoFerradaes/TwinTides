@@ -22,23 +22,29 @@ public class GhostlyWhisperObject : SkillObjectPrefab {
     }
 
     void DefinePosition() {
-        transform.SetParent(_mel.transform);
+        if (IsServer) {
+            transform.SetParent(_mel.transform);
 
-        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
+            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
+        }
 
         DefineAmountOfPuddles();
 
         gameObject.SetActive(true);
 
-        InstantiatePuddle(_context);
+        InstantiatePuddle();
 
         StartCoroutine(Duration());
     }
 
-    void InstantiatePuddle(SkillContext instantiateContext) {
+    void InstantiatePuddle() {
+        if (!IsServer) return;
+
         amountOfPuddles--;
+
+        SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        PlayerSkillPooling.Instance.InstantiateAndSpawnNoCheckRpc(skillId, instantiateContext, _level, 1);
+        PlayerSkillPooling.Instance.InstantiateAndSpawnNoCheckRpc(skillId, newContext, _level, 1);
     }
 
     void DefineAmountOfPuddles() {
@@ -69,14 +75,15 @@ public class GhostlyWhisperObject : SkillObjectPrefab {
 
     void End() {
         amountOfPuddles = 0;
-        _mel.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
+        if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter) {
+            _mel.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
+        }
         ReturnObject();
     }
 
     [Rpc(SendTo.ClientsAndHost)]
     public override void AddStackRpc() {
-        SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
-        InstantiatePuddle(newContext);
+        InstantiatePuddle();
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

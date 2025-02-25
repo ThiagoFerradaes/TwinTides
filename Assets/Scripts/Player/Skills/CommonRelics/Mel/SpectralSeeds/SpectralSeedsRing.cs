@@ -29,9 +29,11 @@ public class SpectralSeedsRing : SkillObjectPrefab {
     private void DefineSizeAndPosition() {
         transform.localScale = _info.RingSize;
 
-        transform.SetParent(_mel.transform);
+        if (IsServer) {
+            transform.SetParent(_mel.transform);
 
-        transform.SetLocalPositionAndRotation(_info.RingPosition, Quaternion.Euler(0,0,0));
+            transform.SetLocalPositionAndRotation(_info.RingPosition, Quaternion.Euler(0, 0, 0));
+        }
 
         gameObject.SetActive(true);
 
@@ -95,7 +97,7 @@ public class SpectralSeedsRing : SkillObjectPrefab {
             yield return null;
         }
 
-        transform.localRotation = targetRotation; 
+        transform.localRotation = targetRotation;
 
         yield return null;
 
@@ -114,7 +116,8 @@ public class SpectralSeedsRing : SkillObjectPrefab {
     }
 
     void Cooldown() {
-        _mel.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
+        if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter)
+            _mel.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

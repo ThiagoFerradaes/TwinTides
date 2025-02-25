@@ -28,11 +28,13 @@ public class PhantomAuraObject : SkillObjectPrefab {
 
         transform.localScale = _level < 4 ? _info.AuraSize : _info.AuraSizeLevel4;
 
-        transform.SetParent(_mel.transform);
+        if (IsServer) {
+            transform.SetParent(_mel.transform);
 
-        transform.SetLocalPositionAndRotation(Vector3.zero, _context.PlayerRotation);
+            transform.SetLocalPositionAndRotation(Vector3.zero, _context.PlayerRotation);
 
-        SecondAura();
+            SecondAura();
+        }
 
         gameObject.SetActive(true);
 
@@ -84,20 +86,22 @@ public class PhantomAuraObject : SkillObjectPrefab {
                 float damage = _level < 4 ? _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.Damage) :
                             _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.DamageLevel4);
 
-                enemyHealth.ApplyDamageOnServerRPC(damage, true, true);
+                bool enemieDead = enemyHealth.ReturnDeathState();
 
-                if (_level > 1) HealPlayer(damage);
+                if (!enemieDead) {
+                    enemyHealth.ApplyDamageOnServerRPC(damage, true, true);
+
+                    if (_level > 1) HealPlayer(damage);
+                }
             }
         }
     }
 
     IEnumerator Duration() {
-        if (_level < 4) {
-            yield return new WaitForSeconds(_info.Duration);
-        }
-        else {
-            yield return new WaitForSeconds(_info.DurationLevel4);
-        }
+        float duration = _level < 4 ? _info.Duration : _info.DurationLevel4;
+
+        yield return new WaitForSeconds(duration);
+
         End();
     }
 
@@ -105,7 +109,7 @@ public class PhantomAuraObject : SkillObjectPrefab {
     void End() {
         _listOfEnemies.Clear();
 
-        transform.SetParent(null);
+        //transform.SetParent(null);
 
         ReturnObject();
     }

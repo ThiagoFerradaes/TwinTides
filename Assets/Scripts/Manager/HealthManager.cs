@@ -348,7 +348,7 @@ public class HealthManager : NetworkBehaviour {
     #endregion
 
     #region Variables Management
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void SetPermissionServerRpc(HealthPermissions permission ,bool state) {
         if (!IsServer) return;
 

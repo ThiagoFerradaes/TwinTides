@@ -34,7 +34,7 @@ public class WardStoneObject : SkillObjectPrefab {
     }
 
     private void CreateArea() {
-        if (_level >= 3) {
+        if (_level >= 3 && IsServer) {
             int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
             PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 1);
         }

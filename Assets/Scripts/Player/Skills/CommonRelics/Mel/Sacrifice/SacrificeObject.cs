@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ public class SacrificeObject : SkillObjectPrefab {
     SkillContext _context;
     GameObject _mel;
 
-    bool _healedMaevis;
+    NetworkVariable<bool> _healedMaevis = new(false);
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as Sacrifice;
@@ -26,7 +27,7 @@ public class SacrificeObject : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        _healedMaevis = false;
+        if (IsServer)_healedMaevis.Value = false;
 
         StartCoroutine(Move());
 
@@ -84,7 +85,7 @@ public class SacrificeObject : SkillObjectPrefab {
         }
     }
     private void OnTriggerEnter(Collider other) {
-        if (!other.CompareTag("Maevis") || _healedMaevis) return;
+        if (!other.CompareTag("Maevis") || _healedMaevis.Value) return;
         if (!other.TryGetComponent<HealthManager>(out HealthManager healthManager)) return;
 
         if (IsServer) HealMaevis(healthManager);
@@ -99,11 +100,12 @@ public class SacrificeObject : SkillObjectPrefab {
         };
 
         maevisHealthM.HealServerRpc(healthGain);
-        _healedMaevis = true;
 
         if (_level == 4) {
             maevisHealthM.CleanAllDebuffsRpc();
         }
+
+        _healedMaevis.Value = true;
     }
 
     void ApllyBuffToMaevis(HealthManager maevisHealthM) {

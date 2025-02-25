@@ -8,8 +8,8 @@ public class HealOverTime : HealthBuff {
     [SerializeField] float timeBetweenTicks;
     public override IEnumerator ApplyBuff(HealthManager health, int currentStacks) {
         for(int i = 0; i < amountOfTicks; i++) {
-            health.HealServerRpc(healPerTick);
             yield return new WaitForSeconds(timeBetweenTicks);
+            health.HealServerRpc(healPerTick);
         }
         StopBuff(health);
     }

@@ -8,10 +8,10 @@ public class SoulSphereArea : SkillObjectPrefab {
     SoulSphere _info;
     int _level;
     SkillContext _context;
-    bool _canDamage = true;
     GameObject _mel;
 
     List<HealthManager> playersList = new();
+    List<HealthManager> _enemiesList = new();
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as SoulSphere;
         _level = skillLevel;
@@ -34,14 +34,7 @@ public class SoulSphereArea : SkillObjectPrefab {
 
         transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
 
-        if (_level == 3) {
-            transform.localScale = _info.AreaRadius;
-
-        }
-        else if (_level == 4) {
-            transform.localScale = _info.AreaRadiusLevel4;
-        }
-
+        transform.localScale = _level < 4? _info.AreaRadius : _info.AreaRadiusLevel4;
 
         gameObject.SetActive(true);
     }
@@ -61,56 +54,51 @@ public class SoulSphereArea : SkillObjectPrefab {
 
     IEnumerator DamageCooldown() {
         while (true) {
-            _canDamage = false;
             yield return new WaitForSeconds(_info.AreaDamageCooldown);
-            _canDamage = true;
-            yield return null;
+            foreach (var enemy in _enemiesList) {
+                float damage = _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.AreaDamage);
+                enemy.ApplyDamageOnServerRPC(damage, true, true);
+            }
         }
-    }
-
-    private void OnTriggerStay(Collider other) {
-        if (!IsServer) return;
-
-        if (!_canDamage) return;
-
-        if (!other.CompareTag("Enemy")) return;
-
-        if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
-
-        float damage = _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.AreaDamage);
-
-        health.ApplyDamageOnServerRPC(damage, true, true);
-
     }
 
     private void OnTriggerEnter(Collider other) {
 
         if (_level < 4) return;
 
-        if (!other.CompareTag("Maevis") && !other.CompareTag("Mel")) return;
-
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        if (!playersList.Contains(health)) { playersList.Add(health); }
+        if (IsServer && other.CompareTag("Enemy")) {
+            if (!_enemiesList.Contains(health)) _enemiesList.Add(health);
+        }
 
-        health.RemoveBuff(_info.invulnerabilityBuff);
+        if (other.CompareTag("Mel") || other.CompareTag("Maevis")) {
+            if (!playersList.Contains(health)) { playersList.Add(health); }
 
-        if (IsServer) health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, false);
+            health.RemoveBuff(_info.invulnerabilityBuff);
+
+            if (IsServer) health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, false);
+        }
     }
 
     private void OnTriggerExit(Collider other) {
 
         if (_level < 4) return;
 
-        if (!other.CompareTag("Maevis") && !other.CompareTag("Mel")) return;
-
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        if (playersList.Contains(health)) { playersList.Remove(health); }
+        if (IsServer && other.CompareTag("Enemy")) {
+            if (_enemiesList.Contains(health)) _enemiesList.Remove(health);
+        }
 
-        if (IsServer) health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, true);
+        if (other.CompareTag("Mel") || other.CompareTag("Maevis")) {
 
-        health.AddBuffToList(_info.invulnerabilityBuff);
+            if (playersList.Contains(health)) { playersList.Remove(health); }
+
+            if (IsServer) health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, true);
+
+            health.AddBuffToList(_info.invulnerabilityBuff);
+        }
 
     }
 
@@ -123,6 +111,8 @@ public class SoulSphereArea : SkillObjectPrefab {
             foreach (var player in removedPlayers) {
                 player.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, true);
             }
+
+            _enemiesList.Clear();
         }
 
         ReturnObject();

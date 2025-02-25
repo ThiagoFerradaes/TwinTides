@@ -25,20 +25,15 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
         _level = skillLevel;
         _context = context;
 
-        DefineSizeAndPlace();
-    }
-
-    private void DefineSizeAndPlace() {
         if (_mel == null) {
             _mel = PlayerSkillPooling.Instance.MelGameObject;
         }
 
-        if (_level < 4) {
-            transform.localScale = _info.Area;
-        }
-        else {
-            transform.localScale = _info.AreaLevel4;
-        }
+        DefineSizeAndPlace();
+    }
+
+    private void DefineSizeAndPlace() {
+        transform.localScale = _level < 4 ? _info.Area : _info.AreaLevel4; 
 
         _context.PlayerPosition.y = GetFloorHeight(_context.PlayerPosition);
 
@@ -53,8 +48,7 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
             transform.SetPositionAndRotation(position, _context.PlayerRotation);
         }
 
-        if (_level >= 4) _areaLevel = 1;
-        else _areaLevel = 0;
+        _areaLevel = _level < 4 ? 0 : 1;
 
         DefineMaterial();
 

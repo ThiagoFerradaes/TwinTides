@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
 public class MelNormalAttackObject : SkillObjectPrefab {
@@ -26,14 +27,18 @@ public class MelNormalAttackObject : SkillObjectPrefab {
 
         if (_mel == null) {
             _mel = PlayerSkillPooling.Instance.MelGameObject;
+            _dManager = _mel.GetComponent<DamageManager>();
         }
-
-        _dManager = _mel.GetComponent<DamageManager>();
 
         DefineSizeAndPosition();
 
-        float cooldown = _dManager.ReturnDivisionAttackSpeed(_info.Cooldown);
-        _mel.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, cooldown);
+        
+        //if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter) {
+        //    Debug.Log("Entrei aqui");
+        //    float cooldown = _dManager.ReturnDivisionAttackSpeed(_info.Cooldown);
+        //    _mel.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, cooldown);
+        //}
+            
     }
 
     private void DefineSizeAndPosition() {
@@ -49,8 +54,6 @@ public class MelNormalAttackObject : SkillObjectPrefab {
 
     IEnumerator Move() {
 
-        transform.rotation = _mel.transform.rotation;
-
         float speed = _dManager.ReturnMultipliedAttackSpeed(_info.SphereSpeed);
 
         float duration = _info.SphereDistance / speed;
@@ -60,7 +63,7 @@ public class MelNormalAttackObject : SkillObjectPrefab {
         OnNormalAttack?.Invoke(this, new NormalAtackEventArgs(finalPosition));
         float startTime = Time.time;
 
-        while(Time.time - startTime < duration) {
+        while (Time.time - startTime < duration) {
             transform.Translate(speed * Time.deltaTime * Vector3.forward);
             yield return null;
         }
@@ -77,6 +80,11 @@ public class MelNormalAttackObject : SkillObjectPrefab {
 
         enemyHelath.ApplyDamageOnServerRPC(_info.SphereDamage, true, true);
 
+        OnNormalHitRpc();
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    void OnNormalHitRpc() {
         OnNormalAttackHit?.Invoke(this, EventArgs.Empty);
 
         End();
@@ -84,8 +92,5 @@ public class MelNormalAttackObject : SkillObjectPrefab {
 
     void End() {
         ReturnObject();
-    }
-    public override void StartSkillCooldown(SkillContext context, Skill skill) {
-        return;
     }
 }
