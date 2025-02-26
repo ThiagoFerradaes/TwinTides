@@ -7,7 +7,7 @@ public class ReduceShield : HealthDebuff
     [Range(0, 1)][SerializeField] float reducedShieldPercent;
     [SerializeField] float duration;
     public override IEnumerator ApplyDebuff(HealthManager health, int currentStacks) {
-        health.SetMultiplyServerRpc(HealthMultipliers.Shield, 1 - reducedShieldPercent);
+        if (health.IsServer) health.SetMultiplyServerRpc(HealthMultipliers.Shield, 1 - reducedShieldPercent);
         yield return new WaitForSeconds(duration);
         StopDebuff(health);
     }

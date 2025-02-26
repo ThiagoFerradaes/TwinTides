@@ -5,7 +5,7 @@ using UnityEngine;
 public class BuffBlocker : HealthDebuff {
     [SerializeField] float duration;
     public override IEnumerator ApplyDebuff(HealthManager health, int currentStacks) {
-        health.SetPermissionServerRpc(HealthPermissions.CanBeBuffed, false);
+        if (health.IsServer) health.SetPermissionServerRpc(HealthPermissions.CanBeBuffed, false);
         yield return new WaitForSeconds(duration);
         StopDebuff(health);
     }

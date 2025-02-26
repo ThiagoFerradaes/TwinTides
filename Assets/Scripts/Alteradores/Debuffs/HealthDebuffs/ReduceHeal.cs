@@ -6,7 +6,7 @@ public class ReduceHeal : HealthDebuff {
     [Range(0,1)][SerializeField] float reducedHealPercent;
     [SerializeField] float duration;
     public override IEnumerator ApplyDebuff(HealthManager health, int currentStacks) {
-        health.SetMultiplyServerRpc(HealthMultipliers.Heal, 1 - reducedHealPercent);
+        if (health.IsServer) health.SetMultiplyServerRpc(HealthMultipliers.Heal, 1 - reducedHealPercent);
         yield return new WaitForSeconds(duration);
         StopDebuff(health);
     }

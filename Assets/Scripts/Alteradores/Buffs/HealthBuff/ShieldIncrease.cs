@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShieldIncrease : HealthBuff {
     [Range(0, 1)][SerializeField] float increaseShield;
     public override IEnumerator ApplyBuff(HealthManager health, int currentStacks) {
-        health.SetMultiplyServerRpc(HealthMultipliers.Shield, 1 + increaseShield);
+        if (health.IsServer) health.SetMultiplyServerRpc(HealthMultipliers.Shield, 1 + increaseShield);
         yield return new WaitForSeconds(duration);
         StopBuff(health);
     }

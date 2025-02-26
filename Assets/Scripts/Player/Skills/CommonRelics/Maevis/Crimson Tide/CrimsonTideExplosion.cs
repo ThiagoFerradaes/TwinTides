@@ -52,10 +52,10 @@ public class CrimsonTideExplosion : SkillObjectPrefab {
 
         health.ApplyDamageOnServerRPC(damage, true, true);
 
-        if (_level == 4 && shouldExecute) {
-            if (wasAlive && health.ReturnDeathState()) {
-                Health_OnDeathRpc();
-            }
+        bool isDead = health.ReturnDeathState();
+
+        if (_level == 4 && wasAlive && isDead) {
+            Health_OnDeathRpc();
         }
     }
 

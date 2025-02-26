@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShieldBlocker : HealthDebuff {
     [SerializeField] float duration;
     public override IEnumerator ApplyDebuff(HealthManager health, int currentStacks) {
-        health.SetPermissionServerRpc(HealthPermissions.CanBeShielded, false);
+        if (health.IsServer) health.SetPermissionServerRpc(HealthPermissions.CanBeShielded, false);
         yield return new WaitForSeconds(duration);
         StopDebuff(health);
     }

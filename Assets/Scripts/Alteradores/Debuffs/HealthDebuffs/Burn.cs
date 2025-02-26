@@ -12,12 +12,12 @@ public class Burn : HealthDebuff
     public override IEnumerator ApplyDebuff(HealthManager health, int currentStacks) {
         for (int i = 0; i < amountOfTicks; i++) {
             if (health.isShielded.Value) {
-                health.ApplyDamageOnServerRPC(damagePerTickOnShield * Mathf.Max(minimumShieldAmountToMultiplyDamage,
+                if (health.IsServer) health.ApplyDamageOnServerRPC(damagePerTickOnShield * Mathf.Max(minimumShieldAmountToMultiplyDamage,
                     health.currentShieldAmount.Value), true, false);
                 yield return new WaitForSeconds(timeBetweenDamage);
             }
             else {
-                health.ApplyDamageOnServerRPC(damagePerTickOffShield * health.ReturnMaxHealth(), true, false);
+                if (health.IsServer) health.ApplyDamageOnServerRPC(damagePerTickOffShield * health.ReturnMaxHealth(), true, false);
                 yield return new WaitForSeconds(timeBetweenDamage);
             } 
         }

@@ -51,10 +51,11 @@ public class SpectralSeedsRing : SkillObjectPrefab {
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
 
         for (int i = 0; i < _AmountOfSeeds; i++) {
-            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 1);
+            if (IsServer) PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 1);
         }
     }
     void InstantiateOneSeed() {
+        if (!IsServer) return;
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 1);
     }
@@ -65,7 +66,7 @@ public class SpectralSeedsRing : SkillObjectPrefab {
         yield return new WaitForSeconds(duration);
 
         foreach (var seed in listOfSeeds) {
-            seed.transform.SetParent(null);
+            if (IsServer) seed.transform.SetParent(null);
             seed.End();
         }
 
@@ -74,7 +75,7 @@ public class SpectralSeedsRing : SkillObjectPrefab {
 
     private void SpectralSeedsObject_OnSphereMoved(object sender, EventArgs e) {
         if (listOfSeeds.Count > 0) {
-            StartCoroutine(UpdateRotation());
+            if (IsServer) StartCoroutine(UpdateRotation());
         }
         else {
             End();

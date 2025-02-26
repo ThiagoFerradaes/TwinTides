@@ -32,13 +32,12 @@ public class MelNormalAttackObject : SkillObjectPrefab {
 
         DefineSizeAndPosition();
 
-        
-        //if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter) {
-        //    Debug.Log("Entrei aqui");
-        //    float cooldown = _dManager.ReturnDivisionAttackSpeed(_info.Cooldown);
-        //    _mel.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, cooldown);
-        //}
-            
+
+        if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter) {
+            float cooldown = _dManager.ReturnDivisionAttackSpeed(_info.Cooldown);
+            _mel.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, cooldown);
+        }
+
     }
 
     private void DefineSizeAndPosition() {
@@ -92,5 +91,9 @@ public class MelNormalAttackObject : SkillObjectPrefab {
 
     void End() {
         ReturnObject();
+    }
+
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
     }
 }

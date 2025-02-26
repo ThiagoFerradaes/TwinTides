@@ -6,7 +6,7 @@ public class HealBlocker : HealthDebuff
 {
     [SerializeField] float duration;
     public override IEnumerator ApplyDebuff(HealthManager health, int currentStacks) {
-        health.SetPermissionServerRpc(HealthPermissions.CanBeHealed, false);
+        if (health.IsServer) health.SetPermissionServerRpc(HealthPermissions.CanBeHealed, false);
         yield return new WaitForSeconds(duration);
         StopDebuff(health);
     }

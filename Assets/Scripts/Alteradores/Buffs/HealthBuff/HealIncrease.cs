@@ -6,7 +6,7 @@ public class HealIncrease : HealthBuff
 {
     [Range(0, 1)][SerializeField] float increaseHeal;
     public override IEnumerator ApplyBuff(HealthManager health, int currentStacks) {
-        health.SetMultiplyServerRpc(HealthMultipliers.Heal, 1 + increaseHeal);
+        if (health.IsServer) health.SetMultiplyServerRpc(HealthMultipliers.Heal, 1 + increaseHeal);
         yield return new WaitForSeconds(duration);
         StopBuff(health);
     }

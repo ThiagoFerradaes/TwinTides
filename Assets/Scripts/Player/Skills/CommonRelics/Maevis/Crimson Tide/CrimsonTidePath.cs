@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class CrimsonTidePath : SkillObjectPrefab
-{
+public class CrimsonTidePath : SkillObjectPrefab {
     CrimsonTide _info;
     int _level;
     SkillContext _context;
@@ -44,7 +43,7 @@ public class CrimsonTidePath : SkillObjectPrefab
         if (Physics.Raycast(ray, out RaycastHit hit, 10f, LayerMask.GetMask("Floor"))) {
             return hit.point.y + 0.1f;
         }
-        return position.y; 
+        return position.y;
     }
 
     IEnumerator Duration() {
@@ -55,7 +54,7 @@ public class CrimsonTidePath : SkillObjectPrefab
 
     IEnumerator DamageCooldown() {
         float elapsedTime = 0f;
-        while (elapsedTime < _info.PathDuration) {  
+        while (elapsedTime < _info.PathDuration) {
             yield return new WaitForSeconds(_info.PathDamageInterval);
             elapsedTime += _info.PathDamageInterval;
 
@@ -70,14 +69,14 @@ public class CrimsonTidePath : SkillObjectPrefab
                 bool shouldExecute = health.ReturnCurrentHealth() <= health.ReturnMaxHealth() * _info.PercentToExecute / 100 && _level >= 4;
                 float damage = shouldExecute ? 9999 : _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.ExplosionDamage);
 
-                bool wasAlive = !health.ReturnDeathState();  
+                bool wasAlive = !health.ReturnDeathState();
 
                 health.ApplyDamageOnServerRPC(damage, true, true);
 
-                if (_level == 4 && shouldExecute) {
-                    if (wasAlive && health.ReturnDeathState()) {  
-                        Health_OnDeathRpc();
-                    }
+                bool isDead = health.ReturnDeathState();
+
+                if (_level == 4 && wasAlive && isDead) {
+                    Health_OnDeathRpc();
                 }
             }
         }
@@ -109,7 +108,8 @@ public class CrimsonTidePath : SkillObjectPrefab
 
     [Rpc(SendTo.ClientsAndHost)]
     private void Health_OnDeathRpc() {
-        _maevis.GetComponent<PlayerSkillManager>().ResetCooldown(_context.SkillIdInUI);
+        if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter)
+            _maevis.GetComponent<PlayerSkillManager>().ResetCooldown(_context.SkillIdInUI);
     }
 
     void End() {

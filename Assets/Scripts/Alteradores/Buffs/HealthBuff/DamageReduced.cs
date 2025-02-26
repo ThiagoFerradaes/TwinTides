@@ -5,7 +5,7 @@ using UnityEngine;
 public class DamageReduced : HealthBuff {
     [Range(0, 1)][SerializeField] float reduceDamage;
     public override IEnumerator ApplyBuff(HealthManager health, int currentStacks) {
-        health.SetMultiplyServerRpc(HealthMultipliers.Damage, 1 - reduceDamage);
+        if (health.IsServer) health.SetMultiplyServerRpc(HealthMultipliers.Damage, 1 - reduceDamage);
         yield return new WaitForSeconds(duration);
         StopBuff(health);
     }
