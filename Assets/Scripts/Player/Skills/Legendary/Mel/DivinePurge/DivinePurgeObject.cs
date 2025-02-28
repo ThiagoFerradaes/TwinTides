@@ -1,0 +1,102 @@
+using NUnit.Framework;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DivinePurgeObject : SkillObjectPrefab
+{
+    DivinePurge _info;
+    int _level;
+    SkillContext _context;
+    GameObject _mel;
+    PlayerController _mManager;
+    HealthManager _hManager;
+    DamageManager _dManager;
+
+    List<HealthManager> _enemiesList = new();
+    HealthManager _maevisHealth;
+
+    public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
+        _info = info as DivinePurge;
+        _level = skillLevel;
+        _context = context;
+
+        if (_mel == null) {
+            _mel = PlayerSkillPooling.Instance.MelGameObject;
+            _mManager = _mel.GetComponent<PlayerController>();
+            _hManager = _mel.GetComponent<HealthManager>();
+            _dManager = _mel.GetComponent<DamageManager>();
+        }
+
+        DefinePosition();
+    }
+
+    private void DefinePosition() {
+        transform.localScale = _info.SkillSize;
+
+        Vector3 direction = _context.PlayerRotation * Vector3.forward;
+        Vector3 position = _context.PlayerPosition + (direction * (_info.ZOffSett + _info.SkillSize.y/2));
+        transform.SetPositionAndRotation(position, _context.PlayerRotation * Quaternion.Euler(90,0,0));
+
+        gameObject.SetActive(true);
+
+        StartCoroutine(SkillDuration());
+        if (IsServer) StartCoroutine(DamageCoroutine());
+    }
+
+    IEnumerator SkillDuration() {
+        _mManager.BlockMovement();
+
+        yield return new WaitForSeconds(_info.Duration);
+
+        End();
+    }
+
+    void End() {
+        _mManager.AllowMovement();
+
+        _maevisHealth = null;
+        _enemiesList.Clear();
+
+        ReturnObject();
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (!IsServer) return;
+
+        if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
+
+        if (other.CompareTag("Maevis")) _maevisHealth = health;
+
+        else if (other.CompareTag("Enemy") && !_enemiesList.Contains(health)) _enemiesList.Add(health); 
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if (!IsServer) return;
+
+        if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
+
+        if (other.CompareTag("Maevis")) _maevisHealth = null;
+
+        else if (other.CompareTag("Enemy") && _enemiesList.Contains(health)) _enemiesList.Remove(health);
+    }
+
+    IEnumerator DamageCoroutine() {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < _info.Duration) {
+            yield return new WaitForSeconds(_info.DamageCooldown);
+            float damage = _dManager.ReturnTotalAttack(_info.DamagePerTick);
+            float totalDamage = 0f;
+            foreach (var enemy in _enemiesList) {
+                if (!enemy.ReturnDeathState()) {
+                    enemy.ApplyDamageOnServerRPC(damage, true, true);
+                    totalDamage += damage;
+                }
+            }
+            _hManager.HealServerRpc(totalDamage * _info.PercentOfHealingBasedOnDamage/100);
+            if(_maevisHealth != null)_maevisHealth.HealServerRpc(_info.AmountOfHealToMaevis);
+        }
+    }
+}

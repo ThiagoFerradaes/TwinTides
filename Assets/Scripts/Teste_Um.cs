@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 
 public class Teste_Um : MonoBehaviour {
     public CommonRelic relic;
+    public LegendaryRelic Lrelic;
     public AttackSkill attack;
     [SerializeField] Characters player = Characters.Mel;
     private void Start() {
@@ -25,6 +26,10 @@ public class Teste_Um : MonoBehaviour {
             LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne = relic;
             LocalWhiteBoard.Instance.AddToCommonDictionary(relic);
             Debug.Log("Relic: " + LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne.name);
+
+            LocalWhiteBoard.Instance.AddToLegendaryDictionary(Lrelic);
+            LocalWhiteBoard.Instance.PlayerLegendarySkill = Lrelic;
+            Debug.Log("Legendary Relic: " + LocalWhiteBoard.Instance.PlayerLegendarySkill.name);
         }
         else {
             int newLevel = LocalWhiteBoard.Instance.CommonRelicInventory[relic] + 1;

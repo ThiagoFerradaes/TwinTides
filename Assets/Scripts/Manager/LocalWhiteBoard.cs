@@ -43,7 +43,7 @@ public class LocalWhiteBoard : MonoBehaviour {
     }
 
     public void AddToLegendaryDictionary(LegendaryRelic relic) {
-        //if (LegendaryRelicInventory.ContainsKey(relic) || relic.Character != PlayerCharacter) return;
+        if (LegendaryRelicInventory.ContainsKey(relic) || relic.Character != PlayerCharacter) return;
 
         LegendaryRelicInventory.Add(relic, 1);
     }
