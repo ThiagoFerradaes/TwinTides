@@ -99,7 +99,7 @@ public class SacrificeObject : SkillObjectPrefab {
             _ => _info.HealingLevel2,
         };
 
-        maevisHealthM.HealServerRpc(healthGain);
+        maevisHealthM.HealServerRpc(healthGain, true);
 
         if (_level == 4) {
             maevisHealthM.CleanAllDebuffsRpc();

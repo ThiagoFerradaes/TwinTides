@@ -1,12 +1,9 @@
 using System;
 using System.Collections;
-using Unity.Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+
 
 public class PlayerController : NetworkBehaviour {
 
@@ -111,6 +108,7 @@ public class PlayerController : NetworkBehaviour {
     IEnumerator DashCoroutine() {
         _inDash = true;
         _canWalk = false;
+        _canRotate = false;
         float startTime = Time.time;
         OnDashCooldown?.Invoke(SkillType.Dash, dashCooldown);
 
@@ -127,6 +125,7 @@ public class PlayerController : NetworkBehaviour {
         }
 
         _canWalk = true;
+        _canRotate = true;
 
         yield return new WaitForSeconds(dashCooldown - dashDuration);
         _inDash = false;

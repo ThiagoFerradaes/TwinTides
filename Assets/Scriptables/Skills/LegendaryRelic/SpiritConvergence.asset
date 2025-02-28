@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d57a861d554e3479d2d0bfcd828442, type: 3}
+  m_Name: SpiritConvergence
+  m_EditorClassIdentifier: 
+  Name: SpiritConvergence
+  UiSprite: {fileID: 0}
+  MinLevel: 1
+  MaxLevel: 1
+  Cooldown: 20
+  IsStackable: 1
+  Character: 1
+  SkillsDescriptions: []
+  UpgradesDescriptions: []
+  skillPrefabs:
+  - {fileID: 7874063244427218275, guid: a628e6e447a8078428bfb263959027fa, type: 3}
+  SkillDuration: 10
+  MeleeMinionCooldown: 1
+  RangedMinionCooldown: 1
+  AmountOfTimesDurationCanExtend: 3
+  DurationExtensionTime: 2
+  MeeleeMinionRange: 0
+  MeeleeMinionAttackRange: 0
+  MeeleMinionAttackCooldown: 0
+  RangedMinionRange: 0
+  RangedMinionAttackRange: 0
+  RangedMinionAttackCooldown: 0

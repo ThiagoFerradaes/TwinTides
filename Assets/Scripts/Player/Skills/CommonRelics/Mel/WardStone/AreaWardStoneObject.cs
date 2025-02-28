@@ -48,7 +48,7 @@ public class AreaWardStoneObject : SkillObjectPrefab {
                     player.ApplyShieldServerRpc(shieldAmount, _info.ExtraShieldDuration, true);
                 }
                 else {
-                    player.HealServerRpc(_info.AmountOfHealing);
+                    player.HealServerRpc(_info.AmountOfHealing, true);
                 }
             }
             yield return new WaitForSeconds(_info.HealingInterval);
