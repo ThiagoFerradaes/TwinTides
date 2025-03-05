@@ -16,21 +16,35 @@ MonoBehaviour:
   UiSprite: {fileID: 0}
   MinLevel: 1
   MaxLevel: 1
-  Cooldown: 20
+  Cooldown: 30
   IsStackable: 1
   Character: 1
   SkillsDescriptions: []
   UpgradesDescriptions: []
   skillPrefabs:
   - {fileID: 7874063244427218275, guid: a628e6e447a8078428bfb263959027fa, type: 3}
+  - {fileID: 9054931232394463758, guid: e3d52a848b5395647a9416cebe941f32, type: 3}
+  - {fileID: 9054931232394463758, guid: c5e9a267d4a3a92478865610a4a1846b, type: 3}
+  - {fileID: 2783750547818537409, guid: 166e534b2c21d2645a39c6a19180dd46, type: 3}
+  - {fileID: 5687284216142523039, guid: 105345d56af3d9c40a7ff34af8a1bf5a, type: 3}
   SkillDuration: 10
-  MeleeMinionCooldown: 1
-  RangedMinionCooldown: 1
+  MeleeMinionCooldown: 2
+  RangedMinionCooldown: 2
   AmountOfTimesDurationCanExtend: 3
   DurationExtensionTime: 2
-  MeeleeMinionRange: 0
-  MeeleeMinionAttackRange: 0
-  MeeleMinionAttackCooldown: 0
-  RangedMinionRange: 0
-  RangedMinionAttackRange: 0
-  RangedMinionAttackCooldown: 0
+  CooldownForSearchEnemy: 0.2
+  RangeToMel: 4
+  MeleeMinionAttackRange: 2
+  MeleMinionAttackCooldown: 0.7
+  MeleeMinionDuration: 8
+  MeleeMinionRangeToFindEnemy: 20
+  MeleeAttackOffSet: 1
+  MeleeAttackDuration: 0.1
+  MeleeAttackDamage: 1
+  RangedMinionAttackRange: 10
+  RangedMinionAttackCooldown: 1
+  RangedMinionDuration: 6
+  RangedMinionRangeToFindEnemy: 20
+  RangedAttackSpeed: 20
+  RangedAttackDuration: 2
+  RangedAttackDamage: 1

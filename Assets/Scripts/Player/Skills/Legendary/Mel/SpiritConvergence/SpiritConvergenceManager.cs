@@ -57,7 +57,7 @@ public class SpiritConvergenceManager : SkillObjectPrefab
         while (_timer < _durationTime) {
 
             SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
-            //PlayerSkillPooling.Instance.InstantiateAndSpawnNoCheckRpc(skillId, newContext, _level, 1);
+            PlayerSkillPooling.Instance.InstantiateAndSpawnNoCheckRpc(skillId, newContext, _level, 1);
             Debug.Log("Instanciei melee");
 
             yield return new WaitForSeconds(_info.MeleeMinionCooldown);
@@ -90,7 +90,7 @@ public class SpiritConvergenceManager : SkillObjectPrefab
        
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
-        //PlayerSkillPooling.Instance.InstantiateAndSpawnNoCheckRpc(skillId, newContext, _level, 2);
+        PlayerSkillPooling.Instance.InstantiateAndSpawnNoCheckRpc(skillId, newContext, _level, 2);
         Debug.Log("Instanciei Ranged");
     }
 

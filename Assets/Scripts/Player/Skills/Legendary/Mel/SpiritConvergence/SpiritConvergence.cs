@@ -10,13 +10,25 @@ public class SpiritConvergence : LegendaryRelic
     public float AmountOfTimesDurationCanExtend;
     public float DurationExtensionTime;
 
+    [Header("Minions")]
+    public float CooldownForSearchEnemy;
+    public float RangeToMel;
+
     [Header("Melee Minion")]
-    public float MeeleeMinionRange;
-    public float MeeleeMinionAttackRange;
-    public float MeeleMinionAttackCooldown;
+    public float MeleeMinionAttackRange;
+    public float MeleMinionAttackCooldown;
+    public float MeleeMinionDuration;
+    public float MeleeMinionRangeToFindEnemy;
+    public float MeleeAttackOffSet;
+    public float MeleeAttackDuration;
+    public float MeleeAttackDamage;
 
     [Header("Ranged Minion")]
-    public float RangedMinionRange;
     public float RangedMinionAttackRange;
     public float RangedMinionAttackCooldown;
+    public float RangedMinionDuration;
+    public float RangedMinionRangeToFindEnemy;
+    public float RangedAttackSpeed;
+    public float RangedAttackDuration;
+    public float RangedAttackDamage;
 }
