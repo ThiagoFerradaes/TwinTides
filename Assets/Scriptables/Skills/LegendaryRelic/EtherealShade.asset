@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d4a3e8fc98cfd4daa538e28ffbfbde, type: 3}
+  m_Name: EtherealShade
+  m_EditorClassIdentifier: 
+  Name: Ethereal Shade
+  UiSprite: {fileID: 0}
+  MinLevel: 1
+  MaxLevel: 1
+  Cooldown: 30
+  IsStackable: 1
+  Character: 1
+  SkillsDescriptions: []
+  UpgradesDescriptions: []
+  skillPrefabs:
+  - {fileID: 8863925194899843353, guid: 4eb00c0736ade8f4faadd355a5089ac8, type: 3}
+  CloneDuration: 10
+  GrowthPercentage: 25
+  HealCooldown: 2
+  MaxAmountOfGrowths: 4
+  Heal: 20
+  BaseDamage: 1
+  PercentOfDamageIncreasePerGrowth: 50
+  MaxRangeToPlace: 10
+  ExplosionDuration: 0.1
+  InicialRadius: 7
