@@ -57,7 +57,7 @@ public class DreadfallManager : SkillObjectPrefab {
     }
 
     private void RecieveShield() {
-        if (_level < 2 || !IsServer) return;
+        if (!IsServer) return;
 
         if (!_maevis.TryGetComponent<HealthManager>(out HealthManager health)) return;
 

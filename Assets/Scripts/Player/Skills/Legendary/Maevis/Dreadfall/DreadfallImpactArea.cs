@@ -8,6 +8,7 @@ public class DreadfallImpactArea : SkillObjectPrefab {
     int _level;
     SkillContext _context;
     GameObject _maevis;
+    DamageManager _dManager;
 
     List<HealthManager> _listOfEnemies = new();
 
@@ -18,12 +19,14 @@ public class DreadfallImpactArea : SkillObjectPrefab {
 
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
+            _dManager = _maevis.GetComponent<DamageManager>();
         }
 
         SetPosition();
     }
 
     private void SetPosition() {
+        transform.localScale = new(_info.FieldRadius, transform.localScale.y, _info.FieldRadius);
 
         _context.PlayerPosition.y = GetGroundHeight(_context.PlayerPosition);
 
@@ -53,7 +56,7 @@ public class DreadfallImpactArea : SkillObjectPrefab {
     IEnumerator DamageCooldown() {
         while (true) {
             yield return new WaitForSeconds(_info.DamageCooldown);
-            float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.FieldDamagePerTick);
+            float damage = _dManager.ReturnTotalAttack(_info.FieldDamagePerTick);
 
             foreach (var health in _listOfEnemies) {
                 if (IsServer) health.ApplyDamageOnServerRPC(damage, true, true);

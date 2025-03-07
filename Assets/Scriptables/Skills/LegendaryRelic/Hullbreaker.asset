@@ -15,8 +15,8 @@ MonoBehaviour:
   Name: Hullbreaker
   UiSprite: {fileID: 0}
   MinLevel: 1
-  MaxLevel: 4
-  Cooldown: 5
+  MaxLevel: 1
+  Cooldown: 20
   IsStackable: 0
   Character: 0
   SkillsDescriptions: []
@@ -25,13 +25,12 @@ MonoBehaviour:
   - {fileID: 221680419640250693, guid: 62107aa32eaf20c46a6cfc420d74fbbf, type: 3}
   - {fileID: 2115139789942485532, guid: 718a5a5636c99fc44acba88f2b8fe18a, type: 3}
   - {fileID: 5266687347423813970, guid: f2f4092f23c8b994c9813f3843a35e91, type: 3}
+  ShieldDuration: 10
   ShieldAmount: 1
-  ShieldDuration: 6
-  ShieldAmountLevel2: 2
-  ExplosionDamage: 10
+  ExplosionDamage: 1
   ExplosionDuration: 0.1
-  ShieldDurationLevel4: 8
-  ShieldAmountLevel4: 3
-  EarthquakeDamage: 5
+  EarthquakeDamage: 1
+  ExplosionRadius: 16
   EarthquakeDuration: 0.1
   EarthquakeInterval: 1
+  EarthquakeRadius: 20

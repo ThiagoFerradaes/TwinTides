@@ -1,42 +1,44 @@
-using System;
 using System.Collections;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
-public class HullbreakerEarthquake : SkillObjectPrefab {
-    Hullbreaker _info;
+public class DreadfallExplosion : SkillObjectPrefab {
+    Dreadfall _info;
+    int _level;
     SkillContext _context;
     GameObject _maevis;
+    DamageManager _dManager;
+
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
-        _info = info as Hullbreaker;
+        _info = info as Dreadfall;
+        _level = skillLevel;
         _context = context;
 
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
+            _dManager = _maevis.GetComponent<DamageManager>();
         }
 
-        DefinePosition();
+        SetPosition();
     }
 
-    private void DefinePosition() {
-        _context.PlayerPosition.y = GetGroundHeight(_context.PlayerPosition);
+    void SetPosition() {
+        transform.localScale = Vector3.one * _info.ExplosionRadius;
 
         transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
         StartCoroutine(Duration());
-
-    }
-    float GetGroundHeight(Vector3 position) {
-        Ray ray = new(position + Vector3.up * 5f, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 10f, LayerMask.GetMask("Floor"))) {
-            return hit.point.y + 0.1f;
-        }
-        return position.y;
     }
 
     IEnumerator Duration() {
-        yield return new WaitForSeconds(_info.EarthquakeDuration);
+        yield return new WaitForSeconds(_info.ExplosionDuration);
+
+        if (IsServer) {
+            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 2);
+        }
 
         ReturnObject();
     }
@@ -48,7 +50,7 @@ public class HullbreakerEarthquake : SkillObjectPrefab {
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.EarthquakeDamage);
+        float damage = _dManager.ReturnTotalAttack(_info.ExplosionDamage);
 
         health.ApplyDamageOnServerRPC(damage, true, true);
     }

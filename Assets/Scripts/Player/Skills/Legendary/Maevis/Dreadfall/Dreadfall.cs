@@ -1,27 +1,20 @@
 using UnityEngine;
 
-[CreateAssetMenu (menuName = "CommonRelic/Dreadfall")]
-public class Dreadfall : CommonRelic
+[CreateAssetMenu (menuName = "LegendaryRelic/Dreadfall")]
+public class Dreadfall : LegendaryRelic
 {
-    [Header("Dreadfall Level 1")]
+    [Header("Atributes")]
+    public float ExplosionDuration;
     public float ExplosionRadius;
     public float ExplosionDamage;
-    public float ExplosionDuration;
     public float JumpDuration;
     public float JumpSpeed;
     public float JumpMaxRange;
-
-    [Header("Dreadfall Level 2")]
     public float AmountOfShiled;
     public float ShieldDuration;
-
-    [Header("Dreadfall Level 3")]
-    public float ExplosionRadiusLevel3;
-    public float ExplosionDamageLevel3;
-
-    [Header("Dreadfall Level 4")]
     public float FieldDuration;
     public float FieldDamagePerTick;
+    public float FieldRadius;
     public float DamageCooldown;
     public HealthDebuff BleedDebuff;
 }

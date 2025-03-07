@@ -19,6 +19,8 @@ public class HullbreakerExplosion : SkillObjectPrefab {
     }
 
     private void DefinePosition() {
+        transform.localScale = Vector3.one * _info.ExplosionRadius;
+
         transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
 
         gameObject.SetActive(true);

@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Dreadfall
   UiSprite: {fileID: 0}
   MinLevel: 1
-  MaxLevel: 4
+  MaxLevel: 1
   Cooldown: 3
   IsStackable: 1
   Character: 0
@@ -25,17 +25,16 @@ MonoBehaviour:
   - {fileID: 3342475582834343785, guid: ef05d3676c59ea64c9bcedcb8eaf29d3, type: 3}
   - {fileID: 6170864651418313359, guid: ce99e7d658f40ae45a74502eac757b37, type: 3}
   - {fileID: 1100069247360307104, guid: c45418b1a9322da4d9af8e4afcf82c9b, type: 3}
-  ExplosionRadius: 6
-  ExplosionDamage: 1
   ExplosionDuration: 0.1
+  ExplosionRadius: 16
+  ExplosionDamage: 1
   JumpDuration: 0.4
   JumpSpeed: 4
-  JumpMaxRange: 8
-  AmountOfShiled: 10
-  ShieldDuration: 5
-  ExplosionRadiusLevel3: 12
-  ExplosionDamageLevel3: 1
-  FieldDuration: 3
-  FieldDamagePerTick: 1
+  JumpMaxRange: 12
+  AmountOfShiled: 20
+  ShieldDuration: 6
+  FieldDuration: 4
+  FieldDamagePerTick: 0
+  FieldRadius: 16
   DamageCooldown: 0.6
   BleedDebuff: {fileID: 11400000, guid: 811747b3cf3ece547a8d6f3bd782cfb3, type: 2}
