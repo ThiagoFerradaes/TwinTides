@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class SpectralSeedsExplosion : SkillObjectPrefab {
