@@ -1,12 +1,12 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Node", menuName = "BehaviourTree/RootNode")]
-public class RootNode : Node
-{
+public class RootNode : Node {
+
+    public DecoratorNode Child;
+
     public override Status Execute() {
-        foreach(var child in Children) {
-            child.Execute();
-        }
+        nodeStatus = Child.Execute();
 
         Debug.Log(name + " " + nodeStatus);
         return nodeStatus;

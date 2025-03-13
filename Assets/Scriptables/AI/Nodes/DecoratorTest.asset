@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d460f31c93cc96348920f031d476ca9c, type: 3}
-  m_Name: TestTree
+  m_Script: {fileID: 11500000, guid: c7e22448e55acc349a486d369e62b1b7, type: 3}
+  m_Name: DecoratorTest
   m_EditorClassIdentifier: 
-  rootNode: {fileID: 11400000, guid: b5bfce5f898e19241850248499ccbccd, type: 2}
-  treeStatus: 1
+  nodeName: DecoratorTest
+  nodeStatus: 1
+  Child: {fileID: 11400000, guid: fa35286c165e71a4ba9abc3122752c34, type: 2}

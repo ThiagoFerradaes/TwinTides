@@ -6,8 +6,7 @@ using UnityEngine;
 public class Node : ScriptableObject
 {
     public string nodeName;
-    public List<Node> Children;
-    public Status nodeStatus;
+    [HideInInspector] public Status nodeStatus = Status.RUNNING;
 
     public enum Status { SUCCESS, RUNNING, FAILURE};
 

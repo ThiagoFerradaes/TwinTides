@@ -7,27 +7,43 @@ public class TreeManager : MonoBehaviour {
 
     private void Start() {
         CloneTree();
-
     }
 
     void CloneTree() {
         _actualTree = Instantiate(tree);
 
         _actualTree.rootNode = CloneNode(tree.rootNode);
-
-        _actualTree.rootNode.Execute();
-
-        Debug.Log(_actualTree.name);
     }
 
     Node CloneNode(Node nodeToClone) {
         Node clonedNode = Instantiate(nodeToClone);
 
-        clonedNode.Children = new();
-        foreach(var child in nodeToClone.Children) {
-            clonedNode.Children.Add(CloneNode(child));
+        if (clonedNode is RootNode root) {
+            RootNode newNode = (RootNode)clonedNode;
+
+            if (newNode.Child != null) root.Child = (DecoratorNode)CloneNode(newNode.Child);
+        }
+
+        else if (clonedNode is DecoratorNode decorator) {
+            DecoratorNode newNode = (DecoratorNode)clonedNode;
+
+            if (newNode.Child != null) decorator.Child = CloneNode(newNode.Child);
+        }
+
+        else if (clonedNode is CompositeNode compositeNode) {
+            CompositeNode newNode = (CompositeNode)clonedNode;
+
+            if (newNode.Children != null) {
+                foreach (var child in newNode.Children) {
+                    compositeNode.Children.Add(CloneNode(child));
+                }
+            }
         }
 
         return clonedNode;
+    }
+
+    private void Update() {
+        if (_actualTree.treeStatus == Node.Status.RUNNING) _actualTree.ExecuteTree();
     }
 }

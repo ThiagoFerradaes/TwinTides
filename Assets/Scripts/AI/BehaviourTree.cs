@@ -4,4 +4,9 @@ using UnityEngine;
 public class BehaviourTree : ScriptableObject
 {
     public Node rootNode;
+    [HideInInspector] public Node.Status treeStatus = Node.Status.RUNNING;
+
+    public void ExecuteTree() {
+        treeStatus = rootNode.Execute();
+    }
 }
