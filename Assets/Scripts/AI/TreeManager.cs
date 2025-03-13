@@ -12,7 +12,7 @@ public class TreeManager : MonoBehaviour {
     void CloneTree() {
         _actualTree = Instantiate(tree);
 
-        _actualTree.rootNode = CloneNode(tree.rootNode);
+        _actualTree.rootNode = (RootNode)CloneNode(tree.rootNode);
     }
 
     Node CloneNode(Node nodeToClone) {
