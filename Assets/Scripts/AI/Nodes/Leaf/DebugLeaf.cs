@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Node", menuName = "BehaviourTree/DebugLeaf")]
+[CreateAssetMenu(fileName = "Node", menuName = "BehaviourTree/LeafNode/DebugLeaf")]
 public class DebugLeaf : LeafNode
 {
     [SerializeField] string debug;
