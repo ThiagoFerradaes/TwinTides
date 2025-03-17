@@ -7,6 +7,6 @@ public class BehaviourTree : ScriptableObject
     [HideInInspector] public Node.Status treeStatus = Node.Status.RUNNING;
 
     public void ExecuteTree() {
-        treeStatus = rootNode.Execute();
+        treeStatus = rootNode.Tick();
     }
 }

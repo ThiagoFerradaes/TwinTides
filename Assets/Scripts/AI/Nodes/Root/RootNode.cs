@@ -6,9 +6,12 @@ public class RootNode : Node {
     public DecoratorNode Child;
 
     public override Status Execute() {
-        nodeStatus = Child.Execute();
+        if (Child == null) return Status.FAILURE;
 
-        Debug.Log(name + " " + nodeStatus);
-        return nodeStatus;
+        Status temp = Child.Tick();
+
+        Debug.Log(name + " " + temp);
+
+        return temp;
     }
 }

@@ -9,7 +9,7 @@ public class BoolConditionNode : DecoratorNode {
         if (Child == null) return Status.FAILURE;
 
         if (isCondition) {
-            return Child.Execute();
+            return Child.Tick();
         }
 
         return Status.FAILURE;

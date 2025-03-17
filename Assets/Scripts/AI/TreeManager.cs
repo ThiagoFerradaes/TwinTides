@@ -5,6 +5,7 @@ public class TreeManager : MonoBehaviour {
     [SerializeField] BehaviourTree tree;
     BehaviourTree _actualTree;
 
+
     private void Start() {
         CloneTree();
     }
@@ -30,13 +31,16 @@ public class TreeManager : MonoBehaviour {
             if (newNode.Child != null) decorator.Child = CloneNode(newNode.Child);
         }
 
-        else if (clonedNode is CompositeNode compositeNode) {
-            CompositeNode newNode = (CompositeNode)clonedNode;
+        else if (clonedNode is CompositeNode newNode) {
+            if (newNode.Children != null && newNode.Children.Count > 0) {
 
-            if (newNode.Children != null) {
-                foreach (var child in newNode.Children) {
-                    compositeNode.Children.Add(CloneNode(child));
+                List<Node> clonedChildren = new();
+
+                for (int i = 0; i < newNode.Children.Count; i++) {
+                    clonedChildren.Add(CloneNode(newNode.Children[i]));
                 }
+
+                newNode.Children = clonedChildren;
             }
         }
 

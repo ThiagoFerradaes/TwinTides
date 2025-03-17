@@ -6,14 +6,18 @@ public class LoopDecorator : DecoratorNode
     [SerializeField] bool isInfinite;
     [SerializeField, Tooltip("Esse número só é necessário se não for infinito")] int LoopAmount;
     public override Status Execute() {
+        if (Child == null) return Status.FAILURE;
+
+        Status temp = Status.SUCCESS;
+
         if (isInfinite) {
-            Child.Execute();
+            Child.Tick();
             return Status.RUNNING;  
         }
 
         for (int i = 0; i < LoopAmount; i++) {
-            Child.Execute();
+            temp = Child.Tick();
         }
-        return Status.SUCCESS;
+        return temp;
     }
 }
