@@ -6,6 +6,7 @@ public abstract class Node : ScriptableObject
 {
     public string nodeName;
     [HideInInspector] public Status NodeStatus = Status.SUCCESS;
+    [HideInInspector] public AIContext Context;
 
     public enum Status { SUCCESS, RUNNING, FAILURE};
 

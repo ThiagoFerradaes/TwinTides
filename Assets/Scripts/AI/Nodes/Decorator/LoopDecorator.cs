@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Node", menuName = "BehaviourTree/LoopDecorator")]
+[CreateAssetMenu(fileName = "Node", menuName = "BehaviourTree/Decorator/LoopDecorator")]
 public class LoopDecorator : DecoratorNode
 {
     [SerializeField] bool isInfinite;

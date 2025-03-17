@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TreeManager : MonoBehaviour {
     [SerializeField] BehaviourTree tree;
+    [SerializeField] AIPath path;
     BehaviourTree _actualTree;
-
 
     private void Start() {
         CloneTree();
@@ -14,6 +15,10 @@ public class TreeManager : MonoBehaviour {
         _actualTree = Instantiate(tree);
 
         _actualTree.rootNode = (RootNode)CloneNode(tree.rootNode);
+
+        AIContext context = new(path, GetComponent<NavMeshAgent>());
+
+        _actualTree.InitiateTree(context);
     }
 
     Node CloneNode(Node nodeToClone) {
