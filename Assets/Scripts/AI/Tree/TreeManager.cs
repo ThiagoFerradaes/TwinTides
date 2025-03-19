@@ -25,18 +25,17 @@ public class TreeManager : MonoBehaviour {
         Node clonedNode = Instantiate(nodeToClone);
 
         if (clonedNode is RootNode root) {
-            RootNode newNode = (RootNode)clonedNode;
 
-            if (newNode.Child != null) root.Child = (DecoratorNode)CloneNode(newNode.Child);
+            if (root.Child != null) root.Child = (DecoratorNode)CloneNode(root.Child);
         }
 
         else if (clonedNode is DecoratorNode decorator) {
-            DecoratorNode newNode = (DecoratorNode)clonedNode;
 
-            if (newNode.Child != null) decorator.Child = CloneNode(newNode.Child);
+            if (decorator.Child != null) decorator.Child = CloneNode(decorator.Child);
         }
 
         else if (clonedNode is CompositeNode newNode) {
+
             if (newNode.Children != null && newNode.Children.Count > 0) {
 
                 List<Node> clonedChildren = new();

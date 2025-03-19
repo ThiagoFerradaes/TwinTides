@@ -18,6 +18,9 @@ public class LoopDecorator : DecoratorNode
         for (int i = 0; i < LoopAmount; i++) {
             temp = Child.Tick();
         }
+
+        Debug.Log(name + " " +  temp);
+
         return temp;
     }
 }
