@@ -16,7 +16,7 @@ public class TreeManager : MonoBehaviour {
 
         _actualTree.rootNode = (RootNode)CloneNode(tree.rootNode);
 
-        AIContext context = new(path, GetComponent<NavMeshAgent>());
+        AIContext context = new(path, GetComponent<NavMeshAgent>(), GetComponent<MovementManager>());
 
         _actualTree.InitiateTree(context);
     }
