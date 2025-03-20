@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae4c8930bf3562a43a6e740102170513, type: 3}
-  m_Name: LoopTest
+  m_Script: {fileID: 11500000, guid: 2eac56755aa842d40bf328859ff672e0, type: 3}
+  m_Name: SequencePatrolBotTree
   m_EditorClassIdentifier: 
-  nodeName: Loop Test
+  nodeName: Sequence Patrol Bot Tree Follow
   NodeStatus: 0
-  Child: {fileID: 11400000, guid: 56debdbdd6850c54ea214f0900cb0259, type: 2}
-  isInfinite: 1
-  LoopAmount: 0
+  Children:
+  - {fileID: 11400000, guid: 0cd77b9cba3eb4246bcb4d55fb508fc9, type: 2}
+  - {fileID: 11400000, guid: 7589607a5c2ed154a9a928e343e5e195, type: 2}

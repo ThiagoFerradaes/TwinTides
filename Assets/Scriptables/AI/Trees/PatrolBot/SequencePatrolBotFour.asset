@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f24fd3af30cde4419a5689f9e38ab4c, type: 3}
-  m_Name: TestRoot
+  m_Script: {fileID: 11500000, guid: 2eac56755aa842d40bf328859ff672e0, type: 3}
+  m_Name: SequencePatrolBotFour
   m_EditorClassIdentifier: 
-  nodeName: Test
+  nodeName: Sequence Patrol Bot Four Follow
   NodeStatus: 0
-  Child: {fileID: 11400000, guid: 3557ca8d66741e344a1300a31c2c891e, type: 2}
+  Children:
+  - {fileID: 11400000, guid: 2f4bae16df5daec41be71719f80cb9db, type: 2}
+  - {fileID: 11400000, guid: 01ec1e646047b48458add3bdeaa750d4, type: 2}

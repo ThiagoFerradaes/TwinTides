@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d421511b2117c474bbf9e4d86d3fab2a, type: 3}
-  m_Name: TreeSecondsCooldown
+  m_Script: {fileID: 11500000, guid: 642e6c1a75a833845befaba15e59e1d6, type: 3}
+  m_Name: SelectorPatrolBot
   m_EditorClassIdentifier: 
-  nodeName: 
+  nodeName: Patrol Selector
   NodeStatus: 0
-  cooldownTime: 3
+  Children:
+  - {fileID: 11400000, guid: a9f1feed2259803499957e7cdd7daa28, type: 2}
+  - {fileID: 11400000, guid: 509b779b6fb5d15438f93105638e62d0, type: 2}
