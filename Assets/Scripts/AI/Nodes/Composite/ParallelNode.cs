@@ -5,6 +5,7 @@ using UnityEngine;
 public class ParallelNode : CompositeNode {
     [SerializeField, Tooltip("Se verdadeiro, todos os filhos precisam retornar SUCCESS para esse nó ter sucesso, " +
         "caso falso, apenas 1 filho precisa retornar SUCCESS para o nó ter sucesso")] bool totalSuccessNode;
+    [SerializeField] bool uniterruptable;
     Dictionary<Node, Status> _childrenStatus = new();
 
     public override void OnStart() {
@@ -32,7 +33,8 @@ public class ParallelNode : CompositeNode {
             }
         }
 
-        if (running) return Status.RUNNING;
+        if (running && !uniterruptable) return Status.RUNNING;
+        else if (running && uniterruptable) return Status.SUCCESS;
         else if (totalSuccessNode) return failure ? Status.FAILURE : Status.SUCCESS;
         else return success ? Status.SUCCESS : Status.FAILURE;
     }

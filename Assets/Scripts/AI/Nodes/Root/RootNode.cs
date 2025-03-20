@@ -10,8 +10,6 @@ public class RootNode : Node {
 
         Status temp = Child.Tick();
 
-        Debug.Log(name + " " + temp);
-
         return temp;
     }
 }
