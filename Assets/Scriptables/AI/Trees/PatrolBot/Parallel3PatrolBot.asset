@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a519ce7853036b4b96bf31761b5e247, type: 3}
-  m_Name: AIPathTest
+  m_Script: {fileID: 11500000, guid: 2f8fe51d57039144c88ab53f984cfee1, type: 3}
+  m_Name: Parallel3PatrolBot
   m_EditorClassIdentifier: 
-  Waypoints: 0000000001000000
+  nodeName: 
+  NodeStatus: 0
+  Children:
+  - {fileID: 11400000, guid: 9e6884b31dc7da14ebd5493ba04360ee, type: 2}
+  uninterruptible: 1

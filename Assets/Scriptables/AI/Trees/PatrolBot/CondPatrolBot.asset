@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a519ce7853036b4b96bf31761b5e247, type: 3}
-  m_Name: AIPathTest
+  m_Script: {fileID: 11500000, guid: bdea77bcd9912064e8aef5627390c7e5, type: 3}
+  m_Name: CondPatrolBot
   m_EditorClassIdentifier: 
-  Waypoints: 0000000001000000
+  nodeName: 
+  NodeStatus: 0
+  Child: {fileID: 11400000, guid: 96581c0d92cbd2b4caf69620b0151375, type: 2}
+  conditionTags: 0000000001000000
+  isGate: 0

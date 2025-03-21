@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a519ce7853036b4b96bf31761b5e247, type: 3}
-  m_Name: AIPathTest
+  m_Script: {fileID: 11500000, guid: d460f31c93cc96348920f031d476ca9c, type: 3}
+  m_Name: TreePatrolBot
   m_EditorClassIdentifier: 
-  Waypoints: 0000000001000000
+  rootNode: {fileID: 11400000, guid: 6b37bf712bb2725439c0c60cba0bf757, type: 2}
+  treeStatus: 1

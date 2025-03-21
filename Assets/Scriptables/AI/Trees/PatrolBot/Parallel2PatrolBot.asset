@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 642e6c1a75a833845befaba15e59e1d6, type: 3}
-  m_Name: SelectorPatrolBot
+  m_Script: {fileID: 11500000, guid: 2f8fe51d57039144c88ab53f984cfee1, type: 3}
+  m_Name: Parallel2PatrolBot
   m_EditorClassIdentifier: 
   nodeName: 
   NodeStatus: 0
   Children:
-  - {fileID: 11400000, guid: cfd2c35c6a550d74187d09dfe0efd2f6, type: 2}
-  - {fileID: 11400000, guid: b02d900b63dea514fb0b8e78e09ab517, type: 2}
+  - {fileID: 11400000, guid: 56312af020856cc4490b2e5c72c24ba0, type: 2}
+  - {fileID: 11400000, guid: 42ab8911623a1da44b44463ee25c3317, type: 2}
+  uninterruptible: 1

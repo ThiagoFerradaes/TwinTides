@@ -12,7 +12,7 @@ public class PlayerDetectionLeaf : LeafNode
     public override Status Execute() {
         Collider[] detectedPlayers = Physics.OverlapSphere(Context.Agent.transform.position, DetectionRadius, DetectionLayer);
 
-        if (detectedPlayers.Length == 0) Debug.Log("Nothing Found");
+        if (detectedPlayers.Length == 0) Context.Blackboard.isTargetInRange = false;
 
         float closestPlayerDistance = Mathf.Infinity;
         Transform closestPlayer = null;
@@ -24,8 +24,7 @@ public class PlayerDetectionLeaf : LeafNode
             if (angleToPlayer <= DetectionAngle / 2) {
 
                 if (Physics.Raycast(Context.Agent.transform.position, directionToPlayer, out RaycastHit ray, DetectionRadius,ObstacleLayer)) {
-                    Debug.Log("Wall Found");
-                    return Status.FAILURE;
+                    Context.Blackboard.isTargetInRange = false;
                 }
 
                 if (Physics.Raycast(Context.Agent.transform.position, directionToPlayer, out ray, DetectionRadius, DetectionLayer)) {
@@ -35,14 +34,13 @@ public class PlayerDetectionLeaf : LeafNode
                             closestPlayerDistance = Vector3.Distance(Context.Agent.transform.position, ray.collider.transform.position);
                         }
                         Context.Blackboard.Target = closestPlayer;
-                        Debug.Log("Player Found: " + closestPlayer.name);
-                        return Status.SUCCESS;
+                        Context.Blackboard.isTargetInRange = true;
                     }
                 }
 
             }
         }
 
-        return Status.FAILURE;
+        return Status.SUCCESS;
     }
 }

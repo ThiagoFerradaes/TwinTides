@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a519ce7853036b4b96bf31761b5e247, type: 3}
-  m_Name: AIPathTest
+  m_Script: {fileID: 11500000, guid: 9cabca05dd58bfa488f1a4e71f85ca36, type: 3}
+  m_Name: CDD1PatrolBot
   m_EditorClassIdentifier: 
-  Waypoints: 0000000001000000
+  nodeName: 
+  NodeStatus: 0
+  Child: {fileID: 11400000, guid: 90c5f4cd4bb856e41989f30f7bb6f398, type: 2}
+  cooldown: 0.1

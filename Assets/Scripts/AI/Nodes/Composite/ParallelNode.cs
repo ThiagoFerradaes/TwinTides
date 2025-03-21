@@ -3,12 +3,11 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Node", menuName = "BehaviourTree/CompositeNode/Parellel")]
 public class ParallelNode : CompositeNode {
-    [SerializeField, Tooltip("Se verdadeiro, todos os filhos precisam retornar SUCCESS para esse nó ter sucesso, " +
-        "caso falso, apenas 1 filho precisa retornar SUCCESS para o nó ter sucesso")] bool totalSuccessNode;
-    [SerializeField] bool uniterruptable;
+    [SerializeField, Tooltip("Se verdadeiro, quando um filho retorna RUNNING ele considera como SUCCESS")] bool uninterruptible;
     Dictionary<Node, Status> _childrenStatus = new();
 
     public override void OnStart() {
+        _childrenStatus.Clear();
         foreach (var child in Children) {
             _childrenStatus[child] = Status.RUNNING;
         }
@@ -16,7 +15,6 @@ public class ParallelNode : CompositeNode {
     public override Status Execute() {
         if (Children == null || Children.Count == 0) return Status.FAILURE;
 
-        bool success = false;
         bool failure = false;
         bool running = false;
 
@@ -27,19 +25,13 @@ public class ParallelNode : CompositeNode {
 
                 _childrenStatus[child] = tempStatus;
 
-                if (tempStatus == Status.SUCCESS) success = true;
-                else if (tempStatus == Status.FAILURE) failure = true;
-                else running = true;
+                if (tempStatus == Status.FAILURE) failure = true;
+                else if(tempStatus == Status.RUNNING) running = true;
             }
         }
 
-        if (running && !uniterruptable) return Status.RUNNING;
-        else if (running && uniterruptable) return Status.SUCCESS;
-        else if (totalSuccessNode) return failure ? Status.FAILURE : Status.SUCCESS;
-        else return success ? Status.SUCCESS : Status.FAILURE;
-    }
-
-    public override void OnStop() {
-        _childrenStatus.Clear();
+        if (failure) return Status.FAILURE;
+        else if (!uninterruptible && running) { Debug.Log(nodeName); return Status.RUNNING; }
+        else return Status.SUCCESS;
     }
 }

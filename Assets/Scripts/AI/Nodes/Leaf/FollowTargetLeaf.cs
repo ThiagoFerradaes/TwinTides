@@ -8,10 +8,11 @@ public class FollowTargetLeaf : LeafNode
         if (Context.Blackboard.Target == null) return Status.FAILURE;
 
         if (Vector3.Distance(Context.Agent.transform.position, Context.Blackboard.Target.position) >= stoppingDistance) {
+            Context.Agent.speed = Context.MManager.ReturnMoveSpeed();
             Context.Agent.SetDestination(Context.Blackboard.Target.position);
             return Status.RUNNING;
         }
 
-        else return Status.SUCCESS;
+        else { Context.Agent.speed = 0; return Status.SUCCESS; }
     }
 }

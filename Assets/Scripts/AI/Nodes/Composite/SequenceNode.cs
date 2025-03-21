@@ -16,7 +16,7 @@ public class SequenceNode : CompositeNode {
         for (int i = currentChild; i < Children.Count; i++) {
             Status temp = Children[i].Tick();
 
-            if (temp == Status.RUNNING) { Debug.Log(name + " RUNNING"); return Status.RUNNING; }
+            if (temp == Status.RUNNING) { return Status.RUNNING; }
 
             else if (temp == Status.FAILURE) {
                 Debug.Log(name + " FAILURE");

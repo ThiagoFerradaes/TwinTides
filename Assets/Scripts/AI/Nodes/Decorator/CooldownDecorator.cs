@@ -13,7 +13,7 @@ public class CooldownDecorator : DecoratorNode
     public override Status Execute() {
         _currentTime += Time.deltaTime;
 
-        if (_currentTime >= cooldown) { Status temp = Child.Tick(); Debug.Log(name + " ChildStatus: " + temp); return temp; }
+        if (_currentTime >= cooldown) { Status temp = Child.Tick(); return temp; }
 
         return Status.RUNNING;
     }
