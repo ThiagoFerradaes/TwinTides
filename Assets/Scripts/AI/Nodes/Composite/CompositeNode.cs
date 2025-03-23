@@ -5,4 +5,8 @@ using UnityEngine;
 public class CompositeNode : Node
 {
     public List<Node> Children;
+    public override List<Node> GetChildren() {
+        return Children;
+    }
+
 }

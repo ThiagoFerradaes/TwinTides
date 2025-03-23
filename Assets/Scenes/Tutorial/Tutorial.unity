@@ -1422,8 +1422,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ec3f61bff63ef438d4a96a9bf70437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree: {fileID: 11400000, guid: d41f716fa08e67d4fa8c3090c5942c2d, type: 2}
+  treeOrigin: {fileID: 11400000, guid: d41f716fa08e67d4fa8c3090c5942c2d, type: 2}
   path: {fileID: 11400000, guid: 226875cacba325b469db754d0ab2a402, type: 2}
+  Tree: {fileID: 0}
 --- !u!114 &1835196082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1437,7 +1438,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  isCLoseToPath: 0
+  isCloseToPath: 0
+  isTargetInRange: 0
 --- !u!1 &1844896544
 GameObject:
   m_ObjectHideFlags: 0

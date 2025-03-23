@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Node", menuName = "BehaviourTree/RootNode")]
@@ -12,4 +13,9 @@ public class RootNode : Node {
 
         return temp;
     }
+
+    public override List<Node> GetChildren() {
+        return Child != null ? new List<Node> { Child } : new List<Node>();
+    }
+
 }

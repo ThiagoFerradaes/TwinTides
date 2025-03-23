@@ -25,4 +25,8 @@ public abstract class Node : ScriptableObject
     public virtual Status Execute() { return Status.SUCCESS; }
     public virtual void OnStop() { }
 
+    public virtual List<Node> GetChildren() {
+        return new List<Node>();
+    }
+
 }

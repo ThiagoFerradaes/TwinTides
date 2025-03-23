@@ -7,10 +7,14 @@ public class AIContext {
     public MovementManager MManager;
     public BlackBoard Blackboard;
 
-    public AIContext(AIPath path, NavMeshAgent agent, MovementManager mManager, BlackBoard blackboard) {
-        this.Path = path;
-        this.Agent = agent;
-        MManager = mManager;
-        Blackboard = blackboard;
+    public static AIContext CreateContext(AIPath path, GameObject parent) {
+        AIContext newContext = new() {
+            Path = path,
+            Agent = parent.GetComponent<NavMeshAgent>(),
+            MManager = parent.GetComponent<MovementManager>(),
+            Blackboard = parent.GetComponent<BlackBoard>(),
+        };
+
+        return newContext;
     }
 }

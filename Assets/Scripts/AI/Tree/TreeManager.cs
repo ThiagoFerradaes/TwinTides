@@ -3,22 +3,22 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class TreeManager : MonoBehaviour {
-    [SerializeField] BehaviourTree tree;
+    [SerializeField] BehaviourTree treeOrigin;
     [SerializeField] AIPath path;
-    BehaviourTree _actualTree;
+    public BehaviourTree Tree;
 
     private void Start() {
         CloneTree();
     }
 
     void CloneTree() {
-        _actualTree = Instantiate(tree);
+        Tree = Instantiate(treeOrigin);
 
-        _actualTree.rootNode = (RootNode)CloneNode(tree.rootNode);
+        Tree.rootNode = (RootNode)CloneNode(treeOrigin.rootNode);
 
-        AIContext context = new(path, GetComponent<NavMeshAgent>(), GetComponent<MovementManager>(), GetComponent<BlackBoard>());
+        AIContext context = AIContext.CreateContext(path, this.gameObject);
 
-        _actualTree.InitiateTree(context);
+        Tree.InitiateTree(context);
     }
 
     Node CloneNode(Node nodeToClone) {
@@ -52,6 +52,6 @@ public class TreeManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (_actualTree.treeStatus == Node.Status.RUNNING) _actualTree.ExecuteTree();
+        if (Tree.treeStatus == Node.Status.RUNNING) Tree.ExecuteTree();
     }
 }
