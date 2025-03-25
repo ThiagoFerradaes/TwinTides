@@ -1189,7 +1189,6 @@ GameObject:
   - component: {fileID: 1835196078}
   - component: {fileID: 1835196080}
   - component: {fileID: 1835196081}
-  - component: {fileID: 1835196082}
   m_Layer: 8
   m_Name: MoveBot
   m_TagString: Enemy
@@ -1399,9 +1398,9 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5000001
   m_Speed: 3.5
-  m_Acceleration: 20
+  m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 1500
+  m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -1419,27 +1418,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1835196070}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93ec3f61bff63ef438d4a96a9bf70437, type: 3}
+  m_Script: {fileID: 11500000, guid: 58c6f9b140a52a14881ec09eaebb66eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treeOrigin: {fileID: 11400000, guid: d41f716fa08e67d4fa8c3090c5942c2d, type: 2}
-  path: {fileID: 11400000, guid: 226875cacba325b469db754d0ab2a402, type: 2}
-  Tree: {fileID: 0}
---- !u!114 &1835196082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1835196070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af64e0119e7e50146b3dd5bf979bb6ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  isCloseToPath: 0
-  isTargetInRange: 0
+  tree: {fileID: 11400000, guid: 7d4a676bec85fc947ba417b5cce65aca, type: 2}
+  path: {fileID: 11400000, guid: c4ca2331c2ee93e4f8c7a068f96250a6, type: 2}
 --- !u!1 &1844896544
 GameObject:
   m_ObjectHideFlags: 0

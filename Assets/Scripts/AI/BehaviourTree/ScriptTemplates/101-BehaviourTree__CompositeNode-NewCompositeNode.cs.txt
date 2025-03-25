@@ -1,0 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class #SCRIPTNAME# : CompositeNode
+{
+
+    protected override State OnUpdate() {
+        if (children == null || children.Count == 0) return State.Failure;
+        return State.Success;
+    }
+}

@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8099087774013787189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163c147d123e4a945b688eddc64e3ea5, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 
+  position: {x: 0, y: 0}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+  child: {fileID: 0}
+--- !u!114 &-6987236339100908158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe9435fa169a065459b4b3352c2a0b61, type: 3}
+  m_Name: DebugLeaf
+  m_EditorClassIdentifier: 
+  NodeStatus: 2
+  Guid: 0fbb12b77d8a34842b5a82e5cb269465
+  Position: {x: 78.52294, y: 484.8101}
+  NodeName: 
+  debug: tchau
+--- !u!114 &-4088593215373165778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae4c8930bf3562a43a6e740102170513, type: 3}
+  m_Name: LoopDecorator
+  m_EditorClassIdentifier: 
+  NodeStatus: 2
+  Guid: 0cd88ee32ebd7514ba593d51e2b42935
+  Position: {x: -22.022755, y: 3.0000043}
+  NodeName: 
+  Child: {fileID: 6710339721730796611}
+  isInfinite: 1
+  LoopAmount: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d285eb63c2cdd74180de7cfceaa96ad, type: 3}
+  m_Name: NewBehaviourTree
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: 0}
+  treeState: 0
+  nodes:
+  - {fileID: -8099087774013787189}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+--- !u!114 &417628787439419057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cabca05dd58bfa488f1a4e71f85ca36, type: 3}
+  m_Name: CooldownDecorator
+  m_EditorClassIdentifier: 
+  NodeStatus: 2
+  Guid: b72f8f70a5179804893261fbb98e786c
+  Position: {x: 80.7274, y: 287.93182}
+  NodeName: 
+  Child: {fileID: -6987236339100908158}
+  cooldown: 2
+  _currentTime: 0
+--- !u!114 &875728609849950982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe9435fa169a065459b4b3352c2a0b61, type: 3}
+  m_Name: DebugLeaf
+  m_EditorClassIdentifier: 
+  NodeStatus: 2
+  Guid: 86db90cafd22a2d4ca5fb330f4e69dc9
+  Position: {x: -170.84047, y: 302.9773}
+  NodeName: 
+  debug: oi
+--- !u!114 &6710339721730796611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8fe51d57039144c88ab53f984cfee1, type: 3}
+  m_Name: ParallelNode
+  m_EditorClassIdentifier: 
+  NodeStatus: 2
+  Guid: ee17554afd07a754bbfa65c1020939c7
+  Position: {x: -12.238504, y: 141.00002}
+  NodeName: 
+  Children:
+  - {fileID: 875728609849950982}
+  - {fileID: 417628787439419057}
+  uninterruptible: 1

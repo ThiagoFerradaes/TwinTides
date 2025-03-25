@@ -1,0 +1,407 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6048613855792968223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdea77bcd9912064e8aef5627390c7e5, type: 3}
+  m_Name: ConditionalDecorator
+  m_EditorClassIdentifier: 
+  NodeStatus: 0
+  Guid: 783d7feaf9ea8e443864d9e644a07da1
+  Position: {x: -663.18945, y: 100.99604}
+  NodeName: 
+  Child: {fileID: -5423449798167170977}
+  conditionTags: 0000000001000000
+  isGate: 0
+--- !u!114 &-5423449798167170977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae4c8930bf3562a43a6e740102170513, type: 3}
+  m_Name: LoopDecorator
+  m_EditorClassIdentifier: 
+  NodeStatus: 0
+  Guid: 99aa5d0f78b080d49b064d86ed8db58a
+  Position: {x: -660.18945, y: 234.99602}
+  NodeName: 
+  Child: {fileID: 7087272266167777567}
+  isInfinite: 1
+  LoopAmount: 0
+--- !u!114 &-4486856158989161283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d421511b2117c474bbf9e4d86d3fab2a, type: 3}
+  m_Name: CooldownLeaf
+  m_EditorClassIdentifier: 
+  NodeStatus: 0
+  Guid: f8a1b2f1a6ab4834ea235e3bee6bd847
+  Position: {x: -584.1894, y: 529.996}
+  NodeName: 
+  cooldownTime: 0.2
+  _currentTimer: 0
+--- !u!114 &-4386891864231385334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163c147d123e4a945b688eddc64e3ea5, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 
+  position: {x: 0, y: 0}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+  child: {fileID: 0}
+--- !u!114 &-4165590862498947482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eac56755aa842d40bf328859ff672e0, type: 3}
+  m_Name: SequenceNode
+  m_EditorClassIdentifier: 
+  NodeStatus: 0
+  Guid: 5f2ab4b1fe39a5c41950b25a15619a57
+  Position: {x: -272.41055, y: 235.24704}
+  NodeName: 
+  Children:
+  - {fileID: 2721211636054814579}
+  - {fileID: 1156449456655120533}
+  - {fileID: 8918328575344978028}
+  - {fileID: -2176463759906414066}
+  currentChild: 0
+--- !u!114 &-3966675335357546206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8fe51d57039144c88ab53f984cfee1, type: 3}
+  m_Name: ParallelNode
+  m_EditorClassIdentifier: 
+  NodeStatus: 0
+  Guid: 3cd459d881ee37b4fa96d4090639984f
+  Position: {x: 276.41754, y: 101.93835}
+  NodeName: 
+  Children:
+  - {fileID: 4956874923217272869}
+  - {fileID: 1252545550511899872}
+  uninterruptible: 1
+--- !u!114 &-2608046801227499842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e27cff52662b6a4680ad044b6864a45, type: 3}
+  m_Name: FollowTargetLeaf
+  m_EditorClassIdentifier: 
+  NodeStatus: 0
+  Guid: 64063ab500c58e64d93d94079718efaa
+  Position: {x: -791.1894, y: 528.99603}
+  NodeName: 
+  stoppingDistance: 5
+--- !u!114 &-2176463759906414066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d421511b2117c474bbf9e4d86d3fab2a, type: 3}
+  m_Name: CooldownLeaf
+  m_EditorClassIdentifier: 
+  NodeStatus: 0
+  Guid: 339662d08fb143e41a8b24d07a9cfc92
+  Position: {x: 117.43205, y: 387.10208}
+  NodeName: 
+  cooldownTime: 1
+  _currentTimer: 0
+--- !u!114 &-5436220568526266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8fe51d57039144c88ab53f984cfee1, type: 3}
+  m_Name: ParallelNode
+  m_EditorClassIdentifier: 
+  NodeStatus: 0
+  Guid: 9e8c831ef8f403340afb79206839f018
+  Position: {x: -273.4105, y: 94.24703}
+  NodeName: 
+  Children:
+  - {fileID: -4165590862498947482}
+  uninterruptible: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d285eb63c2cdd74180de7cfceaa96ad, type: 3}
+  m_Name: PatrolBot
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: 0}
+  treeState: 0
+  nodes:
+  - {fileID: -4386891864231385334}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+--- !u!114 &1156449456655120533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d421511b2117c474bbf9e4d86d3fab2a, type: 3}
+  m_Name: CooldownLeaf
+  m_EditorClassIdentifier: 
+  NodeStatus: 0
+  Guid: 52aeee9b4c8818448a967fd55c6cf24c
+  Position: {x: -219.39998, y: 382.75006}
+  NodeName: 
+  cooldownTime: 1
+  _currentTimer: 0
+--- !u!114 &1252545550511899872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a19bd90ff68365343b3bf69cdbaabedd, type: 3}
+  m_Name: CheckDistanceToPath
+  m_EditorClassIdentifier: 
+  NodeStatus: 0
+  Guid: 9ca0a0a3fd8398f4c971fe7a330f2d1e
+  Position: {x: 402.41754, y: 257.93835}
+  NodeName: 
+  maxDistance: 20
+  closestLocation: {fileID: 0}
+--- !u!114 &2721211636054814579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b538b89aac2f114d9ac6a6cf97f3408, type: 3}
+  m_Name: GoToLeafNode
+  m_EditorClassIdentifier: 
+  NodeStatus: 0
+  Guid: a4b711564f22718469d36f5234c9bca8
+  Position: {x: -390.41046, y: 381.247}
+  NodeName: 
+  targetLocation: 0
+  StoppingDistance: 1
+  targetPosition: {fileID: 0}
+--- !u!114 &4292890344447428506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8fe51d57039144c88ab53f984cfee1, type: 3}
+  m_Name: ParallelNode
+  m_EditorClassIdentifier: 
+  NodeStatus: 0
+  Guid: a7b38e65f2b35b8488ad9f175bfe9906
+  Position: {x: -47.95824, y: -201.00003}
+  NodeName: 
+  Children:
+  - {fileID: 7601972094819281765}
+  - {fileID: 8330639031956105253}
+  uninterruptible: 1
+--- !u!114 &4956874923217272869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3fd33bbbda9a2a4c855c7ba4b9241ed, type: 3}
+  m_Name: PlayerDetectionLeaf
+  m_EditorClassIdentifier: 
+  NodeStatus: 0
+  Guid: 33866a16adc15304faaea5c3e71d6bf3
+  Position: {x: 225.41747, y: 254.93839}
+  NodeName: 
+  DetectionRadius: 10
+  DetectionAngle: 360
+  DetectionLayer:
+    m_Bits: 64
+  ObstacleLayer:
+    m_Bits: 128
+--- !u!114 &7087272266167777567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eac56755aa842d40bf328859ff672e0, type: 3}
+  m_Name: SequenceNode
+  m_EditorClassIdentifier: 
+  NodeStatus: 0
+  Guid: e684df4e7d5de6c44938d777854cdab8
+  Position: {x: -659.1894, y: 370.99603}
+  NodeName: 
+  Children:
+  - {fileID: -2608046801227499842}
+  - {fileID: -4486856158989161283}
+  currentChild: 0
+--- !u!114 &7572943712615130369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae4c8930bf3562a43a6e740102170513, type: 3}
+  m_Name: LoopDecorator
+  m_EditorClassIdentifier: 
+  NodeStatus: 0
+  Guid: 49f2828b0e70b594f85f7de5c02f9a7a
+  Position: {x: -46.322483, y: -312.4175}
+  NodeName: 
+  Child: {fileID: 4292890344447428506}
+  isInfinite: 1
+  LoopAmount: 0
+--- !u!114 &7601972094819281765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 642e6c1a75a833845befaba15e59e1d6, type: 3}
+  m_Name: SelectorComposite
+  m_EditorClassIdentifier: 
+  NodeStatus: 0
+  Guid: 80819321d7b60554b90f085293c81e8e
+  Position: {x: -238.835, y: -57.417507}
+  NodeName: 
+  Children:
+  - {fileID: -6048613855792968223}
+  - {fileID: -5436220568526266}
+  currentChild: 0
+--- !u!114 &8330639031956105253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cabca05dd58bfa488f1a4e71f85ca36, type: 3}
+  m_Name: CooldownDecorator
+  m_EditorClassIdentifier: 
+  NodeStatus: 0
+  Guid: ad52b22530459064c9c3d37867313922
+  Position: {x: 137.77289, y: -52.8523}
+  NodeName: 
+  Child: {fileID: -3966675335357546206}
+  cooldown: 0.1
+  _currentTime: 0
+--- !u!114 &8918328575344978028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b538b89aac2f114d9ac6a6cf97f3408, type: 3}
+  m_Name: GoToLeafNode
+  m_EditorClassIdentifier: 
+  NodeStatus: 0
+  Guid: cf0d5363312d4184390c2f2beb0ff012
+  Position: {x: -52.749985, y: 383.2}
+  NodeName: 
+  targetLocation: 1
+  StoppingDistance: 1
+  targetPosition: {fileID: 0}
