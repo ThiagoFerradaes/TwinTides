@@ -13,7 +13,7 @@ public class GoToAction : ActionNode {
     }
 
     protected override State OnUpdate() {
-        //Context.Agent.speed = Context.MManager.ReturnMoveSpeed();
+        context.agent.speed = context.MManager.ReturnMoveSpeed();
 
         if (context.agent.pathPending) return State.Running;
 

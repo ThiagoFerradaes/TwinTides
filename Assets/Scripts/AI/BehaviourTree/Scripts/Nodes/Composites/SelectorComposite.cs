@@ -16,8 +16,14 @@ public class SelectorComposite : CompositeNode
         for (int i = currentChild; i < children.Count; i++) {
             State temp = children[i].Update();
 
-            if (temp == State.Running) return State.Running;
-            else if (temp == State.Success) return State.Success;
+            if (temp == State.Running) {
+                for (int j = currentChild + 1; j < children.Count; j++) { children[j].Abort(); }
+                return State.Running;
+            }
+            else if (temp == State.Success) {
+                for (int j = currentChild + 1; j < children.Count; j++) { children[j].Abort(); }
+                return State.Success;
+            }
 
             currentChild++;
         }

@@ -8,13 +8,15 @@ public class Context {
     public Transform transform;
     public NavMeshAgent agent;
     public AIPath path;
+    public MovementManager MManager;
 
         public static Context CreateFromGameObject(GameObject gameObject, AIPath path) {
         Context context = new() {
             gameObject = gameObject,
             transform = gameObject.transform,
             agent = gameObject.GetComponent<NavMeshAgent>(),
-            path = path
+            path = path,
+            MManager = gameObject.GetComponent<MovementManager>(),
         };
 
         return context;
