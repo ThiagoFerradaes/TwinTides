@@ -6,7 +6,7 @@ public class NoDetectionAction : ActionNode
 {
 
     protected override State OnUpdate() {
-        blackboard.CanDetectPlayer = false;
+        blackboard.CanFollowPlayer = false;
         blackboard.IsTargetInRange = false;
 
         return State.Success;

@@ -20,32 +20,9 @@ MonoBehaviour:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   targetLocation: 1
   StoppingDistance: 1
---- !u!114 &-8989417343654104429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6026c80600a36374cbb0ec3a91189110, type: 3}
-  m_Name: GateDecorator
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: dea702409bc2f3a439fd534ab9c8e498
-  position: {x: 605.6974, y: 373.85043}
-  blackboard:
-    Target: {fileID: 0}
-    IsCloseToPath: 0
-    IsTargetInRange: 0
-    CanDetectPlayer: 1
-  child: {fileID: 9210491112000176178}
-  conditions: 02000000
 --- !u!114 &-8737707627873100344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +43,7 @@ MonoBehaviour:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   child: {fileID: 1610498867395191891}
 --- !u!114 &-6793917620370379804
 MonoBehaviour:
@@ -88,7 +65,7 @@ MonoBehaviour:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   children:
   - {fileID: -5468306153279131312}
   - {fileID: -5112378745571010503}
@@ -107,12 +84,12 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 864663180707fb64dafe3d315d50757b
-  position: {x: 654.2166, y: 605.88074}
+  position: {x: 724.4791, y: 394.662}
   blackboard:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   maxDistance: 20
 --- !u!114 &-5468306153279131312
 MonoBehaviour:
@@ -134,7 +111,7 @@ MonoBehaviour:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   children:
   - {fileID: -1778014092064343986}
   - {fileID: 2904676501843714341}
@@ -158,8 +135,8 @@ MonoBehaviour:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
-  child: {fileID: 2975085216851528848}
+    CanFollowPlayer: 1
+  child: {fileID: 7714920069465493131}
   cooldown: 0.1
 --- !u!114 &-4685175796735353712
 MonoBehaviour:
@@ -181,7 +158,7 @@ MonoBehaviour:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   child: {fileID: -6793917620370379804}
 --- !u!114 &-3838604061852570075
 MonoBehaviour:
@@ -203,9 +180,9 @@ MonoBehaviour:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   stoppingDistance: 1
---- !u!114 &-2246677429775870508
+--- !u!114 &-3690868420404818733
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,41 +191,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11c0783d6c8afbf4881eacb41fb67f78, type: 3}
-  m_Name: NoDetectionAction
+  m_Script: {fileID: 11500000, guid: 01e6f788ae93786499145ff66d4464ff, type: 3}
+  m_Name: ConditionChanger
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: 2033f314d111c9a4c9d9968f4a5f98e6
-  position: {x: 859.165, y: 697.6159}
+  guid: 97067571d5a69e24ba6df1a4c862af1a
+  position: {x: 460.77866, y: 724.8805}
   blackboard:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
---- !u!114 &-2161566206344479931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6026c80600a36374cbb0ec3a91189110, type: 3}
-  m_Name: GateDecorator
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 218e2e158f098f54f8235cfd5cb06d98
-  position: {x: 814.00916, y: 381.36374}
-  blackboard:
-    Target: {fileID: 0}
-    IsCloseToPath: 0
-    IsTargetInRange: 0
-    CanDetectPlayer: 1
-  child: {fileID: 3936397415506213515}
-  conditions: 00000000
+    CanFollowPlayer: 1
+  conditions: 0100000002000000
+  changeToTrue: 0
 --- !u!114 &-1941407356344442501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,7 +225,7 @@ MonoBehaviour:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   cooldown: 0.5
 --- !u!114 &-1778014092064343986
 MonoBehaviour:
@@ -291,9 +247,9 @@ MonoBehaviour:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   child: {fileID: -8737707627873100344}
-  conditions: 0000000001000000
+  conditions: 000000000100000002000000
 --- !u!114 &-832071066040792598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,7 +270,7 @@ MonoBehaviour:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   targetLocation: 0
   StoppingDistance: 1
 --- !u!114 &-461729228651206470
@@ -332,12 +288,12 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 0595ca967afea794c872126f81cc83af
-  position: {x: 461.8406, y: 605.23584}
+  position: {x: 955.0368, y: 390.26505}
   blackboard:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   detectionRadius: 8
   detectionAngle: 360
   playerLayer:
@@ -380,18 +336,16 @@ MonoBehaviour:
   - {fileID: -3838604061852570075}
   - {fileID: -1941407356344442501}
   - {fileID: 3936397415506213515}
-  - {fileID: 2975085216851528848}
-  - {fileID: -8989417343654104429}
-  - {fileID: -2246677429775870508}
   - {fileID: 3041405883497151913}
   - {fileID: 8661612055495240077}
-  - {fileID: -2161566206344479931}
-  - {fileID: 9210491112000176178}
+  - {fileID: 4989918386672694049}
+  - {fileID: -3690868420404818733}
+  - {fileID: 7714920069465493131}
   blackboard:
     Target: {fileID: 0}
-    IsCloseToPath: 0
+    IsCloseToPath: 1
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
 --- !u!114 &1610498867395191891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,7 +366,7 @@ MonoBehaviour:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   children:
   - {fileID: -3838604061852570075}
   - {fileID: -1941407356344442501}
@@ -436,7 +390,7 @@ MonoBehaviour:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   child: {fileID: -4685175796735353712}
 --- !u!114 &2845475920100613175
 MonoBehaviour:
@@ -458,7 +412,7 @@ MonoBehaviour:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   cooldown: 1
 --- !u!114 &2904676501843714341
 MonoBehaviour:
@@ -480,33 +434,9 @@ MonoBehaviour:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   children:
   - {fileID: 8593820219457342453}
---- !u!114 &2975085216851528848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ec7948efba161040a966732de6160e5, type: 3}
-  m_Name: ParallelComposite
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 35283214d4d874c4e96354304a965224
-  position: {x: 633.0232, y: 171.33797}
-  blackboard:
-    Target: {fileID: 0}
-    IsCloseToPath: 0
-    IsTargetInRange: 0
-    CanDetectPlayer: 1
-  children:
-  - {fileID: -8989417343654104429}
-  - {fileID: -2161566206344479931}
 --- !u!114 &3041405883497151913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,13 +452,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 617d44fb63599ba4dbe83e8eaeaebb31
-  position: {x: 1057.565, y: 700.0159}
+  position: {x: 646.02246, y: 718.87494}
   blackboard:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
-  cooldown: 1
+    CanFollowPlayer: 1
+  cooldown: 2.5
 --- !u!114 &3936397415506213515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,16 +474,39 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 1d3fc66842e51924cb56dfa2482c5e40
-  position: {x: 959.165, y: 537.6159}
+  position: {x: 540.7787, y: 561.8804}
   blackboard:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   children:
-  - {fileID: -2246677429775870508}
+  - {fileID: -3690868420404818733}
   - {fileID: 3041405883497151913}
   - {fileID: 8661612055495240077}
+--- !u!114 &4989918386672694049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a70d27f161e59429d3689e1e4084f0, type: 3}
+  m_Name: FalseGateDecorator
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: cadbe09f459be7d4586b8fefdba81e44
+  position: {x: 543.325, y: 387.61}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+  child: {fileID: 3936397415506213515}
+  conditions: 00000000
 --- !u!114 &5731827953410687217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -574,8 +527,33 @@ MonoBehaviour:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   cooldown: 1
+--- !u!114 &7714920069465493131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58399223f11412c4ba9804df5a130999, type: 3}
+  m_Name: SequenceComposite
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 7bc630ad90b487d4198dda845117c2f8
+  position: {x: 631.62067, y: 199.68002}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 1
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+  children:
+  - {fileID: 4989918386672694049}
+  - {fileID: -6369592398114237754}
+  - {fileID: -461729228651206470}
 --- !u!114 &8593820219457342453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,7 +574,7 @@ MonoBehaviour:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   children:
   - {fileID: -832071066040792598}
   - {fileID: 5731827953410687217}
@@ -617,35 +595,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: b7e0a13ff943af9428eb4f54a5fbb0f1
-  position: {x: 1251.1649, y: 694.4159}
+  position: {x: 832.7787, y: 717.8805}
   blackboard:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
-    CanDetectPlayer: 1
+    CanFollowPlayer: 1
   conditions: 02000000
   changeToTrue: 1
---- !u!114 &9210491112000176178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ec7948efba161040a966732de6160e5, type: 3}
-  m_Name: ParallelComposite
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: ad0d5225134cd7642aa143155bcbfbab
-  position: {x: 595.19995, y: 476.4016}
-  blackboard:
-    Target: {fileID: 0}
-    IsCloseToPath: 0
-    IsTargetInRange: 0
-    CanDetectPlayer: 1
-  children:
-  - {fileID: -461729228651206470}
-  - {fileID: -6369592398114237754}

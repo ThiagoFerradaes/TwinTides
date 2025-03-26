@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GateDecorator : DecoratorNode
+public class FalseGateDecorator : DecoratorNode
 {
     [SerializeField] Blackboard.BlackBoardBools[] conditions;
     bool running;
@@ -10,7 +8,7 @@ public class GateDecorator : DecoratorNode
         if (child == null) return State.Failure;
 
         foreach (var tag in conditions) {
-            if (!blackboard.ReturnBoolByTag(tag)) return State.Success;
+            if (blackboard.ReturnBoolByTag(tag)) return State.Success;
         }
 
         running = true;
