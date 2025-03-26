@@ -23,12 +23,12 @@ public class Teste_Um : MonoBehaviour {
 
         if (!Keyboard.current.mKey.wasPressedThisFrame) return;
         if (!LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne == relic) {
-            LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne = relic;
             LocalWhiteBoard.Instance.AddToCommonDictionary(relic);
+            LocalWhiteBoard.Instance.EquipRelic(relic, 1);
             Debug.Log("Relic: " + LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne.name);
 
             LocalWhiteBoard.Instance.AddToLegendaryDictionary(Lrelic);
-            LocalWhiteBoard.Instance.PlayerLegendarySkill = Lrelic;
+            LocalWhiteBoard.Instance.EquipRelic(Lrelic, 3);
             Debug.Log("Legendary Relic: " + LocalWhiteBoard.Instance.PlayerLegendarySkill.name);
         }
         else {

@@ -20,32 +20,24 @@ public class SkillUiManager : MonoBehaviour {
     [SerializeField] Image characterImage;
     [SerializeField] Image playerTwoCharacterImage;
     [SerializeField] Image characterHealthImage;
-    [SerializeField] Image characterManaImage;
     [SerializeField] Image legendaryRelicSkillImage;
     [SerializeField] Image commonRelicSkillOneImage;
     [SerializeField] Image commonRelicSkillTwoImage;
-    [SerializeField] Image attackSkillImage;
-    [SerializeField] Image dashImage;
 
     [Header("Images to show cooldown")]
     [SerializeField] Image legendaryRelicSkillCooldownImage;
     [SerializeField] Image commonRelicSkillOneCooldownImage;
     [SerializeField] Image commonRelicSkillTwoCooldownImage;
-    [SerializeField] Image attackSkillCooldownImage;
-    [SerializeField] Image dashCooldownImage;
 
     [Header("Texts")]
     [SerializeField] TextMeshProUGUI characterHealthText;
     [SerializeField] TextMeshProUGUI playerTwoHealthText;
     [SerializeField] TextMeshProUGUI playerShieldText;
     [SerializeField] TextMeshProUGUI playerTwoShieldText;
-    [SerializeField] TextMeshProUGUI characterManaText;
     [SerializeField] TextMeshProUGUI goldText;
     [SerializeField] TextMeshProUGUI legendaryRelicSkillCooldownText;
     [SerializeField] TextMeshProUGUI commonRelicSkillOneCooldownText;
     [SerializeField] TextMeshProUGUI commonRelicSkillTwoCooldownText;
-    [SerializeField] TextMeshProUGUI attackSkillCooldownText;
-    [SerializeField] TextMeshProUGUI dashCooldownText;
 
     [Header("Player two Info")]
     [SerializeField] GameObject playerTwoInfo;
@@ -70,7 +62,9 @@ public class SkillUiManager : MonoBehaviour {
     private void OnEnable() {
         PlayerSetUp.OnPlayerSpawned += SetPlayerOne;
         PlayerSetUp.OnPlayerTwoSpawned += SetPlayerTwo;
+        LocalWhiteBoard.OnRelicEquiped += LocalWhiteBoard_OnRelicEquiped;
     }
+
     void SetPlayerOne(GameObject player) {
         _playerCharacter = player;
 
@@ -107,8 +101,7 @@ public class SkillUiManager : MonoBehaviour {
         _listOfCooldowns.Add(SkillType.LegendaryRelic, legendaryRelicSkillCooldownText);
         _listOfCooldowns.Add(SkillType.CommonRelicOne, commonRelicSkillOneCooldownText);
         _listOfCooldowns.Add(SkillType.CommonRelicTwo, commonRelicSkillTwoCooldownText);
-        _listOfCooldowns.Add(SkillType.Attack, attackSkillCooldownText);
-        _listOfCooldowns.Add(SkillType.Dash, dashCooldownText);
+
     }
     private void SetCharacterSpriteInfo() {
         if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
@@ -131,6 +124,9 @@ public class SkillUiManager : MonoBehaviour {
         playerTwoInfo.SetActive(true);
         _playerTwoCharacter.GetComponent<HealthManager>().UpdateHealth += UpdatePlayerTwoHealth;
     }
+    private void LocalWhiteBoard_OnRelicEquiped(object sender, EventArgs e) {
+        SetSkillsSpritesInfo();
+    }
     private void SetSkillsSpritesInfo() {
 
         if (LocalWhiteBoard.Instance.PlayerLegendarySkill != null) {
@@ -152,12 +148,6 @@ public class SkillUiManager : MonoBehaviour {
             commonRelicSkillTwoImage.sprite = noSkillSprite;
         }
 
-        if (LocalWhiteBoard.Instance.PlayerAttackSkill != null) {
-            attackSkillImage.sprite = LocalWhiteBoard.Instance.PlayerAttackSkill.UiSprite;
-        }
-        else {
-            attackSkillImage.sprite = noSkillSprite;
-        }
     }
     private void SetInicialCooldowns() {
         foreach (var item in _listOfCooldowns) {
@@ -170,42 +160,44 @@ public class SkillUiManager : MonoBehaviour {
     void SetCooldown(SkillType skillType, float cooldown) {
         if (_listOfCooldowns.ContainsKey(skillType)) {
             switch (skillType) {
-                case SkillType.Attack:
-                    if (baseAttackCoroutine != null) {
-                        StopCoroutine(baseAttackCoroutine);
-                        baseAttackCoroutine = null;
-                    }
-                    baseAttackCoroutine = StartCoroutine(StartSkillCooldown(_listOfCooldowns[skillType], cooldown));
-                    break;
+                //case SkillType.Attack:
+                //    if (baseAttackCoroutine != null) {
+                //        StopCoroutine(baseAttackCoroutine);
+                //        baseAttackCoroutine = null;
+                //    }
+                //    baseAttackCoroutine = StartCoroutine(StartSkillCooldown(_listOfCooldowns[skillType], cooldown));
+                //    break;
                 case SkillType.CommonRelicOne:
                     if (commonRelicOneCoroutine != null) {
                         StopCoroutine(commonRelicOneCoroutine);
                         commonRelicOneCoroutine = null;
                     }
-                    commonRelicOneCoroutine = StartCoroutine(StartSkillCooldown(_listOfCooldowns[skillType], cooldown));
+                    commonRelicOneCoroutine = StartCoroutine(StartSkillCooldown(_listOfCooldowns[skillType], cooldown, commonRelicSkillOneCooldownImage));
                     break;
                 case SkillType.CommonRelicTwo:
                     if (commonRelicTwoCoroutine != null) {
                         StopCoroutine(commonRelicTwoCoroutine);
                         commonRelicTwoCoroutine = null;
                     }
-                    commonRelicTwoCoroutine = StartCoroutine(StartSkillCooldown(_listOfCooldowns[skillType], cooldown));
+                    commonRelicTwoCoroutine = StartCoroutine(StartSkillCooldown(_listOfCooldowns[skillType], cooldown, commonRelicSkillTwoCooldownImage));
                     break;
                 case SkillType.LegendaryRelic:
                     if (legendaryRelicCoroutine != null) {
                         StopCoroutine(legendaryRelicCoroutine);
                         legendaryRelicCoroutine = null;
                     }
-                    legendaryRelicCoroutine = StartCoroutine(StartSkillCooldown(_listOfCooldowns[skillType], cooldown));
+                    legendaryRelicCoroutine = StartCoroutine(StartSkillCooldown(_listOfCooldowns[skillType], cooldown, legendaryRelicSkillCooldownImage));
                     break;
             }
         }
     }
 
-    IEnumerator StartSkillCooldown(TextMeshProUGUI text, float cooldown) {
+    IEnumerator StartSkillCooldown(TextMeshProUGUI text, float cooldown, Image cooldownImage) {
+        float skillCooldown = cooldown;
         while (cooldown > 0) {
             cooldown -= Time.deltaTime;
             text.text = cooldown.ToString("F0");
+            if (cooldownImage != null) cooldownImage.fillAmount = cooldown / skillCooldown;
             yield return null;
         }
 
@@ -218,6 +210,7 @@ public class SkillUiManager : MonoBehaviour {
 
         PlayerSetUp.OnPlayerSpawned -= SetPlayerOne;
         PlayerSetUp.OnPlayerTwoSpawned -= SetPlayerTwo;
+        LocalWhiteBoard.OnRelicEquiped -= LocalWhiteBoard_OnRelicEquiped;
         _playerCharacter.GetComponent<PlayerController>().OnDashCooldown -= SetCooldown;
     }
     #endregion

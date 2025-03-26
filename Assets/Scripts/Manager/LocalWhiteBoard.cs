@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -26,6 +27,8 @@ public class LocalWhiteBoard : MonoBehaviour {
     [HideInInspector] public float AmbienceVolume = 0.5f;
     [HideInInspector] public float DialogueVolume = 0.5f;
 
+    public static event EventHandler OnRelicEquiped;
+
 
     private void Awake() {  // Singleton, só vai ter um LocalWhiteBoard no jogo
         if (Instance != null && Instance != this) {
@@ -51,6 +54,20 @@ public class LocalWhiteBoard : MonoBehaviour {
     public void UpdateCommonRelicLevel(CommonRelic relic, int level) {
         if (!CommonRelicInventory.ContainsKey(relic)) return;
 
-        CommonRelicInventory[relic] = level;    
+        CommonRelicInventory[relic] = level;
+    }
+
+    public void EquipRelic(Skill relic, int index) {
+        if (relic.Character != PlayerCharacter) return;
+
+        if (relic is CommonRelic && !CommonRelicInventory.ContainsKey(relic as CommonRelic)) return;
+
+        if (relic is LegendaryRelic && !LegendaryRelicInventory.ContainsKey(relic as LegendaryRelic)) return;
+
+        if (index == 1) { PlayerCommonRelicSkillOne = relic as CommonRelic; }
+        else if (index == 2) { PlayerCommonRelicSkillTwo = relic as CommonRelic; }
+        else { PlayerLegendarySkill = relic as LegendaryRelic; }
+
+        OnRelicEquiped?.Invoke(this, EventArgs.Empty);
     }
 }
