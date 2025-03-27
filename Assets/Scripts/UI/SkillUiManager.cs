@@ -194,6 +194,7 @@ public class SkillUiManager : MonoBehaviour {
 
     IEnumerator StartSkillCooldown(TextMeshProUGUI text, float cooldown, Image cooldownImage) {
         float skillCooldown = cooldown;
+        if (!cooldownImage.gameObject.activeSelf) cooldownImage.gameObject.SetActive(true);
         while (cooldown > 0) {
             cooldown -= Time.deltaTime;
             text.text = cooldown.ToString("F0");
@@ -201,6 +202,7 @@ public class SkillUiManager : MonoBehaviour {
             yield return null;
         }
 
+        cooldownImage.gameObject.SetActive(false);
         text.text = "";
     }
     private void OnDisable() {
