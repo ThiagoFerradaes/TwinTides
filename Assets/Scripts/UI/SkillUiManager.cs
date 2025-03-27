@@ -14,7 +14,6 @@ public class SkillUiManager : MonoBehaviour {
     [Header("Sprites")]
     [SerializeField] Sprite maevisSprite;
     [SerializeField] Sprite melSprite;
-    [SerializeField] Sprite noSkillSprite;
 
     [Header("Images to receive Sprites")]
     [SerializeField] Image characterImage;
@@ -130,22 +129,28 @@ public class SkillUiManager : MonoBehaviour {
     private void SetSkillsSpritesInfo() {
 
         if (LocalWhiteBoard.Instance.PlayerLegendarySkill != null) {
+            if (!legendaryRelicSkillImage.gameObject.activeSelf) legendaryRelicSkillImage.gameObject.SetActive(true);
             legendaryRelicSkillImage.sprite = LocalWhiteBoard.Instance.PlayerLegendarySkill.UiSprite;
         }
         else {
-            legendaryRelicSkillImage.sprite = noSkillSprite;
+            legendaryRelicSkillImage.gameObject.SetActive(false);
+            legendaryRelicSkillImage.sprite = null;
         }
         if (LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne != null) {
             commonRelicSkillOneImage.sprite = LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne.UiSprite;
+            if (!commonRelicSkillOneImage.gameObject.activeSelf) commonRelicSkillOneImage.gameObject.SetActive(true);
         }
         else {
-            commonRelicSkillOneImage.sprite = noSkillSprite;
+            commonRelicSkillOneImage.gameObject.SetActive(false);
+            commonRelicSkillOneImage.sprite = null;
         }
         if (LocalWhiteBoard.Instance.PlayerCommonRelicSkillTwo != null) {
             commonRelicSkillTwoImage.sprite = LocalWhiteBoard.Instance.PlayerCommonRelicSkillTwo.UiSprite;
+            if (!commonRelicSkillTwoImage.gameObject.activeSelf) commonRelicSkillOneImage.gameObject.SetActive(true);
         }
         else {
-            commonRelicSkillTwoImage.sprite = noSkillSprite;
+            commonRelicSkillTwoImage.gameObject.SetActive(false);
+            commonRelicSkillTwoImage.sprite = null;
         }
 
     }

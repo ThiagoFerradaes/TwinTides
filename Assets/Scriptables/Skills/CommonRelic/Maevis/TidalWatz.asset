@@ -13,17 +13,18 @@ MonoBehaviour:
   m_Name: TidalWatz
   m_EditorClassIdentifier: 
   Name: Tidal Watz
-  UiSprite: {fileID: 0}
+  UiSprite: {fileID: 21300000, guid: dd2ed421e46f4f24097f0be1ac6edd00, type: 3}
   MinLevel: 1
   MaxLevel: 4
   Cooldown: 10
+  IsStackable: 1
+  Character: 0
   SkillsDescriptions: []
   UpgradesDescriptions: []
   skillPrefabs:
   - {fileID: 7064569682817774075, guid: e6cc4b4de02cbbc48ab42a8c50b0837a, type: 3}
   - {fileID: 4948698788183770020, guid: 2ab1b4e6875084e4a9938769e09637aa, type: 3}
   - {fileID: 4778089487178227976, guid: ed0cc71a39ea0ae499db03fe5a4d315a, type: 3}
-  Character: 0
   CutSize: {x: 2, y: 0.1, z: 0.5}
   CutPosition: {x: -1.5, y: 0, z: 0}
   AmountOfCuts: 1
