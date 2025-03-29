@@ -52,4 +52,13 @@ public class PlayerSkillConverter : MonoBehaviour {
     public Skill TransformIdInSkill(int skillId) {
         return skillIndex[skillId];
     }
+
+    public List<Skill> ReturnCommonSkillList(Characters character) {
+        List<Skill> newList = character == Characters.Maevis ? maevisCommonSkillIndex : melCommonSklilIndex;
+        return newList;
+    }
+    public List<Skill> ReturnLegendarySkillList(Characters character) {
+        List<Skill> newList = character == Characters.Maevis ? maevisLegendarySkillIndex : melLegendarySkillIndex;
+        return newList;
+    }
 }

@@ -77,6 +77,7 @@ public class SkillUiManager : MonoBehaviour {
     }
 
     private void SkillManager_SkillUSed(object sender, PlayerSkillManager.SkillEventHandler e) {
+        Debug.Log("Event invoked");
         SetCooldown(e.Type, e.SkillCooldown);
     }
 
@@ -146,7 +147,7 @@ public class SkillUiManager : MonoBehaviour {
         }
         if (LocalWhiteBoard.Instance.PlayerCommonRelicSkillTwo != null) {
             commonRelicSkillTwoImage.sprite = LocalWhiteBoard.Instance.PlayerCommonRelicSkillTwo.UiSprite;
-            if (!commonRelicSkillTwoImage.gameObject.activeSelf) commonRelicSkillOneImage.gameObject.SetActive(true);
+            if (!commonRelicSkillTwoImage.gameObject.activeSelf) commonRelicSkillTwoImage.gameObject.SetActive(true);
         }
         else {
             commonRelicSkillTwoImage.gameObject.SetActive(false);

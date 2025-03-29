@@ -57,6 +57,11 @@ public class LocalWhiteBoard : MonoBehaviour {
         CommonRelicInventory[relic] = level;
     }
 
+    /// <summary>
+    /// index 1 = slot 1, index 2 == slot 3 else == legendary
+    /// </summary>
+    /// <param name="relic"></param>
+    /// <param name="index"></param>
     public void EquipRelic(Skill relic, int index) {
         if (relic.Character != PlayerCharacter) return;
 
@@ -64,8 +69,20 @@ public class LocalWhiteBoard : MonoBehaviour {
 
         if (relic is LegendaryRelic && !LegendaryRelicInventory.ContainsKey(relic as LegendaryRelic)) return;
 
-        if (index == 1) { PlayerCommonRelicSkillOne = relic as CommonRelic; }
-        else if (index == 2) { PlayerCommonRelicSkillTwo = relic as CommonRelic; }
+        if (index == 1) {
+            if (relic == PlayerCommonRelicSkillTwo) {
+                if (PlayerCommonRelicSkillOne == null) PlayerCommonRelicSkillTwo = null;
+                else PlayerCommonRelicSkillTwo = PlayerCommonRelicSkillOne;
+            }
+            PlayerCommonRelicSkillOne = relic as CommonRelic;
+        }
+        else if (index == 2) {
+            if (relic == PlayerCommonRelicSkillOne) {
+                if (PlayerCommonRelicSkillTwo == null) PlayerCommonRelicSkillOne = null;
+                else PlayerCommonRelicSkillOne = PlayerCommonRelicSkillTwo;
+            }
+            PlayerCommonRelicSkillTwo = relic as CommonRelic; 
+        }
         else { PlayerLegendarySkill = relic as LegendaryRelic; }
 
         OnRelicEquiped?.Invoke(this, EventArgs.Empty);
