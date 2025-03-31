@@ -54,7 +54,7 @@ public class LocalWhiteBoard : MonoBehaviour {
     public void UpdateCommonRelicLevel(CommonRelic relic, int level) {
         if (!CommonRelicInventory.ContainsKey(relic)) return;
 
-        CommonRelicInventory[relic] = level;
+        CommonRelicInventory[relic] = Mathf.Clamp(level, 1, relic.MaxLevel);
     }
 
     /// <summary>
@@ -86,5 +86,21 @@ public class LocalWhiteBoard : MonoBehaviour {
         else { PlayerLegendarySkill = relic as LegendaryRelic; }
 
         OnRelicEquiped?.Invoke(this, EventArgs.Empty);
+    }
+
+    public Skill ReturnCurrentSkill (int skillIndex) {
+        return skillIndex switch {
+            1 => PlayerCommonRelicSkillOne,
+            2 => PlayerCommonRelicSkillTwo,
+            _ => PlayerLegendarySkill,
+        };
+    }
+
+    public int ReturnCurrentSkillLevel(int skillIndex) {
+        return skillIndex switch {
+            1 => CommonRelicInventory[PlayerCommonRelicSkillOne],
+            2 => CommonRelicInventory[PlayerCommonRelicSkillTwo],
+            _ => LegendaryRelicInventory[PlayerLegendarySkill],
+        };
     }
 }

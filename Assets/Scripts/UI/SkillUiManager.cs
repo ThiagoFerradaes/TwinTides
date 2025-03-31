@@ -14,10 +14,14 @@ public class SkillUiManager : MonoBehaviour {
     [Header("Sprites")]
     [SerializeField] Sprite maevisSprite;
     [SerializeField] Sprite melSprite;
+    [SerializeField] Sprite maevisTag;
+    [SerializeField] Sprite melTag;
 
     [Header("Images to receive Sprites")]
     [SerializeField] Image characterImage;
+    [SerializeField] Image characterTag;
     [SerializeField] Image playerTwoCharacterImage;
+    [SerializeField] Image playerTwoCharacterTag;
     [SerializeField] Image characterHealthImage;
     [SerializeField] Image legendaryRelicSkillImage;
     [SerializeField] Image commonRelicSkillOneImage;
@@ -107,13 +111,19 @@ public class SkillUiManager : MonoBehaviour {
         if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
             if (melSprite != null && maevisSprite != null) {
                 characterImage.sprite = maevisSprite;
+                characterTag.sprite = maevisTag;
+
                 playerTwoCharacterImage.sprite = melSprite;
+                playerTwoCharacterTag.sprite = melTag;
             }
         }
         else {
             if (melSprite != null && maevisSprite != null) {
                 characterImage.sprite = melSprite;
+                characterTag.sprite = melTag;
+
                 playerTwoCharacterImage.sprite = maevisSprite;
+                playerTwoCharacterTag.sprite = maevisTag;
             }
         }
     }
