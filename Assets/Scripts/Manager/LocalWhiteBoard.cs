@@ -9,6 +9,7 @@ public class LocalWhiteBoard : MonoBehaviour {
 
     public Characters PlayerCharacter;
     public bool IsSinglePlayer;
+    public bool AnimationOn;
 
     public CommonRelic PlayerCommonRelicSkillOne;
     public CommonRelic PlayerCommonRelicSkillTwo;

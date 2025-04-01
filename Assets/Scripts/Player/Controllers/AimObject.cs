@@ -35,7 +35,7 @@ public class AimObject : MonoBehaviour {
             if (_father.isRotatingMouse) {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _father.floorLayer)) {
+                if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _father.FloorLayer)) {
                     Vector3 pos = new(hit.point.x, 0.5f, hit.point.z);
                     transform.position = pos;
                 }

@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2599662631
+  GlobalObjectIdHash: 860857098
   InScenePlacedSourceGlobalObjectIdHash: 1302872352
   DeferredDespawnTick: 0
   Ownership: 1
@@ -369,12 +369,10 @@ MonoBehaviour:
   aimObject: {fileID: 0}
   isRotatingMouse: 0
   isAiming: 0
-  jumpForce: 12
-  fallForce: 20
-  maxJumps: 1
-  floorLayer:
+  FloorLayer:
     serializedVersion: 2
     m_Bits: 8
+  CanInteract: 0
   dashForce: 20
   dashDuration: 0.25
   dashCooldown: 1
@@ -656,8 +654,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab964788b12c3246a254fd41263ea4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relic: {fileID: 11400000, guid: 378dc66372666f74ea1e9ec6b126beae, type: 2}
-  Lrelic: {fileID: 11400000, guid: 0a86121ff89588146b41a5b842c52c0a, type: 2}
   attack: {fileID: 11400000, guid: ad764f61b860c7447aab5255dd321aee, type: 2}
   player: 1
 --- !u!114 &3160352352417031265

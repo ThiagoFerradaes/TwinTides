@@ -39,6 +39,8 @@ public class PlayerSkillManager : NetworkBehaviour {
 
     #region Inputs
     public void InputBaseAttack(InputAction.CallbackContext context) {
+        if (LocalWhiteBoard.Instance.AnimationOn) return;
+
         if (context.phase == InputActionPhase.Performed && _dictionaryOfCooldowns[0] <= 0 && _canNormalAttack.Value) {
             UseSkill(0);
         }
