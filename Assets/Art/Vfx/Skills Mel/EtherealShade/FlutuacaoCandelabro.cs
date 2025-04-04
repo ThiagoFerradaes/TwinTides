@@ -6,12 +6,10 @@ public class FlutuacaoCandelabro : MonoBehaviour
     public float frequency = 1f; // frequência do movimento
 
     private float startY;
-    private float startRotationY;
 
     void Start()
     {
         startY = transform.position.y;
-        startRotationY = transform.rotation.y;
     }
 
     void Update()
