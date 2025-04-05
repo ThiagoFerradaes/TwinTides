@@ -42,7 +42,6 @@ public class PlayerController : NetworkBehaviour {
         if (context.phase == InputActionPhase.Started) {
             if (Time.timeScale == 1 && CanInteract) {
                 OnInteractInGame?.Invoke(this, EventArgs.Empty);
-                OnInteractInGame?.Invoke(this, EventArgs.Empty);
             }
             else if (LocalWhiteBoard.Instance.AnimationOn) {
                 OnInteractOutGame?.Invoke(this, EventArgs.Empty);

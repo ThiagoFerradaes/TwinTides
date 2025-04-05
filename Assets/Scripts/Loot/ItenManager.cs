@@ -20,13 +20,10 @@ public class ItenManager : MonoBehaviour
 
     private void TurnScreeenOff() {
         Debug.Log("Screen Off");
-        Time.timeScale = 1f;
-        LocalWhiteBoard.Instance.AnimationOn = false;
     }
 
-    public void TurnScreenOn() {
-        Debug.Log("Screen On");
-        Time.timeScale = 0f;
-        LocalWhiteBoard.Instance.AnimationOn = true;
+    public void TurnScreenOn(CommonRelic relic, float gold) {
+        if (relic != null) Debug.Log("Screen On: " + relic.Name + " Gold: " + gold);
+        else Debug.Log("Screen On: Null Gold: " + gold);
     }
 }

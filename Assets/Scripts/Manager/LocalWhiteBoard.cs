@@ -18,7 +18,9 @@ public class LocalWhiteBoard : MonoBehaviour {
 
     public Dictionary<CommonRelic, int> CommonRelicInventory = new();
     public Dictionary<LegendaryRelic, int> LegendaryRelicInventory = new();
+    public Dictionary<CommonRelic, int> FragmentsInventory = new();
     public int AttackLevel;
+    int AmountOsKeys;
 
     public float Gold;
 
@@ -40,12 +42,17 @@ public class LocalWhiteBoard : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
+    // Adicionando a relíquia ao dicionário de relíquias
+    // Só é pra ser chamado 1 vez, na primeira vez que o jogador recebe a relíquia
     public void AddToCommonDictionary(CommonRelic relic) {
         if (CommonRelicInventory.ContainsKey(relic) || relic.Character != PlayerCharacter) return;
 
         CommonRelicInventory.Add(relic, 1);
+        FragmentsInventory.Add(relic, 0);
     }
 
+    // Adicionando a relíquia ao dicionário de relíquias
+    // Só é pra ser chamado 1 vez, na primeira vez que o jogador recebe a relíquia
     public void AddToLegendaryDictionary(LegendaryRelic relic) {
         if (LegendaryRelicInventory.ContainsKey(relic) || relic.Character != PlayerCharacter) return;
 
@@ -82,14 +89,14 @@ public class LocalWhiteBoard : MonoBehaviour {
                 if (PlayerCommonRelicSkillTwo == null) PlayerCommonRelicSkillOne = null;
                 else PlayerCommonRelicSkillOne = PlayerCommonRelicSkillTwo;
             }
-            PlayerCommonRelicSkillTwo = relic as CommonRelic; 
+            PlayerCommonRelicSkillTwo = relic as CommonRelic;
         }
         else { PlayerLegendarySkill = relic as LegendaryRelic; }
 
         OnRelicEquiped?.Invoke(this, EventArgs.Empty);
     }
 
-    public Skill ReturnCurrentSkill (int skillIndex) {
+    public Skill ReturnCurrentSkill(int skillIndex) {
         return skillIndex switch {
             1 => PlayerCommonRelicSkillOne,
             2 => PlayerCommonRelicSkillTwo,
@@ -103,5 +110,54 @@ public class LocalWhiteBoard : MonoBehaviour {
             2 => CommonRelicInventory[PlayerCommonRelicSkillTwo],
             _ => LegendaryRelicInventory[PlayerLegendarySkill],
         };
+    }
+
+    /// <summary>
+    /// Verifica se o jogador já possui a relíquia registrada
+    /// </summary>
+    /// <param name="relic"></param>
+    /// <returns></returns>
+    public bool CheckIfCommonRelicAlredyExist(CommonRelic relic) {
+        if (CommonRelicInventory.ContainsKey(relic) && FragmentsInventory.ContainsKey(relic)) return true;
+        return false;
+    }
+
+    /// <summary>
+    /// Retorna se o jogador já possui o máximo de fragmentos ou se o nível da relíquia já está no nível 4
+    /// </summary>
+    /// <param name="relic"></param>
+    /// <returns></returns>
+    public bool CheckIfAlredyHaveMaxFragments(CommonRelic relic) {
+        if (!CommonRelicInventory.ContainsKey(relic) || !FragmentsInventory.ContainsKey(relic)) return false; 
+
+        return (CommonRelicInventory[relic] + FragmentsInventory[relic]) >= 4;
+    }
+
+    /// <summary>
+    /// Verifica se todas as relíquias comuns já estão maximizadas
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckIfAllRelicsAreMaxed() {
+        if (CommonRelicInventory.Count != 5) return false;
+
+        int skillCounter = 0;
+
+        foreach (var skill in PlayerSkillConverter.Instance.ReturnCommonSkillList(PlayerCharacter)) {
+            if (CheckIfAlredyHaveMaxFragments(skill as CommonRelic)) skillCounter++;
+        }
+
+        return skillCounter == 5;
+    }
+
+    /// <summary>
+    /// Aumenta em 1 o número de framentos no inventário
+    /// </summary>
+    /// <param name="relic"></param>
+    public void AddFragment(CommonRelic relic) {
+        FragmentsInventory[relic]++;
+    }
+
+    public int ReturnFragmentsAmount(CommonRelic relic) {
+        return FragmentsInventory[relic];
     }
 }
