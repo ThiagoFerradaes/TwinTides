@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BordaAreaDanoMel
+  m_Name: AreaPhantomAuraUm
   m_Shader: {fileID: -6465566751694194690, guid: b3a49d4e276e0a2408605fcbe2dbfe12, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -51,20 +51,22 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Quadrado: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _TimeO: 0
     - _alphaClip: 0.5
     - _largura: 0.01
     - _noise: 8
-    - _noiseScale: 0
+    - _noiseScale: 5
     - _size: 0.7
+    - _tamanho: 0.7
     - _transparenci: 0
     - _waveSise: 3
     m_Colors:
-    - _Color: {r: 0.2754717, g: 0.2754717, b: 0.2754717, a: 1}
+    - _Color: {r: 1.0046042, g: 1.0046042, b: 1.0046042, a: 1}
     - _corDentro: {r: 0, g: 0, b: 0, a: 1}
     - _speed: {r: 0, g: 0.12, b: 0, a: 0}
-    - _tilingOffset: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _tilingOffset: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
