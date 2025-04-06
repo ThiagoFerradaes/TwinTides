@@ -160,4 +160,28 @@ public class LocalWhiteBoard : MonoBehaviour {
     public int ReturnFragmentsAmount(CommonRelic relic) {
         return FragmentsInventory[relic];
     }
+
+    public void AddGold(float goldAmount) {
+        Gold += goldAmount;
+    }
+
+    public void RemoveGold(float goldAmount) {
+        Gold -= goldAmount;
+    }
+
+    public float ReturnGoldAmount() {
+        return Gold;
+    }
+
+    public void AddKey(int keyAmount) {
+        AmountOsKeys += keyAmount;
+    }
+
+    public void RemoveKey(int keyAmount) {
+        AmountOsKeys -= keyAmount;
+    }
+
+    public int ReturnAmountOfKeys() {
+        return AmountOsKeys;
+    }
 }

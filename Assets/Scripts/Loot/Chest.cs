@@ -7,15 +7,22 @@ public interface IChestItem {
     public void AddItemToInventory() { }
 }
 public class Chest : NetworkBehaviour {
+
+    [Header("Chest Atributes")]
     [SerializeField] ChestRarity rarity;
-    [SerializeField] List<ChestItem> mandatoryItems;
+    [SerializeField] int amountOfKeysToUnlock;
+
+    [Header("Loot")]
+    [SerializeField] LegendaryRelic mandatoryLegendaryRelic;
+    [SerializeField] int amountOfKeys;
+
 
     Vector2 goldIntervalCommonChest = new(1, 100);
     Vector2 goldIntervalIncommonChest = new(101, 1000);
     Vector2 goldIntervalRareChest = new(1001, 5000);
 
     NetworkVariable<int> amountOfGold = new(0);
-    public CommonRelic fragment;
+    CommonRelic fragment;
 
     public enum ChestRarity {
         Common,
@@ -30,18 +37,13 @@ public class Chest : NetworkBehaviour {
     }
 
     void OpenChest() {
-        int rng = Random.Range(0, 100);
+        AddFragmentToInventory();
 
-        switch (rarity) {
-            case ChestRarity.Common:
-                if (rng >= 50) RandomizeFragment(); break;
-            case ChestRarity.Incommon:
-                if (rng >= 25) RandomizeFragment(); break;
-            case ChestRarity.Rare:
-                RandomizeFragment(); break;
-        }
+        AddGoldToInventory();
 
-        ItenManager.Instance.TurnScreenOn(fragment, amountOfGold.Value);
+        AddMandatoryItensToInventory();
+
+        ItenManager.Instance.TurnScreenOn(fragment, amountOfGold.Value, amountOfKeys, mandatoryLegendaryRelic);
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -79,7 +81,7 @@ public class Chest : NetworkBehaviour {
         return (int)gold;
     }
 
-    void RandomizeFragment() {
+    void ChooseFragment() {
         if (LocalWhiteBoard.Instance.CheckIfAllRelicsAreMaxed()) { fragment = null; return; }
 
         var commonSkills = PlayerSkillConverter.Instance.ReturnCommonSkillList(LocalWhiteBoard.Instance.PlayerCharacter);
@@ -110,8 +112,26 @@ public class Chest : NetworkBehaviour {
         }
     }
 
+    void AddFragmentToInventory() {
+        int rng = Random.Range(0, 100);
 
-    public float ReturnGoldAmount() {
-        return amountOfGold.Value;
+        switch (rarity) {
+            case ChestRarity.Common:
+                if (rng >= 50) ChooseFragment(); break;
+            case ChestRarity.Incommon:
+                if (rng >= 25) ChooseFragment(); break;
+            case ChestRarity.Rare:
+                ChooseFragment(); break;
+        }
+    }
+    void AddGoldToInventory() {
+        LocalWhiteBoard.Instance.AddGold(amountOfGold.Value);
+    }
+
+    void AddMandatoryItensToInventory() {
+        LocalWhiteBoard.Instance.AddKey(amountOfKeys);
+
+        if (mandatoryLegendaryRelic == null) return;
+        LocalWhiteBoard.Instance.AddToLegendaryDictionary(mandatoryLegendaryRelic);
     }
 }
