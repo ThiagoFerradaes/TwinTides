@@ -26,7 +26,7 @@ public class Chest : NetworkBehaviour {
 
     public enum ChestRarity {
         Common,
-        Incommon,
+        Medium,
         Rare
     }
 
@@ -70,7 +70,7 @@ public class Chest : NetworkBehaviour {
             case ChestRarity.Common:
                 gold = Random.Range(goldIntervalCommonChest.x, goldIntervalCommonChest.y);
                 break;
-            case ChestRarity.Incommon:
+            case ChestRarity.Medium:
                 gold = Random.Range(goldIntervalIncommonChest.x, goldIntervalIncommonChest.y);
                 break;
             case ChestRarity.Rare:
@@ -117,11 +117,12 @@ public class Chest : NetworkBehaviour {
 
         switch (rarity) {
             case ChestRarity.Common:
-                if (rng >= 50) ChooseFragment(); break;
-            case ChestRarity.Incommon:
-                if (rng >= 25) ChooseFragment(); break;
+                if (rng >= 75) ChooseFragment(); break;
+            case ChestRarity.Medium:
+                if (rng >= 40) ChooseFragment(); break;
             case ChestRarity.Rare:
-                ChooseFragment(); break;
+                //ChooseFragment();
+                break;
         }
     }
     void AddGoldToInventory() {
