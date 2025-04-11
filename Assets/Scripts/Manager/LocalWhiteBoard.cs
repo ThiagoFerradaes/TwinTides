@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class LocalWhiteBoard : MonoBehaviour {
     public Characters PlayerCharacter;
     public bool IsSinglePlayer;
     public bool AnimationOn;
+    bool finalDoorOpened;
 
     public CommonRelic PlayerCommonRelicSkillOne;
     public CommonRelic PlayerCommonRelicSkillTwo;
@@ -183,5 +185,9 @@ public class LocalWhiteBoard : MonoBehaviour {
 
     public int ReturnAmountOfKeys() {
         return AmountOsKeys;
+    }
+
+    public bool ReturnFinalDoorOpened() {
+        return finalDoorOpened;
     }
 }

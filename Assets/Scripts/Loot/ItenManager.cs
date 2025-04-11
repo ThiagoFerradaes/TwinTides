@@ -15,18 +15,6 @@ public class ItenManager : MonoBehaviour {
         if (Instance == null) Instance = this;
     }
 
-    private void Start() {
-        PlayerController.OnInteractOutGame += PlayerController_OnInteractOutGame;
-    }
-
-    private void PlayerController_OnInteractOutGame(object sender, System.EventArgs e) {
-        TurnScreeenOff();
-    }
-
-    private void TurnScreeenOff() {
-        Debug.Log("Screen Off");
-    }
-
     public void TurnScreenOn(CommonRelic relic, float gold, int amountOfKeys, LegendaryRelic legendaryRelic) {
         StartCoroutine(DisplayItens(relic, gold, amountOfKeys, legendaryRelic));
     }

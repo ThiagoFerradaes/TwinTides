@@ -1,28 +1,39 @@
-using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public interface IChestItem {
-    public void AddItemToInventory() { }
-}
 public class Chest : NetworkBehaviour {
 
     [Header("Chest Atributes")]
     [SerializeField] ChestRarity rarity;
-    [SerializeField] int amountOfKeysToUnlock;
 
     [Header("Loot")]
-    [SerializeField] LegendaryRelic mandatoryLegendaryRelic;
-    [SerializeField] int amountOfKeys;
+    [SerializeField, Tooltip("´Somente necessário se o baú for raro")] LegendaryRelic mandatoryMaevisLegendaryRelic;
+    [SerializeField, Tooltip("´Somente necessário se o baú for raro")] LegendaryRelic mandatoryMelLegendaryRelic;
+    [SerializeField, Tooltip("´Somente necessário se o baú for raro")] float mandatoryGold;
+    int amountOfKeys;
+    LegendaryRelic mandatoryLegendaryRelic;
 
 
     Vector2 goldIntervalCommonChest = new(1, 100);
     Vector2 goldIntervalIncommonChest = new(101, 1000);
-    Vector2 goldIntervalRareChest = new(1001, 5000);
 
     NetworkVariable<int> amountOfGold = new(0);
     CommonRelic fragment;
+    List<PlayerController> players = new();
+
+    public static event EventHandler MediumChestOpened;
+    public static event EventHandler<ChestEventArgs> StatCommonChestCooldown;
+
+    public class ChestEventArgs : EventArgs {
+        public Chest chest;
+
+        public ChestEventArgs(Chest chest) {
+            this.chest = chest;
+        }
+    }
 
     public enum ChestRarity {
         Common,
@@ -30,40 +41,17 @@ public class Chest : NetworkBehaviour {
         Rare
     }
 
+    #region Initialize
     private void Start() {
         if (IsServer) {
             amountOfGold.Value = RandomizeGold();
         }
     }
-
-    void OpenChest() {
-        AddFragmentToInventory();
-
-        AddGoldToInventory();
-
-        AddMandatoryItensToInventory();
-
-        ItenManager.Instance.TurnScreenOn(fragment, amountOfGold.Value, amountOfKeys, mandatoryLegendaryRelic);
+    private void OnEnable() {
+        if (IsServer) {
+            amountOfGold.Value = RandomizeGold();
+        }
     }
-
-    private void OnTriggerEnter(Collider other) {
-        if (!other.CompareTag("Mel") && !other.CompareTag("Maevis")) return;
-        other.TryGetComponent<PlayerController>(out PlayerController controller);
-        controller.OnInteractInGame += Controller_OnInteract;
-        controller.CanInteract = true;
-    }
-
-    private void OnTriggerExit(Collider other) {
-        if (!other.CompareTag("Mel") && !other.CompareTag("Maevis")) return;
-        other.TryGetComponent<PlayerController>(out PlayerController controller);
-        controller.OnInteractInGame -= Controller_OnInteract;
-        controller.CanInteract = false;
-    }
-
-    private void Controller_OnInteract(object sender, System.EventArgs e) {
-        OpenChest();
-    }
-
     int RandomizeGold() {
         float gold = 0f;
         switch (rarity) {
@@ -74,13 +62,89 @@ public class Chest : NetworkBehaviour {
                 gold = Random.Range(goldIntervalIncommonChest.x, goldIntervalIncommonChest.y);
                 break;
             case ChestRarity.Rare:
-                gold = Random.Range(goldIntervalRareChest.x, goldIntervalRareChest.y);
+                gold = mandatoryGold;
                 break;
         }
 
         return (int)gold;
     }
 
+    #endregion
+
+    #region OpenChest
+    private void OnTriggerEnter(Collider other) {
+        if (!other.CompareTag("Mel") && !other.CompareTag("Maevis")) return;
+
+        if (other.TryGetComponent<PlayerController>(out PlayerController controller)) {
+            controller.OnInteractInGame += Controller_OnInteract;
+            controller.CanInteract = true;
+            players.Add(controller);
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if (!other.CompareTag("Mel") && !other.CompareTag("Maevis")) return;
+
+        if (other.TryGetComponent<PlayerController>(out PlayerController controller)) {
+            controller.OnInteractInGame -= Controller_OnInteract;
+            controller.CanInteract = false;
+            players.Remove(controller);
+        }
+    }
+
+    private void Controller_OnInteract(object sender, System.EventArgs e) {
+        OpenChest();
+    }
+    void OpenChest() {
+        AddFragmentToInventory();
+
+        AddGoldToInventory();
+
+        AddKeyToInventory();
+
+        AddMandatoryItensToInventory();
+
+        InvokeEvents();
+
+        CloseChest();
+    }
+
+    private void InvokeEvents() {
+        if (rarity == ChestRarity.Common) StatCommonChestCooldown?.Invoke(this, new ChestEventArgs(this));
+        else if (rarity == ChestRarity.Medium) MediumChestOpened?.Invoke(this, EventArgs.Empty);
+
+        ItenManager.Instance.TurnScreenOn(fragment, amountOfGold.Value, amountOfKeys, mandatoryLegendaryRelic);
+    }
+
+    void CloseChest() {
+        var playersToRemove = new List<PlayerController>(players);
+
+        foreach (var player in playersToRemove) {
+            player.OnInteractInGame -= Controller_OnInteract;
+            player.CanInteract = false;
+        }
+
+        players.Clear();
+
+        gameObject.SetActive(false);
+    }
+    #endregion
+
+    #region AddingToInventory
+    void AddFragmentToInventory() {
+        fragment = null;
+
+        int rng = Random.Range(0, 100);
+
+        switch (rarity) {
+            case ChestRarity.Common:
+                if (rng >= 75) ChooseFragment(); break;
+            case ChestRarity.Medium:
+                if (rng >= 25) ChooseFragment(); break;
+            case ChestRarity.Rare:
+                break;
+        }
+    }
     void ChooseFragment() {
         if (LocalWhiteBoard.Instance.CheckIfAllRelicsAreMaxed()) { fragment = null; return; }
 
@@ -111,28 +175,31 @@ public class Chest : NetworkBehaviour {
             }
         }
     }
-
-    void AddFragmentToInventory() {
-        int rng = Random.Range(0, 100);
-
-        switch (rarity) {
-            case ChestRarity.Common:
-                if (rng >= 75) ChooseFragment(); break;
-            case ChestRarity.Medium:
-                if (rng >= 40) ChooseFragment(); break;
-            case ChestRarity.Rare:
-                //ChooseFragment();
-                break;
-        }
-    }
     void AddGoldToInventory() {
         LocalWhiteBoard.Instance.AddGold(amountOfGold.Value);
     }
-
     void AddMandatoryItensToInventory() {
-        LocalWhiteBoard.Instance.AddKey(amountOfKeys);
+        if (mandatoryMaevisLegendaryRelic == null && mandatoryMelLegendaryRelic == null) return;
 
-        if (mandatoryLegendaryRelic == null) return;
+        mandatoryLegendaryRelic = null;
+
+        if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) mandatoryLegendaryRelic = mandatoryMaevisLegendaryRelic;
+        else mandatoryLegendaryRelic = mandatoryMelLegendaryRelic;
+
         LocalWhiteBoard.Instance.AddToLegendaryDictionary(mandatoryLegendaryRelic);
     }
+    void AddKeyToInventory() {
+        if (rarity != ChestRarity.Medium) return;
+
+        if (LocalWhiteBoard.Instance.ReturnAmountOfKeys() == 3 || LocalWhiteBoard.Instance.ReturnFinalDoorOpened()) return;
+
+        int rng = Random.Range(0, 100);
+
+        if (rng <= (ChestManager.Instance.ReturnAmountOfMediumChestOpened() + 2) * 10) { amountOfKeys = 1; }
+        else amountOfKeys = 0;
+
+        LocalWhiteBoard.Instance.AddKey(amountOfKeys);
+    }
+    #endregion
+
 }
