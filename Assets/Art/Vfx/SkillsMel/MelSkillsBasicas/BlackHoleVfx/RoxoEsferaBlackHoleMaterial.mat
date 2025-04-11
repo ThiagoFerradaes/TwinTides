@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AreaDanoMelBom
+  m_Name: RoxoEsferaBlackHoleMaterial
   m_Shader: {fileID: -6465566751694194690, guid: 558b01c4ed7eb504f8e2e49928624334, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -17,12 +17,12 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2450
   stringTagMap:
     RenderType: TransparentCutout
   disabledShaderPasses:
-  - SHADOWCASTER
   - MOTIONVECTORS
+  - SHADOWCASTER
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -32,7 +32,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _mask:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -55,8 +55,9 @@ Material:
     - _CastShadows: 0
     - _Cull: 2
     - _DeciderAlphaClip: 1
-    - _DeciderColors: 1
+    - _DeciderColors: 0
     - _DstBlend: 0
+    - _NoisePadrao: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Scale: 1
@@ -65,29 +66,23 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
-    - _alfaClip: 0.1
-    - _alfaClipMax: 0.15
-    - _alfaClipMax_Normal: 0.8
-    - _alfaClipMin: 0.09
+    - _alfaClipMax: 0.7
     - _alfaClipMin_normal: 0.1
-    - _distortionAmount: 0.8
-    - _distortionAmountMax: 0.8
-    - _distortionAmountMin: 8
-    - _disttortionScale: 40
+    - _distortionAmountMax: 30
+    - _distortionAmountMin: 20
+    - _disttortionScale: 15
     - _elipseSize: 0.5
     - _global: 0
     - _textureDecider: 0
     m_Colors:
-    - _color_01: {r: 0, g: 0.8377358, b: 0.43734866, a: 1}
-    - _color_01_normal: {r: 0, g: 0.3962264, b: 0.28616345, a: 1}
-    - _color_02: {r: 0.04255602, g: 0.5245282, b: 0.1737736, a: 1}
-    - _color_02_normal: {r: 0, g: 2, b: 1.767956, a: 1}
-    - _distortionSpeed: {r: 0, g: 0, b: 0, a: 0}
-    - _main_texture_speed: {r: 0, g: 0.2, b: 0, a: 0}
+    - _color_01_normal: {r: 0.11698109, g: 0, b: 0.04822641, a: 1}
+    - _color_02: {r: 0.15263017, g: 2.9960785, b: 0.27637017, a: 1}
+    - _distortionSpeed: {r: 0.1, g: 0.3, b: 0, a: 0}
+    - _main_texture_speed: {r: 1, g: 0, b: 0, a: 0}
     - _tilingAndOffset: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &8126519770426236668
+--- !u!114 &792908709916200576
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
