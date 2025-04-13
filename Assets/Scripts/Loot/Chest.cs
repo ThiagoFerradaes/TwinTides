@@ -17,8 +17,8 @@ public class Chest : NetworkBehaviour {
     LegendaryRelic mandatoryLegendaryRelic;
 
 
-    Vector2 goldIntervalCommonChest = new(1, 100);
-    Vector2 goldIntervalIncommonChest = new(101, 1000);
+    Vector2 goldIntervalCommonChest = new(5, 10);
+    Vector2 goldIntervalIncommonChest = new(20, 30);
 
     NetworkVariable<int> amountOfGold = new(0);
     CommonRelic fragment;
@@ -160,6 +160,10 @@ public class Chest : NetworkBehaviour {
 
             if (!alreadyHaveRelic) {
                 LocalWhiteBoard.Instance.AddToCommonDictionary(relic);
+
+                if (LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne == null) LocalWhiteBoard.Instance.EquipRelic(relic, 1);
+                else if (LocalWhiteBoard.Instance.PlayerCommonRelicSkillTwo == null) LocalWhiteBoard.Instance.EquipRelic(relic, 2);
+
                 fragment = relic;
                 break;
             }
@@ -187,6 +191,8 @@ public class Chest : NetworkBehaviour {
         else mandatoryLegendaryRelic = mandatoryMelLegendaryRelic;
 
         LocalWhiteBoard.Instance.AddToLegendaryDictionary(mandatoryLegendaryRelic);
+
+        if (LocalWhiteBoard.Instance.PlayerLegendarySkill == null) LocalWhiteBoard.Instance.EquipRelic(mandatoryLegendaryRelic, 3);
     }
     void AddKeyToInventory() {
         if (rarity != ChestRarity.Medium) return;

@@ -33,6 +33,7 @@ public class LocalWhiteBoard : MonoBehaviour {
     [HideInInspector] public float DialogueVolume = 0.5f;
 
     public static event EventHandler OnRelicEquiped;
+    public static event EventHandler OnGoldChanged;
 
 
     private void Awake() {  // Singleton, só vai ter um LocalWhiteBoard no jogo
@@ -165,10 +166,12 @@ public class LocalWhiteBoard : MonoBehaviour {
 
     public void AddGold(float goldAmount) {
         Gold += goldAmount;
+        OnGoldChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public void RemoveGold(float goldAmount) {
         Gold -= goldAmount;
+        OnGoldChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public float ReturnGoldAmount() {
@@ -189,5 +192,14 @@ public class LocalWhiteBoard : MonoBehaviour {
 
     public bool ReturnFinalDoorOpened() {
         return finalDoorOpened;
+    }
+
+    public int ReturnSkillLevel(Skill skill) {
+        if (skill is CommonRelic) {
+            return CommonRelicInventory[skill as CommonRelic];
+        }
+        else {
+            return LegendaryRelicInventory[skill as LegendaryRelic];
+        }
     }
 }
