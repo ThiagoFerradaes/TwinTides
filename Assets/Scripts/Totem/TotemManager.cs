@@ -279,12 +279,13 @@ public class TotemManager : MonoBehaviour {
     }
 
     void ChangeDescriptionPrinceAndImages() {
-        int skillLevel = LocalWhiteBoard.Instance.ReturnSkillLevel(listOfCommonRelics[updateIndex]) - 1;
+        var relic = listOfCommonRelics[updateIndex];
+        int skillLevel = LocalWhiteBoard.Instance.ReturnSkillLevel(relic) - 1;
 
         if (skillLevel < 3) {
             upgradeDescription.text = listOfCommonRelics[updateIndex].UpgradesDescriptions[skillLevel];
             buyPrice.text = prices[skillLevel].ToString();
-            buyButton.interactable = LocalWhiteBoard.Instance.ReturnGoldAmount() >= prices[skillLevel];
+            buyButton.interactable = (LocalWhiteBoard.Instance.ReturnGoldAmount() >= prices[skillLevel] && LocalWhiteBoard.Instance.FragmentsInventory[relic] > 0);
         }
         else {
             upgradeDescription.text = "Skill no nível máximo!";
@@ -325,8 +326,12 @@ public class TotemManager : MonoBehaviour {
     }
 
     void BuyButton() {
-        int skillLevel = LocalWhiteBoard.Instance.ReturnSkillLevel(listOfCommonRelics[updateIndex]) - 1;
+        var relic = listOfCommonRelics[updateIndex];
+        int skillLevel = LocalWhiteBoard.Instance.ReturnSkillLevel(relic) - 1;
+
         LocalWhiteBoard.Instance.RemoveGold(prices[skillLevel]);
+
+        LocalWhiteBoard.Instance.FragmentsInventory[relic]--;
 
         LocalWhiteBoard.Instance.UpdateCommonRelicLevel(listOfCommonRelics[updateIndex], skillLevel + 2);
 

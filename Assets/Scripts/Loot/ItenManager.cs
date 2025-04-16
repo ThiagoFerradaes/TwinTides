@@ -7,9 +7,9 @@ using UnityEngine.UI;
 
 public class ItenManager : MonoBehaviour {
     public static ItenManager Instance;
-    [SerializeField] RectTransform goldScreen, fragmentsScreen, keyScreen, legendaryScreen;
-    [SerializeField] Vector3 inicialScreenPosition, finalScreenPosition;
-    [SerializeField] float fadeOutDuration, timeBetweenEachText;
+    [SerializeField] RectTransform allScreen, goldScreen, fragmentsScreen, keyScreen, legendaryScreen;
+    [SerializeField] float movementInY;
+    [SerializeField] float fadeOutDuration, textDuration;
 
     private void Awake() {
         if (Instance == null) Instance = this;
@@ -20,76 +20,52 @@ public class ItenManager : MonoBehaviour {
     }
 
     IEnumerator DisplayItens(CommonRelic relic, float gold, int amountOfKeys, LegendaryRelic legendaryRelic) {
+        allScreen.gameObject.SetActive(true);
 
         if (gold != 0) {
             goldScreen.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = gold.ToString("F0");
-            StartCoroutine(ShowFloatingUI(goldScreen));
-            yield return new WaitForSeconds(timeBetweenEachText);
+            goldScreen.gameObject.SetActive(true);
         }
 
         if (relic != null) {
-            fragmentsScreen.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = relic.Name;
             fragmentsScreen.transform.GetChild(1).GetComponent<Image>().sprite = relic.UiSprite;
-            StartCoroutine(ShowFloatingUI(fragmentsScreen));
-            yield return new WaitForSeconds(timeBetweenEachText);
+            fragmentsScreen.gameObject.SetActive(true);
         }
 
         if (amountOfKeys != 0) {
-            keyScreen.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = amountOfKeys.ToString("F0");
-            StartCoroutine(ShowFloatingUI(keyScreen));
-            yield return new WaitForSeconds(timeBetweenEachText);
+            keyScreen.gameObject.SetActive(true);
         }
 
         if (legendaryRelic != null) {
-            legendaryScreen.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = legendaryRelic.Name;
             legendaryScreen.transform.GetChild(1).GetComponent<Image>().sprite = legendaryRelic.UiSprite;
-            StartCoroutine(ShowFloatingUI(legendaryScreen));
+            legendaryScreen.gameObject.SetActive(true);
         }
+
+        yield return new WaitForSeconds(textDuration);
+
+        FadeOutUI();
     }
 
-    IEnumerator ShowFloatingUI(RectTransform ui) {
-        ResetAlpha(ui);
-        ui.anchoredPosition = inicialScreenPosition;
-        ui.gameObject.SetActive(true);
+    void FadeOutUI() {
+        CanvasGroup canvasGroup = allScreen.GetComponent<CanvasGroup>();
+        RectTransform rect = allScreen.GetComponent<RectTransform>();
 
-        FadeOutUI(ui);
+        // Movimento para cima (slide)
+        rect.DOAnchorPosY(rect.anchoredPosition.y + movementInY, fadeOutDuration).SetEase(Ease.InOutSine);
 
-        Vector2 start = inicialScreenPosition;
-        Vector2 end = finalScreenPosition;
+        // Fade out
+        canvasGroup.DOFade(0f, fadeOutDuration).SetEase(Ease.InOutSine).OnComplete(() => {
+            allScreen.gameObject.SetActive(false);
 
-        float elapsed = 0f;
-        while (elapsed < fadeOutDuration) {
-            ui.anchoredPosition = Vector2.Lerp(start, end, elapsed / fadeOutDuration);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
+            // Resetar para próxima vez
+            canvasGroup.alpha = 1f;
+            rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, rect.anchoredPosition.y - movementInY);
 
-        ui.anchoredPosition = end;
-    }
-
-    void FadeOutUI(RectTransform uiTransform) {
-        foreach (var image in uiTransform.GetComponentsInChildren<Image>()) {
-            image.DOFade(0f, fadeOutDuration);
-        }
-
-        foreach (var text in uiTransform.GetComponentsInChildren<TextMeshProUGUI>()) {
-            text.DOFade(0f, fadeOutDuration);
-        }
-
-        DOVirtual.DelayedCall(fadeOutDuration, () => uiTransform.gameObject.SetActive(false));
-    }
-
-    void ResetAlpha(RectTransform uiTransform) {
-        foreach (var image in uiTransform.GetComponentsInChildren<Image>()) {
-            var color = image.color;
-            color.a = 1f;
-            image.color = color;
-        }
-
-        foreach (var text in uiTransform.GetComponentsInChildren<TextMeshProUGUI>()) {
-            var color = text.color;
-            color.a = 1f;
-            text.color = color;
-        }
+            // Esconde os elementos internos também
+            goldScreen.gameObject.SetActive(false);
+            fragmentsScreen.gameObject.SetActive(false);
+            keyScreen.gameObject.SetActive(false);
+            legendaryScreen.gameObject.SetActive(false);
+        });
     }
 }
