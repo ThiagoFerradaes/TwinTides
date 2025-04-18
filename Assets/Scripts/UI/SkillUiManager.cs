@@ -66,6 +66,11 @@ public class SkillUiManager : MonoBehaviour {
         PlayerSetUp.OnPlayerSpawned += SetPlayerOne;
         PlayerSetUp.OnPlayerTwoSpawned += SetPlayerTwo;
         LocalWhiteBoard.OnRelicEquiped += LocalWhiteBoard_OnRelicEquiped;
+        LocalWhiteBoard.OnGoldChanged += LocalWhiteBoard_OnGoldChanged;
+    }
+
+    private void LocalWhiteBoard_OnGoldChanged(object sender, EventArgs e) {
+        SetGoldText();
     }
 
     void SetPlayerOne(GameObject player) {

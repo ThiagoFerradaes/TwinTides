@@ -39,9 +39,10 @@ public class PlayerController : NetworkBehaviour {
         _mManager = GetComponent<MovementManager>();
     }
     public void InputInteract(InputAction.CallbackContext context) {
+        if (LocalWhiteBoard.Instance.AnimationOn) return;
+
         if (context.phase == InputActionPhase.Started) {
             if (Time.timeScale == 1 && CanInteract) {
-                OnInteractInGame?.Invoke(this, EventArgs.Empty);
                 OnInteractInGame?.Invoke(this, EventArgs.Empty);
             }
             else if (LocalWhiteBoard.Instance.AnimationOn) {
@@ -51,11 +52,14 @@ public class PlayerController : NetworkBehaviour {
     }
     public void InputMenuInGame(InputAction.CallbackContext context) {
         if (LocalWhiteBoard.Instance.AnimationOn) return;
+
         if (context.phase == InputActionPhase.Performed) {
             OnPause?.Invoke();
         }
     }
     public void InputMove(InputAction.CallbackContext context) {
+
+        if (LocalWhiteBoard.Instance.AnimationOn) return;
 
         if (context.phase == InputActionPhase.Performed && _canWalk && Time.timeScale == 1) {
             _moveInput = context.ReadValue<Vector2>();
@@ -68,11 +72,15 @@ public class PlayerController : NetworkBehaviour {
     }
     public void InputRotateMouse(InputAction.CallbackContext context) {
 
+        if (LocalWhiteBoard.Instance.AnimationOn) return;
+
         if (context.phase == InputActionPhase.Performed && Time.timeScale == 1) {
             isRotatingMouse = true;
         }
     }
     public void InputRotateController(InputAction.CallbackContext context) {
+
+        if (LocalWhiteBoard.Instance.AnimationOn) return;
 
         if (context.phase == InputActionPhase.Performed && Time.timeScale == 1) {
             isRotatingMouse = false;
@@ -91,11 +99,15 @@ public class PlayerController : NetworkBehaviour {
 
     public void InputDash(InputAction.CallbackContext context) {
 
+        if (LocalWhiteBoard.Instance.AnimationOn) return;
+
         if (context.phase == InputActionPhase.Performed && !_inDash && Time.timeScale == 1) {
             StartCoroutine(DashCoroutine());
         }
     }
     public void InputAimMode(InputAction.CallbackContext context) {
+
+        if (LocalWhiteBoard.Instance.AnimationOn) return;
 
         if (context.phase == InputActionPhase.Started && Time.timeScale == 1) {
             if (isAiming) {
@@ -136,6 +148,7 @@ public class PlayerController : NetworkBehaviour {
     }
     void FixedUpdate() {
         if (!IsOwner) return;
+        if (LocalWhiteBoard.Instance.AnimationOn) return;
         MoveAndRotate();
     }
     private void MoveAndRotate() {
