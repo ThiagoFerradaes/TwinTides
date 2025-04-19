@@ -39,15 +39,13 @@ public class SpiritConvergenceMeleeAttack : SkillObjectPrefab
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
-
         if (!other.CompareTag("Enemy")) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
         float damage = _dManager.ReturnTotalAttack(_info.MeleeAttackDamage);
 
-        health.ApplyDamageOnServerRPC(damage, true, true);
+        health.DealDamage(damage, true, true);
     }
 
     void End() {

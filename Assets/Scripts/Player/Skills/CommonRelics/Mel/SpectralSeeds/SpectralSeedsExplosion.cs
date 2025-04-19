@@ -34,14 +34,13 @@ public class SpectralSeedsExplosion : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
         float healing = 0;
 
         if (other.CompareTag("Enemy") && !health.ReturnDeathState()) {
             float damage = _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.Damage);
-            health.ApplyDamageOnServerRPC(damage, true, true);
+            health.DealDamage(damage, true, true);
             healing = damage * _info.PercentOfDamageToHeal / 100;
         }
 

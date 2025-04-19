@@ -29,11 +29,9 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
 
     private void DefineParent() {
 
-        if (IsServer) {
-            transform.SetParent(_maevis.transform);
+        transform.SetParent(_maevis.transform);
 
-            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
-        }
+        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
 
         gameObject.SetActive(true);
 
@@ -45,10 +43,10 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
 
     IEnumerator AttackCoroutine() {
         _canAttackAgain = false;
-        if (IsServer) {
-            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _currentAttackCombo, 1);
-        }
+
+        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+        PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _currentAttackCombo, 1);
+
 
         float startAngle = transform.localEulerAngles.y;
         float targetAngle = _currentAttackCombo == 1 ? startAngle + 180 : startAngle - 180;
@@ -82,10 +80,9 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
 
     IEnumerator ThirdAttackCoroutine() {
         _canAttackAgain = false;
-        if (IsServer) {
-            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _currentAttackCombo, 1);
-        }
+
+        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+        PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _currentAttackCombo, 1);
 
         float startAngle = transform.localEulerAngles.x;
         float targetAngle = startAngle + 90;

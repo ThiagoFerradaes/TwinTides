@@ -30,7 +30,6 @@ public class WarCryExplosion : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (other.CompareTag("Mel") && _level > 1) {
 

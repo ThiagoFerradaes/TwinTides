@@ -42,7 +42,8 @@ public class DivinePurgeObject : SkillObjectPrefab
         gameObject.SetActive(true);
 
         StartCoroutine(SkillDuration());
-        if (IsServer) StartCoroutine(DamageCoroutine());
+
+        StartCoroutine(DamageCoroutine());
     }
 
     IEnumerator SkillDuration() {
@@ -63,7 +64,6 @@ public class DivinePurgeObject : SkillObjectPrefab
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
@@ -73,7 +73,6 @@ public class DivinePurgeObject : SkillObjectPrefab
     }
 
     private void OnTriggerExit(Collider other) {
-        if (!IsServer) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
@@ -91,7 +90,7 @@ public class DivinePurgeObject : SkillObjectPrefab
             float totalDamage = 0f;
             foreach (var enemy in _enemiesList) {
                 if (!enemy.ReturnDeathState()) {
-                    enemy.ApplyDamageOnServerRPC(damage, true, true);
+                    enemy.DealDamage(damage, true, true);
                     totalDamage += damage;
                 }
             }

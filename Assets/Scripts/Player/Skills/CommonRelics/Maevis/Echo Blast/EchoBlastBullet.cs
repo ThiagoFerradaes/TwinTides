@@ -2,8 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class EchoBlastBullet : SkillObjectPrefab
-{
+public class EchoBlastBullet : SkillObjectPrefab {
     EchoBlast _info;
     int _level;
     SkillContext _context;
@@ -34,22 +33,21 @@ public class EchoBlastBullet : SkillObjectPrefab
 
         ReturnObject();
     }
-    
+
 
     private void OnTriggerEnter(Collider other) {
-        if(!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
         Explode();
     }
     void Explode() {
-        if (IsServer) {
-            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-            SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
 
-            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 2);
-        }
+        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+        SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
+
+        PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, newContext, _level, 2);
+
 
         ReturnObject();
     }

@@ -132,7 +132,6 @@ public class SpiritConvergenceMinion : SkillObjectPrefab {
     }
 
     void Attack() {
-        if (!IsServer) return;
 
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
@@ -142,10 +141,10 @@ public class SpiritConvergenceMinion : SkillObjectPrefab {
         transform.LookAt(direction);
 
         if (isRanged) {
-            PlayerSkillPooling.Instance.InstantiateAndSpawnNoCheckRpc(skillId, newContext, _level, 4);
+            PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 4);
         }
         else {
-            PlayerSkillPooling.Instance.InstantiateAndSpawnNoCheckRpc(skillId, newContext, _level, 3);
+            PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 3);
         }
 
         StartCoroutine(AttackCooldown());

@@ -31,11 +31,11 @@ public class SpectralSeedsObject : SkillObjectPrefab {
 
         _father.listOfSeeds.Add(this);
 
-        if (IsServer) {
-            transform.SetParent(_father.transform);
 
-            transform.SetLocalPositionAndRotation(GetPosition(), _contex.PlayerRotation);
-        }
+        transform.SetParent(_father.transform);
+
+        transform.SetLocalPositionAndRotation(GetPosition(), _contex.PlayerRotation);
+
 
         gameObject.SetActive(true);
 
@@ -116,11 +116,10 @@ public class SpectralSeedsObject : SkillObjectPrefab {
     }
 
     private void Explode() {
-        if (!IsServer) return;
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         SkillContext newContext = new(transform.position, transform.rotation, _contex.SkillIdInUI);
 
-        PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 2);
+        PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, newContext, _level, 2);
     }
 
     public void End() {

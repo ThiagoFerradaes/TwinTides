@@ -9,7 +9,7 @@ public class HealOverTime : HealthBuff {
     public override IEnumerator ApplyBuff(HealthManager health, int currentStacks) {
         for(int i = 0; i < amountOfTicks; i++) {
             yield return new WaitForSeconds(timeBetweenTicks);
-            if (health.IsServer) health.HealServerRpc(healPerTick);
+            if (health.IsServer) health.Heal(healPerTick);
         }
         StopBuff(health);
     }

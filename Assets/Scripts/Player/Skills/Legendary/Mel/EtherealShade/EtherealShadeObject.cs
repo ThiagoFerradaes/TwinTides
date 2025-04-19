@@ -47,7 +47,7 @@ public class EtherealShadeObject : SkillObjectPrefab
         gameObject.SetActive(true);
 
         StartCoroutine(Duration());
-        if (IsServer) StartCoroutine(HealAndGrow());
+        StartCoroutine(HealAndGrow());
     }
 
     float GetGroundHeight(Vector3 position) {
@@ -61,7 +61,7 @@ public class EtherealShadeObject : SkillObjectPrefab
     IEnumerator Duration() {
         yield return new WaitForSeconds(_info.CloneDuration);
 
-        if (IsServer) StopCoroutine(HealAndGrow());
+        StopCoroutine(HealAndGrow());
 
         Explode();
 
@@ -75,7 +75,7 @@ public class EtherealShadeObject : SkillObjectPrefab
             yield return new WaitForSeconds(_info.HealCooldown);
             bool heal = false;
             foreach(var player in _playersList) {
-                player.HealServerRpc(_info.Heal);
+                player.Heal(_info.Heal);
                 heal = true;
             }
             if (heal) Grow();
@@ -88,7 +88,7 @@ public class EtherealShadeObject : SkillObjectPrefab
         _collider.radius *= ( 1 + _info.GrowthPercentage/100);
     }
     void Explode() {
-        if (!IsServer) return;
+
         float attackDamage = Mathf.Max(_info.BaseDamage * _amountOfGrowths * (1 + _info.PercentOfDamageIncreasePerGrowth / 100), _info.BaseDamage);
         float damage = _dManager.ReturnTotalAttack(attackDamage);
 
@@ -97,12 +97,11 @@ public class EtherealShadeObject : SkillObjectPrefab
                 _enemiesList.Remove(enemy);
                 continue;
             }
-            enemy.ApplyDamageOnServerRPC(damage, false, true);
+            enemy.DealDamage(damage, false, true);
         }
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
@@ -112,7 +111,6 @@ public class EtherealShadeObject : SkillObjectPrefab
     }
 
     private void OnTriggerExit(Collider other) {
-        if (!IsServer) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 

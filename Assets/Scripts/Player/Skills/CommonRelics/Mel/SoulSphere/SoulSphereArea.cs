@@ -57,7 +57,7 @@ public class SoulSphereArea : SkillObjectPrefab {
             yield return new WaitForSeconds(_info.AreaDamageCooldown);
             foreach (var enemy in _enemiesList) {
                 float damage = _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.AreaDamage);
-                enemy.ApplyDamageOnServerRPC(damage, true, true);
+                enemy.DealDamage(damage, true, true);
             }
         }
     }
@@ -68,7 +68,7 @@ public class SoulSphereArea : SkillObjectPrefab {
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        if (IsServer && other.CompareTag("Enemy")) {
+        if (other.CompareTag("Enemy")) {
             if (!_enemiesList.Contains(health)) _enemiesList.Add(health);
         }
 
@@ -77,7 +77,7 @@ public class SoulSphereArea : SkillObjectPrefab {
 
             health.RemoveBuff(_info.invulnerabilityBuff);
 
-            if (IsServer) health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, false);
+            health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, false);
         }
     }
 
@@ -87,7 +87,7 @@ public class SoulSphereArea : SkillObjectPrefab {
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        if (IsServer && other.CompareTag("Enemy")) {
+        if (other.CompareTag("Enemy")) {
             if (_enemiesList.Contains(health)) _enemiesList.Remove(health);
         }
 
@@ -95,7 +95,7 @@ public class SoulSphereArea : SkillObjectPrefab {
 
             if (playersList.Contains(health)) { playersList.Remove(health); }
 
-            if (IsServer) health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, true);
+            health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, true);
 
             health.AddBuffToList(_info.invulnerabilityBuff);
         }
@@ -103,7 +103,7 @@ public class SoulSphereArea : SkillObjectPrefab {
     }
 
     void End() {
-        if (IsServer && _level == 4) {
+        if (_level == 4) {
             List<HealthManager> removedPlayers = new(playersList);
 
             playersList.Clear();

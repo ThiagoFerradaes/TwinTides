@@ -22,11 +22,10 @@ public class GhostlyWhisperObject : SkillObjectPrefab {
     }
 
     void DefinePosition() {
-        if (IsServer) {
-            transform.SetParent(_mel.transform);
 
-            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
-        }
+        transform.SetParent(_mel.transform);
+
+        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
 
         DefineAmountOfPuddles();
 
@@ -34,17 +33,17 @@ public class GhostlyWhisperObject : SkillObjectPrefab {
 
         InstantiatePuddle();
 
-        StartCoroutine(Duration());
+        if (_level > 1) StartCoroutine(Duration());
+        else End();
     }
 
     void InstantiatePuddle() {
-        if (!IsServer) return;
 
         amountOfPuddles--;
 
         SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        PlayerSkillPooling.Instance.InstantiateAndSpawnNoCheckRpc(skillId, newContext, _level, 1);
+        PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 1);
     }
 
     void DefineAmountOfPuddles() {

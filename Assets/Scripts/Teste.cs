@@ -10,7 +10,12 @@ public class Teste : NetworkBehaviour {
 
     private void Start() {
         if (IsHost) {
-            Instantiate(prefab);
+            InstantiateRpc();
         }
+    }
+
+    [Rpc(SendTo.Everyone)]
+    void InstantiateRpc() {
+        Instantiate(prefab);
     }
 }

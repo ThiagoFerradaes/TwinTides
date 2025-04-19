@@ -28,12 +28,11 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
 
         transform.localScale = _currentAttackCombo == 3 ? _info.ThirdAttackSize : _info.FirstAndSecondAttackSize;
 
-        if (IsServer) {
-            transform.SetParent(_father.transform);
+        transform.SetParent(_father.transform);
 
-            transform.localPosition = _currentAttackCombo == 3 ? _info.ThirdAttackPosition : _info.AttackPosition;
-            transform.localRotation = _currentAttackCombo == 3 ? Quaternion.Euler(_info.ThierdAttackRotation) : Quaternion.Euler(_info.AttackRotation);
-        }
+        transform.localPosition = _currentAttackCombo == 3 ? _info.ThirdAttackPosition : _info.AttackPosition;
+        transform.localRotation = _currentAttackCombo == 3 ? Quaternion.Euler(_info.ThierdAttackRotation) : Quaternion.Euler(_info.AttackRotation);
+
 
         gameObject.SetActive(true);
 
@@ -61,7 +60,6 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -73,6 +71,6 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
             _ => _dManager.ReturnTotalAttack(_info.ThirdAttackDamage)
         };
 
-        health.ApplyDamageOnServerRPC(damage, true, true);
+        health.DealDamage(damage, true, true);
     }
 }

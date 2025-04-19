@@ -36,7 +36,6 @@ public class EarthBreakerManager : SkillObjectPrefab {
         End();
     }
     void SummonImpact() {
-        if (!IsServer) return;
 
         _amountOfImpactsSummoned++;
 
@@ -46,7 +45,7 @@ public class EarthBreakerManager : SkillObjectPrefab {
         Vector3 newPos = (_context.PlayerPosition) + (direction * _info.InicialImpactSize.z * _amountOfImpactsSummoned);
         SkillContext newContext = new(newPos, _context.PlayerRotation, _context.SkillIdInUI);
 
-        PlayerSkillPooling.Instance.InstantiateAndSpawnNoCheckRpc(skillId, newContext, 1, 1);
+        PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, 1, 1);
     }
 
     void End() {

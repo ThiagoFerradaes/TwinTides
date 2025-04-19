@@ -39,9 +39,9 @@ public class SoulSphereObject : SkillObjectPrefab {
 
     private void OnTriggerEnter(Collider other) {
         if (_level == 1) {
-            if (other.CompareTag("Enemy") && IsServer) {
+            if (other.CompareTag("Enemy")) {
                 float damage = _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.DamagePassingThroughEnemy);
-                other.GetComponent<HealthManager>().ApplyDamageOnServerRPC(damage, true, true);
+                other.GetComponent<HealthManager>().DealDamage(damage, true, true);
                 StopAllCoroutines();
                 ReturnObject();
             }
@@ -52,8 +52,8 @@ public class SoulSphereObject : SkillObjectPrefab {
             }
         }
         else {
-            if (other.CompareTag("Enemy") && IsServer) {
-                other.GetComponent<HealthManager>().ApplyDamageOnServerRPC(_info.DamagePassingThroughEnemy, true, true);
+            if (other.CompareTag("Enemy") ) {
+                other.GetComponent<HealthManager>().DealDamage(_info.DamagePassingThroughEnemy, true, true);
             }
             else if (other.CompareTag("Maevis")) {
                 StopAllCoroutines();
@@ -64,9 +64,8 @@ public class SoulSphereObject : SkillObjectPrefab {
     }
 
     void Explode() {
-        if (!IsServer) return;
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         SkillContext context = new(transform.position, transform.rotation, _context.SkillIdInUI);
-        PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId,context, _level, 1);
+        PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId,context, _level, 1);
     }
 }

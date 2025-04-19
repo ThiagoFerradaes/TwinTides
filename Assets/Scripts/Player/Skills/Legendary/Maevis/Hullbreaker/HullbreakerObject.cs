@@ -21,25 +21,25 @@ public class HullbreakerObject : SkillObjectPrefab {
     }
 
     private void SetParentAndPosition() {
-        if (IsServer) {
-            transform.SetParent(_maevis.transform);
 
-            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
-        }
+        transform.SetParent(_maevis.transform);
+
+        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
+
 
         gameObject.SetActive(true);
 
         StartCoroutine(ShieldDuration());
 
-        if (IsServer) StartCoroutine(Earthquake());
+        StartCoroutine(Earthquake());
     }
 
     IEnumerator ShieldDuration() {
         _maevis.TryGetComponent<HealthManager>(out HealthManager health);
 
-        if (IsServer) {
-            health.ApplyShieldServerRpc(_info.ShieldAmount, _info.ShieldDuration, true);
-        }
+
+        health.ApplyShield(_info.ShieldAmount, _info.ShieldDuration, true);
+
 
         float elapsedTime = 0f;
 
@@ -57,15 +57,15 @@ public class HullbreakerObject : SkillObjectPrefab {
         while (true) {
             yield return new WaitForSeconds(_info.EarthquakeInterval);
             SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
-            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 2);
+            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, newContext, _level, 2);
         }
     }
 
     void Explode() {
-        if (!IsServer) return;
+
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
-        PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 1);
+        PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, newContext, _level, 1);
     }
     void End() {
         Explode();

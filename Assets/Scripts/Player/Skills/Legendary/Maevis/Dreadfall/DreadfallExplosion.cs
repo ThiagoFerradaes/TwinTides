@@ -34,16 +34,14 @@ public class DreadfallExplosion : SkillObjectPrefab {
     IEnumerator Duration() {
         yield return new WaitForSeconds(_info.ExplosionDuration);
 
-        if (IsServer) {
-            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 2);
-        }
+        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+        PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 2);
+
 
         ReturnObject();
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -51,7 +49,7 @@ public class DreadfallExplosion : SkillObjectPrefab {
 
         float damage = _dManager.ReturnTotalAttack(_info.ExplosionDamage);
 
-        health.ApplyDamageOnServerRPC(damage, true, true);
+        health.DealDamage(damage, true, true);
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

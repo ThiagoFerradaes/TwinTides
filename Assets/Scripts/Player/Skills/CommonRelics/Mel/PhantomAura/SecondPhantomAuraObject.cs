@@ -21,21 +21,20 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
     void DefineSizeAndParent() {
         transform.localScale = _level < 4 ? _info.AuraSize : _info.AuraSizeLevel4;
 
-        if (IsServer) {
-            transform.SetParent(_maevis.transform);
 
-            transform.SetLocalPositionAndRotation(Vector3.zero, _maevis.transform.rotation);
-        }
+        transform.SetParent(_maevis.transform);
+
+        transform.SetLocalPositionAndRotation(Vector3.zero, _maevis.transform.rotation);
+
 
         gameObject.SetActive(true);
 
-        if (IsServer) StartCoroutine(DamageTimer());
+        StartCoroutine(DamageTimer());
 
         StartCoroutine(Duration());
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -45,7 +44,6 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
     }
 
     private void OnTriggerExit(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -73,7 +71,7 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
                 bool enemieDead = enemyHealth.ReturnDeathState();
 
                 if (!enemieDead) {
-                    enemyHealth.ApplyDamageOnServerRPC(damage, true, true);
+                    enemyHealth.DealDamage(damage, true, true);
 
                     HealPlayer(damage);
                 }

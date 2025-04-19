@@ -44,10 +44,9 @@ public class BlackHoleObject : SkillObjectPrefab {
 
         StartCoroutine(DurationOfBlackHole());
 
-        if (IsServer) {
-            StartCoroutine(DamageTimer());
-            if (_level > 1) StartCoroutine(StunTimer());
-        }
+        StartCoroutine(DamageTimer());
+        if (_level > 1) StartCoroutine(StunTimer());
+
     }
 
     float GetGroundHeight(Vector3 position) {
@@ -67,7 +66,6 @@ public class BlackHoleObject : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -94,7 +92,6 @@ public class BlackHoleObject : SkillObjectPrefab {
     }
 
     private void OnTriggerExit(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -109,17 +106,17 @@ public class BlackHoleObject : SkillObjectPrefab {
 
         if (_level < 3) return;
 
-        health.SetMultiplyServerRpc(HealthMultipliers.Heal, (1/ (1 - _info.HealReductionPercent/100)));
+        health.SetMultiplyServerRpc(HealthMultipliers.Heal, (1 / (1 - _info.HealReductionPercent / 100)));
         health.SetPermissionServerRpc(HealthPermissions.CanBeShielded, true);
-    
+
     }
 
     IEnumerator DamageTimer() {
         while (true) {
             yield return new WaitForSeconds(_info.DamageInterval);
-            foreach(var enemy in _listOfEnemies) {
+            foreach (var enemy in _listOfEnemies) {
                 float damage = _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.Damage);
-                enemy.ApplyDamageOnServerRPC(damage, false, true);
+                enemy.DealDamage(damage, false, true);
             }
         }
     }

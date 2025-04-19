@@ -34,9 +34,9 @@ public class WardStoneObject : SkillObjectPrefab {
     }
 
     private void CreateArea() {
-        if (_level >= 3 && IsServer) {
+        if (_level >= 3) {
             int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 1);
+            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
         }
     }
 
@@ -55,7 +55,7 @@ public class WardStoneObject : SkillObjectPrefab {
                 health.AddBuffToList(_info.HealingIncreaseBuff);
                 health.AddBuffToList(_info.ShieldIncreaseBuff);
 
-                if (IsServer) health.ApplyShieldServerRpc(_info.AmountOfShield, _info.ShieldDuration, true);
+                health.ApplyShield(_info.AmountOfShield, _info.ShieldDuration, true);
             }
             else {
                 health.AddBuffToList(_info.Debuffblocker);

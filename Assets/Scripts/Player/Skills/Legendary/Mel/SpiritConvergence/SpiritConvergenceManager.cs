@@ -2,8 +2,7 @@ using System.Collections;
 using System.Threading;
 using UnityEngine;
 
-public class SpiritConvergenceManager : SkillObjectPrefab
-{
+public class SpiritConvergenceManager : SkillObjectPrefab {
     SpiritConvergence _info;
     int _level, _timesExtended;
     SkillContext _context;
@@ -28,10 +27,10 @@ public class SpiritConvergenceManager : SkillObjectPrefab
     }
 
     void SetParent() {
-        if (IsServer) {
-            transform.parent = _mel.transform;
-            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
-        }
+
+        transform.parent = _mel.transform;
+        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
+
 
         gameObject.SetActive(true);
 
@@ -41,9 +40,9 @@ public class SpiritConvergenceManager : SkillObjectPrefab
     IEnumerator SkillDuration() {
         _timer = 0;
         _durationTime = _info.SkillDuration;
-        if (IsServer) StartCoroutine(InstantiateMeleeMinion());
+        StartCoroutine(InstantiateMeleeMinion());
 
-        while(_timer < _durationTime) {
+        while (_timer < _durationTime) {
             _timer += Time.deltaTime;
             yield return null;
         }
@@ -57,7 +56,7 @@ public class SpiritConvergenceManager : SkillObjectPrefab
         while (_timer < _durationTime) {
 
             SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
-            PlayerSkillPooling.Instance.InstantiateAndSpawnNoCheckRpc(skillId, newContext, _level, 1);
+            PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 1);
             Debug.Log("Instanciei melee");
 
             yield return new WaitForSeconds(_info.MeleeMinionCooldown);
@@ -86,11 +85,9 @@ public class SpiritConvergenceManager : SkillObjectPrefab
     }
 
     void InstantiateRangedMinion() {
-        if (!IsServer) return;
-       
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
-        PlayerSkillPooling.Instance.InstantiateAndSpawnNoCheckRpc(skillId, newContext, _level, 2);
+        PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 2);
         Debug.Log("Instanciei Ranged");
     }
 

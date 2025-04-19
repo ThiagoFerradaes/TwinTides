@@ -41,7 +41,6 @@ public class TidalWatzImpact : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -51,7 +50,7 @@ public class TidalWatzImpact : SkillObjectPrefab {
 
         float totalDamage = baseDamage + _father.acumulativeDamage;
 
-        health.ApplyDamageOnServerRPC(totalDamage, false, true);
+        health.DealDamage(totalDamage, false, true);
     }
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
         return;

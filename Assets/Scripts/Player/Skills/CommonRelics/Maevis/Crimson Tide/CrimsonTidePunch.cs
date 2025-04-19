@@ -40,12 +40,11 @@ public class CrimsonTidePunch : SkillObjectPrefab
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        health.ApplyDamageOnServerRPC(_info.PunchDamage, true, true);
+        health.DealDamage(_info.PunchDamage, true, true);
     }
 }

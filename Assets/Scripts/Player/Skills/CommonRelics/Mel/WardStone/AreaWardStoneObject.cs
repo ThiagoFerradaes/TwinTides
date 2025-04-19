@@ -45,7 +45,7 @@ public class AreaWardStoneObject : SkillObjectPrefab {
             foreach(var player in _listOfPlayers) {
                 if (player.ReturnCurrentHealth() >= player.ReturnMaxHealth()) {
                     float shieldAmount = _info.AmountOfHealing * _info.PercentOfShieldFromExtraHealing/100;
-                    player.ApplyShieldServerRpc(shieldAmount, _info.ExtraShieldDuration, true);
+                    player.ApplyShield(shieldAmount, _info.ExtraShieldDuration, true);
                 }
                 else {
                     player.HealServerRpc(_info.AmountOfHealing, true);
@@ -59,8 +59,6 @@ public class AreaWardStoneObject : SkillObjectPrefab {
         
         if (!other.CompareTag("Mel") && !other.CompareTag("Maevis")) return;
 
-        if (!IsServer) return;
-
         if (!_listOfPlayers.Contains(health)) _listOfPlayers.Add(health);
 
     }
@@ -69,8 +67,6 @@ public class AreaWardStoneObject : SkillObjectPrefab {
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
         if (!other.CompareTag("Mel") && !other.CompareTag("Maevis")) return;
-
-        if (!IsServer) return;
 
         if (_listOfPlayers.Contains(health)) _listOfPlayers.Remove(health);
     }

@@ -37,7 +37,6 @@ public class CrimsonTideExplosion : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -48,7 +47,7 @@ public class CrimsonTideExplosion : SkillObjectPrefab {
 
         bool wasAlive = !health.ReturnDeathState();
 
-        health.ApplyDamageOnServerRPC(damage, true, true);
+        health.DealDamage(damage, true, true);
 
         bool isDead = health.ReturnDeathState();
 

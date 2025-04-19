@@ -91,7 +91,6 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
             UpAreaLevel();
         }
 
-        if (!IsServer) return;
         if (!other.CompareTag("Enemy")) return;
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
         if (!listOfEnemies.Contains(health)) listOfEnemies.Add(health);
@@ -136,7 +135,7 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
                 _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.DamageLevel2);
 
             foreach (var enemie in listOfEnemies) {
-                enemie.ApplyDamageOnServerRPC(damage, true, true);
+                enemie.DealDamage(damage, true, true);
             }
 
             yield return null;

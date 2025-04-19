@@ -53,7 +53,6 @@ public class ImpactOfEarthBreaker : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -63,7 +62,7 @@ public class ImpactOfEarthBreaker : SkillObjectPrefab {
 
         if (health.ReturnShieldStatus()) health.BreakShieldRpc();
 
-        health.ApplyDamageOnServerRPC(damage, true, true);
+        health.DealDamage(damage, true, true);
 
         if (!other.TryGetComponent<MovementManager>(out MovementManager mManager)) return;
 

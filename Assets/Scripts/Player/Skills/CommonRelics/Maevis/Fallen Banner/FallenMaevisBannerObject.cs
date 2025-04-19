@@ -50,17 +50,16 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
         }
         else {
 
-            if (IsServer) {
-                transform.SetParent(_maveis.transform);
+            transform.SetParent(_maveis.transform);
 
-                transform.SetLocalPositionAndRotation(_info.BannerFollowPosition, Quaternion.Euler(0, 0, 0));
+            transform.SetLocalPositionAndRotation(_info.BannerFollowPosition, Quaternion.Euler(0, 0, 0));
 
-                if (_level > 2) {
-                    int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+            if (_level > 2) {
+                int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
 
-                    PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 1);
-                }
+                PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
             }
+
 
             gameObject.SetActive(true);
 
@@ -79,7 +78,6 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
     }
 
     void AddBuffs() {
-        if (!IsServer) return;
 
         if (_amountOfBuffs < _info.BannerMaxStacks) {
             _amountOfBuffs++;
@@ -100,7 +98,6 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
     }
 
     void EndBuffs() {
-        if (!IsServer) return;
 
         List<GameObject> playersRemoved = new(activePlayers);
         activePlayers.Clear();
@@ -126,7 +123,6 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Maevis") && !other.CompareTag("Mel")) return;
 
@@ -148,7 +144,6 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
     }
 
     private void OnTriggerExit(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Maevis") && !other.CompareTag("Mel")) return;
 

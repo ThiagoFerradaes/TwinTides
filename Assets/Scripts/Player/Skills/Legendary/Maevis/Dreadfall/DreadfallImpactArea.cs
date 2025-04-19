@@ -59,7 +59,7 @@ public class DreadfallImpactArea : SkillObjectPrefab {
             float damage = _dManager.ReturnTotalAttack(_info.FieldDamagePerTick);
 
             foreach (var health in _listOfEnemies) {
-                if (IsServer) health.ApplyDamageOnServerRPC(damage, true, true);
+                health.DealDamage(damage, true, true);
 
                 health.AddDebuffToList(_info.BleedDebuff);
             }

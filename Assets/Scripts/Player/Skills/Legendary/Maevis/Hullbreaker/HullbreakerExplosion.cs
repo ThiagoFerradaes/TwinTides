@@ -35,7 +35,6 @@ public class HullbreakerExplosion : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -43,7 +42,7 @@ public class HullbreakerExplosion : SkillObjectPrefab {
 
         float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.ExplosionDamage);
 
-        health.ApplyDamageOnServerRPC(damage, true, true);
+        health.DealDamage(damage, true, true);
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

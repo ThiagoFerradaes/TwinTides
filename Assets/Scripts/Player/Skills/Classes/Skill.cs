@@ -21,7 +21,7 @@ public abstract class Skill : ScriptableObject
 
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(this);
 
-        PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, context, skillLevel, 0);
+        PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, context, skillLevel, 0);
 
     }
 
