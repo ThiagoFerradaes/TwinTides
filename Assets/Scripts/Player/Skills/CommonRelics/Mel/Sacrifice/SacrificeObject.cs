@@ -23,7 +23,7 @@ public class SacrificeObject : SkillObjectPrefab {
         DefinePosition();
     }
     void DefinePosition() {
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 

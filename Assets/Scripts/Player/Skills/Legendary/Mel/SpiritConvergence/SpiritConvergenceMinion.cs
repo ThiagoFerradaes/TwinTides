@@ -35,7 +35,7 @@ public class SpiritConvergenceMinion : SkillObjectPrefab {
     void Initiate() {
         _hManager.RestoreAllHealthServerRpc();
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 

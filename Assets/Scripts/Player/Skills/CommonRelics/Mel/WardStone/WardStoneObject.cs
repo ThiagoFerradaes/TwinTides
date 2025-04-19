@@ -18,7 +18,7 @@ public class WardStoneObject : SkillObjectPrefab {
     private void DefineSizeAndPosition() {
         transform.localScale = _level < 3 ? _info.ExplosionRadius : _info.ExplosionRadiusLevel3;
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 

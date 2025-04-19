@@ -23,7 +23,7 @@ public class SpiritConvergenceRangedAttack : SkillObjectPrefab
     }
 
     void SetPosition() {
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 

@@ -16,7 +16,7 @@ public class SoulSphereObject : SkillObjectPrefab {
             _mel = PlayerSkillPooling.Instance.MelGameObject;
         }
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
         gameObject.SetActive(true);
 
         StartCoroutine(Move());

@@ -25,7 +25,7 @@ public class AreaWardStoneObject : SkillObjectPrefab {
     private void DefineSizeAndPosition() {
         transform.localScale = _info.ExplosionRadiusLevel3;
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 

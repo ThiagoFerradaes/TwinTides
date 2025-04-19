@@ -24,7 +24,7 @@ public abstract class SkillObjectPrefab : MonoBehaviour {
 
     }
 
-    public virtual void AddStackRpc() {
+    public virtual void AddStack() {
         return;
     }
     public virtual void StartSkillCooldown(SkillContext context, Skill skill) {

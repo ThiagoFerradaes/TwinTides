@@ -44,7 +44,7 @@ public class MelNormalAttackObject : SkillObjectPrefab {
 
         transform.localScale = _info.SphereSize;
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 

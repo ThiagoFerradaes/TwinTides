@@ -145,7 +145,7 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
     }
 
     [Rpc(SendTo.ClientsAndHost)]
-    public override void AddStackRpc() {
+    public override void AddStack() {
         if (!_canAttackAgain) return;
 
         if (_currentAttackCombo < 3) {

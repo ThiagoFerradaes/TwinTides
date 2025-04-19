@@ -41,9 +41,33 @@ public class GhostlyWhisperObject : SkillObjectPrefab {
 
         amountOfPuddles--;
 
-        SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
+        if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Mel) return;
+
+        Vector3 skillPos;
+
+        skillPos.y = GetFloorHeight(_context.Pos);
+
+        Transform aim = _mel.GetComponent<PlayerController>().aimObject;
+        Vector3 direction = transform.rotation * Vector3.forward;
+        Vector3 position = transform.position + (direction * _info.MaxRange);
+
+        if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(transform.position, aim.position) <= _info.MaxRange) {
+            skillPos.x = aim.position.x;
+            skillPos.z = aim.position.z;
+        }
+        else {
+            skillPos = position;
+        }
+
+        SkillContext newContext = new(skillPos, transform.rotation, _context.SkillIdInUI);
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 1);
+    }
+
+    float GetFloorHeight(Vector3 position) {
+        Ray ray = new(position + Vector3.up * 5f, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f, LayerMask.GetMask("Floor"))) return hit.point.y + 0.1f;
+        return position.y;
     }
 
     void DefineAmountOfPuddles() {
@@ -80,8 +104,7 @@ public class GhostlyWhisperObject : SkillObjectPrefab {
         ReturnObject();
     }
 
-    [Rpc(SendTo.ClientsAndHost)]
-    public override void AddStackRpc() {
+    public override void AddStack() {
         InstantiatePuddle();
     }
 

@@ -25,7 +25,7 @@ public class EchoBlastSecondaryExplosion : SkillObjectPrefab {
 
         transform.localScale = Vector3.one * _info.ExplosionRadiusLevel2;
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 

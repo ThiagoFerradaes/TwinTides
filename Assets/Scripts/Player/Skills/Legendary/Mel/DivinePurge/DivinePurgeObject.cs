@@ -36,7 +36,7 @@ public class DivinePurgeObject : SkillObjectPrefab
         transform.localScale = _info.SkillSize;
 
         Vector3 direction = _context.PlayerRotation * Vector3.forward;
-        Vector3 position = _context.PlayerPosition + (direction * (_info.ZOffSett + _info.SkillSize.y/2));
+        Vector3 position = _context.Pos + (direction * (_info.ZOffSett + _info.SkillSize.y/2));
         transform.SetPositionAndRotation(position, _context.PlayerRotation * Quaternion.Euler(90,0,0));
 
         gameObject.SetActive(true);

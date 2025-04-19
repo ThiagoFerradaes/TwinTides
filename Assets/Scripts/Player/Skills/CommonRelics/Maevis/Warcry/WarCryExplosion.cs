@@ -16,7 +16,7 @@ public class WarCryExplosion : SkillObjectPrefab {
     private void DefineSizeAndPosition() {
         transform.localScale = _level < 3 ? Vector3.one * _info.ExplosionRadius : Vector3.one * _info.ExplosionRadiusLevel3;
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 

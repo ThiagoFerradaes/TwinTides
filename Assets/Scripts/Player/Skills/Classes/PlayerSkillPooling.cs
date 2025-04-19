@@ -50,7 +50,7 @@ public class PlayerSkillPooling : NetworkBehaviour {
             spawnedObject = activeSkills[skill.skillPrefabs[objectIndex].name].Dequeue(); // achando o objeto ativo
 
             if (!spawnedObject.TryGetComponent<SkillObjectPrefab>(out SkillObjectPrefab obj)) return;
-            obj.AddStackRpc(); // chamando a função de stacks
+            obj.AddStack(); // chamando a função de stacks
 
             string objectName = spawnedObject.name.Replace("(Clone)", "");
             if (activeSkills.ContainsKey(objectName)) {

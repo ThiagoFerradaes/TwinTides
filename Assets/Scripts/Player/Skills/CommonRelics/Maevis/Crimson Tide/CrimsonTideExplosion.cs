@@ -23,7 +23,7 @@ public class CrimsonTideExplosion : SkillObjectPrefab {
     private void DefineSizeAndPosition() {
         transform.localScale = _info.ExplosionRadius * Vector3.one;
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 

@@ -32,10 +32,10 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
     private void InvocateBanner() {
         if (_level < 2) {
             Vector3 direction = _context.PlayerRotation * Vector3.forward;
-            Vector3 position = _context.PlayerPosition + (direction * _info.MaxRange);
+            Vector3 position = _context.Pos + (direction * _info.MaxRange);
             Transform aim = _maveis.GetComponent<PlayerController>().aimObject.transform;
 
-            if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_context.PlayerPosition, aim.position) < _info.MaxRange) {
+            if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_context.Pos, aim.position) < _info.MaxRange) {
 
                 transform.SetPositionAndRotation(aim.position, _context.PlayerRotation);
             }
@@ -167,7 +167,7 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
 
 
     [Rpc(SendTo.ClientsAndHost)]
-    public override void AddStackRpc() {
+    public override void AddStack() {
         OnStacked?.Invoke(this, EventArgs.Empty);
 
         AddBuffs();

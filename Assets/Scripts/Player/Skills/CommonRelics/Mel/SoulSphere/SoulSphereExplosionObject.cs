@@ -22,7 +22,7 @@ public class SoulSphereExplosionObject : SkillObjectPrefab {
         StartCoroutine(Explode());
     }
     void DefineSize() {
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         transform.localScale = _level < 4 ? Vector3.one * _info.ExplosionRadius : Vector3.one * _info.ExplosionRadiusLevel4;
 

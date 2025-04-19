@@ -22,9 +22,9 @@ public class ImpactOfEarthBreaker : SkillObjectPrefab {
     void SetPosition() {
         transform.localScale = ReturnSize();
 
-        _context.PlayerPosition.y = GetGroundHeight(_context.PlayerPosition);
+        _context.Pos.y = GetGroundHeight(_context.Pos);
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 

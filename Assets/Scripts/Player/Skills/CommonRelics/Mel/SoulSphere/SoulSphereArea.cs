@@ -30,9 +30,9 @@ public class SoulSphereArea : SkillObjectPrefab {
 
     void DefineSize() {
 
-        _context.PlayerPosition.y = GetGroundHeith(_context.PlayerPosition);
+        _context.Pos.y = GetGroundHeith(_context.Pos);
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         transform.localScale = _level < 4? _info.AreaRadius : _info.AreaRadiusLevel4;
 

@@ -27,9 +27,9 @@ public class CrimsonTidePath : SkillObjectPrefab {
     void SetPosition() {
         transform.localScale = _info.PathSize;
 
-        _context.PlayerPosition.y = GetGroundHeight(_context.PlayerPosition);
+        _context.Pos.y = GetGroundHeight(_context.Pos);
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 

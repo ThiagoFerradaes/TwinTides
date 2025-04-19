@@ -24,7 +24,7 @@ public class SpiritConvergenceMeleeAttack : SkillObjectPrefab
 
     void SetPosition() {
         Vector3 direction = _context.PlayerRotation * Vector3.forward;
-        Vector3 position = _context.PlayerPosition + (direction * _info.MeleeAttackOffSet);
+        Vector3 position = _context.Pos + (direction * _info.MeleeAttackOffSet);
         transform.SetPositionAndRotation(position, _context.PlayerRotation);
 
         gameObject.SetActive(true);

@@ -28,13 +28,13 @@ public class BlackHoleObject : SkillObjectPrefab {
 
         Transform aim = _mel.GetComponent<PlayerController>().aimObject;
 
-        _context.PlayerPosition.y = GetGroundHeight(_context.PlayerPosition);
+        _context.Pos.y = GetGroundHeight(_context.Pos);
 
         Vector3 direction = _context.PlayerRotation * Vector3.forward;
-        Vector3 position = _context.PlayerPosition + (direction * _info.MaxRange);
+        Vector3 position = _context.Pos + (direction * _info.MaxRange);
 
-        if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_context.PlayerPosition, aim.position) <= _info.MaxRange) {
-            transform.SetPositionAndRotation(new Vector3(aim.position.x, _context.PlayerPosition.y, aim.position.z), _context.PlayerRotation);
+        if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_context.Pos, aim.position) <= _info.MaxRange) {
+            transform.SetPositionAndRotation(new Vector3(aim.position.x, _context.Pos.y, aim.position.z), _context.PlayerRotation);
         }
         else {
             transform.SetPositionAndRotation(position, _context.PlayerRotation);
