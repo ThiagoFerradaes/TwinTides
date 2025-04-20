@@ -28,19 +28,8 @@ public class EtherealShadeObject : SkillObjectPrefab
     }
 
     void SetPosition() {
-        Transform aim = _mel.GetComponent<PlayerController>().aimObject;
 
-        _context.Pos.y = GetGroundHeight(_context.Pos);
-
-        Vector3 direction = _context.PlayerRotation * Vector3.forward;
-        Vector3 position = _context.Pos + (direction * _info.MaxRangeToPlace);
-
-        if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_context.Pos, aim.position) <= _info.MaxRangeToPlace) {
-            transform.SetPositionAndRotation(new Vector3(aim.position.x, _context.Pos.y, aim.position.z), _context.PlayerRotation);
-        }
-        else {
-            transform.SetPositionAndRotation(position, _context.PlayerRotation);
-        }
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         _collider.radius = _info.InicialRadius;
 
@@ -48,14 +37,6 @@ public class EtherealShadeObject : SkillObjectPrefab
 
         StartCoroutine(Duration());
         StartCoroutine(HealAndGrow());
-    }
-
-    float GetGroundHeight(Vector3 position) {
-        Ray ray = new(position + Vector3.up * 5f, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 10f, LayerMask.GetMask("Floor"))) {
-            return hit.point.y + 0.1f;
-        }
-        return position.y;
     }
 
     IEnumerator Duration() {
@@ -117,6 +98,9 @@ public class EtherealShadeObject : SkillObjectPrefab
         if (other.CompareTag("Enemy") && _enemiesList.Contains(health)) _enemiesList.Remove(health);
 
         if ((other.CompareTag("Mel") || other.CompareTag("Maevis")) && _playersList.Contains(health)) _playersList.Remove(health);
+    }
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
     }
     void End() {
         _amountOfGrowths = 0;

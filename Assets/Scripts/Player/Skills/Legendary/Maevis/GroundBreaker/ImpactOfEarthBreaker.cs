@@ -60,7 +60,7 @@ public class ImpactOfEarthBreaker : SkillObjectPrefab {
 
         float damage = _dManager.ReturnTotalAttack(_info.Damage);
 
-        if (health.ReturnShieldStatus()) health.BreakShieldRpc();
+        if (health.ReturnShieldStatus()) health.BreakShield();
 
         health.DealDamage(damage, true, true);
 

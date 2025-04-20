@@ -28,26 +28,15 @@ public class PhantomAuraObject : SkillObjectPrefab {
 
         transform.localScale = _level < 4 ? _info.AuraSize : _info.AuraSizeLevel4;
 
-
         transform.SetParent(_mel.transform);
 
         transform.SetLocalPositionAndRotation(Vector3.zero, _context.PlayerRotation);
-
-        SecondAura();
-
 
         gameObject.SetActive(true);
 
         StartCoroutine(DamageTimer());
 
         StartCoroutine(Duration());
-    }
-
-    void SecondAura() {
-        if (_level >= 3) {
-            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
-        }
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -106,8 +95,6 @@ public class PhantomAuraObject : SkillObjectPrefab {
 
     void End() {
         _listOfEnemies.Clear();
-
-        //transform.SetParent(null);
 
         ReturnObject();
     }

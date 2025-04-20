@@ -219,8 +219,9 @@ public class HealthManager : NetworkBehaviour {
         _timeToEndShieldCoroutine = StartCoroutine(RemoveShieldAfterDuration(durationOfShield));
 
     }
-    [Rpc(SendTo.Server)]
-    public void BreakShieldRpc() {
+    public void BreakShield() {
+        if (!IsServer) return;
+
         currentShieldAmount.Value = 0;
         isShielded.Value = false;
     }

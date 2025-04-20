@@ -45,6 +45,9 @@ public class SpectralSeedsRing : SkillObjectPrefab {
             2 => _info.AmountOfSeedsLevel2,
             _ => _info.AmountOfSeedsLevel3,
         };
+
+        if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Mel) return;
+
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
 
         for (int i = 0; i < _AmountOfSeeds; i++) {
@@ -52,6 +55,8 @@ public class SpectralSeedsRing : SkillObjectPrefab {
         }
     }
     void InstantiateOneSeed() {
+        if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Mel) return;
+
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
     }

@@ -26,8 +26,6 @@ public class BlackHoleObject : SkillObjectPrefab {
     private void DefineSizeAndPosition() {
         transform.localScale = _level < 4 ? _info.Size : _info.SizeLevel4;
 
-        Transform aim = _mel.GetComponent<PlayerController>().aimObject;
-
         transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
@@ -63,7 +61,7 @@ public class BlackHoleObject : SkillObjectPrefab {
         if (_level < 2) return;
 
         if (health.ReturnShieldStatus()) {
-            health.BreakShieldRpc();
+            health.BreakShield();
         }
 
         if (_level < 3) return;
