@@ -28,17 +28,7 @@ public class BlackHoleObject : SkillObjectPrefab {
 
         Transform aim = _mel.GetComponent<PlayerController>().aimObject;
 
-        _context.Pos.y = GetGroundHeight(_context.Pos);
-
-        Vector3 direction = _context.PlayerRotation * Vector3.forward;
-        Vector3 position = _context.Pos + (direction * _info.MaxRange);
-
-        if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_context.Pos, aim.position) <= _info.MaxRange) {
-            transform.SetPositionAndRotation(new Vector3(aim.position.x, _context.Pos.y, aim.position.z), _context.PlayerRotation);
-        }
-        else {
-            transform.SetPositionAndRotation(position, _context.PlayerRotation);
-        }
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
@@ -47,14 +37,6 @@ public class BlackHoleObject : SkillObjectPrefab {
         StartCoroutine(DamageTimer());
         if (_level > 1) StartCoroutine(StunTimer());
 
-    }
-
-    float GetGroundHeight(Vector3 position) {
-        Ray ray = new(position + Vector3.up * 5f, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 10f, LayerMask.GetMask("Floor"))) {
-            return hit.point.y + 0.1f;
-        }
-        return position.y;
     }
 
     IEnumerator DurationOfBlackHole() {
@@ -129,6 +111,10 @@ public class BlackHoleObject : SkillObjectPrefab {
                 else enemy.GetComponent<MovementManager>().StunWithTimeRpc(_info.StunDurationLevel4);
             }
         }
+    }
+
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
     }
 
     void End() {

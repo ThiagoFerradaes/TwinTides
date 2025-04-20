@@ -56,7 +56,8 @@ public class GhostlyWhisperObject : SkillObjectPrefab {
             skillPos.z = aim.position.z;
         }
         else {
-            skillPos = position;
+            skillPos.x = position.x;
+            skillPos.z = position.z;
         }
 
         SkillContext newContext = new(skillPos, transform.rotation, _context.SkillIdInUI);
