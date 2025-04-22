@@ -72,7 +72,7 @@ public class SacrificeObject : SkillObjectPrefab {
             2 => health.ReturnMaxHealth() * _info.HealthGainPercentLevel2 / 100,
             _ => health.ReturnMaxHealth() * _info.HealthGainPercentLevel3 / 100,
         };
-        health.Heal(healthGain);
+        health.Heal(healthGain, false);
 
         if (_level == 4) {
             health.CleanAllDebuffsRpc();
@@ -99,7 +99,7 @@ public class SacrificeObject : SkillObjectPrefab {
             _ => _info.HealingLevel2,
         };
 
-        maevisHealthM.HealServerRpc(healthGain, true);
+        maevisHealthM.Heal(healthGain, true);
 
         if (_level == 4) {
             maevisHealthM.CleanAllDebuffsRpc();

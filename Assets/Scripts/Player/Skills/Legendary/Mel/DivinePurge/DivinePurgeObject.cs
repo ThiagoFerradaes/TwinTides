@@ -94,8 +94,8 @@ public class DivinePurgeObject : SkillObjectPrefab
                     totalDamage += damage;
                 }
             }
-            _hManager.HealServerRpc(totalDamage * _info.PercentOfHealingBasedOnDamage/100, true);
-            if(_maevisHealth != null)_maevisHealth.HealServerRpc(_info.AmountOfHealToMaevis, true);
+            _hManager.Heal(totalDamage * _info.PercentOfHealingBasedOnDamage/100, true);
+            if(_maevisHealth != null)_maevisHealth.Heal(_info.AmountOfHealToMaevis, true);
         }
     }
 }

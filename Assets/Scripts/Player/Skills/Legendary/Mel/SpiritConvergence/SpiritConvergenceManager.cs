@@ -23,14 +23,18 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
 
         _hManager.OnMelHealed += OnMelHealed;
 
+        _hManager.DealDamage(10, false, false);
+
+        _hManager.Heal(10, true);
+
         SetParent();
     }
 
     void SetParent() {
 
         transform.parent = _mel.transform;
-        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
 
+        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
 
         gameObject.SetActive(true);
 
@@ -40,7 +44,7 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
     IEnumerator SkillDuration() {
         _timer = 0;
         _durationTime = _info.SkillDuration;
-        StartCoroutine(InstantiateMeleeMinion());
+        if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Mel) StartCoroutine(InstantiateMeleeMinion());
 
         while (_timer < _durationTime) {
             _timer += Time.deltaTime;
@@ -57,13 +61,13 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
 
             SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
             PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 1);
-            Debug.Log("Instanciei melee");
 
             yield return new WaitForSeconds(_info.MeleeMinionCooldown);
         }
     }
 
     private void OnMelHealed(object sender, System.EventArgs e) {
+        Debug.Log("Evento chamado na Mel");
         if (_canInstantiateRangedMinion) {
 
             _canInstantiateRangedMinion = false;
@@ -85,13 +89,18 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
     }
 
     void InstantiateRangedMinion() {
+        if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Mel) return;
+
+        Debug.Log("Minion Instanciado");
+
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
         PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 2);
-        Debug.Log("Instanciei Ranged");
     }
 
     void End() {
+        _canInstantiateRangedMinion = true;
+
         _hManager.OnMelHealed -= OnMelHealed;
 
         _timesExtended = 0;

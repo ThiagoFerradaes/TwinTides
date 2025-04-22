@@ -179,17 +179,20 @@ public class HealthManager : NetworkBehaviour {
 
     }
 
-    public void Heal(float healAmount) {
+    public void Heal(float healAmount, bool melHealed) {
         if (!_canBeHealed.Value) return;
+
+        if (melHealed && _currentHealth.Value < maxHealth.Value) { OnMelHealed?.Invoke(this, EventArgs.Empty); Debug.Log("Evento chamado"); }
+
         if (!IsServer) return;
+
         _currentHealth.Value = Mathf.Clamp((_currentHealth.Value + healAmount * _healMultiply.Value), 0, maxHealth.Value);
     }
-    [ServerRpc(RequireOwnership = false)]
-    public void HealServerRpc(float healAmount, bool melHealed) {
-        if (!_canBeHealed.Value) return;
-        if (!IsServer) return;
-        _currentHealth.Value = Mathf.Clamp((_currentHealth.Value + healAmount * _healMultiply.Value), 0, maxHealth.Value);
-        if (melHealed) OnMelHealed?.Invoke(this, EventArgs.Empty);
+
+    [Rpc(SendTo.ClientsAndHost)]
+    void OnMelHealedEventRpc() {
+        Debug.Log("Evento chamado para todos");
+        OnMelHealed?.Invoke(this, EventArgs.Empty);
     }
 
     public float ReturnCurrentHealth() {

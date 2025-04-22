@@ -37,7 +37,7 @@ public class AreaWardStoneObject : SkillObjectPrefab {
         float duration = _level < 4 ? _info.AreaDuration : _info.AreaDurationLevel4;
         yield return new WaitForSeconds(duration);
 
-        ReturnObject();
+        End();
     }
 
     IEnumerator HealingTimer() {
@@ -48,7 +48,7 @@ public class AreaWardStoneObject : SkillObjectPrefab {
                     player.ApplyShield(shieldAmount, _info.ExtraShieldDuration, true);
                 }
                 else {
-                    player.HealServerRpc(_info.AmountOfHealing, true);
+                    player.Heal(_info.AmountOfHealing, true);
                 }
             }
             yield return new WaitForSeconds(_info.HealingInterval);
@@ -72,5 +72,10 @@ public class AreaWardStoneObject : SkillObjectPrefab {
     }
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
         return;
+    }
+
+    void End() {
+        _listOfPlayers.Clear();
+        ReturnObject();
     }
 }

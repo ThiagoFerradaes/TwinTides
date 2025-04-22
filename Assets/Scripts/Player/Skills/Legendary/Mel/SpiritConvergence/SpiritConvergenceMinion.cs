@@ -7,8 +7,6 @@ public class SpiritConvergenceMinion : SkillObjectPrefab {
     int _level;
     SkillContext _context;
     GameObject _mel;
-    HealthManager _hManager;
-    MovementManager _mManager;
     NavMeshAgent _agent;
     Transform _target;
 
@@ -24,8 +22,6 @@ public class SpiritConvergenceMinion : SkillObjectPrefab {
 
         if (_mel == null) {
             _mel = PlayerSkillPooling.Instance.MelGameObject;
-            _mManager = GetComponent<MovementManager>();
-            _hManager = GetComponent<HealthManager>();
             _agent = GetComponent<NavMeshAgent>();
         }
 
@@ -33,12 +29,12 @@ public class SpiritConvergenceMinion : SkillObjectPrefab {
     }
 
     void Initiate() {
-        _hManager.RestoreAllHealthServerRpc();
 
         transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
+        
         StartCoroutine(Duration());
         SearchEnemy();
     }
@@ -72,7 +68,7 @@ public class SpiritConvergenceMinion : SkillObjectPrefab {
         while (_target != null && Vector3.Distance(transform.position, _target.position) > range) {
 
             _agent.isStopped = false;
-            _agent.speed = _mManager.ReturnMoveSpeed();
+            _agent.speed = isRanged ? _info.meleeMinionSpeed : _info.rangedMinionSpeed;
             _agent.destination = _target.position;
 
             yield return null;
@@ -95,7 +91,7 @@ public class SpiritConvergenceMinion : SkillObjectPrefab {
         while (_target == null) {
             if (Vector3.Distance(transform.position, _mel.transform.position) > _info.RangeToMel) {
                 _agent.isStopped = false;
-                _agent.speed = _mManager.ReturnMoveSpeed();
+                _agent.speed = isRanged ? _info.meleeMinionSpeed : _info.rangedMinionSpeed;
                 _agent.destination = _mel.transform.position;
             }
             else {
@@ -141,10 +137,12 @@ public class SpiritConvergenceMinion : SkillObjectPrefab {
         transform.LookAt(direction);
 
         if (isRanged) {
-            PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 4);
+            if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Mel)
+                PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 4);
         }
         else {
-            PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 3);
+            if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Mel)
+                PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 3);
         }
 
         StartCoroutine(AttackCooldown());

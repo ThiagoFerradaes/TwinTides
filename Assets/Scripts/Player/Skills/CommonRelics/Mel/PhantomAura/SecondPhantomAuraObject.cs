@@ -57,7 +57,7 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
 
         float percentOfHealing = _info.HealingPercent / 100 * damage;
 
-        health.HealServerRpc(percentOfHealing, true);
+        health.Heal(percentOfHealing, true);
     }
 
     IEnumerator DamageTimer() {

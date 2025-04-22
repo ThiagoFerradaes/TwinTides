@@ -20,6 +20,8 @@ public class EtherealShadeManager : SkillObjectPrefab
         gameObject.SetActive(true);
 
         Instantiate();
+
+        End();
     }
 
     void Instantiate() {
@@ -47,7 +49,6 @@ public class EtherealShadeManager : SkillObjectPrefab
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, newContext, _level, 1);
 
-        End();
     }
 
     float GetFloorHeight(Vector3 position) {

@@ -47,11 +47,11 @@ public class SpectralSeedsExplosion : SkillObjectPrefab {
         if (_level < 3) return;
 
         if (other.CompareTag("Maevis")) {
-            health.HealServerRpc(_info.AmountOfHealToMaevis, true);
+            health.Heal(_info.AmountOfHealToMaevis, true);
         }
 
         if (_mel.TryGetComponent<HealthManager>(out HealthManager melHealth)) {
-            melHealth.HealServerRpc(healing, true);
+            melHealth.Heal(healing, true);
         }
         
     }

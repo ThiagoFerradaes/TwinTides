@@ -56,7 +56,7 @@ public class EtherealShadeObject : SkillObjectPrefab
             yield return new WaitForSeconds(_info.HealCooldown);
             bool heal = false;
             foreach(var player in _playersList) {
-                player.Heal(_info.Heal);
+                player.Heal(_info.Heal, false);
                 heal = true;
             }
             if (heal) Grow();
