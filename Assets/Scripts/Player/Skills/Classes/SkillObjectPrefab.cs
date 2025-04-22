@@ -6,7 +6,7 @@ public abstract class SkillObjectPrefab : MonoBehaviour {
 
     public void TurnOnSkill(int skillId, int skillLevel, SkillContext context) {
 
-        Debug.Log("TurnOnSKillRpc");
+        Debug.Log("TurnOnSKillRpc" + name);
 
         Skill skill = PlayerSkillConverter.Instance.TransformIdInSkill(skillId);
 

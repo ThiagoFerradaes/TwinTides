@@ -44,9 +44,11 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
     IEnumerator AttackCoroutine() {
         _canAttackAgain = false;
 
-        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _currentAttackCombo, 1);
-
+        if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
+            Debug.Log("Tentando invocar ataque");
+            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _currentAttackCombo, 1);
+        }
 
         float startAngle = transform.localEulerAngles.y;
         float targetAngle = _currentAttackCombo == 1 ? startAngle + 180 : startAngle - 180;
@@ -81,8 +83,11 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
     IEnumerator ThirdAttackCoroutine() {
         _canAttackAgain = false;
 
-        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _currentAttackCombo, 1);
+        if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
+            
+            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _currentAttackCombo, 1);
+        }
 
         float startAngle = transform.localEulerAngles.x;
         float targetAngle = startAngle + 90;
@@ -102,6 +107,8 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
             transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
             yield return null;
         }
+
+        yield return null;
 
         _maevis.GetComponent<PlayerController>().AllowMovement();
         _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
@@ -130,6 +137,8 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
     void End() {
         _currentAttackCombo = 1;
 
+        _canAttackAgain = true;
+
         transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
 
         float cooldown = _dManager.ReturnDivisionAttackSpeed(_info.Cooldown);
@@ -144,7 +153,6 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
         return;
     }
 
-    [Rpc(SendTo.ClientsAndHost)]
     public override void AddStack() {
         if (!_canAttackAgain) return;
 

@@ -38,7 +38,13 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        StartCoroutine(SkillDuration());
+        StartCoroutine(WaitAFrame(SkillDuration()));
+    }
+
+    IEnumerator WaitAFrame(IEnumerator corroutine) {
+        yield return null;
+
+        StartCoroutine(corroutine);
     }
 
     IEnumerator SkillDuration() {

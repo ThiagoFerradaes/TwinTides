@@ -21,11 +21,13 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
             _father = GameObject.FindAnyObjectByType<MaevisNormalAttackManager>().gameObject;
         }
 
+        Debug.Log("Activate normal attack");    
+
         DefinePosition();
     }
 
     void DefinePosition() {
-
+        Debug.Log("Place: " +  _currentAttackCombo);    
         transform.localScale = _currentAttackCombo == 3 ? _info.ThirdAttackSize : _info.FirstAndSecondAttackSize;
 
         transform.SetParent(_father.transform);
@@ -40,6 +42,7 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
     }
 
     IEnumerator Duration() {
+        Debug.Log("Duration");
         float elapsedTime = 0;
         float duration = _currentAttackCombo switch {
             1 => _dManager.ReturnDivisionAttackSpeed(_info.DurationOfFirstAttack),
@@ -52,7 +55,7 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
             yield return null;
         }
 
-        ReturnObject();
+        End();
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
@@ -72,5 +75,12 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
         };
 
         health.DealDamage(damage, true, true);
+    }
+
+    void End() {
+        Debug.Log("End do ataque");
+        _currentAttackCombo = 1;
+
+        ReturnObject();
     }
 }
