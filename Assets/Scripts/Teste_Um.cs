@@ -13,10 +13,10 @@ public class Teste_Um : MonoBehaviour {
     }
     private void Update() {
         if (Keyboard.current.nKey.wasPressedThisFrame) {
-            GetComponent<HealthManager>().ApplyDamageOnServerRPC(1, false, false);
+            GetComponent<HealthManager>().DealDamage(1, false, false);
         }
         if (Keyboard.current.pKey.wasPressedThisFrame) {
-            GetComponent<HealthManager>().ApplyDamageOnServerRPC(1, true, false);
+            GetComponent<HealthManager>().DealDamage(1, true, false);
         }
 
     }

@@ -13,6 +13,8 @@ public class SpiritConvergence : LegendaryRelic
     [Header("Minions")]
     public float CooldownForSearchEnemy;
     public float RangeToMel;
+    public float meleeMinionSpeed;
+    public float rangedMinionSpeed;
 
     [Header("Melee Minion")]
     public float MeleeMinionAttackRange;

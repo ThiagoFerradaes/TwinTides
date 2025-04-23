@@ -24,7 +24,7 @@ public class DreadfallExplosion : SkillObjectPrefab {
     void SetPosition() {
         transform.localScale = Vector3.one * _info.ExplosionRadius;
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
@@ -34,16 +34,15 @@ public class DreadfallExplosion : SkillObjectPrefab {
     IEnumerator Duration() {
         yield return new WaitForSeconds(_info.ExplosionDuration);
 
-        if (IsServer) {
+        if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
             int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 2);
+            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 2);
         }
 
         ReturnObject();
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -51,7 +50,7 @@ public class DreadfallExplosion : SkillObjectPrefab {
 
         float damage = _dManager.ReturnTotalAttack(_info.ExplosionDamage);
 
-        health.ApplyDamageOnServerRPC(damage, true, true);
+        health.DealDamage(damage, true, true);
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

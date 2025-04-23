@@ -22,9 +22,9 @@ public class ImpactOfEarthBreaker : SkillObjectPrefab {
     void SetPosition() {
         transform.localScale = ReturnSize();
 
-        _context.PlayerPosition.y = GetGroundHeight(_context.PlayerPosition);
+        _context.Pos.y = GetGroundHeight(_context.Pos);
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
@@ -53,7 +53,6 @@ public class ImpactOfEarthBreaker : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -61,9 +60,9 @@ public class ImpactOfEarthBreaker : SkillObjectPrefab {
 
         float damage = _dManager.ReturnTotalAttack(_info.Damage);
 
-        if (health.ReturnShieldStatus()) health.BreakShieldRpc();
+        if (health.ReturnShieldStatus()) health.BreakShield();
 
-        health.ApplyDamageOnServerRPC(damage, true, true);
+        health.DealDamage(damage, true, true);
 
         if (!other.TryGetComponent<MovementManager>(out MovementManager mManager)) return;
 

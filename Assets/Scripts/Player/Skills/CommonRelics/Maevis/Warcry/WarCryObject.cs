@@ -24,10 +24,10 @@ public class WarCryObject : SkillObjectPrefab {
     }
 
     private void DefineParentAndPosition() {
-        if (IsServer) {
-            transform.SetParent(_maevis.transform);
-            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
-        }
+
+        transform.SetParent(_maevis.transform);
+        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
+
 
         gameObject.SetActive(true);
 
@@ -37,10 +37,9 @@ public class WarCryObject : SkillObjectPrefab {
     }
 
     private void Explode() {
-        if (!IsServer) return;
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         SkillContext newContex = new(transform.position, transform.rotation, _context.SkillIdInUI);
-        PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContex, _level, 1);
+        PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, newContex, _level, 1);
     }
 
     IEnumerator Duration() {
@@ -54,7 +53,6 @@ public class WarCryObject : SkillObjectPrefab {
     }
 
     void ApplyBuffs() {
-        if (!IsServer) return;
 
         if (_level > 3) {
             LocalWhiteBoard.Instance.PlayerAttackSkill = _info.EnhancedMaevisAttack;
@@ -70,7 +68,6 @@ public class WarCryObject : SkillObjectPrefab {
         }
     }
     void RemoveBuffs() {
-        if (!IsServer) return;
 
         if (_level > 3) {
             LocalWhiteBoard.Instance.PlayerAttackSkill = _info.NormalMaevisAttack;

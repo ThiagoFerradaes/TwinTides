@@ -24,7 +24,7 @@ public class SpiritConvergenceMeleeAttack : SkillObjectPrefab
 
     void SetPosition() {
         Vector3 direction = _context.PlayerRotation * Vector3.forward;
-        Vector3 position = _context.PlayerPosition + (direction * _info.MeleeAttackOffSet);
+        Vector3 position = _context.Pos + (direction * _info.MeleeAttackOffSet);
         transform.SetPositionAndRotation(position, _context.PlayerRotation);
 
         gameObject.SetActive(true);
@@ -39,15 +39,13 @@ public class SpiritConvergenceMeleeAttack : SkillObjectPrefab
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
-
         if (!other.CompareTag("Enemy")) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
         float damage = _dManager.ReturnTotalAttack(_info.MeleeAttackDamage);
 
-        health.ApplyDamageOnServerRPC(damage, true, true);
+        health.DealDamage(damage, true, true);
     }
 
     void End() {

@@ -23,7 +23,7 @@ public class SpiritConvergenceRangedAttack : SkillObjectPrefab
     }
 
     void SetPosition() {
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
@@ -43,7 +43,6 @@ public class SpiritConvergenceRangedAttack : SkillObjectPrefab
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -51,7 +50,7 @@ public class SpiritConvergenceRangedAttack : SkillObjectPrefab
 
         float damage = _dManager.ReturnTotalAttack(_info.RangedAttackDamage);
 
-        health.ApplyDamageOnServerRPC(damage, true, true);
+        health.DealDamage(damage, true, true);
     }
 
     void End() {

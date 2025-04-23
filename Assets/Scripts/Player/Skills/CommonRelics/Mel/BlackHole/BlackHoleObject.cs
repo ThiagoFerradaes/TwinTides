@@ -26,36 +26,15 @@ public class BlackHoleObject : SkillObjectPrefab {
     private void DefineSizeAndPosition() {
         transform.localScale = _level < 4 ? _info.Size : _info.SizeLevel4;
 
-        Transform aim = _mel.GetComponent<PlayerController>().aimObject;
-
-        _context.PlayerPosition.y = GetGroundHeight(_context.PlayerPosition);
-
-        Vector3 direction = _context.PlayerRotation * Vector3.forward;
-        Vector3 position = _context.PlayerPosition + (direction * _info.MaxRange);
-
-        if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_context.PlayerPosition, aim.position) <= _info.MaxRange) {
-            transform.SetPositionAndRotation(new Vector3(aim.position.x, _context.PlayerPosition.y, aim.position.z), _context.PlayerRotation);
-        }
-        else {
-            transform.SetPositionAndRotation(position, _context.PlayerRotation);
-        }
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
         StartCoroutine(DurationOfBlackHole());
 
-        if (IsServer) {
-            StartCoroutine(DamageTimer());
-            if (_level > 1) StartCoroutine(StunTimer());
-        }
-    }
+        StartCoroutine(DamageTimer());
+        if (_level > 1) StartCoroutine(StunTimer());
 
-    float GetGroundHeight(Vector3 position) {
-        Ray ray = new(position + Vector3.up * 5f, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 10f, LayerMask.GetMask("Floor"))) {
-            return hit.point.y + 0.1f;
-        }
-        return position.y;
     }
 
     IEnumerator DurationOfBlackHole() {
@@ -67,7 +46,6 @@ public class BlackHoleObject : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -83,7 +61,7 @@ public class BlackHoleObject : SkillObjectPrefab {
         if (_level < 2) return;
 
         if (health.ReturnShieldStatus()) {
-            health.BreakShieldRpc();
+            health.BreakShield();
         }
 
         if (_level < 3) return;
@@ -94,7 +72,6 @@ public class BlackHoleObject : SkillObjectPrefab {
     }
 
     private void OnTriggerExit(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -109,17 +86,17 @@ public class BlackHoleObject : SkillObjectPrefab {
 
         if (_level < 3) return;
 
-        health.SetMultiplyServerRpc(HealthMultipliers.Heal, (1/ (1 - _info.HealReductionPercent/100)));
+        health.SetMultiplyServerRpc(HealthMultipliers.Heal, (1 / (1 - _info.HealReductionPercent / 100)));
         health.SetPermissionServerRpc(HealthPermissions.CanBeShielded, true);
-    
+
     }
 
     IEnumerator DamageTimer() {
         while (true) {
             yield return new WaitForSeconds(_info.DamageInterval);
-            foreach(var enemy in _listOfEnemies) {
+            foreach (var enemy in _listOfEnemies) {
                 float damage = _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.Damage);
-                enemy.ApplyDamageOnServerRPC(damage, false, true);
+                enemy.DealDamage(damage, false, true);
             }
         }
     }
@@ -132,6 +109,10 @@ public class BlackHoleObject : SkillObjectPrefab {
                 else enemy.GetComponent<MovementManager>().StunWithTimeRpc(_info.StunDurationLevel4);
             }
         }
+    }
+
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
     }
 
     void End() {

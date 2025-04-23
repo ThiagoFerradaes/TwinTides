@@ -28,11 +28,11 @@ public class TidalWatzObject : SkillObjectPrefab {
     }
 
     private void DefineParent() {
-        if (IsServer) {
-            transform.SetParent(_maevis.transform);
 
-            transform.SetLocalPositionAndRotation(new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
-        }
+        transform.SetParent(_maevis.transform);
+
+        transform.SetLocalPositionAndRotation(new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
+
 
         _skillManager.BlockNormalAttackRpc(true);
         _skillManager.BlockSkillsRpc(true);
@@ -55,7 +55,7 @@ public class TidalWatzObject : SkillObjectPrefab {
 
 
         for (int i = 0; i < amountOfCuts; i++) {
-            if (IsServer) PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 1);
+            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
 
             float startAngle = transform.localEulerAngles.y;
             float targetAngle = startAngle + 360;
@@ -81,8 +81,8 @@ public class TidalWatzObject : SkillObjectPrefab {
             }
         }
 
-        if (_level == 4 && IsServer) {
-            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 2);
+        if (_level == 4) {
+            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 2);
             yield return new WaitForSeconds(_info.ImpactDuration);
         }
 

@@ -19,7 +19,7 @@ public class EarthBreakerManager : SkillObjectPrefab {
     void SetPosition() {
         _amountOfImpactsSummoned = 0;
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
@@ -36,17 +36,18 @@ public class EarthBreakerManager : SkillObjectPrefab {
         End();
     }
     void SummonImpact() {
-        if (!IsServer) return;
+
+        if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Maevis) return;
 
         _amountOfImpactsSummoned++;
 
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
 
         Vector3 direction = _context.PlayerRotation * Vector3.forward;
-        Vector3 newPos = (_context.PlayerPosition) + (direction * _info.InicialImpactSize.z * _amountOfImpactsSummoned);
+        Vector3 newPos = (_context.Pos) + (direction * _info.InicialImpactSize.z * _amountOfImpactsSummoned);
         SkillContext newContext = new(newPos, _context.PlayerRotation, _context.SkillIdInUI);
 
-        PlayerSkillPooling.Instance.InstantiateAndSpawnNoCheckRpc(skillId, newContext, 1, 1);
+        PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, 1, 1);
     }
 
     void End() {

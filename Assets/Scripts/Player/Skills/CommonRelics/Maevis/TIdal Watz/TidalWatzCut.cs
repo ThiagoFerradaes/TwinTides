@@ -2,8 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class TidalWatzCut : SkillObjectPrefab
-{
+public class TidalWatzCut : SkillObjectPrefab {
     TidalWatz _info;
     int _level;
     GameObject _maevis;
@@ -25,13 +24,13 @@ public class TidalWatzCut : SkillObjectPrefab
         }
         transform.localScale = _level == 1 ? _info.CutSize : _info.CutSizeLevel2;
 
-        if (IsServer) {
-            transform.SetParent(_father.transform);
 
-            Vector3 position = _level < 2 ? _info.CutPosition : _info.CutPositionLevel2;
+        transform.SetParent(_father.transform);
 
-            transform.SetLocalPositionAndRotation(position, Quaternion.Euler(0, 0, 0));
-        }
+        Vector3 position = _level < 2 ? _info.CutPosition : _info.CutPositionLevel2;
+
+        transform.SetLocalPositionAndRotation(position, Quaternion.Euler(0, 0, 0));
+
 
         gameObject.SetActive(true);
 
@@ -53,8 +52,8 @@ public class TidalWatzCut : SkillObjectPrefab
 
         float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.Damage);
 
-        if (IsServer) enemyHealth.ApplyDamageOnServerRPC(_info.Damage, true, true);
-        
+        enemyHealth.DealDamage(_info.Damage, true, true);
+
         enemyHealth.AddDebuffToList(_info.BleedingDebuff);
 
         _father.acumulativeDamage += damage * _info.PercentOfDamageToAcumulate / 100;

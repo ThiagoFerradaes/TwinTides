@@ -25,7 +25,7 @@ public class AreaWardStoneObject : SkillObjectPrefab {
     private void DefineSizeAndPosition() {
         transform.localScale = _info.ExplosionRadiusLevel3;
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
@@ -37,7 +37,7 @@ public class AreaWardStoneObject : SkillObjectPrefab {
         float duration = _level < 4 ? _info.AreaDuration : _info.AreaDurationLevel4;
         yield return new WaitForSeconds(duration);
 
-        ReturnObject();
+        End();
     }
 
     IEnumerator HealingTimer() {
@@ -45,10 +45,10 @@ public class AreaWardStoneObject : SkillObjectPrefab {
             foreach(var player in _listOfPlayers) {
                 if (player.ReturnCurrentHealth() >= player.ReturnMaxHealth()) {
                     float shieldAmount = _info.AmountOfHealing * _info.PercentOfShieldFromExtraHealing/100;
-                    player.ApplyShieldServerRpc(shieldAmount, _info.ExtraShieldDuration, true);
+                    player.ApplyShield(shieldAmount, _info.ExtraShieldDuration, true);
                 }
                 else {
-                    player.HealServerRpc(_info.AmountOfHealing, true);
+                    player.Heal(_info.AmountOfHealing, true);
                 }
             }
             yield return new WaitForSeconds(_info.HealingInterval);
@@ -59,8 +59,6 @@ public class AreaWardStoneObject : SkillObjectPrefab {
         
         if (!other.CompareTag("Mel") && !other.CompareTag("Maevis")) return;
 
-        if (!IsServer) return;
-
         if (!_listOfPlayers.Contains(health)) _listOfPlayers.Add(health);
 
     }
@@ -70,11 +68,14 @@ public class AreaWardStoneObject : SkillObjectPrefab {
 
         if (!other.CompareTag("Mel") && !other.CompareTag("Maevis")) return;
 
-        if (!IsServer) return;
-
         if (_listOfPlayers.Contains(health)) _listOfPlayers.Remove(health);
     }
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
         return;
+    }
+
+    void End() {
+        _listOfPlayers.Clear();
+        ReturnObject();
     }
 }

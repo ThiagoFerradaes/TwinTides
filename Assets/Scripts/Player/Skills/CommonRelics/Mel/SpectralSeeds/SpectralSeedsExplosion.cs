@@ -20,7 +20,7 @@ public class SpectralSeedsExplosion : SkillObjectPrefab {
     private void DefineSizeAndPosition() {
         transform.localScale = _level == 1 ? Vector3.one * _info.ExplosionRadius : Vector3.one * _info.ExplosionRadiusLevel2;
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
@@ -34,25 +34,24 @@ public class SpectralSeedsExplosion : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
         float healing = 0;
 
         if (other.CompareTag("Enemy") && !health.ReturnDeathState()) {
             float damage = _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.Damage);
-            health.ApplyDamageOnServerRPC(damage, true, true);
+            health.DealDamage(damage, true, true);
             healing = damage * _info.PercentOfDamageToHeal / 100;
         }
 
         if (_level < 3) return;
 
         if (other.CompareTag("Maevis")) {
-            health.HealServerRpc(_info.AmountOfHealToMaevis, true);
+            health.Heal(_info.AmountOfHealToMaevis, true);
         }
 
         if (_mel.TryGetComponent<HealthManager>(out HealthManager melHealth)) {
-            melHealth.HealServerRpc(healing, true);
+            melHealth.Heal(healing, true);
         }
         
     }

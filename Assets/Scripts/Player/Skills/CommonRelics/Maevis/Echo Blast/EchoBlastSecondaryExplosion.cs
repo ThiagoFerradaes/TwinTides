@@ -25,7 +25,7 @@ public class EchoBlastSecondaryExplosion : SkillObjectPrefab {
 
         transform.localScale = Vector3.one * _info.ExplosionRadiusLevel2;
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
@@ -44,9 +44,8 @@ public class EchoBlastSecondaryExplosion : SkillObjectPrefab {
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        if (!IsServer) return;
-            float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.ExplosionDamage);
-            health.ApplyDamageOnServerRPC(damage, true, true);
+        float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.ExplosionDamage);
+        health.DealDamage(damage, true, true);
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

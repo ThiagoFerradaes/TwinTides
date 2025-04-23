@@ -23,11 +23,11 @@ public class SacrificeObject : SkillObjectPrefab {
         DefinePosition();
     }
     void DefinePosition() {
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
-        if (IsServer)_healedMaevis.Value = false;
+        _healedMaevis.Value = false;
 
         StartCoroutine(Move());
 
@@ -56,23 +56,23 @@ public class SacrificeObject : SkillObjectPrefab {
     }
 
     void DrainHealth() {
-        if (!IsServer) return;
+
         if (!_mel.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
         float healthLost = health.ReturnMaxHealth() * _info.HealthLostPercent / 100;
 
-        health.ApplyDamageOnServerRPC(healthLost, false, false);
+        health.DealDamage(healthLost, false, false);
 
     }
     void RecoverHealth() {
-        if (!IsServer) return;
+
         if (!_mel.TryGetComponent<HealthManager>(out HealthManager health)) return;
         var healthGain = _level switch {
             1 => health.ReturnMaxHealth() * _info.HealthGainPercent / 100,
             2 => health.ReturnMaxHealth() * _info.HealthGainPercentLevel2 / 100,
             _ => health.ReturnMaxHealth() * _info.HealthGainPercentLevel3 / 100,
         };
-        health.HealServerRpc(healthGain);
+        health.Heal(healthGain, false);
 
         if (_level == 4) {
             health.CleanAllDebuffsRpc();
@@ -88,7 +88,7 @@ public class SacrificeObject : SkillObjectPrefab {
         if (!other.CompareTag("Maevis") || _healedMaevis.Value) return;
         if (!other.TryGetComponent<HealthManager>(out HealthManager healthManager)) return;
 
-        if (IsServer) HealMaevis(healthManager);
+       HealMaevis(healthManager);
 
         ApllyBuffToMaevis(healthManager);
 
@@ -99,7 +99,7 @@ public class SacrificeObject : SkillObjectPrefab {
             _ => _info.HealingLevel2,
         };
 
-        maevisHealthM.HealServerRpc(healthGain, true);
+        maevisHealthM.Heal(healthGain, true);
 
         if (_level == 4) {
             maevisHealthM.CleanAllDebuffsRpc();

@@ -6,7 +6,7 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
     int _currentAttackCombo;
     SkillContext _context;
     GameObject _maevis;
-    GameObject _father;
+    MaevisNormalAttackManager _father;
     DamageManager _dManager;
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as MaevisNormalAttack;
@@ -18,42 +18,29 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
             _dManager = _maevis.GetComponent<DamageManager>();
         }
         if (_father == null) {
-            _father = GameObject.FindAnyObjectByType<MaevisNormalAttackManager>().gameObject;
+            _father = GameObject.FindAnyObjectByType<MaevisNormalAttackManager>();
         }
+
+        _father.OnEndOfAttack -= _father_OnEndOfAttack;
+        _father.OnEndOfAttack += _father_OnEndOfAttack; 
 
         DefinePosition();
     }
 
-    void DefinePosition() {
-
-        transform.localScale = _currentAttackCombo == 3 ? _info.ThirdAttackSize : _info.FirstAndSecondAttackSize;
-
-        if (IsServer) {
-            transform.SetParent(_father.transform);
-
-            transform.localPosition = _currentAttackCombo == 3 ? _info.ThirdAttackPosition : _info.AttackPosition;
-            transform.localRotation = _currentAttackCombo == 3 ? Quaternion.Euler(_info.ThierdAttackRotation) : Quaternion.Euler(_info.AttackRotation);
-        }
-
-        gameObject.SetActive(true);
-
-        StartCoroutine(Duration());
+    private void _father_OnEndOfAttack(object sender, System.EventArgs e) {
+        End();
     }
 
-    IEnumerator Duration() {
-        float elapsedTime = 0;
-        float duration = _currentAttackCombo switch {
-            1 => _dManager.ReturnDivisionAttackSpeed(_info.DurationOfFirstAttack),
-            2 => _dManager.ReturnDivisionAttackSpeed(_info.DurationOfSecondAttack),
-            _ => _dManager.ReturnDivisionAttackSpeed(_info.DurationOfThirdAtack)
-        };
+    void DefinePosition() { 
+        transform.localScale = _currentAttackCombo == 3 ? _info.ThirdAttackSize : _info.FirstAndSecondAttackSize;
 
-        while (elapsedTime < duration) {
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
+        transform.SetParent(_father.transform);
 
-        ReturnObject();
+        transform.localPosition = _currentAttackCombo == 3 ? _info.ThirdAttackPosition : _info.AttackPosition;
+        transform.localRotation = _currentAttackCombo == 3 ? Quaternion.Euler(_info.ThierdAttackRotation) : Quaternion.Euler(_info.AttackRotation);
+
+
+        gameObject.SetActive(true);
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
@@ -61,7 +48,6 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -73,6 +59,14 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
             _ => _dManager.ReturnTotalAttack(_info.ThirdAttackDamage)
         };
 
-        health.ApplyDamageOnServerRPC(damage, true, true);
+        health.DealDamage(damage, true, true);
+    }
+
+    void End() {
+        _currentAttackCombo = 1;
+
+        _father.OnEndOfAttack -= _father_OnEndOfAttack;
+
+        ReturnObject();
     }
 }
