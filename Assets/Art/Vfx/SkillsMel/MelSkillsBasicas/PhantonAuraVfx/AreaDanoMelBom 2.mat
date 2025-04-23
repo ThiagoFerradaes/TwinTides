@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AreaDanoMelBom 1
+  m_Name: AreaDanoMelBom 2
   m_Shader: {fileID: -6465566751694194690, guid: 558b01c4ed7eb504f8e2e49928624334, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -55,7 +55,7 @@ Material:
     - _CastShadows: 0
     - _Cull: 2
     - _DeciderAlphaClip: 1
-    - _DeciderColors: 0
+    - _DeciderColors: 1
     - _DstBlend: 0
     - _NoisePadrao: 1
     - _QueueControl: 0
@@ -66,22 +66,22 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
-    - _alfaClip: 0.27
-    - _alfaClipMax: 0
+    - _alfaClip: 0.1
+    - _alfaClipMax: 0.15
     - _alfaClipMax_Normal: 0.8
-    - _alfaClipMin: 0.1
-    - _alfaClipMin_normal: 0.2
+    - _alfaClipMin: 0.09
+    - _alfaClipMin_normal: 0.1
     - _distortionAmount: 0.8
-    - _distortionAmountMax: 0.2
-    - _distortionAmountMin: 3
+    - _distortionAmountMax: 0.8
+    - _distortionAmountMin: 8
     - _disttortionScale: 40
-    - _elipseSize: 0.27
+    - _elipseSize: 0.5
     - _global: 0
     - _textureDecider: 0
     m_Colors:
-    - _color_01: {r: 0, g: 1.5924529, b: 0.65173453, a: 1}
-    - _color_01_normal: {r: 0, g: 1, b: 0.4928229, a: 1}
-    - _color_02: {r: 0, g: 0.7735849, b: 0.20754716, a: 1}
+    - _color_01: {r: 0, g: 0.8377358, b: 0.43734866, a: 1}
+    - _color_01_normal: {r: 0, g: 0.16226411, b: 0.117280014, a: 1}
+    - _color_02: {r: 0.0028408272, g: 0.5018867, b: 0.15390335, a: 1}
     - _color_02_normal: {r: 0, g: 2, b: 1.767956, a: 1}
     - _distortionSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _main_texture_speed: {r: 0, g: 0.2, b: 0, a: 0}
