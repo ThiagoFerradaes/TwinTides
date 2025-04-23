@@ -55,7 +55,8 @@ public class TidalWatzObject : SkillObjectPrefab {
 
 
         for (int i = 0; i < amountOfCuts; i++) {
-            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
+            if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis)
+                PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
 
             float startAngle = transform.localEulerAngles.y;
             float targetAngle = startAngle + 360;
@@ -81,7 +82,7 @@ public class TidalWatzObject : SkillObjectPrefab {
             }
         }
 
-        if (_level == 4) {
+        if (_level == 4 && LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
             PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 2);
             yield return new WaitForSeconds(_info.ImpactDuration);
         }

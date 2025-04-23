@@ -36,7 +36,7 @@ public class EtherealShadeManager : SkillObjectPrefab
         Vector3 direction = _context.PlayerRotation * Vector3.forward;
         Vector3 position = _context.Pos + (direction * _info.MaxRangeToPlace);
 
-        if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(transform.position, aim.position) <= _info.MaxRangeToPlace) {
+        if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_mel.transform.position, aim.position) <= _info.MaxRangeToPlace) {
             skillPos.x = aim.position.x;
             skillPos.z = aim.position.z;
         }

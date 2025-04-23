@@ -34,19 +34,19 @@ public class WarCryExplosion : SkillObjectPrefab {
         if (other.CompareTag("Mel") && _level > 1) {
 
             if (_level > 3) {
-                other.GetComponent<DamageManager>().IncreaseAttackSpeedWithTimeRpc(_info.PercentAttackSpeedLevel4, _info.DurationLevel4);
+                other.GetComponent<DamageManager>().IncreaseAttackSpeedWithTime(_info.PercentAttackSpeedLevel4, _info.DurationLevel4);
             }
             else {
-                other.GetComponent<DamageManager>().IncreaseAttackSpeedWithTimeRpc(_info.PercentAttackSpeedLevel2, _info.Duration);
+                other.GetComponent<DamageManager>().IncreaseAttackSpeedWithTime(_info.PercentAttackSpeedLevel2, _info.Duration);
             }
 
             if (_level > 2) {
-                other.GetComponent<MovementManager>().IncreaseMoveSpeedWithTimeRpc(_info.PercentMoveSpeedGain, _info.Duration);
+                other.GetComponent<MovementManager>().IncreaseMoveSpeedWithTime(_info.PercentMoveSpeedGain, _info.Duration);
             }
         }
 
         if (other.CompareTag("Enemy") && _level > 2) {
-            other.GetComponent<MovementManager>().StunWithTimeRpc(_info.StunDuration);
+            other.GetComponent<MovementManager>().StunWithTime(_info.StunDuration);
         }
     }
 }

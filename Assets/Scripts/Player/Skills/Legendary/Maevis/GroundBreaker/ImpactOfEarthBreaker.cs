@@ -66,7 +66,7 @@ public class ImpactOfEarthBreaker : SkillObjectPrefab {
 
         if (!other.TryGetComponent<MovementManager>(out MovementManager mManager)) return;
 
-        mManager.StunWithTimeRpc(_info.StunDuration);
+        mManager.StunWithTime(_info.StunDuration);
     }
 
     void End() {

@@ -41,7 +41,7 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
         transform.SetLocalPositionAndRotation(new Vector3(0, _info.ExplodingDebuffHeight, 0), Quaternion.Euler(0, 0, 0));
 
 
-        TurnObjectOnRpc();
+        TurnObjectOn();
 
         parent.TryGetComponent<HealthManager>(out HealthManager health);
 
@@ -58,8 +58,7 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
         StartCoroutine(WaitToStartExploding());
     }
 
-    [Rpc(SendTo.ClientsAndHost)]
-    void TurnObjectOnRpc() {
+    void TurnObjectOn() {
         gameObject.SetActive(true);
     }
 
@@ -98,7 +97,7 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
 
     IEnumerator Explode() {
         while (true) {
-            if (_canExplode && _parent != null) {
+            if (_canExplode && _parent != null && LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
                 _canExplode = false;
                 _canSetUpExplosion = false;
                 int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);

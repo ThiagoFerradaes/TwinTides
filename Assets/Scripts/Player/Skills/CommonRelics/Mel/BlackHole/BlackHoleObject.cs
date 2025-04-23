@@ -56,7 +56,7 @@ public class BlackHoleObject : SkillObjectPrefab {
             if (!_listOfEnemies.Contains(health)) _listOfEnemies.Add(health);
         }
 
-        mManager.DecreaseMoveSpeedRpc(_info.SlowPercent);
+        mManager.DecreaseMoveSpeed(_info.SlowPercent);
 
         if (_level < 2) return;
 
@@ -82,7 +82,7 @@ public class BlackHoleObject : SkillObjectPrefab {
             if (_listOfEnemies.Contains(health)) _listOfEnemies.Remove(health);
         }
 
-        mManager.IncreaseMoveSpeedRpc(_info.SlowPercent);
+        mManager.IncreaseMoveSpeed(_info.SlowPercent);
 
         if (_level < 3) return;
 
@@ -105,8 +105,8 @@ public class BlackHoleObject : SkillObjectPrefab {
         while (true) {
             yield return new WaitForSeconds(_info.StunInterval);
             foreach (var enemy in _listOfMEnemies) {
-                if (_level < 4) enemy.GetComponent<MovementManager>().StunWithTimeRpc(_info.StunDuration);
-                else enemy.GetComponent<MovementManager>().StunWithTimeRpc(_info.StunDurationLevel4);
+                if (_level < 4) enemy.GetComponent<MovementManager>().StunWithTime(_info.StunDuration);
+                else enemy.GetComponent<MovementManager>().StunWithTime(_info.StunDurationLevel4);
             }
         }
     }
@@ -121,7 +121,7 @@ public class BlackHoleObject : SkillObjectPrefab {
         _listOfMEnemies.Clear();
 
         foreach (var enemy in removed) {
-            enemy.IncreaseMoveSpeedRpc(_info.SlowPercent);
+            enemy.IncreaseMoveSpeed(_info.SlowPercent);
         }
 
         if (_level == 4) {

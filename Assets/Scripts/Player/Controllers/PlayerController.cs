@@ -13,7 +13,7 @@ public class PlayerController : NetworkBehaviour {
     bool _canRotate = true;
     Vector2 _moveInput;
     [HideInInspector] public Vector2 _rotationInput;
-    [HideInInspector] public Transform aimObject;
+    public Transform aimObject;
     [HideInInspector] public bool isRotatingMouse;
     [HideInInspector] public bool isAiming;
     MovementManager _mManager;

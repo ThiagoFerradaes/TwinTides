@@ -76,7 +76,7 @@ public class CrimsonTidePath : SkillObjectPrefab {
                 bool isDead = health.ReturnDeathState();
 
                 if (_level == 4 && wasAlive && isDead) {
-                    Health_OnDeathRpc();
+                    Health_OnDeath();
                 }
             }
         }
@@ -104,8 +104,7 @@ public class CrimsonTidePath : SkillObjectPrefab {
 
     }
 
-    [Rpc(SendTo.ClientsAndHost)]
-    private void Health_OnDeathRpc() {
+    private void Health_OnDeath() {
         if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter)
             _maevis.GetComponent<PlayerSkillManager>().ResetCooldown(_context.SkillIdInUI);
     }

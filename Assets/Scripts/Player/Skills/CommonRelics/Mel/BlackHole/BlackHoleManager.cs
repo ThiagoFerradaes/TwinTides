@@ -35,7 +35,7 @@ public class BlackHoleManager : SkillObjectPrefab
         Vector3 direction = _context.PlayerRotation * Vector3.forward;
         Vector3 position = _context.Pos + (direction * _info.MaxRange);
 
-        if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(transform.position, aim.position) <= _info.MaxRange) {
+        if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_mel.transform.position, aim.position) <= _info.MaxRange) {
             skillPos.x = aim.position.x;
             skillPos.z = aim.position.z;
         }

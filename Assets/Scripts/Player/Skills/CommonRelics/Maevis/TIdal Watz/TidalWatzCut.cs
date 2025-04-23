@@ -22,8 +22,8 @@ public class TidalWatzCut : SkillObjectPrefab {
         if (_father == null) {
             _father = GameObject.FindAnyObjectByType<TidalWatzObject>();
         }
-        transform.localScale = _level == 1 ? _info.CutSize : _info.CutSizeLevel2;
 
+        transform.localScale = _level == 1 ? _info.CutSize : _info.CutSizeLevel2;
 
         transform.SetParent(_father.transform);
 

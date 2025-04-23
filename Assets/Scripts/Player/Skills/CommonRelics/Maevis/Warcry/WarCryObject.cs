@@ -37,6 +37,8 @@ public class WarCryObject : SkillObjectPrefab {
     }
 
     private void Explode() {
+        if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Maevis) return;
+
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         SkillContext newContex = new(transform.position, transform.rotation, _context.SkillIdInUI);
         PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, newContex, _level, 1);
@@ -56,30 +58,30 @@ public class WarCryObject : SkillObjectPrefab {
 
         if (_level > 3) {
             LocalWhiteBoard.Instance.PlayerAttackSkill = _info.EnhancedMaevisAttack;
-            _dManager.IncreaseAttackSpeedRpc(_info.PercentAttackSpeedLevel4);
+            _dManager.IncreaseAttackSpeed(_info.PercentAttackSpeedLevel4);
         }
         else {
             float percent = _level < 2 ? _info.PercentAttackSpeed : _info.PercentAttackSpeedLevel2;
-            _dManager.IncreaseAttackSpeedRpc(percent);
+            _dManager.IncreaseAttackSpeed(percent);
         }
 
         if (_level > 2) {
-            _mManager.IncreaseMoveSpeedRpc(_info.PercentMoveSpeedGain);
+            _mManager.IncreaseMoveSpeed(_info.PercentMoveSpeedGain);
         }
     }
     void RemoveBuffs() {
 
         if (_level > 3) {
             LocalWhiteBoard.Instance.PlayerAttackSkill = _info.NormalMaevisAttack;
-            _dManager.DecreaseAttackSpeedRpc(_info.PercentAttackSpeedLevel4);
+            _dManager.DecreaseAttackSpeed(_info.PercentAttackSpeedLevel4);
         }
         else {
             float percent = _level < 2 ? _info.PercentAttackSpeed : _info.PercentAttackSpeedLevel2;
-            _dManager.DecreaseAttackSpeedRpc(percent);
+            _dManager.DecreaseAttackSpeed(percent);
         }
 
         if (_level > 2) {
-            _mManager.DecreaseMoveSpeedRpc(_info.PercentMoveSpeedGain);
+            _mManager.DecreaseMoveSpeed(_info.PercentMoveSpeedGain);
         }
 
     }

@@ -43,10 +43,12 @@ public class EchoBlastBullet : SkillObjectPrefab {
     }
     void Explode() {
 
-        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
+        if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
+            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+            SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
 
-        PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, newContext, _level, 2);
+            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, newContext, _level, 2);
+        }
 
 
         ReturnObject();

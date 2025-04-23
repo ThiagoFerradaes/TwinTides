@@ -17,13 +17,14 @@ public class TidalWatzImpact : SkillObjectPrefab {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
         }
 
+        if (_father == null) {
+            _father = FindAnyObjectByType<TidalWatzObject>();
+        }
+
         SetSizeAndPosition();
     }
 
     private void SetSizeAndPosition() {
-        if (_father == null) {
-            _father = FindAnyObjectByType<TidalWatzObject>();
-        }
 
         Vector3 direction = _father.transform.rotation * Vector3.forward;
         Vector3 position = _father.transform.position + (direction * _info.ImpactOffset);

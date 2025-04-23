@@ -73,7 +73,7 @@ public class EchoBlastStunExplosion : SkillObjectPrefab {
         if (_level > 1) {
             if (!other.TryGetComponent<MovementManager>(out MovementManager mManager)) return;
 
-            mManager.StunWithTimeRpc(_info.StunTime);
+            mManager.StunWithTime(_info.StunTime);
         }
 
         if (_level > 2 && _canExplodeAgain) {
@@ -82,8 +82,10 @@ public class EchoBlastStunExplosion : SkillObjectPrefab {
         }
 
         if (_level > 3 && !health.ReturnDeathState()) {
-            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 4);
+            if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
+                int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+                PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 4);
+            }
             OnExploded?.Invoke(this, new ExplodedObject(health.gameObject));
         }
     }
