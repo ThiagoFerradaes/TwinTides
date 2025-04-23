@@ -15,6 +15,8 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
 
     float _currentTime = 1;
 
+    public event EventHandler OnEndOfAttack;
+
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as MaevisNormalAttack;
         _context = context;
@@ -45,7 +47,6 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
         _canAttackAgain = false;
 
         if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
-            Debug.Log("Tentando invocar ataque");
             int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
             PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _currentAttackCombo, 1);
         }
@@ -76,6 +77,8 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
 
         transform.localRotation = Quaternion.Euler(0, targetAngle, 0);
         _currentAttackCombo++;
+
+        OnEndOfAttack?.Invoke(this, EventArgs.Empty);
 
         StartCoroutine(CooldownBetweenAttacks());
     }
@@ -108,7 +111,7 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
             yield return null;
         }
 
-        yield return null;
+        OnEndOfAttack?.Invoke(this, EventArgs.Empty);
 
         _maevis.GetComponent<PlayerController>().AllowMovement();
         _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);

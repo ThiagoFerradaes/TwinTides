@@ -34,9 +34,10 @@ public class DreadfallExplosion : SkillObjectPrefab {
     IEnumerator Duration() {
         yield return new WaitForSeconds(_info.ExplosionDuration);
 
-        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 2);
-
+        if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
+            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 2);
+        }
 
         ReturnObject();
     }

@@ -37,6 +37,8 @@ public class EarthBreakerManager : SkillObjectPrefab {
     }
     void SummonImpact() {
 
+        if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Maevis) return;
+
         _amountOfImpactsSummoned++;
 
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);

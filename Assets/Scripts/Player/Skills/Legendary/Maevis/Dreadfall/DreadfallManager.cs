@@ -62,6 +62,7 @@ public class DreadfallManager : SkillObjectPrefab {
     }
 
     private void Explode() {
+        if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Maevis) return;
 
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);

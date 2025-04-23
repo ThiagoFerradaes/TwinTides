@@ -54,7 +54,7 @@ public class HullbreakerObject : SkillObjectPrefab {
 
     IEnumerator Earthquake() {
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        while (true) {
+        while (true && LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
             yield return new WaitForSeconds(_info.EarthquakeInterval);
             SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
             PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, newContext, _level, 2);
@@ -62,6 +62,7 @@ public class HullbreakerObject : SkillObjectPrefab {
     }
 
     void Explode() {
+        if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Maevis) return;
 
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);

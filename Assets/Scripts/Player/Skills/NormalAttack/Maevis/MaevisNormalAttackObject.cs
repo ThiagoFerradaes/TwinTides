@@ -6,7 +6,7 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
     int _currentAttackCombo;
     SkillContext _context;
     GameObject _maevis;
-    GameObject _father;
+    MaevisNormalAttackManager _father;
     DamageManager _dManager;
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as MaevisNormalAttack;
@@ -18,16 +18,20 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
             _dManager = _maevis.GetComponent<DamageManager>();
         }
         if (_father == null) {
-            _father = GameObject.FindAnyObjectByType<MaevisNormalAttackManager>().gameObject;
+            _father = GameObject.FindAnyObjectByType<MaevisNormalAttackManager>();
         }
 
-        Debug.Log("Activate normal attack");    
+        _father.OnEndOfAttack -= _father_OnEndOfAttack;
+        _father.OnEndOfAttack += _father_OnEndOfAttack; 
 
         DefinePosition();
     }
 
-    void DefinePosition() {
-        Debug.Log("Place: " +  _currentAttackCombo);    
+    private void _father_OnEndOfAttack(object sender, System.EventArgs e) {
+        End();
+    }
+
+    void DefinePosition() { 
         transform.localScale = _currentAttackCombo == 3 ? _info.ThirdAttackSize : _info.FirstAndSecondAttackSize;
 
         transform.SetParent(_father.transform);
@@ -37,25 +41,6 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
 
 
         gameObject.SetActive(true);
-
-        StartCoroutine(Duration());
-    }
-
-    IEnumerator Duration() {
-        Debug.Log("Duration");
-        float elapsedTime = 0;
-        float duration = _currentAttackCombo switch {
-            1 => _dManager.ReturnDivisionAttackSpeed(_info.DurationOfFirstAttack),
-            2 => _dManager.ReturnDivisionAttackSpeed(_info.DurationOfSecondAttack),
-            _ => _dManager.ReturnDivisionAttackSpeed(_info.DurationOfThirdAtack)
-        };
-
-        while (elapsedTime < duration) {
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        End();
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
@@ -78,8 +63,9 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
     }
 
     void End() {
-        Debug.Log("End do ataque");
         _currentAttackCombo = 1;
+
+        _father.OnEndOfAttack -= _father_OnEndOfAttack;
 
         ReturnObject();
     }
