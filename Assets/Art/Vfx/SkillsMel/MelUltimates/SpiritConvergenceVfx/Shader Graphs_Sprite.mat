@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3589629712369995753
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -7,12 +20,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_MelShaderPrincipal 4
-  m_Shader: {fileID: -6465566751694194690, guid: 558b01c4ed7eb504f8e2e49928624334, type: 3}
+  m_Name: Shader Graphs_Sprite
+  m_Shader: {fileID: -6465566751694194690, guid: f64d668dda045f94881c9b708d2a3d98, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _ALPHATEST_ON
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -23,18 +35,25 @@ Material:
     RenderType: Transparent
   disabledShaderPasses:
   - MOTIONVECTORS
-  - SHADOWCASTER
   - DepthOnly
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _main_texture:
-        m_Texture: {fileID: 2800000, guid: 2ebb31e72f3dfab40800cef528ca0720, type: 3}
+    - _SampleTexture2D_1e5359424e8a406194272fa9e8435074_Texture_1_Texture2D:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _mask:
-        m_Texture: {fileID: 2800000, guid: 7122a28eb7d256d4bab4c57b9cea755f, type: 3}
+    - _SampleTexture2D_5367c258faee41f598b503159a54e0ba_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 45b939af5909d1e43a0e6889f0949d27, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_8bfe7d35acf04d209a905d4d24b2789f_Texture_1_Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2D:
+        m_Texture: {fileID: 2800000, guid: e80265b4067e1b04699da2b9de1ac872, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -51,49 +70,23 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClip: 1
+    - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
-    - _CastShadows: 0
+    - _CastShadows: 1
     - _Cull: 2
-    - _DeciderAlphaClip: 1
-    - _DeciderColors: 0
     - _DstBlend: 10
-    - _NoisePadrao: 1
+    - _Float: -0.49
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Scale: 1
     - _SrcBlend: 5
     - _Surface: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
-    - _alfaClipMax: 0.5
-    - _alfaClipMin_normal: 0.1
-    - _distortionAmountMax: 30
-    - _distortionAmountMin: 5
-    - _disttortionScale: 20
-    - _elipseSize: 0.5
-    - _global: 0
-    - _textureDecider: 0
     m_Colors:
-    - _color_01_normal: {r: 0.7997892, g: 4.2817016, b: 1.3258337, a: 1}
-    - _color_02: {r: 0.03815754, g: 0.7490196, b: 0.06909254, a: 1}
-    - _distortionSpeed: {r: 0, g: 1.6, b: 0, a: 0}
-    - _main_texture_speed: {r: 2, g: 0, b: 0, a: 0}
-    - _tilingAndOffset: {r: 0.8, g: 2.6, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _offset: {r: 0, g: 0, b: 0, a: 0}
+    - _tiling: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &792908709916200576
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 9
