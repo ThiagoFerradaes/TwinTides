@@ -94,14 +94,14 @@ public class HealthManager : NetworkBehaviour {
         _currentHealth.Value = maxHealth.Value;
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void ApplyDamageOnServerRPC(float damageTaken, bool hitShield, bool isAfectedByDamageMultiply) {
+    public void DealDamage(float damageTaken, bool hitShield, bool isAfectedByDamageMultiply) {
+        if (!IsServer) return;
         if (!_canBeDamaged.Value) { Debug.Log("Can't take Damage" + gameObject.name); return; }
         if (_isDead.Value == true) return;
 
         if (isShielded.Value && hitShield) {
 
-            if(isAfectedByDamageMultiply) currentShieldAmount.Value -= (damageTaken * _damageMultiply.Value);
+            if (isAfectedByDamageMultiply) currentShieldAmount.Value -= (damageTaken * _damageMultiply.Value);
             else currentShieldAmount.Value -= damageTaken;
 
             if (currentShieldAmount.Value <= 0) {
@@ -113,8 +113,8 @@ public class HealthManager : NetworkBehaviour {
         }
         else {
 
-            if(isAfectedByDamageMultiply)
-            _currentHealth.Value = Mathf.Clamp((_currentHealth.Value - damageTaken * _damageMultiply.Value), 0, maxHealth.Value);
+            if (isAfectedByDamageMultiply)
+                _currentHealth.Value = Mathf.Clamp((_currentHealth.Value - damageTaken * _damageMultiply.Value), 0, maxHealth.Value);
 
             else _currentHealth.Value = Mathf.Clamp((_currentHealth.Value - damageTaken), 0, maxHealth.Value);
         }
@@ -129,7 +129,7 @@ public class HealthManager : NetworkBehaviour {
     }
 
     void TookDamage() {
-        DamageIndicatorRpc();    
+        DamageIndicatorRpc();
     }
     [Rpc(SendTo.ClientsAndHost)]
     void DamageIndicatorRpc() {
@@ -140,7 +140,7 @@ public class HealthManager : NetworkBehaviour {
     }
     IEnumerator DamageIndicator() {
         MeshRenderer mesh = GetComponent<MeshRenderer>();
-        
+
         for (int i = 0; i < 3; i++) {
             mesh.material = damageMaterial;
             yield return new WaitForSeconds(0.06f);
@@ -158,7 +158,7 @@ public class HealthManager : NetworkBehaviour {
 
         OnDeath?.Invoke();
 
-        deathBehaviour.Death(this.gameObject);   
+        deathBehaviour.Death(this.gameObject);
     }
     public void ReviveHandler(float percentOfMaxHealth) {
 
@@ -174,23 +174,25 @@ public class HealthManager : NetworkBehaviour {
             _isDead.Value = false;
 
         }
- 
+
         GetComponent<MeshRenderer>().material = originalMaterial;
 
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void HealServerRpc(float healAmount) {
+    public void Heal(float healAmount, bool melHealed) {
         if (!_canBeHealed.Value) return;
+
+        if (melHealed && _currentHealth.Value < maxHealth.Value) { OnMelHealed?.Invoke(this, EventArgs.Empty); Debug.Log("Evento chamado"); }
+
         if (!IsServer) return;
+
         _currentHealth.Value = Mathf.Clamp((_currentHealth.Value + healAmount * _healMultiply.Value), 0, maxHealth.Value);
     }
-    [ServerRpc(RequireOwnership = false)]
-    public void HealServerRpc(float healAmount, bool melHealed) {
-        if (!_canBeHealed.Value) return;
-        if (!IsServer) return;
-        _currentHealth.Value = Mathf.Clamp((_currentHealth.Value + healAmount * _healMultiply.Value), 0, maxHealth.Value);
-        if (melHealed) OnMelHealed?.Invoke(this, EventArgs.Empty);
+
+    [Rpc(SendTo.ClientsAndHost)]
+    void OnMelHealedEventRpc() {
+        Debug.Log("Evento chamado para todos");
+        OnMelHealed?.Invoke(this, EventArgs.Empty);
     }
 
     public float ReturnCurrentHealth() {
@@ -203,26 +205,26 @@ public class HealthManager : NetworkBehaviour {
 
     #region ShieldManagement
 
-    [ServerRpc(RequireOwnership = false)]
-    public void ApplyShieldServerRpc(float shieldAmount, float durationOfShield, bool isCumulative) {
+    public void ApplyShield(float shieldAmount, float durationOfShield, bool isCumulative) {
+        if (!IsServer) return;
 
         if (!_canBeShielded.Value) return; // não pode receber escudo
 
-        if (IsServer) {
-            if (isCumulative) currentShieldAmount.Value = Mathf.Clamp((currentShieldAmount.Value + shieldAmount * _shieldMultiply.Value)
-            , 0, maxShieldAmount); // o escudo recebido acumula com o escudo atual
+        if (isCumulative) currentShieldAmount.Value = Mathf.Clamp((currentShieldAmount.Value + shieldAmount * _shieldMultiply.Value)
+        , 0, maxShieldAmount); // o escudo recebido acumula com o escudo atual
 
-            // o escudo recebido não acumula com o escudo atual
-            else currentShieldAmount.Value = Mathf.Clamp(shieldAmount * _shieldMultiply.Value, 0, maxShieldAmount);
+        // o escudo recebido não acumula com o escudo atual
+        else currentShieldAmount.Value = Mathf.Clamp(shieldAmount * _shieldMultiply.Value, 0, maxShieldAmount);
 
-            isShielded.Value = currentShieldAmount.Value > 0;
+        isShielded.Value = currentShieldAmount.Value > 0;
 
-            if (_timeToEndShieldCoroutine != null) StopCoroutine(_timeToEndShieldCoroutine);
-            _timeToEndShieldCoroutine = StartCoroutine(RemoveShieldAfterDuration(durationOfShield));
-        }
+        if (_timeToEndShieldCoroutine != null) StopCoroutine(_timeToEndShieldCoroutine);
+        _timeToEndShieldCoroutine = StartCoroutine(RemoveShieldAfterDuration(durationOfShield));
+
     }
-    [Rpc(SendTo.Server)]
-    public void BreakShieldRpc() {
+    public void BreakShield() {
+        if (!IsServer) return;
+
         currentShieldAmount.Value = 0;
         isShielded.Value = false;
     }
@@ -258,7 +260,7 @@ public class HealthManager : NetworkBehaviour {
             }
 
             // alteramos o dicionario
-            currentDebuff.Coroutine =  debuff.ApplyDebuff(this, currentDebuff.Stack);
+            currentDebuff.Coroutine = debuff.ApplyDebuff(this, currentDebuff.Stack);
             _listOfActiveDebuffs.Add(debuff.GetType(), currentDebuff);
 
             StartCoroutine(currentDebuff.Coroutine); // começamos a corrotina novamente
@@ -357,7 +359,7 @@ public class HealthManager : NetworkBehaviour {
 
     #region Variables Management
     [ServerRpc(RequireOwnership = false)]
-    public void SetPermissionServerRpc(HealthPermissions permission ,bool state) {
+    public void SetPermissionServerRpc(HealthPermissions permission, bool state) {
         if (!IsServer) return;
 
         switch (permission) {
@@ -394,7 +396,7 @@ public class HealthManager : NetworkBehaviour {
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void SetMultiplyServerRpc(HealthMultipliers multiplier ,float newHealMultiply) {
+    public void SetMultiplyServerRpc(HealthMultipliers multiplier, float newHealMultiply) {
         if (!IsServer) return;
 
         switch (multiplier) {

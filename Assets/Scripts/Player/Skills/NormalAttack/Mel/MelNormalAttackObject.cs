@@ -44,11 +44,11 @@ public class MelNormalAttackObject : SkillObjectPrefab {
 
         transform.localScale = _info.SphereSize;
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
-        if (IsServer) StartCoroutine(Move());
+        StartCoroutine(Move());
     }
 
     IEnumerator Move() {
@@ -71,13 +71,12 @@ public class MelNormalAttackObject : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager enemyHelath)) return;
 
-        enemyHelath.ApplyDamageOnServerRPC(_info.SphereDamage, true, true);
+        enemyHelath.DealDamage(_info.SphereDamage, true, true);
 
         OnNormalHitRpc();
     }

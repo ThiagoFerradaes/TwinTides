@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerSkillPooling : NetworkBehaviour {
@@ -7,7 +9,7 @@ public class PlayerSkillPooling : NetworkBehaviour {
     Dictionary<string, Queue<GameObject>> objectPooling = new();
     Dictionary<string, Queue<GameObject>> activeSkills = new();
 
-    /*[HideInInspector]*/ public GameObject MelGameObject, MaevisGameObject;
+    [HideInInspector] public GameObject MelGameObject, MaevisGameObject;
 
     private void Awake() {
         if (Instance == null) {
@@ -30,25 +32,25 @@ public class PlayerSkillPooling : NetworkBehaviour {
     }
 
     [Rpc(SendTo.Server, RequireOwnership = false)]
-    public void InstantiateAndSpawnRpc(int skillId, SkillContext context, int skillsLevel, int objectIndex) {
-        if (!IsServer) return;
-        Debug.Log("InstantiateAndSpawnRpc");
+    public void RequestInstantiateRpc(int skillId, SkillContext context, int skillsLevel, int objectIndex) {
+
+        InstantiateRpc(skillId, context, skillsLevel, objectIndex);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    void InstantiateRpc(int skillId, SkillContext context, int skillsLevel, int objectIndex) {
         Skill skill = PlayerSkillConverter.Instance.TransformIdInSkill(skillId);
         GameObject spawnedObject;
 
-        if (!SkillActive(skill, objectIndex) || skill.IsStackable) {
-            spawnedObject = ReturnObjectFroomPooling(skill.skillPrefabs[objectIndex]);
-
-            if (!spawnedObject.GetComponent<NetworkObject>().IsSpawned) {
-                spawnedObject.GetComponent<NetworkObject>().Spawn();
-            }
-
-            spawnedObject.GetComponent<SkillObjectPrefab>().TurnOnSkillRpc(skillId, skillsLevel, context);
+        if (!SkillActive(skill, objectIndex) || skill.IsStackable) { // verificando se o objeto em questão já está ativo na cena
+            spawnedObject = ReturnObjectFroomPooling(skill.skillPrefabs[objectIndex]); // Puxando o pooling
+            spawnedObject.GetComponent<SkillObjectPrefab>().TurnOnSkill(skillId, skillsLevel, context); // ligando o objeto 
         }
-        else {
-            spawnedObject = activeSkills[skill.skillPrefabs[objectIndex].name].Dequeue();
+        else { // o objeto em questão já está ativo
+            spawnedObject = activeSkills[skill.skillPrefabs[objectIndex].name].Dequeue(); // achando o objeto ativo
+
             if (!spawnedObject.TryGetComponent<SkillObjectPrefab>(out SkillObjectPrefab obj)) return;
-            obj.AddStackRpc();
+            obj.AddStack(); // chamando a função de stacks
 
             string objectName = spawnedObject.name.Replace("(Clone)", "");
             if (activeSkills.ContainsKey(objectName)) {
@@ -56,24 +58,27 @@ public class PlayerSkillPooling : NetworkBehaviour {
             }
         }
     }
+
+
     [Rpc(SendTo.Server)]
-    public void InstantiateAndSpawnNoCheckRpc(int skillId, SkillContext context, int skillsLevel, int objectIndex) {
+    public void RequestInstantiateNoChecksRpc(int skillId, SkillContext context, int skillsLevel, int objectIndex) {
+        InstantiateNoCheckRpc(skillId, context, skillsLevel, objectIndex);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    void InstantiateNoCheckRpc(int skillId, SkillContext context, int skillsLevel, int objectIndex) {
         Skill skill = PlayerSkillConverter.Instance.TransformIdInSkill(skillId);
         GameObject spawnedObject;
 
-        spawnedObject = ReturnObjectFroomPooling(skill.skillPrefabs[objectIndex]);
-
-        if (!spawnedObject.GetComponent<NetworkObject>().IsSpawned) {
-            spawnedObject.GetComponent<NetworkObject>().Spawn();
-        }
-
-        spawnedObject.GetComponent<SkillObjectPrefab>().TurnOnSkillRpc(skillId, skillsLevel, context);
+        spawnedObject = ReturnObjectFroomPooling(skill.skillPrefabs[objectIndex]); // Puxando o pooling
+        spawnedObject.GetComponent<SkillObjectPrefab>().TurnOnSkill(skillId, skillsLevel, context); // ligando o objeto 
     }
 
     GameObject ReturnObjectFroomPooling(GameObject prefab) {
         if (!objectPooling.ContainsKey(prefab.name)) {
             objectPooling.Add(prefab.name, new Queue<GameObject>());
         }
+
         if (!activeSkills.ContainsKey(prefab.name)) {
             activeSkills.Add(prefab.name, new Queue<GameObject>());
         }
@@ -94,29 +99,23 @@ public class PlayerSkillPooling : NetworkBehaviour {
     }
 
     public void ReturnObjectToPool(GameObject objectToReturn) {
-        if (!IsServer) return;
 
         string objectName = objectToReturn.name.Replace("(Clone)", "");
+
         if (activeSkills.ContainsKey(objectName)) {
             activeSkills[objectName].Dequeue();
         }
+
         if (objectPooling.ContainsKey(objectName)) {
             objectPooling[objectName].Enqueue(objectToReturn);
-            objectToReturn.GetComponent<SkillObjectPrefab>().TurnOffSkillRpc();
+            objectToReturn.GetComponent<SkillObjectPrefab>().TurnOffSkill();
         }
     }
 
     public bool SkillActive(Skill skill, int objectIndex) {
-        if (activeSkills.ContainsKey(skill.skillPrefabs[objectIndex].name)) {
-            if (activeSkills[skill.skillPrefabs[objectIndex].name].Count > 0) {
-                return true;
-            }
-            else {
-                return false;
-            }
+        if (activeSkills.TryGetValue(skill.skillPrefabs[objectIndex].name, out var queue)) {
+            return queue.Count > 0;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 }

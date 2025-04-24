@@ -45,7 +45,7 @@ public class EchoBlastStunExplosion : SkillObjectPrefab {
     void DefineSizeAndPosition() {
         transform.localScale = _level < 2 ? Vector3.one * _info.ExplosionRadius : Vector3.one * _info.ExplosionRadiusLevel2;
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
@@ -61,7 +61,6 @@ public class EchoBlastStunExplosion : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -69,12 +68,12 @@ public class EchoBlastStunExplosion : SkillObjectPrefab {
 
         float damage = _maevis.GetComponent<DamageManager>().ReturnTotalAttack(_info.ExplosionDamage);
 
-        health.ApplyDamageOnServerRPC(damage, true, true);
+        health.DealDamage(damage, true, true);
 
         if (_level > 1) {
             if (!other.TryGetComponent<MovementManager>(out MovementManager mManager)) return;
 
-            mManager.StunWithTimeRpc(_info.StunTime);
+            mManager.StunWithTime(_info.StunTime);
         }
 
         if (_level > 2 && _canExplodeAgain) {
@@ -83,8 +82,10 @@ public class EchoBlastStunExplosion : SkillObjectPrefab {
         }
 
         if (_level > 3 && !health.ReturnDeathState()) {
-            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 4);
+            if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
+                int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+                PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 4);
+            }
             OnExploded?.Invoke(this, new ExplodedObject(health.gameObject));
         }
     }

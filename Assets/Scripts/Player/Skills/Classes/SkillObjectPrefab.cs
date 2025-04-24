@@ -2,12 +2,11 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-public abstract class SkillObjectPrefab : NetworkBehaviour {
+public abstract class SkillObjectPrefab : MonoBehaviour {
 
-    [Rpc(SendTo.ClientsAndHost)]
-    public void TurnOnSkillRpc(int skillId, int skillLevel, SkillContext context) {
+    public void TurnOnSkill(int skillId, int skillLevel, SkillContext context) {
 
-        Debug.Log("TurnOnSKillRpc");
+        Debug.Log("TurnOnSKillRpc" + name);
 
         Skill skill = PlayerSkillConverter.Instance.TransformIdInSkill(skillId);
 
@@ -17,17 +16,15 @@ public abstract class SkillObjectPrefab : NetworkBehaviour {
     }
     public abstract void ActivateSkill(Skill info, int skillLevel, SkillContext context);
 
-    [Rpc(SendTo.ClientsAndHost)]
-    public void TurnOffSkillRpc() {
+    public void TurnOffSkill() {
         gameObject.SetActive(false);
     }
     public void ReturnObject() {
-        if (IsServer) {
-            PlayerSkillPooling.Instance.ReturnObjectToPool(gameObject);
-        }
+        PlayerSkillPooling.Instance.ReturnObjectToPool(gameObject);
+
     }
-    [Rpc(SendTo.ClientsAndHost)]
-    public virtual void AddStackRpc() {
+
+    public virtual void AddStack() {
         return;
     }
     public virtual void StartSkillCooldown(SkillContext context, Skill skill) {

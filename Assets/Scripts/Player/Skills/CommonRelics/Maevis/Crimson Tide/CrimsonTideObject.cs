@@ -25,10 +25,8 @@ public class CrimsonTideObject : SkillObjectPrefab {
     }
 
     private void DefineParent() {
-        if (IsServer) {
-            transform.SetParent(_maevis.transform);
-            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
-        }
+        transform.SetParent(_maevis.transform);
+        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
 
         gameObject.SetActive(true);
 
@@ -36,16 +34,17 @@ public class CrimsonTideObject : SkillObjectPrefab {
         _skillManager.BlockSkillsRpc(true);
 
         if (_level < 2) {
-            if (IsServer) {
+            if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
                 int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-                PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 1);
+                PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
             }
+
             End();
         }
         else {
             StartCoroutine(Dash());
 
-            if (_level == 4 && IsServer) StartCoroutine(SpawnPath());
+            if (_level == 4) StartCoroutine(SpawnPath());
         }
     }
     IEnumerator Dash() {
@@ -53,21 +52,25 @@ public class CrimsonTideObject : SkillObjectPrefab {
 
         _playerController.BlockMovement();
 
-        if (IsServer) {
-            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 2);
+        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+
+        if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
+            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 2);
+        }
 
             while (elapsedTime < _info.DashDuration) {
-                elapsedTime += Time.deltaTime;
-                _maevis.transform.position += _info.DashSpeed * Time.deltaTime * _maevis.transform.forward;
-                yield return null;
-            }
+            elapsedTime += Time.deltaTime;
+            _maevis.transform.position += _info.DashSpeed * Time.deltaTime * _maevis.transform.forward;
+            yield return null;
+        }
 
-            if (_level > 2) {
+        if (_level > 2) {
+            if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
                 SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
-                PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 3);
+                PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, newContext, _level, 3);
             }
         }
+
         else {
             yield return new WaitForSeconds(_info.DashDuration);
         }
@@ -78,10 +81,10 @@ public class CrimsonTideObject : SkillObjectPrefab {
     IEnumerator SpawnPath() {
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         Vector3 lastSpawnPosition = _maevis.transform.position;
-        while (true) {
+        while (true && LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
             if (Vector3.Distance(lastSpawnPosition, _maevis.transform.position) >= _info.PathSpawnInterval) {
                 SkillContext newContext = new(_maevis.transform.position, transform.rotation, _context.SkillIdInUI);
-                PlayerSkillPooling.Instance.InstantiateAndSpawnNoCheckRpc(skillId, newContext, _level, 4);
+                PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 4);
                 lastSpawnPosition = _maevis.transform.position;
             }
             yield return null;

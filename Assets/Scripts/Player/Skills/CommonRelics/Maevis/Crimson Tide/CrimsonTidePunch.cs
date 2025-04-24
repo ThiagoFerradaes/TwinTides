@@ -22,7 +22,7 @@ public class CrimsonTidePunch : SkillObjectPrefab
 
     private void DefinePosition() {
         Vector3 direction = _context.PlayerRotation * Vector3.forward;
-        Vector3 position = _context.PlayerPosition + (direction * _info.PunchAreaOffSett);
+        Vector3 position = _context.Pos + (direction * _info.PunchAreaOffSett);
         transform.SetPositionAndRotation(position, _context.PlayerRotation);
         gameObject.SetActive(true);
 
@@ -40,12 +40,11 @@ public class CrimsonTidePunch : SkillObjectPrefab
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        health.ApplyDamageOnServerRPC(_info.PunchDamage, true, true);
+        health.DealDamage(_info.PunchDamage, true, true);
     }
 }

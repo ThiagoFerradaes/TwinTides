@@ -27,11 +27,10 @@ public class SpectralSeedsRing : SkillObjectPrefab {
     private void DefineSizeAndPosition() {
         transform.localScale = _info.RingSize;
 
-        if (IsServer) {
-            transform.SetParent(_mel.transform);
+        transform.SetParent(_mel.transform);
 
-            transform.SetLocalPositionAndRotation(_info.RingPosition, Quaternion.Euler(0, 0, 0));
-        }
+        transform.SetLocalPositionAndRotation(_info.RingPosition, Quaternion.Euler(0, 0, 0));
+
 
         gameObject.SetActive(true);
 
@@ -46,16 +45,20 @@ public class SpectralSeedsRing : SkillObjectPrefab {
             2 => _info.AmountOfSeedsLevel2,
             _ => _info.AmountOfSeedsLevel3,
         };
+
+        if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Mel) return;
+
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
 
         for (int i = 0; i < _AmountOfSeeds; i++) {
-            if (IsServer) PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 1);
+            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
         }
     }
     void InstantiateOneSeed() {
-        if (!IsServer) return;
+        if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Mel) return;
+
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 1);
+        PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
     }
 
     IEnumerator Duration() {
@@ -64,7 +67,7 @@ public class SpectralSeedsRing : SkillObjectPrefab {
         yield return new WaitForSeconds(duration);
 
         foreach (var seed in listOfSeeds) {
-            if (IsServer) seed.transform.SetParent(null);
+            seed.transform.SetParent(null);
             seed.End();
         }
 
@@ -73,7 +76,7 @@ public class SpectralSeedsRing : SkillObjectPrefab {
 
     private void SpectralSeedsObject_OnSphereMoved(object sender, EventArgs e) {
         if (listOfSeeds.Count > 0) {
-            if (IsServer) StartCoroutine(UpdateRotation());
+            StartCoroutine(UpdateRotation());
         }
         else {
             End();

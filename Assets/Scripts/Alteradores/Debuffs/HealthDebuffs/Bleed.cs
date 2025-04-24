@@ -11,11 +11,11 @@ public class Bleed : HealthDebuff
     public override IEnumerator ApplyDebuff(HealthManager health, int currentStacks) {
         for (int i = 0; i < amountOfTicks; i++) {
             if (health.isShielded.Value) {
-                if (health.IsServer) health.ApplyDamageOnServerRPC(damagePerTickOnShield * currentStacks, true, true);
+                if (health.IsServer) health.DealDamage(damagePerTickOnShield * currentStacks, true, true);
                 yield return new WaitForSeconds(timeBetweenDamage);
             }
             else {
-                health.ApplyDamageOnServerRPC(damagePerTickOffShield * currentStacks, true, true);
+                health.DealDamage(damagePerTickOffShield * currentStacks, true, true);
                 yield return new WaitForSeconds(timeBetweenDamage);
             }
         }

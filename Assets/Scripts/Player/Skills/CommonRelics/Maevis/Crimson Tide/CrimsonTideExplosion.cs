@@ -23,7 +23,7 @@ public class CrimsonTideExplosion : SkillObjectPrefab {
     private void DefineSizeAndPosition() {
         transform.localScale = _info.ExplosionRadius * Vector3.one;
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
@@ -37,7 +37,6 @@ public class CrimsonTideExplosion : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -48,17 +47,16 @@ public class CrimsonTideExplosion : SkillObjectPrefab {
 
         bool wasAlive = !health.ReturnDeathState();
 
-        health.ApplyDamageOnServerRPC(damage, true, true);
+        health.DealDamage(damage, true, true);
 
         bool isDead = health.ReturnDeathState();
 
         if (_level == 4 && wasAlive && isDead) {
-            Health_OnDeathRpc();
+            Health_OnDeath();
         }
     }
 
-    [Rpc(SendTo.ClientsAndHost)]
-    private void Health_OnDeathRpc() {
+    private void Health_OnDeath() {
         if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter)
             _maevis.GetComponent<PlayerSkillManager>().ResetCooldown(_context.SkillIdInUI);
     }

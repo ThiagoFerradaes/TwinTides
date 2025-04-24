@@ -21,11 +21,10 @@ public class DreadfallManager : SkillObjectPrefab {
     }
 
     private void SetParentAndPosition() {
-        if (IsServer) {
-            transform.parent = _maevis.transform;
 
-            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
-        }
+        transform.parent = _maevis.transform;
+
+        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
 
         gameObject.SetActive(true);
 
@@ -56,18 +55,18 @@ public class DreadfallManager : SkillObjectPrefab {
     }
 
     private void RecieveShield() {
-        if (!IsServer) return;
 
         if (!_maevis.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        health.ApplyShieldServerRpc(_info.AmountOfShiled, _info.ShieldDuration, true);
+        health.ApplyShield(_info.AmountOfShiled, _info.ShieldDuration, true);
     }
 
     private void Explode() {
-        if (!IsServer) return;
+        if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Maevis) return;
+
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
-        PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 1);
+        PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, newContext, _level, 1);
     }
     void End() {
         ReturnObject();

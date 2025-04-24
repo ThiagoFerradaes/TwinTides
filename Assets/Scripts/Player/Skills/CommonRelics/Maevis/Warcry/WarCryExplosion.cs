@@ -16,7 +16,7 @@ public class WarCryExplosion : SkillObjectPrefab {
     private void DefineSizeAndPosition() {
         transform.localScale = _level < 3 ? Vector3.one * _info.ExplosionRadius : Vector3.one * _info.ExplosionRadiusLevel3;
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
@@ -30,24 +30,23 @@ public class WarCryExplosion : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (other.CompareTag("Mel") && _level > 1) {
 
             if (_level > 3) {
-                other.GetComponent<DamageManager>().IncreaseAttackSpeedWithTimeRpc(_info.PercentAttackSpeedLevel4, _info.DurationLevel4);
+                other.GetComponent<DamageManager>().IncreaseAttackSpeedWithTime(_info.PercentAttackSpeedLevel4, _info.DurationLevel4);
             }
             else {
-                other.GetComponent<DamageManager>().IncreaseAttackSpeedWithTimeRpc(_info.PercentAttackSpeedLevel2, _info.Duration);
+                other.GetComponent<DamageManager>().IncreaseAttackSpeedWithTime(_info.PercentAttackSpeedLevel2, _info.Duration);
             }
 
             if (_level > 2) {
-                other.GetComponent<MovementManager>().IncreaseMoveSpeedWithTimeRpc(_info.PercentMoveSpeedGain, _info.Duration);
+                other.GetComponent<MovementManager>().IncreaseMoveSpeedWithTime(_info.PercentMoveSpeedGain, _info.Duration);
             }
         }
 
         if (other.CompareTag("Enemy") && _level > 2) {
-            other.GetComponent<MovementManager>().StunWithTimeRpc(_info.StunDuration);
+            other.GetComponent<MovementManager>().StunWithTime(_info.StunDuration);
         }
     }
 }

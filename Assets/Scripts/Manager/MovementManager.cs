@@ -33,8 +33,8 @@ public class MovementManager : NetworkBehaviour {
     /// Multiplica a velocidade adicional por uma porcentam - o valor passado tem que estar entre 0 e 100
     /// </summary>
     /// <param name="speedPercent"></param>
-    [Rpc(SendTo.Server)]
-    public void IncreaseMoveSpeedRpc(float speedPercent) {
+    public void IncreaseMoveSpeed(float speedPercent) {
+        if (!IsServer) return;
         speedPercent = Mathf.Clamp(speedPercent, 0, 100);
         adicionalMoveSpeed.Value *= (1 + speedPercent/100);
     }
@@ -43,8 +43,8 @@ public class MovementManager : NetworkBehaviour {
     /// Divide a velocidade adicional por uma porcentam - o valor passado tem que estar entre 0 e 100
     /// </summary>
     /// <param name="speedPercent"></param>
-    [Rpc(SendTo.Server)]
-    public void DecreaseMoveSpeedRpc(float speedPercent) {
+    public void DecreaseMoveSpeed(float speedPercent) {
+        if (!IsServer) return;
         speedPercent = Mathf.Clamp(speedPercent, 0, 100);
         adicionalMoveSpeed.Value /= (1 + speedPercent/100);
     }
@@ -54,8 +54,8 @@ public class MovementManager : NetworkBehaviour {
     /// </summary>
     /// <param name="speedMultiplier"></param>
     /// <param name="duration"></param>
-    [Rpc(SendTo.Server)]
-    public void IncreaseMoveSpeedWithTimeRpc(float speedMultiplier, float duration) {
+    public void IncreaseMoveSpeedWithTime(float speedMultiplier, float duration) {
+        if (!IsServer) return;
         StartCoroutine(IncreaseSpeedCoroutine(speedMultiplier, duration));
     }
 
@@ -64,8 +64,8 @@ public class MovementManager : NetworkBehaviour {
     /// </summary>
     /// <param name="speedMultiplier"></param>
     /// <param name="duration"></param>
-    [Rpc(SendTo.Server)]
-    public void DecreaseBaseSpeedWithTimeRpc(float speedMultiplier, float duration) {
+    public void DecreaseBaseSpeedWithTime(float speedMultiplier, float duration) {
+        if (!IsServer) return;
         StartCoroutine(DecreaseSpeedCoroutine(speedMultiplier, duration));
     }
 
@@ -84,8 +84,8 @@ public class MovementManager : NetworkBehaviour {
     /// <summary>
     /// Stuna o objeto, ou seja, faz o retorno da velocidade total desse objeto ser 0
     /// </summary>
-    [Rpc(SendTo.Server)]
-    public void StunRpc() {
+    public void Stun() {
+        if (!IsServer) return;
         _isStunned.Value = true;
     }
 
@@ -94,8 +94,8 @@ public class MovementManager : NetworkBehaviour {
     /// Stuna o objeto por um periodo de tempo
     /// </summary>
     /// <param name="stunDuration"></param>
-    [Rpc(SendTo.Server)]
-    public void StunWithTimeRpc(float stunDuration) {
+    public void StunWithTime(float stunDuration) {
+        if (!IsServer) return;
         StartCoroutine(StunWithTimeCoroutine(stunDuration));
     }
 

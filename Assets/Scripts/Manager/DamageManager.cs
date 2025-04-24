@@ -20,24 +20,24 @@ public class DamageManager : NetworkBehaviour {
     /// Multiplica o valor do ataque base. ELe normalmente é 1, e pode ir até 2
     /// </summary>
     /// <param name="damageIncreaseMultiplier"></param>
-    [Rpc(SendTo.Server)]
-    public void IncreaseBaseAttackRpc(float damageIncreaseMultiplier) {
-        baseAttack.Value *= damageIncreaseMultiplier;
+    public void IncreaseBaseAttack(float damageIncreaseMultiplier) {
+        if (IsServer)
+            baseAttack.Value *= damageIncreaseMultiplier;
     }
 
-    [Rpc(SendTo.Server)]
-    public void DecreaseBaseAttackRpc(float damageDecreaseMultiplier) {
-        baseAttack.Value /= damageDecreaseMultiplier;
+    public void DecreaseBaseAttack(float damageDecreaseMultiplier) {
+        if (IsServer)
+            baseAttack.Value /= damageDecreaseMultiplier;
     }
 
-    [Rpc(SendTo.Server)]
-    public void IncreaseBaseAttackWithTimeRpc(float damageMultiplier, float duration) {
-        StartCoroutine(IncreaseAttackCoroutine(damageMultiplier, duration));
+    public void IncreaseBaseAttackWithTime(float damageMultiplier, float duration) {
+        if (IsServer)
+            StartCoroutine(IncreaseAttackCoroutine(damageMultiplier, duration));
     }
 
-    [Rpc(SendTo.Server)]
-    public void DecreaseBaseAttackWithTimeRpc(float damageMultiplier, float duration) {
-        StartCoroutine(DecreaseAttackCoroutine(damageMultiplier, duration));
+    public void DecreaseBaseAttackWithTime(float damageMultiplier, float duration) {
+        if (IsServer)
+            StartCoroutine(DecreaseAttackCoroutine(damageMultiplier, duration));
     }
 
     IEnumerator IncreaseAttackCoroutine(float damageMultipiler, float duration) {
@@ -75,28 +75,28 @@ public class DamageManager : NetworkBehaviour {
     /// Aumenta a velocidade de ataque em X% 
     /// </summary>
     /// <param name="percentToIncrease"></param>
-    [Rpc(SendTo.Server)]
-    public void IncreaseAttackSpeedRpc(float percentToIncrease) {
-        attackSpeed.Value *=(1 + percentToIncrease/100);
+    public void IncreaseAttackSpeed(float percentToIncrease) {
+        if (IsServer)
+            attackSpeed.Value *= (1 + percentToIncrease / 100);
     }
 
     /// <summary>
     /// Diminui o cooldown base dos ataques normais. A função divide o cooldown pelo DamageDecreaseMultiplier
     /// </summary>
     /// <param name="percentToDecrease"></param>
-    [Rpc(SendTo.Server)]
-    public void DecreaseAttackSpeedRpc(float percentToDecrease) {
-        attackSpeed.Value /= (1 + percentToDecrease/100);
+    public void DecreaseAttackSpeed(float percentToDecrease) {
+        if (IsServer)
+            attackSpeed.Value /= (1 + percentToDecrease / 100);
     }
 
-    [Rpc(SendTo.Server)]
-    public void IncreaseAttackSpeedWithTimeRpc(float attackSpeedPercent, float duration) {
-        StartCoroutine(IncreaseAttackSpeedCoroutine((1 + attackSpeedPercent/100), duration));
+    public void IncreaseAttackSpeedWithTime(float attackSpeedPercent, float duration) {
+        if (IsServer)
+            StartCoroutine(IncreaseAttackSpeedCoroutine((1 + attackSpeedPercent / 100), duration));
     }
 
-    [Rpc(SendTo.Server)]
-    public void DecreaseAttackSpeedWithTimeRpc(float attackSpeedPercent, float duration) {
-        StartCoroutine(DecreaseAttackSpeedCoroutine((1 + attackSpeedPercent/100), duration));
+    public void DecreaseAttackSpeedWithTime(float attackSpeedPercent, float duration) {
+        if (IsServer)
+            StartCoroutine(DecreaseAttackSpeedCoroutine((1 + attackSpeedPercent / 100), duration));
     }
 
     IEnumerator IncreaseAttackSpeedCoroutine(float attackSpeedMultiplier, float duration) {

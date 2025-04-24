@@ -36,13 +36,14 @@ public class DivinePurgeObject : SkillObjectPrefab
         transform.localScale = _info.SkillSize;
 
         Vector3 direction = _context.PlayerRotation * Vector3.forward;
-        Vector3 position = _context.PlayerPosition + (direction * (_info.ZOffSett + _info.SkillSize.y/2));
+        Vector3 position = _context.Pos + (direction * (_info.ZOffSett + _info.SkillSize.y/2));
         transform.SetPositionAndRotation(position, _context.PlayerRotation * Quaternion.Euler(90,0,0));
 
         gameObject.SetActive(true);
 
         StartCoroutine(SkillDuration());
-        if (IsServer) StartCoroutine(DamageCoroutine());
+
+        StartCoroutine(DamageCoroutine());
     }
 
     IEnumerator SkillDuration() {
@@ -63,7 +64,6 @@ public class DivinePurgeObject : SkillObjectPrefab
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
@@ -73,7 +73,6 @@ public class DivinePurgeObject : SkillObjectPrefab
     }
 
     private void OnTriggerExit(Collider other) {
-        if (!IsServer) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
@@ -91,12 +90,12 @@ public class DivinePurgeObject : SkillObjectPrefab
             float totalDamage = 0f;
             foreach (var enemy in _enemiesList) {
                 if (!enemy.ReturnDeathState()) {
-                    enemy.ApplyDamageOnServerRPC(damage, true, true);
+                    enemy.DealDamage(damage, true, true);
                     totalDamage += damage;
                 }
             }
-            _hManager.HealServerRpc(totalDamage * _info.PercentOfHealingBasedOnDamage/100, true);
-            if(_maevisHealth != null)_maevisHealth.HealServerRpc(_info.AmountOfHealToMaevis, true);
+            _hManager.Heal(totalDamage * _info.PercentOfHealingBasedOnDamage/100, true);
+            if(_maevisHealth != null)_maevisHealth.Heal(_info.AmountOfHealToMaevis, true);
         }
     }
 }

@@ -28,40 +28,21 @@ public class EtherealShadeObject : SkillObjectPrefab
     }
 
     void SetPosition() {
-        Transform aim = _mel.GetComponent<PlayerController>().aimObject;
 
-        _context.PlayerPosition.y = GetGroundHeight(_context.PlayerPosition);
-
-        Vector3 direction = _context.PlayerRotation * Vector3.forward;
-        Vector3 position = _context.PlayerPosition + (direction * _info.MaxRangeToPlace);
-
-        if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_context.PlayerPosition, aim.position) <= _info.MaxRangeToPlace) {
-            transform.SetPositionAndRotation(new Vector3(aim.position.x, _context.PlayerPosition.y, aim.position.z), _context.PlayerRotation);
-        }
-        else {
-            transform.SetPositionAndRotation(position, _context.PlayerRotation);
-        }
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         _collider.radius = _info.InicialRadius;
 
         gameObject.SetActive(true);
 
         StartCoroutine(Duration());
-        if (IsServer) StartCoroutine(HealAndGrow());
-    }
-
-    float GetGroundHeight(Vector3 position) {
-        Ray ray = new(position + Vector3.up * 5f, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 10f, LayerMask.GetMask("Floor"))) {
-            return hit.point.y + 0.1f;
-        }
-        return position.y;
+        StartCoroutine(HealAndGrow());
     }
 
     IEnumerator Duration() {
         yield return new WaitForSeconds(_info.CloneDuration);
 
-        if (IsServer) StopCoroutine(HealAndGrow());
+        StopCoroutine(HealAndGrow());
 
         Explode();
 
@@ -75,7 +56,7 @@ public class EtherealShadeObject : SkillObjectPrefab
             yield return new WaitForSeconds(_info.HealCooldown);
             bool heal = false;
             foreach(var player in _playersList) {
-                player.HealServerRpc(_info.Heal);
+                player.Heal(_info.Heal, false);
                 heal = true;
             }
             if (heal) Grow();
@@ -88,7 +69,7 @@ public class EtherealShadeObject : SkillObjectPrefab
         _collider.radius *= ( 1 + _info.GrowthPercentage/100);
     }
     void Explode() {
-        if (!IsServer) return;
+
         float attackDamage = Mathf.Max(_info.BaseDamage * _amountOfGrowths * (1 + _info.PercentOfDamageIncreasePerGrowth / 100), _info.BaseDamage);
         float damage = _dManager.ReturnTotalAttack(attackDamage);
 
@@ -97,12 +78,11 @@ public class EtherealShadeObject : SkillObjectPrefab
                 _enemiesList.Remove(enemy);
                 continue;
             }
-            enemy.ApplyDamageOnServerRPC(damage, false, true);
+            enemy.DealDamage(damage, false, true);
         }
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
@@ -112,13 +92,15 @@ public class EtherealShadeObject : SkillObjectPrefab
     }
 
     private void OnTriggerExit(Collider other) {
-        if (!IsServer) return;
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
         if (other.CompareTag("Enemy") && _enemiesList.Contains(health)) _enemiesList.Remove(health);
 
         if ((other.CompareTag("Mel") || other.CompareTag("Maevis")) && _playersList.Contains(health)) _playersList.Remove(health);
+    }
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
     }
     void End() {
         _amountOfGrowths = 0;

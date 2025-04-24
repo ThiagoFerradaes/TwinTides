@@ -33,20 +33,9 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
     }
 
     private void DefineSizeAndPlace() {
-        transform.localScale = _level < 4 ? _info.Area : _info.AreaLevel4; 
+        transform.localScale = _level < 4 ? _info.Area : _info.AreaLevel4;
 
-        _context.PlayerPosition.y = GetFloorHeight(_context.PlayerPosition);
-
-        Transform aim = _mel.GetComponent<PlayerController>().aimObject;
-        Vector3 direction = _context.PlayerRotation * Vector3.forward;
-        Vector3 position = _context.PlayerPosition + (direction * _info.MaxRange);
-
-        if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_context.PlayerPosition, aim.position) <= _info.MaxRange) {
-            transform.SetPositionAndRotation(new Vector3(aim.position.x, _context.PlayerPosition.y, aim.position.z), _context.PlayerRotation);
-        }
-        else {
-            transform.SetPositionAndRotation(position, _context.PlayerRotation);
-        }
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         _areaLevel = _level < 4 ? 0 : 1;
 
@@ -55,12 +44,6 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
         gameObject.SetActive(true);
 
         StartCoroutine(AreaDuration());
-    }
-
-    float GetFloorHeight(Vector3 position) {
-        Ray ray = new(position + Vector3.up * 5f, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 10f, LayerMask.GetMask("Floor"))) return hit.point.y + 0.1f;
-        return position.y;
     }
 
     IEnumerator AreaDuration() {
@@ -91,7 +74,6 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
             UpAreaLevel();
         }
 
-        if (!IsServer) return;
         if (!other.CompareTag("Enemy")) return;
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
         if (!listOfEnemies.Contains(health)) listOfEnemies.Add(health);
@@ -136,7 +118,7 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
                 _mel.GetComponent<DamageManager>().ReturnTotalAttack(_info.DamageLevel2);
 
             foreach (var enemie in listOfEnemies) {
-                enemie.ApplyDamageOnServerRPC(damage, true, true);
+                enemie.DealDamage(damage, true, true);
             }
 
             yield return null;

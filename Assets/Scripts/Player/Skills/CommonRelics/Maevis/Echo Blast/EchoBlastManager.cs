@@ -1,8 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EchoBlastManager : SkillObjectPrefab
-{
+public class EchoBlastManager : SkillObjectPrefab {
     EchoBlast _info;
     int _level;
     SkillContext _context;
@@ -21,16 +20,16 @@ public class EchoBlastManager : SkillObjectPrefab
 
         gameObject.SetActive(true);
 
-        if (IsServer) {
+        if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
             int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 1);
+            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
         }
 
         StartCoroutine(Duration());
     }
 
     private void EchoBlastStunExplosion_OnSecondaryExplosion(object sender, EchoBlastStunExplosion.ExplosionPosition e) {
-        if (IsServer) StartCoroutine(SecondaryExplosion(e.context));
+        StartCoroutine(SecondaryExplosion(e.context));
     }
 
     IEnumerator Duration() {
@@ -42,8 +41,10 @@ public class EchoBlastManager : SkillObjectPrefab
     IEnumerator SecondaryExplosion(SkillContext context) {
         for (int i = 0; i < _info.ExplosionAmountLevel3; i++) {
             yield return new WaitForSeconds(_info.TimeBetweenEachExplosion);
-            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, context, _level, 3);
+            if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
+                int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+                PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, context, _level, 3);
+            }
         }
     }
 }

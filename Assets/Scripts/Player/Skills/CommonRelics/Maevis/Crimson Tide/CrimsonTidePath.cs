@@ -27,9 +27,9 @@ public class CrimsonTidePath : SkillObjectPrefab {
     void SetPosition() {
         transform.localScale = _info.PathSize;
 
-        _context.PlayerPosition.y = GetGroundHeight(_context.PlayerPosition);
+        _context.Pos.y = GetGroundHeight(_context.Pos);
 
-        transform.SetPositionAndRotation(_context.PlayerPosition, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
@@ -71,12 +71,12 @@ public class CrimsonTidePath : SkillObjectPrefab {
 
                 bool wasAlive = !health.ReturnDeathState();
 
-                health.ApplyDamageOnServerRPC(damage, true, true);
+                health.DealDamage(damage, true, true);
 
                 bool isDead = health.ReturnDeathState();
 
                 if (_level == 4 && wasAlive && isDead) {
-                    Health_OnDeathRpc();
+                    Health_OnDeath();
                 }
             }
         }
@@ -86,7 +86,6 @@ public class CrimsonTidePath : SkillObjectPrefab {
         return;
     }
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -96,7 +95,6 @@ public class CrimsonTidePath : SkillObjectPrefab {
 
     }
     private void OnTriggerExit(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -106,8 +104,7 @@ public class CrimsonTidePath : SkillObjectPrefab {
 
     }
 
-    [Rpc(SendTo.ClientsAndHost)]
-    private void Health_OnDeathRpc() {
+    private void Health_OnDeath() {
         if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter)
             _maevis.GetComponent<PlayerSkillManager>().ResetCooldown(_context.SkillIdInUI);
     }

@@ -21,10 +21,10 @@ public class CrimsonTideDashHitBox : SkillObjectPrefab {
     }
 
     private void SetParent() {
-        if (IsServer) {
-            transform.SetParent(_maevis.transform);
-            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-        }
+
+        transform.SetParent(_maevis.transform);
+        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+
 
         gameObject.SetActive(true);
         StartCoroutine(Duration());
@@ -37,7 +37,7 @@ public class CrimsonTideDashHitBox : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
+
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -48,18 +48,17 @@ public class CrimsonTideDashHitBox : SkillObjectPrefab {
 
         bool wasAlive = !health.ReturnDeathState();
 
-        health.ApplyDamageOnServerRPC(damage, true, true);
+        health.DealDamage(damage, true, true);
 
         bool isDead = health.ReturnDeathState();
 
         if (_level == 4 && wasAlive && isDead) {
-            Health_OnDeathRpc();
+            Health_OnDeath();
         }
 
     }
 
-    [Rpc(SendTo.ClientsAndHost)]
-    private void Health_OnDeathRpc() {
+    private void Health_OnDeath() {
         if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter)
             _maevis.GetComponent<PlayerSkillManager>().ResetCooldown(_context.SkillIdInUI);
     }

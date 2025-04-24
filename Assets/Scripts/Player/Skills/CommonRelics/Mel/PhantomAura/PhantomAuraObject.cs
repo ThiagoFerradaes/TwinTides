@@ -28,30 +28,18 @@ public class PhantomAuraObject : SkillObjectPrefab {
 
         transform.localScale = _level < 4 ? _info.AuraSize : _info.AuraSizeLevel4;
 
-        if (IsServer) {
-            transform.SetParent(_mel.transform);
+        transform.SetParent(_mel.transform);
 
-            transform.SetLocalPositionAndRotation(Vector3.zero, _context.PlayerRotation);
-
-            SecondAura();
-        }
+        transform.SetLocalPositionAndRotation(Vector3.zero, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
-        if (IsServer) StartCoroutine(DamageTimer());
+        StartCoroutine(DamageTimer());
 
         StartCoroutine(Duration());
     }
 
-    void SecondAura() {
-        if (_level >= 3) {
-            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-            PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, _context, _level, 1);
-        }
-    }
-
     private void OnTriggerEnter(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -61,7 +49,6 @@ public class PhantomAuraObject : SkillObjectPrefab {
     }
 
     private void OnTriggerExit(Collider other) {
-        if (!IsServer) return;
 
         if (!other.CompareTag("Enemy")) return;
 
@@ -75,7 +62,7 @@ public class PhantomAuraObject : SkillObjectPrefab {
 
         float percentOfHealing = (_info.HealingPercent / 100) * damage;
 
-        health.HealServerRpc(percentOfHealing, true);
+        health.Heal(percentOfHealing, true);
     }
 
     IEnumerator DamageTimer() {
@@ -89,7 +76,7 @@ public class PhantomAuraObject : SkillObjectPrefab {
                 bool enemieDead = enemyHealth.ReturnDeathState();
 
                 if (!enemieDead) {
-                    enemyHealth.ApplyDamageOnServerRPC(damage, true, true);
+                    enemyHealth.DealDamage(damage, true, true);
 
                     if (_level > 1) HealPlayer(damage);
                 }
@@ -108,8 +95,6 @@ public class PhantomAuraObject : SkillObjectPrefab {
 
     void End() {
         _listOfEnemies.Clear();
-
-        //transform.SetParent(null);
 
         ReturnObject();
     }

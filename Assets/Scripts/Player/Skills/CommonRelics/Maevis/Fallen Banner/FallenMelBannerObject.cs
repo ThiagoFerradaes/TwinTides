@@ -34,11 +34,10 @@ public class FallenMelBannerObject : SkillObjectPrefab {
     }
 
     private void InvocateBanner() {
-        if (IsServer) {
-            transform.SetParent(_mel.transform);
+        transform.SetParent(_mel.transform);
 
-            transform.SetLocalPositionAndRotation(_info.BannerFollowPosition, Quaternion.Euler(0, 0, 0));
-        }
+        transform.SetLocalPositionAndRotation(_info.BannerFollowPosition, Quaternion.Euler(0, 0, 0));
+
 
         gameObject.SetActive(true);
 
@@ -61,19 +60,17 @@ public class FallenMelBannerObject : SkillObjectPrefab {
         ReturnObject();
     }
     void EndBuffs() {
-        if (!IsServer) return;
 
         for (int i = 0; i < _amountOfBuffs; i++) {
-            _damageManager.DecreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
+            _damageManager.DecreaseBaseAttack(_info.BaseAttackIncreaseLevel2);
         }
 
     }
     void AddBuffs() {
-        if (!IsServer) return;
 
         if (_amountOfBuffs < _info.BannerMaxStacks) {
             _amountOfBuffs++;
-            _damageManager.IncreaseBaseAttackRpc(_info.BaseAttackIncreaseLevel2);
+            _damageManager.IncreaseBaseAttack(_info.BaseAttackIncreaseLevel2);
         }
 
         if (durationCoroutine != null) StopCoroutine(durationCoroutine);

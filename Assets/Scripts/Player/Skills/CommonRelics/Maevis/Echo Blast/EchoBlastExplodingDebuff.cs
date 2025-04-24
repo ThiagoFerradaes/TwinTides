@@ -36,13 +36,12 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
 
         _parent = parent;
 
-        if (IsServer) {
-            transform.SetParent(_parent.transform);
+        transform.SetParent(_parent.transform);
 
-            transform.SetLocalPositionAndRotation(new Vector3(0, _info.ExplodingDebuffHeight, 0), Quaternion.Euler(0, 0, 0));
-        }
+        transform.SetLocalPositionAndRotation(new Vector3(0, _info.ExplodingDebuffHeight, 0), Quaternion.Euler(0, 0, 0));
 
-        TurnObjectOnRpc();
+
+        TurnObjectOn();
 
         parent.TryGetComponent<HealthManager>(out HealthManager health);
 
@@ -59,15 +58,14 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
         StartCoroutine(WaitToStartExploding());
     }
 
-    [Rpc(SendTo.ClientsAndHost)]
-    void TurnObjectOnRpc() {
+    void TurnObjectOn() {
         gameObject.SetActive(true);
     }
 
     private bool ParentAlreadyHasDebuff(GameObject parent) {
         foreach (Transform child in parent.transform) {
             if (child.GetComponent<EchoBlastExplodingDebuff>() != null) {
-                return true; 
+                return true;
             }
         }
         return false;
@@ -98,13 +96,13 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
     }
 
     IEnumerator Explode() {
-        while (true && IsServer) {
-            if (_canExplode && _parent != null) {
+        while (true) {
+            if (_canExplode && _parent != null && LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
                 _canExplode = false;
                 _canSetUpExplosion = false;
                 int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
                 SkillContext newContext = new(_parent.transform.position, transform.rotation, _context.SkillIdInUI);
-                PlayerSkillPooling.Instance.InstantiateAndSpawnRpc(skillId, newContext, _level, 3);
+                PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, newContext, _level, 3);
 
                 StartCoroutine(ExplosionCooldown());
             }
@@ -117,23 +115,23 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
 
         _canSetUpExplosion = true;
     }
-    
+
     void End() {
         StopAllCoroutines();
 
         EchoBlastStunExplosion.OnExploded -= EchoBlastStunExplosion_OnExploded;
 
-        foreach(var enemie in events) {
+        foreach (var enemie in events) {
             enemie.OnGeneralDamage -= Health_OnGeneralDamage;
             enemie.OnDeath -= Health_OnDeath;
         }
 
         events.Clear();
 
-        if (IsServer) transform.parent = null;
-        
+        transform.parent = null;
+
         _isPositioned = false;
-        
+
         ReturnObject();
     }
 
