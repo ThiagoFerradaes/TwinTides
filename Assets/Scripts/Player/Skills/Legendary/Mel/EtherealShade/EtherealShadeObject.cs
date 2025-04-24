@@ -7,7 +7,7 @@ public class EtherealShadeObject : SkillObjectPrefab
 {
     EtherealShade _info;
     SkillContext _context;
-    GameObject _mel;
+    GameObject _mel, _healingEffect, _damageEffect;
     DamageManager _dManager;
     SphereCollider _collider;
     int _amountOfGrowths;
@@ -24,6 +24,14 @@ public class EtherealShadeObject : SkillObjectPrefab
             _collider = GetComponent<SphereCollider>();
         }
 
+        if (_healingEffect == null) {
+            _healingEffect = gameObject.transform.GetChild(1).gameObject;
+        }
+
+        if (_damageEffect == null) {
+            _damageEffect = gameObject.transform.GetChild(2).gameObject;
+        }
+
         SetPosition();
     }
 
@@ -32,6 +40,8 @@ public class EtherealShadeObject : SkillObjectPrefab
         transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         _collider.radius = _info.InicialRadius;
+        _healingEffect.transform.localScale = Vector3.one * _info.InicialRadius;
+        _damageEffect.transform.localScale = Vector3.one * _info.InicialRadius;
 
         gameObject.SetActive(true);
 
@@ -43,6 +53,8 @@ public class EtherealShadeObject : SkillObjectPrefab
         yield return new WaitForSeconds(_info.CloneDuration);
 
         StopCoroutine(HealAndGrow());
+
+        yield return new WaitForSeconds(_info.HealingEffectDuration);
 
         Explode();
 
@@ -59,19 +71,37 @@ public class EtherealShadeObject : SkillObjectPrefab
                 player.Heal(_info.Heal, false);
                 heal = true;
             }
+            StartCoroutine(HealingEffectTimer());
             if (heal) Grow();
         }
+    }
+
+    IEnumerator HealingEffectTimer() {
+        _healingEffect.SetActive(true);
+        yield return new WaitForSeconds(_info.HealingEffectDuration);
+        _healingEffect.SetActive(false);
+    }
+
+    IEnumerator DamageEffectTimer() {
+        _damageEffect.SetActive(true);
+        yield return new WaitForSeconds(_info.ExplosionDuration);
+        _damageEffect.SetActive(false);
     }
 
     void Grow() {
         if (_amountOfGrowths >= _info.MaxAmountOfGrowths) return;
         _amountOfGrowths++;
         _collider.radius *= ( 1 + _info.GrowthPercentage/100);
+
+        _healingEffect.transform.localScale *= (1 + _info.GrowthPercentage / 100);
+        _damageEffect.transform.localScale *= (1 + _info.GrowthPercentage / 100);
     }
     void Explode() {
 
         float attackDamage = Mathf.Max(_info.BaseDamage * _amountOfGrowths * (1 + _info.PercentOfDamageIncreasePerGrowth / 100), _info.BaseDamage);
         float damage = _dManager.ReturnTotalAttack(attackDamage);
+
+        StartCoroutine(DamageEffectTimer());
 
         foreach(var enemy in _enemiesList) {
             if (enemy == null) {
@@ -103,6 +133,10 @@ public class EtherealShadeObject : SkillObjectPrefab
         return;
     }
     void End() {
+
+        _healingEffect.SetActive(false);
+        _damageEffect.SetActive(false);
+
         _amountOfGrowths = 0;
         _playersList.Clear();
         _enemiesList.Clear();

@@ -78,11 +78,10 @@ public class MelNormalAttackObject : SkillObjectPrefab {
 
         enemyHelath.DealDamage(_info.SphereDamage, true, true);
 
-        OnNormalHitRpc();
+        OnNormalHit();
     }
 
-    [Rpc(SendTo.ClientsAndHost)]
-    void OnNormalHitRpc() {
+    void OnNormalHit() {
         OnNormalAttackHit?.Invoke(this, EventArgs.Empty);
 
         End();
