@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4381585651788781128}
   - component: {fileID: 1032928260469186886}
   - component: {fileID: 8294332140581275871}
-  - component: {fileID: 6562763475730003177}
   m_Layer: 0
   m_Name: Damage
   m_TagString: Untagged
@@ -87,27 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6562763475730003177
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3731049000625541315}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6021783530632383693
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +99,7 @@ GameObject:
   - component: {fileID: 9143395500367589690}
   - component: {fileID: 6321629544677330863}
   m_Layer: 0
-  m_Name: Clone
+  m_Name: Candelabro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,7 +205,6 @@ GameObject:
   - component: {fileID: 6371950965171318310}
   - component: {fileID: 5481460820072675726}
   - component: {fileID: 6035494654511905129}
-  - component: {fileID: 8196988767160344869}
   m_Layer: 0
   m_Name: Healing
   m_TagString: Untagged
@@ -303,27 +280,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8196988767160344869
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7639632253502275630}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8863925194899843353
 GameObject:
   m_ObjectHideFlags: 0
