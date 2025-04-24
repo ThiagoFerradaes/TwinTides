@@ -14,4 +14,5 @@ public class EtherealShade : LegendaryRelic
     public float MaxRangeToPlace;
     public float ExplosionDuration;
     public float InicialRadius;
+    public float HealingEffectDuration;
 }
