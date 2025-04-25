@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class CharacterSelectionUI : MonoBehaviour {
     [SerializeField] bool playerOne;
     [SerializeField] Image characterImage;
-    [SerializeField] TextMeshProUGUI readyText;
+    [SerializeField] Image readyImage;
+    [SerializeField] Sprite maevisSprite, melSprite, readySpriteOne, notReadySpriteOne, readySpriteTwo, notReadySpriteTwo;
 
 
     private void OnEnable() {
@@ -35,18 +36,18 @@ public class CharacterSelectionUI : MonoBehaviour {
     private void ChangeCharacterUIClientRpc(Characters preview, Characters newChar) {
         if (playerOne) {
             if (WhiteBoard.Singleton.PlayerOneCharacter.Value == Characters.Maevis) {
-                characterImage.color = Color.red;
+                characterImage.sprite = maevisSprite;
             }
             else {
-                characterImage.color = Color.blue;
+                characterImage.sprite = melSprite;
             }
         }
         else {
             if (WhiteBoard.Singleton.PlayerTwoCharacter.Value == Characters.Maevis) {
-                characterImage.color = Color.red;
+                characterImage.sprite = maevisSprite;
             }
             else {
-                characterImage.color = Color.blue;
+                characterImage.sprite = melSprite;
             }
         }
     }
@@ -54,10 +55,10 @@ public class CharacterSelectionUI : MonoBehaviour {
     [ClientRpc]
     void ChangeReadyTextClientRpc(bool old, bool newBool) {
         if (playerOne) {
-            readyText.text = WhiteBoard.Singleton.PlayerOneReady.Value ? "Ready" : "Not Ready";
+            readyImage.sprite = WhiteBoard.Singleton.PlayerOneReady.Value ? readySpriteOne : notReadySpriteOne;
         }
         else {
-            readyText.text = WhiteBoard.Singleton.PlayerTwoReady.Value ? "Ready" : "Not Ready";
+            readyImage.sprite = WhiteBoard.Singleton.PlayerOneReady.Value ? readySpriteTwo : notReadySpriteTwo;
         }
     }
 }

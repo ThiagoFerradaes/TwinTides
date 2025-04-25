@@ -28,14 +28,12 @@ public class MenuManager : NetworkBehaviour {
     [Header("Lobby")]
     [SerializeField] GameObject hostVisualIndicador;
     [SerializeField] GameObject clientVisualIndicador;
-    [SerializeField] TextMeshProUGUI hostTMP;
-    [SerializeField] TextMeshProUGUI clientTMP;
     [SerializeField] GameObject lobbyClosedScreen;
     [SerializeField] GameObject lobbyScreen;
-    [SerializeField] GameObject changeCharacterOnButton;
-    [SerializeField] GameObject changeCHaracterTwoButton;
-    [SerializeField] GameObject playButton;
-    [SerializeField] GameObject[] readyButton;
+    [SerializeField] Button changeCharacterOneButtonOne, changeCharacterOneButtonTwo, changeCharacterTwoButtonOne, changeCharacterTwoButtonTwo;
+    [SerializeField] Button playButton;
+    [SerializeField] Button[] readyButton;
+    [SerializeField] Sprite readyButtonSprite, notReadyButtonSprite;
     [SerializeField] TextMeshProUGUI[] readyTexts;
     [SerializeField] GameObject joinByCodeScreen;
     [SerializeField] GameObject creatLobbyScreen;
@@ -62,6 +60,27 @@ public class MenuManager : NetworkBehaviour {
     #endregion
 
     #region Methods
+
+    private void Awake() {
+        SetButtonsFunctions();
+    }
+
+    private void SetButtonsFunctions() {
+
+        // botão de dar play
+        playButton.onClick.AddListener(PlayButton);
+
+        // botões para trocar de personagem
+        changeCharacterOneButtonOne.onClick.AddListener(() => ChangeCharacterButtonServerRpc(1));
+        changeCharacterOneButtonTwo.onClick.AddListener(() => ChangeCharacterButtonServerRpc(1));
+        changeCharacterTwoButtonOne.onClick.AddListener(() => ChangeCharacterButtonServerRpc(2));
+        changeCharacterTwoButtonOne.onClick.AddListener(() => ChangeCharacterButtonServerRpc(2));
+
+        // botões ready
+        readyButton[0].onClick.AddListener(() => ReadyButtonServerRpc(1));
+        readyButton[1].onClick.AddListener(() => ReadyButtonServerRpc(2));
+    }
+
     private void Start() {
         if (NetworkManager.Singleton != null) {
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
@@ -110,42 +129,42 @@ public class MenuManager : NetworkBehaviour {
         if (isHost) { // Ui que liga quando só o host entra na sal
             hostId = clientId;
             hostVisualIndicador.SetActive(true);
-            hostTMP.text = $"Player 1: {hostId}";
             EachPlayerButtonsOn(isHost);
 
             WhiteBoard.Singleton.ResetWhiteBoardServerRpc(); // Resetar o whiteBoard quando o host entra
         }
         else { // Ui que liga quando o client entra na sala
             hostVisualIndicador.SetActive(true);
-            hostTMP.text = $"Player 1: {hostId}";
             clientVisualIndicador.SetActive(true);
-            clientTMP.text = $"Player 2: {clientId}";
         }
     }
 
     void EachPlayerButtonsOn(bool isHost) {
         if (isHost) {
-            changeCHaracterTwoButton.SetActive(false); // Desligando os botões antigos caso o host tenha sido client
-            readyButton[1].SetActive(false);
+            changeCharacterTwoButtonOne.gameObject.SetActive(false); // Desligando os botões antigos caso o host tenha sido client
+            changeCharacterTwoButtonTwo.gameObject.SetActive(false); // Desligando os botões antigos caso o host tenha sido client
+            readyButton[1].gameObject.SetActive(false);
 
-            changeCharacterOnButton.SetActive(true); // Ligando os botões certos
-            readyButton[0].SetActive(true);
-            playButton.SetActive(true);
+            changeCharacterOneButtonOne.gameObject.SetActive(true); // Ligando os botões certos
+            changeCharacterOneButtonTwo.gameObject.SetActive(true); // Ligando os botões certos
+            readyButton[0].gameObject.SetActive(true);
+            playButton.gameObject.SetActive(true);
         }
         else {
-            changeCharacterOnButton.SetActive(false); // Desligando os botões antigos caso o client tenha sido host
-            readyButton[0].SetActive(false);
-            playButton.SetActive(false);
+            changeCharacterOneButtonOne.gameObject.SetActive(false); // Desligando os botões antigos caso o client tenha sido host
+            changeCharacterOneButtonTwo.gameObject.SetActive(false); // Desligando os botões antigos caso o client tenha sido host
+            readyButton[0].gameObject.SetActive(false);
+            playButton.gameObject.SetActive(false);
 
 
-            changeCHaracterTwoButton.SetActive(true); // Ligando os botões certos
-            readyButton[1].SetActive(true);
+            changeCharacterTwoButtonOne.gameObject.SetActive(true); // Ligando os botões certos
+            changeCharacterTwoButtonTwo.gameObject.SetActive(true); // Ligando os botões certos
+            readyButton[1].gameObject.SetActive(true);
         }
     }
 
     private void OnClientDisconneted(ulong obj) { // Se o client desconecta limpa a ui dele
         clientVisualIndicador.SetActive(false);
-        clientTMP.text = "";
     }
     #endregion
 
@@ -256,10 +275,8 @@ public class MenuManager : NetworkBehaviour {
     void CloseLobbyClientRpc() {
 
         hostVisualIndicador.SetActive(false);
-        hostTMP.text = "";
 
         clientVisualIndicador.SetActive(false);
-        clientTMP.text = "";
 
         if (!NetworkManager.Singleton.IsHost) {
             lobbyScreen.SetActive(false);
@@ -272,10 +289,12 @@ public class MenuManager : NetworkBehaviour {
         if (player == 1) {
             if (WhiteBoard.Singleton.PlayerOneReady.Value == true) { // Se vc ja ta pronto vc pode voltar
                 WhiteBoard.Singleton.CharacterReadyServerRpc(player);
+                readyButton[0].GetComponent<Image>().sprite = readyButtonSprite;
             }
             else { // Se vc n ta pronto, vc só pode dar pronto se o seu personagem for diferente do outro
                 if (WhiteBoard.Singleton.PlayerOneCharacter.Value != WhiteBoard.Singleton.PlayerTwoCharacter.Value) {
                     WhiteBoard.Singleton.CharacterReadyServerRpc(player);
+                    readyButton[0].GetComponent<Image>().sprite = notReadyButtonSprite;
                 }
                 else {
                     ShowDuplicatePopUpClientRpc(player);
@@ -285,10 +304,12 @@ public class MenuManager : NetworkBehaviour {
         if (player == 2) {
             if (WhiteBoard.Singleton.PlayerTwoReady.Value == true) { // Se vc ja ta pronto vc pode voltar
                 WhiteBoard.Singleton.CharacterReadyServerRpc(player);
+                readyButton[1].GetComponent<Image>().sprite = readyButtonSprite;
             }
             else { // Se vc n ta pronto, vc só pode dar pronto se o seu personagem for diferente do outro
                 if (WhiteBoard.Singleton.PlayerOneCharacter.Value != WhiteBoard.Singleton.PlayerTwoCharacter.Value) {
                     WhiteBoard.Singleton.CharacterReadyServerRpc(player); ;
+                    readyButton[1].GetComponent<Image>().sprite = notReadyButtonSprite;
                 }
                 else {
                     ShowDuplicatePopUpClientRpc(player);

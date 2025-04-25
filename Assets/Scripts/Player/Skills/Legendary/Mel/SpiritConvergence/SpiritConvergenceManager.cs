@@ -21,7 +21,7 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
             _hManager = _mel.GetComponent<HealthManager>();
         }
 
-        _hManager.OnMelHealed += OnMelHealed;
+        HealthManager.OnMelHealed += OnMelHealed;
 
         _hManager.DealDamage(10, false, false);
 
@@ -107,7 +107,7 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
     void End() {
         _canInstantiateRangedMinion = true;
 
-        _hManager.OnMelHealed -= OnMelHealed;
+        HealthManager.OnMelHealed -= OnMelHealed;
 
         _timesExtended = 0;
 

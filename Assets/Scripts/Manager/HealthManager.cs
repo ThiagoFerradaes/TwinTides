@@ -44,7 +44,7 @@ public class HealthManager : NetworkBehaviour {
     public event Action<Buff, int> OnBuffAdded, OnBuffRemoved;
     public event Action<Debuff, int> OnDebuffAdded, OnDebuffRemoved;
     public event EventHandler OnGeneralDamage;
-    public event EventHandler OnMelHealed;
+    public static event EventHandler OnMelHealed;
 
     // Corrotinas
     Coroutine damageIndicatorCoroutine;
@@ -59,7 +59,7 @@ public class HealthManager : NetworkBehaviour {
         originalMaterial = GetComponent<MeshRenderer>().material;
     }
     void Inicialize() {
-        RestoreAllHealthServerRpc();
+        RestoreAllHealth();
         InvokeUpdateHealth();
     }
     private void OnEnable() {
@@ -87,8 +87,7 @@ public class HealthManager : NetworkBehaviour {
     public float ReturnMaxHealth() {
         return maxHealth.Value;
     }
-    [ServerRpc(RequireOwnership = false)]
-    public void RestoreAllHealthServerRpc() {
+    public void RestoreAllHealth() {
         if (!IsServer) return;
 
         _currentHealth.Value = maxHealth.Value;
@@ -187,12 +186,6 @@ public class HealthManager : NetworkBehaviour {
         if (!IsServer) return;
 
         _currentHealth.Value = Mathf.Clamp((_currentHealth.Value + healAmount * _healMultiply.Value), 0, maxHealth.Value);
-    }
-
-    [Rpc(SendTo.ClientsAndHost)]
-    void OnMelHealedEventRpc() {
-        Debug.Log("Evento chamado para todos");
-        OnMelHealed?.Invoke(this, EventArgs.Empty);
     }
 
     public float ReturnCurrentHealth() {
