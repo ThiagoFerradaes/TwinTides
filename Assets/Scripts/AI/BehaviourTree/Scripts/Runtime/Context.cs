@@ -4,18 +4,18 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Context {
-    public GameObject gameObject;
-    public Transform transform;
-    public NavMeshAgent agent;
-    public AIPath path;
+    public GameObject GameObject;
+    public Transform Transform;
+    public NavMeshAgent Agent;
+    public AIPath Path;
     public MovementManager MManager;
 
         public static Context CreateFromGameObject(GameObject gameObject, AIPath path) {
         Context context = new() {
-            gameObject = gameObject,
-            transform = gameObject.transform,
-            agent = gameObject.GetComponent<NavMeshAgent>(),
-            path = path,
+            GameObject = gameObject,
+            Transform = gameObject.transform,
+            Agent = gameObject.GetComponent<NavMeshAgent>(),
+            Path = path,
             MManager = gameObject.GetComponent<MovementManager>(),
         };
 

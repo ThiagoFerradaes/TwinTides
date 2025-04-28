@@ -1,28 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9149890427416028198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0effce09a7b748448af7c4dd3044c627, type: 3}
-  m_Name: GoToAction
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: d1af9e77f69d82f47b7546d36cfe894d
-  position: {x: 120.19527, y: 517.99603}
-  blackboard:
-    Target: {fileID: 0}
-    IsCloseToPath: 0
-    IsTargetInRange: 0
-    CanFollowPlayer: 1
-  targetLocation: 1
-  StoppingDistance: 1
 --- !u!114 &-8737707627873100344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,6 +21,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   child: {fileID: 1610498867395191891}
 --- !u!114 &-6793917620370379804
 MonoBehaviour:
@@ -66,6 +44,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   children:
   - {fileID: -5468306153279131312}
   - {fileID: -5112378745571010503}
@@ -90,6 +69,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   maxDistance: 20
 --- !u!114 &-5468306153279131312
 MonoBehaviour:
@@ -112,6 +92,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   children:
   - {fileID: -1778014092064343986}
   - {fileID: 2904676501843714341}
@@ -136,6 +117,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   child: {fileID: 7714920069465493131}
   cooldown: 0.1
 --- !u!114 &-4685175796735353712
@@ -159,6 +141,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   child: {fileID: -6793917620370379804}
 --- !u!114 &-3838604061852570075
 MonoBehaviour:
@@ -175,12 +158,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 6b16b6c54fa14b245be736a5c27da8e1
-  position: {x: -700.64514, y: 606.58}
+  position: {x: -812.87213, y: 601.25006}
   blackboard:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   stoppingDistance: 1
 --- !u!114 &-3690868420404818733
 MonoBehaviour:
@@ -203,6 +187,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   conditions: 0100000002000000
   changeToTrue: 0
 --- !u!114 &-1941407356344442501
@@ -220,12 +205,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: f607c65df01e7c343a84d53da04243ee
-  position: {x: -486.64517, y: 607.35504}
+  position: {x: -365.65204, y: 602.4001}
   blackboard:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   cooldown: 0.5
 --- !u!114 &-1778014092064343986
 MonoBehaviour:
@@ -248,6 +234,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   child: {fileID: -8737707627873100344}
   conditions: 000000000100000002000000
 --- !u!114 &-832071066040792598
@@ -265,13 +252,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 5b4b87f1e0e1d924ea640ec945aee93a
-  position: {x: -242.20724, y: 515.74896}
+  position: {x: -180.78476, y: 516}
   blackboard:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
-  targetLocation: 0
+    CurrentPathIndex: 0
   StoppingDistance: 1
 --- !u!114 &-461729228651206470
 MonoBehaviour:
@@ -294,6 +281,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   detectionRadius: 8
   detectionAngle: 360
   playerLayer:
@@ -328,8 +316,6 @@ MonoBehaviour:
   - {fileID: 8593820219457342453}
   - {fileID: -832071066040792598}
   - {fileID: 5731827953410687217}
-  - {fileID: -9149890427416028198}
-  - {fileID: 2845475920100613175}
   - {fileID: -1778014092064343986}
   - {fileID: -8737707627873100344}
   - {fileID: 1610498867395191891}
@@ -346,6 +332,7 @@ MonoBehaviour:
     IsCloseToPath: 1
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
 --- !u!114 &1610498867395191891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,6 +354,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   children:
   - {fileID: -3838604061852570075}
   - {fileID: -1941407356344442501}
@@ -391,29 +379,8 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   child: {fileID: -4685175796735353712}
---- !u!114 &2845475920100613175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96f6f4df09da1014e82d353999f1ee41, type: 3}
-  m_Name: CooldownAction
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: c17339ae40af37c48ba4904214912715
-  position: {x: 281.9072, y: 514.753}
-  blackboard:
-    Target: {fileID: 0}
-    IsCloseToPath: 0
-    IsTargetInRange: 0
-    CanFollowPlayer: 1
-  cooldown: 1
 --- !u!114 &2904676501843714341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,6 +402,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   children:
   - {fileID: 8593820219457342453}
 --- !u!114 &3041405883497151913
@@ -458,6 +426,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   cooldown: 2.5
 --- !u!114 &3936397415506213515
 MonoBehaviour:
@@ -480,6 +449,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   children:
   - {fileID: -3690868420404818733}
   - {fileID: 3041405883497151913}
@@ -505,6 +475,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   child: {fileID: 3936397415506213515}
   conditions: 00000000
 --- !u!114 &5731827953410687217
@@ -522,12 +493,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: d3e5857246b95b744b39c4b8881cbc69
-  position: {x: -66.01192, y: 517.5496}
+  position: {x: 77.41847, y: 509.25494}
   blackboard:
     Target: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   cooldown: 1
 --- !u!114 &7714920069465493131
 MonoBehaviour:
@@ -550,6 +522,7 @@ MonoBehaviour:
     IsCloseToPath: 1
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   children:
   - {fileID: 4989918386672694049}
   - {fileID: -6369592398114237754}
@@ -575,11 +548,10 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   children:
   - {fileID: -832071066040792598}
   - {fileID: 5731827953410687217}
-  - {fileID: -9149890427416028198}
-  - {fileID: 2845475920100613175}
 --- !u!114 &8661612055495240077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,5 +573,6 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    CurrentPathIndex: 0
   conditions: 02000000
   changeToTrue: 1

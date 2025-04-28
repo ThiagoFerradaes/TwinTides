@@ -8,12 +8,12 @@ public class FollowPlayerAction : ActionNode
     protected override State OnUpdate() {
         if (blackboard.Target == null) return State.Failure;
 
-        if (Vector3.Distance(context.agent.transform.position, blackboard.Target.position) >= stoppingDistance) {
-            context.agent.speed = context.MManager.ReturnMoveSpeed();
-            context.agent.SetDestination(blackboard.Target.position);
+        if (Vector3.Distance(context.Agent.transform.position, blackboard.Target.position) >= stoppingDistance) {
+            context.Agent.speed = context.MManager.ReturnMoveSpeed();
+            context.Agent.SetDestination(blackboard.Target.position);
             return State.Running;
         }
 
-        else { context.agent.speed = 0; return State.Success; }
+        else { context.Agent.speed = 0; return State.Success; }
     }
 }

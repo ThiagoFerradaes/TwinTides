@@ -6,10 +6,17 @@ using static UnityEngine.Rendering.DebugUI;
 
 [System.Serializable]
 public class Blackboard {
+
+    // Componentes
     public Transform Target;
+
+    // Condicionais
     public bool IsCloseToPath = true;
     public bool IsTargetInRange = false;
     public bool CanFollowPlayer = true;
+
+    // Atributos
+    public int CurrentPathIndex;
 
     public enum BlackBoardBools {
         isCloseToPath,
