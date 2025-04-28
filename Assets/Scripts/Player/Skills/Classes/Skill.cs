@@ -5,6 +5,7 @@ public abstract class Skill : ScriptableObject
     // Atributos
     public string Name;
     public Sprite UiSprite;
+    public Sprite NameSpriteTotem;
     public int MinLevel, MaxLevel;
     public float Cooldown;
     public bool IsStackable = true;

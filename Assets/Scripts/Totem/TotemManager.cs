@@ -24,7 +24,12 @@ public class TotemManager : MonoBehaviour {
     [SerializeField] GameObject upgradeScreen;
     [SerializeField] Button upArrow, downArrow, buyButton;
     [SerializeField] TextMeshProUGUI upgradeDescription, buyPrice;
-    [SerializeField] Image relicImage, firstUpgradeImage, secondUpgradeImage, thirdUpgradeImage, fourthUpgradeImage, buyButtonBackGroundImage;
+    [SerializeField]
+    Image relicImage, firstUpgradeImage, secondUpgradeImage, thirdUpgradeImage, fourthUpgradeImage, firstLineImage,
+        secondLineImage, thirdLineImage, firstRelicNameImage, secondRelicNameImage, legendaryRelicNameImage;
+    [SerializeField]
+    Sprite firstUpgradeUp, firstUpgradeDown, secondUpgradeUp, secondUpgradeDown, thirdUpgradeUp, thirdUpgradeDown, fourthUpgradeUp, fourthUpgradeDown,
+        firstLineUp, firstLineDown, secondLineUp, secondLineDown, thirdLineUp, thirdLineDown;
 
     public List<CommonRelic> listOfCommonRelics = new();
     List<LegendaryRelic> listOfLegendaryRelics = new();
@@ -83,6 +88,9 @@ public class TotemManager : MonoBehaviour {
         equipScreen.SetActive(true);
         totemScreen.SetActive(true);
 
+        equipTabButton.gameObject.SetActive(false);
+        upgradeTabButton.gameObject.SetActive(true);
+
         LocalWhiteBoard.Instance.AnimationOn = true;
     }
 
@@ -128,7 +136,13 @@ public class TotemManager : MonoBehaviour {
         if (LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne != null) {
             CommonRelic firstRelic = LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne;
             firstCommonIndex = listOfCommonRelics.IndexOf(firstRelic);
+            firstRelicImage.gameObject.SetActive(true);
             DefineImagenAndDescription(firstRelic, SkillIndex.firstCommon);
+        }
+        else {
+            firstRelicImage.gameObject.SetActive(false);
+            firstRelicNameImage.gameObject.SetActive(false);
+            firstRelicDescription.text = "";
         }
 
 
@@ -137,7 +151,13 @@ public class TotemManager : MonoBehaviour {
         if (LocalWhiteBoard.Instance.PlayerCommonRelicSkillTwo != null) {
             CommonRelic secondRelic = LocalWhiteBoard.Instance.PlayerCommonRelicSkillTwo;
             secondCommonIndex = listOfCommonRelics.IndexOf(secondRelic);
+            secondRelicImage.gameObject.SetActive(true);
             DefineImagenAndDescription(secondRelic, SkillIndex.secondCommon);
+        }
+        else{
+            secondRelicImage.gameObject.SetActive(false);
+            secondRelicNameImage.gameObject.SetActive(false);
+            secondRelicDescription.text = "";
         }
 
         // Legendary Relic
@@ -145,15 +165,25 @@ public class TotemManager : MonoBehaviour {
         if (LocalWhiteBoard.Instance.PlayerLegendarySkill != null) {
             LegendaryRelic legendaryRelic = LocalWhiteBoard.Instance.PlayerLegendarySkill;
             legendaryIndex = listOfLegendaryRelics.IndexOf(legendaryRelic);
+            legendaryRelicImage.gameObject.SetActive(true);
             DefineImagenAndDescription(legendaryRelic, SkillIndex.legendary);
+        }
+        else {
+            legendaryRelicImage.gameObject.SetActive(false);
+            legendaryRelicNameImage.gameObject.SetActive(false);
+            legendaryRelicDescription.text = "";
         }
 
         // Upgrade
         if (LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne != null) {
             CommonRelic firstRelic = LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne;
             updateIndex = listOfCommonRelics.IndexOf(firstRelic);
+            relicImage.gameObject.SetActive(true);
             relicImage.sprite = listOfCommonRelics[updateIndex].UiSprite;
             ChangeDescriptionPrinceAndImages();
+        }
+        else {
+            relicImage.gameObject.SetActive(false);
         }
     }
 
@@ -166,14 +196,17 @@ public class TotemManager : MonoBehaviour {
             case SkillIndex.firstCommon:
                 firstRelicImage.sprite = skill.UiSprite;
                 firstRelicDescription.text = skill.SkillsDescriptions[LocalWhiteBoard.Instance.ReturnSkillLevel(skill) - 1];
+                firstRelicNameImage.sprite = skill.NameSpriteTotem;
                 break;
             case SkillIndex.secondCommon:
                 secondRelicImage.sprite = skill.UiSprite;
                 secondRelicDescription.text = skill.SkillsDescriptions[LocalWhiteBoard.Instance.ReturnSkillLevel(skill) - 1];
+                secondRelicNameImage.sprite = skill.NameSpriteTotem;
                 break;
             case SkillIndex.legendary:
                 legendaryRelicImage.sprite = skill.UiSprite;
                 legendaryRelicDescription.text = skill.SkillsDescriptions[LocalWhiteBoard.Instance.ReturnSkillLevel(skill) - 1];
+                legendaryRelicNameImage.sprite = skill.NameSpriteTotem;
                 break;
         }
     }
@@ -186,11 +219,15 @@ public class TotemManager : MonoBehaviour {
     void TurnEquipTabOn() {
         upgradeScreen.SetActive(false);
         equipScreen.SetActive(true);
+        equipTabButton.gameObject.SetActive(false);
+        upgradeTabButton.gameObject.SetActive(true);
     }
 
     void TurnUpgradeTabOn() {
         upgradeScreen.SetActive(true);
         equipScreen.SetActive(false);
+        equipTabButton.gameObject.SetActive(true);
+        upgradeTabButton.gameObject.SetActive(false);
     }
 
     enum ArrowDirection { up, down, left, right }
@@ -299,28 +336,44 @@ public class TotemManager : MonoBehaviour {
     void ChangeUpdatedIcons(int skillLevel) {
         switch (skillLevel) {
             case 1:
-                firstUpgradeImage.color = Color.green;
-                secondUpgradeImage.color = Color.red;
-                thirdUpgradeImage.color = Color.red;
-                fourthUpgradeImage.color = Color.red;
+                firstUpgradeImage.sprite = firstUpgradeUp;
+                secondUpgradeImage.sprite = secondUpgradeDown;
+                thirdUpgradeImage.sprite = thirdUpgradeDown;
+                fourthUpgradeImage.sprite = fourthUpgradeDown;
+
+                firstLineImage.sprite = firstLineDown;
+                secondLineImage.sprite = secondLineDown;
+                thirdLineImage.sprite = thirdLineDown;
                 break;
             case 2:
-                firstUpgradeImage.color = Color.green;
-                secondUpgradeImage.color = Color.green;
-                thirdUpgradeImage.color = Color.red;
-                fourthUpgradeImage.color = Color.red;
+                firstUpgradeImage.sprite = firstUpgradeUp;
+                secondUpgradeImage.sprite = secondUpgradeUp;
+                thirdUpgradeImage.sprite = thirdUpgradeDown;
+                fourthUpgradeImage.sprite = fourthUpgradeDown;
+
+                firstLineImage.sprite = firstLineUp;
+                secondLineImage.sprite = secondLineDown;
+                thirdLineImage.sprite = thirdLineDown;
                 break;
             case 3:
-                firstUpgradeImage.color = Color.green;
-                secondUpgradeImage.color = Color.green;
-                thirdUpgradeImage.color = Color.green;
-                fourthUpgradeImage.color = Color.red;
+                firstUpgradeImage.sprite = firstUpgradeUp;
+                secondUpgradeImage.sprite = secondUpgradeUp;
+                thirdUpgradeImage.sprite = thirdUpgradeUp;
+                fourthUpgradeImage.sprite = fourthUpgradeDown;
+
+                firstLineImage.sprite = firstLineUp;
+                secondLineImage.sprite = secondLineUp;
+                thirdLineImage.sprite = thirdLineDown;
                 break;
             case 4:
-                firstUpgradeImage.color = Color.green;
-                secondUpgradeImage.color = Color.green;
-                thirdUpgradeImage.color = Color.green;
-                fourthUpgradeImage.color = Color.green;
+                firstUpgradeImage.sprite = firstUpgradeUp;
+                secondUpgradeImage.sprite = secondUpgradeUp;
+                thirdUpgradeImage.sprite = thirdUpgradeUp;
+                fourthUpgradeImage.sprite = fourthUpgradeUp;
+
+                firstLineImage.sprite = firstLineUp;
+                secondLineImage.sprite = secondLineUp;
+                thirdLineImage.sprite = thirdLineUp;
                 break;
         }
     }
