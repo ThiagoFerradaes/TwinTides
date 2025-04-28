@@ -23,10 +23,6 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
 
         HealthManager.OnMelHealed += OnMelHealed;
 
-        _hManager.DealDamage(10, false, false);
-
-        _hManager.Heal(10, true);
-
         SetParent();
     }
 
@@ -73,7 +69,6 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
     }
 
     private void OnMelHealed(object sender, System.EventArgs e) {
-        Debug.Log("Evento chamado na Mel");
         if (_canInstantiateRangedMinion) {
 
             _canInstantiateRangedMinion = false;
@@ -96,8 +91,6 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
 
     void InstantiateRangedMinion() {
         if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Mel) return;
-
-        Debug.Log("Minion Instanciado");
 
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
