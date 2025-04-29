@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Slash
-  m_Shader: {fileID: -6465566751694194690, guid: 9e477402fd3207c4794523e46f6dc638, type: 3}
+  m_Name: EfeitoBalaEchoBlast
+  m_Shader: {fileID: -6465566751694194690, guid: 69946d54c442b004f98af00a91bb3cb6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -17,16 +17,25 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
   - MOTIONVECTORS
+  - SHADOWCASTER
   - DepthOnly
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _SampleTexture2D_f47c711650994bbd8f8adb59e1de8674_Texture_1_Texture2D:
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture:
+        m_Texture: {fileID: 2800000, guid: 6a65d8007ddf5c54f83b9cee53c8f9d2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -44,28 +53,29 @@ Material:
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 2
-    - _CastShadows: 1
+    - _CastShadows: 0
     - _Cull: 2
     - _DstBlend: 1
-    - _NoiseRodado: 3.5
+    - _Noise: 0
+    - _NoiseDecider: 0
+    - _NoiseScale: 10
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RadialScale: 0.5
-    - _RotationPivot: 0.63
-    - _RotationSpeed: 0
-    - _SlashSise: 9.2
+    - _RotationDecider: 1
+    - _RotationSpeed: 2
     - _SrcBlend: 5
     - _Surface: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
-    - _noise: 2
+    - _mask: 1
     m_Colors:
-    - _Center: {r: -0.03, g: 0.5, b: 0, a: 0}
-    - _Color: {r: 21.361254, g: 0.111839026, b: 0, a: 0}
+    - _Color: {r: 18.371344, g: 8.075978, b: 0.79724497, a: 0}
+    - _MoveNoise: {r: 0, g: 0, b: 0, a: 0}
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &3313897343575925417
+--- !u!114 &8235643116742335497
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
