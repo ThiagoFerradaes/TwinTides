@@ -22,7 +22,7 @@ public class BehaviourTreeRunner : MonoBehaviour {
     }
 
     Context CreateBehaviourTreeContext() {
-        return Context.CreateFromGameObject(gameObject, path);
+        return Context.CreateFromGameObject(gameObject, path, tree.blackboard);
     }
 
 }

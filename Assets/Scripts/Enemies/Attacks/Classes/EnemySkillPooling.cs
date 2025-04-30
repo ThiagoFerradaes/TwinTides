@@ -1,16 +1,46 @@
+using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class EnemySkillPooling : MonoBehaviour
+public class EnemySkillPooling : NetworkBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+    public static EnemySkillPooling Instance;
+
+    private void Awake() {
+        if (Instance == null) Instance = this;
+        else Destroy(this);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public Dictionary<string, List<GameObject>> attackDictionary = new();
+
+    [Rpc(SendTo.Server)]
+    public void RequestInstantiateAttakcRpc(int skillId, int objectId, Context parentContext) {
+        InstantiateAttackRpc(skillId, objectId, parentContext);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    void InstantiateAttackRpc(int skillId, int objectId, Context parentContext) {
+
+        EnemyAttack attack = EnemySkillConverter.Instance.TransformIdInSkill(skillId);
+
+        GameObject prefab = attack.ListOfPrefabs[objectId];
+
+        GameObject newAttack = GetObjectFromPool(prefab);
+
+        newAttack.GetComponent<EnemyAttackPrefab>().StartAttack(parentContext);
+    }
+
+    GameObject GetObjectFromPool(GameObject prefab) {
+        string name = prefab.name;
+
+        for (int i = 0; i < attackDictionary[name].Count; i++) {
+            if (!attackDictionary[name][i].activeInHierarchy) return attackDictionary[name][i];
+        }
+
+        GameObject newAttackObject = Instantiate(prefab);
+        newAttackObject.SetActive(false);
+        attackDictionary[name].Add(newAttackObject);
+
+        return newAttackObject;
     }
 }

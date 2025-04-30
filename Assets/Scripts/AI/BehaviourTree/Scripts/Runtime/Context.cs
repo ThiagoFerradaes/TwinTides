@@ -9,14 +9,16 @@ public class Context {
     public NavMeshAgent Agent;
     public AIPath Path;
     public MovementManager MManager;
+    public Blackboard Blackboard;
 
-        public static Context CreateFromGameObject(GameObject gameObject, AIPath path) {
+        public static Context CreateFromGameObject(GameObject gameObject, AIPath path, Blackboard blackboard) {
         Context context = new() {
             GameObject = gameObject,
             Transform = gameObject.transform,
             Agent = gameObject.GetComponent<NavMeshAgent>(),
             Path = path,
             MManager = gameObject.GetComponent<MovementManager>(),
+            Blackboard = blackboard,
         };
 
         return context;

@@ -8,7 +8,7 @@ public class AttackNode: ActionNode
     public override void OnStart() {
         if (originAttack != null) realAttack = ScriptableObject.Instantiate(originAttack);
 
-        realAttack.StartAttack();
+        realAttack.StartAttack(context);
     }
 
 
