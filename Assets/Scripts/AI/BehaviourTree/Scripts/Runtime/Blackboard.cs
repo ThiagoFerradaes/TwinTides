@@ -17,6 +17,7 @@ public class Blackboard {
 
     // Atributos
     public int CurrentPathIndex;
+    public int CurrentComboIndex;
 
     public enum BlackBoardBools {
         isCloseToPath,
