@@ -14,12 +14,12 @@ public class EnemySkillPooling : NetworkBehaviour
     public Dictionary<string, List<GameObject>> attackDictionary = new();
 
     [Rpc(SendTo.Server)]
-    public void RequestInstantiateAttakcRpc(int skillId, int objectId, Context parentContext) {
-        InstantiateAttackRpc(skillId, objectId, parentContext);
+    public void RequestInstantiateAttakcRpc(int skillId, int objectId) {
+        InstantiateAttackRpc(skillId, objectId);
     }
 
     [Rpc(SendTo.ClientsAndHost)]
-    void InstantiateAttackRpc(int skillId, int objectId, Context parentContext) {
+    void InstantiateAttackRpc(int skillId, int objectId) {
 
         EnemyAttack attack = EnemySkillConverter.Instance.TransformIdInSkill(skillId);
 
@@ -27,7 +27,7 @@ public class EnemySkillPooling : NetworkBehaviour
 
         GameObject newAttack = GetObjectFromPool(prefab);
 
-        newAttack.GetComponent<EnemyAttackPrefab>().StartAttack(parentContext);
+        newAttack.GetComponent<EnemyAttackPrefab>().StartAttack();
     }
 
     GameObject GetObjectFromPool(GameObject prefab) {

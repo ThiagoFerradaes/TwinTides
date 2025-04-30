@@ -24,18 +24,18 @@ public class ZombieAttack : EnemyAttack {
     }
 
     IEnumerator PunchRoutine() {
-        if (isServer) EnemySkillPooling.Instance.RequestInstantiateAttakcRpc(skillId, 0, parentContext);
+        if (isServer) EnemySkillPooling.Instance.RequestInstantiateAttakcRpc(skillId, 0);
 
         yield return new WaitForSeconds(timeBetweenPunches);
 
-        if (isServer) EnemySkillPooling.Instance.RequestInstantiateAttakcRpc(skillId, 0, parentContext);
+        if (isServer) EnemySkillPooling.Instance.RequestInstantiateAttakcRpc(skillId, 0);
 
         state = AttackState.SUCCESS;
         parentContext.Blackboard.CurrentComboIndex++;
     }
 
     IEnumerator BetterPunchRoutine() {
-        if (isServer) EnemySkillPooling.Instance.RequestInstantiateAttakcRpc(skillId, 1, parentContext);
+        if (isServer) EnemySkillPooling.Instance.RequestInstantiateAttakcRpc(skillId, 1);
 
         yield return null;
 
