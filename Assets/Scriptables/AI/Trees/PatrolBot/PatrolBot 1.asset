@@ -21,6 +21,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   child: {fileID: 1610498867395191891}
@@ -45,6 +46,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   children:
@@ -71,6 +73,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   maxDistance: 20
@@ -95,6 +98,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   children:
@@ -121,6 +125,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   child: {fileID: 7714920069465493131}
@@ -146,6 +151,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   child: {fileID: -6793917620370379804}
@@ -170,9 +176,10 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
-  stoppingDistance: 1
+  stoppingDistance: 5
 --- !u!114 &-3690868420404818733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +201,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   conditions: 0100000002000000
@@ -219,6 +227,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   cooldown: 0.5
@@ -243,6 +252,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   child: {fileID: -8737707627873100344}
@@ -268,6 +278,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   StoppingDistance: 1
@@ -292,6 +303,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   detectionRadius: 8
@@ -345,8 +357,9 @@ MonoBehaviour:
     IsCloseToPath: 1
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
-    CurrentComboIndex: 0
+    CurrentComboIndex: 1
 --- !u!114 &1610498867395191891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,6 +381,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   children:
@@ -395,6 +409,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   child: {fileID: -4685175796735353712}
@@ -419,6 +434,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   children:
@@ -444,6 +460,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   cooldown: 2.5
@@ -468,9 +485,10 @@ MonoBehaviour:
     IsCloseToPath: 1
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
-  originAttack: {fileID: 0}
+  attack: {fileID: 11400000, guid: 76198010d53507e468028ce8f0fb9aff, type: 2}
 --- !u!114 &3936397415506213515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,6 +510,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   children:
@@ -519,6 +538,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   child: {fileID: 3936397415506213515}
@@ -544,6 +564,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   cooldown: 1
@@ -568,6 +589,7 @@ MonoBehaviour:
     IsCloseToPath: 1
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   children:
@@ -595,6 +617,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   children:
@@ -621,6 +644,7 @@ MonoBehaviour:
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
+    IsAttacking: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
   conditions: 02000000

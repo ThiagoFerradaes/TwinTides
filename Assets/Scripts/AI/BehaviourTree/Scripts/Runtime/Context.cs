@@ -10,8 +10,9 @@ public class Context {
     public AIPath Path;
     public MovementManager MManager;
     public Blackboard Blackboard;
+    public MonoBehaviour CoroutineRunner;
 
-        public static Context CreateFromGameObject(GameObject gameObject, AIPath path, Blackboard blackboard) {
+        public static Context CreateFromGameObject(GameObject gameObject, AIPath path, Blackboard blackboard, MonoBehaviour coroutineRunner) {
         Context context = new() {
             GameObject = gameObject,
             Transform = gameObject.transform,
@@ -19,6 +20,7 @@ public class Context {
             Path = path,
             MManager = gameObject.GetComponent<MovementManager>(),
             Blackboard = blackboard,
+            CoroutineRunner = coroutineRunner,
         };
 
         return context;

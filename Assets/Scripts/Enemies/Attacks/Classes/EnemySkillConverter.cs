@@ -29,7 +29,7 @@ public class EnemySkillConverter : MonoBehaviour {
     // Barba Negra
     [SerializeField] public List<EnemyAttack> blackBeardSkills = new();
 
-    List<EnemyAttack> skillsList = new();
+    public List<EnemyAttack> skillsList = new();
 
 
     private void Awake() {
@@ -69,13 +69,19 @@ public class EnemySkillConverter : MonoBehaviour {
         foreach (var skill in zombieGirlTreeTwoSkills) { skillsList.Add(skill); }
 
         foreach (var skill in blackBeardSkills) { skillsList.Add(skill); }
+
+       
     }
     
     public EnemyAttack TransformIdInSkill(int id) {
+        if (id < 0 || id >= skillsList.Count) {
+            return null;
+        }
         return skillsList[id];
     }
     
     public int TransformSkillInInt(EnemyAttack skill) {
-        return skillsList.IndexOf(skill);
+        int id = skillsList.IndexOf(skill);
+        return id;
     }
 }

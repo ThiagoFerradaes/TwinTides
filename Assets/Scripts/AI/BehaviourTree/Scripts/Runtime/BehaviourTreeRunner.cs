@@ -7,11 +7,11 @@ public class BehaviourTreeRunner : MonoBehaviour {
     public BehaviourTree tree;
     public AIPath path;
 
-    Context context;
+    public Context context;
 
     void Start() {
-        context = CreateBehaviourTreeContext();
         tree = tree.Clone();
+        context = CreateBehaviourTreeContext();
         tree.Bind(context);
     }
 
@@ -22,7 +22,7 @@ public class BehaviourTreeRunner : MonoBehaviour {
     }
 
     Context CreateBehaviourTreeContext() {
-        return Context.CreateFromGameObject(gameObject, path, tree.blackboard);
+        return Context.CreateFromGameObject(gameObject, path, tree.blackboard, this);
     }
 
 }

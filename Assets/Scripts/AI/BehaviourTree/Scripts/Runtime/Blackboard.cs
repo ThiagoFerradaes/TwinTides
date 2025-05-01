@@ -14,6 +14,7 @@ public class Blackboard {
     public bool IsCloseToPath = true;
     public bool IsTargetInRange = false;
     public bool CanFollowPlayer = true;
+    public bool IsAttacking = false;
 
     // Atributos
     public int CurrentPathIndex;
