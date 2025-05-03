@@ -11,15 +11,14 @@ public class ZombieOneOneManager : EnemyAttackPrefab {
 
         gameObject.SetActive(true);
 
+        parentContext.Blackboard.IsAttacking = true;
+
         if (parentContext.Blackboard.CurrentComboIndex < _info.comboNumberToUpgradeAttack) StartCoroutine(NormalPunchRoutine());
-        else BetterPunch();
+        else StartCoroutine(BetterPunch());
     }
 
 
     IEnumerator NormalPunchRoutine() {
-        Debug.Log(parentContext.Blackboard.CurrentComboIndex + " Combo");
-
-        parentContext.Blackboard.IsAttacking = true;
 
         EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 1, parent);
 
@@ -34,8 +33,11 @@ public class ZombieOneOneManager : EnemyAttackPrefab {
         End();
     }
 
-    void BetterPunch() {
+    IEnumerator BetterPunch() {
+
         EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 2, parent);
+
+        yield return new WaitForSeconds(_info.durationOfBetterPunch);
 
         parentContext.Blackboard.CurrentComboIndex = 1;
 
