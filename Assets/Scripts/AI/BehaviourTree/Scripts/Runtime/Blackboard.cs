@@ -15,15 +15,22 @@ public class Blackboard {
     public bool IsTargetInRange = false;
     public bool CanFollowPlayer = true;
     public bool IsAttacking = false;
+    public bool IsInAttackRange = false;
+    public bool CanAttack = true;
 
     // Atributos
     public int CurrentPathIndex;
     public int CurrentComboIndex;
+    public float AttackRange;
+    public float AttackCooldown = 0;
 
     public enum BlackBoardBools {
         isCloseToPath,
         isTargetInRange,
         canFollowPlayer,
+        isAttacking,
+        isInAttackRange,
+        canAttack
     }
 
     public bool ReturnBoolByTag(BlackBoardBools tag) {
@@ -31,6 +38,9 @@ public class Blackboard {
             BlackBoardBools.isCloseToPath => IsCloseToPath,
             BlackBoardBools.isTargetInRange => IsTargetInRange,
             BlackBoardBools.canFollowPlayer => CanFollowPlayer,
+            BlackBoardBools.isInAttackRange => IsInAttackRange,
+            BlackBoardBools.canAttack => CanAttack,
+            BlackBoardBools.isAttacking => IsAttacking,
             _ => false,
         };
     }
@@ -43,6 +53,12 @@ public class Blackboard {
                 return ref IsTargetInRange;
             case BlackBoardBools.canFollowPlayer:
                 return ref CanFollowPlayer;
+            case BlackBoardBools.isInAttackRange:
+                return ref IsInAttackRange;
+            case BlackBoardBools.canAttack:
+                return ref CanAttack;
+            case BlackBoardBools.isAttacking:
+                return ref IsAttacking;
             default: return ref IsCloseToPath;
         }
     }

@@ -8,6 +8,9 @@ public class ZombieOneOne : EnemyAttack {
     [Header("Attack Atributes")]
     public float timeBetweenPunches;
     public int comboNumberToUpgradeAttack;
+    public float cooldownPunch;
+    public float cooldownBetterPunch;
+    public int quantidadeDeSocoPorCombo;
 
     [Header("First Punch")]
     public float damageOfPunch;

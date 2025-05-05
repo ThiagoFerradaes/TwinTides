@@ -20,15 +20,15 @@ public class ZombieOneOneManager : EnemyAttackPrefab {
 
     IEnumerator NormalPunchRoutine() {
 
-        EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 1, parent);
+        for (int i = 0; i < _info.quantidadeDeSocoPorCombo; i++) {
+            EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 1, parent);
 
-        yield return new WaitForSeconds(_info.timeBetweenPunches);
-
-        EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 1, parent);
+            if (i < _info.quantidadeDeSocoPorCombo - 1) yield return new WaitForSeconds(_info.timeBetweenPunches);
+        }
 
         parentContext.Blackboard.CurrentComboIndex++;
 
-        parentContext.Blackboard.IsAttacking = false;
+        EndOfAttack(_info.cooldownPunch);
 
         End();
     }
@@ -41,8 +41,16 @@ public class ZombieOneOneManager : EnemyAttackPrefab {
 
         parentContext.Blackboard.CurrentComboIndex = 1;
 
-        parentContext.Blackboard.IsAttacking = false;
+        EndOfAttack(_info.cooldownBetterPunch);
 
         End();
+    }
+
+    void EndOfAttack(float cooldown) {
+        parentContext.Blackboard.IsAttacking = false;
+
+        parentContext.Blackboard.CanAttack = false;
+
+        parentContext.Blackboard.AttackCooldown = cooldown;
     }
 }

@@ -1,16 +1,17 @@
 using UnityEngine;
 
 public class FollowPlayerAction : ActionNode {
-    [SerializeField] float stoppingDistance;
+    //[SerializeField] float stoppingDistance;
     protected override State OnUpdate() {
         if (blackboard.Target == null) return State.Failure;
 
         Vector3 direction = (blackboard.Target.position - context.Agent.transform.position);
         direction.y = 0;
 
-        if (Vector3.Distance(context.Agent.transform.position, blackboard.Target.position) >= stoppingDistance) { // Perguntando se o inimigo já esta perto o suficiente do jogador
+        if (Vector3.Distance(context.Agent.transform.position, blackboard.Target.position) >= blackboard.AttackRange) { // Perguntando se o inimigo já esta perto o suficiente do jogador
             context.Agent.speed = context.MManager.ReturnMoveSpeed();
             context.Agent.SetDestination(blackboard.Target.position);
+            blackboard.IsInAttackRange = false;
             return State.Running;
         }
 
@@ -28,6 +29,7 @@ public class FollowPlayerAction : ActionNode {
                 return State.Running;
             }
         }
+        blackboard.IsInAttackRange = true;
         return State.Success;
     }
 }
