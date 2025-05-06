@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5ea560aec46184385e29aec3ecc024, type: 3}
+  m_Name: ZombieTreeOneAttack
+  m_EditorClassIdentifier: 
+  ListOfPrefabs:
+  - {fileID: 5072909332047297575, guid: f049c3254a44fde4eb2a0673467f3c7a, type: 3}
+  - {fileID: 467574699466477257, guid: 4d5f0638cfda59f4e90a110800b98b3d, type: 3}
+  - {fileID: 798007976764252003, guid: ed37b04f30c6da44fa963e995e849dbf, type: 3}
+  - {fileID: 467574699466477257, guid: c9a5c84630280aa40a32d91d53275742, type: 3}
+  ListOfPrefabsNames:
+  - Zombie Tree One Manager
+  - Zombie Tree One Punch
+  - Zombie Tree One Spin
+  - Zombie Tree One Smash
+  comboNumberToUpgradeAttack: 4
+  timeBetweenPunches: 0.15
+  cooldownPunch: 1
+  amountOfPunchesPerCombo: 5
+  damagePerPunch: 1
+  durationOfPunch: 0.1
+  placementOfPunch: 2
+  amountOfTicksPerSpin: 15
+  totalSpinDuration: 1.5
+  damagePerTick: 1
+  timeBetweenSpinAndSmash: 2
+  smashDamage: 1
+  smashDuration: 0.3
+  smashPlacement: 3
+  smashStunTime: 3
+  smashCooldown: 4

@@ -9,7 +9,7 @@ public class ZombieTwoOne : EnemyAttack {
     public int comboNumberToUpgradeAttack;
     public float cooldownPunch;
     public float cooldownFinalAttack;
-    public int quantidadeDeSocoPorCombo;
+    public int amountOfPunchesPerCombo;
 
     [Header("First Punch")]
     public float damageOfPunch;
