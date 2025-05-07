@@ -8,9 +8,8 @@ public class GirlXOneManager : EnemyAttackPrefab
     public override void StartAttack(int enemyId, int skillId) {
         base.StartAttack(enemyId, skillId);
 
-        Debug.Log("Girl X Manager On");
-
         _info = EnemySkillConverter.Instance.TransformIdInSkill(skillId) as GirlXOne;
+
         gameObject.SetActive(true);
 
         parentContext.Blackboard.IsAttacking = true;
@@ -30,7 +29,7 @@ public class GirlXOneManager : EnemyAttackPrefab
 
         parentContext.Blackboard.CurrentComboIndex++;
 
-        EndOfAttack(_info.cooldownOfBullets);
+        EndOfAttack(_info.cooldownOfBullets, _info.ListOfAttacksNames[0]);
 
         End();
     }
@@ -54,16 +53,16 @@ public class GirlXOneManager : EnemyAttackPrefab
 
         parentContext.Blackboard.CurrentComboIndex = 1;
 
-        EndOfAttack(_info.StrongerBulletCooldown);
+        EndOfAttack(_info.StrongerBulletCooldown, _info.ListOfAttacksNames[0]);
 
         End();
     }
 
-    void EndOfAttack(float cooldown) {
+    void EndOfAttack(float cooldown, string attackName) {
         parentContext.Blackboard.IsAttacking = false;
 
         parentContext.Blackboard.CanAttack = false;
 
-        parentContext.Blackboard.AttackCooldown = cooldown;
+        parentContext.Blackboard.Cooldowns[attackName] = cooldown;
     }
 }

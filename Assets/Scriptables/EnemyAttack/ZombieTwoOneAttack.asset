@@ -22,12 +22,14 @@ MonoBehaviour:
   - Zombie Two One Punch
   - Zombie Two One Final Attack Part One
   - Zombie Two One FinalAttack Part Two
+  ListOfAttacksNames:
+  - Punch
   timeBetweenPunches: 0.3
   timeBetweenFinalAttacks: 0.3
   comboNumberToUpgradeAttack: 5
   cooldownPunch: 1
   cooldownFinalAttack: 2
-  quantidadeDeSocoPorCombo: 3
+  amountOfPunchesPerCombo: 0
   damageOfPunch: 1
   durationOfPunch: 0.15
   placementOfPunch: 2

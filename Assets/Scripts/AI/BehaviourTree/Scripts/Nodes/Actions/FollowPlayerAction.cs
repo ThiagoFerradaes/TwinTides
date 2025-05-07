@@ -1,7 +1,6 @@
 using UnityEngine;
 
 public class FollowPlayerAction : ActionNode {
-    //[SerializeField] float stoppingDistance;
     protected override State OnUpdate() {
         if (blackboard.Target == null) return State.Failure;
 

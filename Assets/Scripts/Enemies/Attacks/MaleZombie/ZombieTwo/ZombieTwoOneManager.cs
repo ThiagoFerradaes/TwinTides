@@ -28,7 +28,7 @@ public class ZombieTwoOneManager : EnemyAttackPrefab {
 
         parentContext.Blackboard.CurrentComboIndex++;
 
-        EndOfAttack(_info.cooldownPunch);
+        EndOfAttack(_info.cooldownPunch, _info.ListOfAttacksNames[0]);
 
         End();
     }
@@ -45,16 +45,16 @@ public class ZombieTwoOneManager : EnemyAttackPrefab {
 
         parentContext.Blackboard.CurrentComboIndex = 1;
 
-        EndOfAttack(_info.cooldownFinalAttack);
+        EndOfAttack(_info.cooldownFinalAttack, _info.ListOfAttacksNames[0]);
 
         End();
     }
 
-    void EndOfAttack(float cooldown) {
+    void EndOfAttack(float cooldown, string attackName) {
         parentContext.Blackboard.IsAttacking = false;
 
         parentContext.Blackboard.CanAttack = false;
 
-        parentContext.Blackboard.AttackCooldown = cooldown;
+        parentContext.Blackboard.Cooldowns[attackName] = cooldown;
     }
 }

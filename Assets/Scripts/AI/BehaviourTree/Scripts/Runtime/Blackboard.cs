@@ -22,7 +22,11 @@ public class Blackboard {
     public int CurrentPathIndex;
     public int CurrentComboIndex;
     public float AttackRange;
-    public float AttackCooldown = 0;
+    public float AttackCooldown;
+    [HideInInspector] public float GlobalAttackTimer;
+
+    // Cooldowns
+    public Dictionary<string, float> Cooldowns = new();
 
     public enum BlackBoardBools {
         isCloseToPath,

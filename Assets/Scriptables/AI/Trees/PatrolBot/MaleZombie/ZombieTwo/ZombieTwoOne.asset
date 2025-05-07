@@ -28,6 +28,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   child: {fileID: -1232385359316088806}
 --- !u!114 &-8519606943112325767
 MonoBehaviour:
@@ -57,9 +58,9 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   children:
   - {fileID: -3838604061852570075}
-  - {fileID: -820351757826398512}
 --- !u!114 &-6793917620370379804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,8 +89,10 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   children:
   - {fileID: -5468306153279131312}
+  - {fileID: -820351757826398512}
   - {fileID: -5112378745571010503}
 --- !u!114 &-6369592398114237754
 MonoBehaviour:
@@ -119,6 +122,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   maxDistance: 20
 --- !u!114 &-5468306153279131312
 MonoBehaviour:
@@ -148,6 +152,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   children:
   - {fileID: -1778014092064343986}
   - {fileID: 2904676501843714341}
@@ -179,6 +184,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   child: {fileID: 7714920069465493131}
   cooldown: 0.1
 --- !u!114 &-4685175796735353712
@@ -209,6 +215,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   child: {fileID: -6793917620370379804}
 --- !u!114 &-4374297142791464532
 MonoBehaviour:
@@ -238,6 +245,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   child: {fileID: -8519606943112325767}
   conditions: 03000000
 --- !u!114 &-3838604061852570075
@@ -268,6 +276,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
 --- !u!114 &-3690868420404818733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +305,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   conditions: 0100000002000000
   changeToTrue: 0
 --- !u!114 &-1778014092064343986
@@ -326,6 +336,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   child: {fileID: -8737707627873100344}
   conditions: 000000000100000002000000
 --- !u!114 &-1232385359316088806
@@ -356,6 +367,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   children:
   - {fileID: 3781917414317124037}
   - {fileID: -4374297142791464532}
@@ -387,6 +399,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   StoppingDistance: 1
 --- !u!114 &-820351757826398512
 MonoBehaviour:
@@ -403,7 +416,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 8b9c8e6bc7980f041ac9b3d4780a6421
-  position: {x: -331.49808, y: 918.9682}
+  position: {x: 221, y: 136.59998}
   blackboard:
     Target: {fileID: 0}
     IsCloseToPath: 1
@@ -416,6 +429,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
 --- !u!114 &-461729228651206470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,6 +458,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   detectionRadius: 8
   detectionAngle: 360
   playerLayer:
@@ -504,7 +519,8 @@ MonoBehaviour:
     CurrentPathIndex: 0
     CurrentComboIndex: 1
     AttackRange: 3
-    AttackCooldown: 0
+    AttackCooldown: 1
+    GlobalAttackTimer: 0
 --- !u!114 &2000049473197180753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,6 +549,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   child: {fileID: -4685175796735353712}
 --- !u!114 &2904676501843714341
 MonoBehaviour:
@@ -562,6 +579,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   children:
   - {fileID: 8593820219457342453}
 --- !u!114 &3041405883497151913
@@ -592,6 +610,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   cooldown: 2.5
 --- !u!114 &3781917414317124037
 MonoBehaviour:
@@ -621,6 +640,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   child: {fileID: 5098730227991954732}
   conditions: 0500000004000000
 --- !u!114 &3936397415506213515
@@ -651,6 +671,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   children:
   - {fileID: -3690868420404818733}
   - {fileID: 3041405883497151913}
@@ -683,6 +704,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   child: {fileID: 3936397415506213515}
   conditions: 00000000
 --- !u!114 &5098730227991954732
@@ -713,6 +735,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   attack: {fileID: 11400000, guid: e15785d9051b7924eb922b88c7d26696, type: 2}
 --- !u!114 &5731827953410687217
 MonoBehaviour:
@@ -742,6 +765,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   cooldown: 1
 --- !u!114 &7714920069465493131
 MonoBehaviour:
@@ -771,6 +795,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   children:
   - {fileID: 4989918386672694049}
   - {fileID: -6369592398114237754}
@@ -803,6 +828,7 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   children:
   - {fileID: -832071066040792598}
   - {fileID: 5731827953410687217}
@@ -834,5 +860,6 @@ MonoBehaviour:
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    GlobalAttackTimer: 0
   conditions: 02000000
   changeToTrue: 1

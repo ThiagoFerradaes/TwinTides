@@ -45,7 +45,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 95f4cbef66b2bdb4ab3a41ddd51f360f
-  position: {x: -424.49805, y: 779.9682}
+  position: {x: -430.0834, y: 781.5209}
   blackboard:
     Target: {fileID: 0}
     IsCloseToPath: 1
@@ -232,7 +232,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 85eabf3875876bb4d9c245f2559b2e21
-  position: {x: -428.57227, y: 622.2788}
+  position: {x: -426.98853, y: 621.9999}
   blackboard:
     Target: {fileID: 0}
     IsCloseToPath: 1
@@ -263,7 +263,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 6b16b6c54fa14b245be736a5c27da8e1
-  position: {x: -514.49805, y: 921.9682}
+  position: {x: -429.56253, y: 914.5209}
   blackboard:
     Target: {fileID: 0}
     IsCloseToPath: 0
@@ -416,7 +416,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 8b9c8e6bc7980f041ac9b3d4780a6421
-  position: {x: 153.49998, y: 85.80002}
+  position: {x: 219.78474, y: 85.99999}
   blackboard:
     Target: {fileID: 0}
     IsCloseToPath: 1
@@ -477,7 +477,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d285eb63c2cdd74180de7cfceaa96ad, type: 3}
-  m_Name: ZombieOneOne
+  m_Name: ZombieTreeTwo
   m_EditorClassIdentifier: 
   rootNode: {fileID: 2000049473197180753}
   treeState: 0
@@ -518,8 +518,8 @@ MonoBehaviour:
     CanAttack: 1
     CurrentPathIndex: 0
     CurrentComboIndex: 1
-    AttackRange: 3
-    AttackCooldown: 1
+    AttackRange: 5
+    AttackCooldown: 0.3
     GlobalAttackTimer: 0
 --- !u!114 &2000049473197180753
 MonoBehaviour:
@@ -736,7 +736,7 @@ MonoBehaviour:
     AttackRange: 0
     AttackCooldown: 0
     GlobalAttackTimer: 0
-  attack: {fileID: 11400000, guid: 76198010d53507e468028ce8f0fb9aff, type: 2}
+  attack: {fileID: 11400000, guid: ee2786c607f129d46a6da3890bb272f8, type: 2}
 --- !u!114 &5731827953410687217
 MonoBehaviour:
   m_ObjectHideFlags: 0

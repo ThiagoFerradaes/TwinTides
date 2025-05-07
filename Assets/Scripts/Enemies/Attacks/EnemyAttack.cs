@@ -6,5 +6,6 @@ public abstract class EnemyAttack : ScriptableObject {
 
     public List<GameObject> ListOfPrefabs = new();
     public List<string> ListOfPrefabsNames = new();
+    public List<string> ListOfAttacksNames = new();
 
 }
