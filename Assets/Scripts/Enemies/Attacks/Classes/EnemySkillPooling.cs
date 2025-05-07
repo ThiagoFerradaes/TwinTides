@@ -16,18 +16,24 @@ public class EnemySkillPooling : NetworkBehaviour
 
     public Dictionary<string, List<GameObject>> attackDictionary = new();
 
-    public void RequestInstantiateAttack(EnemyAttack attack, int objectId, GameObject enemy) {
+    public void RequestInstantiateAttack(EnemyAttack attack, int objectId, GameObject enemy, Vector3? position = null) {
         if (!IsServer) return;
 
         int skillId = EnemySkillConverter.Instance.TransformSkillInInt(attack);
 
         int enemyId = EnemiesManager.Instance.TransformEnemyInId(enemy);
 
-        InstantiateAttackRpc(skillId, objectId, enemyId);
+        if (position.HasValue) {
+            InstantiateAttackRpc(skillId, objectId, enemyId, position.Value);
+        }
+        else {
+            InstantiateAttackRpc(skillId, objectId, enemyId, Vector3.negativeInfinity);
+        }
+
     }
 
     [Rpc(SendTo.ClientsAndHost)]
-    void InstantiateAttackRpc(int skillId, int objectId, int enemyId) {
+    void InstantiateAttackRpc(int skillId, int objectId, int enemyId, Vector3 position) {
 
         EnemyAttack attack = EnemySkillConverter.Instance.TransformIdInSkill(skillId);
 
@@ -35,7 +41,12 @@ public class EnemySkillPooling : NetworkBehaviour
 
         GameObject newAttack = GetObjectFromPool(attack, objectId, prefab);
 
-        newAttack.GetComponent<EnemyAttackPrefab>().StartAttack(enemyId, skillId);
+        if (!position.Equals(Vector3.negativeInfinity)) {
+            newAttack.GetComponent<EnemyAttackPrefab>().StartAttack(enemyId, skillId, position);
+        }
+        else {
+            newAttack.GetComponent<EnemyAttackPrefab>().StartAttack(enemyId, skillId);
+        }
     }
 
     GameObject GetObjectFromPool(EnemyAttack skill, int objectId, GameObject prefab) {

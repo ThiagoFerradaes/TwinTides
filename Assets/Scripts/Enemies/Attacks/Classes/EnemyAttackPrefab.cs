@@ -8,6 +8,11 @@ public class EnemyAttackPrefab : MonoBehaviour {
         parentContext = parent.GetComponent<BehaviourTreeRunner>().context;
 
     }
+    public virtual void StartAttack(int enemyId, int skillId, Vector3 position) {
+        parent = EnemiesManager.Instance.TransformIdInEnemy(enemyId);
+        parentContext = parent.GetComponent<BehaviourTreeRunner>().context;
+
+    }
 
     public virtual void End() {
         gameObject.SetActive(false);
