@@ -7,11 +7,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RachaduraCirculoParteUm
-  m_Shader: {fileID: -6465566751694194690, guid: 69946d54c442b004f98af00a91bb3cb6, type: 3}
+  m_Name: Shader Graphs_MelShaderPrincipal 1
+  m_Shader: {fileID: -6465566751694194690, guid: 558b01c4ed7eb504f8e2e49928624334, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _ALPHATEST_ON
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -21,19 +22,19 @@ Material:
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
-  - MOTIONVECTORS
   - DepthOnly
+  - MOTIONVECTORS
   - SHADOWCASTER
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _SampleTexture2D_f47c711650994bbd8f8adb59e1de8674_Texture_1_Texture2D:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+    - _main_texture:
+        m_Texture: {fileID: 2800000, guid: 600a166ee280b344f892fbcb5c00415f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Texture:
-        m_Texture: {fileID: 2800000, guid: 4dc2a217f5dfa0741b319610b88bbcbf, type: 3}
+    - _mask:
+        m_Texture: {fileID: 2800000, guid: 1a5176aaa9c425f45acb749803fb75e1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -50,32 +51,41 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClip: 0
+    - _AlphaClip: 1
     - _AlphaToMask: 0
-    - _Blend: 2
+    - _Blend: 0
     - _CastShadows: 0
     - _Cull: 2
-    - _DstBlend: 1
-    - _Noise: 0
-    - _NoiseDecider: 0
-    - _NoiseScale: 10
+    - _DeciderAlphaClip: 1
+    - _DeciderColors: 0
+    - _DstBlend: 10
+    - _NoisePadrao: 0
+    - _Quadrado: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RotationDecider: 1
-    - _RotationSpeed: 0
+    - _Scale: 1
     - _SrcBlend: 5
     - _Surface: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
-    - _mask: 1
+    - _alfaClipMax: 0
+    - _alfaClipMin_normal: 0
+    - _distortionAmountMax: 20
+    - _distortionAmountMin: 5
+    - _disttortionScale: 6
+    - _elipseSize: 0.5
+    - _global: 0
+    - _textureDecider: 0
     m_Colors:
-    - _Color: {r: 46.27603, g: 15.914782, b: 2.706709, a: 0}
-    - _MoveNoise: {r: 0, g: 0, b: 0, a: 0}
-    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _color_01_normal: {r: 0, g: 1.9055135, b: 1.2966511, a: 1}
+    - _color_02: {r: 0, g: 0.03137255, b: 0.015425731, a: 1}
+    - _distortionSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _main_texture_speed: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _tilingAndOffset: {r: 0.75, g: 0.75, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &8235643116742335497
+--- !u!114 &5611534300171656187
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
