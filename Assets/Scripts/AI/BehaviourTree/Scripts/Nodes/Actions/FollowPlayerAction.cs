@@ -15,7 +15,6 @@ public class FollowPlayerAction : ActionNode {
         float distance = Vector3.Distance(context.Agent.transform.position, blackboard.Target.position);
 
         if (distance >= blackboard.AttackRange && canRetreat) { // Perguntando se o inimigo já esta perto o suficiente do jogador
-            Debug.Log("Distancia mt grande, chegando perto");
             context.Agent.speed = context.MManager.ReturnMoveSpeed();
             context.Agent.SetDestination(blackboard.Target.position);
             blackboard.IsInAttackRange = false;
@@ -24,7 +23,6 @@ public class FollowPlayerAction : ActionNode {
 
         else {
             if (distance < minRange && !isRetreating && canRetreat) {
-                Debug.Log("Distancia muito curta preciso me afastar");
                 Vector3 retreatDirection = (context.Agent.transform.position - blackboard.Target.position).normalized;
                 retreatPosition = blackboard.Target.position + retreatDirection * blackboard.AttackRange;
                 isRetreating = true;
@@ -32,7 +30,6 @@ public class FollowPlayerAction : ActionNode {
                 return State.Running;
             }
             else if (isRetreating) {
-                Debug.Log("Me afastando");
                 context.Agent.updateRotation = false; // impede que ele vire
 
                 context.Agent.speed = context.MManager.ReturnMoveSpeed();
@@ -70,13 +67,11 @@ public class FollowPlayerAction : ActionNode {
             }
         }
 
-        Debug.Log("Fim do Node de seguir jogador");
         blackboard.IsInAttackRange = true;
         return State.Success;
     }
 
     public override void OnStop() {
-        Debug.Log("On stop follow Player Action");
         canRetreat = true;
         isRetreating = false;
         context.Agent.updateRotation = true;
