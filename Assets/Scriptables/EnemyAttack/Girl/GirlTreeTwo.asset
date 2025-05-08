@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5022b54af9eeb45b645b47e85723a7, type: 3}
+  m_Name: GirlTreeTwo
+  m_EditorClassIdentifier: 
+  ListOfPrefabs:
+  - {fileID: 8322177604889524186, guid: e5ac7b656d9bd944aa76d4f239ad3724, type: 3}
+  - {fileID: 5910994842768696592, guid: c7c0b5c10682fd946a8c26d398173ea4, type: 3}
+  - {fileID: 5910994842768696592, guid: 41d4c3570a2bf8a4aa399af01d3d7b1d, type: 3}
+  ListOfPrefabsNames:
+  - Girl Tree Two Manager
+  - Girl Tree Two Bomb
+  - Girl Tree Two Explosion
+  ListOfAttacksNames:
+  - Bomb
+  distanceToDash: 4
+  targetDistance: 8
+  dashSpeed: 10
+  cooldownIfDashed: 1.6
+  timeBetweenBombAndDash: 0.4
+  bombsSpeed: 20
+  bombsRange: 8
+  bombPlacement: 1
+  amountOfBombs: 1
+  timeBetweenBombs: 0.1
+  cooldown: 1
+  explosionRadius: 6
+  explosionDamage: 1
+  explosionDuration: 0.1
+  burningDebuff: {fileID: 11400000, guid: 86a385b2a33a4bf478a57b6cb16ca780, type: 2}
