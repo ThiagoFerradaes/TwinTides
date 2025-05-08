@@ -6,7 +6,7 @@ public class PlayerSkillConverter : MonoBehaviour {
     public static PlayerSkillConverter Instance;
 
     // Mel
-    [SerializeField] List<Skill> melCommonSklilIndex = new();
+    [SerializeField] List<Skill> melCommonSkillIndex = new();
     [SerializeField] List<Skill> melLegendarySkillIndex = new();
     [SerializeField] List<Skill> melAtackSkillIndex = new();
 
@@ -26,7 +26,7 @@ public class PlayerSkillConverter : MonoBehaviour {
         AddSKillsToList();
     }
     void AddSKillsToList() {
-        foreach (var skill in melCommonSklilIndex) {
+        foreach (var skill in melCommonSkillIndex) {
             skillIndex.Add(skill);
         }
         foreach (var skill in melLegendarySkillIndex) {
@@ -54,7 +54,7 @@ public class PlayerSkillConverter : MonoBehaviour {
     }
 
     public List<Skill> ReturnCommonSkillList(Characters character) {
-        List<Skill> newList = character == Characters.Maevis ? maevisCommonSkillIndex : melCommonSklilIndex;
+        List<Skill> newList = character == Characters.Maevis ? maevisCommonSkillIndex : melCommonSkillIndex;
         return newList;
     }
     public List<Skill> ReturnLegendarySkillList(Characters character) {

@@ -10,7 +10,7 @@ public class PlayerDetectionAction : ActionNode
     [SerializeField] LayerMask obstacleLayer;
 
     protected override State OnUpdate() {
-        Collider[] detectedPlayers = Physics.OverlapSphere(context.transform.position, detectionRadius, playerLayer);
+        Collider[] detectedPlayers = Physics.OverlapSphere(context.Transform.position, detectionRadius, playerLayer);
 
         if (detectedPlayers.Length == 0) blackboard.IsTargetInRange = false;
 
@@ -18,20 +18,20 @@ public class PlayerDetectionAction : ActionNode
         Transform closestPlayer = null;
 
         foreach (var player in detectedPlayers) {
-            Vector3 directionToPlayer = (player.transform.position - context.transform.position);
-            float angleToPlayer = Vector3.Angle(context.transform.forward, directionToPlayer);
+            Vector3 directionToPlayer = (player.transform.position - context.Transform.position);
+            float angleToPlayer = Vector3.Angle(context.Transform.forward, directionToPlayer);
 
             if (angleToPlayer <= detectionAngle / 2) {
 
-                if (Physics.Raycast(context.transform.position, directionToPlayer, out RaycastHit ray, detectionRadius, obstacleLayer)) {
+                if (Physics.Raycast(context.Transform.position, directionToPlayer, out RaycastHit ray, detectionRadius, obstacleLayer)) {
                     blackboard.IsTargetInRange = false;
                 }
 
-                if (Physics.Raycast(context.transform.position, directionToPlayer, out ray, detectionRadius, playerLayer)) {
+                if (Physics.Raycast(context.Transform.position, directionToPlayer, out ray, detectionRadius, playerLayer)) {
                     if (ray.collider != null && (ray.collider.CompareTag("Maevis") || ray.collider.CompareTag("Mel"))) {
-                        if (Vector3.Distance(context.transform.position, ray.collider.transform.position) < closestPlayerDistance) {
+                        if (Vector3.Distance(context.Transform.position, ray.collider.transform.position) < closestPlayerDistance) {
                             closestPlayer = ray.collider.transform;
-                            closestPlayerDistance = Vector3.Distance(context.transform.position, ray.collider.transform.position);
+                            closestPlayerDistance = Vector3.Distance(context.Transform.position, ray.collider.transform.position);
                         }
                         blackboard.Target = closestPlayer;
                         blackboard.IsTargetInRange = true;

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09641335c9137104ab73684da4849e9d, type: 3}
+  m_Name: ZombieTwoTwo
+  m_EditorClassIdentifier: 
+  ListOfPrefabs:
+  - {fileID: 7726239073850033130, guid: 9bc5eb8d0dc0a3049875bd7b6181de24, type: 3}
+  ListOfPrefabsNames:
+  - Zombie Two Two Attack
+  ListOfAttacksNames:
+  - Zombie Two Attack
+  attackDamage: 1
+  stunTime: 1.5
+  attackCooldown: 4
+  hitBoxSize: 4
+  dashSpeed: 16
+  dashDistance: 6

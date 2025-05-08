@@ -3,21 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GoToAction : ActionNode {
-    [SerializeField] Waypoints.PathTag targetLocation;
+
     [SerializeField] float StoppingDistance;
     Transform targetPosition;
 
     public override void OnStart() {
-        if (targetPosition == null) targetPosition = Waypoints.Instance.GetPointByTag(targetLocation);
-        context.agent.SetDestination(targetPosition.position);
+
+        Waypoints.PathTag tag = context.Path.Waypoints[blackboard.CurrentPathIndex];
+        targetPosition = Waypoints.Instance.GetPointByTag(tag);
+
+        context.Agent.SetDestination(targetPosition.position);
+
     }
 
     protected override State OnUpdate() {
-        context.agent.speed = context.MManager.ReturnMoveSpeed();
+        context.Agent.speed = context.MManager.ReturnMoveSpeed();
 
-        if (context.agent.pathPending) return State.Running;
+        if (context.Agent.pathPending) return State.Running;
 
-        else if (context.agent.remainingDistance > StoppingDistance) return State.Running;
+        else if (context.Agent.remainingDistance > StoppingDistance) return State.Running;
+
+        blackboard.CurrentPathIndex++;
+        if (blackboard.CurrentPathIndex >= context.Path.Waypoints.Length) {
+            blackboard.CurrentPathIndex = 0;
+        }
 
         return State.Success;
     }

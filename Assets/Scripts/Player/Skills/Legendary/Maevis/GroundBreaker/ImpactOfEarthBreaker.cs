@@ -34,8 +34,15 @@ public class ImpactOfEarthBreaker : SkillObjectPrefab {
     Vector3 ReturnSize() {
         float x = _info.InicialImpactSize.x;
         for (int i = 0; i < _father._amountOfImpactsSummoned; i++) {
-            x *= (1 + _info.ImpactGrowthPercent / 100);
+            x *= (1 + _info.ImpactGrowthPercent / 100); 
         }
+
+        GameObject filho = transform.GetChild(0).gameObject;
+
+        ParticleSystem ps = filho.GetComponent<ParticleSystem>();
+        var shape = ps.shape;
+        shape.scale = new Vector3(x, 0, 1);
+
         return new Vector3(x, _info.InicialImpactSize.y, _info.InicialImpactSize.z);
     }
 

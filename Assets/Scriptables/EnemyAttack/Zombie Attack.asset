@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b5affbe4a46cd541ac16d8da0c99460, type: 3}
+  m_Name: Zombie Attack
+  m_EditorClassIdentifier: 
+  ListOfPrefabs:
+  - {fileID: 5072909332047297575, guid: 57b7ea11acaf44e48b741f7b35fdb1ad, type: 3}
+  - {fileID: 467574699466477257, guid: 82d86b4cde4b2ad438da4f9117c6fc4a, type: 3}
+  - {fileID: 467574699466477257, guid: acff355ed563deb4cb51c2e1f2180b4a, type: 3}
+  ListOfPrefabsNames:
+  - ZombieOneManager
+  - ZombieOneOnePunch
+  - ZombieOneOneBetterPunch
+  ListOfAttacksNames:
+  - Punch
+  timeBetweenPunches: 0.3
+  comboNumberToUpgradeAttack: 5
+  cooldownPunch: 1
+  cooldownBetterPunch: 2
+  quantidadeDeSocoPorCombo: 2
+  damageOfPunch: 1
+  durationOfPunch: 0.15
+  placementOfPunch: 2
+  damageOfBetterPunch: 1
+  durationOfBetterPunch: 0.5
+  placementOfBetterPunch: 2
