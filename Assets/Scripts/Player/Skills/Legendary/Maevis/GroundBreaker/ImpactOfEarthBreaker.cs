@@ -41,6 +41,14 @@ public class ImpactOfEarthBreaker : SkillObjectPrefab {
 
         ParticleSystem ps = filho.GetComponent<ParticleSystem>();
         var shape = ps.shape;
+        var emission = ps.emission;
+
+        ParticleSystem.Burst[] bursts = new ParticleSystem.Burst[emission.burstCount];
+        emission.GetBursts(bursts);
+
+        bursts[0].count = new ParticleSystem.MinMaxCurve(x);
+        emission.SetBursts(bursts);
+
         shape.scale = new Vector3(x, 0, 1);
 
         return new Vector3(x, _info.InicialImpactSize.y, _info.InicialImpactSize.z);
