@@ -29304,7 +29304,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5621921394617077785, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.120001
+      value: -15.54
       objectReference: {fileID: 0}
     - target: {fileID: 5621921394617077785, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -29312,7 +29312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5621921394617077785, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.99
+      value: 5.15
       objectReference: {fileID: 0}
     - target: {fileID: 5621921394617077785, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -29340,6 +29340,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5621921394617077785, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6340091126219032004, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6340091126219032004, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
+      propertyPath: EmissionModule.rateOverDistance.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6340091126219032004, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6340091126219032004, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6340091126219032004, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minMaxState
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7357193125562972744, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
