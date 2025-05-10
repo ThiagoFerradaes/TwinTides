@@ -1,0 +1,802 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8737707627873100344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9dc8c35db2cf548ab6e3d1f77b4444, type: 3}
+  m_Name: RepeatDecorator
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 97cad97eace635f478e3ffe7ab2e9802
+  position: {x: -554.4, y: 332.92004}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  child: {fileID: -1232385359316088806}
+--- !u!114 &-6793917620370379804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eff2ceed911dff42bff53343baca4cf, type: 3}
+  m_Name: RunnerComposite
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 9d286f0766f25e44a97b433dd3f56560
+  position: {x: -34.202362, y: -71.2}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  children:
+  - {fileID: -5468306153279131312}
+  - {fileID: -820351757826398512}
+  - {fileID: -5112378745571010503}
+--- !u!114 &-6369592398114237754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09613087454704c4ab4337e3243af4b4, type: 3}
+  m_Name: CheckDistanceToPathAction
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 864663180707fb64dafe3d315d50757b
+  position: {x: 728.80005, y: 397.31604}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  maxDistance: 20
+--- !u!114 &-5468306153279131312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc898903af62cce45848490989ee711e, type: 3}
+  m_Name: SelectorComposite
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 682642ff759327e49bbff9a348a06c49
+  position: {x: -261.40237, y: 63.199978}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  children:
+  - {fileID: -1778014092064343986}
+  - {fileID: 2904676501843714341}
+--- !u!114 &-5112378745571010503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 960aed6893a4e28428da6546b9467bfe, type: 3}
+  m_Name: CooldownDecorator
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 3f756d4916560334187636b7ea87b338
+  position: {x: 637.79755, y: 55.200016}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  child: {fileID: 7714920069465493131}
+  cooldown: 0.1
+--- !u!114 &-4685175796735353712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9dc8c35db2cf548ab6e3d1f77b4444, type: 3}
+  m_Name: RepeatDecorator
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 24c090a0b3b07f54ab630c892f9582ee
+  position: {x: -35.246994, y: -220.74893}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  child: {fileID: -6793917620370379804}
+--- !u!114 &-3838604061852570075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b349b1f1f51f304094ad0d71a279bb8, type: 3}
+  m_Name: FollowPlayerAction
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 6b16b6c54fa14b245be736a5c27da8e1
+  position: {x: -459.06802, y: 639.9432}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  minRange: 3
+--- !u!114 &-3690868420404818733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01e6f788ae93786499145ff66d4464ff, type: 3}
+  m_Name: ConditionChanger
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 97067571d5a69e24ba6df1a4c862af1a
+  position: {x: 467.2, y: 723.19995}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  conditions: 0100000002000000
+  changeToTrue: 0
+--- !u!114 &-1778014092064343986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d4b75c60fcab064fb8900092b916f82, type: 3}
+  m_Name: ConditionalDecorator
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: e6fc497e2139b3846a0c375237690e5a
+  position: {x: -555.8024, y: 209.59998}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  child: {fileID: -8737707627873100344}
+  conditions: 000000000100000002000000
+--- !u!114 &-1232385359316088806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc898903af62cce45848490989ee711e, type: 3}
+  m_Name: SelectorComposite
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 0a3c22ce532402942b7d54a6b49a476a
+  position: {x: -553.0113, y: 464.9091}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 1
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  children:
+  - {fileID: 3781917414317124037}
+  - {fileID: -3838604061852570075}
+--- !u!114 &-832071066040792598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0effce09a7b748448af7c4dd3044c627, type: 3}
+  m_Name: GoToAction
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 5b4b87f1e0e1d924ea640ec945aee93a
+  position: {x: -176.60236, y: 516}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  StoppingDistance: 1
+--- !u!114 &-820351757826398512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 980a6806d614dc94791e7e0068df50c7, type: 3}
+  m_Name: AttackCooldownAction
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 8b9c8e6bc7980f041ac9b3d4780a6421
+  position: {x: 221, y: 136.59998}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 1
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+--- !u!114 &-461729228651206470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87e10bc11a5078247a916b6712ee88a8, type: 3}
+  m_Name: PlayerDetectionAction
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 0595ca967afea794c872126f81cc83af
+  position: {x: 959.3975, y: 390.39996}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  detectionRadius: 8
+  detectionAngle: 360
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d285eb63c2cdd74180de7cfceaa96ad, type: 3}
+  m_Name: ZombieOneTree
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: 2000049473197180753}
+  treeState: 0
+  nodes:
+  - {fileID: 2000049473197180753}
+  - {fileID: -4685175796735353712}
+  - {fileID: -6793917620370379804}
+  - {fileID: -5112378745571010503}
+  - {fileID: -461729228651206470}
+  - {fileID: -6369592398114237754}
+  - {fileID: -5468306153279131312}
+  - {fileID: 2904676501843714341}
+  - {fileID: 8593820219457342453}
+  - {fileID: -832071066040792598}
+  - {fileID: 5731827953410687217}
+  - {fileID: -1778014092064343986}
+  - {fileID: -8737707627873100344}
+  - {fileID: -3838604061852570075}
+  - {fileID: 3936397415506213515}
+  - {fileID: 3041405883497151913}
+  - {fileID: 8661612055495240077}
+  - {fileID: 4989918386672694049}
+  - {fileID: -3690868420404818733}
+  - {fileID: 7714920069465493131}
+  - {fileID: 3781917414317124037}
+  - {fileID: -1232385359316088806}
+  - {fileID: 5098730227991954732}
+  - {fileID: -820351757826398512}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 1
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 1
+    AttackRange: 3
+    AttackCooldown: 1
+    GlobalAttackTimer: 0
+--- !u!114 &2000049473197180753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163c147d123e4a945b688eddc64e3ea5, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 45f9c993829dd8245b29f9e495fcd6be
+  position: {x: -35.494015, y: -340.15552}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  child: {fileID: -4685175796735353712}
+--- !u!114 &2904676501843714341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eff2ceed911dff42bff53343baca4cf, type: 3}
+  m_Name: RunnerComposite
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: a722136402c894142a333bc4f712d1e3
+  position: {x: -57.402424, y: 204.79999}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  children:
+  - {fileID: 8593820219457342453}
+--- !u!114 &3041405883497151913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f6f4df09da1014e82d353999f1ee41, type: 3}
+  m_Name: CooldownAction
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 617d44fb63599ba4dbe83e8eaeaebb31
+  position: {x: 652.8, y: 717.6}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  cooldown: 2.5
+--- !u!114 &3781917414317124037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d4b75c60fcab064fb8900092b916f82, type: 3}
+  m_Name: ConditionalDecorator
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 46e364694cdc3a74e83870eeb7e1a07a
+  position: {x: -729.9772, y: 619.5456}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 1
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  child: {fileID: 5098730227991954732}
+  conditions: 0500000004000000
+--- !u!114 &3936397415506213515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58399223f11412c4ba9804df5a130999, type: 3}
+  m_Name: SequenceComposite
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 1d3fc66842e51924cb56dfa2482c5e40
+  position: {x: 547.2, y: 560.8}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  children:
+  - {fileID: -3690868420404818733}
+  - {fileID: 3041405883497151913}
+  - {fileID: 8661612055495240077}
+--- !u!114 &4989918386672694049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a70d27f161e59429d3689e1e4084f0, type: 3}
+  m_Name: FalseGateDecorator
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: cadbe09f459be7d4586b8fefdba81e44
+  position: {x: 549.04, y: 389.84003}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  child: {fileID: 3936397415506213515}
+  conditions: 00000000
+--- !u!114 &5098730227991954732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073aef14423b50c4cba000fa3a0984ad, type: 3}
+  m_Name: AttackNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 9a7062d92b8f5084d9b615ec4dd46715
+  position: {x: -727.4516, y: 768.6044}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 1
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  attack: {fileID: 11400000, guid: 0709dfb052859dd4ab27d24b723596d0, type: 2}
+--- !u!114 &5731827953410687217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f6f4df09da1014e82d353999f1ee41, type: 3}
+  m_Name: CooldownAction
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: d3e5857246b95b744b39c4b8881cbc69
+  position: {x: 81.79761, y: 509.59995}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  cooldown: 1
+--- !u!114 &7714920069465493131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58399223f11412c4ba9804df5a130999, type: 3}
+  m_Name: SequenceComposite
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 7bc630ad90b487d4198dda845117c2f8
+  position: {x: 636.1976, y: 199.99998}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 1
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  children:
+  - {fileID: 4989918386672694049}
+  - {fileID: -6369592398114237754}
+  - {fileID: -461729228651206470}
+--- !u!114 &8593820219457342453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58399223f11412c4ba9804df5a130999, type: 3}
+  m_Name: SequenceComposite
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 09c0886440965d349b643e18ad1c531f
+  position: {x: -58.20241, y: 335.2}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  children:
+  - {fileID: -832071066040792598}
+  - {fileID: 5731827953410687217}
+--- !u!114 &8661612055495240077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01e6f788ae93786499145ff66d4464ff, type: 3}
+  m_Name: ConditionChanger
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: b7e0a13ff943af9428eb4f54a5fbb0f1
+  position: {x: 839.2, y: 716.8}
+  blackboard:
+    Target: {fileID: 0}
+    IsCloseToPath: 0
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    GlobalAttackTimer: 0
+  conditions: 02000000
+  changeToTrue: 1

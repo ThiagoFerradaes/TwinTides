@@ -289,6 +289,10 @@ public class HealthManager : NetworkBehaviour {
         }
         _listOfActiveBuffs.Clear();
     }
+
+    public bool CheckIfHasDebuff(HealthDebuff debuff) {
+        return _listOfActiveDebuffs.TryGetValue(debuff.GetType(), out ActiveDebuff currentDebuff);
+    }
     #endregion
 
     #region Buff Manager
