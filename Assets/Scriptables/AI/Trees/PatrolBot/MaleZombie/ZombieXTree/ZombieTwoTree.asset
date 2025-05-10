@@ -215,7 +215,7 @@ MonoBehaviour:
     AttackRange: 0
     AttackCooldown: 0
     GlobalAttackTimer: 0
-  minRange: 0
+  minRange: 3
 --- !u!114 &-3690868420404818733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,7 +416,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d285eb63c2cdd74180de7cfceaa96ad, type: 3}
-  m_Name: ZombieOneTree
+  m_Name: ZombieTwoTree
   m_EditorClassIdentifier: 
   rootNode: {fileID: 2000049473197180753}
   treeState: 0
@@ -455,7 +455,7 @@ MonoBehaviour:
     CanAttack: 1
     CurrentPathIndex: 0
     CurrentComboIndex: 1
-    AttackRange: 3
+    AttackRange: 6
     AttackCooldown: 1
     GlobalAttackTimer: 0
 --- !u!114 &2000049473197180753
@@ -673,7 +673,7 @@ MonoBehaviour:
     AttackRange: 0
     AttackCooldown: 0
     GlobalAttackTimer: 0
-  attack: {fileID: 11400000, guid: 0709dfb052859dd4ab27d24b723596d0, type: 2}
+  attack: {fileID: 11400000, guid: c4508d7a0bf8bfe4d82f5c4c2e24b484, type: 2}
 --- !u!114 &5731827953410687217
 MonoBehaviour:
   m_ObjectHideFlags: 0
