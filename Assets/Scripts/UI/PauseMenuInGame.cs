@@ -106,7 +106,7 @@ public class PauseMenuInGame : NetworkBehaviour {
         StartCoroutine(ServerShutdown());
     }
     IEnumerator ServerShutdown() {
-        loadingScreen.SetActive(true);
+        loadingScreen.GetComponent<LoadingScreen>().Activate(loadingTime);
         yield return new WaitForSecondsRealtime(loadingTime);
         UnityEngine.SceneManagement.SceneManager.LoadScene(menuSceneName);
     }

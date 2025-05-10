@@ -1,25 +1,39 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LoadingScreen : MonoBehaviour {
-    [SerializeField] TextMeshProUGUI loadingText;
-    [SerializeField] float timeBetweenDots;
+    [SerializeField] GameObject thingImage;
+    [SerializeField] float thingRotateSpeed;
+    [SerializeField] Image insideBar;
 
-    private void OnEnable() {
+    public void Activate(float amountOfTimeToLoad) {
+
+        insideBar.fillAmount = 0;
+
+        thingImage.transform.rotation = Quaternion.identity;
+
+        gameObject.SetActive(true);
+
         StopAllCoroutines();
-        StartCoroutine(DotsCoroutine());
+
+        StartCoroutine(LoadinScreenEffectsRoutine(amountOfTimeToLoad));
     }
-    IEnumerator DotsCoroutine() {
+    IEnumerator LoadinScreenEffectsRoutine(float timeToLoad) {
+
+        float timer = 0;
+
         while (true) {
-            loadingText.text = "Loading";
-            yield return new WaitForSeconds(timeBetweenDots);
-            loadingText.text = "Loading.";
-            yield return new WaitForSeconds(timeBetweenDots);
-            loadingText.text = "Loading..";
-            yield return new WaitForSeconds(timeBetweenDots);
-            loadingText.text = "Loading...";
-            yield return new WaitForSeconds(timeBetweenDots);
+
+            thingImage.transform.Rotate(0, 0, -thingRotateSpeed * Time.deltaTime);
+
+            if (insideBar.fillAmount < 1f) {
+                timer += Time.deltaTime;
+                insideBar.fillAmount = Mathf.Clamp01(timer / timeToLoad);
+            }
+
+            yield return null;
         }
     }
 }

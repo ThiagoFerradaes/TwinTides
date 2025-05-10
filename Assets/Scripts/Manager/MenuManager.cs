@@ -1,13 +1,7 @@
 using System;
 using System.Collections;
-using System.Linq;
-using System.Threading.Tasks;
 using TMPro;
 using Unity.Netcode;
-using Unity.Services.Lobbies;
-using Unity.Services.Multiplayer;
-using Unity.Services.Vivox;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -246,7 +240,7 @@ public class MenuManager : NetworkBehaviour {
 
     [ClientRpc]
     void LoadingScreenClientRpc() {
-        loadingScreen.SetActive(true); 
+        loadingScreen.GetComponent<LoadingScreen>().Activate(loadingTime); 
         if (IsHost) {
             LocalWhiteBoard.Instance.PlayerCharacter = WhiteBoard.Singleton.PlayerOneCharacter.Value;
         }
