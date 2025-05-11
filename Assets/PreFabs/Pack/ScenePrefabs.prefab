@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1970041173
+  GlobalObjectIdHash: 3558093723
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -270,11 +270,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ee2786c607f129d46a6da3890bb272f8, type: 2}
   zombieGirlOneOneSkills:
   - {fileID: 11400000, guid: a84789795f5da0e419aede264c2ccbbb, type: 2}
-  zombieGirlOneTwoSkills: []
+  zombieGirlOneTwoSkills:
+  - {fileID: 11400000, guid: 5833e92a779c2d14dbea8861a0e3d316, type: 2}
   zombieGirlOneTreeSkills: []
   zombieGirlTwoOneSkills:
   - {fileID: 11400000, guid: 691887ce953035b45ab1f1d23278c66c, type: 2}
-  zombieGirlTwoTwoSkills: []
+  zombieGirlTwoTwoSkills:
+  - {fileID: 11400000, guid: 4d986e1fb96b33f4092d26415e2fa28f, type: 2}
   zombieGirlTwoTreeSkills: []
   zombieGirlTreeOneSkills:
   - {fileID: 11400000, guid: b7f70fc2f8d3e6545a843ffe82d0b29c, type: 2}
@@ -321,7 +323,7 @@ Transform:
   m_GameObject: {fileID: 7214388736521335965}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.306227, y: 0.50000024, z: -14.363527}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -524,7 +526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1949740367986292341, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2190202172
+      value: 2349714449
       objectReference: {fileID: 0}
     - target: {fileID: 4825039715634543611, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_SizeDelta.x

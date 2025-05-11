@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ public class HealthManager : NetworkBehaviour {
     Material originalMaterial;
 
     // Variaveis do tipo float
-    readonly NetworkVariable<float> _currentHealth = new();
+    public NetworkVariable<float> _currentHealth = new();
     [HideInInspector] public NetworkVariable<float> currentShieldAmount = new();
     readonly NetworkVariable<float> _healMultiply = new(1f);
     readonly NetworkVariable<float> _shieldMultiply = new(1f);
@@ -278,16 +279,25 @@ public class HealthManager : NetworkBehaviour {
         Debug.Log("Debuff removed: " + debuff.name);
         OnDebuffRemoved?.Invoke(debuff, 0);
     }
+
+    public void CleanAllDebuffs() {
+        if (!IsServer) return;
+
+        CleanAllDebuffsRpc();
+    }
     [Rpc(SendTo.ClientsAndHost)]
     public void CleanAllDebuffsRpc() {
-        foreach (var debuff in _listOfActiveDebuffs.Values) {
+        var debuffsToClean = _listOfActiveDebuffs.Values.ToList();
+
+        foreach (var debuff in debuffsToClean) {
             if (debuff.Coroutine != null) {
                 StopCoroutine(debuff.Coroutine);
                 debuff.Coroutine = null;
                 debuff.Debuff.StopDebuff(this);
             }
         }
-        _listOfActiveBuffs.Clear();
+
+        _listOfActiveDebuffs.Clear();
     }
 
     public bool CheckIfHasDebuff(HealthDebuff debuff) {
