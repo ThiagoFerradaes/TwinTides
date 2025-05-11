@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810a67eacafa5364bb78904d41ff7b3f, type: 3}
+  m_Name: GirlTwoThree
+  m_EditorClassIdentifier: 
+  ListOfPrefabs:
+  - {fileID: 4343116316165340520, guid: 9c48fc656f7bf554d88cf0286f42a9f7, type: 3}
+  ListOfPrefabsNames:
+  - Girl Two Three Puddle
+  ListOfAttacksNames:
+  - Puddle
+  timeBetweenDamage: 0.1
+  offSett: 4
+  cooldown: 4
+  highDamagePuddleDamageToHealth: 0.3
+  highDamagePuddleDamageToShield: 1
+  highDamagePuddleDuration: 6
+  highDamagePuddleSize: 6
+  highDamagePuddleMaterial: {fileID: 2100000, guid: 9f5a452ef5edaf048be3381aeeec51f2, type: 2}
+  slowPuddleDamage: 0.1
+  slowPuddleSlowPercent: 100
+  slowPuddleDuration: 4
+  slowPuddleSize: 10
+  slowPuddleStunDuration: 3
+  slowPuddleMaterial: {fileID: 2100000, guid: 40f1605a8ce356c47b1c8384560351cb, type: 2}
+  blockPuddleDamage: 0.2
+  blockPuddleDuration: 3
+  blockPuddleSize: 4
+  blockPuddleNoDebuffDebuff: {fileID: 11400000, guid: 90e58e68b618b88459e05ad9cb1e72b9, type: 2}
+  blockPuddleMaterial: {fileID: 2100000, guid: 8de71edd6f3c4534d8a3427efa612c5d, type: 2}
