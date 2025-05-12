@@ -4,16 +4,14 @@ using UnityEngine;
 public class TidalWatz : CommonRelic
 {
     [Header("Tidal Level 1")]
-    public Vector3 CutSize;
-    public Vector3 CutPosition;
+    public float CutSize;
     public int AmountOfCuts;
     public float Damage;
     public float CutDuration;
     public HealthDebuff BleedingDebuff;
 
     [Header("Tidal Level 2")]
-    public Vector3 CutSizeLevel2;
-    public Vector3 CutPositionLevel2;
+    public float CutSizeLevel2;
     public int AmountOfCutsLevel2;
     public float CutInterval;
 
@@ -24,6 +22,7 @@ public class TidalWatz : CommonRelic
 
     [Header("Tidal Level 4")]
     public int AmountOfCutsLevel4;
+    public Vector3 impactSize;
     public float BaseDamageImpact;
     public float ImpactDuration;
     public float ImpactOffset;

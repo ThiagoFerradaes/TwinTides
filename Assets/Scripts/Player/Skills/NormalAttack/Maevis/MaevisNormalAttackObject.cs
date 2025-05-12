@@ -21,13 +21,13 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
             _father = GameObject.FindAnyObjectByType<MaevisNormalAttackManager>();
         }
 
-        _father.OnEndOfAttack -= _father_OnEndOfAttack;
-        _father.OnEndOfAttack += _father_OnEndOfAttack; 
+        _father.OnEndOfAttack -= Father_OnEndOfAttack;
+        _father.OnEndOfAttack += Father_OnEndOfAttack; 
 
         DefinePosition();
     }
 
-    private void _father_OnEndOfAttack(object sender, System.EventArgs e) {
+    private void Father_OnEndOfAttack(object sender, System.EventArgs e) {
         End();
     }
 
@@ -36,9 +36,7 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
 
         transform.SetParent(_father.transform);
 
-        transform.localPosition = _currentAttackCombo == 3 ? _info.ThirdAttackPosition : _info.AttackPosition;
-        transform.localRotation = _currentAttackCombo == 3 ? Quaternion.Euler(_info.ThierdAttackRotation) : Quaternion.Euler(_info.AttackRotation);
-
+        transform.localPosition = _currentAttackCombo == 3 ? Vector3.forward * _info.ThirdAttackPosition : Vector3.forward * _info.AttackPosition;
 
         gameObject.SetActive(true);
     }
@@ -65,7 +63,7 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
     void End() {
         _currentAttackCombo = 1;
 
-        _father.OnEndOfAttack -= _father_OnEndOfAttack;
+        _father.OnEndOfAttack -= Father_OnEndOfAttack;
 
         ReturnObject();
     }

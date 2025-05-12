@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using Unity.Multiplayer.Center.NetcodeForGameObjectsExample.DistributedAuthority;
-using Unity.Netcode;
 using UnityEngine;
 
 public class MaevisNormalAttackManager : SkillObjectPrefab {
@@ -51,10 +49,6 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
             PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _currentAttackCombo, 1);
         }
 
-        float startAngle = transform.localEulerAngles.y;
-        float targetAngle = _currentAttackCombo == 1 ? startAngle + 180 : startAngle - 180;
-
-        float elapsedTime = 0f;
         float duration = _currentAttackCombo switch {
             1 => _dManager.ReturnDivisionAttackSpeed(_info.DurationOfFirstAttack),
             2 => _dManager.ReturnDivisionAttackSpeed(_info.DurationOfSecondAttack),
@@ -65,17 +59,10 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
 
         _maevis.GetComponent<PlayerController>().BlockMovement();
 
-        while (elapsedTime < duration) {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / duration;
-            float yRotation = Mathf.Lerp(startAngle, targetAngle, t);
-            transform.localRotation = Quaternion.Euler(0, yRotation, 0);
-            yield return null;
-        }
+        yield return new WaitForSeconds(duration);
 
         _maevis.GetComponent<PlayerController>().AllowMovement();
 
-        transform.localRotation = Quaternion.Euler(0, targetAngle, 0);
         _currentAttackCombo++;
 
         OnEndOfAttack?.Invoke(this, EventArgs.Empty);
@@ -92,10 +79,6 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
             PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _currentAttackCombo, 1);
         }
 
-        float startAngle = transform.localEulerAngles.x;
-        float targetAngle = startAngle + 90;
-
-        float elapsedTime = 0f;
         float duration = _dManager.ReturnDivisionAttackSpeed(_info.DurationOfThirdAtack);
 
         _currentTime = duration + _dManager.ReturnDivisionAttackSpeed(_info.CooldownBetweenEachAttack) + _info.TimeLimitBetweenEachAttack;
@@ -103,20 +86,12 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
         _maevis.GetComponent<PlayerController>().BlockMovement();
         _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(true);
 
-        while (elapsedTime < duration) {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / duration;
-            float xRotation = Mathf.Lerp(startAngle, targetAngle, t);
-            transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-            yield return null;
-        }
+        yield return new WaitForSeconds(duration);
 
         OnEndOfAttack?.Invoke(this, EventArgs.Empty);
 
         _maevis.GetComponent<PlayerController>().AllowMovement();
         _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
-
-        transform.localRotation = Quaternion.Euler(0, targetAngle, 0);
 
         yield return null;
 

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Maevis Normal Attack
   UiSprite: {fileID: 0}
+  NameSpriteTotem: {fileID: 0}
   MinLevel: 1
   MaxLevel: 1
   Cooldown: 1
@@ -28,12 +29,10 @@ MonoBehaviour:
   DurationOfSecondAttack: 0.4
   DurationOfThirdAtack: 0.6
   CooldownBetweenEachAttack: 0.2
-  AttackPosition: {x: -1.8, y: 0, z: 0}
-  ThirdAttackPosition: {x: 0, y: 2.5, z: 0}
-  AttackRotation: {x: 0, y: 0, z: 0}
-  ThierdAttackRotation: {x: 0, y: 90, z: 90}
-  FirstAndSecondAttackSize: {x: 2.4, y: 0.2, z: 0.5}
-  ThirdAttackSize: {x: 2.4, y: 0.2, z: 1}
+  AttackPosition: {x: 0, y: 0, z: 2}
+  ThirdAttackPosition: {x: 0, y: 0, z: 3}
+  FirstAndSecondAttackSize: {x: 2, y: 1, z: 4}
+  ThirdAttackSize: {x: 3.5, y: 1, z: 2}
   FirstAttackDamage: 1
   SecondAttackDamage: 1
   ThirdAttackDamage: 1

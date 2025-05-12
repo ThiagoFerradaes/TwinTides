@@ -33,20 +33,19 @@ MonoBehaviour:
   - {fileID: 7064569682817774075, guid: e6cc4b4de02cbbc48ab42a8c50b0837a, type: 3}
   - {fileID: 4948698788183770020, guid: 2ab1b4e6875084e4a9938769e09637aa, type: 3}
   - {fileID: 4778089487178227976, guid: ed0cc71a39ea0ae499db03fe5a4d315a, type: 3}
-  CutSize: {x: 2, y: 0.1, z: 0.5}
-  CutPosition: {x: -1.5, y: 0, z: 0}
+  CutSize: 0
   AmountOfCuts: 1
   Damage: 1
   CutDuration: 0.5
   BleedingDebuff: {fileID: 11400000, guid: 811747b3cf3ece547a8d6f3bd782cfb3, type: 2}
-  CutSizeLevel2: {x: 4, y: 0.1, z: 0.5}
-  CutPositionLevel2: {x: -3, y: 0, z: 0}
+  CutSizeLevel2: 0
   AmountOfCutsLevel2: 2
   CutInterval: 0.5
   AmountOfCutsLevel3: 3
   CutIntervalLevel3: 0.25
   CutDurationLevel3: 0.35
   AmountOfCutsLevel4: 4
+  impactSize: {x: 0, y: 0, z: 0}
   BaseDamageImpact: 1
   ImpactDuration: 0.1
   ImpactOffset: 4
