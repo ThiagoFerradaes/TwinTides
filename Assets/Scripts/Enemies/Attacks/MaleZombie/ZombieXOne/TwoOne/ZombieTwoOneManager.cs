@@ -21,8 +21,8 @@ public class ZombieTwoOneManager : EnemyAttackPrefab {
     IEnumerator NormalPunchRoutine() {
 
         for(int i = 0; i < _info.amountOfPunchesPerCombo; i++) {
-            EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 1, parent); 
-
+            EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 1, parent);
+            Debug.Log("Instantiate punch");
             if (i < _info.amountOfPunchesPerCombo - 1) yield return new WaitForSeconds(_info.timeBetweenPunches);
         }
 

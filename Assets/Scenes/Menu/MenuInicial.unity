@@ -1703,6 +1703,11 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_EnterSessionButton: {fileID: 0}
+--- !u!1 &274978916 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4538268503003453933, guid: c4ee86d328a783344884610b26bb8f76, type: 3}
+  m_PrefabInstance: {fileID: 9120668942858524645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &276191195
 GameObject:
   m_ObjectHideFlags: 0
@@ -3100,11 +3105,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &491816348 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1521957778906761915, guid: c4ee86d328a783344884610b26bb8f76, type: 3}
-  m_PrefabInstance: {fileID: 9120668942858524645}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &496360662
 GameObject:
   m_ObjectHideFlags: 0
@@ -9597,7 +9597,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 491816348}
+      - m_Target: {fileID: 274978916}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6

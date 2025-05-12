@@ -56,6 +56,7 @@ public class MenuManager : NetworkBehaviour {
     #region Methods
 
     private void Awake() {
+
         SetButtonsFunctions();
     }
 
@@ -81,6 +82,7 @@ public class MenuManager : NetworkBehaviour {
             NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconneted;
 
             NetworkManager.Singleton.OnServerStarted += ServerStarted;
+           
             NetworkManager.Singleton.OnServerStopped += ServerStopped;
         }
 
