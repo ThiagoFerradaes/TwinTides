@@ -3,7 +3,7 @@ using UnityEngine;
 public class AlterarExplosao : MonoBehaviour
 {
     private Material material;
-    public float teste;
+    public Vector4 teste;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,14 +16,16 @@ public class AlterarExplosao : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            //teste = Color(1.75177872, 8.67703533, 6.6664772, 1);
-            //bool
+            //teste = !teste;
             //material.SetFloat("_NoisePadrao", teste ? 1.0f : 0.0f);
 
-            //float
-            //material.SetFloat("_NoisePadrao", teste);
+            //teste += 1;
+            //material.SetFloat("_disttortionScale", teste);
 
-            //material.SetFloat("_NoisePadrao", teste);
+            //teste = 
+            //material.SetFloat("_color_01_normal", teste);
+
+
         }
     }
 }
