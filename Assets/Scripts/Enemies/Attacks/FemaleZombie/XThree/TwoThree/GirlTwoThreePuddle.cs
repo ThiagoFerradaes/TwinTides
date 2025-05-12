@@ -120,7 +120,10 @@ public class GirlTwoThreePuddle : EnemyAttackPrefab {
 
     void ApplyEndEffect() {
         foreach(var player in _listOfPlayers) {
-            if (type == PuddleType.Slow) player.GetComponent<MovementManager>().StunWithTime(_info.slowPuddleStunDuration);
+            if (type == PuddleType.Slow) {
+                player.GetComponent<MovementManager>().IncreaseMoveSpeed(_info.slowPuddleSlowPercent);
+                player.GetComponent<MovementManager>().StunWithTime(_info.slowPuddleStunDuration);
+            }
             else if (type == PuddleType.Block) player.AddDebuffToList(_info.blockPuddleNoDebuffDebuff);
         }
     }
