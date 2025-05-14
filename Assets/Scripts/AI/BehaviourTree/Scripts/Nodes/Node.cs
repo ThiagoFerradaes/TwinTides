@@ -38,7 +38,6 @@ public abstract class Node : ScriptableObject {
     }
 
     public void Abort() {
-        Debug.Log("Abort " + name);
         BehaviourTree.Traverse(this, (node) => {
             node.started = false;
             node.state = State.Running;

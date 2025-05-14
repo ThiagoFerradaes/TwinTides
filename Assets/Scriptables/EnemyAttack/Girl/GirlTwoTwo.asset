@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5c0727f314fa0741adece4405515637, type: 3}
+  m_Name: GirlTwoTwo
+  m_EditorClassIdentifier: 
+  ListOfPrefabs:
+  - {fileID: 5008790866809282816, guid: 71b9da93fbdf42b4aa706d2a6e73cb43, type: 3}
+  ListOfPrefabsNames:
+  - Girl Two Two Heal
+  ListOfAttacksNames:
+  - Heal
+  amountOfHealing: 1
+  healingDuration: 5
+  healingSize: 16
+  timeBetweenHeals: 0.1
+  amountOfShield: 1
+  durationOfShield: 5
+  cooldown: 3

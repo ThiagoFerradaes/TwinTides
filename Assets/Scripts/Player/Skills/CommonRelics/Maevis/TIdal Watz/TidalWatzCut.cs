@@ -23,11 +23,11 @@ public class TidalWatzCut : SkillObjectPrefab {
             _father = GameObject.FindAnyObjectByType<TidalWatzObject>();
         }
 
-        transform.localScale = _level == 1 ? _info.CutSize : _info.CutSizeLevel2;
+        transform.localScale = _level == 1 ? Vector3.one * _info.CutSize : Vector3.one * _info.CutSizeLevel2;
 
         transform.SetParent(_father.transform);
 
-        Vector3 position = _level < 2 ? _info.CutPosition : _info.CutPositionLevel2;
+        Vector3 position = Vector3.zero;
 
         transform.SetLocalPositionAndRotation(position, Quaternion.Euler(0, 0, 0));
 

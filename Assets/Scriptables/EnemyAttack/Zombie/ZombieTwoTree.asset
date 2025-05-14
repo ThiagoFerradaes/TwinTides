@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b443ed1fb6d2454f9200721ca8161b8, type: 3}
+  m_Name: ZombieTwoTree
+  m_EditorClassIdentifier: 
+  ListOfPrefabs:
+  - {fileID: 8177452723593379185, guid: 58e58ba650602174887874c4ce3e0585, type: 3}
+  - {fileID: 1704781666384760290, guid: 72c42e333604f9d48b39b6a4c1c889cb, type: 3}
+  - {fileID: 1910976881631787273, guid: eb414804a06c0db4fad68af6ef69726c, type: 3}
+  ListOfPrefabsNames:
+  - Zombie Two Three Manager
+  - Zombie Two Three Bomb
+  - Zombie Two Three Explosion
+  ListOfAttacksNames:
+  - RainBomb
+  amountOfbombs: 26
+  rainRadius: 12
+  timeBetweenEachBomb: 0.2
+  rainCooldown: 10
+  durationOfAttack: 4
+  fallSpeed: 10
+  bombHeight: 10
+  explosionSize: 5
+  explosionDamage: 1
+  explosionDuration: 0.1
+  poisonDebuff: {fileID: 11400000, guid: 07fecbce3982b1d48b25917e8424f895, type: 2}

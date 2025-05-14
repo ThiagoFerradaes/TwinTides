@@ -30,6 +30,8 @@ public class TidalWatzImpact : SkillObjectPrefab {
         Vector3 position = _father.transform.position + (direction * _info.ImpactOffset);
         transform.SetPositionAndRotation(position, _father.transform.rotation);
 
+        transform.localScale = _info.impactSize;
+
         gameObject.SetActive(true);
 
         StartCoroutine(Duration());

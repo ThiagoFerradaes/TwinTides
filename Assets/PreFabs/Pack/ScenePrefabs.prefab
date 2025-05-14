@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1970041173
+  GlobalObjectIdHash: 3558093723
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -254,25 +254,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombieBoyOneOneSkills:
   - {fileID: 11400000, guid: 76198010d53507e468028ce8f0fb9aff, type: 2}
-  zombieBoyOneTwoSkills: []
-  zombieBoyOneTreeSkills: []
+  zombieBoyOneTwoSkills:
+  - {fileID: 11400000, guid: 06cea7e91cc27b546931dcd361e0d775, type: 2}
+  zombieBoyOneTreeSkills:
+  - {fileID: 11400000, guid: 0709dfb052859dd4ab27d24b723596d0, type: 2}
   zombieBoyTwoOneSkills:
   - {fileID: 11400000, guid: e15785d9051b7924eb922b88c7d26696, type: 2}
   zombieBoyTwoTwoSkills:
   - {fileID: 11400000, guid: 645e7c98dfc11d146b90368bb1fd0abc, type: 2}
-  zombieBoyTwoTreeSkills: []
+  zombieBoyTwoTreeSkills:
+  - {fileID: 11400000, guid: c4508d7a0bf8bfe4d82f5c4c2e24b484, type: 2}
   zombieBoyTreeOneSkills:
   - {fileID: 11400000, guid: 51a31b0697c76d4448f889d25b32326b, type: 2}
   zombieBoyTreeTwoSkills:
   - {fileID: 11400000, guid: ee2786c607f129d46a6da3890bb272f8, type: 2}
   zombieGirlOneOneSkills:
   - {fileID: 11400000, guid: a84789795f5da0e419aede264c2ccbbb, type: 2}
-  zombieGirlOneTwoSkills: []
-  zombieGirlOneTreeSkills: []
+  zombieGirlOneTwoSkills:
+  - {fileID: 11400000, guid: 5833e92a779c2d14dbea8861a0e3d316, type: 2}
+  zombieGirlOneTreeSkills:
+  - {fileID: 11400000, guid: 3a9cee5db4f9f3d4cbb096bfddf9ade0, type: 2}
   zombieGirlTwoOneSkills:
   - {fileID: 11400000, guid: 691887ce953035b45ab1f1d23278c66c, type: 2}
-  zombieGirlTwoTwoSkills: []
-  zombieGirlTwoTreeSkills: []
+  zombieGirlTwoTwoSkills:
+  - {fileID: 11400000, guid: 4d986e1fb96b33f4092d26415e2fa28f, type: 2}
+  zombieGirlTwoTreeSkills:
+  - {fileID: 11400000, guid: 0fb9f3e7210be0f439cd0ff425b53473, type: 2}
   zombieGirlTreeOneSkills:
   - {fileID: 11400000, guid: b7f70fc2f8d3e6545a843ffe82d0b29c, type: 2}
   zombieGirlTreeTwoSkills:
@@ -318,7 +325,7 @@ Transform:
   m_GameObject: {fileID: 7214388736521335965}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.306227, y: 0.50000024, z: -14.363527}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -519,9 +526,13 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1898261735005080089, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1949740367986292341, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2190202172
+      value: 2349714449
       objectReference: {fileID: 0}
     - target: {fileID: 4825039715634543611, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_SizeDelta.x
