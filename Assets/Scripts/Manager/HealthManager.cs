@@ -112,7 +112,6 @@ public class HealthManager : NetworkBehaviour {
             }
         }
         else {
-
             if (isAfectedByDamageMultiply)
                 _currentHealth.Value = Mathf.Clamp((_currentHealth.Value - damageTaken * _damageMultiply.Value), 0, maxHealth.Value);
 
