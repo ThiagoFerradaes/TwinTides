@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackBeardSO : ScriptableObject
+public class BlackBeardSO : EnemyAttack
 {
-    public List<GameObject> ListOfPrefabs = new();
+    //public List<GameObject> ListOfPrefabs = new();
 }

@@ -87,7 +87,7 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
         _canSetUpExplosion = true;
     }
 
-    private void Health_OnGeneralDamage(object sender, EventArgs e) {
+    private void Health_OnGeneralDamage(object sender, float damage) {
         CanExplode();
     }
 

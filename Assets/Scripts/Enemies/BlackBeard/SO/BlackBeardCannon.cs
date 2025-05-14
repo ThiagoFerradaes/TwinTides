@@ -7,6 +7,7 @@ public class BlackBeardCannon : BlackBeardSO
     public float InitialTime;
     public float CooldownBetweenAttacks;
     public float MaxAmountOfAttacksToBomb;
+    [Range(0,100)]public float PercentToChangeState;
 
     [Header("Shoot Up")]
     public float AmountOfShootUpBullets;
@@ -14,6 +15,11 @@ public class BlackBeardCannon : BlackBeardSO
     public float ShootUpBulletSpeedToFall;
     public float ShootUpBulletDamage;
     public float TimeBetweenShootUpBullets;
+    public float ShootUpRadius;
+    public float ShootUpBulletSize;
+    public float DistanceBetweenEachShootUpBullet;
+    public float ShootUpBulletWarningDuration;
+    public float ShootUpBulletWarningSize;
 
     [Header("Shoot Straight")]
     public float AmountOfStraighBullets;

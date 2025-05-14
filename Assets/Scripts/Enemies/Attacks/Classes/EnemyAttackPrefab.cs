@@ -5,11 +5,14 @@ public class EnemyAttackPrefab : MonoBehaviour {
     protected Context parentContext;
     public virtual void StartAttack(int enemyId, int skillId) {
         parent = EnemiesManager.Instance.TransformIdInEnemy(enemyId);
-        parentContext = parent.GetComponent<BehaviourTreeRunner>().context;
+
+        if (parent.TryGetComponent<BehaviourTreeRunner>(out BehaviourTreeRunner bRunner)) {
+            parentContext = bRunner.context;
+        }
 
         EnemyAttack skill = EnemySkillConverter.Instance.TransformIdInSkill(skillId);
 
-        if (parentContext.Blackboard.Cooldowns.Count == 0) {
+        if (parentContext != null && parentContext.Blackboard.Cooldowns.Count == 0) {
             foreach (var attack in skill.ListOfAttacksNames) {
                 if (!parentContext.Blackboard.Cooldowns.ContainsKey(attack)) {
                     parentContext.Blackboard.Cooldowns[attack] = 0;
@@ -20,12 +23,26 @@ public class EnemyAttackPrefab : MonoBehaviour {
     }
     public virtual void StartAttack(int enemyId, int skillId, Vector3 position) {
         parent = EnemiesManager.Instance.TransformIdInEnemy(enemyId);
-        parentContext = parent.GetComponent<BehaviourTreeRunner>().context;
 
+        if (parent.TryGetComponent<BehaviourTreeRunner>(out BehaviourTreeRunner bRunner)) {
+            parentContext = bRunner.context;
+        }
+
+        EnemyAttack skill = EnemySkillConverter.Instance.TransformIdInSkill(skillId);
+
+        if (parentContext != null && parentContext.Blackboard.Cooldowns.Count == 0) {
+            foreach (var attack in skill.ListOfAttacksNames) {
+                if (!parentContext.Blackboard.Cooldowns.ContainsKey(attack)) {
+                    parentContext.Blackboard.Cooldowns[attack] = 0;
+                }
+            }
+        }
     }
 
     public virtual void End() {
-        parentContext.Blackboard.GlobalAttackTimer = parentContext.Blackboard.AttackCooldown;
+        if (parentContext != null)
+            parentContext.Blackboard.GlobalAttackTimer = parentContext.Blackboard.AttackCooldown;
+
         gameObject.SetActive(false);
     }
 }

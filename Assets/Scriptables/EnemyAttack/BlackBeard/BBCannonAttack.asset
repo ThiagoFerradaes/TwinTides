@@ -12,15 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231ace7366b0b364885123afaf4b7148, type: 3}
   m_Name: BBCannonAttack
   m_EditorClassIdentifier: 
-  ListOfPrefabs: []
-  InitialTime: 0
-  CooldownBetweenAttacks: 0
-  MaxAmountOfAttacksToBomb: 0
-  AmountOfShootUpBullets: 0
-  ShootUpBulletHeigh: 0
-  ShootUpBulletSpeedToFall: 0
-  ShootUpBulletDamage: 0
-  TimeBetweenShootUpBullets: 0
+  ListOfPrefabs:
+  - {fileID: 5309081003974535765, guid: 39daa0e77756cd740bf76cd0063ff613, type: 3}
+  - {fileID: 2919476714694507724, guid: 4656fcf359f404845a9f42d195269c7e, type: 3}
+  ListOfPrefabsNames:
+  - BlackBeard Shoot Up Bullet Warning
+  - BlackBeard Shoot Up Bullet
+  ListOfAttacksNames: []
+  InitialTime: 1
+  CooldownBetweenAttacks: 2
+  MaxAmountOfAttacksToBomb: 3
+  PercentToChangeState: 33
+  AmountOfShootUpBullets: 35
+  ShootUpBulletHeigh: 26
+  ShootUpBulletSpeedToFall: 35
+  ShootUpBulletDamage: 1
+  TimeBetweenShootUpBullets: 0.5
+  ShootUpRadius: 20
+  ShootUpBulletSize: 6
+  DistanceBetweenEachShootUpBullet: 6
+  ShootUpBulletWarningDuration: 0.6
+  ShootUpBulletWarningSize: 6
   AmountOfStraighBullets: 0
   StraighBulletSpeed: 0
   StraighBulletDamage: 0

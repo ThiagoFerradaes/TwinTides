@@ -44,7 +44,7 @@ public class HealthManager : NetworkBehaviour {
     public event Action OnDeath;
     public event Action<Buff, int> OnBuffAdded, OnBuffRemoved;
     public event Action<Debuff, int> OnDebuffAdded, OnDebuffRemoved;
-    public event EventHandler OnGeneralDamage;
+    public event EventHandler<float> OnGeneralDamage;
     public static event EventHandler OnMelHealed;
 
     // Corrotinas
@@ -117,12 +117,13 @@ public class HealthManager : NetworkBehaviour {
 
             else _currentHealth.Value = Mathf.Clamp((_currentHealth.Value - damageTaken), 0, maxHealth.Value);
         }
+
         if (_currentHealth.Value <= 0) {
             _isDead.Value = true;
             DeathHandlerRpc();
         }
         else {
-            OnGeneralDamage?.Invoke(this, EventArgs.Empty);
+            OnGeneralDamage?.Invoke(this, damageTaken);
             TookDamage();
         }
     }
