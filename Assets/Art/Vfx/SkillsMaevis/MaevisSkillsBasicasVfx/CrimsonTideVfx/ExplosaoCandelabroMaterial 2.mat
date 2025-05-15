@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3414675471569964796
+--- !u!114 &-2560758094890290687
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_Quadrado
-  m_Shader: {fileID: -6465566751694194690, guid: 78f9d91f262bf9149ad19dbd1e23c7e8, type: 3}
+  m_Name: ExplosaoCandelabroMaterial 2
+  m_Shader: {fileID: -6465566751694194690, guid: 558b01c4ed7eb504f8e2e49928624334, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -31,16 +31,25 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
-  - DepthOnly
+  - SHADOWCASTER
   - MOTIONVECTORS
+  - DepthOnly
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _main_texture:
+        m_Texture: {fileID: 2800000, guid: 2b08373b14c74a74aadd2b348335db4f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _mask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -57,22 +66,36 @@ Material:
     m_Floats:
     - _AlphaClip: 1
     - _AlphaToMask: 0
-    - _Blend: 2
-    - _CastShadows: 1
-    - _Cull: 2
-    - _DstBlend: 1
+    - _Blend: 0
+    - _CastShadows: 0
+    - _Cull: 0
+    - _DeciderAlphaClip: 0
+    - _DeciderColors: 0
+    - _DstBlend: 10
+    - _NoisePadrao: 0
+    - _Quadrado: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Rotate: 0
+    - _Scale: 0
     - _SrcBlend: 5
     - _Surface: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
-    - _forca: 1.42
-    - _power: 1
-    - _quadrado: 0.78
-    - _sise: 0.67
+    - _alfaClipMax: 1
+    - _alfaClipMin_normal: 0.1
+    - _distortionAmountMax: 10
+    - _distortionAmountMin: 1.2
+    - _disttortionScale: 10
+    - _elipseSize: 0.5
+    - _global: 0
+    - _textureDecider: 0
     m_Colors:
-    - _Color: {r: 16.847178, g: 3.7707853, b: 0, a: 0}
+    - _color_01_normal: {r: 11.584522, g: 0.18504025, b: 0, a: 1}
+    - _color_02: {r: 0.29308632, g: 0.61886764, b: 0.47832733, a: 1}
+    - _distortionSpeed: {r: -0.01, g: 0, b: 0, a: 0}
+    - _main_texture_speed: {r: 0, g: 0, b: 0, a: 0}
+    - _tilingAndOffset: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
