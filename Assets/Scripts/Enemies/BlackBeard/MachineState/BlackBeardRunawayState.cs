@@ -10,6 +10,7 @@ public class BlackBeardRunawayState : BlackBeardStates {
 
     // Booleanas
     bool isStuned;
+    bool changedState;
 
     // Camp
     Camps camp;
@@ -40,6 +41,7 @@ public class BlackBeardRunawayState : BlackBeardStates {
         if (_info == null) _info = _parent.ListOfAttacks[1] as BlackBeardRunawaySO;
 
         isStuned = false;
+        changedState = false;
 
         PhaseTimer = _info.PhaseDuration;
 
@@ -48,10 +50,16 @@ public class BlackBeardRunawayState : BlackBeardStates {
     }
 
     private void Camp_OnAllEnemiesDead() {
-        _parent.StartCoroutine(StunTimer());
+        if (!changedState && !isStuned) {
+            _parent.StartCoroutine(StunTimer());
+        }
     }
 
     void LeaveShip() {
+        Debug.Log("Leave ship");
+
+        _parent.transform.DOKill();
+
         _parent.transform.DOJump(_parent.LandPlace.position, _info.JumpPower, 1, _info.JumpDuration).OnComplete(() => {
             Vector3 fromCenter = _parent.transform.position - _parent.CenterOfArena.position;
             Vector3 clampedOffset = fromCenter.normalized * _info.ArenaRadius;
@@ -77,7 +85,7 @@ public class BlackBeardRunawayState : BlackBeardStates {
 
         float angle = Mathf.Atan2(initialOffset.z, initialOffset.x) * Mathf.Rad2Deg;
 
-        while (!isStuned) {
+        while (!isStuned && !changedState) {
             angle += _info.BlackBeardSpeed * Time.deltaTime;
 
             float rad = angle * Mathf.Deg2Rad;
@@ -92,27 +100,35 @@ public class BlackBeardRunawayState : BlackBeardStates {
     }
 
     IEnumerator PhaseTimerRoutine() {
-        while (PhaseTimer > 0) {
+        while (PhaseTimer > 0 && !changedState) {
             PhaseTimer -= Time.deltaTime;
             yield return null;
         }
 
-        if (!isStuned) EndPhase();
+        if (!isStuned && !changedState) EndPhase();
     }
 
     IEnumerator StunTimer() {
+        if (isStuned || changedState) yield break;
+
         isStuned = true;
         _parent.Health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, true);
 
-        _parent.StopCoroutine(runCoroutine);
-        _parent.StopCoroutine(phaseCoroutine);
+        if (runCoroutine != null) _parent.StopCoroutine(runCoroutine);
+        if (phaseCoroutine != null) _parent.StopCoroutine(phaseCoroutine);
 
         yield return new WaitForSeconds(_info.BlackBeardStunTime);
 
-        EndPhase();
+        if (!changedState) EndPhase();
     }
 
     void EndPhase() {
+        if (changedState) return;
+
+        camp.OnAllEnemiesDead -= Camp_OnAllEnemiesDead;
+
+        changedState = true;
+
         int enemiesAlive = camp.ReturnAliveCount();
 
         if (enemiesAlive > 0) {
@@ -129,6 +145,8 @@ public class BlackBeardRunawayState : BlackBeardStates {
     }
 
     void ChangePhase() {
-        _parent.ChangeState(BlackBeardState.SHIP);
+        if (changedState) {
+            _parent.ChangeState(BlackBeardState.SHIP);
+        }
     }
 }

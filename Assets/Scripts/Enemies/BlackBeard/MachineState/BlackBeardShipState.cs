@@ -35,7 +35,6 @@ public class BlackBeardShipState : BlackBeardStates {
     #region StartRegion
     public override void StartState(BlackBeardMachineState parent) {
         base.StartState(parent);
-
         _info = _parent.ListOfAttacks[0] as BlackBeardCannon;
 
         _timesAttacked = 0;
@@ -312,7 +311,6 @@ public class BlackBeardShipState : BlackBeardStates {
     }
 
     IEnumerator AttacksCooldown(float cooldown) {
-
         yield return new WaitForSeconds(cooldown);
 
         Attack();
