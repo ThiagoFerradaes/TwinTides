@@ -1,13 +1,7 @@
 using System;
 using System.Collections;
-using System.Linq;
-using System.Threading.Tasks;
 using TMPro;
 using Unity.Netcode;
-using Unity.Services.Lobbies;
-using Unity.Services.Multiplayer;
-using Unity.Services.Vivox;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -62,6 +56,7 @@ public class MenuManager : NetworkBehaviour {
     #region Methods
 
     private void Awake() {
+
         SetButtonsFunctions();
     }
 
@@ -87,6 +82,7 @@ public class MenuManager : NetworkBehaviour {
             NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconneted;
 
             NetworkManager.Singleton.OnServerStarted += ServerStarted;
+           
             NetworkManager.Singleton.OnServerStopped += ServerStopped;
         }
 
@@ -246,7 +242,7 @@ public class MenuManager : NetworkBehaviour {
 
     [ClientRpc]
     void LoadingScreenClientRpc() {
-        loadingScreen.SetActive(true); 
+        loadingScreen.GetComponent<LoadingScreen>().Activate(loadingTime); 
         if (IsHost) {
             LocalWhiteBoard.Instance.PlayerCharacter = WhiteBoard.Singleton.PlayerOneCharacter.Value;
         }

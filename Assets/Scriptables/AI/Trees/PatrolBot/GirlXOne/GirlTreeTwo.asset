@@ -30,37 +30,6 @@ MonoBehaviour:
     AttackCooldown: 0
     GlobalAttackTimer: 0
   child: {fileID: -1232385359316088806}
---- !u!114 &-8519606943112325767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9eff2ceed911dff42bff53343baca4cf, type: 3}
-  m_Name: RunnerComposite
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 95f4cbef66b2bdb4ab3a41ddd51f360f
-  position: {x: -424.49805, y: 779.9682}
-  blackboard:
-    Target: {fileID: 0}
-    IsCloseToPath: 1
-    IsTargetInRange: 0
-    CanFollowPlayer: 1
-    IsAttacking: 0
-    IsInAttackRange: 0
-    CanAttack: 1
-    CurrentPathIndex: 0
-    CurrentComboIndex: 0
-    AttackRange: 0
-    AttackCooldown: 0
-    GlobalAttackTimer: 0
-  children:
-  - {fileID: -3838604061852570075}
 --- !u!114 &-6793917620370379804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,37 +186,6 @@ MonoBehaviour:
     AttackCooldown: 0
     GlobalAttackTimer: 0
   child: {fileID: -6793917620370379804}
---- !u!114 &-4374297142791464532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51a70d27f161e59429d3689e1e4084f0, type: 3}
-  m_Name: FalseGateDecorator
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 85eabf3875876bb4d9c245f2559b2e21
-  position: {x: -428.57227, y: 622.2788}
-  blackboard:
-    Target: {fileID: 0}
-    IsCloseToPath: 1
-    IsTargetInRange: 0
-    CanFollowPlayer: 1
-    IsAttacking: 0
-    IsInAttackRange: 0
-    CanAttack: 1
-    CurrentPathIndex: 0
-    CurrentComboIndex: 0
-    AttackRange: 0
-    AttackCooldown: 0
-    GlobalAttackTimer: 0
-  child: {fileID: -8519606943112325767}
-  conditions: 03000000
 --- !u!114 &-3838604061852570075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,7 +201,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 6b16b6c54fa14b245be736a5c27da8e1
-  position: {x: -417.79114, y: 932.22144}
+  position: {x: -429.836, y: 623.52045}
   blackboard:
     Target: {fileID: 0}
     IsCloseToPath: 0
@@ -371,7 +309,7 @@ MonoBehaviour:
     GlobalAttackTimer: 0
   children:
   - {fileID: 3781917414317124037}
-  - {fileID: -4374297142791464532}
+  - {fileID: -3838604061852570075}
 --- !u!114 &-832071066040792598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,11 +442,9 @@ MonoBehaviour:
   - {fileID: -3690868420404818733}
   - {fileID: 7714920069465493131}
   - {fileID: 3781917414317124037}
-  - {fileID: -8519606943112325767}
   - {fileID: -1232385359316088806}
   - {fileID: 5098730227991954732}
   - {fileID: -820351757826398512}
-  - {fileID: -4374297142791464532}
   blackboard:
     Target: {fileID: 0}
     IsCloseToPath: 1

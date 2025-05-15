@@ -9,10 +9,8 @@ public class MaevisNormalAttack : AttackSkill
     public float DurationOfThirdAtack;
     public float CooldownBetweenEachAttack;
 
-    public Vector3 AttackPosition;
-    public Vector3 ThirdAttackPosition;
-    public Vector3 AttackRotation;
-    public Vector3 ThierdAttackRotation;
+    public float AttackPosition;
+    public float ThirdAttackPosition;
     public Vector3 FirstAndSecondAttackSize;
     public Vector3 ThirdAttackSize;
 

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -58,21 +57,8 @@ public class TidalWatzObject : SkillObjectPrefab {
             if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis)
                 PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
 
-            float startAngle = transform.localEulerAngles.y;
-            float targetAngle = startAngle + 360;
-
-            float elapsedTime = 0f;
             float duration = _level < 3 ? _info.CutDuration : _info.CutDurationLevel3;
-
-            while (elapsedTime < duration) {
-                elapsedTime += Time.deltaTime;
-                float t = elapsedTime / duration;
-                float yRotation = Mathf.Lerp(startAngle, targetAngle, t);
-                transform.localRotation = Quaternion.Euler(0, yRotation, 0);
-                yield return null;
-            }
-
-            transform.localRotation = Quaternion.Euler(0, startAngle, 0);
+            yield return new WaitForSeconds(duration);
 
             if (_level < 3 && _level > 1) {
                 yield return new WaitForSeconds(_info.CutInterval);
