@@ -15,34 +15,55 @@ MonoBehaviour:
   ListOfPrefabs:
   - {fileID: 5309081003974535765, guid: 39daa0e77756cd740bf76cd0063ff613, type: 3}
   - {fileID: 2919476714694507724, guid: 4656fcf359f404845a9f42d195269c7e, type: 3}
+  - {fileID: 7948591492589818339, guid: 1b73e7b4f3219d64ca0642a1a54466c8, type: 3}
+  - {fileID: 7948591492589818339, guid: 2f6404f732a21eb43b1d73f9204ef09c, type: 3}
+  - {fileID: 7948591492589818339, guid: edcc3a2f25a5eb4489eb4c1e3914995c, type: 3}
   ListOfPrefabsNames:
   - BlackBeard Shoot Up Bullet Warning
   - BlackBeard Shoot Up Bullet
+  - BlackBeard StraightBullet
+  - BlackBeard Cannon Bomb
+  - BlackBeard Cannon Bomb Explosion
   ListOfAttacksNames: []
-  InitialTime: 1
+  InitialTime: 2
   CooldownBetweenAttacks: 2
   MaxAmountOfAttacksToBomb: 3
   PercentToChangeState: 33
-  AmountOfShootUpBullets: 35
+  AmountOfShootUpBullets: 30
   ShootUpBulletHeigh: 26
   ShootUpBulletSpeedToFall: 35
   ShootUpBulletDamage: 1
   TimeBetweenShootUpBullets: 0.5
-  ShootUpRadius: 20
+  ShootUpRadius: 16
   ShootUpBulletSize: 6
-  DistanceBetweenEachShootUpBullet: 6
+  DistanceBetweenEachShootUpBullet: 3
   ShootUpBulletWarningDuration: 0.6
   ShootUpBulletWarningSize: 6
-  AmountOfStraighBullets: 0
-  StraighBulletSpeed: 0
-  StraighBulletDamage: 0
-  TimeBetweenStraighBullets: 0
-  StraighBulletRange: 0
-  AmountOfBombs: 0
-  BombHeight: 0
-  BombFallSpeed: 0
-  BombExplosionRadius: 0
-  BombExplosionDamage: 0
-  TimeBetweenBombs: 0
-  TimeToBombExplode: 0
-  BombDamageToShip: 0
+  AmountOfStraightBulletsAttacks: 4
+  StraightBulletSpeed: 30
+  StraightBulletDamage: 1
+  TimeBetweenStraightBullets: 0.2
+  TimeBetweenStraightBulletsAttacks: 0.8
+  TimeBetweenStraightBulletsSequence: 0.3
+  StraightBulletRange: 40
+  StraightBulletStunTime: 2
+  StraightBulletSize: 4
+  CannonMovementSpeed: 4
+  CannonMovementRange: 4
+  AmountOfBombs: 3
+  BombHeight: 26
+  BombFallSpeed: 25
+  BombExplosionRadius: 14
+  BombExplosionDamage: 1
+  BombExplosionDuration: 0.1
+  TimeBetweenBombs: 0.6
+  TimeToBombExplode: 5
+  BombDamageToShip: 1
+  ShootBombRadius: 13
+  BombSize: 3
+  BombSpeed: 25
+  DistanceBetweenBombs: 5
+  CooldownAfterBomb: 3
+  TimeBetweenWarnings: 0.2
+  WarningCooldown: 0.5
+  WarningMaterial: {fileID: 2100000, guid: bd260d75cd071d94cb8da51f88f1f28c, type: 2}

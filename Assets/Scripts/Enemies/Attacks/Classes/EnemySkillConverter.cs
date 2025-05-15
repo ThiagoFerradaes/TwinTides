@@ -74,11 +74,9 @@ public class EnemySkillConverter : MonoBehaviour {
     }
     
     public EnemyAttack TransformIdInSkill(int id) {
-        Debug.Log("Transform Id in Skill: " +  id); 
         if (id < 0 || id >= skillsList.Count) {
             return null;
         }
-        Debug.Log("Skill: " + skillsList[id]);
         return skillsList[id];
     }
     

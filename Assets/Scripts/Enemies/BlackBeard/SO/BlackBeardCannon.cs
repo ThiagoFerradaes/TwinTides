@@ -22,11 +22,20 @@ public class BlackBeardCannon : BlackBeardSO
     public float ShootUpBulletWarningSize;
 
     [Header("Shoot Straight")]
-    public float AmountOfStraighBullets;
-    public float StraighBulletSpeed;
-    public float StraighBulletDamage;
-    public float TimeBetweenStraighBullets;
-    public float StraighBulletRange;
+    public float AmountOfStraightBulletsAttacks;
+    public float StraightBulletSpeed;
+    public float StraightBulletDamage;
+    [Tooltip("Esse aqui é o tempo entre as balas de tiros consecutivos de um ataque de uma sequencia")]
+    public float TimeBetweenStraightBullets;
+    [Tooltip("Esse aqui é o tempo entre ataques de sequencias diferentes, ou seja, ele faz um sequencia, espera esse tempo e depois faz outra")]
+    public float TimeBetweenStraightBulletsAttacks;
+    [Tooltip("Esse aqui é o tempo entre ataques da mesma sequencia, por exemplo se for 1, 2, 3, 4 e depois 4, 3, 2, 1 esse é o tempo entre essas duas sequências")]
+    public float TimeBetweenStraightBulletsSequence;
+    public float StraightBulletRange;
+    public float StraightBulletStunTime;
+    public float StraightBulletSize;
+    public float CannonMovementSpeed;
+    public float CannonMovementRange;
 
     [Header("Shoot Bomb")]
     public float AmountOfBombs;
@@ -34,7 +43,16 @@ public class BlackBeardCannon : BlackBeardSO
     public float BombFallSpeed;
     public float BombExplosionRadius;
     public float BombExplosionDamage;
+    public float BombExplosionDuration;
     public float TimeBetweenBombs;
     public float TimeToBombExplode;
     public float BombDamageToShip;
+    public float ShootBombRadius;
+    public float BombSize;
+    public float BombSpeed;
+    public float DistanceBetweenBombs;
+    public float CooldownAfterBomb;
+    public float TimeBetweenWarnings;
+    public float WarningCooldown;
+    public Material WarningMaterial;
 }

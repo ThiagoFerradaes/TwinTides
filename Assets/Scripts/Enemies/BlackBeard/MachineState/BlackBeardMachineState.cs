@@ -12,6 +12,8 @@ public class BlackBeardMachineState : MonoBehaviour
 
     public List<BlackBeardSO> ListOfAttacks = new();
     public Transform CenterOfArena;
+    public Transform[] CannonsPosition;
+    public Transform Ship;
 
     public int Lifes = 1;
     void Start()

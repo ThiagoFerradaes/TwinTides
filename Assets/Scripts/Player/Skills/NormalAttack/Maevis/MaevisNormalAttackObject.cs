@@ -46,8 +46,12 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
+        if (!other.CompareTag("Enemy") && !other.CompareTag("BlackBeardBomb")) return;
 
-        if (!other.CompareTag("Enemy")) return;
+        if (other.TryGetComponent<BlackBeardCannonBomb>(out var bomb)) {
+            bomb.TryPush(transform.position);
+            return;
+        }
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
@@ -59,6 +63,7 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
 
         health.DealDamage(damage, true, true);
     }
+
 
     void End() {
         _currentAttackCombo = 1;

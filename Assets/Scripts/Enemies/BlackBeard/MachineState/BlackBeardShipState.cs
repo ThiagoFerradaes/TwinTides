@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,6 +10,7 @@ public class BlackBeardShipState : BlackBeardStates {
 
     // Booleanas
     bool _firstTime = true;
+    bool _isStraightShooting = false;
 
     // ints
     int _timesAttacked = 0;
@@ -25,6 +27,9 @@ public class BlackBeardShipState : BlackBeardStates {
     // HealthManager do barba negra
     HealthManager _health;
 
+    // Listas
+    List<StraightShootPattern> _listOfShootPatterns;
+
     #endregion
 
     #region StartRegion
@@ -36,6 +41,8 @@ public class BlackBeardShipState : BlackBeardStates {
         _timesAttacked = 0;
 
         if (_health == null) _health = _parent.GetComponent<HealthManager>();
+
+        if (_listOfShootPatterns == null) CreateListOfPatterns();
 
         DefineHealthLimit();
 
@@ -55,7 +62,7 @@ public class BlackBeardShipState : BlackBeardStates {
 
         int numberOfDivisions = (int)(100 / _info.PercentToChangeState);
 
-        for (int i = 1; i<= numberOfDivisions; i++) {
+        for (int i = 1; i <= numberOfDivisions; i++) {
             float life = ReturnDivision(i, numberOfDivisions);
             if (_health.ReturnCurrentHealth() > life) {
                 healthLimit = life;
@@ -69,38 +76,85 @@ public class BlackBeardShipState : BlackBeardStates {
         return health;
     }
 
+    void CreateListOfPatterns() {
+        _listOfShootPatterns = new() {
+            new StraightShootPattern {
+                groups = new List<StraightShootGroup> {
+                    new() { cannonIndexes = new List<int>{0, 1, 2, 3}, fireSimultaneously = false},
+                    new() { cannonIndexes = new List<int>{3, 2, 1, 0}, fireSimultaneously = false}
+                }
+            },
+            new StraightShootPattern {
+                groups = new List<StraightShootGroup> {
+                    new() { cannonIndexes = new List<int>{0, 1, 2, 3}, fireSimultaneously = false},
+                    new() { cannonIndexes = new List<int>{0, 1, 2, 3}, fireSimultaneously = false}
+                }
+            },
+            new StraightShootPattern {
+                groups = new List<StraightShootGroup> {
+                    new() { cannonIndexes = new List<int>{3, 2, 1, 0}, fireSimultaneously = false},
+                    new() { cannonIndexes = new List<int>{0, 1, 2, 3 }, fireSimultaneously = false}
+                }
+            },
+            new StraightShootPattern {
+                groups = new List<StraightShootGroup> {
+                    new() { cannonIndexes = new List<int>{3, 2, 1, 0 }, fireSimultaneously = false},
+                    new() { cannonIndexes = new List<int>{3, 2, 1, 0}, fireSimultaneously = false}
+                }
+            },
+            new StraightShootPattern {
+                groups = new List<StraightShootGroup> {
+                    new() { cannonIndexes = new List<int>{0, 2}, fireSimultaneously = true},
+                    new() { cannonIndexes = new List<int>{1, 3}, fireSimultaneously = true}
+                }
+            },
+            new StraightShootPattern {
+                groups = new List<StraightShootGroup> {
+                    new() { cannonIndexes = new List<int>{0,1}, fireSimultaneously = true},
+                    new() { cannonIndexes = new List<int>{2, 3}, fireSimultaneously = true}
+                }
+            },
+            new StraightShootPattern {
+                groups = new List<StraightShootGroup> {
+                    new() { cannonIndexes = new List<int>{0, 1, 2, 3}, fireSimultaneously = true},
+                    new() { cannonIndexes = new List<int>{0, 1, 2, 3 }, fireSimultaneously = true}
+                }
+            },
+        };
+    }
+
     #endregion
 
     #region Update Region
 
     void Attack() {
-        //if (_timesAttacked >= _info.MaxAmountOfAttacksToBomb) BombAttack();
-        //else {
-        //    if (_timesAttacked > 0) {
-        //        int rng = Random.Range(0, 3);
+        if (_timesAttacked >= _info.MaxAmountOfAttacksToBomb) _parent.StartCoroutine(BombAttack());
+        else {
+            if (_timesAttacked > 0) {
+                int rng = Random.Range(0, 3);
 
-        //        switch (rng) {
-        //            case 0: _parent.StartCoroutine(ShootUpAttack()); break;
-        //            case 1: StraightShootAttack(); break;
-        //            case 2: BombAttack(); break;
-        //        }
-        //    }
-        //    else {
-        //        int rng = Random.Range(0, 2);
+                switch (rng) {
+                    case 0: _parent.StartCoroutine(ShootUpAttack()); break;
+                    case 1: _parent.StartCoroutine(StraightShootAttack()); break;
+                    case 2: _parent.StartCoroutine(BombAttack()); break;
+                }
+            }
+            else {
+                int rng = Random.Range(0, 2);
 
-        //        switch (rng) {
-        //            case 0: _parent.StartCoroutine(ShootUpAttack()); break;
-        //            case 1: StraightShootAttack(); break;
-        //        }
-        //    }
-            _parent.StartCoroutine(ShootUpAttack());
+                switch (rng) {
+                    case 0: _parent.StartCoroutine(ShootUpAttack()); break;
+                    case 1: _parent.StartCoroutine(StraightShootAttack()); break;
+                }
+            }
+
             _timesAttacked++;
-        //}
+        }
     }
     IEnumerator ShootUpAttack() {
-        Queue<Vector3> recentPositions = new(); 
+        Queue<Vector3> recentPositions = new();
         int maxAttempts = 10;
-        int recentCheckCount = 3; 
+        int recentCheckCount = 3;
 
         for (int i = 0; i < _info.AmountOfShootUpBullets; i++) {
             Vector3 pos = Vector3.zero;
@@ -125,7 +179,7 @@ public class BlackBeardShipState : BlackBeardStates {
             if (validPos) {
                 recentPositions.Enqueue(pos);
                 if (recentPositions.Count > recentCheckCount)
-                    recentPositions.Dequeue(); // mantém apenas os últimos N
+                    recentPositions.Dequeue();
             }
             else {
                 pos = _parent.CenterOfArena.position;
@@ -137,31 +191,129 @@ public class BlackBeardShipState : BlackBeardStates {
             yield return new WaitForSeconds(_info.TimeBetweenShootUpBullets);
         }
 
-        _cooldownCoroutine = _parent.StartCoroutine(AttacksCooldown());
+        _cooldownCoroutine = _parent.StartCoroutine(AttacksCooldown(_info.CooldownBetweenAttacks));
     }
 
+    IEnumerator StraightShootAttack() {
 
+        _parent.StartCoroutine(MoveCannons());
 
-    void StraightShootAttack() {
-        for (int i = 0; i < _info.AmountOfStraighBullets; i++) {
-            EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 2, _parent.gameObject, _parent.CenterOfArena.position);
+        for (int i = 0; i < _info.AmountOfStraightBulletsAttacks; i++) {
+
+            var selectedPattern = _listOfShootPatterns[Random.Range(0, _listOfShootPatterns.Count)];
+
+            foreach (var pattern in selectedPattern.groups) {
+
+                if (pattern.fireSimultaneously) {
+                    foreach (int bullet in pattern.cannonIndexes) {
+                        Vector3 pos = _parent.CannonsPosition[bullet].position;
+                        EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 2, _parent.gameObject, pos);
+                    }
+                }
+                else {
+                    for (int j = 0; j < pattern.cannonIndexes.Count; j++) {
+                        Vector3 pos = _parent.CannonsPosition[pattern.cannonIndexes[j]].position;
+                        EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 2, _parent.gameObject, pos);
+                        yield return new WaitForSeconds(_info.TimeBetweenStraightBullets);
+                    }
+                }
+                yield return new WaitForSeconds(_info.TimeBetweenStraightBulletsSequence);
+            }
+
+            yield return new WaitForSeconds(_info.TimeBetweenStraightBulletsAttacks);
+
         }
 
-        _cooldownCoroutine = _parent.StartCoroutine(AttacksCooldown());
+        _isStraightShooting = false;
+
+        _cooldownCoroutine = _parent.StartCoroutine(AttacksCooldown(_info.CooldownBetweenAttacks));
     }
 
-    void BombAttack() {
-        for (int i = 0; i < _info.AmountOfBombs; i++) {
-            EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 3, _parent.gameObject, _parent.CenterOfArena.position);
+    IEnumerator MoveCannons() {
+        _isStraightShooting = true;
+
+        Vector3[] initialPositions = new Vector3[_parent.CannonsPosition.Length];
+        int[] movementDirections = new int[_parent.CannonsPosition.Length];
+
+        for (int i = 0; i < _parent.CannonsPosition.Length; i++) {
+            initialPositions[i] = _parent.CannonsPosition[i].position;
+            movementDirections[i] = Random.value > 0.5f ? 1 : -1;
         }
 
+        while (_isStraightShooting) {
+            for (int i = 0; i < _parent.CannonsPosition.Length; i++) {
+                float offset = Mathf.PingPong(Time.time * _info.CannonMovementSpeed + i, _info.CannonMovementRange) - (_info.CannonMovementRange / 2f);
+                offset *= movementDirections[i];
+                Vector3 basePos = initialPositions[i];
+                _parent.CannonsPosition[i].position = basePos + _parent.CannonsPosition[i].right * offset;
+            }
+
+            yield return null;
+        }
+
+        bool allReached = false;
+        while (!allReached) {
+            allReached = true;
+
+            for (int i = 0; i < _parent.CannonsPosition.Length; i++) {
+                Transform cannon = _parent.CannonsPosition[i];
+                Vector3 target = initialPositions[i];
+                cannon.position = Vector3.MoveTowards(cannon.position, target, _info.CannonMovementSpeed * Time.deltaTime);
+
+                if (Vector3.Distance(cannon.position, target) > 0.01f) {
+                    allReached = false;
+                }
+            }
+            yield return null;
+        }
+    }
+
+    IEnumerator BombAttack() {
         _timesAttacked = 0;
+        Queue<Vector3> recentPositions = new();
+        int maxAttempts = 10;
+        int recentCheckCount = 3;
 
-        _cooldownCoroutine = _parent.StartCoroutine(AttacksCooldown());
+        for (int i = 0; i < _info.AmountOfBombs; i++) {
+            Vector3 pos = Vector3.zero;
+            bool validPos = false;
+
+            for (int attempt = 0; attempt < maxAttempts; attempt++) {
+                Vector2 randomPoint = Random.insideUnitCircle * _info.ShootBombRadius;
+                pos = _parent.CenterOfArena.position + new Vector3(randomPoint.x, _info.BombHeight, randomPoint.y);
+
+                validPos = true;
+
+                foreach (Vector3 recentPos in recentPositions) {
+                    if (Vector3.Distance(pos, recentPos) < _info.DistanceBetweenBombs) {
+                        validPos = false;
+                        break;
+                    }
+                }
+
+                if (validPos) break;
+            }
+
+            if (validPos) {
+                recentPositions.Enqueue(pos);
+                if (recentPositions.Count > recentCheckCount)
+                    recentPositions.Dequeue();
+            }
+            else {
+                pos = _parent.CenterOfArena.position;
+            }
+
+            EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 3, _parent.gameObject, pos);
+
+            yield return new WaitForSeconds(_info.TimeBetweenBombs);
+        }
+
+        _cooldownCoroutine = _parent.StartCoroutine(AttacksCooldown(_info.CooldownAfterBomb));
     }
 
-    IEnumerator AttacksCooldown() {
-        yield return new WaitForSeconds(_info.CooldownBetweenAttacks);
+    IEnumerator AttacksCooldown(float cooldown) {
+
+        yield return new WaitForSeconds(cooldown);
 
         Attack();
     }
@@ -186,4 +338,13 @@ public class BlackBeardShipState : BlackBeardStates {
     }
 
     #endregion
+}
+
+public class StraightShootGroup {
+    public List<int> cannonIndexes;
+    public bool fireSimultaneously;
+}
+
+public class StraightShootPattern {
+    public List<StraightShootGroup> groups;
 }
