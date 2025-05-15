@@ -14,11 +14,15 @@ public class BlackBeardMachineState : MonoBehaviour
     public Transform CenterOfArena;
     public Transform[] CannonsPosition;
     public Transform Ship;
+    public Transform ShipPlace, LandPlace;
+    public Camps ShipCamp;
+
+    public HealthManager Health;
 
     public int Lifes = 1;
     void Start()
     {
-        _currentState = _shipState;
+        _currentState = _runawayState;
         _currentState.StartState(this);
     }
 

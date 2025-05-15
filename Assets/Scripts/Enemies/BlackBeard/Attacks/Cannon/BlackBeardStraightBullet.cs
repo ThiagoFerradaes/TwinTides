@@ -17,9 +17,11 @@ public class BlackBeardStraightBullet : EnemyAttackPrefab
     }
 
     private void DefinePosition() {
+        Transform canon = parent.GetComponent<BlackBeardMachineState>().CannonsPosition[0];
+
         transform.localScale = Vector3.one * _info.StraightBulletSize;
 
-        transform.SetPositionAndRotation(pos, parent.transform.rotation);
+        transform.SetPositionAndRotation(pos, canon.rotation);
 
         gameObject.SetActive(true);
 

@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3360498746
+  GlobalObjectIdHash: 3430547126
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -242,7 +242,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3638960116113353898}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d477c339f4f6e5b4c9e09a17059d6e70, type: 3}
   m_Name: 
@@ -257,7 +257,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3638960116113353898}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5000001
   m_Speed: 3.5
@@ -365,4 +365,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b8c780d5004c22648a5ef0d02d665337, type: 2}
   - {fileID: 11400000, guid: 5f7ca4ace10bd9b4cb6d88e73e6a5d2d, type: 2}
   CenterOfArena: {fileID: 0}
+  CannonsPosition: []
+  Ship: {fileID: 0}
+  ShipPlace: {fileID: 0}
+  LandPlace: {fileID: 0}
+  ShipCamp: {fileID: 0}
+  Health: {fileID: 0}
   Lifes: 1

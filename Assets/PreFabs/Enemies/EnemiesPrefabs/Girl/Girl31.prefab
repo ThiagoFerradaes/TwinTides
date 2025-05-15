@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2950631235440392704}
   - component: {fileID: -8015809491459835981}
   - component: {fileID: 5661412640750131094}
+  - component: {fileID: -3759760598359277542}
   m_Layer: 8
   m_Name: Girl31
   m_TagString: Enemy
@@ -272,6 +273,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-3759760598359277542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3638960116113353898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3293ce28c15b34e4b92f14d7e2840441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1001 &5147446417584002369
 PrefabInstance:
   m_ObjectHideFlags: 0

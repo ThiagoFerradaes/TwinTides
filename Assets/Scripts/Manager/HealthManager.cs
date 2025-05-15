@@ -136,7 +136,7 @@ public class HealthManager : NetworkBehaviour {
         if (damageIndicatorCoroutine != null) {
             return;
         }
-        damageIndicatorCoroutine = StartCoroutine(DamageIndicator());
+        if (gameObject.activeInHierarchy) damageIndicatorCoroutine = StartCoroutine(DamageIndicator());
     }
     IEnumerator DamageIndicator() {
         MeshRenderer mesh = GetComponent<MeshRenderer>();
@@ -151,10 +151,21 @@ public class HealthManager : NetworkBehaviour {
         yield return new WaitForSeconds(0.1f);
         damageIndicatorCoroutine = null;
     }
+    public void Kill() {
+        if (!IsServer) return;
+
+        DeathHandlerRpc();
+    }
 
     [Rpc(SendTo.ClientsAndHost)]
     void DeathHandlerRpc() {
         if (damageIndicatorCoroutine != null) StopCoroutine(damageIndicatorCoroutine);
+
+        StopAllCoroutines();
+
+        _listOfActiveBuffs.Clear();
+
+        _listOfActiveDebuffs.Clear();
 
         OnDeath?.Invoke();
 
@@ -213,7 +224,7 @@ public class HealthManager : NetworkBehaviour {
         isShielded.Value = currentShieldAmount.Value > 0;
 
         if (_timeToEndShieldCoroutine != null) StopCoroutine(_timeToEndShieldCoroutine);
-        _timeToEndShieldCoroutine = StartCoroutine(RemoveShieldAfterDuration(durationOfShield));
+        if (gameObject.activeInHierarchy) _timeToEndShieldCoroutine = StartCoroutine(RemoveShieldAfterDuration(durationOfShield));
 
     }
     public void BreakShield() {
@@ -257,7 +268,7 @@ public class HealthManager : NetworkBehaviour {
             currentDebuff.Coroutine = debuff.ApplyDebuff(this, currentDebuff.Stack);
             _listOfActiveDebuffs.Add(debuff.GetType(), currentDebuff);
 
-            StartCoroutine(currentDebuff.Coroutine); // começamos a corrotina novamente
+            if (gameObject.activeInHierarchy) StartCoroutine(currentDebuff.Coroutine); // começamos a corrotina novamente
         }
 
         else {
@@ -265,7 +276,7 @@ public class HealthManager : NetworkBehaviour {
             ActiveDebuff newDebuff = new(debuff, debuff.InicialStack, debuff.ApplyDebuff(this, debuff.InicialStack));
             _listOfActiveDebuffs.Add(debuff.GetType(), newDebuff); // adicionamos ao dicionario
 
-            StartCoroutine(newDebuff.Coroutine); // começamos a corrotina 
+            if (gameObject.activeInHierarchy) StartCoroutine(newDebuff.Coroutine); // começamos a corrotina 
             Debug.Log("Debuff added: " + debuff.name);
         }
 
@@ -330,7 +341,7 @@ public class HealthManager : NetworkBehaviour {
             currentBuff.Coroutine = buff.ApplyBuff(this, currentBuff.Stack);
             _listOfActiveBuffs.Add(buff.GetType(), currentBuff);
 
-            StartCoroutine(currentBuff.Coroutine); // começamos a corrotina novamente
+            if (gameObject.activeInHierarchy) StartCoroutine(currentBuff.Coroutine); // começamos a corrotina novamente
         }
 
         else {
@@ -338,7 +349,7 @@ public class HealthManager : NetworkBehaviour {
             ActiveBuff newBuff = new(buff, buff.InicialStack, buff.ApplyBuff(this, buff.InicialStack));
             _listOfActiveBuffs.Add(buff.GetType(), newBuff); // adicionamos ao dicionario
 
-            StartCoroutine(newBuff.Coroutine); // começamos a corrotina 
+            if (gameObject.activeInHierarchy) StartCoroutine(newBuff.Coroutine); // começamos a corrotina 
             Debug.Log("Buff added: " + buff.name);
         }
 

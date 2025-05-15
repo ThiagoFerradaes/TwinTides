@@ -38,6 +38,8 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
 
         transform.localPosition = _currentAttackCombo == 3 ? Vector3.forward * _info.ThirdAttackPosition : Vector3.forward * _info.AttackPosition;
 
+        transform.localRotation = Quaternion.Euler(0, 0, 0);
+
         gameObject.SetActive(true);
     }
 

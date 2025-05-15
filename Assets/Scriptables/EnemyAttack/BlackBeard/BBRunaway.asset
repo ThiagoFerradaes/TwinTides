@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: BBRunaway
   m_EditorClassIdentifier: 
   ListOfPrefabs: []
-  BlackBeardSpeed: 0
-  BlackBeardStunTime: 0
-  PhaseDuration: 0
-  AmountOfHealthRecoveredPerEnemy: 0
-  MaxAmountOfEnemies: 0
-  ZombieOneOneRange: {x: 0, y: 0}
-  ZombieTwoOneRange: {x: 0, y: 0}
-  ZombieThreeOneRange: {x: 0, y: 0}
-  GirlOneOneRange: {x: 0, y: 0}
-  GirlTwoOneRange: {x: 0, y: 0}
-  GirlThreeOneRange: {x: 0, y: 0}
-  ZombieOneTwoRange: {x: 0, y: 0}
-  ZombieTwoTwoRange: {x: 0, y: 0}
+  ListOfPrefabsNames: []
+  ListOfAttacksNames: []
+  BlackBeardSpeed: 30
+  ArenaRadius: 15
+  BlackBeardStunTime: 6
+  PhaseDuration: 180
+  AmountOfHealthRecoveredPerEnemy: 10
+  JumpPower: 8
+  JumpDuration: 1
+  ListOfGroups:
+  - {fileID: 11400000, guid: 617d425b4f92b0d42a45edb97b256766, type: 2}
+  - {fileID: 11400000, guid: c974c84495592ca48b5e7d18fde8bc1b, type: 2}
+  - {fileID: 11400000, guid: c161817f3c07fe1489121698068d12ea, type: 2}
+  - {fileID: 11400000, guid: 754a365b532a2624a91590c394c4b55e, type: 2}
+  - {fileID: 11400000, guid: 4ecebaecc8b210e4f92a69dbae4b65cb, type: 2}
+  - {fileID: 11400000, guid: 9a7ea211e718c6d40af166b556af6075, type: 2}
+  - {fileID: 11400000, guid: 58e2fd747dbc2ae41a30df620b0d7686, type: 2}
+  - {fileID: 11400000, guid: a86fd61aa9351ff4d913773d9b09c8df, type: 2}
