@@ -12,4 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c2a4fc3ab5927e4ab252c4658293ea8, type: 3}
   m_Name: BBCrossAttack
   m_EditorClassIdentifier: 
-  ListOfPrefabs: []
+  ListOfPrefabs:
+  - {fileID: 7423980347696019090, guid: 304d7df5592d44b4387a692395e34306, type: 3}
+  - {fileID: 7423980347696019090, guid: e785c04e5e7342a48abbab058837189e, type: 3}
+  ListOfPrefabsNames:
+  - BlackBeard Cross Cut
+  - BlackBeard Cross Field
+  ListOfAttacksNames: []
+  DistanceToCenter: 0.5
+  AmountOfCuts: 8
+  AmountOfCutsStronger: 8
+  CutSpeed: 30
+  CutSpeedStronger: 40
+  CutDamage: 1
+  CutaDamageStronger: 1
+  CutSize: {x: 3, y: 4, z: 1}
+  CutRange: 25
+  Cooldown: 10
+  FieldDuration: 5
+  FieldDamage: 1
+  TimeBetweenDamage: 0.1
+  FieldSize: {x: 3.5, y: 0.3}

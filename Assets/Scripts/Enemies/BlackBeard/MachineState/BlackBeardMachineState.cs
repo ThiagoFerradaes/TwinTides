@@ -22,7 +22,7 @@ public class BlackBeardMachineState : MonoBehaviour
     public int Lifes = 1;
     void Start()
     {
-        _currentState = _runawayState;
+        _currentState = _finalState;
         _currentState.StartState(this);
     }
 

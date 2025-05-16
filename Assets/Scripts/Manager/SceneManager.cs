@@ -1,8 +1,12 @@
 using UnityEngine;
 using Unity.Netcode;
+using System.Collections.Generic;
 
 public class SceneManager : NetworkBehaviour
 {
+
+    public static List<GameObject> ActivePlayers = new();
+
     [SerializeField] GameObject maevisPreFab;
     [SerializeField] GameObject melPreFab;
     void Start()
@@ -26,6 +30,8 @@ public class SceneManager : NetworkBehaviour
 
             var playerNetworkObject = playerObject.GetComponent<NetworkObject>();
             playerNetworkObject.SpawnWithOwnership(clientID, true);
+
+            ActivePlayers.Add(playerObject);
 
             playerIndex++;
         }

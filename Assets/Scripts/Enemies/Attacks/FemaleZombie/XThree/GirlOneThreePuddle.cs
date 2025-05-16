@@ -59,6 +59,8 @@ public class GirlOneThreePuddle : EnemyAttackPrefab
 
         yield return new WaitForSeconds(Realduration);
 
+        _listOfPlayers.Clear();
+
         End();
     }
 
