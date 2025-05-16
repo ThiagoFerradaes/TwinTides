@@ -38,7 +38,7 @@ public class BlackBeardFinalState : BlackBeardStates {
 
         _attacks ??= new List<BlackBeardFinalFormAttacks>()
         {
-            new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.BULLETS, Priority = 1, Cooldown = 5f },
+            new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.BULLETS, Priority = 1, Cooldown = _bulletsInfo.Cooldown},
             new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.BULLETRAIN, Priority = 2, Cooldown = 3f },
             new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.CROSS, Priority = 1, Cooldown = _crossInfo.Cooldown },
             new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.JUMP, Priority = 3, Cooldown = 2f },
@@ -79,12 +79,12 @@ public class BlackBeardFinalState : BlackBeardStates {
         //        Debug.Log("JUMP");
         //        break;
         //    case BlackBeardFinalFormAttacks.FinalFormAttacks.ANCHOR:
-        //        Debug.Log("ANCHOR");
+        //        _parent.StartCoroutine(AnchorAttack());
         //        break;
 
         //}
         //chosenAttack.Use();
-        _parent.StartCoroutine(BulletsAttack());
+        _parent.StartCoroutine(AnchorAttack());
     }
 
     BlackBeardFinalFormAttacks ChooseAttack() {
@@ -227,6 +227,82 @@ public class BlackBeardFinalState : BlackBeardStates {
 
         return farthest;
     }
+
+    #endregion
+
+    #region AnchorAttack
+    IEnumerator AnchorAttack() {
+
+        Vector3 centerOfArena = _parent.CenterOfArena.position;
+        float distanceToCenter = Vector3.Distance(_parent.transform.position, centerOfArena);
+
+        if (distanceToCenter > 0.5f) 
+{
+            yield return DashToPosition(centerOfArena);
+        }
+
+        if (!IsStronger()) {
+
+            Transform farthestPlayer = FindFarthestPlayer();
+            if (farthestPlayer != null) {
+                Vector3 lookDirection = (farthestPlayer.position - _parent.transform.position).normalized;
+
+                lookDirection.y = 0f;
+
+                if (lookDirection != Vector3.zero) {
+                    Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+                    _parent.transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
+                }
+            }
+
+            Vector3 anchorPosition = _parent.transform.forward * _anchorInfo.AnchorOffset;
+
+            EnemySkillPooling.Instance.RequestInstantiateAttack(_anchorInfo, 0, _parent.gameObject, anchorPosition);
+
+            float attackDuration = (_anchorInfo.AnchorSpeed / _anchorInfo.AnchorRange);
+
+            float duration = 2 * attackDuration + _anchorInfo.TimeBetweenAttacks;
+
+            yield return new WaitForSeconds(duration);
+        }
+
+        else { 
+
+            Vector3 southDirection = new(0f, 0f, -1f);
+            Quaternion targetRotation = Quaternion.LookRotation(southDirection);
+            _parent.transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
+
+            Vector3 anchorPosition = _parent.transform.forward * _anchorInfo.AnchorOffset;
+
+            EnemySkillPooling.Instance.RequestInstantiateAttack(_anchorInfo, 0, _parent.gameObject, anchorPosition);
+
+            float attackDuration = (_anchorInfo.AnchorSpeed / _anchorInfo.AnchorRange);
+
+            yield return new WaitForSeconds(attackDuration);
+
+            yield return Rotate(_anchorInfo.RotationDuration);
+
+            yield return new WaitForSeconds(attackDuration);
+
+            _parent.transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
+        }
+
+        _parent.StartCoroutine(CooldownBetweenAttacks());
+    }
+
+    IEnumerator Rotate(float duration) {
+        float elapsed = 0f;
+
+        float rotationSpeed = _anchorInfo.AnchorRotationSPeed; 
+
+        while (elapsed < duration) {
+            elapsed += Time.deltaTime;
+            _parent.transform.Rotate(0f, rotationSpeed * Time.deltaTime, 0f);
+
+            yield return null;
+        }
+    }
+
 
     #endregion
 

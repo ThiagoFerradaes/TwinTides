@@ -12,6 +12,7 @@ public class BlackBeardBulletsAttackSO : BlackBeardSO
     public float TimeBetweenOneAttackAndTheNext;
     public float TimeBetweenDamages;
     public float BulletsSize;
+    public float Cooldown;
 
     [Header("Bullets Atributes Stronger")]
     public float DurationStronger;
