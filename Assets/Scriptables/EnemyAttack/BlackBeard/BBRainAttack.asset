@@ -12,4 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf265bca709746146adc6cc9bfca6d36, type: 3}
   m_Name: BBRainAttack
   m_EditorClassIdentifier: 
-  ListOfPrefabs: []
+  ListOfPrefabs:
+  - {fileID: 1516381448724842725, guid: dcb248d9d780f794db6ae009ace209ba, type: 3}
+  - {fileID: 6274239617610626292, guid: 48474a0a897410f49a8447009a3a0c69, type: 3}
+  - {fileID: 6274239617610626292, guid: 389ddaa209cdae040b1d322423909fb6, type: 3}
+  - {fileID: 2888966623609141944, guid: 7cf3b305bbab3604290fb6d087c5cc59, type: 3}
+  ListOfPrefabsNames:
+  - Black Beard Rain Bullet Manager
+  - Black Beard Rain Bullet Bomb
+  - Black Beard Rain Bullet Explosion
+  - Black Beard Rain Bullet FIeld
+  ListOfAttacksNames: []
+  AmountOfBullets: 12
+  BulletSize: 3
+  BulletHeight: 20
+  BulletFallSpeed: 18
+  Radius: 15
+  BurningDebuff: {fileID: 11400000, guid: 86a385b2a33a4bf478a57b6cb16ca780, type: 2}
+  TimeBetweenEachBullet: 2
+  ExplosionDamage: 1
+  FieldDamage: 1
+  FieldSize: {x: 8, y: 0.3}
+  TimeBetweenFieldDamage: 0.1
+  FieldDuration: 12
+  BulletDistaceFromEachOther: 10
+  Cooldown: 60
+  AttackTime: 2
+  ExplosionRadius: 8
+  ExplosionDuration: 0.1
+  AmountOfBulletsStronger: 12
+  AmountOfSecondaryBullets: 3
+  RadiusStronger: 10
+  SecondaryBulletDistanceToMainBullet: 1
+  SecondaryBulletDistanceToEachOther: 1

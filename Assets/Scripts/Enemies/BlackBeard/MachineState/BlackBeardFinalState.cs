@@ -11,7 +11,7 @@ public class BlackBeardFinalState : BlackBeardStates {
     BlackBeardAnchorAttackSO _anchorInfo;
     BlackBeardBulletsAttackSO _bulletsInfo;
     BlackBeardBulletRainSO _bulletRainInfo;
-    BlackBeardJumpAttackSO _jumpInfo;
+    BlackBeardWaveAttackSO _waveInfo;
     HealthManager _health;
     List<BlackBeardFinalFormAttacks> _attacks;
     #endregion
@@ -34,15 +34,15 @@ public class BlackBeardFinalState : BlackBeardStates {
         if (_anchorInfo == null) _anchorInfo = _parent.ListOfAttacks[6] as BlackBeardAnchorAttackSO;
         if (_bulletsInfo == null) _bulletsInfo = _parent.ListOfAttacks[2] as BlackBeardBulletsAttackSO;
         if (_bulletRainInfo == null) _bulletRainInfo = _parent.ListOfAttacks[4] as BlackBeardBulletRainSO;
-        if (_jumpInfo == null) _jumpInfo = _parent.ListOfAttacks[5] as BlackBeardJumpAttackSO;
+        if (_waveInfo == null) _waveInfo = _parent.ListOfAttacks[5] as BlackBeardWaveAttackSO;
 
         _attacks ??= new List<BlackBeardFinalFormAttacks>()
         {
             new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.BULLETS, Priority = 1, Cooldown = _bulletsInfo.Cooldown},
             new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.BULLETRAIN, Priority = 2, Cooldown = 3f },
             new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.CROSS, Priority = 1, Cooldown = _crossInfo.Cooldown },
-            new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.JUMP, Priority = 3, Cooldown = 2f },
-            new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.ANCHOR, Priority = 2, Cooldown = 4f },
+            new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.WAVE, Priority = 3, Cooldown = _waveInfo.Cooldown },
+            new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.ANCHOR, Priority = 2, Cooldown = _anchorInfo.Cooldown },
         };
 
     }
@@ -84,7 +84,7 @@ public class BlackBeardFinalState : BlackBeardStates {
 
         //}
         //chosenAttack.Use();
-        _parent.StartCoroutine(AnchorAttack());
+        _parent.StartCoroutine(RainBulletAttack());
     }
 
     BlackBeardFinalFormAttacks ChooseAttack() {
@@ -306,6 +306,32 @@ public class BlackBeardFinalState : BlackBeardStates {
 
     #endregion
 
+    #region WaveImpactAttack
+    IEnumerator WaveImpactAttack() {
+        int amountOfWaves = IsStronger() ? _waveInfo.AmountOfWavesStronger : _waveInfo.AmountOfWaves;
+        float timeBetweenEachWave = IsStronger() ? _waveInfo.TimeBetweenEachWaveStronger : _waveInfo.TimeBetweenEachWave;
+
+        for (int i = 0; i < amountOfWaves; i++) {
+            EnemySkillPooling.Instance.RequestInstantiateAttack(_waveInfo, 0, _parent.gameObject, _parent.transform.position);
+            yield return new WaitForSeconds(timeBetweenEachWave);
+        }
+
+        _parent.StartCoroutine(CooldownBetweenAttacks());
+    }
+
+    #endregion
+
+    #region RainBulletAttack
+    IEnumerator RainBulletAttack() {
+
+        EnemySkillPooling.Instance.RequestInstantiateAttack(_bulletRainInfo, 0, _parent.gameObject);
+
+        yield return new WaitForSeconds(_bulletRainInfo.AttackTime);
+
+        //_parent.StartCoroutine(CooldownBetweenAttacks());
+    }
+    #endregion
+
     bool IsStronger() {
         return _parent.Health.ReturnCurrentHealth() < _parent.Health.ReturnMaxHealth() / 2;
     }
@@ -321,7 +347,7 @@ public class BlackBeardFinalState : BlackBeardStates {
 }
 
 public class BlackBeardFinalFormAttacks {
-    public enum FinalFormAttacks { BULLETS, BULLETRAIN, CROSS, JUMP, ANCHOR }
+    public enum FinalFormAttacks { BULLETS, BULLETRAIN, CROSS, WAVE, ANCHOR }
     public FinalFormAttacks Attack;
 
     public int Priority;
