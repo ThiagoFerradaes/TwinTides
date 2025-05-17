@@ -8,7 +8,6 @@ public class BlackBeardBulletRainSO : BlackBeardSO
     public float BulletSize;
     public float BulletHeight;
     public float BulletFallSpeed;
-    //public float BulletExplosionRadius;
     public float Radius;
     public HealthDebuff BurningDebuff;
     public float TimeBetweenEachBullet;
@@ -17,8 +16,6 @@ public class BlackBeardBulletRainSO : BlackBeardSO
     public Vector2 FieldSize;
     public float TimeBetweenFieldDamage;
     public float FieldDuration;
-    public float BulletDistaceFromEachOther;
-    //public float AttackDuration;
     public float Cooldown;
     public float AttackTime;
     public float ExplosionRadius;
@@ -29,5 +26,9 @@ public class BlackBeardBulletRainSO : BlackBeardSO
     public int AmountOfSecondaryBullets;
     public float RadiusStronger;
     public float SecondaryBulletDistanceToMainBullet;
-    public float SecondaryBulletDistanceToEachOther;
+    public float SecondaryBulletSize;
+    public float SecondaryExplosionRadiusPercent;
+    public float SecondaryBulletJumpPower;
+    public float SecondaryBulletJumpDuration;
+    public float SecondaryBulletSizeMultiplier;
 }

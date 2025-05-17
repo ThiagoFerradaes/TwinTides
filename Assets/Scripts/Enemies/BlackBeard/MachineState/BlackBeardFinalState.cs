@@ -39,7 +39,7 @@ public class BlackBeardFinalState : BlackBeardStates {
         _attacks ??= new List<BlackBeardFinalFormAttacks>()
         {
             new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.BULLETS, Priority = 1, Cooldown = _bulletsInfo.Cooldown},
-            new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.BULLETRAIN, Priority = 2, Cooldown = 3f },
+            new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.BULLETRAIN, Priority = 2, Cooldown = _bulletRainInfo.Cooldown },
             new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.CROSS, Priority = 1, Cooldown = _crossInfo.Cooldown },
             new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.WAVE, Priority = 3, Cooldown = _waveInfo.Cooldown },
             new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.ANCHOR, Priority = 2, Cooldown = _anchorInfo.Cooldown },
@@ -62,29 +62,28 @@ public class BlackBeardFinalState : BlackBeardStates {
     #region Attack Region
     void Attack() {
 
-        //BlackBeardFinalFormAttacks chosenAttack = ChooseAttack();
-        //if (chosenAttack == null) return;
+        BlackBeardFinalFormAttacks chosenAttack = ChooseAttack();
+        if (chosenAttack == null) return;
 
-        //switch (chosenAttack.Attack) {
-        //    case BlackBeardFinalFormAttacks.FinalFormAttacks.BULLETS:
-        //        _parent.StartCoroutine(BulletsAttack());
-        //        break;
-        //    case BlackBeardFinalFormAttacks.FinalFormAttacks.BULLETRAIN:
-        //        Debug.Log("BULLETRAIN");
-        //        break;
-        //    case BlackBeardFinalFormAttacks.FinalFormAttacks.CROSS:
-        //        _parent.StartCoroutine(CrossAttack());
-        //        break;
-        //    case BlackBeardFinalFormAttacks.FinalFormAttacks.JUMP:
-        //        Debug.Log("JUMP");
-        //        break;
-        //    case BlackBeardFinalFormAttacks.FinalFormAttacks.ANCHOR:
-        //        _parent.StartCoroutine(AnchorAttack());
-        //        break;
+        switch (chosenAttack.Attack) {
+            case BlackBeardFinalFormAttacks.FinalFormAttacks.BULLETS:
+                _parent.StartCoroutine(BulletsAttack());
+                break;
+            case BlackBeardFinalFormAttacks.FinalFormAttacks.BULLETRAIN:
+                _parent.StartCoroutine(RainBulletAttack());
+                break;
+            case BlackBeardFinalFormAttacks.FinalFormAttacks.CROSS:
+                _parent.StartCoroutine(CrossAttack());
+                break;
+            case BlackBeardFinalFormAttacks.FinalFormAttacks.WAVE:
+                _parent.StartCoroutine(WaveImpactAttack());
+                break;
+            case BlackBeardFinalFormAttacks.FinalFormAttacks.ANCHOR:
+                _parent.StartCoroutine(AnchorAttack());
+                break;
 
-        //}
-        //chosenAttack.Use();
-        _parent.StartCoroutine(RainBulletAttack());
+        }
+        chosenAttack.Use();
     }
 
     BlackBeardFinalFormAttacks ChooseAttack() {
@@ -308,6 +307,18 @@ public class BlackBeardFinalState : BlackBeardStates {
 
     #region WaveImpactAttack
     IEnumerator WaveImpactAttack() {
+
+        Vector3 centerOfArena = _parent.CenterOfArena.position;
+        float distanceToCenter = Vector3.Distance(_parent.transform.position, centerOfArena);
+
+        if (distanceToCenter > 0.5f) {
+            yield return DashToPosition(centerOfArena);
+        }
+
+        Vector3 southDirection = new(0f, 0f, -1f);
+        Quaternion targetRotation = Quaternion.LookRotation(southDirection);
+        _parent.transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
+
         int amountOfWaves = IsStronger() ? _waveInfo.AmountOfWavesStronger : _waveInfo.AmountOfWaves;
         float timeBetweenEachWave = IsStronger() ? _waveInfo.TimeBetweenEachWaveStronger : _waveInfo.TimeBetweenEachWave;
 
@@ -328,7 +339,7 @@ public class BlackBeardFinalState : BlackBeardStates {
 
         yield return new WaitForSeconds(_bulletRainInfo.AttackTime);
 
-        //_parent.StartCoroutine(CooldownBetweenAttacks());
+        _parent.StartCoroutine(CooldownBetweenAttacks());
     }
     #endregion
 

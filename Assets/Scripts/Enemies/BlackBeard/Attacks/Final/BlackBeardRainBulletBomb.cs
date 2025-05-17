@@ -39,7 +39,11 @@ public class BlackBeardRainBulletBomb : EnemyAttackPrefab
 
         collided = false;
 
-        EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 2, parent, transform.position);
+        EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 2, parent, transform.position, 0);
+
+        if (isStronger) {
+            EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 4, parent, transform.position, _info.AmountOfSecondaryBullets);
+        }
 
         End();
     }
