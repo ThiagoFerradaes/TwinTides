@@ -10,7 +10,6 @@ public class BlackBeardWaveAttackSO : BlackBeardSO
     public float WaveDamage;
     public float WaveMaxRadius;
     public float WaveInitialRadius;
-    public float Cooldown;
 
     [Header("Attack Under 50%")]
     public int AmountOfWavesStronger;

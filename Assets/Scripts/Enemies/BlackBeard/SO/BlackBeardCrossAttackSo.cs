@@ -10,10 +10,9 @@ public class BlackBeardCrossAttackSo : BlackBeardSO
     public float CutSpeed;
     public float CutSpeedStronger;
     public float CutDamage;
-    public float CutaDamageStronger;
+    public float CutDamageStronger;
     public Vector3 CutSize;
     public float CutRange;
-    public float Cooldown;
 
     [Header("Field")]
     public float FieldDuration;

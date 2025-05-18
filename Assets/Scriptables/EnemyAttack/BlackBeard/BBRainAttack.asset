@@ -26,24 +26,23 @@ MonoBehaviour:
   - Black Beard Rain SecondaryBullet
   ListOfAttacksNames: []
   AmountOfBullets: 12
+  AmountOfBulletsStronger: 15
   BulletSize: 3
   BulletHeight: 20
   BulletFallSpeed: 20
-  Radius: 18
-  BurningDebuff: {fileID: 11400000, guid: 86a385b2a33a4bf478a57b6cb16ca780, type: 2}
   TimeBetweenEachBullet: 1.5
-  ExplosionDamage: 1
-  FieldDamage: 1
-  FieldSize: {x: 10, y: 0.3}
-  TimeBetweenFieldDamage: 0.1
-  FieldDuration: 15
-  Cooldown: 60
   AttackTime: 2
+  AttackRadius: 20
+  AttackRadiusStronger: 18
+  ExplosionDamage: 1
   ExplosionRadius: 10
   ExplosionDuration: 0.1
-  AmountOfBulletsStronger: 15
+  FieldDamage: 1
+  TimeBetweenFieldDamage: 0.1
+  FieldDuration: 15
+  BurningDebuff: {fileID: 11400000, guid: 86a385b2a33a4bf478a57b6cb16ca780, type: 2}
+  FieldSize: {x: 10, y: 0.3}
   AmountOfSecondaryBullets: 3
-  RadiusStronger: 16
   SecondaryBulletDistanceToMainBullet: 4
   SecondaryBulletSize: 2.5
   SecondaryExplosionRadiusPercent: 10

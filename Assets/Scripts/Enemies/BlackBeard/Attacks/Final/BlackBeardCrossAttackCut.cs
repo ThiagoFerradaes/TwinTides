@@ -57,7 +57,7 @@ public class BlackBeardCrossAttackCut : EnemyAttackPrefab
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        float damage = isStronger ? _info.CutaDamageStronger : _info.CutDamage;
+        float damage = isStronger ? _info.CutDamageStronger : _info.CutDamage;
 
         health.DealDamage(damage, true, true);
     }

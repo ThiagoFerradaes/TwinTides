@@ -292,6 +292,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b8c780d5004c22648a5ef0d02d665337, type: 2}
   - {fileID: 11400000, guid: d2efc29d2ed54a14d99a7bad55d9c58c, type: 2}
   - {fileID: 11400000, guid: c3447c671156c6b449aaae39ed62d45c, type: 2}
+  - {fileID: 11400000, guid: 823cca1730db25d409e134dcaba4c9e3, type: 2}
   skillsList: []
 --- !u!114 &1210910929218762898
 MonoBehaviour:
@@ -305,8 +306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f981e961fc3e34580bd0a8560cf1fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listOfEnemies:
-  - {fileID: 0}
+  ListOfCamps: []
+  ListOfEnemies: []
 --- !u!1 &7214388736521335965
 GameObject:
   m_ObjectHideFlags: 0

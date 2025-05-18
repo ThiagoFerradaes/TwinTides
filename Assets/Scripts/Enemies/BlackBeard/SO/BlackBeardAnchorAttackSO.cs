@@ -8,7 +8,6 @@ public class BlackBeardAnchorAttackSO : BlackBeardSO
     public float AnchorSpeed;
     public float AnchorDamage;
     public float AnchorStunTime;
-    public float Cooldown;
     public float TimeBetweenAttacks;
     public Vector3 AnchorSize;
     public float AnchorOffset;

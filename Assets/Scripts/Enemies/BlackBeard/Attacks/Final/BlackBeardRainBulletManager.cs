@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackBeardBulletRainManager : EnemyAttackPrefab {
+public class BlackBeardRainBulletManager : EnemyAttackPrefab {
     BlackBeardBulletRainSO _info;
     Vector3 pos;
     HealthManager _health;
@@ -28,7 +28,7 @@ public class BlackBeardBulletRainManager : EnemyAttackPrefab {
 
     IEnumerator Duration() {
         int amountOfBullets = isStronger ? _info.AmountOfBulletsStronger : _info.AmountOfBullets;
-        float radius = isStronger ? _info.RadiusStronger : _info.Radius;
+        float radius = isStronger ? _info.AttackRadiusStronger : _info.AttackRadius;
 
         Transform center = parent.GetComponent<BlackBeardMachineState>().CenterOfArena;
 

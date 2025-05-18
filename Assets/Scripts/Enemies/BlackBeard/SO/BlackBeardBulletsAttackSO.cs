@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "BlackBeardAttack/ Bullets Attack")]
 public class BlackBeardBulletsAttackSO : BlackBeardSO
 {
-    [Header("BulletsAtributes")]
+    [Header("Bullets Atributes")]
     public float Duration;
     public float DashSpeed;
     public int AmountOfTimesAttack;
@@ -12,7 +12,6 @@ public class BlackBeardBulletsAttackSO : BlackBeardSO
     public float TimeBetweenOneAttackAndTheNext;
     public float TimeBetweenDamages;
     public float BulletsSize;
-    public float Cooldown;
 
     [Header("Bullets Atributes Stronger")]
     public float DurationStronger;

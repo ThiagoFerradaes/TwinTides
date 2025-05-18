@@ -12,6 +12,7 @@ public class BlackBeardFinalState : BlackBeardStates {
     BlackBeardBulletsAttackSO _bulletsInfo;
     BlackBeardBulletRainSO _bulletRainInfo;
     BlackBeardWaveAttackSO _waveInfo;
+    BlackBeardFinalSO _info;
     HealthManager _health;
     List<BlackBeardFinalFormAttacks> _attacks;
     #endregion
@@ -35,20 +36,21 @@ public class BlackBeardFinalState : BlackBeardStates {
         if (_bulletsInfo == null) _bulletsInfo = _parent.ListOfAttacks[2] as BlackBeardBulletsAttackSO;
         if (_bulletRainInfo == null) _bulletRainInfo = _parent.ListOfAttacks[4] as BlackBeardBulletRainSO;
         if (_waveInfo == null) _waveInfo = _parent.ListOfAttacks[5] as BlackBeardWaveAttackSO;
+        if (_info == null) _info = _parent.ListOfAttacks[7] as BlackBeardFinalSO;
 
         _attacks ??= new List<BlackBeardFinalFormAttacks>()
         {
-            new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.BULLETS, Priority = 1, Cooldown = _bulletsInfo.Cooldown},
-            new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.BULLETRAIN, Priority = 2, Cooldown = _bulletRainInfo.Cooldown },
-            new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.CROSS, Priority = 1, Cooldown = _crossInfo.Cooldown },
-            new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.WAVE, Priority = 3, Cooldown = _waveInfo.Cooldown },
-            new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.ANCHOR, Priority = 2, Cooldown = _anchorInfo.Cooldown },
+            new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.BULLETS, Priority = _info.BulletsPrio, Cooldown = _info.BulletsCooldown},
+            new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.BULLETRAIN, Priority = _info.BulletsRainPrio, Cooldown = _info.BulletsRainCooldown },
+            new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.CROSS, Priority = _info.CrossPrio, Cooldown = _info.CrossCooldown },
+            new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.WAVE, Priority = _info.WavePrio, Cooldown = _info.WaveCooldown },
+            new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.ANCHOR, Priority = _info.AnchorPrio, Cooldown = _info.AnchorCooldown },
         };
 
     }
 
     void JumpToCenter() {
-        _parent.transform.DOJump(_parent.CenterOfArena.position, 10, 1, 0.8f).OnComplete(() => {
+        _parent.transform.DOJump(_parent.CenterOfArena.position, _info.JumpToCenterPower, 1, _info.JumpToCenterDuration).OnComplete(() => {
             _parent.StartCoroutine(WaitToAtack());
         });
     }
@@ -63,7 +65,7 @@ public class BlackBeardFinalState : BlackBeardStates {
     void Attack() {
 
         BlackBeardFinalFormAttacks chosenAttack = ChooseAttack();
-        if (chosenAttack == null) return;
+        if (chosenAttack == null) { return; }
 
         switch (chosenAttack.Attack) {
             case BlackBeardFinalFormAttacks.FinalFormAttacks.BULLETS:
@@ -105,7 +107,7 @@ public class BlackBeardFinalState : BlackBeardStates {
         Vector3 centerOfArena = _parent.CenterOfArena.position;
         float distanceToCenter = Vector3.Distance(_parent.transform.position, centerOfArena);
 
-        if (distanceToCenter > 0.5f) // margem de tolerância
+        if (distanceToCenter > 0.5f) 
 {
             yield return DashToPosition(centerOfArena);
         }
@@ -144,7 +146,7 @@ public class BlackBeardFinalState : BlackBeardStates {
     }
 
     private IEnumerator DashToPosition(Vector3 targetPos) {
-        float dashSpeed = 20f;
+        float dashSpeed = _info.DashToPositionSpeed;
         float closeEnough = 0.1f;
 
         while (Vector3.Distance(_parent.transform.position, targetPos) > closeEnough) {
@@ -348,7 +350,7 @@ public class BlackBeardFinalState : BlackBeardStates {
     }
 
     IEnumerator CooldownBetweenAttacks() {
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(_info.CooldownBetweenAttacks);
 
         Attack();
     }
@@ -363,7 +365,7 @@ public class BlackBeardFinalFormAttacks {
 
     public int Priority;
     public float Cooldown;
-    public float LastTimeUsed = Mathf.Infinity;
+    public float LastTimeUsed = -Mathf.Infinity;
 
     public bool IsReady => Time.time >= LastTimeUsed + Cooldown;
 

@@ -46,6 +46,7 @@ public class BlackBeardRainBulletField : EnemyAttackPrefab
             yield return new WaitForSeconds(_info.TimeBetweenFieldDamage);
             foreach (var player in _listOfPlayers) {
                 player.DealDamage(_info.FieldDamage, false, true);
+                player.AddDebuffToList(_info.BurningDebuff);
             }
         }
     }

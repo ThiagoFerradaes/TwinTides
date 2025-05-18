@@ -3,28 +3,31 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "BlackBeardAttack/ Bullet Rain")]
 public class BlackBeardBulletRainSO : BlackBeardSO
 {
-    [Header("Attack Over 50%")]
+    [Header("Bullet")]
     public int AmountOfBullets;
+    public int AmountOfBulletsStronger;
     public float BulletSize;
     public float BulletHeight;
     public float BulletFallSpeed;
-    public float Radius;
-    public HealthDebuff BurningDebuff;
     public float TimeBetweenEachBullet;
-    public float ExplosionDamage;
-    public float FieldDamage;
-    public Vector2 FieldSize;
-    public float TimeBetweenFieldDamage;
-    public float FieldDuration;
-    public float Cooldown;
     public float AttackTime;
+    public float AttackRadius;
+    public float AttackRadiusStronger;
+
+    [Header("Explosion")]
+    public float ExplosionDamage;
     public float ExplosionRadius;
     public float ExplosionDuration;
 
-    [Header("Attack Under 50%")]
-    public int AmountOfBulletsStronger;
+    [Header("Field")]
+    public float FieldDamage;
+    public float TimeBetweenFieldDamage;
+    public float FieldDuration;
+    public HealthDebuff BurningDebuff;
+    public Vector2 FieldSize;
+
+    [Header("Secondary Bullet")]
     public int AmountOfSecondaryBullets;
-    public float RadiusStronger;
     public float SecondaryBulletDistanceToMainBullet;
     public float SecondaryBulletSize;
     public float SecondaryExplosionRadiusPercent;
