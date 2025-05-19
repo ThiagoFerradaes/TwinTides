@@ -43,11 +43,9 @@ public class ZombieTwoTreeManager : EnemyAttackPrefab
             Vector3 candidatePosition = parent.transform.position + new Vector3(randomPoint.x, 0, randomPoint.y);
             candidatePosition.y = 0;
 
-            Debug.Log("Candidate Pos: " + candidatePosition);
             if (NavMesh.SamplePosition(candidatePosition, out NavMeshHit hit, 1.0f, NavMesh.AllAreas)) {
                 spawnPoint = hit.position + Vector3.up * _info.bombHeight;
                 foundValidPosition = true;
-                Debug.Log("Candidate position found? " + foundValidPosition);
                 break;
             }
         }

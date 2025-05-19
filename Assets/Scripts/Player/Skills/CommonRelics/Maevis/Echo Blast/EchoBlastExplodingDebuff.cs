@@ -1,8 +1,5 @@
-using NUnit.Framework;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Netcode;
 using UnityEngine;
 
 public class EchoBlastExplodingDebuff : SkillObjectPrefab {
@@ -11,26 +8,25 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
     int _level;
     SkillContext _context;
     GameObject _maevis, _parent;
+    float _currentEnemyHealth;
 
-    List<HealthManager> events = new();
+    List<HealthManager> _trackedHealthManagers = new();
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as EchoBlast;
         _level = skillLevel;
         _context = context;
 
-        if (_maevis == null) {
-            _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
-        }
+        _maevis = _maevis != null ? _maevis : PlayerSkillPooling.Instance.MaevisGameObject;
 
-        EchoBlastStunExplosion.OnExploded += EchoBlastStunExplosion_OnExploded;
+        EchoBlastStunExplosion.OnExploded += OnExplosionTriggered;
     }
-    private void EchoBlastStunExplosion_OnExploded(object sender, EchoBlastStunExplosion.ExplodedObject e) {
-        DefineParent(e.target);
+    private void OnExplosionTriggered(object sender, EchoBlastStunExplosion.ExplodedObject e) {
+        TryAttachToTarget(e.target);
     }
 
-    private void DefineParent(GameObject parent) {
-        if (_isPositioned || ParentAlreadyHasDebuff(parent)) return;
+    private void TryAttachToTarget(GameObject parent) {
+        if (_isPositioned || TargetAlreadyHasDebuff(parent)) return;
 
         _isPositioned = true;
 
@@ -40,17 +36,13 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
 
         transform.SetLocalPositionAndRotation(new Vector3(0, _info.ExplodingDebuffHeight, 0), Quaternion.Euler(0, 0, 0));
 
+        gameObject.SetActive(true);
 
-        TurnObjectOn();
-
-        parent.TryGetComponent<HealthManager>(out HealthManager health);
-
-        if (!events.Contains(health)) {
-            health.OnGeneralDamage += Health_OnGeneralDamage;
-
-            health.OnDeath += Health_OnDeath;
-
-            events.Add(health);
+        if (parent.TryGetComponent(out HealthManager health) && !_trackedHealthManagers.Contains(health)) {
+            _currentEnemyHealth = health.ReturnCurrentHealth();
+            health.OnHealthUpdate += OnHealthChanged;
+            health.OnDeath += OnDeath;
+            _trackedHealthManagers.Add(health);
         }
 
         StartCoroutine(DebuffDuration());
@@ -58,11 +50,8 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
         StartCoroutine(WaitToStartExploding());
     }
 
-    void TurnObjectOn() {
-        gameObject.SetActive(true);
-    }
 
-    private bool ParentAlreadyHasDebuff(GameObject parent) {
+    private bool TargetAlreadyHasDebuff(GameObject parent) {
         foreach (Transform child in parent.transform) {
             if (child.GetComponent<EchoBlastExplodingDebuff>() != null) {
                 return true;
@@ -71,7 +60,7 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
         return false;
     }
 
-    private void Health_OnDeath() {
+    private void OnDeath() {
         End();
     }
 
@@ -87,13 +76,13 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
         _canSetUpExplosion = true;
     }
 
-    private void Health_OnGeneralDamage(object sender, EventArgs e) {
-        CanExplode();
+    private void OnHealthChanged((float maxHealth, float currentHealth, float currentShield)health) {
+        if (_currentEnemyHealth > health.currentHealth) {
+            if (_canSetUpExplosion) _canExplode = true;
+            _currentEnemyHealth = health.currentHealth;
+        }
     }
 
-    void CanExplode() {
-        if (_canSetUpExplosion) _canExplode = true;
-    }
 
     IEnumerator Explode() {
         while (true) {
@@ -119,14 +108,14 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
     void End() {
         StopAllCoroutines();
 
-        EchoBlastStunExplosion.OnExploded -= EchoBlastStunExplosion_OnExploded;
+        EchoBlastStunExplosion.OnExploded -= OnExplosionTriggered;
 
-        foreach (var enemie in events) {
-            enemie.OnGeneralDamage -= Health_OnGeneralDamage;
-            enemie.OnDeath -= Health_OnDeath;
+        foreach (var enemie in _trackedHealthManagers) {
+            enemie.OnHealthUpdate -= OnHealthChanged;
+            enemie.OnDeath -= OnDeath;
         }
 
-        events.Clear();
+        _trackedHealthManagers.Clear();
 
         transform.parent = null;
 

@@ -8,10 +8,11 @@ public class Waypoints : MonoBehaviour
     public enum PathTag {
         LocalA,
         LocalB,
+        CenterOfArena,
         LocalC,
         LocalD,
         LocalE,
-        LocalF
+        LocalF,
     }
     public List<Transform> PathWayPoints = new();
     Dictionary<Transform, PathTag> pathDictionary = new(); 

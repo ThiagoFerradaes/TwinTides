@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1401d1259cd0a5409ef68548361da78, type: 3}
+  m_Name: Final
+  m_EditorClassIdentifier: 
+  ListOfPrefabs: []
+  ListOfPrefabsNames: []
+  ListOfAttacksNames: []
+  AnchorPrio: 2
+  BulletsPrio: 3
+  BulletsRainPrio: 1
+  CrossPrio: 2
+  WavePrio: 1
+  AnchorCooldown: 20
+  BulletsCooldown: 0
+  BulletsRainCooldown: 40
+  CrossCooldown: 20
+  WaveCooldown: 40
+  CooldownBetweenAttacks: 3
+  HealTimer: 2
+  TimeBetweenHealingAndAttacking: 1
+  JumpToCenterPower: 10
+  JumpToCenterDuration: 0.8
+  DashToPositionSpeed: 10

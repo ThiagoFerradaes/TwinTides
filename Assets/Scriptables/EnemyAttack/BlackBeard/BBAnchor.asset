@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b6a00b0b371c544a3a97c76f43feec, type: 3}
+  m_Name: BBAnchor
+  m_EditorClassIdentifier: 
+  ListOfPrefabs:
+  - {fileID: 7423980347696019090, guid: 2f9cf3ba01e6da04e909ffceef58ec12, type: 3}
+  - {fileID: 7423980347696019090, guid: 9fae9e128877a6b469416ca887c7c07b, type: 3}
+  ListOfPrefabsNames:
+  - Black Beard Anchor
+  - Black Beard Chain
+  ListOfAttacksNames: []
+  AnchorRange: 18
+  AnchorSpeed: 22
+  AnchorDamage: 1
+  AnchorStunTime: 2
+  Cooldown: 20
+  TimeBetweenAttacks: 2
+  AnchorSize: {x: 8, y: 2, z: 4}
+  AnchorOffset: 1
+  AnchorRotationSPeed: 180
+  ChainDamage: 1
+  RotationDuration: 4.4
+  ChainSize: {x: 1, y: 1}

@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf265bca709746146adc6cc9bfca6d36, type: 3}
+  m_Name: BBRainAttack
+  m_EditorClassIdentifier: 
+  ListOfPrefabs:
+  - {fileID: 1516381448724842725, guid: dcb248d9d780f794db6ae009ace209ba, type: 3}
+  - {fileID: 6274239617610626292, guid: 48474a0a897410f49a8447009a3a0c69, type: 3}
+  - {fileID: 6274239617610626292, guid: 389ddaa209cdae040b1d322423909fb6, type: 3}
+  - {fileID: 2888966623609141944, guid: 7cf3b305bbab3604290fb6d087c5cc59, type: 3}
+  - {fileID: 6274239617610626292, guid: 2e6795454d880a540b69ad5248b73908, type: 3}
+  ListOfPrefabsNames:
+  - Black Beard Rain Bullet Manager
+  - Black Beard Rain Bullet Bomb
+  - Black Beard Rain Bullet Explosion
+  - Black Beard Rain Bullet FIeld
+  - Black Beard Rain SecondaryBullet
+  ListOfAttacksNames: []
+  AmountOfBullets: 12
+  AmountOfBulletsStronger: 15
+  BulletSize: 3
+  BulletHeight: 20
+  BulletFallSpeed: 20
+  TimeBetweenEachBullet: 1.5
+  AttackTime: 2
+  AttackRadius: 20
+  AttackRadiusStronger: 18
+  ExplosionDamage: 1
+  ExplosionRadius: 10
+  ExplosionDuration: 0.1
+  FieldDamage: 1
+  TimeBetweenFieldDamage: 0.1
+  FieldDuration: 15
+  BurningDebuff: {fileID: 11400000, guid: 86a385b2a33a4bf478a57b6cb16ca780, type: 2}
+  FieldSize: {x: 10, y: 0.3}
+  AmountOfSecondaryBullets: 3
+  SecondaryBulletDistanceToMainBullet: 4
+  SecondaryBulletSize: 2.5
+  SecondaryExplosionRadiusPercent: 10
+  SecondaryBulletJumpPower: 8
+  SecondaryBulletJumpDuration: 0.5
+  SecondaryBulletSizeMultiplier: 8

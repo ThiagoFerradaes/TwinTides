@@ -45,7 +45,7 @@ public class HullbreakerObject : SkillObjectPrefab {
 
         while (elapsedTime < _info.ShieldDuration) {
             elapsedTime += Time.deltaTime;
-            if (!health.isShielded.Value) break;
+            if (!health.ReturnShieldStatus()) break;
             yield return null;
         }
 

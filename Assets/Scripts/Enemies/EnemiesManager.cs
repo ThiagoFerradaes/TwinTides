@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemiesManager : MonoBehaviour
 {
-    public List<GameObject> listOfEnemies;
+    public List<Camps> ListOfCamps = new();
+    public List<GameObject> ListOfEnemies = new();
 
     public static EnemiesManager Instance;
 
@@ -14,14 +15,22 @@ public class EnemiesManager : MonoBehaviour
             return;
         }
         Instance = this;
+
+
     }
 
-
+    private void Start() {
+        foreach (var camp in ListOfCamps) {
+            foreach (var enemy in camp.ReturnListOfEnemies()) {
+                ListOfEnemies.Add(enemy);
+            }
+        }
+    }
     public int TransformEnemyInId(GameObject enemy) {
-        return listOfEnemies.IndexOf(enemy);
+        return ListOfEnemies.IndexOf(enemy);
     }
 
     public GameObject TransformIdInEnemy(int id) {
-        return listOfEnemies[id];
+        return ListOfEnemies[id];
     }
 }
