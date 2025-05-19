@@ -25,6 +25,9 @@ public class BlackBeardRunawayState : BlackBeardStates {
     Coroutine runCoroutine;
     Coroutine phaseCoroutine;
 
+    // Health
+    HealthManager _health;
+
     #endregion
     public override void StartState(BlackBeardMachineState parent) {
         base.StartState(parent);
@@ -40,6 +43,8 @@ public class BlackBeardRunawayState : BlackBeardStates {
 
         if (_info == null) _info = _parent.ListOfAttacks[1] as BlackBeardRunawaySO;
 
+        if (_health == null) _health = _parent.Health;
+
         isStuned = false;
         changedState = false;
 
@@ -47,7 +52,12 @@ public class BlackBeardRunawayState : BlackBeardStates {
 
         camp.OnAllEnemiesDead -= Camp_OnAllEnemiesDead;
         camp.OnAllEnemiesDead += Camp_OnAllEnemiesDead;
+
+        _health.OnHealthUpdate -= CheckHealthToChangeState;
+        _health.OnHealthUpdate += CheckHealthToChangeState;
     }
+
+
 
     private void Camp_OnAllEnemiesDead() {
         if (!changedState && !isStuned) {
@@ -56,7 +66,6 @@ public class BlackBeardRunawayState : BlackBeardStates {
     }
 
     void LeaveShip() {
-        Debug.Log("Leave ship");
 
         _parent.transform.DOKill();
 
@@ -122,6 +131,16 @@ public class BlackBeardRunawayState : BlackBeardStates {
         if (!changedState) EndPhase();
     }
 
+    private void CheckHealthToChangeState((float maxHealth, float currentHealth, float currentShield) health) {
+        if (_parent.Lifes > 1) {
+            float newHealth = health.currentHealth;
+
+            if (newHealth == 0) {
+                _parent.Lifes = 1;
+                EndPhase();
+            }
+        }
+    }
     void EndPhase() {
         if (changedState) return;
 
@@ -129,24 +148,36 @@ public class BlackBeardRunawayState : BlackBeardStates {
 
         changedState = true;
 
-        int enemiesAlive = camp.ReturnAliveCount();
+        if (_parent.Lifes > 1) {
+            int enemiesAlive = camp.ReturnAliveCount();
 
-        if (enemiesAlive > 0) {
-            camp.KillCamp();
+            if (enemiesAlive > 0) {
+                camp.KillCamp();
 
-            _parent.Health.Heal(_info.AmountOfHealthRecoveredPerEnemy * enemiesAlive, false);
+                _parent.Health.Heal(_info.AmountOfHealthRecoveredPerEnemy * enemiesAlive, false);
+            }
+
+            _parent.transform.DOJump(_parent.ShipPlace.position, _info.JumpPower, 1, _info.JumpDuration).OnComplete(() => {
+                _parent.Health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, true);
+
+                ChangePhase();
+            });
         }
+        else {
+            int enemiesAlive = camp.ReturnAliveCount();
 
-        _parent.transform.DOJump(_parent.ShipPlace.position, _info.JumpPower, 1, _info.JumpDuration).OnComplete(() => {
-            _parent.Health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, true);
+            if (enemiesAlive > 0) {
+                camp.KillCamp();
+            }
 
             ChangePhase();
-        });
+        }
     }
 
     void ChangePhase() {
         if (changedState) {
-            _parent.ChangeState(BlackBeardState.SHIP);
+            if (_parent.Lifes > 1) _parent.ChangeState(BlackBeardState.SHIP);
+            else _parent.ChangeState(BlackBeardState.FINAL);
         }
     }
 }

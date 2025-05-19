@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: d25b9d80db440d249972f6af7791cc43, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -162,8 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3430547126
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 208546099
+  InScenePlacedSourceGlobalObjectIdHash: 3430547126
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
@@ -224,17 +224,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  maxHealth:
-    m_InternalValue: 10
+  health: 20
   maxShieldAmount: 10
-  deathBehaviour: {fileID: 11400000, guid: 589511066338e104a96a8b3062906aaf, type: 2}
+  deathBehaviour: {fileID: 11400000, guid: a42cb83f27232bf448507fc899231a6b, type: 2}
   damageMaterial: {fileID: 2100000, guid: bd260d75cd071d94cb8da51f88f1f28c, type: 2}
-  _currentHealth:
-    m_InternalValue: 0
-  currentShieldAmount:
-    m_InternalValue: 0
-  isShielded:
-    m_InternalValue: 0
 --- !u!114 &2049203172403124494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,7 +315,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: d25b9d80db440d249972f6af7791cc43, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -366,10 +359,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5f7ca4ace10bd9b4cb6d88e73e6a5d2d, type: 2}
   - {fileID: 11400000, guid: 823cca1730db25d409e134dcaba4c9e3, type: 2}
   CenterOfArena: {fileID: 0}
-  CannonsPosition: []
+  CannonsPosition:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Ship: {fileID: 0}
   ShipPlace: {fileID: 0}
   LandPlace: {fileID: 0}
   ShipCamp: {fileID: 0}
-  Health: {fileID: 0}
-  Lifes: 1
+  Health: {fileID: 5586428718235828075}
+  Lifes: 2

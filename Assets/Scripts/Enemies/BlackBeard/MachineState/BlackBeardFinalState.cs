@@ -7,13 +7,19 @@ using UnityEngine;
 public class BlackBeardFinalState : BlackBeardStates {
 
     #region variabels
+
+    // SOS
     BlackBeardCrossAttackSo _crossInfo;
     BlackBeardAnchorAttackSO _anchorInfo;
     BlackBeardBulletsAttackSO _bulletsInfo;
     BlackBeardBulletRainSO _bulletRainInfo;
     BlackBeardWaveAttackSO _waveInfo;
     BlackBeardFinalSO _info;
+
+    // Health
     HealthManager _health;
+
+    // Listas
     List<BlackBeardFinalFormAttacks> _attacks;
     #endregion
 
@@ -47,16 +53,43 @@ public class BlackBeardFinalState : BlackBeardStates {
             new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.ANCHOR, Priority = _info.AnchorPrio, Cooldown = _info.AnchorCooldown },
         };
 
+        _health.OnHealthUpdate += HealthUpdate;
+
+    }
+
+    private void HealthUpdate((float maxHealth, float currentHealth, float currentShield) obj) {
+        throw new System.NotImplementedException();
     }
 
     void JumpToCenter() {
         _parent.transform.DOJump(_parent.CenterOfArena.position, _info.JumpToCenterPower, 1, _info.JumpToCenterDuration).OnComplete(() => {
-            _parent.StartCoroutine(WaitToAtack());
+            _parent.StartCoroutine(HealFullLife());
         });
     }
 
-    IEnumerator WaitToAtack() {
-        yield return new WaitForSeconds(0.5f);
+    IEnumerator HealFullLife() {
+        float timer = 0f;
+        float duration = _info.HealTimer;
+        float startHealth = _health.ReturnCurrentHealth();
+        float maxHealth = _health.ReturnMaxHealth();
+        float totalToHeal = maxHealth - startHealth;
+
+        while (timer < duration) {
+            float deltaTime = Time.deltaTime;
+            timer += deltaTime;
+
+            float fraction = deltaTime / duration;
+            float amountToHeal = totalToHeal * fraction;
+
+            _health.Heal(amountToHeal, false);
+
+            yield return null;
+        }
+
+        _health.Heal(maxHealth - _health.ReturnCurrentHealth(), false);
+
+        yield return new WaitForSeconds(_info.TimeBetweenHealingAndAttacking);
+
         Attack();
     }
     #endregion
@@ -355,6 +388,13 @@ public class BlackBeardFinalState : BlackBeardStates {
         Attack();
     }
 
+    #endregion
+
+    #region ChangeState
+
+    void ChangeState() {
+        
+    }
     #endregion
 
 }

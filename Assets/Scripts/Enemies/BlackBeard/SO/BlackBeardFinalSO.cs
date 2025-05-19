@@ -19,6 +19,8 @@ public class BlackBeardFinalSO : BlackBeardSO
     public float CooldownBetweenAttacks;
 
     [Header("Phase")]
+    public float HealTimer;
+    public float TimeBetweenHealingAndAttacking;
     public float JumpToCenterPower;
     public float JumpToCenterDuration;
     public float DashToPositionSpeed;

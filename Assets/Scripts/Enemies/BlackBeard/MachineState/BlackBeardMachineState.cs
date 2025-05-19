@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,10 +21,18 @@ public class BlackBeardMachineState : MonoBehaviour
 
     public HealthManager Health;
 
-    public int Lifes = 1;
+    public int Lifes = 2;
+
+    public event Action OnFinal;
+
     void Start()
     {
-        _currentState = _finalState;
+        StartCoroutine(WaitToStart());
+    }
+
+    IEnumerator WaitToStart() {
+        yield return new WaitForSeconds(0.5f);
+        _currentState = _shipState;
         _currentState.StartState(this);
     }
 
@@ -33,6 +43,8 @@ public class BlackBeardMachineState : MonoBehaviour
             BlackBeardState.FINAL => _finalState,
             _ => _shipState
         };
+
+        if (state == BlackBeardState.FINAL) OnFinal?.Invoke();
 
         _currentState.StartState(this);
     }

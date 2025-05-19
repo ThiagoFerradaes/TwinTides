@@ -51,43 +51,52 @@ public class SkillUiManager : MonoBehaviour {
     readonly Dictionary<SkillType, TextMeshProUGUI> _listOfCooldowns = new();
 
     // Corrotinas
-    Coroutine baseAttackCoroutine, commonRelicOneCoroutine, commonRelicTwoCoroutine, legendaryRelicCoroutine;
+    Coroutine commonRelicOneCoroutine, commonRelicTwoCoroutine, legendaryRelicCoroutine;
     #endregion
 
     #region Methods
+
+    #region Initialize
     private void Start() {
         AddTextsToListOfCooldowns(); // Criar um dicionario com os textMeshPros
         SetCharacterSpriteInfo(); // Colocar a foto do personagem principal
         SetSkillsSpritesInfo(); // Colocar sprite nas skills
         SetInicialCooldowns(); // Zerar o texto de cooldowns
-        SetGoldText(); // Mudar o texto do gold
+        UpdateGoldText(); // Mudar o texto do gold
     }
     private void OnEnable() {
         PlayerSetUp.OnPlayerSpawned += SetPlayerOne;
         PlayerSetUp.OnPlayerTwoSpawned += SetPlayerTwo;
-        LocalWhiteBoard.OnRelicEquiped += LocalWhiteBoard_OnRelicEquiped;
-        LocalWhiteBoard.OnGoldChanged += LocalWhiteBoard_OnGoldChanged;
+        LocalWhiteBoard.OnRelicEquiped += OnRelicEquipped;
+        LocalWhiteBoard.OnGoldChanged += OnGoldChanged;
+    }
+    private void OnDisable() {
+        if (_playerCharacter != null) {
+            _playerCharacter.GetComponent<HealthManager>().OnHealthUpdate -= UpdatePlayerHealth;
+        }
+
+        if (_playerTwoCharacter != null) {
+            _playerTwoCharacter.GetComponent<HealthManager>().OnHealthUpdate -= UpdatePlayerTwoHealth;
+        }
+
+        PlayerSetUp.OnPlayerSpawned -= SetPlayerOne;
+        PlayerSetUp.OnPlayerTwoSpawned -= SetPlayerTwo;
+        LocalWhiteBoard.OnRelicEquiped -= OnRelicEquipped;
+        LocalWhiteBoard.OnGoldChanged -= OnGoldChanged;
     }
 
-    private void LocalWhiteBoard_OnGoldChanged(object sender, EventArgs e) {
-        SetGoldText();
-    }
+    #endregion
 
+    #region Set Players
     void SetPlayerOne(GameObject player) {
         _playerCharacter = player;
 
         SetCharacterHealthManagerInfo();
-        _playerCharacter.GetComponent<PlayerController>().OnDashCooldown += SetCooldown;
+
         PlayerSkillManager skillManager = _playerCharacter.GetComponent<PlayerSkillManager>();
-        skillManager.OnBaseAttack += SkillManager_SkillUSed;
         skillManager.OnCommonSkillOne += SkillManager_SkillUSed;
         skillManager.OnCommonSkillTwo += SkillManager_SkillUSed;
         skillManager.OnLegendary += SkillManager_SkillUSed;
-    }
-
-    private void SkillManager_SkillUSed(object sender, PlayerSkillManager.SkillEventHandler e) {
-        Debug.Log("Event invoked");
-        SetCooldown(e.Type, e.SkillCooldown);
     }
 
     void SetPlayerTwo(GameObject player) {
@@ -95,146 +104,137 @@ public class SkillUiManager : MonoBehaviour {
 
         SetSecondCharacterHealthManagerInfo();
     }
-    void UpdatePlayerHealth((float maxHealth, float currentHealth, float currentShield) health) {
-        characterHealthText.text = health.currentHealth.ToString("F0") + " / " + health.maxHealth.ToString("F0");
-        if (health.currentShield != 0) playerShieldText.text = health.currentShield.ToString("F0");
-        else playerShieldText.text = "";
-    }
-    void UpdatePlayerTwoHealth((float maxHealth, float currentHealth, float currentShield) health) {
-        playerTwoHealthText.text = health.currentHealth.ToString("F0") + " / " + health.maxHealth.ToString("F0");
-        if (health.currentShield != 0) playerTwoShieldText.text = health.currentShield.ToString("F0");
-        else playerTwoShieldText.text = "";
+    #endregion
+
+    #region Player Health
+    private void UpdatePlayerHealth((float maxHealth, float currentHealth, float currentShield) health) {
+        characterHealthText.text = $"{health.currentHealth:F0} / {health.maxHealth:F0}";
+        playerShieldText.text = health.currentShield > 0 ? health.currentShield.ToString("F0") : "";
     }
 
+    private void UpdatePlayerTwoHealth((float maxHealth, float currentHealth, float currentShield) health) {
+        playerTwoHealthText.text = $"{health.currentHealth:F0} / {health.maxHealth:F0}";
+        playerTwoShieldText.text = health.currentShield > 0 ? health.currentShield.ToString("F0") : "";
+    }
+
+    private void SetCharacterHealthManagerInfo() {
+        HealthManager health = _playerCharacter.GetComponent<HealthManager>();
+        health.OnHealthUpdate += UpdatePlayerHealth;
+
+        UpdatePlayerHealth((health.ReturnMaxHealth(), health.ReturnCurrentHealth(), health.ReturnShieldAmount()));
+    }
+    private void SetSecondCharacterHealthManagerInfo() {
+        playerTwoInfo.SetActive(true);
+
+        HealthManager health = _playerTwoCharacter.GetComponent<HealthManager>();
+        health.OnHealthUpdate += UpdatePlayerTwoHealth;
+
+        UpdatePlayerHealth((health.ReturnMaxHealth(), health.ReturnCurrentHealth(), health.ReturnShieldAmount()));
+    }
+    #endregion
+
+    #region Sprite
+    private void OnRelicEquipped(object sender, EventArgs e) {
+        SetSkillsSpritesInfo();
+    }
+    private void SetCharacterSpriteInfo() {
+        bool isMaevis = LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis;
+
+        characterImage.sprite = isMaevis ? maevisSprite : melSprite;
+        characterTag.sprite = isMaevis ? maevisTag : melTag;
+        playerTwoCharacterImage.sprite = isMaevis ? melSprite : maevisSprite;
+        playerTwoCharacterTag.sprite = isMaevis ? melTag : maevisTag;
+    }
+
+    private void SetSkillsSpritesInfo() {
+        SetSkillSprite(legendaryRelicSkillImage, LocalWhiteBoard.Instance.PlayerLegendarySkill);
+        SetSkillSprite(commonRelicSkillOneImage, LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne);
+        SetSkillSprite(commonRelicSkillTwoImage, LocalWhiteBoard.Instance.PlayerCommonRelicSkillTwo);
+    }
+
+    private void SetSkillSprite(Image image, Skill skill) {
+        if (skill != null) {
+            image.sprite = skill.UiSprite;
+            if (!image.gameObject.activeSelf) image.gameObject.SetActive(true);
+        }
+        else {
+            image.sprite = null;
+            image.gameObject.SetActive(false);
+        }
+    }
+    #endregion
+
+    #region Gold
+    private void OnGoldChanged(object sender, EventArgs e) {
+        UpdateGoldText();
+    }
+
+    private void UpdateGoldText() {
+        goldText.text = LocalWhiteBoard.Instance.Gold.ToString("F0");
+    }
+    #endregion
+
+    #region Players Skills
     private void AddTextsToListOfCooldowns() {
         _listOfCooldowns.Add(SkillType.LegendaryRelic, legendaryRelicSkillCooldownText);
         _listOfCooldowns.Add(SkillType.CommonRelicOne, commonRelicSkillOneCooldownText);
         _listOfCooldowns.Add(SkillType.CommonRelicTwo, commonRelicSkillTwoCooldownText);
 
     }
-    private void SetCharacterSpriteInfo() {
-        if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
-            if (melSprite != null && maevisSprite != null) {
-                characterImage.sprite = maevisSprite;
-                characterTag.sprite = maevisTag;
-
-                playerTwoCharacterImage.sprite = melSprite;
-                playerTwoCharacterTag.sprite = melTag;
-            }
-        }
-        else {
-            if (melSprite != null && maevisSprite != null) {
-                characterImage.sprite = melSprite;
-                characterTag.sprite = melTag;
-
-                playerTwoCharacterImage.sprite = maevisSprite;
-                playerTwoCharacterTag.sprite = maevisTag;
-            }
-        }
-    }
-    private void SetCharacterHealthManagerInfo() {
-        _playerCharacter.GetComponent<HealthManager>().UpdateHealth += UpdatePlayerHealth;
-    }
-    private void SetSecondCharacterHealthManagerInfo() {
-        playerTwoInfo.SetActive(true);
-        _playerTwoCharacter.GetComponent<HealthManager>().UpdateHealth += UpdatePlayerTwoHealth;
-    }
-    private void LocalWhiteBoard_OnRelicEquiped(object sender, EventArgs e) {
-        SetSkillsSpritesInfo();
-    }
-    private void SetSkillsSpritesInfo() {
-
-        if (LocalWhiteBoard.Instance.PlayerLegendarySkill != null) {
-            if (!legendaryRelicSkillImage.gameObject.activeSelf) legendaryRelicSkillImage.gameObject.SetActive(true);
-            legendaryRelicSkillImage.sprite = LocalWhiteBoard.Instance.PlayerLegendarySkill.UiSprite;
-        }
-        else {
-            legendaryRelicSkillImage.gameObject.SetActive(false);
-            legendaryRelicSkillImage.sprite = null;
-        }
-        if (LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne != null) {
-            commonRelicSkillOneImage.sprite = LocalWhiteBoard.Instance.PlayerCommonRelicSkillOne.UiSprite;
-            if (!commonRelicSkillOneImage.gameObject.activeSelf) commonRelicSkillOneImage.gameObject.SetActive(true);
-        }
-        else {
-            commonRelicSkillOneImage.gameObject.SetActive(false);
-            commonRelicSkillOneImage.sprite = null;
-        }
-        if (LocalWhiteBoard.Instance.PlayerCommonRelicSkillTwo != null) {
-            commonRelicSkillTwoImage.sprite = LocalWhiteBoard.Instance.PlayerCommonRelicSkillTwo.UiSprite;
-            if (!commonRelicSkillTwoImage.gameObject.activeSelf) commonRelicSkillTwoImage.gameObject.SetActive(true);
-        }
-        else {
-            commonRelicSkillTwoImage.gameObject.SetActive(false);
-            commonRelicSkillTwoImage.sprite = null;
-        }
-
-    }
     private void SetInicialCooldowns() {
-        foreach (var item in _listOfCooldowns) {
-            item.Value.text = "";
+        foreach (var cooldown in _listOfCooldowns) {
+            cooldown.Value.text = "";
         }
     }
-    private void SetGoldText() {
-        goldText.text = LocalWhiteBoard.Instance.Gold.ToString("F0");
-    }
-    void SetCooldown(SkillType skillType, float cooldown) {
-        if (_listOfCooldowns.ContainsKey(skillType)) {
-            switch (skillType) {
-                //case SkillType.Attack:
-                //    if (baseAttackCoroutine != null) {
-                //        StopCoroutine(baseAttackCoroutine);
-                //        baseAttackCoroutine = null;
-                //    }
-                //    baseAttackCoroutine = StartCoroutine(StartSkillCooldown(_listOfCooldowns[skillType], cooldown));
-                //    break;
-                case SkillType.CommonRelicOne:
-                    if (commonRelicOneCoroutine != null) {
-                        StopCoroutine(commonRelicOneCoroutine);
-                        commonRelicOneCoroutine = null;
-                    }
-                    commonRelicOneCoroutine = StartCoroutine(StartSkillCooldown(_listOfCooldowns[skillType], cooldown, commonRelicSkillOneCooldownImage));
-                    break;
-                case SkillType.CommonRelicTwo:
-                    if (commonRelicTwoCoroutine != null) {
-                        StopCoroutine(commonRelicTwoCoroutine);
-                        commonRelicTwoCoroutine = null;
-                    }
-                    commonRelicTwoCoroutine = StartCoroutine(StartSkillCooldown(_listOfCooldowns[skillType], cooldown, commonRelicSkillTwoCooldownImage));
-                    break;
-                case SkillType.LegendaryRelic:
-                    if (legendaryRelicCoroutine != null) {
-                        StopCoroutine(legendaryRelicCoroutine);
-                        legendaryRelicCoroutine = null;
-                    }
-                    legendaryRelicCoroutine = StartCoroutine(StartSkillCooldown(_listOfCooldowns[skillType], cooldown, legendaryRelicSkillCooldownImage));
-                    break;
-            }
-        }
+    private void SkillManager_SkillUSed(object sender, PlayerSkillManager.SkillEventHandler e) {
+        SetCooldown(e.Type, e.SkillCooldown);
     }
 
-    IEnumerator StartSkillCooldown(TextMeshProUGUI text, float cooldown, Image cooldownImage) {
-        float skillCooldown = cooldown;
+    private void SetCooldown(SkillType type, float cooldown) {
+        if (!_listOfCooldowns.ContainsKey(type)) return;
+
+        Coroutine coroutineToStop = null;
+        Image cooldownImage = null;
+
+        switch (type) {
+            case SkillType.CommonRelicOne:
+                coroutineToStop = commonRelicOneCoroutine;
+                cooldownImage = commonRelicSkillOneCooldownImage;
+                break;
+            case SkillType.CommonRelicTwo:
+                coroutineToStop = commonRelicTwoCoroutine;
+                cooldownImage = commonRelicSkillTwoCooldownImage;
+                break;
+            case SkillType.LegendaryRelic:
+                coroutineToStop = legendaryRelicCoroutine;
+                cooldownImage = legendaryRelicSkillCooldownImage;
+                break;
+        }
+
+        if (coroutineToStop != null) StopCoroutine(coroutineToStop);
+
+        Coroutine newCoroutine = StartCoroutine(StartSkillCooldown(_listOfCooldowns[type], cooldown, cooldownImage));
+        switch (type) {
+            case SkillType.CommonRelicOne: commonRelicOneCoroutine = newCoroutine; break;
+            case SkillType.CommonRelicTwo: commonRelicTwoCoroutine = newCoroutine; break;
+            case SkillType.LegendaryRelic: legendaryRelicCoroutine = newCoroutine; break;
+        }
+    }
+    private IEnumerator StartSkillCooldown(TextMeshProUGUI text, float duration, Image cooldownImage) {
         if (!cooldownImage.gameObject.activeSelf) cooldownImage.gameObject.SetActive(true);
-        while (cooldown > 0) {
-            cooldown -= Time.deltaTime;
-            text.text = cooldown.ToString("F0");
-            if (cooldownImage != null) cooldownImage.fillAmount = cooldown / skillCooldown;
+
+        float timer = duration;
+        while (timer > 0) {
+            timer -= Time.deltaTime;
+            text.text = timer.ToString("F0");
+            if (cooldownImage != null) cooldownImage.fillAmount = timer / duration;
             yield return null;
         }
 
         cooldownImage.gameObject.SetActive(false);
         text.text = "";
     }
-    private void OnDisable() {
-        if (_playerCharacter == null || _playerTwoCharacter == null) return;
-        _playerCharacter.GetComponent<HealthManager>().UpdateHealth -= UpdatePlayerHealth;
-        _playerTwoCharacter.GetComponent<HealthManager>().UpdateHealth -= UpdatePlayerTwoHealth;
+    #endregion
 
-        PlayerSetUp.OnPlayerSpawned -= SetPlayerOne;
-        PlayerSetUp.OnPlayerTwoSpawned -= SetPlayerTwo;
-        LocalWhiteBoard.OnRelicEquiped -= LocalWhiteBoard_OnRelicEquiped;
-        _playerCharacter.GetComponent<PlayerController>().OnDashCooldown -= SetCooldown;
-    }
     #endregion
 }

@@ -23,6 +23,7 @@ public class BlackBeardShipState : BlackBeardStates {
 
     // Corrotinas
     Coroutine _cooldownCoroutine;
+    Coroutine _attackRoutine;
 
     // HealthManager do barba negra
     HealthManager _health;
@@ -45,7 +46,7 @@ public class BlackBeardShipState : BlackBeardStates {
 
         DefineHealthLimit();
 
-        _health.OnGeneralDamage += BlackBeardShipState_OnGeneralDamage;
+        _health.OnHealthUpdate += CheckHealthToChangeState;
 
         if (_firstTime) _parent.StartCoroutine(InitialCooldown());
         else Attack();
@@ -133,17 +134,17 @@ public class BlackBeardShipState : BlackBeardStates {
                 int rng = Random.Range(0, 3);
 
                 switch (rng) {
-                    case 0: _parent.StartCoroutine(ShootUpAttack()); break;
-                    case 1: _parent.StartCoroutine(StraightShootAttack()); break;
-                    case 2: _parent.StartCoroutine(BombAttack()); break;
+                    case 0: _attackRoutine = _parent.StartCoroutine(ShootUpAttack()); break;
+                    case 1: _attackRoutine = _parent.StartCoroutine(StraightShootAttack()); break;
+                    case 2: _attackRoutine = _parent.StartCoroutine(BombAttack()); break;
                 }
             }
             else {
                 int rng = Random.Range(0, 2);
 
                 switch (rng) {
-                    case 0: _parent.StartCoroutine(ShootUpAttack()); break;
-                    case 1: _parent.StartCoroutine(StraightShootAttack()); break;
+                    case 0: _attackRoutine = _parent.StartCoroutine(ShootUpAttack()); break;
+                    case 1: _attackRoutine = _parent.StartCoroutine(StraightShootAttack()); break;
                 }
             }
 
@@ -320,19 +321,29 @@ public class BlackBeardShipState : BlackBeardStates {
 
     #region ChangeState
 
-    private void BlackBeardShipState_OnGeneralDamage(object sender, float damage) {
-        float newHealth = _health.ReturnCurrentHealth();
+    private void CheckHealthToChangeState((float maxHealth, float currentHealth, float currentShield) health) {
+        if (_parent.Lifes > 1) {
+            float newHealth = health.currentHealth;
+            Debug.Log(newHealth + " " + healthLimit);
 
-        if (newHealth <= healthLimit) ChangeState();
+            if (newHealth == 0) {
+                _parent.Lifes = 1;
+                ChangeState();
+            }
+            else if (newHealth <= healthLimit) ChangeState();
+        }
     }
 
     void ChangeState() { // fim desse estado
 
         _parent.StopCoroutine(_cooldownCoroutine); // parando corrotina de cooldown
 
-        _parent.GetComponent<HealthManager>().OnGeneralDamage -= BlackBeardShipState_OnGeneralDamage; // Desinscrevendo do evento
+        _parent.StopCoroutine(_attackRoutine); // parando corrotina de ataque
 
-        _parent.ChangeState(BlackBeardState.RUNNAWAY); // trocando de estado
+        _parent.GetComponent<HealthManager>().OnHealthUpdate -= CheckHealthToChangeState; // Desinscrevendo do evento
+
+        if (_parent.Lifes > 1) _parent.ChangeState(BlackBeardState.RUNNAWAY); // trocando de estado
+        else _parent.ChangeState(BlackBeardState.FINAL);
     }
 
     #endregion
