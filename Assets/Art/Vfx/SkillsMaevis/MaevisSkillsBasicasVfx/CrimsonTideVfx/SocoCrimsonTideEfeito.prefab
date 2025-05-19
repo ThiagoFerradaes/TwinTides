@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd322b36067bcea46b28a845c497f15f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.74
+      value: -18.515709
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd322b36067bcea46b28a845c497f15f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd322b36067bcea46b28a845c497f15f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.94
+      value: 26.08808
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd322b36067bcea46b28a845c497f15f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -71,15 +71,15 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: cd322b36067bcea46b28a845c497f15f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: aa22af1200ebc7949b0d08e74b79d4bc, type: 2}
+      objectReference: {fileID: 2100000, guid: 758bee558ebfe42488ae8ac9703078e0, type: 2}
     - target: {fileID: -7511558181221131132, guid: cd322b36067bcea46b28a845c497f15f, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: 2100000, guid: c8efe39f69331e545bf7d8e1bd93d44a, type: 2}
+      objectReference: {fileID: 2100000, guid: 7ca04efcff658bc469e2561bdc5a958d, type: 2}
     - target: {fileID: -7511558181221131132, guid: cd322b36067bcea46b28a845c497f15f, type: 3}
       propertyPath: 'm_Materials.Array.data[2]'
       value: 
-      objectReference: {fileID: 2100000, guid: 7313f05b016292149b00e02f4a025955, type: 2}
+      objectReference: {fileID: 2100000, guid: c7c16590a9abead4cbfdeb2acc0c17e4, type: 2}
     - target: {fileID: -7511558181221131132, guid: cd322b36067bcea46b28a845c497f15f, type: 3}
       propertyPath: 'm_Materials.Array.data[3]'
       value: 
@@ -90,10 +90,33 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 24e7ca8e2cca1dd42a5983eaaa4062b8, type: 2}
     - target: {fileID: 919132149155446097, guid: cd322b36067bcea46b28a845c497f15f, type: 3}
       propertyPath: m_Name
-      value: a
+      value: SocoCrimsonTideEfeito
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cd322b36067bcea46b28a845c497f15f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 191665510199303655}
   m_SourcePrefab: {fileID: 100100000, guid: cd322b36067bcea46b28a845c497f15f, type: 3}
+--- !u!1 &8421740339156009888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: cd322b36067bcea46b28a845c497f15f, type: 3}
+  m_PrefabInstance: {fileID: 8656307600292708081}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &191665510199303655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8421740339156009888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84b033ecd571274baebfda03ea8bcfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialScale: {x: 3, y: 1, z: 3}
+  finalScale: {x: 5.51, y: 5.51, z: 5.51}
+  duration: 0.15
