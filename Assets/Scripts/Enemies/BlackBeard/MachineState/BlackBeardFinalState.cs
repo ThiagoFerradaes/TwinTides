@@ -64,6 +64,9 @@ public class BlackBeardFinalState : BlackBeardStates {
     }
 
     IEnumerator HealFullLife() {
+
+        _health.ReviveHandler(0);
+
         float timer = 0f;
         float duration = _info.HealTimer;
         float startHealth = _health.ReturnCurrentHealth();
