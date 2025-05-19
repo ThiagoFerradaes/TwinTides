@@ -53,8 +53,8 @@ public class BlackBeardRunawayState : BlackBeardStates {
         camp.OnAllEnemiesDead -= Camp_OnAllEnemiesDead;
         camp.OnAllEnemiesDead += Camp_OnAllEnemiesDead;
 
-        _health.OnHealthUpdate -= CheckHealthToChangeState;
-        _health.OnHealthUpdate += CheckHealthToChangeState;
+        _health.OnDeath -= OnDeath;
+        _health.OnDeath += OnDeath;
     }
 
 
@@ -131,15 +131,9 @@ public class BlackBeardRunawayState : BlackBeardStates {
         if (!changedState) EndPhase();
     }
 
-    private void CheckHealthToChangeState((float maxHealth, float currentHealth, float currentShield) health) {
-        if (_parent.Lifes > 1) {
-            float newHealth = health.currentHealth;
-
-            if (newHealth == 0) {
-                _parent.Lifes = 1;
-                EndPhase();
-            }
-        }
+    void OnDeath() {
+        _parent.Lifes = 1;
+        EndPhase();
     }
     void EndPhase() {
         if (changedState) return;

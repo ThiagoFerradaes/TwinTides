@@ -53,13 +53,9 @@ public class BlackBeardFinalState : BlackBeardStates {
             new() { Attack = BlackBeardFinalFormAttacks.FinalFormAttacks.ANCHOR, Priority = _info.AnchorPrio, Cooldown = _info.AnchorCooldown },
         };
 
-        _health.OnHealthUpdate += HealthUpdate;
 
     }
 
-    private void HealthUpdate((float maxHealth, float currentHealth, float currentShield) obj) {
-        throw new System.NotImplementedException();
-    }
 
     void JumpToCenter() {
         _parent.transform.DOJump(_parent.CenterOfArena.position, _info.JumpToCenterPower, 1, _info.JumpToCenterDuration).OnComplete(() => {
@@ -80,6 +76,7 @@ public class BlackBeardFinalState : BlackBeardStates {
 
             float fraction = deltaTime / duration;
             float amountToHeal = totalToHeal * fraction;
+            Debug.Log(amountToHeal);
 
             _health.Heal(amountToHeal, false);
 

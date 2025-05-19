@@ -160,7 +160,7 @@ public class HealthManager : NetworkBehaviour {
 
     // Heal
     public void Heal(float healAmount, bool melHealed) {
-        bool isFullLife = _currentHealth.Value < _maxHealth.Value;
+        bool isFullLife = _currentHealth.Value >= _maxHealth.Value;
 
         if (!_canBeHealed.Value || isFullLife) return;
 

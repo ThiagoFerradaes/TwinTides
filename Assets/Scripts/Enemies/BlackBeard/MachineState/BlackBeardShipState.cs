@@ -48,6 +48,8 @@ public class BlackBeardShipState : BlackBeardStates {
 
         _health.OnHealthUpdate += CheckHealthToChangeState;
 
+        _health.OnDeath += OnDeath;
+
         if (_firstTime) _parent.StartCoroutine(InitialCooldown());
         else Attack();
     }
@@ -324,16 +326,14 @@ public class BlackBeardShipState : BlackBeardStates {
     private void CheckHealthToChangeState((float maxHealth, float currentHealth, float currentShield) health) {
         if (_parent.Lifes > 1) {
             float newHealth = health.currentHealth;
-            Debug.Log(newHealth + " " + healthLimit);
 
-            if (newHealth == 0) {
-                _parent.Lifes = 1;
-                ChangeState();
-            }
-            else if (newHealth <= healthLimit) ChangeState();
+            if (newHealth <= healthLimit && newHealth > 0) ChangeState();
         }
     }
-
+    void OnDeath() {
+        _parent.Lifes = 1;
+        ChangeState();
+    }
     void ChangeState() { // fim desse estado
 
         _parent.StopCoroutine(_cooldownCoroutine); // parando corrotina de cooldown
@@ -341,6 +341,7 @@ public class BlackBeardShipState : BlackBeardStates {
         _parent.StopCoroutine(_attackRoutine); // parando corrotina de ataque
 
         _parent.GetComponent<HealthManager>().OnHealthUpdate -= CheckHealthToChangeState; // Desinscrevendo do evento
+        _parent.GetComponent<HealthManager>().OnDeath -= OnDeath; // Desinscrevendo do evento
 
         if (_parent.Lifes > 1) _parent.ChangeState(BlackBeardState.RUNNAWAY); // trocando de estado
         else _parent.ChangeState(BlackBeardState.FINAL);
