@@ -1,8 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BlackBeardStraightBullet : EnemyAttackPrefab
-{
+public class BlackBeardStraightBullet : BlackBeardAttackPrefab {
     BlackBeardCannon _info;
     Vector3 pos;
     public override void StartAttack(int enemyId, int skillId, Vector3 position) {

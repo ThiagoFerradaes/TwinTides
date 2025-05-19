@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackBeardChain : EnemyAttackPrefab
+public class BlackBeardChain : BlackBeardAttackPrefab
 {
     BlackBeardAnchorAttackSO _info;
     Vector3 pos;

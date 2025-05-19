@@ -41,13 +41,15 @@ public class ZombieTreeTwoOil : EnemyAttackPrefab {
     IEnumerator Duration() {
         yield return new WaitForSeconds(_info.oilDuration);
 
+        End();
+    }
+
+    public override void End() {
         foreach (var player in _listOfPlayers) {
             player.IncreaseMoveSpeed(_info.oilSpeedReduction);
         }
-
         _listOfPlayers.Clear();
-
-        End();
+        base.End();
     }
 
     public void Burn() {

@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackBeardCrossAttackField : EnemyAttackPrefab
-{
+public class BlackBeardCrossAttackField : BlackBeardAttackPrefab {
     BlackBeardCrossAttackSo _info;
     Vector3 pos;
 
@@ -52,9 +51,13 @@ public class BlackBeardCrossAttackField : EnemyAttackPrefab
 
         yield return new WaitForSeconds(_info.FieldDuration);
 
+        End();
+    }
+
+    public override void End() {
         _listOfPlayers.Clear();
 
-        End();
+        base.End();
     }
 
     IEnumerator DamageRoutine() {

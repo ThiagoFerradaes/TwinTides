@@ -2,7 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
-public class BlackBeardBulletRainSecondaryBomb : EnemyAttackPrefab {
+public class BlackBeardBulletRainSecondaryBomb : BlackBeardAttackPrefab {
     BlackBeardBulletRainSO _info;
     float amountOfBombsLeft;
     float _explosionMultiplier;

@@ -24,6 +24,7 @@ public class BlackBeardMachineState : MonoBehaviour
     public int Lifes = 2;
 
     public event Action OnFinal;
+    public event Action OnChangedPhase;
 
     void Start()
     {
@@ -45,6 +46,8 @@ public class BlackBeardMachineState : MonoBehaviour
         };
 
         if (state == BlackBeardState.FINAL) OnFinal?.Invoke();
+
+        OnChangedPhase?.Invoke();
 
         _currentState.StartState(this);
     }

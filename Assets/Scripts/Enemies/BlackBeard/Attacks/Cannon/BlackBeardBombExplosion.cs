@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BlackBeardBombExplosion : EnemyAttackPrefab
+public class BlackBeardBombExplosion : BlackBeardAttackPrefab
 {
     BlackBeardCannon _info;
     Vector3 _position;
@@ -43,6 +43,5 @@ public class BlackBeardBombExplosion : EnemyAttackPrefab
 
         health.DealDamage(_info.BombExplosionDamage, true, true);
 
-        End();
     }
 }

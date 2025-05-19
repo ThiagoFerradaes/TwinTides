@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackBeardBullets : EnemyAttackPrefab
+public class BlackBeardBullets : BlackBeardAttackPrefab
 {
     BlackBeardBulletsAttackSO _info;
     HashSet<HealthManager> _listOfPlayers = new();
@@ -42,9 +42,11 @@ public class BlackBeardBullets : EnemyAttackPrefab
 
         yield return new WaitForSeconds(durartion);
 
-        _listOfPlayers.Clear();
-
         End();
+    }
+    public override void End() {
+        _listOfPlayers.Clear();
+        base.End();
     }
 
     IEnumerator DamageRoutine() {

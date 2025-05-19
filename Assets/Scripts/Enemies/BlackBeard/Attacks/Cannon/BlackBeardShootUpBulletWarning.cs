@@ -1,8 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BlackBeardShootUpBulletWarning : EnemyAttackPrefab
-{
+public class BlackBeardShootUpBulletWarning : BlackBeardAttackPrefab {
     BlackBeardCannon _info;
 
     public override void StartAttack(int enemyId, int skillId, Vector3 position) {

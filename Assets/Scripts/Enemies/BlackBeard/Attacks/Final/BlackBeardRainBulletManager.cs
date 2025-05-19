@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackBeardRainBulletManager : EnemyAttackPrefab {
+public class BlackBeardRainBulletManager : BlackBeardAttackPrefab {
     BlackBeardBulletRainSO _info;
     Vector3 pos;
     HealthManager _health;

@@ -1,8 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BlackBeardCannonBomb : EnemyAttackPrefab
-{
+public class BlackBeardCannonBomb : BlackBeardAttackPrefab {
     BlackBeardCannon _info;
     bool collided;
     bool pushed;
@@ -15,7 +14,9 @@ public class BlackBeardCannonBomb : EnemyAttackPrefab
         _info = EnemySkillConverter.Instance.TransformIdInSkill(skillId) as BlackBeardCannon;
 
         mrenderer = transform.GetChild(0).gameObject.GetComponent<MeshRenderer>();
+
         originalMaterial = mrenderer.material;
+
         pushed = false;
 
         SetPosition(position);
@@ -49,11 +50,11 @@ public class BlackBeardCannonBomb : EnemyAttackPrefab
 
         yield return new WaitForSeconds(_info.TimeToBombExplode);
 
-        if (!pushed) EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 4, parent, transform.position);
+        if (!pushed) {
+            EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 4, parent, transform.position);
 
-        mrenderer.material = originalMaterial;
-
-        End();
+            End();
+        }
     }
 
     IEnumerator ExplosionWarning() {
@@ -64,6 +65,7 @@ public class BlackBeardCannonBomb : EnemyAttackPrefab
             mrenderer.material = originalMaterial;
             yield return new WaitForSeconds(_info.WarningCooldown);
         }
+        mrenderer.material = originalMaterial;
     }
 
     public void TryPush(Vector3 attackerPosition) {
