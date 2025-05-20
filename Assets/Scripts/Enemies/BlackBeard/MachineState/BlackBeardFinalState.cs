@@ -280,7 +280,7 @@ public class BlackBeardFinalState : BlackBeardStates {
                 }
             }
 
-            Vector3 anchorPosition = _parent.transform.forward * _anchorInfo.AnchorOffset;
+            Vector3 anchorPosition = _parent.transform.position + _parent.transform.forward * _anchorInfo.AnchorOffset;
 
             EnemySkillPooling.Instance.RequestInstantiateAttack(_anchorInfo, 0, _parent.gameObject, anchorPosition);
 

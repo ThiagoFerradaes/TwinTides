@@ -57,6 +57,11 @@ public class BlackBeardCannonBomb : BlackBeardAttackPrefab {
         }
     }
 
+    public override void End() {
+        mrenderer.material = originalMaterial;
+        base.End();
+    }
+
     IEnumerator ExplosionWarning() {
         while (!pushed) {
             yield return new WaitForSeconds(_info.TimeBetweenWarnings);
