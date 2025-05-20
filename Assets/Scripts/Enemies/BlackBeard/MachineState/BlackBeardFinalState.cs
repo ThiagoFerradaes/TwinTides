@@ -381,13 +381,6 @@ public class BlackBeardFinalState : BlackBeardStates {
 
     #endregion
 
-    #region ChangeState
-
-    void ChangeState() {
-        
-    }
-    #endregion
-
 }
 
 public class BlackBeardFinalFormAttacks {

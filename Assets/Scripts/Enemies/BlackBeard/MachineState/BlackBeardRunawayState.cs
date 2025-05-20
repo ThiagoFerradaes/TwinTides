@@ -132,7 +132,6 @@ public class BlackBeardRunawayState : BlackBeardStates {
     }
 
     void OnDeath() {
-        _parent.Lifes = 1;
         EndPhase();
     }
     void EndPhase() {

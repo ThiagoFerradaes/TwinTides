@@ -25,7 +25,7 @@ public class BlackBeardHealthUiManager : MonoBehaviour
         HealthBar.gameObject.SetActive(true);
     }
 
-    void TurnUIOff() {
+    public void TurnUIOff() {
         HealthPlace.gameObject.SetActive(false);
         HealthBar.gameObject.SetActive(false);
     }

@@ -347,7 +347,6 @@ public class BlackBeardShipState : BlackBeardStates {
         }
     }
     void OnDeath() {
-        _parent.Lifes = 1;
         ChangeState();
     }
     void ChangeState() { // fim desse estado

@@ -7,9 +7,8 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public enum BlackBeardState { SHIP, RUNNAWAY, FINAL }
-public class BlackBeardMachineState : NetworkBehaviour
-{
-    
+public class BlackBeardMachineState : NetworkBehaviour {
+
     BlackBeardStates _currentState;
     BlackBeardShipState _shipState = new();
     BlackBeardRunawayState _runawayState = new();
@@ -28,9 +27,9 @@ public class BlackBeardMachineState : NetworkBehaviour
 
     public event Action OnFinal;
     public event Action OnChangedPhase;
-
-    void Start()
-    {
+    public event Action OnDeath;
+    public void StartFight() {
+        Debug.Log("BlackBeard Started");
         StartCoroutine(WaitToStart());
     }
 
@@ -80,5 +79,15 @@ public class BlackBeardMachineState : NetworkBehaviour
         if (_currentState is BlackBeardFinalState finalState) {
             finalState.Attack(attack);
         }
+    }
+
+    public void Death() {
+        if (_currentState != _finalState || Lifes > 0) return;
+
+        StopAllCoroutines();
+
+        OnDeath?.Invoke();
+
+        gameObject.SetActive(false);
     }
 }
