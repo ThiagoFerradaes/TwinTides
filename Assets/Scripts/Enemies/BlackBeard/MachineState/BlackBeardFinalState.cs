@@ -90,17 +90,18 @@ public class BlackBeardFinalState : BlackBeardStates {
 
         yield return new WaitForSeconds(_info.TimeBetweenHealingAndAttacking);
 
-        Attack();
+        TryAttack();
     }
     #endregion
 
     #region Attack Region
-    void Attack() {
 
-        BlackBeardFinalFormAttacks chosenAttack = ChooseAttack();
-        if (chosenAttack == null) { return; }
+    void TryAttack() {
+        _parent.FinalFormChoosAttack(_attacks);
+    }
+    public void Attack(BlackBeardFinalFormAttacks.FinalFormAttacks attack) {
 
-        switch (chosenAttack.Attack) {
+        switch (attack) {
             case BlackBeardFinalFormAttacks.FinalFormAttacks.BULLETS:
                 _parent.StartCoroutine(BulletsAttack());
                 break;
@@ -118,21 +119,11 @@ public class BlackBeardFinalState : BlackBeardStates {
                 break;
 
         }
-        chosenAttack.Use();
-    }
 
-    BlackBeardFinalFormAttacks ChooseAttack() {
-        for (int priority = 1; priority <= 3; priority++) {
-            var available = _attacks.Where(a => a.Priority == priority && a.IsReady).ToList();
-
-            if (available.Count > 0) {
-                return available[Random.Range(0, available.Count)];
-            }
+        foreach(var typeOfAttack in _attacks) {
+            if (typeOfAttack.Attack == attack) typeOfAttack.Use();
         }
-
-        return null;
     }
-
 
     #region CrossAttack
     IEnumerator CrossAttack() {
@@ -385,7 +376,7 @@ public class BlackBeardFinalState : BlackBeardStates {
     IEnumerator CooldownBetweenAttacks() {
         yield return new WaitForSeconds(_info.CooldownBetweenAttacks);
 
-        Attack();
+        TryAttack();
     }
 
     #endregion

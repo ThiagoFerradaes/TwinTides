@@ -4,7 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Camps : MonoBehaviour
+public class Camps : NetworkBehaviour
 {
     #region Variables
 
@@ -42,9 +42,9 @@ public class Camps : MonoBehaviour
 
     void StartCamp(bool all) {
         if (all) {
-            List<int> listWithEveryEnemy = new();
+            int[] listWithEveryEnemy = new int[listOfEnemies.Count];
             for (int i = 0; i< listOfEnemies.Count; i++) {
-                listWithEveryEnemy.Add(i);
+                listWithEveryEnemy[i] = i;
             }
 
             StartCampWithIndex(listWithEveryEnemy);
@@ -63,12 +63,18 @@ public class Camps : MonoBehaviour
                 allIndexes.RemoveAt(random); 
             }
 
-            StartCampWithIndex(randomIndexes);
+            StartCampWithIndex(randomIndexes.ToArray());
         }
         
     }
 
-    public  void StartCampWithIndex(List<int> index) {
+    public  void StartCampWithIndex(int[] index) {
+        if (!IsServer) return;
+        StartCampForEveryoneRpc(index);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    public void StartCampForEveryoneRpc(int[] index) {
         ClearPreviousEvents();
         currentActiveEnemies = new List<GameObject>();
         aliveCount = 0;
