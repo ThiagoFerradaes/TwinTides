@@ -33,24 +33,13 @@ public class WhiteBoard: NetworkBehaviour
             Singleton = null;
         }
     }
-
-    [ServerRpc (RequireOwnership = false)]
-    public void ChangeCharactersServerRpc(int player) {
+    public void ChangeCharacters(int player) {
+        if (!IsServer) return;
         if (player == 1) {
-            if (PlayerOneCharacter.Value == Characters.Maevis) {
-                PlayerOneCharacter.Value = Characters.Mel;
-            }
-            else {
-                PlayerOneCharacter.Value = Characters.Maevis;
-            }
+            PlayerOneCharacter.Value = PlayerOneCharacter.Value == Characters.Mel ? Characters.Maevis : Characters.Mel;
         }
         else {
-            if (PlayerTwoCharacter.Value == Characters.Maevis) {
-                PlayerTwoCharacter.Value = Characters.Mel;
-            }
-            else {
-                PlayerTwoCharacter.Value = Characters.Maevis;
-            }
+            PlayerTwoCharacter.Value = PlayerTwoCharacter.Value == Characters.Mel ? Characters.Maevis : Characters.Mel;
         }
     }
 
