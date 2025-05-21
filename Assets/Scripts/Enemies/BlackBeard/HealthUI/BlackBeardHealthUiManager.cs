@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class BlackBeardHealthUiManager : MonoBehaviour
 {
-    [SerializeField] Image HealthPlace, HealthBar;
-    [SerializeField] Sprite HealthPlaceSpriteOne, HealthPlaceSpriteTwo, HealthBarSpriteOne, HealthBarSpriteTwo;
+    [SerializeField] Image HealthPlace, HealthBar, HealthEffect;
+    [SerializeField] Sprite HealthPlaceSpriteOne, HealthPlaceSpriteTwo;
     [SerializeField] HealthManager BlackBeardHealthManager;
 
     private void Start() {
@@ -21,6 +21,9 @@ public class BlackBeardHealthUiManager : MonoBehaviour
     }
 
     public void TurnUIOn() {
+        HealthPlace.sprite = HealthPlaceSpriteOne;
+        HealthEffect.gameObject.SetActive(false);
+
         HealthPlace.gameObject.SetActive(true);
         HealthBar.gameObject.SetActive(true);
     }
@@ -28,10 +31,11 @@ public class BlackBeardHealthUiManager : MonoBehaviour
     public void TurnUIOff() {
         HealthPlace.gameObject.SetActive(false);
         HealthBar.gameObject.SetActive(false);
+        HealthEffect.gameObject.SetActive(false);
     }
 
     void ChangeUI() {
-        HealthBar.sprite = HealthBarSpriteTwo;
+        HealthEffect.gameObject.SetActive(true);
         HealthPlace.sprite = HealthPlaceSpriteTwo;
     }
 }
