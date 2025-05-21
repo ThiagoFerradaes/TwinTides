@@ -1,11 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Camps : NetworkBehaviour
-{
+public class Camps : NetworkBehaviour {
     #region Variables
 
     // Listas
@@ -17,7 +17,9 @@ public class Camps : NetworkBehaviour
 
     [SerializeField] bool activateOnStart;
     [SerializeField] bool randomCamp;
-    [SerializeField] int numberOfEnemies;
+    [SerializeField, Tooltip("Só necessário quando é random")] int numberOfEnemies;
+    [SerializeField, Tooltip("Deixa 0 se n quiser que ele respawne")] float respawnTime;
+    [SerializeField] Chest chest;
 
     public event Action OnAllEnemiesDead;
 
@@ -28,7 +30,7 @@ public class Camps : NetworkBehaviour
 
         for (int i = 0; i < transform.childCount; i++) {
             var enemy = transform.GetChild(i).gameObject;
-            listOfEnemies.Add(enemy);
+            if (enemy.CompareTag("Enemy")) listOfEnemies.Add(enemy);
         }
     }
 
@@ -40,10 +42,16 @@ public class Camps : NetworkBehaviour
         if (activateOnStart) StartCamp(!randomCamp);
     }
 
+    void TurnChestOn() {
+        if (chest == null) return;
+
+        chest.gameObject.SetActive(true);
+    }
+
     void StartCamp(bool all) {
         if (all) {
             int[] listWithEveryEnemy = new int[listOfEnemies.Count];
-            for (int i = 0; i< listOfEnemies.Count; i++) {
+            for (int i = 0; i < listOfEnemies.Count; i++) {
                 listWithEveryEnemy[i] = i;
             }
 
@@ -60,15 +68,15 @@ public class Camps : NetworkBehaviour
             for (int i = 0; i < numberOfEnemies; i++) {
                 int random = Random.Range(0, allIndexes.Count);
                 randomIndexes.Add(allIndexes[random]);
-                allIndexes.RemoveAt(random); 
+                allIndexes.RemoveAt(random);
             }
 
             StartCampWithIndex(randomIndexes.ToArray());
         }
-        
+        TurnChestOn();
     }
 
-    public  void StartCampWithIndex(int[] index) {
+    public void StartCampWithIndex(int[] index) {
         if (!IsServer) return;
         StartCampForEveryoneRpc(index);
     }
@@ -106,8 +114,23 @@ public class Camps : NetworkBehaviour
         aliveCount--;
         if (aliveCount <= 0) {
             OnAllEnemiesDead?.Invoke();
+            chest.UnlockChest();
         }
+
+        if (respawnTime > 0) StartCoroutine(RespawnCampTimer());
     }
+
+    #region Respawn
+    IEnumerator RespawnCampTimer() {
+        yield return new WaitForSeconds(respawnTime);
+
+        RespawnCamp();
+    }
+
+    void RespawnCamp() {
+        StartCamp(!randomCamp);
+    }
+    #endregion
 
     public void KillCamp() {
         foreach (var enemy in currentActiveEnemies) {
