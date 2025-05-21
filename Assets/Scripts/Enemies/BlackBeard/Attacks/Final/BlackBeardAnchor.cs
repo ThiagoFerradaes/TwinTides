@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BlackBeardAnchor : EnemyAttackPrefab {
+public class BlackBeardAnchor : BlackBeardAttackPrefab {
     BlackBeardAnchorAttackSO _info;
     Vector3 pos;
     Vector3 _direction;

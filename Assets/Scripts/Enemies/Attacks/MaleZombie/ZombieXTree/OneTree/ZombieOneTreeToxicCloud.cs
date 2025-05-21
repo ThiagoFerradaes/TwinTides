@@ -67,9 +67,12 @@ public class ZombieOneTreeToxicCloud : EnemyAttackPrefab
             yield return null;
         }
 
-        _listOfPlayers.Clear();
-
         End();
+    }
+
+    public override void End() {
+        _listOfPlayers.Clear();
+        base.End();
     }
 
     private void OnTriggerEnter(Collider other) {

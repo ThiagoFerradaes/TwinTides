@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackBeardRainBulletBomb : EnemyAttackPrefab
+public class BlackBeardRainBulletBomb : BlackBeardAttackPrefab
 {
     BlackBeardBulletRainSO _info;
     bool collided;

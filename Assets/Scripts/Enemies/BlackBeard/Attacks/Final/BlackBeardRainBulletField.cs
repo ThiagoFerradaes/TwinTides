@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackBeardRainBulletField : EnemyAttackPrefab
-{
+public class BlackBeardRainBulletField : BlackBeardAttackPrefab {
     BlackBeardBulletRainSO _info;
     HashSet<HealthManager> _listOfPlayers = new();
     public override void StartAttack(int enemyId, int skillId, Vector3 position) {
@@ -37,9 +36,12 @@ public class BlackBeardRainBulletField : EnemyAttackPrefab
 
         yield return new WaitForSeconds(_info.FieldDuration);
 
-        _listOfPlayers.Clear();
-
         End();
+    }
+
+    public override void End() {
+        _listOfPlayers.Clear();
+        base.End();
     }
     IEnumerator DamageRoutine() {
         while (true) {
