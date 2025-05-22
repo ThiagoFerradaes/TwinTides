@@ -40,6 +40,11 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
 
         transform.localRotation = Quaternion.Euler(0, 0, 0);
 
+        transform.GetChild(0).gameObject.SetActive(_currentAttackCombo == 1);
+        transform.GetChild(1).gameObject.SetActive(_currentAttackCombo == 2);
+        transform.GetChild(2).gameObject.SetActive(_currentAttackCombo == 3);
+
+
         //switch (_currentAttackCombo) {
         //    case 1:
         //        transform.GetChild(0).gameObject.SetActive(true);
