@@ -127,7 +127,7 @@ public class PlayerController : NetworkBehaviour {
         float startTime = Time.time;
         OnDashCooldown?.Invoke(SkillType.Dash, dashCooldown);
 
-        while (Time.time - startTime < dashDuration) {
+        while (Time.time - startTime < dashDuration && !_mManager.ReturnStunnedValue()) {
             if (_moveInput.magnitude >= 0.1f) {
                 Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
                 transform.position += (dashForce * Time.deltaTime * moveDirection);
@@ -152,6 +152,7 @@ public class PlayerController : NetworkBehaviour {
         MoveAndRotate();
     }
     private void MoveAndRotate() {
+        if (_mManager.ReturnStunnedValue()) return;
         if (_moveInput.magnitude != 0) {
 
             Moving();
