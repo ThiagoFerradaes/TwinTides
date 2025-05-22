@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BlackBeardCrossAttackCut : EnemyAttackPrefab
+public class BlackBeardCrossAttackCut : BlackBeardAttackPrefab
 {
     BlackBeardCrossAttackSo _info;
     Vector3 pos;

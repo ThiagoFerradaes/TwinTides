@@ -30,7 +30,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _main_texture:
-        m_Texture: {fileID: 2800000, guid: 600a166ee280b344f892fbcb5c00415f, type: 3}
+        m_Texture: {fileID: 2800000, guid: cddca65738ba3664bb7615c88e388158, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _mask:
@@ -69,20 +69,20 @@ Material:
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
-    - _alfaClipMax: 0
+    - _alfaClipMax: 0.2
     - _alfaClipMin_normal: 0
     - _distortionAmountMax: 20
-    - _distortionAmountMin: 5
+    - _distortionAmountMin: 7
     - _disttortionScale: 6
     - _elipseSize: 0.5
     - _global: 0
     - _textureDecider: 0
     m_Colors:
-    - _color_01_normal: {r: 0, g: 1.9055135, b: 1.2966511, a: 1}
+    - _color_01_normal: {r: 0, g: 10.176041, b: 1.8920435, a: 1}
     - _color_02: {r: 0, g: 0.03137255, b: 0.015425731, a: 1}
     - _distortionSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _main_texture_speed: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _tilingAndOffset: {r: 0.75, g: 0.75, b: 0, a: 0}
+    - _tilingAndOffset: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &5611534300171656187

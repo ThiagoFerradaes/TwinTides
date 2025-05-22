@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum BlackBeardState { SHIP, RUNNAWAY, FINAL }
-public class BlackBeardMachineState : MonoBehaviour
-{
-    
+public class BlackBeardMachineState : NetworkBehaviour {
+
     BlackBeardStates _currentState;
     BlackBeardShipState _shipState = new();
     BlackBeardRunawayState _runawayState = new();
@@ -24,9 +26,10 @@ public class BlackBeardMachineState : MonoBehaviour
     public int Lifes = 2;
 
     public event Action OnFinal;
-
-    void Start()
-    {
+    public event Action OnChangedPhase;
+    public event Action OnDeath;
+    public void StartFight() {
+        Debug.Log("BlackBeard Started");
         StartCoroutine(WaitToStart());
     }
 
@@ -46,6 +49,45 @@ public class BlackBeardMachineState : MonoBehaviour
 
         if (state == BlackBeardState.FINAL) OnFinal?.Invoke();
 
+        OnChangedPhase?.Invoke();
+
         _currentState.StartState(this);
+    }
+
+    public void FinalFormChoosAttack(List<BlackBeardFinalFormAttacks> attacks) {
+        if (!IsServer) return;
+
+        BlackBeardFinalFormAttacks attack = ChooseAttack(attacks);
+
+        FinalFormAttackRpc(attack.Attack);
+    }
+
+    BlackBeardFinalFormAttacks ChooseAttack(List<BlackBeardFinalFormAttacks> attacks) {
+        for (int priority = 1; priority <= 3; priority++) {
+            var available = attacks.Where(a => a.Priority == priority && a.IsReady).ToList();
+
+            if (available.Count > 0) {
+                return available[Random.Range(0, available.Count)];
+            }
+        }
+
+        return null;
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    public void FinalFormAttackRpc(BlackBeardFinalFormAttacks.FinalFormAttacks attack) {
+        if (_currentState is BlackBeardFinalState finalState) {
+            finalState.Attack(attack);
+        }
+    }
+
+    public void Death() {
+        if (_currentState != _finalState || Lifes > 0) return;
+
+        StopAllCoroutines();
+
+        OnDeath?.Invoke();
+
+        gameObject.SetActive(false);
     }
 }

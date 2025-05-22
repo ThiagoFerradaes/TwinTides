@@ -1,8 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BlackBeardWaveImpact : EnemyAttackPrefab
-{
+public class BlackBeardWaveImpact : BlackBeardAttackPrefab {
     BlackBeardWaveAttackSO _info;
     Vector3 pos;
     HealthManager _health;

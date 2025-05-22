@@ -86,7 +86,7 @@ public class BlackBeardRunawayState : BlackBeardStates {
     void SpawnAllies() {
         int rng = Random.Range(0, _info.ListOfGroups.Count);
 
-        camp.StartCampWithIndex(_info.ListOfGroups[rng].ListOfEnemies);
+        camp.StartCampWithIndex(_info.ListOfGroups[rng].ListOfEnemies.ToArray());
     }
 
     IEnumerator Runnaway(Vector3 initialOffset) {
@@ -132,7 +132,6 @@ public class BlackBeardRunawayState : BlackBeardStates {
     }
 
     void OnDeath() {
-        _parent.Lifes = 1;
         EndPhase();
     }
     void EndPhase() {

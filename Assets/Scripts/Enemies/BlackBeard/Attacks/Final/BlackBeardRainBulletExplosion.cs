@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackBeardRainBulletExplosion : EnemyAttackPrefab
+public class BlackBeardRainBulletExplosion : BlackBeardAttackPrefab
 {
     BlackBeardBulletRainSO _info;
     float _bombIndex;

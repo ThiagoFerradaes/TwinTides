@@ -24,12 +24,15 @@ public class BlackBeardShipState : BlackBeardStates {
     // Corrotinas
     Coroutine _cooldownCoroutine;
     Coroutine _attackRoutine;
+    Coroutine _cannonRoutine;
+    Coroutine _cannonToInitialPositionRoutine;
 
     // HealthManager do barba negra
     HealthManager _health;
 
     // Listas
     List<StraightShootPattern> _listOfShootPatterns;
+    Vector3[] initialCannonPosition;
 
     #endregion
 
@@ -127,7 +130,7 @@ public class BlackBeardShipState : BlackBeardStates {
 
     #endregion
 
-    #region Update Region
+    #region Attack Region
 
     void Attack() {
         if (_timesAttacked >= _info.MaxAmountOfAttacksToBomb) _parent.StartCoroutine(BombAttack());
@@ -198,7 +201,7 @@ public class BlackBeardShipState : BlackBeardStates {
 
     IEnumerator StraightShootAttack() {
 
-        _parent.StartCoroutine(MoveCannons());
+        _cannonRoutine = _parent.StartCoroutine(MoveCannons());
 
         for (int i = 0; i < _info.AmountOfStraightBulletsAttacks; i++) {
 
@@ -234,11 +237,12 @@ public class BlackBeardShipState : BlackBeardStates {
     IEnumerator MoveCannons() {
         _isStraightShooting = true;
 
-        Vector3[] initialPositions = new Vector3[_parent.CannonsPosition.Length];
+        if (initialCannonPosition == null) initialCannonPosition = new Vector3[_parent.CannonsPosition.Length];
+
         int[] movementDirections = new int[_parent.CannonsPosition.Length];
 
         for (int i = 0; i < _parent.CannonsPosition.Length; i++) {
-            initialPositions[i] = _parent.CannonsPosition[i].position;
+            initialCannonPosition[i] = _parent.CannonsPosition[i].position;
             movementDirections[i] = Random.value > 0.5f ? 1 : -1;
         }
 
@@ -246,20 +250,26 @@ public class BlackBeardShipState : BlackBeardStates {
             for (int i = 0; i < _parent.CannonsPosition.Length; i++) {
                 float offset = Mathf.PingPong(Time.time * _info.CannonMovementSpeed + i, _info.CannonMovementRange) - (_info.CannonMovementRange / 2f);
                 offset *= movementDirections[i];
-                Vector3 basePos = initialPositions[i];
+                Vector3 basePos = initialCannonPosition[i];
                 _parent.CannonsPosition[i].position = basePos + _parent.CannonsPosition[i].right * offset;
             }
 
             yield return null;
         }
 
+        _cannonRoutine = null;
+
+        _cannonToInitialPositionRoutine = _parent.StartCoroutine(ReturnCannonToPlace());
+    }
+
+    IEnumerator ReturnCannonToPlace() {
         bool allReached = false;
         while (!allReached) {
             allReached = true;
 
             for (int i = 0; i < _parent.CannonsPosition.Length; i++) {
                 Transform cannon = _parent.CannonsPosition[i];
-                Vector3 target = initialPositions[i];
+                Vector3 target = initialCannonPosition[i];
                 cannon.position = Vector3.MoveTowards(cannon.position, target, _info.CannonMovementSpeed * Time.deltaTime);
 
                 if (Vector3.Distance(cannon.position, target) > 0.01f) {
@@ -268,6 +278,8 @@ public class BlackBeardShipState : BlackBeardStates {
             }
             yield return null;
         }
+
+        _cannonToInitialPositionRoutine = null;
     }
 
     IEnumerator BombAttack() {
@@ -314,7 +326,11 @@ public class BlackBeardShipState : BlackBeardStates {
     }
 
     IEnumerator AttacksCooldown(float cooldown) {
+        _attackRoutine = null;
+
         yield return new WaitForSeconds(cooldown);
+
+        _cooldownCoroutine = null;
 
         Attack();
     }
@@ -331,20 +347,30 @@ public class BlackBeardShipState : BlackBeardStates {
         }
     }
     void OnDeath() {
-        _parent.Lifes = 1;
         ChangeState();
     }
     void ChangeState() { // fim desse estado
 
-        _parent.StopCoroutine(_cooldownCoroutine); // parando corrotina de cooldown
-
-        _parent.StopCoroutine(_attackRoutine); // parando corrotina de ataque
+        CheckCoroutines();
 
         _parent.GetComponent<HealthManager>().OnHealthUpdate -= CheckHealthToChangeState; // Desinscrevendo do evento
         _parent.GetComponent<HealthManager>().OnDeath -= OnDeath; // Desinscrevendo do evento
 
         if (_parent.Lifes > 1) _parent.ChangeState(BlackBeardState.RUNNAWAY); // trocando de estado
         else _parent.ChangeState(BlackBeardState.FINAL);
+    }
+
+    void CheckCoroutines() {
+        if (_cooldownCoroutine != null) _parent.StopCoroutine(_cooldownCoroutine); // parando corrotina de cooldown
+
+        if (_attackRoutine != null) _parent.StopCoroutine(_attackRoutine); // parando corrotina de ataque
+
+        if (_cannonToInitialPositionRoutine != null) _parent.StopCoroutine(_cannonToInitialPositionRoutine); // parando a rotina de volta dos canhoes
+
+        if (_cannonRoutine != null) {
+            _parent.StopCoroutine(_cannonRoutine); // parando o movimento dos canhoes
+            _cannonToInitialPositionRoutine = _parent.StartCoroutine(ReturnCannonToPlace()); // voltando eles pro lugar caso necessario
+        }     
     }
 
     #endregion

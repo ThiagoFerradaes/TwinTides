@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -8,8 +9,12 @@ public class Chest : NetworkBehaviour {
 
     [Header("Chest Atributes")]
     [SerializeField] ChestRarity rarity;
+    [SerializeField] bool isLocked;
+    bool locked;
+    [Header("Common chest atributes")]
+    [SerializeField] float chestTimerToTurnOffAfterUnlock;
 
-    [Header("Loot")]
+    [Header("Loot Legendary")]
     [SerializeField, Tooltip("´Somente necessário se o baú for raro")] LegendaryRelic mandatoryMaevisLegendaryRelic;
     [SerializeField, Tooltip("´Somente necessário se o baú for raro")] LegendaryRelic mandatoryMelLegendaryRelic;
     [SerializeField, Tooltip("´Somente necessário se o baú for raro")] float mandatoryGold;
@@ -25,15 +30,6 @@ public class Chest : NetworkBehaviour {
     List<PlayerController> players = new();
 
     public static event EventHandler MediumChestOpened;
-    public static event EventHandler<ChestEventArgs> StatCommonChestCooldown;
-
-    public class ChestEventArgs : EventArgs {
-        public Chest chest;
-
-        public ChestEventArgs(Chest chest) {
-            this.chest = chest;
-        }
-    }
 
     public enum ChestRarity {
         Common,
@@ -46,11 +42,13 @@ public class Chest : NetworkBehaviour {
         if (IsServer) {
             amountOfGold.Value = RandomizeGold();
         }
+        locked = isLocked;
     }
     private void OnEnable() {
         if (IsServer) {
             amountOfGold.Value = RandomizeGold();
         }
+        locked = isLocked;
     }
     int RandomizeGold() {
         float gold = 0f;
@@ -76,7 +74,7 @@ public class Chest : NetworkBehaviour {
         if (!other.CompareTag("Mel") && !other.CompareTag("Maevis")) return;
 
         if (other.TryGetComponent<PlayerController>(out PlayerController controller)) {
-            controller.OnInteractInGame += Controller_OnInteract;
+            controller.OnInteractInGame += OnOpenChest;
             controller.CanInteract = true;
             players.Add(controller);
         }
@@ -86,14 +84,14 @@ public class Chest : NetworkBehaviour {
         if (!other.CompareTag("Mel") && !other.CompareTag("Maevis")) return;
 
         if (other.TryGetComponent<PlayerController>(out PlayerController controller)) {
-            controller.OnInteractInGame -= Controller_OnInteract;
+            controller.OnInteractInGame -= OnOpenChest;
             controller.CanInteract = false;
             players.Remove(controller);
         }
     }
 
-    private void Controller_OnInteract(object sender, System.EventArgs e) {
-        OpenChest();
+    private void OnOpenChest(object sender, System.EventArgs e) {
+        if(!locked) OpenChest();
     }
     void OpenChest() {
         AddFragmentToInventory();
@@ -110,8 +108,7 @@ public class Chest : NetworkBehaviour {
     }
 
     private void InvokeEvents() {
-        if (rarity == ChestRarity.Common) StatCommonChestCooldown?.Invoke(this, new ChestEventArgs(this));
-        else if (rarity == ChestRarity.Medium) MediumChestOpened?.Invoke(this, EventArgs.Empty);
+        if (rarity == ChestRarity.Medium) MediumChestOpened?.Invoke(this, EventArgs.Empty);
 
         ItenManager.Instance.TurnScreenOn(fragment, amountOfGold.Value, amountOfKeys, mandatoryLegendaryRelic);
     }
@@ -120,13 +117,30 @@ public class Chest : NetworkBehaviour {
         var playersToRemove = new List<PlayerController>(players);
 
         foreach (var player in playersToRemove) {
-            player.OnInteractInGame -= Controller_OnInteract;
+            player.OnInteractInGame -= OnOpenChest;
             player.CanInteract = false;
         }
 
         players.Clear();
 
+        LockChest();
+
         gameObject.SetActive(false);
+    }
+
+    public void UnlockChest() {
+        locked = false;
+        StartCoroutine(ChestTimer());
+    }
+
+    IEnumerator ChestTimer() {
+        yield return new WaitForSeconds(chestTimerToTurnOffAfterUnlock);
+
+        CloseChest();
+    }
+    
+    void LockChest() {
+        if (isLocked) locked = true;
     }
     #endregion
 

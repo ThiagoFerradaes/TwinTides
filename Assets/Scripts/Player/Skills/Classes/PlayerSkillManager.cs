@@ -28,6 +28,8 @@ public class PlayerSkillManager : NetworkBehaviour {
     NetworkVariable<bool> _canNormalAttack = new(true);
     NetworkVariable<bool> _canUseSkill = new(true);
 
+    MovementManager _mManager;
+
     private void Start() {
         _dictionaryOfCooldowns = new Dictionary<int, float> {
             { 0, 0f },
@@ -35,6 +37,8 @@ public class PlayerSkillManager : NetworkBehaviour {
             { 2, 0f },
             { 3, 0f },
         };
+
+        _mManager = GetComponent<MovementManager>();
     }
 
     #region Inputs
@@ -65,6 +69,8 @@ public class PlayerSkillManager : NetworkBehaviour {
     #endregion
 
     void UseSkill(int skillId) {
+        if (_mManager.ReturnStunnedValue()) return;
+
         SkillContext skillContext = new(this.transform.position, this.transform.rotation, skillId);
         switch (skillId) {
             case 0:
@@ -170,18 +176,12 @@ public class PlayerSkillManager : NetworkBehaviour {
     /// </summary>
     /// <param name="block"></param>
     [Rpc(SendTo.Server)]
-    public void BlockNormalAttackRpc(bool block) {
-        if (block) _canNormalAttack.Value = false;
-        else _canNormalAttack.Value = true;
-    }
+    public void BlockNormalAttackRpc(bool block) => _canNormalAttack.Value = !block;
 
     /// <summary>
     /// Função para bloquear o uso de skills do personagem (se passar verdadeiro ele bloqueia, se passar falso ele desbloqueia)
     /// </summary>
     /// <param name="block"></param>
     [Rpc(SendTo.Server)]
-    public void BlockSkillsRpc(bool block) {
-        if (block) _canUseSkill.Value = false;
-        else _canUseSkill.Value = true;
-    }
+    public void BlockSkillsRpc(bool block) => _canUseSkill.Value = !block;
 }

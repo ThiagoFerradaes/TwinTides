@@ -23,7 +23,6 @@ public class ChestManager: NetworkBehaviour
     }
 
     public void Start() {
-        Chest.StatCommonChestCooldown += Chest_StatCommonChestCooldown;
         Chest.MediumChestOpened += Chest_MediumChestOpened;
     }
 
@@ -31,21 +30,11 @@ public class ChestManager: NetworkBehaviour
         amountOfMediumChestOpened++;
     }
 
-    private void Chest_StatCommonChestCooldown(object sender, Chest.ChestEventArgs e) {
-        StartCoroutine(CommonChestCooldown(e.chest));
-    }
-
-    IEnumerator CommonChestCooldown(Chest chest) {
-        yield return new WaitForSeconds(cooldownCommonChestRespawn);
-        chest.gameObject.SetActive(true);
-    }
-
     public int ReturnAmountOfMediumChestOpened() {
         return amountOfMediumChestOpened;
     }
 
     private void OnDisable() {
-        Chest.StatCommonChestCooldown -= Chest_StatCommonChestCooldown;
         Chest.MediumChestOpened -= Chest_MediumChestOpened;
     }
 }

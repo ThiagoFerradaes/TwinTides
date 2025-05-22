@@ -1,8 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BlackBeardShootUpBullet : EnemyAttackPrefab
-{
+public class BlackBeardShootUpBullet : BlackBeardAttackPrefab {
     BlackBeardCannon _info;
     bool collided;
 
