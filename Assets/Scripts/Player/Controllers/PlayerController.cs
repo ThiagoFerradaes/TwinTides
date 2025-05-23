@@ -33,6 +33,7 @@ public class PlayerController : NetworkBehaviour {
     // Componentes
     Vector2 _moveInput;
     MovementManager _mManager;
+    Rigidbody _rb;
 
     // eventos 
     public static event Action OnMove; // Esses dois aqui são pra camera
@@ -48,6 +49,7 @@ public class PlayerController : NetworkBehaviour {
     #region Initialize and Update
     void Start() {
         _mManager = GetComponent<MovementManager>();
+        _rb = GetComponent<Rigidbody>();
     }
     void FixedUpdate() {
         if (!IsOwner) return;
@@ -86,6 +88,7 @@ public class PlayerController : NetworkBehaviour {
         }
         else if (context.phase == InputActionPhase.Canceled) {
             _moveInput = Vector2.zero;
+            //if (!_inDash) _rb.linearVelocity = Vector3.zero;
             OnStop?.Invoke();
         }
     }
@@ -154,29 +157,32 @@ public class PlayerController : NetworkBehaviour {
     }
     IEnumerator DashCoroutine() {
         BlockMovement();
-
         float startTime = Time.time;
         OnDashCooldown?.Invoke(SkillType.Dash, dashCooldown);
 
-        while (Time.time - startTime < dashDuration && !_mManager.ReturnStunnedValue()) {
-            if (_moveInput.magnitude >= 0.1f) {
-                Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
-                transform.position += (dashForce * Time.deltaTime * moveDirection);
-                yield return null;
-            }
-            else {
-                transform.position += (dashForce * Time.deltaTime * transform.forward);
-                yield return null;
-            }
+        Vector3 moveDirection = (_moveInput.magnitude >= 0.1f)
+            ? new Vector3(_moveInput.x, 0, _moveInput.y).normalized
+            : transform.forward;
+
+        _rb.linearVelocity = moveDirection * dashForce;
+
+        OnDashCooldown?.Invoke(SkillType.Dash, dashCooldown);
+
+        float timer = 0f;
+        while (timer < dashDuration && !_mManager.ReturnStunnedValue()) {
+            timer += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
         }
+
+        _rb.linearVelocity = Vector3.zero;
 
         _canWalk = true;
         _canRotate = true;
 
         yield return new WaitForSeconds(dashCooldown - dashDuration);
         _inDash = false;
-
     }
+
 
     #endregion
 
@@ -184,21 +190,24 @@ public class PlayerController : NetworkBehaviour {
 
 
     private void MoveAndRotate() {
-        if (_mManager.ReturnStunnedValue()) return;
-        if (_moveInput.magnitude != 0) {
+        if (_mManager.ReturnStunnedValue()) { _rb.linearVelocity = Vector3.zero; return; }
 
             Moving();
-
-        }
-
-        Rotate();
+        
+            Rotate();
 
     }
 
     void Moving() {
         if (!_canWalk) return;
+
+        if (_moveInput == (Vector2.zero)) {
+            _rb.linearVelocity = Vector3.zero;
+            return;
+        }
+
         Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
-        transform.position += (_mManager.ReturnMoveSpeed() * Time.deltaTime * moveDirection);
+        _rb.linearVelocity = moveDirection * _mManager.ReturnMoveSpeed();
     }
 
     public void Rotate() {
