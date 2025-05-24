@@ -7,27 +7,36 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : NetworkBehaviour {
 
+    #region Variables
     [Header("Movement")]
     [SerializeField] float rotationSpeed;
-    bool _canWalk = true;
-    bool _canRotate = true;
-    Vector2 _moveInput;
-    [HideInInspector] public Vector2 _rotationInput;
-    public Transform aimObject;
-    [HideInInspector] public bool isRotatingMouse;
-    [HideInInspector] public bool isAiming;
-    MovementManager _mManager;
-    public LayerMask FloorLayer;
-    public bool CanInteract;
 
+    [Header("Aim")]
+    public LayerMask FloorLayer;
+    public Transform aimObject;
+    
     [Header("Dash")]
     [SerializeField] float dashForce;
     [SerializeField] float dashDuration;
     [SerializeField] float dashCooldown;
+    
+    // booleanas
+    bool _canWalk = true;
+    bool _canRotate = true;
     bool _inDash;
+    
+    [HideInInspector] public bool isRotatingMouse;
+    [HideInInspector] public bool isAiming;
+    [HideInInspector] public bool CanInteract;
+    [HideInInspector] public Vector2 _rotationInput;
+    
+    // Componentes
+    Vector2 _moveInput;
+    MovementManager _mManager;
+    Rigidbody _rb;
 
     // eventos 
-    public static event Action OnMove;
+    public static event Action OnMove; // Esses dois aqui são pra camera
     public static event Action OnStop;
     public static event Action OnPause;
     public event Action<SkillType, float> OnDashCooldown;
@@ -35,9 +44,21 @@ public class PlayerController : NetworkBehaviour {
     public event EventHandler OnInteractInGame;
     public static event EventHandler OnInteractOutGame;
 
+    #endregion
+
+    #region Initialize and Update
     void Start() {
         _mManager = GetComponent<MovementManager>();
+        _rb = GetComponent<Rigidbody>();
     }
+    void FixedUpdate() {
+        if (!IsOwner) return;
+        if (LocalWhiteBoard.Instance.AnimationOn) return;
+        MoveAndRotate();
+    }
+    #endregion
+
+    #region Inputs
     public void InputInteract(InputAction.CallbackContext context) {
         if (LocalWhiteBoard.Instance.AnimationOn) return;
 
@@ -59,30 +80,31 @@ public class PlayerController : NetworkBehaviour {
     }
     public void InputMove(InputAction.CallbackContext context) {
 
-        if (LocalWhiteBoard.Instance.AnimationOn) return;
+        if (!CanDetectInputs()) return;
 
-        if (context.phase == InputActionPhase.Performed && _canWalk && Time.timeScale == 1) {
+        if (context.phase == InputActionPhase.Performed && _canWalk) {
             _moveInput = context.ReadValue<Vector2>();
             OnMove?.Invoke();
         }
         else if (context.phase == InputActionPhase.Canceled) {
             _moveInput = Vector2.zero;
+            //if (!_inDash) _rb.linearVelocity = Vector3.zero;
             OnStop?.Invoke();
         }
     }
     public void InputRotateMouse(InputAction.CallbackContext context) {
 
-        if (LocalWhiteBoard.Instance.AnimationOn) return;
+        if (!CanDetectInputs()) return;
 
-        if (context.phase == InputActionPhase.Performed && Time.timeScale == 1) {
+        if (context.phase == InputActionPhase.Performed) {
             isRotatingMouse = true;
         }
     }
     public void InputRotateController(InputAction.CallbackContext context) {
 
-        if (LocalWhiteBoard.Instance.AnimationOn) return;
+        if (!CanDetectInputs()) return;
 
-        if (context.phase == InputActionPhase.Performed && Time.timeScale == 1) {
+        if (context.phase == InputActionPhase.Performed) {
             isRotatingMouse = false;
             isAiming = true;
             _rotationInput = context.ReadValue<Vector2>();
@@ -96,20 +118,19 @@ public class PlayerController : NetworkBehaviour {
             _rotationInput = Vector2.zero;
         }
     }
-
     public void InputDash(InputAction.CallbackContext context) {
 
-        if (LocalWhiteBoard.Instance.AnimationOn) return;
+        if (!CanDetectInputs()) return;
 
-        if (context.phase == InputActionPhase.Performed && !_inDash && Time.timeScale == 1) {
-            StartCoroutine(DashCoroutine());
+        if (context.phase == InputActionPhase.Performed) {
+            Dash();
         }
     }
     public void InputAimMode(InputAction.CallbackContext context) {
 
-        if (LocalWhiteBoard.Instance.AnimationOn) return;
+        if (!CanDetectInputs()) return;
 
-        if (context.phase == InputActionPhase.Started && Time.timeScale == 1) {
+        if (context.phase == InputActionPhase.Started) {
             if (isAiming) {
                 isAiming = false;
                 StopAimMode();
@@ -120,56 +141,78 @@ public class PlayerController : NetworkBehaviour {
             }
         }
     }
+
+    bool CanDetectInputs() {
+        return (!LocalWhiteBoard.Instance.AnimationOn && Time.timeScale == 1);
+    }
+
+    #endregion
+
+    #region Dash
+
+    void Dash() {
+        if (_inDash) return;
+
+        StartCoroutine(DashCoroutine());
+    }
     IEnumerator DashCoroutine() {
-        _inDash = true;
-        _canWalk = false;
-        _canRotate = false;
+        BlockMovement();
         float startTime = Time.time;
         OnDashCooldown?.Invoke(SkillType.Dash, dashCooldown);
 
-        while (Time.time - startTime < dashDuration) {
-            if (_moveInput.magnitude >= 0.1f) {
-                Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
-                transform.position += (dashForce * Time.deltaTime * moveDirection);
-                yield return null;
-            }
-            else {
-                transform.position += (dashForce * Time.deltaTime * transform.forward);
-                yield return null;
-            }
+        Vector3 moveDirection = (_moveInput.magnitude >= 0.1f)
+            ? new Vector3(_moveInput.x, 0, _moveInput.y).normalized
+            : transform.forward;
+
+        _rb.linearVelocity = moveDirection * dashForce;
+
+        OnDashCooldown?.Invoke(SkillType.Dash, dashCooldown);
+
+        float timer = 0f;
+        while (timer < dashDuration && !_mManager.ReturnStunnedValue()) {
+            timer += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
         }
+
+        _rb.linearVelocity = Vector3.zero;
 
         _canWalk = true;
         _canRotate = true;
 
         yield return new WaitForSeconds(dashCooldown - dashDuration);
         _inDash = false;
+    }
 
-    }
-    void FixedUpdate() {
-        if (!IsOwner) return;
-        if (LocalWhiteBoard.Instance.AnimationOn) return;
-        MoveAndRotate();
-    }
+
+    #endregion
+
+    #region MoveAndaRotate
+
+
     private void MoveAndRotate() {
-        if (_moveInput.magnitude != 0) {
+        if (_mManager.ReturnStunnedValue()) { _rb.linearVelocity = Vector3.zero; return; }
 
             Moving();
-
-        }
-
-        Rotate();
+        
+            Rotate();
 
     }
 
     void Moving() {
         if (!_canWalk) return;
+
+        if (_moveInput == (Vector2.zero)) {
+            _rb.linearVelocity = Vector3.zero;
+            return;
+        }
+
         Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
-        transform.position += (_mManager.ReturnMoveSpeed() * Time.deltaTime * moveDirection);
+        _rb.linearVelocity = moveDirection * _mManager.ReturnMoveSpeed();
     }
 
     public void Rotate() {
         if (!_canRotate) return;
+
         if (aimObject != null && aimObject.gameObject.activeInHierarchy) {
             Vector3 objectPosition = new(aimObject.position.x, transform.position.y, aimObject.position.z);
             Vector3 aimDirection = (objectPosition - transform.position);
@@ -187,6 +230,9 @@ public class PlayerController : NetworkBehaviour {
         }
     }
 
+    #endregion
+
+    #region Aim
     public void StartAimMode() {
         if (aimObject == null) return;
         aimObject.gameObject.SetActive(true);
@@ -196,7 +242,9 @@ public class PlayerController : NetworkBehaviour {
         if (aimObject == null) return;
         aimObject.gameObject.SetActive(false);
     }
+    #endregion
 
+    #region Setters
     public void BlockMovement() {
         _inDash = true;
         _canWalk = false;
@@ -209,7 +257,6 @@ public class PlayerController : NetworkBehaviour {
         _canRotate = true;
     }
 
-    public void BlockRotate(bool canRotate) {
-        _canRotate = canRotate;
-    }
+    public void BlockRotate(bool canRotate) => _canRotate = canRotate;
+    #endregion
 }

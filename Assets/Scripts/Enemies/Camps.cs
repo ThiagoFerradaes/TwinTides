@@ -115,9 +115,9 @@ public class Camps : NetworkBehaviour {
         if (aliveCount <= 0) {
             OnAllEnemiesDead?.Invoke();
             chest.UnlockChest();
+            if (respawnTime > 0) StartCoroutine(RespawnCampTimer());
         }
 
-        if (respawnTime > 0) StartCoroutine(RespawnCampTimer());
     }
 
     #region Respawn
