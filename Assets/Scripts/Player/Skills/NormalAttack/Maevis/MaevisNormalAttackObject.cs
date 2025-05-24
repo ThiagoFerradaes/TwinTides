@@ -38,6 +38,31 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
 
         transform.localPosition = _currentAttackCombo == 3 ? Vector3.forward * _info.ThirdAttackPosition : Vector3.forward * _info.AttackPosition;
 
+        transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+        transform.GetChild(0).gameObject.SetActive(_currentAttackCombo == 1);
+        transform.GetChild(1).gameObject.SetActive(_currentAttackCombo == 2);
+        transform.GetChild(2).gameObject.SetActive(_currentAttackCombo == 3);
+
+
+        //switch (_currentAttackCombo) {
+        //    case 1:
+        //        transform.GetChild(0).gameObject.SetActive(true);
+        //        transform.GetChild(1).gameObject.SetActive(false);
+        //        transform.GetChild(2).gameObject.SetActive(false);
+        //        break;
+        //    case 2:
+        //        transform.GetChild(0).gameObject.SetActive(false);
+        //        transform.GetChild(1).gameObject.SetActive(true);
+        //        transform.GetChild(2).gameObject.SetActive(false);
+        //        break;
+        //    case 3:
+        //        transform.GetChild(0).gameObject.SetActive(false);
+        //        transform.GetChild(1).gameObject.SetActive(false);
+        //        transform.GetChild(2).gameObject.SetActive(true);
+        //        break;
+        //}
+
         gameObject.SetActive(true);
     }
 
@@ -46,8 +71,12 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
+        if (!other.CompareTag("Enemy") && !other.CompareTag("BlackBeardBomb")) return;
 
-        if (!other.CompareTag("Enemy")) return;
+        if (other.TryGetComponent<BlackBeardCannonBomb>(out var bomb)) {
+            bomb.TryPush(transform.position);
+            return;
+        }
 
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
@@ -59,6 +88,7 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
 
         health.DealDamage(damage, true, true);
     }
+
 
     void End() {
         _currentAttackCombo = 1;

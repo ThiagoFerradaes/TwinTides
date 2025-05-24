@@ -32,7 +32,7 @@ public class GirlXTwoHealingArea : EnemyAttackPrefab
 
         yield return new WaitForSeconds(_info.healingDuration);
 
-        EndOfAttack();
+        End();
     }
 
     IEnumerator HealingRoutine() {
@@ -64,12 +64,13 @@ public class GirlXTwoHealingArea : EnemyAttackPrefab
         _listOfEnemies.Remove(health);
     }
 
-    private void EndOfAttack() {
+    public override void End() {
         _listOfEnemies.Clear();
 
         parentContext.Blackboard.IsAttacking = false;
         parentContext.Blackboard.CanAttack = false;
         parentContext.Blackboard.Cooldowns[_info.ListOfAttacksNames[0]] = _info.cooldown;
-        End();
+
+        base.End();
     }
 }

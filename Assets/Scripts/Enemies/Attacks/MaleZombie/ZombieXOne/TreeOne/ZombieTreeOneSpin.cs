@@ -33,9 +33,12 @@ public class ZombieTreeOneSpin : EnemyAttackPrefab
 
         yield return new WaitForSeconds(_info.totalSpinDuration);
 
-        _listOfPlayers.Clear();
-
         End();
+    }
+
+    public override void End() {
+        _listOfPlayers.Clear();
+        base.End();
     }
 
     IEnumerator Damage() {

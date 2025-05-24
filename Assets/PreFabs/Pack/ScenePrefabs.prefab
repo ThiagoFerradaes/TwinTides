@@ -284,7 +284,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b7f70fc2f8d3e6545a843ffe82d0b29c, type: 2}
   zombieGirlTreeTwoSkills:
   - {fileID: 11400000, guid: d6c56ff9098e09c4fadd736dd722efd4, type: 2}
-  blackBeardSkills: []
+  blackBeardSkills:
+  - {fileID: 11400000, guid: 5f7ca4ace10bd9b4cb6d88e73e6a5d2d, type: 2}
+  - {fileID: 11400000, guid: 74f4037cd0b94ff459a3b10ed409c44f, type: 2}
+  - {fileID: 11400000, guid: 81d7063eab672b444aed6488d1897120, type: 2}
+  - {fileID: 11400000, guid: ce13fd08378df074f96e008eb0bebb60, type: 2}
+  - {fileID: 11400000, guid: b8c780d5004c22648a5ef0d02d665337, type: 2}
+  - {fileID: 11400000, guid: d2efc29d2ed54a14d99a7bad55d9c58c, type: 2}
+  - {fileID: 11400000, guid: c3447c671156c6b449aaae39ed62d45c, type: 2}
+  - {fileID: 11400000, guid: 823cca1730db25d409e134dcaba4c9e3, type: 2}
   skillsList: []
 --- !u!114 &1210910929218762898
 MonoBehaviour:
@@ -298,8 +306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f981e961fc3e34580bd0a8560cf1fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listOfEnemies:
-  - {fileID: 0}
+  ListOfCamps: []
+  ListOfEnemies: []
 --- !u!1 &7214388736521335965
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,38 +528,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 137139705362260360, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 612895003150621489, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1898261735005080089, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1949740367986292341, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 2349714449
-      objectReference: {fileID: 0}
-    - target: {fileID: 4825039715634543611, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4825039715634543611, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4825039715634543611, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4825039715634543611, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4825039715634543611, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
-      propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9076130675839607190, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}

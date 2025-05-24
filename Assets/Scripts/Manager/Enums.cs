@@ -6,6 +6,7 @@ public enum Characters {
 }
 
 public enum SkillType {
+    None,
     Dash,
     Attack,
     LegendaryRelic,

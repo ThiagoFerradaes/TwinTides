@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 124961e4d054c0944925d3afb8e25644, type: 3}
+  m_Name: BBBulletsAttack
+  m_EditorClassIdentifier: 
+  ListOfPrefabs:
+  - {fileID: 6274239617610626292, guid: be752c0c1d2ccc540815359fa3a9ff47, type: 3}
+  ListOfPrefabsNames:
+  - Black Beard Final Bullets Attack
+  ListOfAttacksNames: []
+  Duration: 2
+  DashSpeed: 35
+  AmountOfTimesAttack: 3
+  Damage: 1
+  TimeBetweenOneAttackAndTheNext: 0.8
+  TimeBetweenDamages: 0.1
+  BulletsSize: 10
+  Cooldown: 60
+  DurationStronger: 1
+  DashSpeedStronger: 50
+  AmountOfAttacksStronger: 5
+  BulletSizeStronger: 14

@@ -3,140 +3,199 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
+using UnityEditor;
 using UnityEngine;
 
 public class HealthManager : NetworkBehaviour {
 
     #region Variables
     [Header("Atributes")]
-    [SerializeField] NetworkVariable<float> maxHealth;
+    [SerializeField] float health;
     [SerializeField] private float maxShieldAmount;
     [SerializeField] DeathBehaviour deathBehaviour;
     [SerializeField] Material damageMaterial;
     Material originalMaterial;
 
-    // Variaveis do tipo float
-    public NetworkVariable<float> _currentHealth = new();
-    [HideInInspector] public NetworkVariable<float> currentShieldAmount = new();
-    readonly NetworkVariable<float> _healMultiply = new(1f);
-    readonly NetworkVariable<float> _shieldMultiply = new(1f);
-    readonly NetworkVariable<float> _damageMultiply = new(1f);
+    // Network
 
-    // Variaveis do tipo bool
-    readonly NetworkVariable<bool> _canBeDamaged = new(true);
-    [HideInInspector] public NetworkVariable<bool> isShielded = new(false);
-    readonly NetworkVariable<bool> _canBeShielded = new(true);
-    readonly NetworkVariable<bool> _canBeHealed = new(true);
-    readonly NetworkVariable<bool> _canBeInvulnerable = new(true);
-    readonly NetworkVariable<bool> _canReceiveDebuff = new(true);
-    readonly NetworkVariable<bool> _canReceiveBuff = new(true);
-    readonly NetworkVariable<bool> _isDead = new(false);
+    // vida
+    private NetworkVariable<float> _maxHealth = new();
+    private NetworkVariable<float> _currentHealth = new();
+
+    // Multiplicadores
+    private NetworkVariable<float> _healMultiply = new(1f);
+    private NetworkVariable<float> _shieldMultiply = new(1f);
+    private NetworkVariable<float> _damageMultiply = new(1f);
+
+    // escudo
+    private NetworkVariable<float> _currentShieldAmount = new();
+
+    // Permissões
+    private NetworkVariable<bool> _canBeDamaged = new(true);
+    private NetworkVariable<bool> _isShielded = new(false);
+    private NetworkVariable<bool> _canBeShielded = new(true);
+    private NetworkVariable<bool> _canBeHealed = new(true);
+    private NetworkVariable<bool> _canBeInvulnerable = new(true);
+    private NetworkVariable<bool> _canReceiveDebuff = new(true);
+    private NetworkVariable<bool> _canReceiveBuff = new(true);
+
+    // Morte
+    private NetworkVariable<bool> _isDead = new(false);
+
 
     // Dicionarios de Debuffs e buffs
     readonly Dictionary<Type, ActiveDebuff> _listOfActiveDebuffs = new();
     readonly Dictionary<Type, ActiveBuff> _listOfActiveBuffs = new();
 
+    // Corrotina
     Coroutine _timeToEndShieldCoroutine;
-
+    Coroutine damageIndicatorCoroutine;
 
     // Eventos
-    public event Action<(float maxHealth, float currentHealth, float currentShield)> UpdateHealth;
+    public event Action<(float maxHealth, float currentHealth, float currentShield)> OnHealthUpdate;
     public event Action OnDeath;
     public event Action<Buff, int> OnBuffAdded, OnBuffRemoved;
     public event Action<Debuff, int> OnDebuffAdded, OnDebuffRemoved;
-    public event EventHandler OnGeneralDamage;
     public static event EventHandler OnMelHealed;
 
-    // Corrotinas
-    Coroutine damageIndicatorCoroutine;
     #endregion
 
     #region Methods
 
-    #region Unity Lifecycle
-    void Start() {
-        Inicialize();
+    #region Initialize
+    public override void OnNetworkSpawn() {
+        Initialize();
 
         originalMaterial = GetComponent<MeshRenderer>().material;
     }
-    void Inicialize() {
-        RestoreAllHealth();
-        InvokeUpdateHealth();
+    void Initialize() {
+        if (IsServer) {
+            _maxHealth.Value = health; // Igualando a vida máxima a vida disponível no inspecto
+            _currentHealth.Value = _maxHealth.Value; // Igualando a vida atual a vida máxima
+        }
+
+        UpdateHealthUI(0, 0);
     }
     private void OnEnable() {
         _currentHealth.OnValueChanged += UpdateHealthUI;
-        currentShieldAmount.OnValueChanged += UpdateHealthUI;
-        maxHealth.OnValueChanged += UpdateHealthUI;
+        _currentShieldAmount.OnValueChanged += UpdateHealthUI;
+        _maxHealth.OnValueChanged += UpdateHealthUI;
     }
     private void OnDisable() {
         _currentHealth.OnValueChanged -= UpdateHealthUI;
-        currentShieldAmount.OnValueChanged -= UpdateHealthUI;
-        maxHealth.OnValueChanged -= UpdateHealthUI;
+        _currentShieldAmount.OnValueChanged -= UpdateHealthUI;
+        _maxHealth.OnValueChanged -= UpdateHealthUI;
     }
-    #endregion
-
-    #region Event Handler
     void UpdateHealthUI(float old, float newValue) {
-        InvokeUpdateHealth();
-    }
-    void InvokeUpdateHealth() {
-        UpdateHealth?.Invoke((maxHealth.Value, _currentHealth.Value, currentShieldAmount.Value));
+        OnHealthUpdate?.Invoke((_maxHealth.Value, _currentHealth.Value, _currentShieldAmount.Value));
     }
     #endregion
 
     #region HealthManagement
-    public float ReturnMaxHealth() {
-        return maxHealth.Value;
-    }
-    public void RestoreAllHealth() {
-        if (!IsServer) return;
 
-        _currentHealth.Value = maxHealth.Value;
-    }
+    // Getters 
+    public float ReturnMaxHealth() => _maxHealth.Value;
+    public float ReturnCurrentHealth() => _currentHealth.Value;
+    public bool ReturnDeathState() => _isDead.Value;
 
-    public void DealDamage(float damageTaken, bool hitShield, bool isAfectedByDamageMultiply) {
-        if (!IsServer) return;
-        if (!_canBeDamaged.Value) { Debug.Log("Can't take Damage" + gameObject.name); return; }
-        if (_isDead.Value == true) return;
 
-        if (isShielded.Value && hitShield) {
+    // Damage
+    public void DealDamage(float damageTaken, bool hitShield, bool isAffectedByDamageMultiply) {
+        if (!IsServer || !_canBeDamaged.Value || _isDead.Value) return;
 
-            if (isAfectedByDamageMultiply) currentShieldAmount.Value -= (damageTaken * _damageMultiply.Value);
-            else currentShieldAmount.Value -= damageTaken;
+        float finalDamage = isAffectedByDamageMultiply ? damageTaken * _damageMultiply.Value : damageTaken;
 
-            if (currentShieldAmount.Value <= 0) {
-                float overDamage = -currentShieldAmount.Value;
-                currentShieldAmount.Value = 0f;
-                isShielded.Value = false;
-                _currentHealth.Value = Mathf.Clamp((_currentHealth.Value - overDamage), 0, maxHealth.Value);
-            }
+        if (_isShielded.Value && hitShield) {
+            ApplyShieldDamage(finalDamage);
         }
         else {
-
-            if (isAfectedByDamageMultiply)
-                _currentHealth.Value = Mathf.Clamp((_currentHealth.Value - damageTaken * _damageMultiply.Value), 0, maxHealth.Value);
-
-            else _currentHealth.Value = Mathf.Clamp((_currentHealth.Value - damageTaken), 0, maxHealth.Value);
+            ApplyHealthDamage(finalDamage);
         }
+
         if (_currentHealth.Value <= 0) {
             _isDead.Value = true;
-            DeathHandlerRpc();
+            HandleDeathRpc();
         }
         else {
-            OnGeneralDamage?.Invoke(this, EventArgs.Empty);
-            TookDamage();
+            DamageIndicatorRpc();
         }
     }
 
-    void TookDamage() {
-        DamageIndicatorRpc();
+    private void ApplyShieldDamage(float damage) {
+        _currentShieldAmount.Value -= damage;
+
+        if (_currentShieldAmount.Value <= 0f) {
+            float overDamage = -_currentShieldAmount.Value;
+            _currentShieldAmount.Value = 0f;
+            _isShielded.Value = false;
+
+            ApplyHealthDamage(overDamage);
+        }
     }
+
+    private void ApplyHealthDamage(float damage) {
+        _currentHealth.Value = Mathf.Clamp(_currentHealth.Value - damage, 0, _maxHealth.Value);
+    }
+
+
+    // Death Handling
+    public void Kill() {
+        if (IsServer)
+            HandleDeathRpc();
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void HandleDeathRpc() {
+        if (damageIndicatorCoroutine != null)
+            StopCoroutine(damageIndicatorCoroutine);
+
+        StopAllCoroutines();
+
+        _listOfActiveBuffs.Clear();
+        _listOfActiveDebuffs.Clear();
+
+        OnDeath?.Invoke();
+        deathBehaviour.Death(this.gameObject);
+    }
+
+    // Heal
+    public void Heal(float healAmount, bool melHealed) {
+        bool isFullLife = _currentHealth.Value >= _maxHealth.Value;
+
+        if (!_canBeHealed.Value || isFullLife) return;
+
+        if (melHealed) OnMelHealed?.Invoke(this, EventArgs.Empty);
+
+        if (!IsServer) return;
+
+        _currentHealth.Value = Mathf.Clamp((_currentHealth.Value + healAmount * _healMultiply.Value), 0, _maxHealth.Value);
+    }
+
+    // Revive
+    public void ReviveHandler(float percentOfMaxHealth) {
+
+        if (IsServer) {
+            _currentHealth.Value = Mathf.Clamp((percentOfMaxHealth / 100 * _maxHealth.Value), 0.2f * _maxHealth.Value, _maxHealth.Value);
+
+            _canBeDamaged.Value = true;
+
+            _isShielded.Value = false;
+
+            _isDead.Value = false;
+
+            _currentShieldAmount.Value = 0f;
+
+        }
+
+        GetComponent<MeshRenderer>().material = originalMaterial;
+
+    }
+
+    // Visual
     [Rpc(SendTo.ClientsAndHost)]
     void DamageIndicatorRpc() {
-        if (damageIndicatorCoroutine != null) {
-            return;
-        }
-        damageIndicatorCoroutine = StartCoroutine(DamageIndicator());
+        if (damageIndicatorCoroutine == null && gameObject.activeInHierarchy)
+            damageIndicatorCoroutine = StartCoroutine(DamageIndicator());
     }
     IEnumerator DamageIndicator() {
         MeshRenderer mesh = GetComponent<MeshRenderer>();
@@ -152,84 +211,41 @@ public class HealthManager : NetworkBehaviour {
         damageIndicatorCoroutine = null;
     }
 
-    [Rpc(SendTo.ClientsAndHost)]
-    void DeathHandlerRpc() {
-        if (damageIndicatorCoroutine != null) StopCoroutine(damageIndicatorCoroutine);
 
-        OnDeath?.Invoke();
-
-        deathBehaviour.Death(this.gameObject);
-    }
-    public void ReviveHandler(float percentOfMaxHealth) {
-
-        if (IsServer) {
-            _currentHealth.Value = Mathf.Clamp((percentOfMaxHealth / 100 * maxHealth.Value), 0.2f * maxHealth.Value, maxHealth.Value);
-
-            _canBeDamaged.Value = true;
-
-            currentShieldAmount.Value = 0f;
-
-            isShielded.Value = false;
-
-            _isDead.Value = false;
-
-        }
-
-        GetComponent<MeshRenderer>().material = originalMaterial;
-
-    }
-
-    public void Heal(float healAmount, bool melHealed) {
-        if (!_canBeHealed.Value) return;
-
-        if (melHealed && _currentHealth.Value < maxHealth.Value) { OnMelHealed?.Invoke(this, EventArgs.Empty); Debug.Log("Evento chamado"); }
-
-        if (!IsServer) return;
-
-        _currentHealth.Value = Mathf.Clamp((_currentHealth.Value + healAmount * _healMultiply.Value), 0, maxHealth.Value);
-    }
-
-    public float ReturnCurrentHealth() {
-        return _currentHealth.Value;
-    }
-    public bool ReturnDeathState() {
-        return _isDead.Value;
-    }
     #endregion
 
     #region ShieldManagement
 
+    // Getters
+    public bool ReturnShieldStatus() => _isShielded.Value;
+    public float ReturnShieldAmount() => _currentShieldAmount.Value;
+
+    // Shield 
     public void ApplyShield(float shieldAmount, float durationOfShield, bool isCumulative) {
-        if (!IsServer) return;
+        if (!IsServer || !_canBeShielded.Value) return;
 
-        if (!_canBeShielded.Value) return; // não pode receber escudo
+        float calculatedShield = shieldAmount * _shieldMultiply.Value;
 
-        if (isCumulative) currentShieldAmount.Value = Mathf.Clamp((currentShieldAmount.Value + shieldAmount * _shieldMultiply.Value)
-        , 0, maxShieldAmount); // o escudo recebido acumula com o escudo atual
+        _currentShieldAmount.Value = isCumulative ? Mathf.Clamp(_currentShieldAmount.Value + calculatedShield, 0, maxShieldAmount) : Mathf.Clamp(calculatedShield, 0, maxShieldAmount);
 
-        // o escudo recebido não acumula com o escudo atual
-        else currentShieldAmount.Value = Mathf.Clamp(shieldAmount * _shieldMultiply.Value, 0, maxShieldAmount);
-
-        isShielded.Value = currentShieldAmount.Value > 0;
+        _isShielded.Value = _currentShieldAmount.Value > 0;
 
         if (_timeToEndShieldCoroutine != null) StopCoroutine(_timeToEndShieldCoroutine);
-        _timeToEndShieldCoroutine = StartCoroutine(RemoveShieldAfterDuration(durationOfShield));
 
+        if (gameObject.activeInHierarchy) _timeToEndShieldCoroutine = StartCoroutine(RemoveShieldAfterDuration(durationOfShield));
     }
     public void BreakShield() {
         if (!IsServer) return;
 
-        currentShieldAmount.Value = 0;
-        isShielded.Value = false;
+        _currentShieldAmount.Value = 0;
+        _isShielded.Value = false;
     }
     IEnumerator RemoveShieldAfterDuration(float time) {
         yield return new WaitForSeconds(time);
-        currentShieldAmount.Value = 0;
-        isShielded.Value = false;
+        _currentShieldAmount.Value = 0;
+        _isShielded.Value = false;
     }
-    public bool ReturnShieldStatus() {
-        return isShielded.Value;
-    }
+
     #endregion
 
     #region Debuff Manager
@@ -257,7 +273,7 @@ public class HealthManager : NetworkBehaviour {
             currentDebuff.Coroutine = debuff.ApplyDebuff(this, currentDebuff.Stack);
             _listOfActiveDebuffs.Add(debuff.GetType(), currentDebuff);
 
-            StartCoroutine(currentDebuff.Coroutine); // começamos a corrotina novamente
+            if (gameObject.activeInHierarchy) StartCoroutine(currentDebuff.Coroutine); // começamos a corrotina novamente
         }
 
         else {
@@ -265,7 +281,7 @@ public class HealthManager : NetworkBehaviour {
             ActiveDebuff newDebuff = new(debuff, debuff.InicialStack, debuff.ApplyDebuff(this, debuff.InicialStack));
             _listOfActiveDebuffs.Add(debuff.GetType(), newDebuff); // adicionamos ao dicionario
 
-            StartCoroutine(newDebuff.Coroutine); // começamos a corrotina 
+            if (gameObject.activeInHierarchy) StartCoroutine(newDebuff.Coroutine); // começamos a corrotina 
             Debug.Log("Debuff added: " + debuff.name);
         }
 
@@ -330,7 +346,7 @@ public class HealthManager : NetworkBehaviour {
             currentBuff.Coroutine = buff.ApplyBuff(this, currentBuff.Stack);
             _listOfActiveBuffs.Add(buff.GetType(), currentBuff);
 
-            StartCoroutine(currentBuff.Coroutine); // começamos a corrotina novamente
+            if (gameObject.activeInHierarchy) StartCoroutine(currentBuff.Coroutine); // começamos a corrotina novamente
         }
 
         else {
@@ -338,7 +354,7 @@ public class HealthManager : NetworkBehaviour {
             ActiveBuff newBuff = new(buff, buff.InicialStack, buff.ApplyBuff(this, buff.InicialStack));
             _listOfActiveBuffs.Add(buff.GetType(), newBuff); // adicionamos ao dicionario
 
-            StartCoroutine(newBuff.Coroutine); // começamos a corrotina 
+            if (gameObject.activeInHierarchy) StartCoroutine(newBuff.Coroutine); // começamos a corrotina 
             Debug.Log("Buff added: " + buff.name);
         }
 
@@ -375,7 +391,6 @@ public class HealthManager : NetworkBehaviour {
                 break;
             case HealthPermissions.CanBeShielded:
                 _canBeShielded.Value = state;
-                Debug.Log(gameObject.name + " Can be shielded: " + _canBeShielded.Value);
                 break;
             case HealthPermissions.CanTakeDamage: // fica invulneravel
                 if (_canBeInvulnerable.Value) _canBeDamaged.Value = state;
@@ -396,9 +411,9 @@ public class HealthManager : NetworkBehaviour {
     public void ChangeMaxHealthServerRpc(float newMaxHealthValue) {
         if (!IsServer) return;
 
-        float percentageOfCurrentHealth = _currentHealth.Value / maxHealth.Value;
-        maxHealth.Value = newMaxHealthValue;
-        _currentHealth.Value = Mathf.Min(percentageOfCurrentHealth * maxHealth.Value, maxHealth.Value);
+        float percentageOfCurrentHealth = _currentHealth.Value / _maxHealth.Value;
+        _maxHealth.Value = newMaxHealthValue;
+        _currentHealth.Value = Mathf.Min(percentageOfCurrentHealth * _maxHealth.Value, _maxHealth.Value);
 
     }
 
@@ -450,3 +465,4 @@ public class ActiveBuff {
     }
 }
 #endregion
+

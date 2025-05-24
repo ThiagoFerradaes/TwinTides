@@ -27,7 +27,6 @@ public class MenuManager : NetworkBehaviour {
     [SerializeField] Button changeCharacterOneButtonOne, changeCharacterOneButtonTwo, changeCharacterTwoButtonOne, changeCharacterTwoButtonTwo;
     [SerializeField] Button playButton;
     [SerializeField] Button[] readyButton;
-    [SerializeField] Sprite readyButtonSprite, notReadyButtonSprite;
     [SerializeField] TextMeshProUGUI[] readyTexts;
     [SerializeField] GameObject joinByCodeScreen;
     [SerializeField] GameObject creatLobbyScreen;
@@ -66,10 +65,10 @@ public class MenuManager : NetworkBehaviour {
         playButton.onClick.AddListener(PlayButton);
 
         // botões para trocar de personagem
-        changeCharacterOneButtonOne.onClick.AddListener(() => ChangeCharacterButtonServerRpc(1));
-        changeCharacterOneButtonTwo.onClick.AddListener(() => ChangeCharacterButtonServerRpc(1));
-        changeCharacterTwoButtonOne.onClick.AddListener(() => ChangeCharacterButtonServerRpc(2));
-        changeCharacterTwoButtonOne.onClick.AddListener(() => ChangeCharacterButtonServerRpc(2));
+        changeCharacterOneButtonOne.onClick.AddListener(() => ChangeCharacterButtonRpc(1));
+        changeCharacterOneButtonTwo.onClick.AddListener(() => ChangeCharacterButtonRpc(1));
+        changeCharacterTwoButtonOne.onClick.AddListener(() => ChangeCharacterButtonRpc(2));
+        changeCharacterTwoButtonTwo.onClick.AddListener(() => ChangeCharacterButtonRpc(2));
 
         // botões ready
         readyButton[0].onClick.AddListener(() => ReadyButtonServerRpc(1));
@@ -165,13 +164,13 @@ public class MenuManager : NetworkBehaviour {
     #endregion
 
     #region Buttons
-    [ServerRpc(RequireOwnership = false)]
-    public void ChangeCharacterButtonServerRpc(int player) { // Botão de mudar de personagem
+    [Rpc(SendTo.Server)]
+    public void ChangeCharacterButtonRpc(int player) { // Botão de mudar de personagem
         if (player == 1 && !WhiteBoard.Singleton.PlayerOneReady.Value) {
-            WhiteBoard.Singleton.ChangeCharactersServerRpc(player);
+            WhiteBoard.Singleton.ChangeCharacters(player);
         }
         else if (player == 2 && !WhiteBoard.Singleton.PlayerTwoReady.Value) {
-            WhiteBoard.Singleton.ChangeCharactersServerRpc(player);
+            WhiteBoard.Singleton.ChangeCharacters(player);
         }
     }
 
@@ -196,45 +195,27 @@ public class MenuManager : NetworkBehaviour {
     IEnumerator PopUpFadeInFadeOut(Image popUp) {
         popUpCoroutinePlaying = true;
 
-        Color original = popUp.color;
-        popUp.color = new Color(original.r, original.g, original.b, 0f);
+        CanvasGroup canvasGroup = popUp.GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0f;
+        canvasGroup.gameObject.SetActive(true);
 
-        TextMeshProUGUI textComponent = popUp.GetComponentInChildren<TextMeshProUGUI>();
-        Color originalText = textComponent.color;
-        textComponent.color = new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, 0f);
-
-        popUp.gameObject.SetActive(true);
-
-        float maxAlpha = popUpMaxAlpha / 255f;
-
-
+        // Fade in
         for (float i = 0; i <= timeToPopUpFadeOut; i += Time.deltaTime) {
-            float alpha = Mathf.Lerp(0, maxAlpha, i / timeToPopUpFadeOut);
-            float textAlpha = Mathf.Lerp(0, 1, i / timeToPopUpFadeOut);
-
-            popUp.color = new Color(original.r, original.g, original.b, alpha);
-            textComponent.color = new Color(originalText.r, originalText.g, originalText.b, textAlpha);
-
+            canvasGroup.alpha = Mathf.Lerp(0f, 1f, i / timeToPopUpFadeOut);
             yield return null;
         }
 
-
+        canvasGroup.alpha = 1f;
         yield return new WaitForSeconds(waitTimeToPopUpFadeOut);
 
-
+        // Fade out
         for (float i = 0; i <= timeToPopUpFadeOut; i += Time.deltaTime) {
-            float alpha = Mathf.Lerp(maxAlpha, 0, i / timeToPopUpFadeOut);
-            float textAlpha = Mathf.Lerp(1, 0, i / timeToPopUpFadeOut);
-
-            popUp.color = new Color(original.r, original.g, original.b, alpha);
-            textComponent.color = new Color(originalText.r, originalText.g, originalText.b, textAlpha);
-
+            canvasGroup.alpha = Mathf.Lerp(1f, 0f, i / timeToPopUpFadeOut);
             yield return null;
         }
 
-        popUp.gameObject.SetActive(false);
-        popUp.color = original;
-        textComponent.color = originalText;
+        canvasGroup.alpha = 0f;
+        canvasGroup.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(0.2f);
         popUpCoroutinePlaying = false;
@@ -285,12 +266,10 @@ public class MenuManager : NetworkBehaviour {
         if (player == 1) {
             if (WhiteBoard.Singleton.PlayerOneReady.Value == true) { // Se vc ja ta pronto vc pode voltar
                 WhiteBoard.Singleton.CharacterReadyServerRpc(player);
-                readyButton[0].GetComponent<Image>().sprite = readyButtonSprite;
             }
             else { // Se vc n ta pronto, vc só pode dar pronto se o seu personagem for diferente do outro
                 if (WhiteBoard.Singleton.PlayerOneCharacter.Value != WhiteBoard.Singleton.PlayerTwoCharacter.Value) {
                     WhiteBoard.Singleton.CharacterReadyServerRpc(player);
-                    readyButton[0].GetComponent<Image>().sprite = notReadyButtonSprite;
                 }
                 else {
                     ShowDuplicatePopUpClientRpc(player);
@@ -300,12 +279,10 @@ public class MenuManager : NetworkBehaviour {
         if (player == 2) {
             if (WhiteBoard.Singleton.PlayerTwoReady.Value == true) { // Se vc ja ta pronto vc pode voltar
                 WhiteBoard.Singleton.CharacterReadyServerRpc(player);
-                readyButton[1].GetComponent<Image>().sprite = readyButtonSprite;
             }
             else { // Se vc n ta pronto, vc só pode dar pronto se o seu personagem for diferente do outro
                 if (WhiteBoard.Singleton.PlayerOneCharacter.Value != WhiteBoard.Singleton.PlayerTwoCharacter.Value) {
                     WhiteBoard.Singleton.CharacterReadyServerRpc(player); ;
-                    readyButton[1].GetComponent<Image>().sprite = notReadyButtonSprite;
                 }
                 else {
                     ShowDuplicatePopUpClientRpc(player);

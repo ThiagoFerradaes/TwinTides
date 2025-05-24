@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2950631235440392704}
   - component: {fileID: -8015809491459835981}
   - component: {fileID: -926942859103859}
+  - component: {fileID: 3803397650573982185}
   m_Layer: 8
   m_Name: Zombie12
   m_TagString: Enemy
@@ -37,7 +38,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2882714897749066286}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &3777686734291718104
@@ -137,17 +139,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  maxHealth:
-    m_InternalValue: 10
+  health: 0
   maxShieldAmount: 10
-  deathBehaviour: {fileID: 11400000, guid: 589511066338e104a96a8b3062906aaf, type: 2}
+  deathBehaviour: {fileID: 11400000, guid: 423c7756fe1a21440b2dd50698a1add2, type: 2}
   damageMaterial: {fileID: 2100000, guid: bd260d75cd071d94cb8da51f88f1f28c, type: 2}
-  _currentHealth:
-    m_InternalValue: 0
-  currentShieldAmount:
-    m_InternalValue: 0
-  isShielded:
-    m_InternalValue: 0
 --- !u!114 &2049203172403124494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,3 +266,90 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3803397650573982185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3638960116113353898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3293ce28c15b34e4b92f14d7e2840441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+--- !u!1001 &6081904208509689420
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4757646871818118107}
+    m_Modifications:
+    - target: {fileID: 8587773940075808472, guid: 98835bcfe0cb0e54a84c0bd570b00cb7, type: 3}
+      propertyPath: m_Name
+      value: Melee 1 Roxo
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963911802452909154, guid: 98835bcfe0cb0e54a84c0bd570b00cb7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963911802452909154, guid: 98835bcfe0cb0e54a84c0bd570b00cb7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963911802452909154, guid: 98835bcfe0cb0e54a84c0bd570b00cb7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963911802452909154, guid: 98835bcfe0cb0e54a84c0bd570b00cb7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963911802452909154, guid: 98835bcfe0cb0e54a84c0bd570b00cb7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963911802452909154, guid: 98835bcfe0cb0e54a84c0bd570b00cb7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963911802452909154, guid: 98835bcfe0cb0e54a84c0bd570b00cb7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963911802452909154, guid: 98835bcfe0cb0e54a84c0bd570b00cb7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963911802452909154, guid: 98835bcfe0cb0e54a84c0bd570b00cb7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963911802452909154, guid: 98835bcfe0cb0e54a84c0bd570b00cb7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963911802452909154, guid: 98835bcfe0cb0e54a84c0bd570b00cb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963911802452909154, guid: 98835bcfe0cb0e54a84c0bd570b00cb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963911802452909154, guid: 98835bcfe0cb0e54a84c0bd570b00cb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 98835bcfe0cb0e54a84c0bd570b00cb7, type: 3}
+--- !u!4 &2882714897749066286 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8963911802452909154, guid: 98835bcfe0cb0e54a84c0bd570b00cb7, type: 3}
+  m_PrefabInstance: {fileID: 6081904208509689420}
+  m_PrefabAsset: {fileID: 0}

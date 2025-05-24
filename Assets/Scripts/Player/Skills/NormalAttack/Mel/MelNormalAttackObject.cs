@@ -71,12 +71,16 @@ public class MelNormalAttackObject : SkillObjectPrefab {
     }
 
     private void OnTriggerEnter(Collider other) {
+        if (!other.CompareTag("Enemy") && !other.CompareTag("BlackBeardBomb")) return;
 
-        if (!other.CompareTag("Enemy")) return;
+        if (other.TryGetComponent<BlackBeardCannonBomb>(out var bomb)) {
+            bomb.TryPush(transform.position);
+            return;
+        }
 
-        if (!other.TryGetComponent<HealthManager>(out HealthManager enemyHelath)) return;
+        if (!other.TryGetComponent<HealthManager>(out HealthManager enemyHealth)) return;
 
-        enemyHelath.DealDamage(_info.SphereDamage, true, true);
+        enemyHealth.DealDamage(_info.SphereDamage, true, true);
 
         OnNormalHit();
     }

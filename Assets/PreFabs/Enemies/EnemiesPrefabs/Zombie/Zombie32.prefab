@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2950631235440392704}
   - component: {fileID: -8015809491459835981}
   - component: {fileID: 3234332177171737841}
+  - component: {fileID: -8969698895622793221}
   m_Layer: 8
   m_Name: Zombie32
   m_TagString: Enemy
@@ -138,17 +139,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  maxHealth:
-    m_InternalValue: 10
+  health: 0
   maxShieldAmount: 10
-  deathBehaviour: {fileID: 11400000, guid: 589511066338e104a96a8b3062906aaf, type: 2}
+  deathBehaviour: {fileID: 11400000, guid: 423c7756fe1a21440b2dd50698a1add2, type: 2}
   damageMaterial: {fileID: 2100000, guid: bd260d75cd071d94cb8da51f88f1f28c, type: 2}
-  _currentHealth:
-    m_InternalValue: 0
-  currentShieldAmount:
-    m_InternalValue: 0
-  isShielded:
-    m_InternalValue: 0
 --- !u!114 &2049203172403124494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,6 +266,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-8969698895622793221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3638960116113353898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3293ce28c15b34e4b92f14d7e2840441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1001 &4701293156038842620
 PrefabInstance:
   m_ObjectHideFlags: 0

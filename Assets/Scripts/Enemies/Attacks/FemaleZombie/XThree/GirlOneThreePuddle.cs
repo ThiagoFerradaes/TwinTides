@@ -62,6 +62,12 @@ public class GirlOneThreePuddle : EnemyAttackPrefab
         End();
     }
 
+    public override void End() {
+        _listOfPlayers.Clear();
+
+        base.End();
+    }
+
     IEnumerator DamageRoutine() {
         while (true) {
             foreach (var player in _listOfPlayers) {

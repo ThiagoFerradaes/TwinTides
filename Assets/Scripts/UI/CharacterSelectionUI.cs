@@ -6,59 +6,46 @@ using UnityEngine.UI;
 
 public class CharacterSelectionUI : MonoBehaviour {
     [SerializeField] bool playerOne;
-    [SerializeField] Image characterImage;
-    [SerializeField] Image readyImage;
-    [SerializeField] Sprite maevisSprite, melSprite, readySpriteOne, notReadySpriteOne, readySpriteTwo, notReadySpriteTwo;
+    [SerializeField] Image characterImage, nameImage;
+    [SerializeField] Image readyImage, readyButtonImage;
+    [SerializeField] Sprite maevisSprite, melSprite, maevisNameSprite, melNameSprite, readyButtonSpriteOn, readyButtonSpriteOff;
 
 
     private void OnEnable() {
-        ChangeCharacterUIClientRpc(Characters.Mel, Characters.Maevis);
-        ChangeReadyTextClientRpc(false, false);
-        WhiteBoard.Singleton.PlayerOneCharacter.OnValueChanged += ChangeCharacterUIClientRpc;
-        WhiteBoard.Singleton.PlayerTwoCharacter.OnValueChanged += ChangeCharacterUIClientRpc;
 
-        WhiteBoard.Singleton.PlayerOneReady.OnValueChanged += ChangeReadyTextClientRpc;
-        WhiteBoard.Singleton.PlayerTwoReady.OnValueChanged += ChangeReadyTextClientRpc;
+        if (playerOne)ChangeCharacterUIClientRpc(Characters.Mel, WhiteBoard.Singleton.PlayerOneCharacter.Value);
+        else ChangeCharacterUIClientRpc(Characters.Maevis, WhiteBoard.Singleton.PlayerTwoCharacter.Value);
+
+        ChangeReadyTextClientRpc(false, false);
+
+        if (playerOne) WhiteBoard.Singleton.PlayerOneCharacter.OnValueChanged += ChangeCharacterUIClientRpc;
+        else WhiteBoard.Singleton.PlayerTwoCharacter.OnValueChanged += ChangeCharacterUIClientRpc;
+
+        if (playerOne) WhiteBoard.Singleton.PlayerOneReady.OnValueChanged += ChangeReadyTextClientRpc;
+        else WhiteBoard.Singleton.PlayerTwoReady.OnValueChanged += ChangeReadyTextClientRpc; 
     }
 
     private void OnDisable() {
         if (WhiteBoard.Singleton != null) {
-            WhiteBoard.Singleton.PlayerOneCharacter.OnValueChanged -= ChangeCharacterUIClientRpc;
-            WhiteBoard.Singleton.PlayerTwoCharacter.OnValueChanged -= ChangeCharacterUIClientRpc;
+            if (playerOne) WhiteBoard.Singleton.PlayerOneCharacter.OnValueChanged -= ChangeCharacterUIClientRpc;
+            else WhiteBoard.Singleton.PlayerTwoCharacter.OnValueChanged -= ChangeCharacterUIClientRpc;
 
-            WhiteBoard.Singleton.PlayerOneReady.OnValueChanged -= ChangeReadyTextClientRpc;
-            WhiteBoard.Singleton.PlayerTwoReady.OnValueChanged -= ChangeReadyTextClientRpc;
+            if (playerOne) WhiteBoard.Singleton.PlayerOneReady.OnValueChanged -= ChangeReadyTextClientRpc;
+            else WhiteBoard.Singleton.PlayerTwoReady.OnValueChanged -= ChangeReadyTextClientRpc;
 
         }
     }
 
     [ClientRpc]
     private void ChangeCharacterUIClientRpc(Characters preview, Characters newChar) {
-        if (playerOne) {
-            if (WhiteBoard.Singleton.PlayerOneCharacter.Value == Characters.Maevis) {
-                characterImage.sprite = maevisSprite;
-            }
-            else {
-                characterImage.sprite = melSprite;
-            }
-        }
-        else {
-            if (WhiteBoard.Singleton.PlayerTwoCharacter.Value == Characters.Maevis) {
-                characterImage.sprite = maevisSprite;
-            }
-            else {
-                characterImage.sprite = melSprite;
-            }
-        }
+        characterImage.sprite = newChar == Characters.Maevis ? maevisSprite : melSprite;
+        nameImage.sprite = newChar == Characters.Maevis ? maevisNameSprite : melNameSprite;
+
     }
 
     [ClientRpc]
     void ChangeReadyTextClientRpc(bool old, bool newBool) {
-        if (playerOne) {
-            readyImage.sprite = WhiteBoard.Singleton.PlayerOneReady.Value ? readySpriteOne : notReadySpriteOne;
-        }
-        else {
-            readyImage.sprite = WhiteBoard.Singleton.PlayerOneReady.Value ? readySpriteTwo : notReadySpriteTwo;
-        }
+        readyImage.gameObject.SetActive(newBool);
+        readyButtonImage.sprite = newBool ? readyButtonSpriteOff : readyButtonSpriteOn;
     }
 }
