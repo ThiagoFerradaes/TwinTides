@@ -202,9 +202,9 @@ public class PlayerController : NetworkBehaviour {
     }
 
     void Moving() {
-        if (!_canWalk) return;
+        //if (!_canWalk) return;
 
-        if (_moveInput == (Vector2.zero)) {
+        if (_moveInput == (Vector2.zero) || !_canWalk) {
             _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);
             return;
         }

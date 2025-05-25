@@ -12,7 +12,7 @@ public class BlackBeardHealthUiManager : MonoBehaviour
         BlackBeardHealthManager.GetComponent<BlackBeardMachineState>().OnFinal += BlackBeardHealthUiManager_OnFinal;
     }
 
-    private void HealthUpdate((float maxHealth, float currentHealth, float currentShield) obj) {
+    private void HealthUpdate((float maxHealth, float currentHealth, float currentShield, float maxShield) obj) {
         HealthBar.fillAmount = obj.currentHealth / obj.maxHealth;
     }
 
