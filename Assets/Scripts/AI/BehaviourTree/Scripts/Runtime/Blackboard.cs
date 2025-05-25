@@ -10,6 +10,9 @@ public class Blackboard {
     // Componentes
     public Transform Target;
 
+    // Listas
+    public List<Transform> path = new();
+
     // Condicionais
     public bool IsCloseToPath = true;
     public bool IsTargetInRange = false;
@@ -67,4 +70,31 @@ public class Blackboard {
         }
     }
 
+    public void SetPath(List<Transform> path) {
+        this.path = path;
+    }
+
+    public void Restart() {
+        // Resetar componentes
+        Target = null;
+
+        // Resetar listas
+        path?.Clear();
+
+        // Resetar condicionais
+        IsCloseToPath = true;      // ou false, dependendo do seu default
+        IsTargetInRange = false;
+        CanFollowPlayer = true;
+        IsAttacking = false;
+        IsInAttackRange = false;
+        CanAttack = true;
+
+        // Resetar atributos
+        CurrentPathIndex = 0;
+        CurrentComboIndex = 0;
+        GlobalAttackTimer = 0f;
+
+        // Resetar cooldowns
+        Cooldowns.Clear();
+    }
 }
