@@ -14,22 +14,22 @@ public class PlayerController : NetworkBehaviour {
     [Header("Aim")]
     public LayerMask FloorLayer;
     public Transform aimObject;
-    
+
     [Header("Dash")]
     [SerializeField] float dashForce;
     [SerializeField] float dashDuration;
     [SerializeField] float dashCooldown;
-    
+
     // booleanas
     bool _canWalk = true;
     bool _canRotate = true;
     bool _inDash;
-    
+
     [HideInInspector] public bool isRotatingMouse;
     [HideInInspector] public bool isAiming;
     [HideInInspector] public bool CanInteract;
     [HideInInspector] public Vector2 _rotationInput;
-    
+
     // Componentes
     Vector2 _moveInput;
     MovementManager _mManager;
@@ -88,7 +88,6 @@ public class PlayerController : NetworkBehaviour {
         }
         else if (context.phase == InputActionPhase.Canceled) {
             _moveInput = Vector2.zero;
-            //if (!_inDash) _rb.linearVelocity = Vector3.zero;
             OnStop?.Invoke();
         }
     }
@@ -174,7 +173,7 @@ public class PlayerController : NetworkBehaviour {
             yield return new WaitForFixedUpdate();
         }
 
-        _rb.linearVelocity = Vector3.zero;
+        _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);
 
         _canWalk = true;
         _canRotate = true;
@@ -190,11 +189,15 @@ public class PlayerController : NetworkBehaviour {
 
 
     private void MoveAndRotate() {
-        if (_mManager.ReturnStunnedValue()) { _rb.linearVelocity = Vector3.zero; return; }
+        if (_rb.linearVelocity.y < 0) {
+            _rb.linearVelocity += Vector3.up * Physics.gravity.y * (2) * Time.deltaTime;
+        }
 
-            Moving();
-        
-            Rotate();
+        if (_mManager.ReturnStunnedValue()) { _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f); return; }
+
+        Moving();
+
+        Rotate();
 
     }
 
@@ -202,12 +205,14 @@ public class PlayerController : NetworkBehaviour {
         if (!_canWalk) return;
 
         if (_moveInput == (Vector2.zero)) {
-            _rb.linearVelocity = Vector3.zero;
+            _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);
             return;
         }
-
+        
         Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
-        _rb.linearVelocity = moveDirection * _mManager.ReturnMoveSpeed();
+        Vector3 velocity = moveDirection * _mManager.ReturnMoveSpeed();
+        velocity.y = _rb.linearVelocity.y; 
+        _rb.linearVelocity = velocity;
     }
 
     public void Rotate() {

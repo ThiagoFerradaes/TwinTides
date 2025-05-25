@@ -21,7 +21,7 @@ public class Camps : NetworkBehaviour {
     [SerializeField] bool randomCamp;
     [SerializeField, Tooltip("Só necessário quando é random")] int numberOfEnemies;
     [SerializeField, Tooltip("Deixa 0 se n quiser que ele respawne")] float respawnTime;
-    [SerializeField] Chest chest;
+    Chest chest;
 
     public event Action OnAllEnemiesDead;
 
@@ -38,6 +38,9 @@ public class Camps : NetworkBehaviour {
             }
             else if (child.CompareTag("CampPoint")) {
                 listOfPoints.Add(child.transform);
+            }
+            else if (child.CompareTag("Chest")) {
+                chest = child.GetComponent<Chest>();
             }
         }
     }
