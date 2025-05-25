@@ -9,22 +9,33 @@ public class GoToAction : ActionNode {
 
     public override void OnStart() {
 
-        Waypoints.PathTag tag = context.Path.Waypoints[blackboard.CurrentPathIndex];
-        targetPosition = Waypoints.Instance.GetPointByTag(tag);
+        if (blackboard.path == null || blackboard.path.Count == 0) {
+            state = State.Failure;
+            return;
+        }
 
+        // Garante que o índice está dentro do intervalo
+        if (blackboard.CurrentPathIndex >= blackboard.path.Count) {
+            blackboard.CurrentPathIndex = 0;
+        }
+
+        targetPosition = blackboard.path[blackboard.CurrentPathIndex];
         context.Agent.SetDestination(targetPosition.position);
 
     }
 
     protected override State OnUpdate() {
+        if (state == State.Failure) return State.Failure;
+
         context.Agent.speed = context.MManager.ReturnMoveSpeed();
 
         if (context.Agent.pathPending) return State.Running;
 
-        else if (context.Agent.remainingDistance > StoppingDistance) return State.Running;
+        if (context.Agent.remainingDistance > StoppingDistance) return State.Running;
 
+        // Avança para o próximo ponto
         blackboard.CurrentPathIndex++;
-        if (blackboard.CurrentPathIndex >= context.Path.Waypoints.Length) {
+        if (blackboard.CurrentPathIndex >= blackboard.path.Count) {
             blackboard.CurrentPathIndex = 0;
         }
 
