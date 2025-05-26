@@ -6,6 +6,10 @@ public class DesitroyObjectTeste : MonoBehaviour
 
     void Start()
     {
-        Destroy(gameObject, tempoDeVida);
+        Invoke(nameof(TurnOff), tempoDeVida);
+    }
+
+    void TurnOff() {
+        gameObject.SetActive(false);
     }
 }

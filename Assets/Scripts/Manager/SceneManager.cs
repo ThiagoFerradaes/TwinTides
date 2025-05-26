@@ -24,7 +24,7 @@ public class SceneManager : NetworkBehaviour
             ulong clientID = client.ClientId;
 
             GameObject prefab = GetPrefab(playerIndex);
-            Vector3 prefabPos = Vector3.zero + new Vector3(playerIndex * 2,0,0);
+            Vector3 prefabPos = Vector3.zero + new Vector3(playerIndex * 2,8.1f,0);
 
             var playerObject = Instantiate(prefab, prefabPos, Quaternion.identity);
 

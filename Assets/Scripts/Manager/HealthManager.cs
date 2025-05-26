@@ -52,7 +52,7 @@ public class HealthManager : NetworkBehaviour {
     Coroutine damageIndicatorCoroutine;
 
     // Eventos
-    public event Action<(float maxHealth, float currentHealth, float currentShield)> OnHealthUpdate;
+    public event Action<(float maxHealth, float currentHealth, float currentShield, float maxShield)> OnHealthUpdate;
     public event Action OnDeath;
     public event Action<Buff, int> OnBuffAdded, OnBuffRemoved;
     public event Action<Debuff, int> OnDebuffAdded, OnDebuffRemoved;
@@ -87,7 +87,7 @@ public class HealthManager : NetworkBehaviour {
         _maxHealth.OnValueChanged -= UpdateHealthUI;
     }
     void UpdateHealthUI(float old, float newValue) {
-        OnHealthUpdate?.Invoke((_maxHealth.Value, _currentHealth.Value, _currentShieldAmount.Value));
+        OnHealthUpdate?.Invoke((_maxHealth.Value, _currentHealth.Value, _currentShieldAmount.Value, maxShieldAmount));
     }
     #endregion
 
@@ -219,6 +219,8 @@ public class HealthManager : NetworkBehaviour {
     // Getters
     public bool ReturnShieldStatus() => _isShielded.Value;
     public float ReturnShieldAmount() => _currentShieldAmount.Value;
+
+    public float ReturnMaxShieldAmount() => maxShieldAmount;
 
     // Shield 
     public void ApplyShield(float shieldAmount, float durationOfShield, bool isCumulative) {
