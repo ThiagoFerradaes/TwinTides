@@ -127,12 +127,14 @@ public class Camps : NetworkBehaviour {
             enemy.transform.position = listOfPoints[pointIndexes[i]].position;
 
             Vector3 directionToCenter = transform.position - enemy.transform.position;
-            directionToCenter.y = 0; 
+            directionToCenter.y = 0;
             if (directionToCenter != Vector3.zero) {
                 enemy.transform.rotation = Quaternion.LookRotation(directionToCenter);
             }
 
-            enemy.GetComponent<BehaviourTreeRunner>().SetPath(listOfPoints[pointIndexes[i]]);
+            BehaviourTreeRunner behaviour = enemy.GetComponent<BehaviourTreeRunner>();
+            behaviour.RestartBlackBoard();
+            behaviour.SetPath(listOfPoints[pointIndexes[i]]);
 
             enemy.SetActive(true);
         }

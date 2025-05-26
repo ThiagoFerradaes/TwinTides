@@ -76,7 +76,7 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
         _canSetUpExplosion = true;
     }
 
-    private void OnHealthChanged((float maxHealth, float currentHealth, float currentShield)health) {
+    private void OnHealthChanged((float maxHealth, float currentHealth, float currentShield, float maxShield) health) {
         if (_currentEnemyHealth > health.currentHealth) {
             if (_canSetUpExplosion) _canExplode = true;
             _currentEnemyHealth = health.currentHealth;
