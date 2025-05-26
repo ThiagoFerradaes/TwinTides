@@ -256,7 +256,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5000001
   m_Height: 2
@@ -334,6 +334,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BalaMaevis (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2007043955194867648, guid: e9feb85c2e15c314197c306da78afb6f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2387279758332869685, guid: e9feb85c2e15c314197c306da78afb6f, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.3739215
@@ -378,6 +382,10 @@ PrefabInstance:
     - target: {fileID: 6542143189633808574, guid: f966a2e48a9a56a4b985dda94aa59e64, type: 3}
       propertyPath: m_Name
       value: TrailTiroMaevis
+      objectReference: {fileID: 0}
+    - target: {fileID: 6542143189633808574, guid: f966a2e48a9a56a4b985dda94aa59e64, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6595521675451446775, guid: f966a2e48a9a56a4b985dda94aa59e64, type: 3}
       propertyPath: m_LocalPosition.x
@@ -440,6 +448,10 @@ PrefabInstance:
     - target: {fileID: 6225159391613228016, guid: 8a4a7520c460f69408a1a15382399757, type: 3}
       propertyPath: m_Name
       value: Tiro
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225159391613228016, guid: 8a4a7520c460f69408a1a15382399757, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6715527816953809848, guid: 8a4a7520c460f69408a1a15382399757, type: 3}
       propertyPath: m_LocalPosition.x
