@@ -205,7 +205,7 @@ public class PlayerController : NetworkBehaviour {
         //if (!_canWalk) return;
 
         if (_moveInput == (Vector2.zero) || !_canWalk) {
-            _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);
+            if (!_inDash) _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);
             return;
         }
         
