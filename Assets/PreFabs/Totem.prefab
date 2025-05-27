@@ -53,7 +53,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 10, z: 10}
+  m_Size: {x: 12, y: 12, z: 12}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7527666349304012364
 MonoBehaviour:
@@ -77,15 +77,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0dff60e361f087b40904d1aaf5c2cd6c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.3
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0dff60e361f087b40904d1aaf5c2cd6c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.3
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0dff60e361f087b40904d1aaf5c2cd6c, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.3
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0dff60e361f087b40904d1aaf5c2cd6c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -137,7 +137,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3057194824697141932, guid: 0dff60e361f087b40904d1aaf5c2cd6c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8317866417903279670}
+      addedObject: {fileID: 5537644332728298081}
   m_SourcePrefab: {fileID: 100100000, guid: 0dff60e361f087b40904d1aaf5c2cd6c, type: 3}
 --- !u!4 &2130107180738227905 stripped
 Transform:
@@ -149,8 +149,8 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3057194824697141932, guid: 0dff60e361f087b40904d1aaf5c2cd6c, type: 3}
   m_PrefabInstance: {fileID: 1874922740886292778}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &8317866417903279670
-MeshCollider:
+--- !u!136 &5537644332728298081
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -167,7 +167,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 8012563891942627399, guid: 0dff60e361f087b40904d1aaf5c2cd6c, type: 3}
+  serializedVersion: 2
+  m_Radius: 11.061237
+  m_Height: 53.596577
+  m_Direction: 1
+  m_Center: {x: -0.0000007947286, y: 17.404438, z: 0.0000007947286}

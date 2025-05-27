@@ -61,4 +61,8 @@ public class AimObject : MonoBehaviour {
     private void OnDisable() {
         aimAlive = null;
     }
+
+    private void OnDestroy() {
+        PlayerSetUp.OnPlayerSpawned -= PlayerSetUp_OnPlayerSpawned;
+    }
 }
