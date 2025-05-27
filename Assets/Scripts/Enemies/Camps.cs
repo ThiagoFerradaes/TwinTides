@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -11,6 +12,7 @@ public class Camps : NetworkBehaviour {
     // Listas
     List<GameObject> listOfEnemies = new();
     List<GameObject> currentActiveEnemies = new();
+    List<Transform> listOfPoints = new();
 
     // int
     int aliveCount;
@@ -19,7 +21,7 @@ public class Camps : NetworkBehaviour {
     [SerializeField] bool randomCamp;
     [SerializeField, Tooltip("Só necessário quando é random")] int numberOfEnemies;
     [SerializeField, Tooltip("Deixa 0 se n quiser que ele respawne")] float respawnTime;
-    [SerializeField] Chest chest;
+    Chest chest;
 
     public event Action OnAllEnemiesDead;
 
@@ -29,8 +31,17 @@ public class Camps : NetworkBehaviour {
         listOfEnemies.Clear();
 
         for (int i = 0; i < transform.childCount; i++) {
-            var enemy = transform.GetChild(i).gameObject;
-            if (enemy.CompareTag("Enemy")) listOfEnemies.Add(enemy);
+            var child = transform.GetChild(i).gameObject;
+
+            if (child.CompareTag("Enemy")) {
+                listOfEnemies.Add(child);
+            }
+            else if (child.CompareTag("CampPoint")) {
+                listOfPoints.Add(child.transform);
+            }
+            else if (child.CompareTag("Chest")) {
+                chest = child.GetComponent<Chest>();
+            }
         }
     }
 
@@ -78,11 +89,25 @@ public class Camps : NetworkBehaviour {
 
     public void StartCampWithIndex(int[] index) {
         if (!IsServer) return;
-        StartCampForEveryoneRpc(index);
+
+        List<int> availablePointIndexes = new();
+        for (int i = 0; i < listOfPoints.Count; i++) {
+            availablePointIndexes.Add(i);
+        }
+
+        for (int i = 0; i < availablePointIndexes.Count; i++) {
+            int rand = Random.Range(i, availablePointIndexes.Count);
+            (availablePointIndexes[i], availablePointIndexes[rand]) =
+                (availablePointIndexes[rand], availablePointIndexes[i]);
+        }
+
+        int[] pointIndexesToUse = availablePointIndexes.Take(index.Length).ToArray();
+
+        StartCampForEveryoneRpc(index, pointIndexesToUse);
     }
 
     [Rpc(SendTo.ClientsAndHost)]
-    public void StartCampForEveryoneRpc(int[] index) {
+    public void StartCampForEveryoneRpc(int[] index, int[] pointIndexes) {
         ClearPreviousEvents();
         currentActiveEnemies = new List<GameObject>();
         aliveCount = 0;
@@ -99,7 +124,18 @@ public class Camps : NetworkBehaviour {
 
             health.ReviveHandler(100);
 
-            enemy.transform.position = this.transform.position;
+            enemy.transform.position = listOfPoints[pointIndexes[i]].position;
+
+            Vector3 directionToCenter = transform.position - enemy.transform.position;
+            directionToCenter.y = 0;
+            if (directionToCenter != Vector3.zero) {
+                enemy.transform.rotation = Quaternion.LookRotation(directionToCenter);
+            }
+
+            BehaviourTreeRunner behaviour = enemy.GetComponent<BehaviourTreeRunner>();
+            behaviour.RestartBlackBoard();
+            behaviour.SetPath(listOfPoints[pointIndexes[i]]);
+
             enemy.SetActive(true);
         }
     }

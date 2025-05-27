@@ -6,8 +6,8 @@ public class Waypoints : MonoBehaviour
 {
     public static Waypoints Instance;
     public enum PathTag {
-        LocalA,
-        LocalB,
+        Camp01A,
+        Camp01B,
         CenterOfArena,
         LocalC,
         LocalD,

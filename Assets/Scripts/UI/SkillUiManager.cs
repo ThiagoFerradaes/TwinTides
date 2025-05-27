@@ -22,10 +22,15 @@ public class SkillUiManager : MonoBehaviour {
     [SerializeField] Image characterTag;
     [SerializeField] Image playerTwoCharacterImage;
     [SerializeField] Image playerTwoCharacterTag;
-    [SerializeField] Image characterHealthImage;
     [SerializeField] Image legendaryRelicSkillImage;
     [SerializeField] Image commonRelicSkillOneImage;
     [SerializeField] Image commonRelicSkillTwoImage;
+
+    [Header("Health And Shield Images")]
+    [SerializeField] Image characterHealthImage;
+    [SerializeField] Image characterShieldImage;
+    [SerializeField] Image characterTwoHealthImage;
+    [SerializeField] Image characterTwoShieldImage;
 
     [Header("Images to show cooldown")]
     [SerializeField] Image legendaryRelicSkillCooldownImage;
@@ -107,21 +112,32 @@ public class SkillUiManager : MonoBehaviour {
     #endregion
 
     #region Player Health
-    private void UpdatePlayerHealth((float maxHealth, float currentHealth, float currentShield) health) {
+    private void UpdatePlayerHealth((float maxHealth, float currentHealth, float currentShield, float maxShield) health) {
+
+        // Textos
         characterHealthText.text = $"{health.currentHealth:F0} / {health.maxHealth:F0}";
         playerShieldText.text = health.currentShield > 0 ? health.currentShield.ToString("F0") : "";
+
+        // Imagens
+        characterHealthImage.fillAmount = health.currentHealth / health.maxHealth;
+        characterShieldImage.fillAmount = health.currentShield / health.maxShield;
     }
 
-    private void UpdatePlayerTwoHealth((float maxHealth, float currentHealth, float currentShield) health) {
+    private void UpdatePlayerTwoHealth((float maxHealth, float currentHealth, float currentShield, float maxShield) health) {
+        // Textos
         playerTwoHealthText.text = $"{health.currentHealth:F0} / {health.maxHealth:F0}";
         playerTwoShieldText.text = health.currentShield > 0 ? health.currentShield.ToString("F0") : "";
+
+        // Imagens
+        characterTwoHealthImage.fillAmount = health.currentHealth / health.maxHealth;
+        characterTwoShieldImage.fillAmount = health.currentShield / health.maxShield;
     }
 
     private void SetCharacterHealthManagerInfo() {
         HealthManager health = _playerCharacter.GetComponent<HealthManager>();
         health.OnHealthUpdate += UpdatePlayerHealth;
 
-        UpdatePlayerHealth((health.ReturnMaxHealth(), health.ReturnCurrentHealth(), health.ReturnShieldAmount()));
+        UpdatePlayerHealth((health.ReturnMaxHealth(), health.ReturnCurrentHealth(), health.ReturnShieldAmount(), health.ReturnMaxShieldAmount()));
     }
     private void SetSecondCharacterHealthManagerInfo() {
         playerTwoInfo.SetActive(true);
@@ -129,7 +145,7 @@ public class SkillUiManager : MonoBehaviour {
         HealthManager health = _playerTwoCharacter.GetComponent<HealthManager>();
         health.OnHealthUpdate += UpdatePlayerTwoHealth;
 
-        UpdatePlayerHealth((health.ReturnMaxHealth(), health.ReturnCurrentHealth(), health.ReturnShieldAmount()));
+        UpdatePlayerHealth((health.ReturnMaxHealth(), health.ReturnCurrentHealth(), health.ReturnShieldAmount(), health.ReturnMaxShieldAmount()));
     }
     #endregion
 

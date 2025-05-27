@@ -25,9 +25,7 @@ public class MovementManager : NetworkBehaviour {
     /// Retorna se o objeto está stunado
     /// </summary>
     /// <returns></returns>
-    public bool ReturnStunnedValue() {
-        return _isStunned.Value;
-    }
+    public bool ReturnStunnedValue() => _isStunned.Value;
 
     /// <summary>
     /// Multiplica a velocidade adicional por uma porcentam - o valor passado tem que estar entre 0 e 100
@@ -87,6 +85,11 @@ public class MovementManager : NetworkBehaviour {
     public void Stun() {
         if (!IsServer) return;
         _isStunned.Value = true;
+    }
+
+    public void UnStun() {
+        if (!IsServer) return;
+        _isStunned.Value = false;
     }
 
 
