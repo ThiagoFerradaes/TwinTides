@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class SceneManager : NetworkBehaviour
 {
 
-    public static List<GameObject> ActivePlayers = new();
+    public static Dictionary<Characters ,GameObject> ActivePlayers = new();
 
     [SerializeField] GameObject maevisPreFab;
     [SerializeField] GameObject melPreFab;
@@ -24,6 +24,7 @@ public class SceneManager : NetworkBehaviour
             ulong clientID = client.ClientId;
 
             GameObject prefab = GetPrefab(playerIndex);
+            Characters typeOfCharacter = prefab == maevisPreFab ? Characters.Maevis : Characters.Mel;
             Vector3 prefabPos = Vector3.zero + new Vector3(playerIndex * 2,8.1f,0);
 
             var playerObject = Instantiate(prefab, prefabPos, Quaternion.identity);
@@ -31,7 +32,7 @@ public class SceneManager : NetworkBehaviour
             var playerNetworkObject = playerObject.GetComponent<NetworkObject>();
             playerNetworkObject.SpawnWithOwnership(clientID, true);
 
-            ActivePlayers.Add(playerObject);
+            ActivePlayers[typeOfCharacter] = (playerObject);
 
             playerIndex++;
         }
