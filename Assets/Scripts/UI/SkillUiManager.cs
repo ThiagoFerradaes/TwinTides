@@ -145,7 +145,7 @@ public class SkillUiManager : MonoBehaviour {
         HealthManager health = _playerTwoCharacter.GetComponent<HealthManager>();
         health.OnHealthUpdate += UpdatePlayerTwoHealth;
 
-        UpdatePlayerHealth((health.ReturnMaxHealth(), health.ReturnCurrentHealth(), health.ReturnShieldAmount(), health.ReturnMaxShieldAmount()));
+        UpdatePlayerTwoHealth((health.ReturnMaxHealth(), health.ReturnCurrentHealth(), health.ReturnShieldAmount(), health.ReturnMaxShieldAmount()));
     }
     #endregion
 
