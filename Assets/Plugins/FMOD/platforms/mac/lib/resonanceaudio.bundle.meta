@@ -1,15 +1,13 @@
 fileFormatVersion: 2
 guid: 04e20ff877bea8747ae257229c720dcc
+folderAsset: yes
+timeCreated: 1511469544
+licenseType: Free
 PluginImporter:
-  externalObjects: {}
-  serializedVersion: 3
+  serializedVersion: 1
   iconMap: {}
   executionOrder: {}
-  defineConstraints: []
   isPreloaded: 0
-  isOverridable: 0
-  isExplicitlyReferenced: 0
-  validateReferences: 1
   platformData:
     Android:
       enabled: 0
@@ -17,30 +15,41 @@ PluginImporter:
         CPU: AnyCPU
     Any:
       enabled: 0
-      settings:
-        Exclude Editor: 1
-        Exclude Linux64: 1
-        Exclude OSXUniversal: 1
-        Exclude Win: 1
-        Exclude Win64: 1
+      settings: {}
     Editor:
       enabled: 0
       settings:
         CPU: AnyCPU
         DefaultValueInitialized: true
         OS: AnyOS
+    Linux:
+      enabled: 0
+      settings:
+        CPU: x86
     Linux64:
       enabled: 0
       settings:
-        CPU: None
-    OSXUniversal:
+        CPU: x86_64
+    LinuxUniversal:
       enabled: 0
+      settings:
+        CPU: None
+    OSXIntel:
+      enabled: 1
+      settings:
+        CPU: AnyCPU
+    OSXIntel64:
+      enabled: 1
+      settings:
+        CPU: AnyCPU
+    OSXUniversal:
+      enabled: 1
       settings:
         CPU: AnyCPU
     Win:
       enabled: 0
       settings:
-        CPU: None
+        CPU: AnyCPU
     Win64:
       enabled: 0
       settings:

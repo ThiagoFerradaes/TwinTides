@@ -187,7 +187,7 @@ public class BlackBeardFinalState : BlackBeardStates {
         float minDist = float.MaxValue;
         Transform nearest = null;
 
-        foreach (var player in SceneManager.ActivePlayers) {
+        foreach (var player in SceneManager.ActivePlayers.Values) {
             float dist = Vector3.Distance(_parent.transform.position, player.transform.position);
             if (dist < minDist) {
                 minDist = dist;
@@ -242,7 +242,7 @@ public class BlackBeardFinalState : BlackBeardStates {
         float maxDist = float.MinValue;
         Transform farthest = null;
 
-        foreach (var player in SceneManager.ActivePlayers) {
+        foreach (var player in SceneManager.ActivePlayers.Values) {
             float dist = Vector3.Distance(_parent.transform.position, player.transform.position);
             if (dist > maxDist) {
                 maxDist = dist;
