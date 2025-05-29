@@ -36,7 +36,7 @@ public class AimObject : MonoBehaviour {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _father.FloorLayer)) {
-                    Vector3 pos = new(hit.point.x, 0.5f, hit.point.z);
+                    Vector3 pos = new(hit.point.x, hit.point.y + 0.5f, hit.point.z);
                     transform.position = pos;
                 }
             }
@@ -60,5 +60,9 @@ public class AimObject : MonoBehaviour {
 
     private void OnDisable() {
         aimAlive = null;
+    }
+
+    private void OnDestroy() {
+        PlayerSetUp.OnPlayerSpawned -= PlayerSetUp_OnPlayerSpawned;
     }
 }

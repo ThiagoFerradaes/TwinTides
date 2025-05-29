@@ -23,7 +23,8 @@ public class PlayerController : NetworkBehaviour {
     // booleanas
     bool _canWalk = true;
     bool _canRotate = true;
-    bool _inDash;
+    bool _canDash = true;
+    bool _inDash = false;
 
     [HideInInspector] public bool isRotatingMouse;
     [HideInInspector] public bool isAiming;
@@ -150,12 +151,15 @@ public class PlayerController : NetworkBehaviour {
     #region Dash
 
     void Dash() {
-        if (_inDash) return;
+        if (!_canDash || _inDash) return;
 
         StartCoroutine(DashCoroutine());
     }
     IEnumerator DashCoroutine() {
         BlockMovement();
+
+        _inDash = true;
+
         float startTime = Time.time;
         OnDashCooldown?.Invoke(SkillType.Dash, dashCooldown);
 
@@ -175,8 +179,7 @@ public class PlayerController : NetworkBehaviour {
 
         _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);
 
-        _canWalk = true;
-        _canRotate = true;
+        AllowMovement();
 
         yield return new WaitForSeconds(dashCooldown - dashDuration);
         _inDash = false;
@@ -202,10 +205,8 @@ public class PlayerController : NetworkBehaviour {
     }
 
     void Moving() {
-        //if (!_canWalk) return;
-
         if (_moveInput == (Vector2.zero) || !_canWalk) {
-            _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);
+            if (!_inDash) _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);
             return;
         }
         
@@ -251,13 +252,13 @@ public class PlayerController : NetworkBehaviour {
 
     #region Setters
     public void BlockMovement() {
-        _inDash = true;
+        _canDash = false;
         _canWalk = false;
         _canRotate = false;
     }
 
     public void AllowMovement() {
-        _inDash = false;
+        _canDash = true;
         _canWalk = true;
         _canRotate = true;
     }
