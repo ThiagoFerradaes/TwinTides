@@ -31,6 +31,9 @@
 		<relationship name="parameters">
 			<destination>{5086ba6e-f82a-499d-8722-290a4e4fdf9c}</destination>
 		</relationship>
+		<relationship name="banks">
+			<destination>{f1ee1cbb-84fa-4fcb-bd1b-9e7c0424206d}</destination>
+		</relationship>
 	</object>
 	<object class="EventMixer" id="{b2153788-f03f-498b-931e-46a887eaf068}">
 		<relationship name="masterBus">
@@ -81,7 +84,7 @@
 	</object>
 	<object class="MultiSound" id="{cf77dedb-c441-4cb7-8252-de85cf9bf78f}">
 		<relationship name="sounds">
-			<destination>{d4cbb7bd-2d77-43c0-a8ab-4d6dc8feef9d}</destination>
+			<destination>{f56e8d98-7ad6-46db-8e3b-e44c304e2d12}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{1d6b4f7c-24d3-4bc7-8aee-9624b65951a2}">
@@ -96,11 +99,43 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{70e0434a-0b4c-4da8-912e-d6d714574546}" />
-	<object class="SingleSound" id="{d4cbb7bd-2d77-43c0-a8ab-4d6dc8feef9d}">
-		<relationship name="audioFile">
-			<destination>{7b546ad1-6d18-4517-ab24-7b273deb16ad}</destination>
+	<object class="MultiSound" id="{f56e8d98-7ad6-46db-8e3b-e44c304e2d12}">
+		<relationship name="sounds">
+			<destination>{52a5f22e-2404-4fe8-b9cf-d5521392c3bf}</destination>
+			<destination>{ef941046-b873-4de3-9e66-34cff39e87a2}</destination>
+			<destination>{26df605e-e2fc-4fd8-8ed9-c6f2e99d4c2e}</destination>
+			<destination>{04c15f16-f5f0-457b-916f-930d8a40c832}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{fa61ae37-d0f9-40c8-8177-9457fb96926a}" />
 	<object class="MixerBusFader" id="{90ef6b8a-4108-4f55-b6e9-78e5442c1d48}" />
+	<object class="SingleSound" id="{52a5f22e-2404-4fe8-b9cf-d5521392c3bf}">
+		<relationship name="audioFile">
+			<destination>{7b546ad1-6d18-4517-ab24-7b273deb16ad}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{ef941046-b873-4de3-9e66-34cff39e87a2}">
+		<property name="pitch">
+			<value>2.20000005</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{7b546ad1-6d18-4517-ab24-7b273deb16ad}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{26df605e-e2fc-4fd8-8ed9-c6f2e99d4c2e}">
+		<property name="pitch">
+			<value>-2.60000014</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{7b546ad1-6d18-4517-ab24-7b273deb16ad}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{04c15f16-f5f0-457b-916f-930d8a40c832}">
+		<property name="pitch">
+			<value>1.80000007</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{7b546ad1-6d18-4517-ab24-7b273deb16ad}</destination>
+		</relationship>
+	</object>
 </objects>
