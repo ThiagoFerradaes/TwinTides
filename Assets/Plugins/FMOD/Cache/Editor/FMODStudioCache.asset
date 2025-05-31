@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8161124285223327073
+--- !u!114 &-6217580732417444864
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,98 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/SFX.bank
+  m_Name: bank:/Music.bank
   m_EditorClassIdentifier: 
-  Path: Assets/FMOD/TwinTides/Build/Desktop/SFX.bank
-  Name: SFX
-  StudioPath: bank:/SFX/SFX
-  lastModified: 638841339187879661
-  FileSizes:
-  - Name: Desktop
-    Value: 475680
+  Path: Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 638793832411117802
+  FileSizes: []
   Exists: 1
---- !u!114 &-8072193126665044990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/InimigoMelee/MeleeTomandoDano
-  m_EditorClassIdentifier: 
-  Path: event:/InimigoMelee/MeleeTomandoDano
-  Guid:
-    Data1: 1546890301
-    Data2: 1142906993
-    Data3: 1360575652
-    Data4: 1143295805
-  Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-8066194365741355226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/InimigoMelee/MeleeAtaque
-  m_EditorClassIdentifier: 
-  Path: event:/InimigoMelee/MeleeAtaque
-  Guid:
-    Data1: -735897583
-    Data2: 1197704776
-    Data3: -1710317892
-    Data4: 511372140
-  Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-6235137153016358604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/InimigaRanged/RangedTomandoDano
-  m_EditorClassIdentifier: 
-  Path: event:/InimigaRanged/RangedTomandoDano
-  Guid:
-    Data1: -2033011215
-    Data2: 1230866384
-    Data3: -1696750418
-    Data4: 1742793303
-  Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-4047870932218031448
+--- !u!114 &-5249655840691604759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,17 +28,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
+  m_Name: bank:/SFXs.bank
   m_EditorClassIdentifier: 
-  Path: Assets/FMOD/TwinTides/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 638841365431837506
-  FileSizes:
-  - Name: Desktop
-    Value: 1598
+  Path: Desktop/SFXs.bank
+  Name: SFXs
+  StudioPath: bank:/SFXs
+  lastModified: 638793832411147706
+  FileSizes: []
   Exists: 1
---- !u!114 &-3584006362751709354
+--- !u!114 &-1355622180299757032
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,25 +45,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Maevis/MaevisAndando
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Dialogue.bank
   m_EditorClassIdentifier: 
-  Path: event:/Maevis/MaevisAndando
-  Guid:
-    Data1: 1530063372
-    Data2: 1175145155
-    Data3: 431315859
-    Data4: -710225316
-  Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-3445118457318115062
+  Path: Desktop/Dialogue.bank
+  Name: Dialogue
+  StudioPath: bank:/Dialogue
+  lastModified: 638793832410968197
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-905237283778955207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Ambience.bank
+  m_EditorClassIdentifier: 
+  Path: Desktop/Ambience.bank
+  Name: Ambience
+  StudioPath: bank:/Ambience
+  lastModified: 638793832410948241
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-573593221001584827
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,68 +84,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
   m_EditorClassIdentifier: 
-  Path: Assets/FMOD/TwinTides/Build/Desktop/Master.bank
+  Path: Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638841365431778132
-  FileSizes:
-  - Name: Desktop
-    Value: 1074
+  lastModified: 638793832411038005
+  FileSizes: []
   Exists: 1
---- !u!114 &-2276382452250134370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/MusicasDeFundo/MenuMusica
-  m_EditorClassIdentifier: 
-  Path: event:/MusicasDeFundo/MenuMusica
-  Guid:
-    Data1: 284535149
-    Data2: 1218399784
-    Data3: 2050892715
-    Data4: 1847705658
-  Banks:
-  - {fileID: 1365137884315589294}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-291298281538344076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Mel/MelAndandoAgua
-  m_EditorClassIdentifier: 
-  Path: event:/Mel/MelAndandoAgua
-  Guid:
-    Data1: -1421259494
-    Data2: 1298206089
-    Data3: -1963923551
-    Data4: -1206879787
-  Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,117 +103,25 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -4047870932218031448}
-  - {fileID: -3445118457318115062}
-  - {fileID: -8161124285223327073}
-  - {fileID: 1365137884315589294}
+  - {fileID: 1899455303067552799}
+  - {fileID: -905237283778955207}
+  - {fileID: -1355622180299757032}
+  - {fileID: -573593221001584827}
+  - {fileID: -6217580732417444864}
+  - {fileID: -5249655840691604759}
   EditorEvents:
-  - {fileID: 1596914896674180238}
-  - {fileID: -3584006362751709354}
-  - {fileID: -8066194365741355226}
-  - {fileID: -291298281538344076}
-  - {fileID: 1653207753856793482}
-  - {fileID: -8072193126665044990}
-  - {fileID: 1026046758839477580}
-  - {fileID: 6941704830575020300}
-  - {fileID: 7928037744480917015}
-  - {fileID: 4625402190184885614}
-  - {fileID: 3446368256495712016}
-  - {fileID: 9052737103159618310}
-  - {fileID: 874582534559779321}
-  - {fileID: -6235137153016358604}
-  - {fileID: -2276382452250134370}
+  - {fileID: 8960594156905553194}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -3445118457318115062}
+  - {fileID: -573593221001584827}
   StringsBanks:
-  - {fileID: -4047870932218031448}
+  - {fileID: 1899455303067552799}
   cacheVersion: 131847
-  cacheTime: 638841365450562264
+  cacheTime: 638793832411147706
   SerializableEventsDict:
-  - key: event:/InimigoMelee/MeleeGemendo
+  - key: event:/Test
     index: 0
-  - key: event:/Maevis/MaevisAndando
-    index: 1
-  - key: event:/InimigoMelee/MeleeAtaque
-    index: 2
-  - key: event:/Mel/MelAndandoAgua
-    index: 3
-  - key: event:/Maevis/MaevisEspada
-    index: 4
-  - key: event:/InimigoMelee/MeleeTomandoDano
-    index: 5
-  - key: event:/InimigaRanged/RangedAndando
-    index: 6
-  - key: event:/Maevis/MaevisTiro
-    index: 7
-  - key: event:/InimigaRanged/RangedAtacando
-    index: 8
-  - key: event:/InimigaRanged/TiroRanged
-    index: 9
-  - key: event:/InimigoMelee/MeleeAndando 2
-    index: 10
-  - key: event:/Mel/MelAndando
-    index: 11
-  - key: event:/Maevis/MaevisAndandoAgua
-    index: 12
-  - key: event:/InimigaRanged/RangedTomandoDano
-    index: 13
---- !u!114 &874582534559779321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Maevis/MaevisAndandoAgua
-  m_EditorClassIdentifier: 
-  Path: event:/Maevis/MaevisAndandoAgua
-  Guid:
-    Data1: 164072672
-    Data2: 1129954961
-    Data3: 810145187
-    Data4: -391306251
-  Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &1026046758839477580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/InimigaRanged/RangedAndando
-  m_EditorClassIdentifier: 
-  Path: event:/InimigaRanged/RangedAndando
-  Guid:
-    Data1: -1388392885
-    Data2: 1099323583
-    Data3: 969538185
-    Data4: 1298210483
-  Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &1365137884315589294
+--- !u!114 &1899455303067552799
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -355,17 +131,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Musics.bank
+  m_Name: bank:/Master.strings.bank
   m_EditorClassIdentifier: 
-  Path: Assets/FMOD/TwinTides/Build/Desktop/Musics.bank
-  Name: Musics
-  StudioPath: bank:/Musics
-  lastModified: 638841365450562264
+  Path: Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638793832411047982
   FileSizes:
-  - Name: Desktop
-    Value: 1391680
+  - Name: 
+    Value: 1074
   Exists: 1
---- !u!114 &1596914896674180238
+--- !u!114 &8960594156905553194
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -375,182 +151,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/InimigoMelee/MeleeGemendo
+  m_Name: event:/Test
   m_EditorClassIdentifier: 
-  Path: event:/InimigoMelee/MeleeGemendo
+  Path: event:/Test
   Guid:
-    Data1: -1031213558
-    Data2: 1308096575
-    Data3: -1048463707
-    Data4: 147838527
+    Data1: -42852159
+    Data2: 1217815492
+    Data3: 1373731768
+    Data4: 796129288
   Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
+  - {fileID: -573593221001584827}
+  - {fileID: -6217580732417444864}
+  IsStream: 1
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
---- !u!114 &1653207753856793482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Maevis/MaevisEspada
-  m_EditorClassIdentifier: 
-  Path: event:/Maevis/MaevisEspada
-  Guid:
-    Data1: 815064092
-    Data2: 1300253940
-    Data3: -752002629
-    Data4: 1046369167
-  Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &3446368256495712016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/InimigoMelee/MeleeAndando 2
-  m_EditorClassIdentifier: 
-  Path: event:/InimigoMelee/MeleeAndando 2
-  Guid:
-    Data1: -1118151243
-    Data2: 1314818339
-    Data3: -570306169
-    Data4: -1579902811
-  Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &4625402190184885614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/InimigaRanged/TiroRanged
-  m_EditorClassIdentifier: 
-  Path: event:/InimigaRanged/TiroRanged
-  Guid:
-    Data1: -545915499
-    Data2: 1248120260
-    Data3: 1745904268
-    Data4: -221102414
-  Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &6941704830575020300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Maevis/MaevisTiro
-  m_EditorClassIdentifier: 
-  Path: event:/Maevis/MaevisTiro
-  Guid:
-    Data1: 2026808696
-    Data2: 1278201226
-    Data3: -1739167868
-    Data4: -155145060
-  Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &7928037744480917015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/InimigaRanged/RangedAtacando
-  m_EditorClassIdentifier: 
-  Path: event:/InimigaRanged/RangedAtacando
-  Guid:
-    Data1: 1286976899
-    Data2: 1192004685
-    Data3: 400890539
-    Data4: -950296220
-  Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &9052737103159618310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Mel/MelAndando
-  m_EditorClassIdentifier: 
-  Path: event:/Mel/MelAndando
-  Guid:
-    Data1: -801683502
-    Data2: 1236579253
-    Data3: 1279312006
-    Data4: -224977409
-  Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
+  Length: 96052

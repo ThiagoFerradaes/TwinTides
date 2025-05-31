@@ -607,10 +607,10 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   switchSettingsMigration: 1
-  HasSourceProject: 1
-  HasPlatforms: 1
-  sourceProjectPath: Assets/FMOD/TwinTides/TwinTides.fspro
-  sourceBankPath: Assets/FMOD/TwinTides/Build
+  HasSourceProject: 0
+  HasPlatforms: 0
+  sourceProjectPath: 
+  sourceBankPath: Desktop
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
@@ -634,8 +634,10 @@ MonoBehaviour:
   MasterBanks:
   - Master
   Banks:
-  - Musics
-  - SFX
+  - Ambience
+  - Dialogue
+  - Music
+  - SFXs
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
