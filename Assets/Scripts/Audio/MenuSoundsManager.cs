@@ -52,4 +52,12 @@ public class MenuSoundsManager : MonoBehaviour
             ambienceInstance.release();
         }
     }
+
+    private void OnDestroy() {
+        if (musicInstance.isValid()) {
+            musicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            musicInstance.release();
+        }
+        StopLobbySound();
+    }
 }

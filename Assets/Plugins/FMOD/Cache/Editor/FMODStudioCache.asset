@@ -1,59 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8656811702906693782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/MusicasDeFundo/Ondas
-  m_EditorClassIdentifier: 
-  Path: event:/MusicasDeFundo/Ondas
-  Guid:
-    Data1: -1912740061
-    Data2: 1227338465
-    Data3: 1909103254
-    Data4: -1091015893
-  Banks:
-  - {fileID: -5603623505756103860}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 283416
---- !u!114 &-8600015779257546901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/CenarioInteragiveis/AbrirBauRaro
-  m_EditorClassIdentifier: 
-  Path: event:/CenarioInteragiveis/AbrirBauRaro
-  Guid:
-    Data1: 1201791669
-    Data2: 1259436349
-    Data3: -447037821
-    Data4: -1676691726
-  Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &-8161124285223327073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,10 +15,10 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638844696337827482
+  lastModified: 638844835699419148
   FileSizes:
   - Name: Desktop
-    Value: 797792
+    Value: 5264384
   Exists: 1
 --- !u!114 &-8072193126665044990
 MonoBehaviour:
@@ -175,33 +121,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-6015946272014125005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/MusicasDeFundo/Gaivotas
-  m_EditorClassIdentifier: 
-  Path: event:/MusicasDeFundo/Gaivotas
-  Guid:
-    Data1: 613359999
-    Data2: 1234793208
-    Data3: 1713279629
-    Data4: 718328064
-  Banks:
-  - {fileID: -5603623505756103860}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &-5603623505756103860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,65 +136,11 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Ambience.bank
   Name: Ambience
   StudioPath: bank:/Ambience
-  lastModified: 638844696335311955
+  lastModified: 638844833083765759
   FileSizes:
   - Name: Desktop
-    Value: 4648352
+    Value: 506
   Exists: 1
---- !u!114 &-4436729047433843120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/CenarioInteragiveis/AbrirBauLendario
-  m_EditorClassIdentifier: 
-  Path: event:/CenarioInteragiveis/AbrirBauLendario
-  Guid:
-    Data1: 1508530599
-    Data2: 1324902365
-    Data3: -1638182469
-    Data4: -1924475586
-  Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-4113741723468474673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/CenarioInteragiveis/PocoDeOferecimento
-  m_EditorClassIdentifier: 
-  Path: event:/CenarioInteragiveis/PocoDeOferecimento
-  Guid:
-    Data1: 1411877644
-    Data2: 1134946408
-    Data3: 1576671641
-    Data4: -2087511804
-  Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &-4047870932218031448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,10 +156,10 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638844696335467727
+  lastModified: 638844835698592540
   FileSizes:
   - Name: Desktop
-    Value: 2494
+    Value: 2240
   Exists: 1
 --- !u!114 &-3584006362751709354
 MonoBehaviour:
@@ -338,7 +203,7 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638844696335457725
+  lastModified: 638844835698581954
   FileSizes:
   - Name: Desktop
     Value: 1670
@@ -365,34 +230,7 @@ MonoBehaviour:
   - {fileID: 1365137884315589294}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-2099391073905937479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/CenarioInteragiveis/AbrirBauNormal
-  m_EditorClassIdentifier: 
-  Path: event:/CenarioInteragiveis/AbrirBauNormal
-  Guid:
-    Data1: 1030311992
-    Data2: 1300624448
-    Data3: -1688887123
-    Data4: -2023469066
-  Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -492,21 +330,16 @@ MonoBehaviour:
   - {fileID: -738441720813052047}
   - {fileID: 2383433226395904760}
   - {fileID: 2217574944266421771}
-  - {fileID: -8656811702906693782}
-  - {fileID: 6619820208846658806}
-  - {fileID: -6015946272014125005}
-  - {fileID: -4113741723468474673}
-  - {fileID: -2099391073905937479}
-  - {fileID: 6007289688065948627}
-  - {fileID: -4436729047433843120}
-  - {fileID: -8600015779257546901}
+  - {fileID: 2224948459143773472}
+  - {fileID: 8734582616290904938}
+  - {fileID: 8367959199842071374}
   EditorParameters: []
   MasterBanks:
   - {fileID: -3445118457318115062}
   StringsBanks:
   - {fileID: -4047870932218031448}
   cacheVersion: 131847
-  cacheTime: 638844696337827482
+  cacheTime: 638844835699419148
   SerializableEventsDict:
   - key: event:/InimigoMelee/MeleeGemendo
     index: 0
@@ -556,16 +389,6 @@ MonoBehaviour:
     index: 22
   - key: event:/MusicasDeFundo/Gaivotas
     index: 23
-  - key: event:/CenarioInteragiveis/PocoDeOferecimento
-    index: 24
-  - key: event:/CenarioInteragiveis/AbrirBauNormal
-    index: 25
-  - key: event:/CenarioInteragiveis/UnlockTotem
-    index: 26
-  - key: event:/CenarioInteragiveis/AbrirBauLendario
-    index: 27
-  - key: event:/CenarioInteragiveis/AbrirBauRaro
-    index: 28
 --- !u!114 &800014808567655917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,7 +485,7 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Musics.bank
   Name: Musics
   StudioPath: bank:/Musics
-  lastModified: 638842039710541202
+  lastModified: 638844833084283122
   FileSizes:
   - Name: Desktop
     Value: 1391680
@@ -748,6 +571,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &2224948459143773472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MusicasDeFundo/Ondas
+  m_EditorClassIdentifier: 
+  Path: event:/MusicasDeFundo/Ondas
+  Guid:
+    Data1: -1912740061
+    Data2: 1227338465
+    Data3: 1909103254
+    Data4: -1091015893
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 283416
 --- !u!114 &2383433226395904760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -883,60 +733,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &6007289688065948627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/CenarioInteragiveis/UnlockTotem
-  m_EditorClassIdentifier: 
-  Path: event:/CenarioInteragiveis/UnlockTotem
-  Guid:
-    Data1: 1534284933
-    Data2: 1107189631
-    Data3: 1156681135
-    Data4: -48412866
-  Banks:
-  - {fileID: -8161124285223327073}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &6619820208846658806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/MusicasDeFundo/SelecaoDePersonagem
-  m_EditorClassIdentifier: 
-  Path: event:/MusicasDeFundo/SelecaoDePersonagem
-  Guid:
-    Data1: -2126509269
-    Data2: 1199613252
-    Data3: 1627745191
-    Data4: -27464976
-  Banks:
-  - {fileID: -5603623505756103860}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &6941704830575020300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -985,6 +781,60 @@ MonoBehaviour:
   Banks:
   - {fileID: -8161124285223327073}
   IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8367959199842071374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MusicasDeFundo/Gaivotas
+  m_EditorClassIdentifier: 
+  Path: event:/MusicasDeFundo/Gaivotas
+  Guid:
+    Data1: 613359999
+    Data2: 1234793208
+    Data3: 1713279629
+    Data4: 718328064
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8734582616290904938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MusicasDeFundo/SelecaoDePersonagem
+  m_EditorClassIdentifier: 
+  Path: event:/MusicasDeFundo/SelecaoDePersonagem
+  Guid:
+    Data1: -2126509269
+    Data2: 1199613252
+    Data3: 1627745191
+    Data4: -27464976
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 1
   Is3D: 0
   IsOneShot: 1
   Parameters: []
