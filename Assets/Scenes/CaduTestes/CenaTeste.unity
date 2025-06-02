@@ -320,7 +320,6 @@ GameObject:
   - component: {fileID: 469601734}
   - component: {fileID: 469601733}
   - component: {fileID: 469601732}
-  - component: {fileID: 469601731}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -328,38 +327,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &469601731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469601730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SerializedVersion: 0
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_GenerateLinks: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: bb5fb174e62240643b3130e9a8b9ddbe, type: 2}
-  m_BuildHeightMesh: 0
 --- !u!65 &469601732
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -612,8 +579,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605905070}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.024209816, y: -0.9739153, z: 0.18690535, w: 0.12636973}
-  m_LocalPosition: {x: 147.46678, y: 1.4445033, z: -32.165024}
+  m_LocalRotation: {x: 0.041759666, y: -0.95802736, z: 0.19102138, w: 0.20964399}
+  m_LocalPosition: {x: 147.54283, y: 1.0995541, z: -32.541183}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
