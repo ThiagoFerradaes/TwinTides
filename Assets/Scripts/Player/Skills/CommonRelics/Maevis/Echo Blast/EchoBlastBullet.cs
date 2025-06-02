@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -18,6 +19,8 @@ public class EchoBlastBullet : SkillObjectPrefab {
         transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
+
+        RuntimeManager.PlayOneShot(_info.ShotSound);
 
         StartCoroutine(Move());
     }

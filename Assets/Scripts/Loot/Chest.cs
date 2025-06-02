@@ -152,9 +152,9 @@ public class Chest : NetworkBehaviour {
 
         switch (rarity) {
             case ChestRarity.Common:
-                if (rng >= 75) ChooseFragment(); break;
+                if (rng >= 40) ChooseFragment(); break;
             case ChestRarity.Medium:
-                if (rng >= 25) ChooseFragment(); break;
+                if (rng >= 10) ChooseFragment(); break;
             case ChestRarity.Rare:
                 break;
         }
