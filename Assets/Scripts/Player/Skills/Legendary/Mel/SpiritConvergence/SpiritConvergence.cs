@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "LegendaryRelic/SpiritConvergence")]
@@ -9,6 +10,7 @@ public class SpiritConvergence : LegendaryRelic
     public float RangedMinionCooldown;
     public float AmountOfTimesDurationCanExtend;
     public float DurationExtensionTime;
+    public EventReference InvocationSound;
 
     [Header("Minions")]
     public float CooldownForSearchEnemy;
@@ -24,6 +26,7 @@ public class SpiritConvergence : LegendaryRelic
     public float MeleeAttackOffSet;
     public float MeleeAttackDuration;
     public float MeleeAttackDamage;
+    public EventReference MeleeMinionHitSound;
 
     [Header("Ranged Minion")]
     public float RangedMinionAttackRange;
@@ -33,4 +36,5 @@ public class SpiritConvergence : LegendaryRelic
     public float RangedAttackSpeed;
     public float RangedAttackDuration;
     public float RangedAttackDamage;
+    public EventReference RangedMinionHitSound;
 }

@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -26,6 +27,8 @@ public class SpiritConvergenceRangedAttack : SkillObjectPrefab
         transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
+
+        if (!_info.RangedMinionHitSound.IsNull) RuntimeManager.PlayOneShot(_info.RangedMinionHitSound);
 
         StartCoroutine(Move());
     }

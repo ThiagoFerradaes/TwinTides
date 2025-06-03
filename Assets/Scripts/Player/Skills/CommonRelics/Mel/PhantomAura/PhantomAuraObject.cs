@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +13,8 @@ public class PhantomAuraObject : SkillObjectPrefab {
     bool _canDamage;
 
     List<HealthManager> _listOfEnemies = new();
+
+    EventInstance sound;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as PhantomAura;
@@ -34,7 +38,20 @@ public class PhantomAuraObject : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        StartCoroutine(DamageTimer());
+        if (_level < 4) {
+            if (!_info.AuraSound.IsNull) {
+                sound = RuntimeManager.CreateInstance(_info.AuraSound);
+                sound.start();
+            }
+        }
+        else {
+            if (!_info.StrongerAuraSound.IsNull) {
+                sound = RuntimeManager.CreateInstance(_info.StrongerAuraSound);
+                sound.start();
+            }
+        }
+
+            StartCoroutine(DamageTimer());
 
         StartCoroutine(Duration());
     }
@@ -95,6 +112,11 @@ public class PhantomAuraObject : SkillObjectPrefab {
 
     void End() {
         _listOfEnemies.Clear();
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            sound.release();
+        }
 
         ReturnObject();
     }

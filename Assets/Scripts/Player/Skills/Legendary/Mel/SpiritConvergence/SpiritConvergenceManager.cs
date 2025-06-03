@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Threading;
 using UnityEngine;
@@ -46,7 +47,7 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
     IEnumerator SkillDuration() {
         _timer = 0;
         _durationTime = _info.SkillDuration;
-        if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Mel) StartCoroutine(InstantiateMeleeMinion());
+        StartCoroutine(InstantiateMeleeMinion());
 
         while (_timer < _durationTime) {
             _timer += Time.deltaTime;
@@ -61,8 +62,12 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
 
         while (_timer < _durationTime) {
 
-            SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
-            PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 1);
+            if(!_info.InvocationSound.IsNull) RuntimeManager.PlayOneShot(_info.InvocationSound);
+
+            if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Mel) {
+                SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
+                PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 1);
+            }
 
             yield return new WaitForSeconds(_info.MeleeMinionCooldown);
         }
@@ -90,11 +95,14 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
     }
 
     void InstantiateRangedMinion() {
-        if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Mel) return;
 
-        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
-        PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 2);
+        if (!_info.InvocationSound.IsNull) RuntimeManager.PlayOneShot(_info.InvocationSound);
+
+        if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Mel) {
+            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+            SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
+            PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 2);
+        }
     }
 
     void End() {

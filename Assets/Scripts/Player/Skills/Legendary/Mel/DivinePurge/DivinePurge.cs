@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "LegendaryRelic/DivinePurge")]
@@ -11,4 +12,5 @@ public class DivinePurge : LegendaryRelic {
     public float AmountOfHealToMaevis;
     [Range(0, 100)] public float PercentOfHealingBasedOnDamage;
     public float ZOffSett;
+    public EventReference LaserSound;
 }

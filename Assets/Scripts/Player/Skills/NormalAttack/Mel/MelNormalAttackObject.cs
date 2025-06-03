@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using Unity.Netcode;
@@ -9,7 +10,7 @@ public class MelNormalAttackObject : SkillObjectPrefab {
     SkillContext _context;
 
     public static event EventHandler<NormalAtackEventArgs> OnNormalAttack;
-    public static event EventHandler OnNormalAttackHit;
+    public static event System.EventHandler OnNormalAttackHit;
     GameObject _mel;
     DamageManager _dManager;
 
@@ -47,6 +48,8 @@ public class MelNormalAttackObject : SkillObjectPrefab {
         transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
+
+        if (!_info.AttackSound.IsNull) RuntimeManager.PlayOneShot(_info.AttackSound);
 
         StartCoroutine(Move());
     }
