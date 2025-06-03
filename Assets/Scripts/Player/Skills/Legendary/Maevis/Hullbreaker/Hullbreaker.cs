@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "LegendaryRelic/Hullbreaker")]
@@ -13,4 +14,6 @@ public class Hullbreaker : LegendaryRelic
     public float EarthquakeDuration;
     public float EarthquakeInterval;
     public float EarthquakeRadius;
+    public EventReference EarthquakeSound;
+    public EventReference ExplosionSound;
 }

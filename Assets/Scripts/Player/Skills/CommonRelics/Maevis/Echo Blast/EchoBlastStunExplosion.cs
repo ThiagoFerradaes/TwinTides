@@ -49,6 +49,8 @@ public class EchoBlastStunExplosion : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
+        if (!_info.ExplosionSound.IsNull)
+
         StartCoroutine(ExplosionDuration());
     }
 

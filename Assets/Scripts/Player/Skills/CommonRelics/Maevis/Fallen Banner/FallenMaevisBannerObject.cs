@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
 
     List<GameObject> activePlayers = new();
     Coroutine durationCoroutine;
-    public static event EventHandler OnStacked;
+    public static event System.EventHandler OnStacked;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as FallenBanner;
@@ -36,6 +37,8 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
 
             gameObject.SetActive(true);
 
+            if (!_info.BannerFallingSound.IsNull) RuntimeManager.PlayOneShot(_info.BannerFallingSound);
+
             durationCoroutine = StartCoroutine(BannerDuration());
         }
         else {
@@ -45,6 +48,8 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
             transform.SetLocalPositionAndRotation(_info.BannerFollowPosition, Quaternion.Euler(0, 0, 0));
 
             gameObject.SetActive(true);
+
+            if (!_info.BannerSound.IsNull) RuntimeManager.PlayOneShot(_info.BannerSound);
 
             AddBuffs();
         }

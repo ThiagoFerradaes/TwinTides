@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -38,8 +39,9 @@ public class FallenMelBannerObject : SkillObjectPrefab {
 
         transform.SetLocalPositionAndRotation(_info.BannerFollowPosition, Quaternion.Euler(0, 0, 0));
 
-
         gameObject.SetActive(true);
+
+        if (!_info.BannerSound.IsNull) RuntimeManager.PlayOneShot(_info.BannerSound);
 
         durationCoroutine = StartCoroutine(BannerDuration());
 

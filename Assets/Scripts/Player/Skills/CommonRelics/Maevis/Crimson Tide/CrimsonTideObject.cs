@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -53,6 +54,8 @@ public class CrimsonTideObject : SkillObjectPrefab {
         _playerController.BlockMovement();
 
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+
+        if (!_info.DashSound.IsNull) RuntimeManager.PlayOneShot(_info.DashSound);
 
         if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
             PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 2);

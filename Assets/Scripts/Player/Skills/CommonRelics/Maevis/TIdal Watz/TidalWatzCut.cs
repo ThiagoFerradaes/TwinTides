@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -31,10 +32,16 @@ public class TidalWatzCut : SkillObjectPrefab {
 
         transform.SetLocalPositionAndRotation(position, Quaternion.Euler(0, 0, 0));
 
-
         gameObject.SetActive(true);
 
-        StartCoroutine(CutDuration());
+        if (_level < 3) {
+            if (!_info.CutSound.IsNull) RuntimeManager.PlayOneShot(_info.CutSound);
+        }
+        else {
+            if (!_info.CutSoundFaster.IsNull) RuntimeManager.PlayOneShot(_info.CutSoundFaster);
+        }
+
+            StartCoroutine(CutDuration());
     }
 
     IEnumerator CutDuration() {

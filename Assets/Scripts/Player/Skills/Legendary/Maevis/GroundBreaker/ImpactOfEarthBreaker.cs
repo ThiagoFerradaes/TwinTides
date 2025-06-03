@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -27,6 +28,8 @@ public class ImpactOfEarthBreaker : SkillObjectPrefab {
         transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
+
+        if (!_info.EarthImpactSound.IsNull) RuntimeManager.PlayOneShot(_info.EarthImpactSound);
 
         StartCoroutine(Duration());
     }
