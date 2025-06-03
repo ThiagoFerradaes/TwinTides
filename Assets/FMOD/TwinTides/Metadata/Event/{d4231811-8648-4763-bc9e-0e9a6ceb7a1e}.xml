@@ -5,7 +5,7 @@
 			<value>MeleeAtaque</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{303c63d6-df48-4f42-803c-f7503d0385da}</destination>
@@ -96,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{6a42fa91-e1b5-43a4-aadd-8f95878b4c6a}">
 		<relationship name="effects">
 			<destination>{26f9da0c-7ec1-4b54-97f6-a11d1a8b7379}</destination>
+			<destination>{66b83035-6d61-4608-83fd-2bf495854b12}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{885fa726-d6dc-48b4-9253-cd4d413c849c}" />
@@ -113,6 +114,14 @@
 	</object>
 	<object class="MixerBusFader" id="{4547ac38-0e8e-4277-b1f0-91f2952110c5}" />
 	<object class="MixerBusFader" id="{26f9da0c-7ec1-4b54-97f6-a11d1a8b7379}" />
+	<object class="SpatialiserEffect" id="{66b83035-6d61-4608-83fd-2bf495854b12}">
+		<property name="maximumDistance">
+			<value>40</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="SingleSound" id="{cc187116-1c6c-431d-bd34-5f937cae3e7a}">
 		<relationship name="audioFile">
 			<destination>{24143358-ba8a-433e-82bb-5516c253937d}</destination>

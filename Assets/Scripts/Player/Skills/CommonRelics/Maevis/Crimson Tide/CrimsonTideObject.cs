@@ -55,7 +55,7 @@ public class CrimsonTideObject : SkillObjectPrefab {
 
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
 
-        if (!_info.DashSound.IsNull) RuntimeManager.PlayOneShot(_info.DashSound);
+        if (!_info.DashSound.IsNull) RuntimeManager.PlayOneShot(_info.DashSound, transform.position);
 
         if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
             PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 2);

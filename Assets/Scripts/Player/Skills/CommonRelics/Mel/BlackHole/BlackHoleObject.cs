@@ -36,6 +36,7 @@ public class BlackHoleObject : SkillObjectPrefab {
 
         if (!_info.BlackHoleSound.IsNull) {
             sound = RuntimeManager.CreateInstance(_info.BlackHoleSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
             sound.start();
         }
 

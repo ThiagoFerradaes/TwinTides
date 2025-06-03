@@ -28,7 +28,7 @@ public class CrimsonTidePunch : SkillObjectPrefab
 
         gameObject.SetActive(true);
 
-        if (!_info.PunchSound.IsNull) RuntimeManager.PlayOneShot(_info.PunchSound);
+        if (!_info.PunchSound.IsNull) RuntimeManager.PlayOneShot(_info.PunchSound, transform.position) ;
 
         StartCoroutine(PunchDuration());
     }

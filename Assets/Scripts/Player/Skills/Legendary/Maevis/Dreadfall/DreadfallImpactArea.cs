@@ -40,6 +40,7 @@ public class DreadfallImpactArea : SkillObjectPrefab {
 
         if (!_info.BurningAreaSound.IsNull) {
             soundInstance = RuntimeManager.CreateInstance(_info.BurningAreaSound);
+            RuntimeManager.AttachInstanceToGameObject(soundInstance, this.gameObject);
             soundInstance.start();
         }
 

@@ -47,6 +47,7 @@ public class DivinePurgeObject : SkillObjectPrefab
 
         if (!_info.LaserSound.IsNull) {
             sound = RuntimeManager.CreateInstance(_info.LaserSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
             sound.start();
         }
 

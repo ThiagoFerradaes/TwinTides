@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +10,8 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
     GameObject _maevis;
 
     List<HealthManager> _listOfEnemies = new();
+
+    EventInstance sound;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as PhantomAura;
@@ -28,6 +32,21 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
 
 
         gameObject.SetActive(true);
+
+        if (_level < 4) {
+            if (!_info.AuraSound.IsNull) {
+                sound = RuntimeManager.CreateInstance(_info.AuraSound);
+                RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+                sound.start();
+            }
+        }
+        else {
+            if (!_info.StrongerAuraSound.IsNull) {
+                sound = RuntimeManager.CreateInstance(_info.StrongerAuraSound);
+                RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+                sound.start();
+            }
+        }
 
         StartCoroutine(DamageTimer());
 
@@ -90,6 +109,12 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
     void End() {
         _listOfEnemies.Clear();
         transform.SetParent(null);
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            sound.release();
+        }
+
         ReturnObject();
     }
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

@@ -41,7 +41,7 @@ public class FallenMelBannerObject : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        if (!_info.BannerSound.IsNull) RuntimeManager.PlayOneShot(_info.BannerSound);
+        if (!_info.BannerSound.IsNull) RuntimeManager.PlayOneShot(_info.BannerSound, transform.position);
 
         durationCoroutine = StartCoroutine(BannerDuration());
 

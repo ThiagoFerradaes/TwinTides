@@ -35,10 +35,10 @@ public class TidalWatzCut : SkillObjectPrefab {
         gameObject.SetActive(true);
 
         if (_level < 3) {
-            if (!_info.CutSound.IsNull) RuntimeManager.PlayOneShot(_info.CutSound);
+            if (!_info.CutSound.IsNull) RuntimeManager.PlayOneShot(_info.CutSound, transform.position);
         }
         else {
-            if (!_info.CutSoundFaster.IsNull) RuntimeManager.PlayOneShot(_info.CutSoundFaster);
+            if (!_info.CutSoundFaster.IsNull) RuntimeManager.PlayOneShot(_info.CutSoundFaster, transform.position);
         }
 
             StartCoroutine(CutDuration());

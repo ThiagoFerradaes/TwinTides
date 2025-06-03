@@ -28,7 +28,7 @@ public class CrimsonTideExplosion : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        if (!_info.ExplosionSound.IsNull) RuntimeManager.PlayOneShot(_info.ExplosionSound);
+        if (!_info.ExplosionSound.IsNull) RuntimeManager.PlayOneShot(_info.ExplosionSound, transform.position);
 
         StartCoroutine(Duration());
     }

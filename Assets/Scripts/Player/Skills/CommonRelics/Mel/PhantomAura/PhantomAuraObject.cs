@@ -41,12 +41,14 @@ public class PhantomAuraObject : SkillObjectPrefab {
         if (_level < 4) {
             if (!_info.AuraSound.IsNull) {
                 sound = RuntimeManager.CreateInstance(_info.AuraSound);
+                RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
                 sound.start();
             }
         }
         else {
             if (!_info.StrongerAuraSound.IsNull) {
                 sound = RuntimeManager.CreateInstance(_info.StrongerAuraSound);
+                RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
                 sound.start();
             }
         }

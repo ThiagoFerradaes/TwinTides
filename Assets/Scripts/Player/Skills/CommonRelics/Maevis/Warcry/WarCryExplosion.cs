@@ -21,7 +21,7 @@ public class WarCryExplosion : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        if (!_info.CrySound.IsNull) RuntimeManager.PlayOneShot(_info.CrySound);
+        if (!_info.CrySound.IsNull) RuntimeManager.PlayOneShot(_info.CrySound, transform.position);
 
         StartCoroutine(ExplosionDuration());
     }

@@ -27,7 +27,7 @@ public class HullbreakerEarthquake : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        if (!_info.EarthquakeSound.IsNull) RuntimeManager.PlayOneShot(_info.EarthquakeSound);
+        if (!_info.EarthquakeSound.IsNull) RuntimeManager.PlayOneShot(_info.EarthquakeSound, transform.position);
 
         StartCoroutine(Duration());
 

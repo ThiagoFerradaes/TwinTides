@@ -30,7 +30,7 @@ public class EchoBlastSecondaryExplosion : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        if (!_info.SecondExplosionSound.IsNull) RuntimeManager.PlayOneShot(_info.SecondExplosionSound);
+        if (!_info.SecondExplosionSound.IsNull) RuntimeManager.PlayOneShot(_info.SecondExplosionSound, transform.position);
 
         StartCoroutine(ExplosionDuration());
     }

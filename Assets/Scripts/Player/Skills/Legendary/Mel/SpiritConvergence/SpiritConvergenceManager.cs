@@ -62,7 +62,7 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
 
         while (_timer < _durationTime) {
 
-            if(!_info.InvocationSound.IsNull) RuntimeManager.PlayOneShot(_info.InvocationSound);
+            if(!_info.InvocationSound.IsNull) RuntimeManager.PlayOneShot(_info.InvocationSound, transform.position);
 
             if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Mel) {
                 SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
@@ -96,7 +96,7 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
 
     void InstantiateRangedMinion() {
 
-        if (!_info.InvocationSound.IsNull) RuntimeManager.PlayOneShot(_info.InvocationSound);
+        if (!_info.InvocationSound.IsNull) RuntimeManager.PlayOneShot(_info.InvocationSound, transform.position);
 
         if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Mel) {
             int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);

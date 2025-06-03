@@ -29,7 +29,7 @@ public class DreadfallExplosion : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        if (!_info.ImpactSound.IsNull) RuntimeManager.PlayOneShot(_info.ImpactSound);
+        if (!_info.ImpactSound.IsNull) RuntimeManager.PlayOneShot(_info.ImpactSound, transform.position);
 
         StartCoroutine(Duration());
     }

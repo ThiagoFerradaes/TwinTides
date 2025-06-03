@@ -29,7 +29,7 @@ public class ImpactOfEarthBreaker : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        if (!_info.EarthImpactSound.IsNull) RuntimeManager.PlayOneShot(_info.EarthImpactSound);
+        if (!_info.EarthImpactSound.IsNull) RuntimeManager.PlayOneShot(_info.EarthImpactSound, transform.position);
 
         StartCoroutine(Duration());
     }

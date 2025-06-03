@@ -35,6 +35,7 @@ public class AreaWardStoneObject : SkillObjectPrefab {
 
         if (!_info.AreaSound.IsNull) {
             sound = RuntimeManager.CreateInstance(_info.AreaSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
             sound.start();
         }
 

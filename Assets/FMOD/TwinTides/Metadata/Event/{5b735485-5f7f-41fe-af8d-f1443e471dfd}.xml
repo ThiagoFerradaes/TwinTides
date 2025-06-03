@@ -5,7 +5,7 @@
 			<value>UnlockTotem</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{ae9eb66d-6278-432f-854b-adf115cd221d}</destination>
@@ -30,6 +30,9 @@
 		</relationship>
 		<relationship name="parameters">
 			<destination>{9403291b-505c-49c5-88bd-45451adac003}</destination>
+		</relationship>
+		<relationship name="banks">
+			<destination>{f1ee1cbb-84fa-4fcb-bd1b-9e7c0424206d}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{113dcb3e-f8f4-4e25-a234-6995f1cf80a8}">
@@ -93,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{1b859432-feef-408b-a458-41edf9b778f5}">
 		<relationship name="effects">
 			<destination>{65ff565f-8c28-413f-b3f8-c39c53a83149}</destination>
+			<destination>{de5aee0d-88d8-4833-a010-64d57e3e6c76}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{007d0743-47bb-40d6-9528-1d485dd4234a}" />
@@ -103,4 +107,5 @@
 	</object>
 	<object class="MixerBusFader" id="{aead5358-4575-4d45-b062-f6b3bfb135be}" />
 	<object class="MixerBusFader" id="{65ff565f-8c28-413f-b3f8-c39c53a83149}" />
+	<object class="SpatialiserEffect" id="{de5aee0d-88d8-4833-a010-64d57e3e6c76}" />
 </objects>

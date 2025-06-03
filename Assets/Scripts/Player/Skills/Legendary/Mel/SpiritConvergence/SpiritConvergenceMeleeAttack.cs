@@ -30,7 +30,7 @@ public class SpiritConvergenceMeleeAttack : SkillObjectPrefab
 
         gameObject.SetActive(true);
 
-        if (!_info.MeleeMinionHitSound.IsNull) RuntimeManager.PlayOneShot(_info.MeleeMinionHitSound);   
+        if (!_info.MeleeMinionHitSound.IsNull) RuntimeManager.PlayOneShot(_info.MeleeMinionHitSound, transform.position);   
 
         StartCoroutine(Duration());
     }

@@ -5,7 +5,7 @@
 			<value>AbrirBauNormal</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{ae9eb66d-6278-432f-854b-adf115cd221d}</destination>
@@ -30,6 +30,9 @@
 		</relationship>
 		<relationship name="parameters">
 			<destination>{930a9545-29b3-4349-b732-fba1e0464840}</destination>
+		</relationship>
+		<relationship name="banks">
+			<destination>{f1ee1cbb-84fa-4fcb-bd1b-9e7c0424206d}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{0980111b-aad8-44c0-9aa0-4ca2b12cc925}">
@@ -93,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{d4886fe7-9d67-4b99-8038-ff89185fc777}">
 		<relationship name="effects">
 			<destination>{db6485e9-6126-4a70-ac79-401a9b58fcd5}</destination>
+			<destination>{61e950c1-418c-4b99-85b3-e7704d243135}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{f002ef2e-fb33-4eb0-9895-1a787dfae49b}" />
@@ -103,4 +107,5 @@
 	</object>
 	<object class="MixerBusFader" id="{3b6fba02-768a-4b70-8aac-cdd71503bf15}" />
 	<object class="MixerBusFader" id="{db6485e9-6126-4a70-ac79-401a9b58fcd5}" />
+	<object class="SpatialiserEffect" id="{61e950c1-418c-4b99-85b3-e7704d243135}" />
 </objects>

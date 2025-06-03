@@ -49,7 +49,7 @@ public class MelNormalAttackObject : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        if (!_info.AttackSound.IsNull) RuntimeManager.PlayOneShot(_info.AttackSound);
+        if (!_info.AttackSound.IsNull) RuntimeManager.PlayOneShot(_info.AttackSound, transform.position);
 
         StartCoroutine(Move());
     }

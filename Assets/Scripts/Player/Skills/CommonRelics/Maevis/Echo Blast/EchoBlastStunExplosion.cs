@@ -1,3 +1,4 @@
+using FMODUnity;
 using NUnit.Framework;
 using System;
 using System.Collections;
@@ -49,7 +50,7 @@ public class EchoBlastStunExplosion : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        if (!_info.ExplosionSound.IsNull)
+        if (!_info.ExplosionSound.IsNull) RuntimeManager.PlayOneShot(_info.ExplosionSound, transform.position);
 
         StartCoroutine(ExplosionDuration());
     }

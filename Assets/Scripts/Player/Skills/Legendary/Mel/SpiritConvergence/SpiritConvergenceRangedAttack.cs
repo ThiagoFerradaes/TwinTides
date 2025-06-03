@@ -28,7 +28,7 @@ public class SpiritConvergenceRangedAttack : SkillObjectPrefab
 
         gameObject.SetActive(true);
 
-        if (!_info.RangedMinionHitSound.IsNull) RuntimeManager.PlayOneShot(_info.RangedMinionHitSound);
+        if (!_info.RangedMinionHitSound.IsNull) RuntimeManager.PlayOneShot(_info.RangedMinionHitSound, transform.position);
 
         StartCoroutine(Move());
     }

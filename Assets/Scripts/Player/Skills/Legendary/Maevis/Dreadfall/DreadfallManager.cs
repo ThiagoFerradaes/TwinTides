@@ -31,7 +31,7 @@ public class DreadfallManager : SkillObjectPrefab {
 
         StartCoroutine(JumpCoroutine());
 
-        if (!_info.JumpSound.IsNull) RuntimeManager.PlayOneShot(_info.JumpSound);
+        if (!_info.JumpSound.IsNull) RuntimeManager.PlayOneShot(_info.JumpSound, _maevis.transform.position);
     }
 
     IEnumerator JumpCoroutine() {

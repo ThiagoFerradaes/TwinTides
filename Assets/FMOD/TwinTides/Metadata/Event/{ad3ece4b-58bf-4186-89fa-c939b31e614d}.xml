@@ -5,7 +5,7 @@
 			<value>RangedAndando</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{a3054b40-e27e-4453-a5a6-0acc7465e97f}</destination>
@@ -96,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{251e7790-0759-44cf-a46f-3eff6b5907f0}">
 		<relationship name="effects">
 			<destination>{b1b6ef5f-f6a1-45b8-a55c-6866b95f3927}</destination>
+			<destination>{542ca26f-362b-4bef-8a6f-bb675fc4756f}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{c1ce54a9-5846-4377-a914-0f3f798b63db}" />
@@ -116,6 +117,14 @@
 	</object>
 	<object class="MixerBusFader" id="{ad63c937-8854-4877-90b7-4b3c1bf2766a}" />
 	<object class="MixerBusFader" id="{b1b6ef5f-f6a1-45b8-a55c-6866b95f3927}" />
+	<object class="SpatialiserEffect" id="{542ca26f-362b-4bef-8a6f-bb675fc4756f}">
+		<property name="maximumDistance">
+			<value>40</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="SingleSound" id="{a7e2b501-b517-433e-96f2-2aaed6fcb16a}">
 		<relationship name="audioFile">
 			<destination>{2e128d16-80f4-40e0-9194-42b34b3a46f3}</destination>

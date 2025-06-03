@@ -37,7 +37,7 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
 
             gameObject.SetActive(true);
 
-            if (!_info.BannerFallingSound.IsNull) RuntimeManager.PlayOneShot(_info.BannerFallingSound);
+            if (!_info.BannerFallingSound.IsNull) RuntimeManager.PlayOneShot(_info.BannerFallingSound, transform.position);
 
             durationCoroutine = StartCoroutine(BannerDuration());
         }
@@ -49,7 +49,7 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
 
             gameObject.SetActive(true);
 
-            if (!_info.BannerSound.IsNull) RuntimeManager.PlayOneShot(_info.BannerSound);
+            if (!_info.BannerSound.IsNull) RuntimeManager.PlayOneShot(_info.BannerSound, transform.position);
 
             AddBuffs();
         }

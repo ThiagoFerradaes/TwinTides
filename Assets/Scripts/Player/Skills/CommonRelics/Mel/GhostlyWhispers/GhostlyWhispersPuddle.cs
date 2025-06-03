@@ -51,18 +51,21 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
             case 1:
                 if (!_info.NormalPuddleSound.IsNull) {
                     sound = RuntimeManager.CreateInstance(_info.NormalPuddleSound);
+                    RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
                     sound.start();
                 }
                 break;
             case 2:
                 if (!_info.SuperPuddleSound.IsNull) {
                     sound = RuntimeManager.CreateInstance(_info.SuperPuddleSound);
+                    RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
                     sound.start();
                 }
                 break;
             case 3:
                 if (!_info.MegaPuddleSound.IsNull) {
                     sound = RuntimeManager.CreateInstance(_info.MegaPuddleSound);
+                    RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
                     sound.start();
                 }
                 break;
