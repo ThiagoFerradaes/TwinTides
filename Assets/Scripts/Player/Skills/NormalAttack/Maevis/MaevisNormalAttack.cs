@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu (menuName = "NormalAttack/Maevis")]
@@ -18,5 +19,7 @@ public class MaevisNormalAttack : AttackSkill
     public float SecondAttackDamage;
     public float ThirdAttackDamage;
     public float TimeLimitBetweenEachAttack;
+
+    public EventReference attackSound;
 
 }

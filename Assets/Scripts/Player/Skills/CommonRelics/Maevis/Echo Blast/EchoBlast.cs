@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "CommonRelic/EchoBlast")]
@@ -10,6 +11,7 @@ public class EchoBlast : CommonRelic
     public float ExplosionDuration;
     public float ExplosionDamage;
     public float ManagerDuration;
+    public EventReference ShotSound;
 
     [Header("Echo Blast Level 2")]
     public float StunTime;

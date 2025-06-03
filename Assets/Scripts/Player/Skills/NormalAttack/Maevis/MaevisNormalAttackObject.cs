@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -45,6 +46,8 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
         transform.GetChild(2).gameObject.SetActive(_currentAttackCombo == 3);
 
         gameObject.SetActive(true);
+
+        RuntimeManager.PlayOneShot(_info.attackSound);
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

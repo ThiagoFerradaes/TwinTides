@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638842041448591401
+  lastModified: 638844835699419148
   FileSizes:
   - Name: Desktop
-    Value: 616736
+    Value: 5264384
   Exists: 1
 --- !u!114 &-8072193126665044990
 MonoBehaviour:
@@ -89,7 +89,7 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Dialogue.bank
   Name: Dialogue
   StudioPath: bank:/Dialogue
-  lastModified: 638842041448352405
+  lastModified: 638842016237025522
   FileSizes:
   - Name: Desktop
     Value: 506
@@ -136,7 +136,7 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Ambience.bank
   Name: Ambience
   StudioPath: bank:/Ambience
-  lastModified: 638842041448342416
+  lastModified: 638844833083765759
   FileSizes:
   - Name: Desktop
     Value: 506
@@ -156,10 +156,10 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638842041448372411
+  lastModified: 638844835698592540
   FileSizes:
   - Name: Desktop
-    Value: 2104
+    Value: 2240
   Exists: 1
 --- !u!114 &-3584006362751709354
 MonoBehaviour:
@@ -203,7 +203,7 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638842041448362416
+  lastModified: 638844835698581954
   FileSizes:
   - Name: Desktop
     Value: 1670
@@ -230,7 +230,7 @@ MonoBehaviour:
   - {fileID: 1365137884315589294}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -330,13 +330,16 @@ MonoBehaviour:
   - {fileID: -738441720813052047}
   - {fileID: 2383433226395904760}
   - {fileID: 2217574944266421771}
+  - {fileID: 2224948459143773472}
+  - {fileID: 8734582616290904938}
+  - {fileID: 8367959199842071374}
   EditorParameters: []
   MasterBanks:
   - {fileID: -3445118457318115062}
   StringsBanks:
   - {fileID: -4047870932218031448}
   cacheVersion: 131847
-  cacheTime: 638842041448591401
+  cacheTime: 638844835699419148
   SerializableEventsDict:
   - key: event:/InimigoMelee/MeleeGemendo
     index: 0
@@ -380,6 +383,12 @@ MonoBehaviour:
     index: 19
   - key: event:/InimigoMelee/MeleeJogandoBarril
     index: 20
+  - key: event:/MusicasDeFundo/Ondas
+    index: 21
+  - key: event:/MusicasDeFundo/SelecaoDePersonagem
+    index: 22
+  - key: event:/MusicasDeFundo/Gaivotas
+    index: 23
 --- !u!114 &800014808567655917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,7 +485,7 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Musics.bank
   Name: Musics
   StudioPath: bank:/Musics
-  lastModified: 638842041448520529
+  lastModified: 638844833084283122
   FileSizes:
   - Name: Desktop
     Value: 1391680
@@ -562,6 +571,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &2224948459143773472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MusicasDeFundo/Ondas
+  m_EditorClassIdentifier: 
+  Path: event:/MusicasDeFundo/Ondas
+  Guid:
+    Data1: -1912740061
+    Data2: 1227338465
+    Data3: 1909103254
+    Data4: -1091015893
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 283416
 --- !u!114 &2383433226395904760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,6 +781,60 @@ MonoBehaviour:
   Banks:
   - {fileID: -8161124285223327073}
   IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8367959199842071374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MusicasDeFundo/Gaivotas
+  m_EditorClassIdentifier: 
+  Path: event:/MusicasDeFundo/Gaivotas
+  Guid:
+    Data1: 613359999
+    Data2: 1234793208
+    Data3: 1713279629
+    Data4: 718328064
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8734582616290904938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MusicasDeFundo/SelecaoDePersonagem
+  m_EditorClassIdentifier: 
+  Path: event:/MusicasDeFundo/SelecaoDePersonagem
+  Guid:
+    Data1: -2126509269
+    Data2: 1199613252
+    Data3: 1627745191
+    Data4: -27464976
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 1
   Is3D: 0
   IsOneShot: 1
   Parameters: []
