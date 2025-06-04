@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +12,8 @@ public class BlackHoleObject : SkillObjectPrefab {
 
     List<HealthManager> _listOfEnemies = new();
     List<MovementManager> _listOfMEnemies = new();
+
+    EventInstance sound;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as BlackHole;
@@ -29,6 +33,12 @@ public class BlackHoleObject : SkillObjectPrefab {
         transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
+
+        if (!_info.BlackHoleSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.BlackHoleSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
 
         StartCoroutine(DurationOfBlackHole());
 
@@ -132,6 +142,11 @@ public class BlackHoleObject : SkillObjectPrefab {
                 enemy.SetMultiplyServerRpc(HealthMultipliers.Heal, (1 / (1 - _info.HealReductionPercent / 100)));
                 enemy.SetPermissionServerRpc(HealthPermissions.CanBeShielded, true);
             }
+        }
+
+        if (!_info.BlackHoleSound.IsNull) {
+            sound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            sound.release();
         }
 
         _listOfEnemies.Clear();

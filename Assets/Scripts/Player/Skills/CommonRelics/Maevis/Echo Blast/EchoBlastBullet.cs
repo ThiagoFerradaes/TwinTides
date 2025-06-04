@@ -20,7 +20,7 @@ public class EchoBlastBullet : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        RuntimeManager.PlayOneShot(_info.ShotSound);
+        RuntimeManager.PlayOneShot(_info.ShotSound, transform.position);
 
         StartCoroutine(Move());
     }

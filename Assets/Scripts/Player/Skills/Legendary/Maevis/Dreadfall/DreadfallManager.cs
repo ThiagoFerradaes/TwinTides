@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
+using FMODUnity;
 
 public class DreadfallManager : SkillObjectPrefab {
     Dreadfall _info;
@@ -29,6 +30,8 @@ public class DreadfallManager : SkillObjectPrefab {
         gameObject.SetActive(true);
 
         StartCoroutine(JumpCoroutine());
+
+        if (!_info.JumpSound.IsNull) RuntimeManager.PlayOneShot(_info.JumpSound, _maevis.transform.position);
     }
 
     IEnumerator JumpCoroutine() {

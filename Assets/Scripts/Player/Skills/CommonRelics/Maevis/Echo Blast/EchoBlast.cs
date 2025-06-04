@@ -16,6 +16,7 @@ public class EchoBlast : CommonRelic
     [Header("Echo Blast Level 2")]
     public float StunTime;
     public float ExplosionRadiusLevel2;
+    public EventReference ExplosionSound;
 
     [Header("Echo Blast Level 3")]
     public float ExplosionAmountLevel3;
@@ -26,4 +27,5 @@ public class EchoBlast : CommonRelic
     public float ExplodingDebuffExplosionCooldown;
     public float ExplodingDebuffDelay;
     public float ExplodingDebuffHeight;
+    public EventReference SecondExplosionSound;
 }

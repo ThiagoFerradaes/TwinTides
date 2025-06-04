@@ -5,14 +5,12 @@ using UnityEngine;
 public class MaevisNormalAttackObject : SkillObjectPrefab {
     MaevisNormalAttack _info;
     int _currentAttackCombo;
-    SkillContext _context;
     GameObject _maevis;
     MaevisNormalAttackManager _father;
     DamageManager _dManager;
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as MaevisNormalAttack;
         _currentAttackCombo = skillLevel;
-        _context = context;
 
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
@@ -47,7 +45,7 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        RuntimeManager.PlayOneShot(_info.attackSound);
+        RuntimeManager.PlayOneShot(_info.attackSound, transform.position);
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

@@ -5,7 +5,7 @@
 			<value>MeleeGemendo</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{303c63d6-df48-4f42-803c-f7503d0385da}</destination>
@@ -96,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{e602732b-56a3-4340-86ef-a4ded06ea926}">
 		<relationship name="effects">
 			<destination>{eb3d9403-3fc4-4722-a650-7f566122954b}</destination>
+			<destination>{f99c36b9-eddc-46cc-938b-5ed15f5efa35}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{dd140002-e035-4f34-af42-0da96566875e}" />
@@ -111,6 +112,14 @@
 	</object>
 	<object class="MixerBusFader" id="{2c1adcb8-27fa-4620-8ce1-f6d41e560f7c}" />
 	<object class="MixerBusFader" id="{eb3d9403-3fc4-4722-a650-7f566122954b}" />
+	<object class="SpatialiserEffect" id="{f99c36b9-eddc-46cc-938b-5ed15f5efa35}">
+		<property name="maximumDistance">
+			<value>40</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="SingleSound" id="{e58c5953-5b4f-400b-b5f9-881c182a56e3}">
 		<relationship name="audioFile">
 			<destination>{0fac0b29-c438-40b5-b040-d21d988557e6}</destination>

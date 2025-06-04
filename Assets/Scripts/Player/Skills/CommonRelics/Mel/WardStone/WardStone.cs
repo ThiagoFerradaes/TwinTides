@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "CommonRelic/WardStone")]
@@ -7,6 +8,7 @@ public class WardStone : CommonRelic {
     public Vector3 ExplosionRadius;
     public HealthBuff Debuffblocker;
     public float ExplosionDuration;
+    public EventReference ExplosionSound;
 
     [Header("WardStone Level 2")]
     public HealthBuff HealingIncreaseBuff;
@@ -27,4 +29,5 @@ public class WardStone : CommonRelic {
     [Range(0,100)]public float PercentOfShieldFromExtraHealing;
     public float AreaDurationLevel4;
     public float ExtraShieldDuration;
+    public EventReference AreaSound;
 }
