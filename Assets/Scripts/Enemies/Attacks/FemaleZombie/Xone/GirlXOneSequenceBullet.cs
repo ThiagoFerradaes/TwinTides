@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ public class GirlXOneSequenceBullet : EnemyAttackPrefab
         transform.SetPositionAndRotation(pos, parent.transform.rotation);
 
         gameObject.SetActive(true);
+
+        if (!_info.SequenceBulletShootSound.IsNull) RuntimeManager.PlayOneShot(_info.SequenceBulletShootSound, transform.position);
 
         StartCoroutine(Duration());
     }
