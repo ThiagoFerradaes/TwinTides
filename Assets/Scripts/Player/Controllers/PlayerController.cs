@@ -21,6 +21,8 @@ public class PlayerController : NetworkBehaviour {
     [SerializeField] float dashForce;
     [SerializeField] float dashDuration;
     [SerializeField] float dashCooldown;
+    [SerializeField] EventReference dashSound;
+    EventInstance dashSoundInstance;
 
     // booleanas
     bool _canWalk = true;
@@ -171,18 +173,27 @@ public class PlayerController : NetworkBehaviour {
         float startTime = Time.time;
         OnDashCooldown?.Invoke(SkillType.Dash, dashCooldown);
 
-        Vector3 moveDirection = (_moveInput.magnitude >= 0.1f)
-            ? new Vector3(_moveInput.x, 0, _moveInput.y).normalized
-            : transform.forward;
+        Vector3 moveDirection = (_moveInput.magnitude >= 0.1f) ? new Vector3(_moveInput.x, 0, _moveInput.y).normalized : transform.forward;
 
         _rb.linearVelocity = moveDirection * dashForce;
 
         OnDashCooldown?.Invoke(SkillType.Dash, dashCooldown);
 
+        if (!dashSound.IsNull) {
+            dashSoundInstance = RuntimeManager.CreateInstance(dashSound);
+            RuntimeManager.AttachInstanceToGameObject(dashSoundInstance, this.gameObject);
+            dashSoundInstance.start();
+        }
+
         float timer = 0f;
         while (timer < dashDuration && !_mManager.ReturnStunnedValue()) {
             timer += Time.fixedDeltaTime;
             yield return new WaitForFixedUpdate();
+        }
+
+        if (dashSoundInstance.isValid()) {
+            dashSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            dashSoundInstance.release();
         }
 
         _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);

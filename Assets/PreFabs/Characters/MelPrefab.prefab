@@ -440,7 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 860857098
+  GlobalObjectIdHash: 2599662631
   InScenePlacedSourceGlobalObjectIdHash: 1302872352
   DeferredDespawnTick: 0
   Ownership: 1
@@ -559,6 +559,13 @@ MonoBehaviour:
   dashForce: 20
   dashDuration: 0.25
   dashCooldown: 1
+  dashSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   isRotatingMouse: 0
   isAiming: 0
   CanInteract: 0
@@ -840,6 +847,30 @@ MonoBehaviour:
   maxShieldAmount: 100
   deathBehaviour: {fileID: 11400000, guid: 5c61840156b25e44885dd344ca744dfa, type: 2}
   damageMaterial: {fileID: 2100000, guid: bd260d75cd071d94cb8da51f88f1f28c, type: 2}
+  RecieveHealSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  RecieveDamageSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  RecieveShieldSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  healIndicatorCooldown: 0
+  shieldIndicatorCooldown: 0
+  timeBetweenDamageIndicators: 0
 --- !u!54 &5911823821045647350
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -922,6 +953,14 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   baseMoveSpeed:
     m_InternalValue: 3
+  stunSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  cooldownStunSound: 0
 --- !u!1001 &2208903057095198466
 PrefabInstance:
   m_ObjectHideFlags: 0
