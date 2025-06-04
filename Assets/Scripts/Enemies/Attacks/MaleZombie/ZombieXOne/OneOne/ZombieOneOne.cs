@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -16,9 +17,11 @@ public class ZombieOneOne : EnemyAttack {
     public float damageOfPunch;
     public float durationOfPunch;
     public float placementOfPunch;
+    public EventReference NormalPunchSound;
 
     [Header("Better Punch")]
     public float damageOfBetterPunch;
     public float durationOfBetterPunch;
     public float placementOfBetterPunch;
+    public EventReference BetterPunchSound;
 }

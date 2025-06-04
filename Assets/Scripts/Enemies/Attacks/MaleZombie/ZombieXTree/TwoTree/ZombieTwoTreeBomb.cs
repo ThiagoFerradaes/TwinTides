@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using UnityEditor.PackageManager.Requests;
 using UnityEngine;
@@ -6,6 +8,8 @@ public class ZombieTwoTreeBomb : EnemyAttackPrefab
 {
     ZombieTwoTree _info;
     bool collided;
+
+    EventInstance sound;
 
     public override void StartAttack(int enemyId, int skillId, Vector3 position) {
         base.StartAttack(enemyId, skillId);
@@ -22,6 +26,12 @@ public class ZombieTwoTreeBomb : EnemyAttackPrefab
 
         gameObject.SetActive(true);
 
+        if (!_info.FallingSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.FallingSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
+
         StartCoroutine(FallRoutine());
     }
 
@@ -34,6 +44,16 @@ public class ZombieTwoTreeBomb : EnemyAttackPrefab
         collided = false;
 
         End();
+    }
+
+    public override void End() {
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
+
+        base.End();
     }
 
     private void OnTriggerEnter(Collider other) {

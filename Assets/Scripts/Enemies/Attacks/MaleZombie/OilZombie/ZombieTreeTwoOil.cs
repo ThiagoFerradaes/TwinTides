@@ -1,4 +1,5 @@
-using NUnit.Framework;
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class ZombieTreeTwoOil : EnemyAttackPrefab {
     ZombieTreeTwo _info;
     Vector3 position;
     public List<MovementManager> _listOfPlayers = new();
+
+    EventInstance sound;
 
     public override void StartAttack(int enemyId, int skillId, Vector3 pos) {
         base.StartAttack(enemyId, skillId);
@@ -27,6 +30,8 @@ public class ZombieTreeTwoOil : EnemyAttackPrefab {
         transform.SetPositionAndRotation(position, parent.transform.rotation);
 
         gameObject.SetActive(true);
+
+        if (!_info.OilSound.IsNull) RuntimeManager.PlayOneShot(_info.OilSound, transform.position);
 
         StartCoroutine(Duration());
 
@@ -49,11 +54,22 @@ public class ZombieTreeTwoOil : EnemyAttackPrefab {
             player.IncreaseMoveSpeed(_info.oilSpeedReduction);
         }
         _listOfPlayers.Clear();
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
         base.End();
     }
 
     public void Burn() {
         StartCoroutine(DamageRoutine());
+
+        if (!_info.OilFireSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.OilFireSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
     }
 
     IEnumerator DamageRoutine() {

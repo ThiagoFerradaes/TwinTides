@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu (menuName = "EnemyAttack/ Zombie One Tree")]
@@ -11,4 +12,5 @@ public class ZombieOneTree : EnemyAttack
     public HealthDebuff toxicDebuff;
     public float toxicCloudCooldown;
     public float timeBetweenToxicAplication;
+    public EventReference ToxicCloundSound;
 }

@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -21,6 +22,8 @@ public class ZombieOneTwoExplosion : EnemyAttackPrefab
         transform.position = parent.transform.position;
 
         gameObject.SetActive(true);
+
+        if (!_info.JumpImpactSound.IsNull) RuntimeManager.PlayOneShot(_info.JumpImpactSound, transform.position);
 
         StartCoroutine(Duration());
     }
