@@ -5,7 +5,7 @@
 			<value>MaevisAndandoAgua</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{9c92ff59-ec41-44b5-9753-f7401ec83b90}</destination>
@@ -56,7 +56,7 @@
 			<destination>{2340cd07-4e0c-46e6-b5a2-b71b6ef797f7}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{c188c619-9cc8-42c7-8e25-973f3b6c8d0a}</destination>
+			<destination>{6afd8936-1fe8-46db-a81a-8c9a8b805138}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{33e87350-da5f-4c9b-b7d0-5f784ed14073}" />
@@ -96,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{24be7f12-4bb4-403d-b429-dfaf362a225b}">
 		<relationship name="effects">
 			<destination>{c68a7885-87f0-4f77-96cd-8ea896f80d7d}</destination>
+			<destination>{2f8de5d9-b133-4ae0-b712-0e422fc917f9}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{45d419f2-90c0-4531-9488-f2e65792440b}" />
@@ -113,6 +114,14 @@
 	</object>
 	<object class="MixerBusFader" id="{5c1932c5-23b1-495c-b2ad-6b9c74b9f68d}" />
 	<object class="MixerBusFader" id="{c68a7885-87f0-4f77-96cd-8ea896f80d7d}" />
+	<object class="SpatialiserEffect" id="{2f8de5d9-b133-4ae0-b712-0e422fc917f9}">
+		<property name="maximumDistance">
+			<value>40</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="SingleSound" id="{f75de42b-740a-459e-84a2-25ea3fd9e19b}">
 		<relationship name="audioFile">
 			<destination>{5fb02cdc-26e5-4689-8b97-35eb639003fd}</destination>

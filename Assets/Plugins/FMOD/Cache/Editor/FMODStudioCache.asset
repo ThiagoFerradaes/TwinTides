@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/FMOD/TwinTides/Build/Desktop/SFX.bank
   Name: SFX
-  StudioPath: bank:/SFX/SFX
-  lastModified: 638841370347290847
+  StudioPath: bank:/SFX
+  lastModified: 638847161380943659
   FileSizes:
   - Name: Desktop
-    Value: 475680
+    Value: 5452352
   Exists: 1
 --- !u!114 &-8072193126665044990
 MonoBehaviour:
@@ -41,7 +41,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -8161124285223327073}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -68,12 +68,32 @@ MonoBehaviour:
   Banks:
   - {fileID: -8161124285223327073}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-7063816962255387914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Dialogue.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/TwinTides/Build/Desktop/Dialogue.bank
+  Name: Dialogue
+  StudioPath: bank:/Dialogue
+  lastModified: 638847161379768362
+  FileSizes:
+  - Name: Desktop
+    Value: 506
+  Exists: 1
 --- !u!114 &-6235137153016358604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,12 +115,32 @@ MonoBehaviour:
   Banks:
   - {fileID: -8161124285223327073}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-5603623505756103860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Ambience.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/TwinTides/Build/Desktop/Ambience.bank
+  Name: Ambience
+  StudioPath: bank:/Ambience
+  lastModified: 638847161379768362
+  FileSizes:
+  - Name: Desktop
+    Value: 506
+  Exists: 1
 --- !u!114 &-4047870932218031448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,11 +156,65 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638841370347003816
+  lastModified: 638847161379768362
   FileSizes:
   - Name: Desktop
-    Value: 1598
+    Value: 2494
   Exists: 1
+--- !u!114 &-3878552047275575475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/CenarioInteragiveis/PocoDeOferecimento
+  m_EditorClassIdentifier: 
+  Path: event:/CenarioInteragiveis/PocoDeOferecimento
+  Guid:
+    Data1: 1411877644
+    Data2: 1134946408
+    Data3: 1576671641
+    Data4: -2087511804
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3791989457783289002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/CenarioInteragiveis/UnlockTotem
+  m_EditorClassIdentifier: 
+  Path: event:/CenarioInteragiveis/UnlockTotem
+  Guid:
+    Data1: 1534284933
+    Data2: 1107189631
+    Data3: 1156681135
+    Data4: -48412866
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-3584006362751709354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +236,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -8161124285223327073}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -163,11 +257,38 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638841370346989999
+  lastModified: 638847161379768362
   FileSizes:
   - Name: Desktop
-    Value: 1074
+    Value: 1670
   Exists: 1
+--- !u!114 &-3007518092816905168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/CenarioInteragiveis/AbrirBauRaro
+  m_EditorClassIdentifier: 
+  Path: event:/CenarioInteragiveis/AbrirBauRaro
+  Guid:
+    Data1: 1201791669
+    Data2: 1259436349
+    Data3: -447037821
+    Data4: -1676691726
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-2276382452250134370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +311,60 @@ MonoBehaviour:
   - {fileID: 1365137884315589294}
   IsStream: 1
   Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-738441720813052047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Menu/SelecionarOpcao
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Menu/SelecionarOpcao
+  Guid:
+    Data1: 1910035298
+    Data2: 1088125791
+    Data3: 562281601
+    Data4: 1207720390
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-415707884844513016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/CenarioInteragiveis/AbrirBauNormal
+  m_EditorClassIdentifier: 
+  Path: event:/CenarioInteragiveis/AbrirBauNormal
+  Guid:
+    Data1: 1030311992
+    Data2: 1300624448
+    Data3: -1688887123
+    Data4: -2023469066
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -216,7 +391,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -8161124285223327073}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -239,6 +414,8 @@ MonoBehaviour:
   - {fileID: -3445118457318115062}
   - {fileID: -8161124285223327073}
   - {fileID: 1365137884315589294}
+  - {fileID: -5603623505756103860}
+  - {fileID: -7063816962255387914}
   EditorEvents:
   - {fileID: 1596914896674180238}
   - {fileID: -3584006362751709354}
@@ -255,13 +432,27 @@ MonoBehaviour:
   - {fileID: 874582534559779321}
   - {fileID: -6235137153016358604}
   - {fileID: -2276382452250134370}
+  - {fileID: 4098864487139365093}
+  - {fileID: 800014808567655917}
+  - {fileID: 5056793325090784352}
+  - {fileID: -738441720813052047}
+  - {fileID: 2383433226395904760}
+  - {fileID: 2217574944266421771}
+  - {fileID: 2224948459143773472}
+  - {fileID: 8734582616290904938}
+  - {fileID: 8367959199842071374}
+  - {fileID: -3878552047275575475}
+  - {fileID: -415707884844513016}
+  - {fileID: -3791989457783289002}
+  - {fileID: 6264162733145905795}
+  - {fileID: -3007518092816905168}
   EditorParameters: []
   MasterBanks:
   - {fileID: -3445118457318115062}
   StringsBanks:
   - {fileID: -4047870932218031448}
   cacheVersion: 131847
-  cacheTime: 638841370347290847
+  cacheTime: 638847161380943659
   SerializableEventsDict:
   - key: event:/InimigoMelee/MeleeGemendo
     index: 0
@@ -293,6 +484,61 @@ MonoBehaviour:
     index: 13
   - key: event:/MusicasDeFundo/MenuMusica
     index: 14
+  - key: event:/UI/Menu/TrocarOpcao
+    index: 15
+  - key: event:/InimigoMelee/MeleeJump
+    index: 16
+  - key: event:/InimigoMelee/MeleePunch
+    index: 17
+  - key: event:/UI/Menu/SelecionarOpcao
+    index: 18
+  - key: event:/InimigoMelee/MeleeJogandoVeneno
+    index: 19
+  - key: event:/InimigoMelee/MeleeJogandoBarril
+    index: 20
+  - key: event:/MusicasDeFundo/Ondas
+    index: 21
+  - key: event:/MusicasDeFundo/SelecaoDePersonagem
+    index: 22
+  - key: event:/MusicasDeFundo/Gaivotas
+    index: 23
+  - key: event:/CenarioInteragiveis/PocoDeOferecimento
+    index: 24
+  - key: event:/CenarioInteragiveis/AbrirBauNormal
+    index: 25
+  - key: event:/CenarioInteragiveis/UnlockTotem
+    index: 26
+  - key: event:/CenarioInteragiveis/AbrirBauLendario
+    index: 27
+  - key: event:/CenarioInteragiveis/AbrirBauRaro
+    index: 28
+--- !u!114 &800014808567655917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeJump
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeJump
+  Guid:
+    Data1: 1140911699
+    Data2: 1113015371
+    Data3: -1707690880
+    Data4: 1471483734
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &874582534559779321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,7 +560,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -8161124285223327073}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -341,7 +587,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -8161124285223327073}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -362,7 +608,7 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Musics.bank
   Name: Musics
   StudioPath: bank:/Musics
-  lastModified: 638841370347201726
+  lastModified: 638847161380102853
   FileSizes:
   - Name: Desktop
     Value: 1391680
@@ -388,7 +634,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -8161124285223327073}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -415,7 +661,88 @@ MonoBehaviour:
   Banks:
   - {fileID: -8161124285223327073}
   IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &2217574944266421771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeJogandoBarril
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeJogandoBarril
+  Guid:
+    Data1: -475550101
+    Data2: 1107039000
+    Data3: 1191943083
+    Data4: 147161044
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &2224948459143773472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MusicasDeFundo/Ondas
+  m_EditorClassIdentifier: 
+  Path: event:/MusicasDeFundo/Ondas
+  Guid:
+    Data1: -1912740061
+    Data2: 1227338465
+    Data3: 1909103254
+    Data4: -1091015893
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 1
   Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 283416
+--- !u!114 &2383433226395904760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeJogandoVeneno
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeJogandoVeneno
+  Guid:
+    Data1: -739574678
+    Data2: 1196072135
+    Data3: 1255430072
+    Data4: -1167005033
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -439,6 +766,33 @@ MonoBehaviour:
     Data2: 1314818339
     Data3: -570306169
     Data4: -1579902811
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4098864487139365093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Menu/TrocarOpcao
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Menu/TrocarOpcao
+  Guid:
+    Data1: -1510511828
+    Data2: 1255024176
+    Data3: -513902948
+    Data4: 1226173974
   Banks:
   - {fileID: -8161124285223327073}
   IsStream: 0
@@ -469,7 +823,61 @@ MonoBehaviour:
   Banks:
   - {fileID: -8161124285223327073}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5056793325090784352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleePunch
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleePunch
+  Guid:
+    Data1: 49803093
+    Data2: 1226823249
+    Data3: -518459718
+    Data4: 572283286
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6264162733145905795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/CenarioInteragiveis/AbrirBauLendario
+  m_EditorClassIdentifier: 
+  Path: event:/CenarioInteragiveis/AbrirBauLendario
+  Guid:
+    Data1: 1508530599
+    Data2: 1324902365
+    Data3: -1638182469
+    Data4: -1924475586
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -496,7 +904,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -8161124285223327073}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -523,6 +931,60 @@ MonoBehaviour:
   Banks:
   - {fileID: -8161124285223327073}
   IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8367959199842071374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MusicasDeFundo/Gaivotas
+  m_EditorClassIdentifier: 
+  Path: event:/MusicasDeFundo/Gaivotas
+  Guid:
+    Data1: 613359999
+    Data2: 1234793208
+    Data3: 1713279629
+    Data4: 718328064
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8734582616290904938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MusicasDeFundo/SelecaoDePersonagem
+  m_EditorClassIdentifier: 
+  Path: event:/MusicasDeFundo/SelecaoDePersonagem
+  Guid:
+    Data1: -2126509269
+    Data2: 1199613252
+    Data3: 1627745191
+    Data4: -27464976
+  Banks:
+  - {fileID: -8161124285223327073}
+  IsStream: 1
   Is3D: 0
   IsOneShot: 1
   Parameters: []
@@ -550,7 +1012,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -8161124285223327073}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1

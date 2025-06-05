@@ -5,7 +5,7 @@
 			<value>AbrirBauRaro</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{ae9eb66d-6278-432f-854b-adf115cd221d}</destination>
@@ -31,6 +31,9 @@
 		<relationship name="parameters">
 			<destination>{7b1250ab-c0df-4b00-a858-3bc9abda6328}</destination>
 		</relationship>
+		<relationship name="banks">
+			<destination>{f1ee1cbb-84fa-4fcb-bd1b-9e7c0424206d}</destination>
+		</relationship>
 	</object>
 	<object class="EventMixer" id="{15ac28c6-2ef8-4799-b327-fcec31e96c51}">
 		<relationship name="masterBus">
@@ -53,7 +56,7 @@
 			<destination>{954870f9-d390-4069-b019-09b875b3c6bd}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{c188c619-9cc8-42c7-8e25-973f3b6c8d0a}</destination>
+			<destination>{6afd8936-1fe8-46db-a81a-8c9a8b805138}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{f83f9df3-40e8-4e4f-b7df-e44c96c38df0}" />
@@ -93,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{29822415-ffaf-4997-9b61-d6e59a38ea66}">
 		<relationship name="effects">
 			<destination>{4784dcfd-774a-43ce-81a6-024cb493cced}</destination>
+			<destination>{e1b37c0e-e9fa-4607-be26-f3dea71b7bad}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{bb1baf65-d052-45ec-bdc6-c3e26a633031}" />
@@ -103,4 +107,12 @@
 	</object>
 	<object class="MixerBusFader" id="{cf9016a9-c748-42a3-b4f7-92eb0dccaf3d}" />
 	<object class="MixerBusFader" id="{4784dcfd-774a-43ce-81a6-024cb493cced}" />
+	<object class="SpatialiserEffect" id="{e1b37c0e-e9fa-4607-be26-f3dea71b7bad}">
+		<property name="maximumDistance">
+			<value>40</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 </objects>

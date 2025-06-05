@@ -559,6 +559,13 @@ MonoBehaviour:
   dashForce: 20
   dashDuration: 0.25
   dashCooldown: 1
+  dashSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   isRotatingMouse: 0
   isAiming: 0
   CanInteract: 0
@@ -652,26 +659,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
     m_ActionName: 'Player/Interact[/Keyboard/enter]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f1ba0d36-48eb-4cd5-b651-1c94a6531f70
-    m_ActionName: 'Player/Jump[/Keyboard/space]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2849821314780519991}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: InputSprint
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 641cd816-40e6-41b4-8c3d-04687c349290
-    m_ActionName: 'Player/Sprint[/Keyboard/leftShift]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -4439767094921606809}
@@ -846,6 +833,30 @@ MonoBehaviour:
   maxShieldAmount: 100
   deathBehaviour: {fileID: 11400000, guid: 5c61840156b25e44885dd344ca744dfa, type: 2}
   damageMaterial: {fileID: 2100000, guid: bd260d75cd071d94cb8da51f88f1f28c, type: 2}
+  RecieveHealSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  RecieveDamageSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  RecieveShieldSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  healIndicatorCooldown: 0
+  shieldIndicatorCooldown: 0
+  timeBetweenDamageIndicators: 0
 --- !u!114 &2402475289913472152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -942,6 +953,14 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   baseMoveSpeed:
     m_InternalValue: 3.5
+  stunSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  cooldownStunSound: 0
 --- !u!1001 &5054681171358996515
 PrefabInstance:
   m_ObjectHideFlags: 0

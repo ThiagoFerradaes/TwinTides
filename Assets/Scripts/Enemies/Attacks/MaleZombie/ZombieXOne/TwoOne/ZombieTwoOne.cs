@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "EnemyAttack/ ZombieTwoOneAttack")]
@@ -15,6 +16,7 @@ public class ZombieTwoOne : EnemyAttack {
     public float damageOfPunch;
     public float durationOfPunch;
     public float placementOfPunch;
+    public EventReference NormalPunchSound;
 
     [Header("Final Attack")]
     public float damageOfFinalAttackPartOne;
@@ -24,4 +26,6 @@ public class ZombieTwoOne : EnemyAttack {
     public float durationOfFinalAttackPartTwo;
     public float placementOfFinalAttackPartTwo;
     public float stunTimeFinalAttackTwo;
+    public EventReference FinalPunchOneSound;
+    public EventReference FinalPunchTwoSound;
 }

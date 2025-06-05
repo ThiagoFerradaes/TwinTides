@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +9,8 @@ public class ZombieOneTreeToxicCloud : EnemyAttackPrefab
     ZombieOneTree _info;
 
     HashSet<HealthManager> _listOfPlayers = new();
+
+    EventInstance sound;
     public override void StartAttack(int enemyId, int skillId) {
         base.StartAttack(enemyId, skillId);
 
@@ -32,6 +36,12 @@ public class ZombieOneTreeToxicCloud : EnemyAttackPrefab
         transform.localScale = Vector3.one * realIncrease;
 
         gameObject.SetActive(true);
+
+        if (!_info.ToxicCloundSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.ToxicCloundSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
 
         parentContext.Blackboard.CurrentComboIndex++;
 
@@ -72,6 +82,11 @@ public class ZombieOneTreeToxicCloud : EnemyAttackPrefab
 
     public override void End() {
         _listOfPlayers.Clear();
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
         base.End();
     }
 

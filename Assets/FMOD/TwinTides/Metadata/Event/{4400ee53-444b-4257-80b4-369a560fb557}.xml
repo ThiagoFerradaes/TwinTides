@@ -5,7 +5,7 @@
 			<value>MeleeJump</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{303c63d6-df48-4f42-803c-f7503d0385da}</destination>
@@ -56,7 +56,7 @@
 			<destination>{81f186d8-4b9e-4684-83a0-ebbb37861aab}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{c188c619-9cc8-42c7-8e25-973f3b6c8d0a}</destination>
+			<destination>{6afd8936-1fe8-46db-a81a-8c9a8b805138}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{b21b6ae8-41fd-4253-8f9c-e15c683fa7e9}" />
@@ -96,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{cb49ab23-d462-4db3-a6cd-2ce9a9b8baa4}">
 		<relationship name="effects">
 			<destination>{e171287c-1ce0-4da0-86a1-d23f04bda974}</destination>
+			<destination>{4ac6638a-1654-42c0-9a33-a28d6eb2c8a8}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{4bdfbcee-5b36-433f-add9-bd4a49a35ead}" />
@@ -108,6 +109,14 @@
 	</object>
 	<object class="MixerBusFader" id="{3c768e42-b6ab-4994-b161-900be6caef72}" />
 	<object class="MixerBusFader" id="{e171287c-1ce0-4da0-86a1-d23f04bda974}" />
+	<object class="SpatialiserEffect" id="{4ac6638a-1654-42c0-9a33-a28d6eb2c8a8}">
+		<property name="maximumDistance">
+			<value>40</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="SingleSound" id="{0da8853b-080a-4e61-8b6d-fae327f884c3}">
 		<relationship name="audioFile">
 			<destination>{05e8acda-0a14-4965-a5c4-d78b441dbc94}</destination>

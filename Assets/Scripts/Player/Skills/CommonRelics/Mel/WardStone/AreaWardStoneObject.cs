@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using NUnit.Framework;
 using System;
 using System.Collections;
@@ -11,6 +13,8 @@ public class AreaWardStoneObject : SkillObjectPrefab {
     GameObject _mel;
 
     List<HealthManager> _listOfPlayers = new();
+
+    EventInstance sound;
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as WardStone;
         _level = skillLevel;
@@ -28,6 +32,12 @@ public class AreaWardStoneObject : SkillObjectPrefab {
         transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
+
+        if (!_info.AreaSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.AreaSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
 
         StartCoroutine(AreaDuration());
         if (_level > 3) StartCoroutine(HealingTimer());
@@ -76,6 +86,11 @@ public class AreaWardStoneObject : SkillObjectPrefab {
 
     void End() {
         _listOfPlayers.Clear();
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
         ReturnObject();
     }
 }

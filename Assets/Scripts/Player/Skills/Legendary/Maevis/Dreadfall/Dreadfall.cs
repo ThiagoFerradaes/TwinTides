@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu (menuName = "LegendaryRelic/Dreadfall")]
@@ -17,4 +18,7 @@ public class Dreadfall : LegendaryRelic
     public float FieldRadius;
     public float DamageCooldown;
     public HealthDebuff BleedDebuff;
+    public EventReference JumpSound;
+    public EventReference ImpactSound;
+    public EventReference BurningAreaSound;
 }

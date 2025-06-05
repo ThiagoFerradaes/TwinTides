@@ -5,7 +5,7 @@
 			<value>TiroRanged</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{a3054b40-e27e-4453-a5a6-0acc7465e97f}</destination>
@@ -56,7 +56,7 @@
 			<destination>{fb7d6d33-544b-48f2-b354-1635d23fe1a2}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{c188c619-9cc8-42c7-8e25-973f3b6c8d0a}</destination>
+			<destination>{6afd8936-1fe8-46db-a81a-8c9a8b805138}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{c1491f7e-bbe3-486c-a4e5-2e7096652ac1}" />
@@ -96,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{55025225-5acf-48b0-844f-e2d30dd58e15}">
 		<relationship name="effects">
 			<destination>{8aec3563-1be6-45a6-95b4-1adad33c75c2}</destination>
+			<destination>{b6e24cc6-fc0d-472a-a56a-1406c1bbeaa0}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{a2296b21-3c4b-4ae1-98c9-a255c29a0c16}" />
@@ -111,6 +112,14 @@
 	</object>
 	<object class="MixerBusFader" id="{7f6919ba-5f31-43eb-8d22-949374a0ff05}" />
 	<object class="MixerBusFader" id="{8aec3563-1be6-45a6-95b4-1adad33c75c2}" />
+	<object class="SpatialiserEffect" id="{b6e24cc6-fc0d-472a-a56a-1406c1bbeaa0}">
+		<property name="maximumDistance">
+			<value>40</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="SingleSound" id="{6d3c4ab2-f5a9-4089-a8ca-80a93f5ba0fb}">
 		<property name="pitch">
 			<value>-2</value>

@@ -56,7 +56,7 @@
 			<destination>{e0d3b66c-f1b5-4c79-b663-9fe0b26ecfe3}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{c188c619-9cc8-42c7-8e25-973f3b6c8d0a}</destination>
+			<destination>{dbaa7254-f122-40ec-a6a8-d9795c5c63d4}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{c1b3f980-104f-4198-9272-adcba0cf704f}" />
@@ -100,6 +100,9 @@
 	</object>
 	<object class="MixerBusPanner" id="{244a9f47-baf6-43eb-8f97-74cc0084edde}" />
 	<object class="SingleSound" id="{a2a7285f-742c-49e8-8be3-5e7be74ab04d}">
+		<property name="looping">
+			<value>true</value>
+		</property>
 		<relationship name="audioFile">
 			<destination>{f2b861de-8a3c-4fef-9dc0-51cae9a75514}</destination>
 		</relationship>

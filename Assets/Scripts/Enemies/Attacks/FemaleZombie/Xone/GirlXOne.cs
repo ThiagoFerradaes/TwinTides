@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 public class GirlXOne : EnemyAttack
@@ -11,10 +12,12 @@ public class GirlXOne : EnemyAttack
     public float bulletSpeed;
     public float bulletRange;
     public float placementOfBullet;
+    public EventReference NormalShootSound;
 
     [Header("Stronger Bullet")]
     public float StrongerBulletDamage;
     public float StrongerBulletSpeed;
     public float StrongerBulletRange;
     public float StrongerBulletCooldown;
+    public EventReference StrongerShootSound;
 }

@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ public class Chest : NetworkBehaviour {
     [SerializeField] ChestRarity rarity;
     [SerializeField] bool isLocked;
     bool locked;
+    [SerializeField] EventReference openChestSound;
+
     [Header("Common chest atributes")]
     [SerializeField] float chestTimerToTurnOffAfterUnlock;
 
@@ -29,7 +32,7 @@ public class Chest : NetworkBehaviour {
     CommonRelic fragment;
     List<PlayerController> players = new();
 
-    public static event EventHandler MediumChestOpened;
+    public static event System.EventHandler MediumChestOpened;
 
     public enum ChestRarity {
         Common,
@@ -94,6 +97,8 @@ public class Chest : NetworkBehaviour {
         if(!locked) OpenChest();
     }
     void OpenChest() {
+        SoundEffect();
+
         AddFragmentToInventory();
 
         AddGoldToInventory();
@@ -105,6 +110,10 @@ public class Chest : NetworkBehaviour {
         InvokeEvents();
 
         CloseChest();
+    }
+
+    void SoundEffect() {
+        if (!openChestSound.IsNull) RuntimeManager.PlayOneShot(openChestSound, transform.position);
     }
 
     private void InvokeEvents() {
@@ -152,9 +161,9 @@ public class Chest : NetworkBehaviour {
 
         switch (rarity) {
             case ChestRarity.Common:
-                if (rng >= 75) ChooseFragment(); break;
+                if (rng >= 40) ChooseFragment(); break;
             case ChestRarity.Medium:
-                if (rng >= 25) ChooseFragment(); break;
+                if (rng >= 10) ChooseFragment(); break;
             case ChestRarity.Rare:
                 break;
         }

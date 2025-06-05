@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +10,8 @@ public class GirlTwoThreePuddle : EnemyAttackPrefab {
 
     HashSet<HealthManager> _listOfPlayers = new();
     enum PuddleType { Block, Damage, Slow }
+
+    EventInstance sound;
     public override void StartAttack(int enemyId, int skillId) {
         base.StartAttack(enemyId, skillId);
 
@@ -67,6 +71,8 @@ public class GirlTwoThreePuddle : EnemyAttackPrefab {
         };
 
         gameObject.GetComponent<MeshRenderer>().material = puddleMaterial;
+
+        
     }
 
     void SetPosition() {
@@ -85,6 +91,30 @@ public class GirlTwoThreePuddle : EnemyAttackPrefab {
         transform.position = pos;
 
         gameObject.SetActive(true);
+
+        switch (type) {
+            case PuddleType.Damage:
+                if (!_info.DamagePuddleSound.IsNull) {
+                    sound = RuntimeManager.CreateInstance(_info.DamagePuddleSound);
+                    RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+                    sound.start();
+                }
+                break;
+            case PuddleType.Slow:
+                if (!_info.SlowPuddleSound.IsNull) {
+                    sound = RuntimeManager.CreateInstance(_info.SlowPuddleSound);
+                    RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+                    sound.start();
+                }
+                break;
+            case PuddleType.Block:
+                if (!_info.NoBuffPuddleSound.IsNull) {
+                    sound = RuntimeManager.CreateInstance(_info.NoBuffPuddleSound);
+                    RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+                    sound.start();
+                }
+                break;
+        }
 
         StartCoroutine(Duration());
     }
@@ -124,6 +154,11 @@ public class GirlTwoThreePuddle : EnemyAttackPrefab {
         }
 
         _listOfPlayers.Clear();
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
 
         base.End();
     }

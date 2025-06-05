@@ -5,7 +5,7 @@
 			<value>MelAndando</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{d7e7150f-4847-476a-bbe9-afbfaf8f19a1}</destination>
@@ -56,7 +56,7 @@
 			<destination>{82051d52-7d1b-4314-adae-a3eb927c7963}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{c188c619-9cc8-42c7-8e25-973f3b6c8d0a}</destination>
+			<destination>{6afd8936-1fe8-46db-a81a-8c9a8b805138}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{5d3b7dc6-c8bb-4c49-9c69-066b3302dbe2}" />
@@ -96,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{aa0b9f78-ccb1-4757-8dfa-564959cd6da6}">
 		<relationship name="effects">
 			<destination>{4949355a-abe7-4f65-b0fe-ef46ec59da59}</destination>
+			<destination>{784b9664-e21b-485a-87b8-305db6b23129}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{28bf175f-bb44-4f68-9cce-7e6b0abf7635}" />
@@ -110,6 +111,14 @@
 	</object>
 	<object class="MixerBusFader" id="{850bee46-813f-49d1-b1c4-764a732b2f55}" />
 	<object class="MixerBusFader" id="{4949355a-abe7-4f65-b0fe-ef46ec59da59}" />
+	<object class="SpatialiserEffect" id="{784b9664-e21b-485a-87b8-305db6b23129}">
+		<property name="maximumDistance">
+			<value>40</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="SingleSound" id="{a09f6110-b355-4f64-ba1c-b51dcca48874}">
 		<relationship name="audioFile">
 			<destination>{825a56e8-85ab-4850-8f88-c0ef25020593}</destination>

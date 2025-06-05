@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "LegendaryRelic/EarthBreaker")]
@@ -11,4 +12,6 @@ public class EarthBreaker : LegendaryRelic
     public float Damage;
     public float StunDuration;
     public Vector3 InicialImpactSize;
+    public EventReference EarthImpactSound;
+    
 }
