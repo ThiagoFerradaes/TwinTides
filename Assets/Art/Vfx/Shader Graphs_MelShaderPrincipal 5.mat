@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RachaduraCirculoParteTres 1
-  m_Shader: {fileID: -6465566751694194690, guid: 69946d54c442b004f98af00a91bb3cb6, type: 3}
+  m_Name: Shader Graphs_MelShaderPrincipal 5
+  m_Shader: {fileID: -6465566751694194690, guid: 558b01c4ed7eb504f8e2e49928624334, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -21,19 +21,19 @@ Material:
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
+  - SHADOWCASTER
   - MOTIONVECTORS
   - DepthOnly
-  - SHADOWCASTER
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _SampleTexture2D_f47c711650994bbd8f8adb59e1de8674_Texture_1_Texture2D:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+    - _main_texture:
+        m_Texture: {fileID: 2800000, guid: 6f72b94c103a18d4e970662dc27e3515, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Texture:
-        m_Texture: {fileID: 2800000, guid: 1583087ca95875140a95cd2c6f9a8abc, type: 3}
+    - _mask:
+        m_Texture: {fileID: 2800000, guid: 14448b1533744b741879db221d56aceb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -54,28 +54,41 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 2
     - _CastShadows: 0
-    - _Cull: 2
+    - _Cull: 0
+    - _DeciderAlphaClip: 1
+    - _DeciderColors: 0
     - _DstBlend: 1
-    - _Noise: 0
-    - _NoiseDecider: 0
-    - _NoiseScale: 10
+    - _NoisePadrao: 0
+    - _Quadrado: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RotationDecider: 1
-    - _RotationSpeed: 1.25
+    - _Scale: 1
+    - _SpeedMesh: 2
     - _SrcBlend: 5
     - _Surface: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
-    - _mask: 1
+    - _alfaClipMax: 0.09
+    - _alfaClipMin_normal: 0
+    - _distortionAmountMax: 25
+    - _distortionAmountMin: 4
+    - _disttortionScale: 1
+    - _elipseSize: 1
+    - _forceMesh: 0.15
+    - _global: 0
+    - _mashSize: 1
+    - _noiseMesh: 8
+    - _textureDecider: 0
     m_Colors:
-    - _Color: {r: 0, g: 0.33976266, b: 5.340313, a: 1}
-    - _MoveNoise: {r: 0, g: 0, b: 0, a: 0}
-    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _color_01_normal: {r: 0, g: 0.13962269, b: 0.044091374, a: 1}
+    - _color_02: {r: 0, g: 2.0078433, b: 0.9872468, a: 1}
+    - _distortionSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _main_texture_speed: {r: 0, g: 0.5, b: 0, a: 0}
+    - _tilingAndOffset: {r: 0.55, g: 0.55, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &8235643116742335497
+--- !u!114 &5611534300171656187
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
