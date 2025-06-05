@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -7,6 +9,8 @@ public class BlackBeardCrossAttackCut : BlackBeardAttackPrefab
     Vector3 pos;
     HealthManager health;
     bool isStronger;
+
+    EventInstance sound;
     public override void StartAttack(int enemyId, int skillId, Vector3 position) {
         base.StartAttack(enemyId, skillId);
 
@@ -31,6 +35,12 @@ public class BlackBeardCrossAttackCut : BlackBeardAttackPrefab
 
         gameObject.SetActive(true);
 
+        if (!_info.CutSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.CutSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
+
         StartCoroutine(Duration());
     }
 
@@ -50,6 +60,16 @@ public class BlackBeardCrossAttackCut : BlackBeardAttackPrefab
 
         EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 1, parent, transform.position);
         End();
+    }
+
+    public override void End() {
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
+
+        base.End();
     }
 
     private void OnTriggerEnter(Collider other) {

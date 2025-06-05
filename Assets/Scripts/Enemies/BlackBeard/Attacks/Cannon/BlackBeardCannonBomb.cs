@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -7,6 +9,8 @@ public class BlackBeardCannonBomb : BlackBeardAttackPrefab {
     bool pushed;
     Material originalMaterial;
     MeshRenderer mrenderer;
+
+    EventInstance sound;
 
     public override void StartAttack(int enemyId, int skillId, Vector3 position) {
         base.StartAttack(enemyId, skillId);
@@ -29,6 +33,12 @@ public class BlackBeardCannonBomb : BlackBeardAttackPrefab {
 
         gameObject.SetActive(true);
 
+        if (!_info.BombFalingSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.BombFalingSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
+
         StartCoroutine(FallRoutine());
     }
 
@@ -36,6 +46,11 @@ public class BlackBeardCannonBomb : BlackBeardAttackPrefab {
         while (!collided) {
             transform.position += _info.BombFallSpeed * Time.deltaTime * -transform.up;
             yield return null;
+        }
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
         }
 
         collided = false;
@@ -59,6 +74,12 @@ public class BlackBeardCannonBomb : BlackBeardAttackPrefab {
 
     public override void End() {
         mrenderer.material = originalMaterial;
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
+
         base.End();
     }
 
@@ -66,6 +87,7 @@ public class BlackBeardCannonBomb : BlackBeardAttackPrefab {
         while (!pushed) {
             yield return new WaitForSeconds(_info.TimeBetweenWarnings);
             mrenderer.material = _info.WarningMaterial;
+            if (!_info.TickSound.IsNull) RuntimeManager.PlayOneShot(_info.TickSound, transform.position);
             yield return new WaitForSeconds(_info.TimeBetweenWarnings);
             mrenderer.material = originalMaterial;
             yield return new WaitForSeconds(_info.WarningCooldown);
@@ -85,13 +107,27 @@ public class BlackBeardCannonBomb : BlackBeardAttackPrefab {
 
     IEnumerator PushTowardsShip() {
         Transform ship = parent.GetComponent<BlackBeardMachineState>().Ship;
+
+        if (!_info.BombGoingToShipSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.BombGoingToShipSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
+
         while (Vector3.Distance(transform.position, ship.position) > 0.5f) {
             Vector3 dir = (ship.position - transform.position).normalized;
             transform.position += _info.BombSpeed * Time.deltaTime * dir;
             yield return null;
         }
 
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
+
         parent.GetComponent<HealthManager>().DealDamage(_info.BombDamageToShip, true, false);
+
+        if (!_info.BombDamageToShipSound.IsNull) RuntimeManager.PlayOneShot(_info.BombDamageToShipSound, transform.position);
 
         pushed = false;
 
