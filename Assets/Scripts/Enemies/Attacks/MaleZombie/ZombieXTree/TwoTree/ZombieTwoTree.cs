@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "EnemyAttack/ Zombie Two Tree")]
@@ -9,6 +10,7 @@ public class ZombieTwoTree : EnemyAttack
     public float timeBetweenEachBomb;
     public float rainCooldown;
     public float durationOfAttack;
+    public EventReference FallingSound;
 
     [Header("Bomb")]
     public float fallSpeed;
@@ -19,4 +21,5 @@ public class ZombieTwoTree : EnemyAttack
     public float explosionDamage;
     public float explosionDuration;
     public HealthDebuff poisonDebuff;
+    public EventReference ExplosionSound;
 }

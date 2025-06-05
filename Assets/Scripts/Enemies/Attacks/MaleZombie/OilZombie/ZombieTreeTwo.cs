@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "EnemyAttack/ Zombie Tree Two")]
@@ -12,6 +13,8 @@ public class ZombieTreeTwo : EnemyAttack
     public float oilDamageInterval;
     public Material oilNormalMaterial;
     public Material oilBurningMaterial;
+    public EventReference OilSound;
+    public EventReference OilFireSound;
 
     [Header("Punches")]
     public float distanceToPunch;
@@ -23,4 +26,5 @@ public class ZombieTreeTwo : EnemyAttack
     public float timeBetweenPunches;
     public float punchCooldown;
     public float rootationSpeedToPunch;
+    public EventReference PunchSound;
 }
