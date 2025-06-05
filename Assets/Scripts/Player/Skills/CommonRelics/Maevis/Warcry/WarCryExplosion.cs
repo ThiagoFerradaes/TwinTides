@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ public class WarCryExplosion : SkillObjectPrefab {
         transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
+
+        if (!_info.CrySound.IsNull) RuntimeManager.PlayOneShot(_info.CrySound, transform.position);
 
         StartCoroutine(ExplosionDuration());
     }

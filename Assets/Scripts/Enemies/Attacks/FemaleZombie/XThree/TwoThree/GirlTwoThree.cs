@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "EnemyAttack/ Girl Two Three")]
@@ -14,6 +15,7 @@ public class GirlTwoThree : EnemyAttack
     public float highDamagePuddleDuration;
     public float highDamagePuddleSize;
     public Material highDamagePuddleMaterial;
+    public EventReference DamagePuddleSound;
 
     [Header("Slow and Stun Puddle")]
     public float slowPuddleDamage;
@@ -22,6 +24,7 @@ public class GirlTwoThree : EnemyAttack
     public float slowPuddleSize;
     public float slowPuddleStunDuration;
     public Material slowPuddleMaterial;
+    public EventReference SlowPuddleSound;
 
     [Header("No Buffs Puddle")]
     public float blockPuddleDamage;
@@ -29,4 +32,5 @@ public class GirlTwoThree : EnemyAttack
     public float blockPuddleSize;
     public HealthDebuff blockPuddleNoDebuffDebuff;
     public Material blockPuddleMaterial;
+    public EventReference NoBuffPuddleSound;
 }

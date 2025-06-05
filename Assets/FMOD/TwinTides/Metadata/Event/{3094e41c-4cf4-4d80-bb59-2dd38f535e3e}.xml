@@ -5,7 +5,7 @@
 			<value>MaevisEspada</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{9c92ff59-ec41-44b5-9753-f7401ec83b90}</destination>
@@ -96,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{451f7f60-121d-41ef-8aae-ed748048900a}">
 		<relationship name="effects">
 			<destination>{f14ffd58-551d-4086-bbd8-79b6950cc8af}</destination>
+			<destination>{af18eebf-5701-40f3-a537-28ceb19beae3}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{1a08f92a-24ff-4e7b-a754-3a6e327e7d82}" />
@@ -110,6 +111,14 @@
 	</object>
 	<object class="MixerBusFader" id="{4f786956-31a0-4259-a89d-e0ff455d7fbd}" />
 	<object class="MixerBusFader" id="{f14ffd58-551d-4086-bbd8-79b6950cc8af}" />
+	<object class="SpatialiserEffect" id="{af18eebf-5701-40f3-a537-28ceb19beae3}">
+		<property name="maximumDistance">
+			<value>40</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="SingleSound" id="{62bb27a4-94d5-487e-9392-deca6092a193}">
 		<relationship name="audioFile">
 			<destination>{417aab1f-19a6-460f-b55c-42c08d7c2ed2}</destination>

@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -33,6 +34,8 @@ public class TidalWatzImpact : SkillObjectPrefab {
         transform.localScale = _info.impactSize;
 
         gameObject.SetActive(true);
+
+        if (!_info.ImpactSound.IsNull) RuntimeManager.PlayOneShot(_info.ImpactSound, transform.position);
 
         StartCoroutine(Duration());
     }

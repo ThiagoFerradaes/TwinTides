@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ public class ZombieOneOneBetterPunchPrefab : EnemyAttackPrefab {
         transform.SetPositionAndRotation(pos, parent.transform.rotation);
 
         gameObject.SetActive(true);
+
+        if (!_info.BetterPunchSound.IsNull) RuntimeManager.PlayOneShot(_info.BetterPunchSound, transform.position);
 
         StartCoroutine(Duration());
     }

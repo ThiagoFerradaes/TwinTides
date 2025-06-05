@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -24,7 +25,10 @@ public class CrimsonTidePunch : SkillObjectPrefab
         Vector3 direction = _context.PlayerRotation * Vector3.forward;
         Vector3 position = _context.Pos + (direction * _info.PunchAreaOffSett);
         transform.SetPositionAndRotation(position, _context.PlayerRotation);
+
         gameObject.SetActive(true);
+
+        if (!_info.PunchSound.IsNull) RuntimeManager.PlayOneShot(_info.PunchSound, transform.position) ;
 
         StartCoroutine(PunchDuration());
     }

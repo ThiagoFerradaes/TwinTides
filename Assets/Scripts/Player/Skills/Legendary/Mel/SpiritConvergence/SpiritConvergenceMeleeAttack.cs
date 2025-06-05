@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -28,6 +29,8 @@ public class SpiritConvergenceMeleeAttack : SkillObjectPrefab
         transform.SetPositionAndRotation(position, _context.PlayerRotation);
 
         gameObject.SetActive(true);
+
+        if (!_info.MeleeMinionHitSound.IsNull) RuntimeManager.PlayOneShot(_info.MeleeMinionHitSound, transform.position);   
 
         StartCoroutine(Duration());
     }

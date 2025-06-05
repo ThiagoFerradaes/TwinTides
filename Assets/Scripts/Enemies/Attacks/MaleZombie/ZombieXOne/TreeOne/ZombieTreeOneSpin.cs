@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +10,8 @@ public class ZombieTreeOneSpin : EnemyAttackPrefab
     ZombieTreeOne _info;
 
     List<HealthManager> _listOfPlayers = new();
+
+    EventInstance sound;
     public override void StartAttack(int enemyId, int skillId) {
         base.StartAttack(enemyId, skillId);
 
@@ -25,6 +29,12 @@ public class ZombieTreeOneSpin : EnemyAttackPrefab
 
         gameObject.SetActive(true);
 
+        if (!_info.TentacleSpinSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.TentacleSpinSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
+
         StartCoroutine(Duration());
     }
 
@@ -38,6 +48,11 @@ public class ZombieTreeOneSpin : EnemyAttackPrefab
 
     public override void End() {
         _listOfPlayers.Clear();
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
         base.End();
     }
 

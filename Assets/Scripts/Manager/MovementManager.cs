@@ -1,4 +1,6 @@
+using FMODUnity;
 using System.Collections;
+using System.Threading;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -7,6 +9,11 @@ public class MovementManager : NetworkBehaviour {
     [SerializeField] NetworkVariable<float> baseMoveSpeed = new(3);
     NetworkVariable<float> adicionalMoveSpeed = new(1);
     private NetworkVariable<bool> _isStunned = new(false);
+
+    [SerializeField] EventReference stunSound;
+    [SerializeField] float cooldownStunSound;
+    Coroutine stunSoundRooutine;
+    Coroutine stunRoutine;
 
     /// <summary>
     /// Retorna o valor da velocidade base/minima + o valor da velocidade adicional, se o objeto estiver stunado retorna 0
@@ -84,12 +91,23 @@ public class MovementManager : NetworkBehaviour {
     /// </summary>
     public void Stun() {
         if (!IsServer) return;
+
+        stunSoundRooutine ??= StartCoroutine(StunSoundRoutine());
+
         _isStunned.Value = true;
     }
 
     public void UnStun() {
         if (!IsServer) return;
         _isStunned.Value = false;
+    }
+
+    IEnumerator StunSoundRoutine() {
+        if (!stunSound.IsNull) RuntimeManager.PlayOneShot(stunSound, transform.position);
+
+        yield return new WaitForSeconds(cooldownStunSound);
+
+        stunSoundRooutine = null;
     }
 
 
@@ -99,13 +117,20 @@ public class MovementManager : NetworkBehaviour {
     /// <param name="stunDuration"></param>
     public void StunWithTime(float stunDuration) {
         if (!IsServer) return;
-        StartCoroutine(StunWithTimeCoroutine(stunDuration));
+        if(stunRoutine == null) stunRoutine = StartCoroutine(StunWithTimeCoroutine(stunDuration));
+        else {
+            StopCoroutine(stunRoutine);
+            stunRoutine = null;
+            stunRoutine = StartCoroutine(StunWithTimeCoroutine(stunDuration));
+        }
     }
 
     IEnumerator StunWithTimeCoroutine(float stunDuration) {
-        _isStunned.Value = true;
+        Stun();
         yield return new WaitForSeconds(stunDuration);
-        _isStunned.Value = false;
+        UnStun();
+
+        stunRoutine = null;
     }
 
 }
