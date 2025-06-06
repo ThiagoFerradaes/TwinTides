@@ -1,3 +1,4 @@
+using FMODUnity;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ public class TotemManager : MonoBehaviour {
     [SerializeField] Button closeScreenButton;
     [SerializeField] Button equipTabButton, upgradeTabButton;
     [SerializeField] List<float> prices = new();
+    [SerializeField] EventReference totemOpenSound;
 
     [Header("Equip Tab")]
     [SerializeField] GameObject equipScreen;
@@ -92,6 +94,8 @@ public class TotemManager : MonoBehaviour {
         upgradeTabButton.gameObject.SetActive(true);
 
         LocalWhiteBoard.Instance.AnimationOn = true;
+
+        if (!totemOpenSound.IsNull) RuntimeManager.PlayOneShot(totemOpenSound);
     }
 
     void CreateAndVerifyList() {

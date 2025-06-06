@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2828064119436608723}
   - component: {fileID: 5007051620940765402}
   - component: {fileID: 6824068076131848293}
+  - component: {fileID: 5475409883467005655}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -181,6 +182,13 @@ MonoBehaviour:
   - 10
   - 25
   - 100
+  totemOpenSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   equipScreen: {fileID: 2679045387758733723}
   firstRelicRightArrow: {fileID: 60384212201146559}
   firstRelicLeftArrow: {fileID: 6655259517092773932}
@@ -293,6 +301,74 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c3447c671156c6b449aaae39ed62d45c, type: 2}
   - {fileID: 11400000, guid: 823cca1730db25d409e134dcaba4c9e3, type: 2}
   skillsList: []
+--- !u!114 &5475409883467005655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4296963664878829859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dfb20fc639b54f43bc3ab1ab68c81b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  clickSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  hoverSoundTotem:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  clickSoundTotem:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  changeRelicSound:
+    Guid:
+      Data1: 1061541290
+      Data2: 1220698762
+      Data3: -1618937426
+      Data4: -139030179
+    Path: event:/UI/PocoDeOferecimento/TrocarEquipado
+  exitTotemSound:
+    Guid:
+      Data1: -1271926234
+      Data2: 1191303697
+      Data3: -498701159
+      Data4: -318437566
+    Path: event:/UI/PocoDeOferecimento/Exit
+  switchTotemTabSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  upgradeRelicSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1 &7214388736521335965
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,6 +627,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 612895003150621489, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 645482142020780335, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_SizeDelta.x
       value: 137
@@ -639,6 +719,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4376230364778178794, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5308547276087114510, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -666,6 +750,10 @@ PrefabInstance:
     - target: {fileID: 5781216279673864071, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_AnchorMin.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326369562152015267, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7017802933229530986, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_IsActive
@@ -704,14 +792,59 @@ PrefabInstance:
     - {fileID: 8807768172400898466, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
     - {fileID: 8825031438081184036, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4541839232326572205, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1117856412836287828}
+    - targetCorrespondingSourceObject: {fileID: 3100293379072052314, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 168723964164867089}
+    - targetCorrespondingSourceObject: {fileID: 5200355527434797441, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3951082590243552546}
+    - targetCorrespondingSourceObject: {fileID: 7898909940298408303, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4364048371675476465}
+    - targetCorrespondingSourceObject: {fileID: 6352924937084854554, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 494937393483352176}
+    - targetCorrespondingSourceObject: {fileID: 1359135024694983344, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2191302727548442790}
+    - targetCorrespondingSourceObject: {fileID: 84203716243272486, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6552266178360070784}
+    - targetCorrespondingSourceObject: {fileID: 3175060251529988477, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7876629747370912924}
+    - targetCorrespondingSourceObject: {fileID: 3801402078013419760, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9016414246666447118}
+    - targetCorrespondingSourceObject: {fileID: 5830274343798049761, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4883023120928585653}
+    - targetCorrespondingSourceObject: {fileID: 4135675467202899895, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3189744137733514623}
+    - targetCorrespondingSourceObject: {fileID: 2308665914020861836, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5292586158611692200}
+    - targetCorrespondingSourceObject: {fileID: 1426713180535562067, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2375944211440219994}
+    - targetCorrespondingSourceObject: {fileID: 7404980687525999412, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 251718863157047290}
+    - targetCorrespondingSourceObject: {fileID: 4563680013285046315, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5451672852471866404}
   m_SourcePrefab: {fileID: 100100000, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
 --- !u!114 &23104951068776939 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1856760774423378074, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
   m_PrefabInstance: {fileID: 1843836755600712049}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 5296185207341951632}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -722,7 +855,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1826946423870401095, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
   m_PrefabInstance: {fileID: 1843836755600712049}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 9175338158273778245}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -733,7 +866,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1819481584360303054, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
   m_PrefabInstance: {fileID: 1843836755600712049}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8360949746502352926}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -755,7 +888,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2097122145622457004, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
   m_PrefabInstance: {fileID: 1843836755600712049}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 3267314035993366913}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -772,6 +905,106 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &745956889549028898 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1426713180535562067, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+  m_PrefabInstance: {fileID: 1843836755600712049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2375944211440219994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745956889549028898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: ExitTotem
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!1 &813464710016916417 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1359135024694983344, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+  m_PrefabInstance: {fileID: 1843836755600712049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2191302727548442790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813464710016916417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: ChangeRelic
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1082982658768937364 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1626108699245740261, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
@@ -793,6 +1026,56 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 137139705362260360, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
   m_PrefabInstance: {fileID: 1843836755600712049}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1782784539870958167 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 84203716243272486, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+  m_PrefabInstance: {fileID: 1843836755600712049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6552266178360070784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782784539870958167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: ChangeRelic
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1975438113943388352 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 215246705698709937, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
@@ -820,17 +1103,167 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2374031621038706374 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4135675467202899895, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+  m_PrefabInstance: {fileID: 1843836755600712049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3189744137733514623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2374031621038706374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: ChangeRelic
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2679045387758733723 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4376230364778178794, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
   m_PrefabInstance: {fileID: 1843836755600712049}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2779078815163464156 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4541839232326572205, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+  m_PrefabInstance: {fileID: 1843836755600712049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1117856412836287828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2779078815163464156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: ClickSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!1 &2793336814478563674 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4563680013285046315, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+  m_PrefabInstance: {fileID: 1843836755600712049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5451672852471866404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2793336814478563674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: SwitchTotemTab
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &2944098340710081960 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3552519961533793497, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
   m_PrefabInstance: {fileID: 1843836755600712049}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 745956889549028898}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -847,6 +1280,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3267314035993366913 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3801402078013419760, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+  m_PrefabInstance: {fileID: 1843836755600712049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9016414246666447118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3267314035993366913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: ChangeRelic
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &3319386636934334245 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4000968115998811732, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
@@ -869,11 +1352,111 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3643671190003150123 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3100293379072052314, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+  m_PrefabInstance: {fileID: 1843836755600712049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &168723964164867089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3643671190003150123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: ClickSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!224 &3686123662397687324 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3076277620728653677, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
   m_PrefabInstance: {fileID: 1843836755600712049}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3856923755855734796 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3175060251529988477, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+  m_PrefabInstance: {fileID: 1843836755600712049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7876629747370912924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856923755855734796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: ChangeRelic
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!224 &3974463033081732877 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3368339374879129212, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
@@ -884,7 +1467,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3373638699149827921, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
   m_PrefabInstance: {fileID: 1843836755600712049}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2374031621038706374}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -906,12 +1489,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4151360804507596541 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2308665914020861836, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+  m_PrefabInstance: {fileID: 1843836755600712049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5292586158611692200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4151360804507596541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: UpgradeRelic
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &4195050134580461823 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2567421345511776654, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
   m_PrefabInstance: {fileID: 1843836755600712049}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 3856923755855734796}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -922,7 +1555,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2631484014682090859, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
   m_PrefabInstance: {fileID: 1843836755600712049}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 813464710016916417}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -944,12 +1577,112 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6343390286442758323, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
   m_PrefabInstance: {fileID: 1843836755600712049}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4736801992239366251 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6352924937084854554, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+  m_PrefabInstance: {fileID: 1843836755600712049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &494937393483352176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4736801992239366251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: ChangeRelic
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!1 &5296185207341951632 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5830274343798049761, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+  m_PrefabInstance: {fileID: 1843836755600712049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4883023120928585653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5296185207341951632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: ChangeRelic
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &5467986136698922813 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5941566949527946828, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
   m_PrefabInstance: {fileID: 1843836755600712049}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1782784539870958167}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -971,6 +1704,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5890075054957273328 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5200355527434797441, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+  m_PrefabInstance: {fileID: 1843836755600712049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3951082590243552546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5890075054957273328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: ClickSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &6161409007612251114 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5482894070814435995, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
@@ -1009,7 +1792,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5029012836143718749, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
   m_PrefabInstance: {fileID: 1843836755600712049}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 4736801992239366251}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -1020,7 +1803,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8791082322551225027, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
   m_PrefabInstance: {fileID: 1843836755600712049}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2793336814478563674}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -1031,7 +1814,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8826960262049474794, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
   m_PrefabInstance: {fileID: 1843836755600712049}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 4151360804507596541}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -1081,6 +1864,106 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8360949746502352926 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7898909940298408303, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+  m_PrefabInstance: {fileID: 1843836755600712049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4364048371675476465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8360949746502352926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: ChangeRelic
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!1 &9175338158273778245 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7404980687525999412, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+  m_PrefabInstance: {fileID: 1843836755600712049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &251718863157047290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9175338158273778245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: HoverSound
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5475409883467005655}
+          m_TargetAssemblyTypeName: SoundsInGameManager, Assembly-CSharp
+          m_MethodName: SwitchTotemTab
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &9221965098894228116 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7380730904538274789, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
