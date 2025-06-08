@@ -2042,6 +2042,61 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
+--- !u!114 &542767131 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9207764216691653736, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
+  m_PrefabInstance: {fileID: 542767130}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bcbc787bb1231a4a8fa1011f629d3da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &542767132 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2669943665524124858, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
+  m_PrefabInstance: {fileID: 542767130}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bcbc787bb1231a4a8fa1011f629d3da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &542767133 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4971349203019111823, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
+  m_PrefabInstance: {fileID: 542767130}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bcbc787bb1231a4a8fa1011f629d3da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &542767134 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7045626509120840602, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
+  m_PrefabInstance: {fileID: 542767130}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bcbc787bb1231a4a8fa1011f629d3da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &542767135 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2250075773203590566, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
+  m_PrefabInstance: {fileID: 542767130}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bcbc787bb1231a4a8fa1011f629d3da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &600771374
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5266,6 +5321,10 @@ PrefabInstance:
       propertyPath: 'listOfDialogues.Array.data[0]'
       value: 
       objectReference: {fileID: 1250506856}
+    - target: {fileID: 2089184698251057778, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      propertyPath: positionOffSet
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2286058956107053135, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1970041173
@@ -5322,6 +5381,38 @@ PrefabInstance:
       propertyPath: BlackBeardHealthManager
       value: 
       objectReference: {fileID: 1412150414}
+    - target: {fileID: 8228927664607018245, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      propertyPath: transformOffSett.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8228927664607018245, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      propertyPath: transformOffSett.z
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8228927664607018245, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      propertyPath: listOfTotensInGame.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8228927664607018245, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      propertyPath: 'listOfTotensInGame.Array.data[0]'
+      value: 
+      objectReference: {fileID: 542767135}
+    - target: {fileID: 8228927664607018245, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      propertyPath: 'listOfTotensInGame.Array.data[1]'
+      value: 
+      objectReference: {fileID: 542767134}
+    - target: {fileID: 8228927664607018245, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      propertyPath: 'listOfTotensInGame.Array.data[2]'
+      value: 
+      objectReference: {fileID: 542767133}
+    - target: {fileID: 8228927664607018245, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      propertyPath: 'listOfTotensInGame.Array.data[3]'
+      value: 
+      objectReference: {fileID: 542767132}
+    - target: {fileID: 8228927664607018245, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      propertyPath: 'listOfTotensInGame.Array.data[4]'
+      value: 
+      objectReference: {fileID: 542767131}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

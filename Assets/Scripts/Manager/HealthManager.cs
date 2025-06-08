@@ -63,6 +63,7 @@ public class HealthManager : NetworkBehaviour {
     // Eventos
     public event Action<(float maxHealth, float currentHealth, float currentShield, float maxShield)> OnHealthUpdate;
     public event Action OnDeath;
+    public event Action OnRevive;
     public event Action<Buff, int> OnBuffAdded, OnBuffRemoved;
     public event Action<Debuff, int> OnDebuffAdded, OnDebuffRemoved;
     public static event System.EventHandler OnMelHealed;
@@ -210,8 +211,11 @@ public class HealthManager : NetworkBehaviour {
             _currentShieldAmount.Value = 0f;
 
         }
+        GetComponent<MovementManager>().UnStun();
 
         GetComponent<MeshRenderer>().material = originalMaterial;
+
+        OnRevive?.Invoke();
 
     }
 

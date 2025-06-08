@@ -17,7 +17,7 @@ public class DialogueManager : NetworkBehaviour {
     DialogueTrigger currentDialogue;
 
     [Header("Dialogue Components")]
-    [SerializeField] Canvas dialogueCanvas;
+    [SerializeField] GameObject dialogueCanvas;
     [SerializeField] Image characterImage;
     [SerializeField] Image SkipImage;
     [SerializeField] TextMeshProUGUI characterName;

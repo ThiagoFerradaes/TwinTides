@@ -16,6 +16,7 @@ public class ReviveZone : NetworkBehaviour
     public override void OnNetworkSpawn() {
         _parent = transform.parent.GetComponent<HealthManager>();
         _parent.OnDeath += PlayerDeath;
+        _parent.OnRevive += Revived;
 
         gameObject.SetActive(false);
     }
@@ -23,7 +24,13 @@ public class ReviveZone : NetworkBehaviour
     public override void OnDestroy() {
         base.OnDestroy();
         _parent.OnDeath -= PlayerDeath;
+        _parent.OnRevive -= Revived;
     }
+
+    private void Revived() {
+        gameObject.SetActive(false);
+    }
+
     private void PlayerDeath() {
 
         gameObject.SetActive(true);
@@ -86,8 +93,5 @@ public class ReviveZone : NetworkBehaviour
         isRevived = true;
 
         _parent.ReviveHandler(amountOfReviveHealthPercent);
-        _parent.GetComponent<MovementManager>().UnStun();
-
-        gameObject.SetActive(false);
     }
 }

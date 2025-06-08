@@ -9,6 +9,8 @@ public class Totem : MonoBehaviour
             controller.OnInteractInGame += Controller_OnInteractInGame;
             controller.CanInteract = true;
         }
+
+        CheckPointsManager.Instance.RegisterLastTotem(this);
     }
 
     private void OnTriggerExit(Collider other) {
