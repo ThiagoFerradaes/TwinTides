@@ -1,22 +1,31 @@
+using DG.Tweening;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayersDeathManager : NetworkBehaviour
-{
+public class PlayersDeathManager : NetworkBehaviour {
     #region Variables
 
     [SerializeField] Image blackOut;
     [SerializeField] GameObject defeatScreen;
     [SerializeField] TextMeshProUGUI reviveVotedBox;
     [SerializeField] float positionOffSet;
+    [SerializeField] float blackOutTimeToExpand;
+    [SerializeField] float blackOutTimeToContract;
+    [SerializeField] float blackOutDuration;
+    [SerializeField] CinemachineCamera cam;
     List<HealthManager> listOfPlayers = new();
 
     NetworkVariable<int> playersVoted = new();
     NetworkVariable<int> playersDead = new();
 
+    public static event Action OnGameRestart;
+    public static event Action OnDefeat;
     #endregion
 
     #region Initialize
@@ -32,7 +41,7 @@ public class PlayersDeathManager : NetworkBehaviour
     }
 
     void Init() {
-        foreach(var player in SceneManager.ActivePlayers.Values) {
+        foreach (var player in SceneManager.ActivePlayers.Values) {
             HealthManager health = player.GetComponent<HealthManager>();
             health.OnDeath += PlayerDeath;
             health.OnRevive += PlayerRevived;
@@ -74,6 +83,7 @@ public class PlayersDeathManager : NetworkBehaviour
     void DefeatRpc() {
         Time.timeScale = 0;
         defeatScreen.SetActive(true);
+        OnDefeat?.Invoke();
     }
     #endregion
 
@@ -96,16 +106,50 @@ public class PlayersDeathManager : NetworkBehaviour
 
     [Rpc(SendTo.ClientsAndHost)]
     void ReviveRpc() {
+        OnGameRestart?.Invoke();
+        StartCoroutine(ReviveRoutine());
+    }
+
+    IEnumerator ReviveRoutine() {
+        defeatScreen.SetActive(false);
+
+        Tween expandTween = ExpandFromCenter();
+        yield return expandTween.WaitForCompletion();
+
         Vector3 lastCheckPointPosition = CheckPointsManager.Instance.ReturnLastTotemPosition();
 
-        for (int i = 0; i < listOfPlayers.Count; i ++) {
+        for (int i = 0; i < listOfPlayers.Count; i++) {
             listOfPlayers[i].ReviveHandler(100);
             listOfPlayers[i].gameObject.transform.position = lastCheckPointPosition + new Vector3(positionOffSet * i, 0, positionOffSet * i);
             listOfPlayers[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
-        defeatScreen.SetActive(false);
+        cam.OnTargetObjectWarped(cam.Follow, cam.Follow.position);
+
+        yield return new WaitForSecondsRealtime(blackOutDuration);
+
+        Tween contractTween = blackOut.rectTransform.DOSizeDelta(Vector2.zero, blackOutTimeToContract).SetEase(Ease.InCubic).SetUpdate(true);
+
+        yield return contractTween.WaitForCompletion();
+
+        blackOut.gameObject.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+
+    public Tween ExpandFromCenter() {
+        blackOut.rectTransform.sizeDelta = Vector2.zero;
+        blackOut.gameObject.SetActive(true);
+        blackOut.rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+        blackOut.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+        blackOut.rectTransform.pivot = new Vector2(0.5f, 0.5f);
+        blackOut.rectTransform.anchoredPosition = Vector2.zero;
+
+        // Começa pequeno
+        blackOut.rectTransform.sizeDelta = Vector2.zero;
+
+        // Expande para preencher a tela (por exemplo 1920x1080, ou use Screen.width/height)
+        return blackOut.rectTransform.DOSizeDelta(new Vector2(Screen.width, Screen.height), blackOutTimeToExpand).SetEase(Ease.OutCubic).SetUpdate(true);
     }
     #endregion
 }

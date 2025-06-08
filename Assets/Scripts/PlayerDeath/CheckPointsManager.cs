@@ -22,9 +22,13 @@ public class CheckPointsManager : NetworkBehaviour {
     }
 
     public Vector3 ReturnLastTotemPosition() {
-        Vector3 lastTotemPosition;
-        if (lastTotem != null) lastTotemPosition = lastTotem.transform.position + transformOffSett;
-        else lastTotemPosition = new Vector3(0, 10, 0);
-        return lastTotemPosition;
+        Vector3 basePosition = lastTotem != null ? lastTotem.transform.position + transformOffSett : new Vector3(0, 10, 0);
+
+        if (Physics.Raycast(basePosition, Vector3.down, out RaycastHit hitInfo, 20f, LayerMask.GetMask("Floor"))) {
+            float playerHalfHeight = 1f; 
+            return hitInfo.point + Vector3.up * playerHalfHeight;
+        }
+
+        return basePosition;
     }
 }

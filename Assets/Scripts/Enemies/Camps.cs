@@ -134,6 +134,7 @@ public class Camps : NetworkBehaviour {
 
             BehaviourTreeRunner behaviour = enemy.GetComponent<BehaviourTreeRunner>();
             behaviour.RestartBlackBoard();
+            behaviour.RestartBlackBoardCamps();
             behaviour.SetPath(listOfPoints[pointIndexes[i]]);
 
             enemy.SetActive(true);

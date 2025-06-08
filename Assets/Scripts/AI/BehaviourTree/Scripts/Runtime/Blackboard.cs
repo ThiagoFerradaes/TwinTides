@@ -78,9 +78,6 @@ public class Blackboard {
         // Resetar componentes
         Target = null;
 
-        // Resetar listas
-        path?.Clear();
-
         // Resetar condicionais
         IsCloseToPath = true;      // ou false, dependendo do seu default
         IsTargetInRange = false;
@@ -96,5 +93,10 @@ public class Blackboard {
 
         // Resetar cooldowns
         Cooldowns.Clear();
+    }
+
+    public void RestartPaths() {
+        // Resetar listas
+        path?.Clear();
     }
 }
