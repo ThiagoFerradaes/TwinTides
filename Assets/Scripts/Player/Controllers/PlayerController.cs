@@ -91,9 +91,7 @@ public class PlayerController : NetworkBehaviour {
     }
     public void InputMove(InputAction.CallbackContext context) {
 
-        if (!CanDetectInputs()) return;
-
-        if (context.phase == InputActionPhase.Performed && _canWalk) {
+        if (context.phase == InputActionPhase.Performed && _canWalk && CanDetectInputs()) {
             _moveInput = context.ReadValue<Vector2>();
             OnMove?.Invoke();
         }
@@ -224,7 +222,7 @@ public class PlayerController : NetworkBehaviour {
     }
 
     void Moving() {
-        if (_moveInput == (Vector2.zero) || !_canWalk) {
+        if (_moveInput == Vector2.zero || !_canWalk) {
             if (!_inDash) _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);
             return;
         }

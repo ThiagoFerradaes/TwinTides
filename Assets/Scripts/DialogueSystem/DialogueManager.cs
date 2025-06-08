@@ -13,8 +13,8 @@ public class DialogueManager : NetworkBehaviour {
     public static DialogueManager Instance;
 
     [Header("List of dialogues")]
-    [SerializeField] List<DialogueHitBox> listOfDialogues = new();
-    DialogueHitBox currentDialogue;
+    [SerializeField] List<DialogueTrigger> listOfDialogues = new();
+    DialogueTrigger currentDialogue;
 
     [Header("Dialogue Components")]
     [SerializeField] Canvas dialogueCanvas;
@@ -166,7 +166,7 @@ public class DialogueManager : NetworkBehaviour {
 
         amountOfPlayersFinishedWithDialogue.OnValueChanged += ChangeFinishedText;
 
-        DialogueHitBox dialogueHit = IntToDialogue(dialogueId);
+        DialogueTrigger dialogueHit = IntToDialogue(dialogueId);
 
         currentDialogue = dialogueHit;
 
@@ -241,7 +241,7 @@ public class DialogueManager : NetworkBehaviour {
 
         amountOfPlayersFinishedWithDialogue.OnValueChanged -= ChangeFinishedText;
 
-        currentDialogue.gameObject.SetActive(false);
+        if (currentDialogue is DialogueHitBox) currentDialogue.gameObject.SetActive(false);
 
         dialogueCanvas.gameObject.SetActive(false);
 
@@ -253,9 +253,9 @@ public class DialogueManager : NetworkBehaviour {
 
     #region Getters
 
-    public int DialogueToInt(DialogueHitBox dialogue) => listOfDialogues.IndexOf(dialogue);
+    public int DialogueToInt(DialogueTrigger dialogue) => listOfDialogues.IndexOf(dialogue);
 
-    DialogueHitBox IntToDialogue(int dialogueId) => listOfDialogues[dialogueId];
+    DialogueTrigger IntToDialogue(int dialogueId) => listOfDialogues[dialogueId];
 
     #endregion
 }
