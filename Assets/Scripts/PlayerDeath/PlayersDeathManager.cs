@@ -106,7 +106,6 @@ public class PlayersDeathManager : NetworkBehaviour {
 
     [Rpc(SendTo.ClientsAndHost)]
     void ReviveRpc() {
-        OnGameRestart?.Invoke();
         StartCoroutine(ReviveRoutine());
     }
 
@@ -115,6 +114,8 @@ public class PlayersDeathManager : NetworkBehaviour {
 
         Tween expandTween = ExpandFromCenter();
         yield return expandTween.WaitForCompletion();
+
+        OnGameRestart?.Invoke();
 
         Vector3 lastCheckPointPosition = CheckPointsManager.Instance.ReturnLastTotemPosition();
 
