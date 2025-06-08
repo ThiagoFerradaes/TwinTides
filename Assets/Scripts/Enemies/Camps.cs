@@ -122,8 +122,6 @@ public class Camps : NetworkBehaviour {
             currentActiveEnemies.Add(enemy);
             aliveCount++;
 
-            health.ReviveHandler(100);
-
             enemy.transform.position = listOfPoints[pointIndexes[i]].position;
 
             Vector3 directionToCenter = transform.position - enemy.transform.position;

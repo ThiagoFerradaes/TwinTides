@@ -35,6 +35,7 @@ public class BehaviourTreeRunner : MonoBehaviour {
     }
 
     public void RestartBlackBoard() {
+        GetComponent<HealthManager>().ReviveHandler(100);
         context.Blackboard.Restart();
     }
 
