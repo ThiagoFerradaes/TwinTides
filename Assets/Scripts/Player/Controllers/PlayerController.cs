@@ -18,7 +18,6 @@ public class PlayerController : NetworkBehaviour {
     public Vector3 mousePos;
     public Texture2D aimCursorTexture;
     public Texture2D normalCursorTexture;
-    //[HideInInspector] public Transform aimObject;
 
     [Header("Dash")]
     [SerializeField] float dashForce;
@@ -34,7 +33,6 @@ public class PlayerController : NetworkBehaviour {
     bool _inDash = false;
 
     [HideInInspector] public bool isRotatingMouse;
-    [HideInInspector] public bool isAiming;
     [HideInInspector] public bool CanInteract;
     [HideInInspector] public Vector2 _rotationInput;
 
@@ -88,7 +86,7 @@ public class PlayerController : NetworkBehaviour {
         if (LocalWhiteBoard.Instance.AnimationOn) return;
 
         if (context.phase == InputActionPhase.Performed) {
-            if (Time.timeScale == 0 && isAiming) ChangeMouseSprite(true);
+            if (Time.timeScale == 0 && LocalWhiteBoard.Instance.IsAiming) ChangeMouseSprite(true);
             else ChangeMouseSprite(false);
             OnPause?.Invoke();
         }
@@ -112,20 +110,7 @@ public class PlayerController : NetworkBehaviour {
             isRotatingMouse = true;
         }
     }
-    public void InputRotateController(InputAction.CallbackContext context) {
 
-        if (!CanDetectInputs()) return;
-
-        if (context.phase == InputActionPhase.Performed) {
-            isRotatingMouse = false;
-            isAiming = true;
-            _rotationInput = context.ReadValue<Vector2>();
-        }
-        else if (context.phase == InputActionPhase.Canceled) {
-            isAiming = false;
-            _rotationInput = Vector2.zero;
-        }
-    }
     public void InputDash(InputAction.CallbackContext context) {
 
         if (!CanDetectInputs()) return;
@@ -139,14 +124,9 @@ public class PlayerController : NetworkBehaviour {
         if (!CanDetectInputs()) return;
 
         if (context.phase == InputActionPhase.Started) {
-            if (isAiming) {
-                isAiming = false;
-            }
-            else {
-                isAiming = true;
-            }
+            LocalWhiteBoard.Instance.IsAiming = !LocalWhiteBoard.Instance.IsAiming;
 
-            ChangeMouseSprite(isAiming);
+            ChangeMouseSprite(LocalWhiteBoard.Instance.IsAiming);
         }
     }
 
@@ -236,7 +216,7 @@ public class PlayerController : NetworkBehaviour {
     public void Rotate() {
         if (!_canRotate) return;
 
-        if (isAiming) {
+        if (LocalWhiteBoard.Instance.IsAiming) {
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 

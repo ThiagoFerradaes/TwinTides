@@ -82,7 +82,7 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
     public override void ReturnObject() {
         EndBuffs();
         _amountOfBuffs = 0;
-        ReturnObject();
+        base.ReturnObject();
     }
 
     void EndBuffs() {

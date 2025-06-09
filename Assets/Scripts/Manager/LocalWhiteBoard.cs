@@ -12,6 +12,7 @@ public class LocalWhiteBoard : MonoBehaviour {
     public bool IsSinglePlayer;
     public bool AnimationOn;
     bool finalDoorOpened;
+    public bool IsAiming = false;
 
     public CommonRelic PlayerCommonRelicSkillOne;
     public CommonRelic PlayerCommonRelicSkillTwo;

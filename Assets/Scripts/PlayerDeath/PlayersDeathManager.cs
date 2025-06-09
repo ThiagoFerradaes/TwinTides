@@ -126,8 +126,8 @@ public class PlayersDeathManager : NetworkBehaviour {
             listOfPlayers[i].ReviveHandler(100);
             listOfPlayers[i].gameObject.transform.position = lastCheckPointPosition + new Vector3(positionOffSet * i, 0, positionOffSet * i);
             listOfPlayers[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-            listOfPlayers[i].GetComponent<PlayerController>().isAiming = false;
         }
+        LocalWhiteBoard.Instance.IsAiming = false;
 
         cam.OnTargetObjectWarped(cam.Follow, cam.Follow.position);
 

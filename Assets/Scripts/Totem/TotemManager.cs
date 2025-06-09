@@ -37,6 +37,8 @@ public class TotemManager : MonoBehaviour {
     List<LegendaryRelic> listOfLegendaryRelics = new();
     int firstCommonIndex, secondCommonIndex, legendaryIndex, updateIndex;
 
+    PlayerController _player;
+
     #region Initialize
     private void Awake() {
         if (Instance == null) {
@@ -80,7 +82,10 @@ public class TotemManager : MonoBehaviour {
         buyButton.onClick.AddListener(BuyButton);
     }
 
-    public void TurnTotemScreenOn() {
+    public void TurnTotemScreenOn(GameObject player) {
+        this._player = player.GetComponent<PlayerController>();
+
+        if (LocalWhiteBoard.Instance.IsAiming) _player.ChangeMouseSprite(false);
 
         CreateAndVerifyList();
 
@@ -216,6 +221,7 @@ public class TotemManager : MonoBehaviour {
     }
 
     public void TurnTotemScreenOff() {
+        if (LocalWhiteBoard.Instance.IsAiming) _player.ChangeMouseSprite(true);
         totemScreen.SetActive(false);
         LocalWhiteBoard.Instance.AnimationOn = false;
     }
