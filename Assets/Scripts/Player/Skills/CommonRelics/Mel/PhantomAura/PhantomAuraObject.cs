@@ -108,11 +108,11 @@ public class PhantomAuraObject : SkillObjectPrefab {
 
         yield return new WaitForSeconds(duration);
 
-        End();
+        ReturnObject();
     }
 
 
-    void End() {
+    public override void ReturnObject() {
         _listOfEnemies.Clear();
 
         if (sound.isValid()) {
@@ -120,6 +120,6 @@ public class PhantomAuraObject : SkillObjectPrefab {
             sound.release();
         }
 
-        ReturnObject();
+        base.ReturnObject();
     }
 }

@@ -47,7 +47,7 @@ public class AreaWardStoneObject : SkillObjectPrefab {
         float duration = _level < 4 ? _info.AreaDuration : _info.AreaDurationLevel4;
         yield return new WaitForSeconds(duration);
 
-        End();
+        ReturnObject();
     }
 
     IEnumerator HealingTimer() {
@@ -84,13 +84,13 @@ public class AreaWardStoneObject : SkillObjectPrefab {
         return;
     }
 
-    void End() {
+    public override void ReturnObject() {
         _listOfPlayers.Clear();
 
         if (sound.isValid()) {
             sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             sound.release();
         }
-        ReturnObject();
+        base.ReturnObject();
     }
 }

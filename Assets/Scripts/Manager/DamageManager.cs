@@ -16,6 +16,7 @@ public class DamageManager : NetworkBehaviour {
         return (1 + baseAttack.Value) * skillDamage;
     }
 
+
     /// <summary>
     /// Multiplica o valor do ataque base. ELe normalmente é 1, e pode ir até 2
     /// </summary>
@@ -108,6 +109,26 @@ public class DamageManager : NetworkBehaviour {
         attackSpeed.Value /= damageMultipiler;
         yield return new WaitForSeconds(duration);
         attackSpeed.Value *= damageMultipiler;
+    }
+
+    #endregion
+
+    #region Reset
+
+    private void Start() {
+        if (IsServer) PlayersDeathManager.OnGameRestart += ResetStats;
+    }
+    public void ResetStats() {
+        if (!IsServer) return;
+
+        StopAllCoroutines();
+        baseAttack.Value = 0f;
+        attackSpeed.Value = 1f;
+       
+    }
+
+    public override void OnDestroy() {
+        if (IsServer) PlayersDeathManager.OnGameRestart -= ResetStats;
     }
 
     #endregion

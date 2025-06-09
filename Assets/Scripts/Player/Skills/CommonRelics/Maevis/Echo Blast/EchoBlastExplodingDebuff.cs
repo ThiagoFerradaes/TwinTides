@@ -61,14 +61,14 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
     }
 
     private void OnDeath() {
-        End();
+        ReturnObject();
     }
 
     IEnumerator DebuffDuration() {
         StartCoroutine(Explode());
         yield return new WaitForSeconds(_info.ExplodingDebuffDuration);
 
-        End();
+        ReturnObject();
     }
     IEnumerator WaitToStartExploding() {
         yield return new WaitForSeconds(_info.ExplodingDebuffDelay);
@@ -105,7 +105,7 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
         _canSetUpExplosion = true;
     }
 
-    void End() {
+    public override void ReturnObject() {
         StopAllCoroutines();
 
         EchoBlastStunExplosion.OnExploded -= OnExplosionTriggered;
@@ -121,7 +121,7 @@ public class EchoBlastExplodingDebuff : SkillObjectPrefab {
 
         _isPositioned = false;
 
-        ReturnObject();
+        base.ReturnObject();
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

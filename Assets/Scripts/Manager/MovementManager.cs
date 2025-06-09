@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class MovementManager : NetworkBehaviour {
 
-    [SerializeField] NetworkVariable<float> baseMoveSpeed = new(3);
+    [SerializeField] float moveSpeed = 3;
+    NetworkVariable<float> baseMoveSpeed = new(0);
     NetworkVariable<float> adicionalMoveSpeed = new(1);
     private NetworkVariable<bool> _isStunned = new(false);
 
@@ -15,6 +16,31 @@ public class MovementManager : NetworkBehaviour {
     Coroutine stunSoundRooutine;
     Coroutine stunRoutine;
 
+
+    private void Start() {
+        if (IsServer) {
+            baseMoveSpeed.Value = moveSpeed;
+            PlayersDeathManager.OnGameRestart += Reset;
+        }
+    }
+
+    private void Reset() {
+        if (!IsServer) return;
+
+        // Parar todas as corrotinas relacionadas
+        StopAllCoroutines();
+        stunRoutine = null;
+        stunSoundRooutine = null;
+
+        // Resetar variáveis
+        baseMoveSpeed.Value = moveSpeed;
+        adicionalMoveSpeed.Value = 1f;
+        _isStunned.Value = false;
+    }
+
+    public override void OnDestroy() {
+        if (IsServer) PlayersDeathManager.OnGameRestart -= Reset;
+    }
     /// <summary>
     /// Retorna o valor da velocidade base/minima + o valor da velocidade adicional, se o objeto estiver stunado retorna 0
     /// </summary>

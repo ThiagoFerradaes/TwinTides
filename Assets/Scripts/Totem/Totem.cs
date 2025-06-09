@@ -23,6 +23,6 @@ public class Totem : MonoBehaviour
     }
 
     private void Controller_OnInteractInGame(object sender, System.EventArgs e) {
-        TotemManager.Instance.TurnTotemScreenOn();
+        if (sender is MonoBehaviour mono) TotemManager.Instance.TurnTotemScreenOn(mono.gameObject);
     }
 }
