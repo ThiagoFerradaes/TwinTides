@@ -53,13 +53,13 @@ public class FallenMelBannerObject : SkillObjectPrefab {
 
         yield return new WaitForSeconds(duration);
 
-        End();
+        ReturnObject();
     }
 
-    private void End() {
+    public override void ReturnObject() {
         EndBuffs();
         _amountOfBuffs = 0;
-        ReturnObject();
+        base.ReturnObject();
     }
     void EndBuffs() {
 

@@ -73,14 +73,14 @@ public class TidalWatzObject : SkillObjectPrefab {
             yield return new WaitForSeconds(_info.ImpactDuration);
         }
 
-        End();
+        ReturnObject();
     }
 
-    void End() {
+    public override void ReturnObject() {
         acumulativeDamage = 0;
         _skillManager.BlockSkillsRpc(false);
         _skillManager.BlockNormalAttackRpc(false);
         _pController.BlockRotate(true);
-        ReturnObject();
+        base.ReturnObject();
     }
 }

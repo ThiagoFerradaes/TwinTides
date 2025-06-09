@@ -63,7 +63,7 @@ public class EtherealShadeObject : SkillObjectPrefab
 
         yield return new WaitForSeconds(_info.ExplosionDuration);
 
-        End();
+        ReturnObject();
     }
 
     IEnumerator HealAndGrow() {
@@ -141,7 +141,7 @@ public class EtherealShadeObject : SkillObjectPrefab
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
         return;
     }
-    void End() {
+    public override void ReturnObject() {
 
         _healingEffect.SetActive(false);
         _damageEffect.SetActive(false);
@@ -149,6 +149,6 @@ public class EtherealShadeObject : SkillObjectPrefab
         _amountOfGrowths = 0;
         _playersList.Clear();
         _enemiesList.Clear();
-        ReturnObject();
+        base.ReturnObject();
     }
 }

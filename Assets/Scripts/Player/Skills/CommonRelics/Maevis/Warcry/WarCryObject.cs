@@ -51,7 +51,7 @@ public class WarCryObject : SkillObjectPrefab {
 
         yield return new WaitForSeconds(duration);
 
-        End();
+        ReturnObject();
     }
 
     void ApplyBuffs() {
@@ -86,8 +86,8 @@ public class WarCryObject : SkillObjectPrefab {
 
     }
 
-    private void End() {
+    public override void ReturnObject() {
         RemoveBuffs();
-        ReturnObject();
+        base.ReturnObject();
     }
 }

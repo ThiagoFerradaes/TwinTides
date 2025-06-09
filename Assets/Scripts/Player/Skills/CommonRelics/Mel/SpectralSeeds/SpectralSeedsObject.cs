@@ -110,7 +110,7 @@ public class SpectralSeedsObject : SkillObjectPrefab {
             Explode();
         }
 
-        End();
+        ReturnObject();
     }
 
     private void Explode() {
@@ -121,7 +121,7 @@ public class SpectralSeedsObject : SkillObjectPrefab {
         PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, newContext, _level, 2);
     }
 
-    public void End() {
+    public override void ReturnObject() {
 
         MelNormalAttackObject.OnNormalAttack -= MelNormalAttackObject_OnNormalAttack;
 
@@ -129,7 +129,7 @@ public class SpectralSeedsObject : SkillObjectPrefab {
 
         _active = false;
 
-        ReturnObject();
+        base.ReturnObject();
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

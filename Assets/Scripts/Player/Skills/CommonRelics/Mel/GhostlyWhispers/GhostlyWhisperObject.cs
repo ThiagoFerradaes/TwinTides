@@ -34,7 +34,7 @@ public class GhostlyWhisperObject : SkillObjectPrefab {
         InstantiatePuddle();
 
         if (_level > 1) StartCoroutine(Duration());
-        else End();
+        else ReturnObject();
     }
 
     void InstantiatePuddle() {
@@ -95,15 +95,15 @@ public class GhostlyWhisperObject : SkillObjectPrefab {
             yield return null;
         }
 
-        End();
+        ReturnObject();
     }
 
-    void End() {
+    public override void ReturnObject() {
         amountOfPuddles = 0;
         if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter) {
             _mel.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
         }
-        ReturnObject();
+        base.ReturnObject();
     }
 
     public override void AddStack() {

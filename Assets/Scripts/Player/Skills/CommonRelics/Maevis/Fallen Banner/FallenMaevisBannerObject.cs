@@ -62,7 +62,7 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
 
         durationCoroutine = null;
 
-        End();
+        ReturnObject();
     }
 
     void AddBuffs() {
@@ -79,7 +79,7 @@ public class FallenMaevisBannerObject : SkillObjectPrefab {
         durationCoroutine = StartCoroutine(BannerDuration());
     }
 
-    void End() {
+    public override void ReturnObject() {
         EndBuffs();
         _amountOfBuffs = 0;
         ReturnObject();

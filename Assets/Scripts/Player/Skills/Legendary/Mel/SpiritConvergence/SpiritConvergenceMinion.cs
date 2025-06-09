@@ -48,7 +48,7 @@ public class SpiritConvergenceMinion : SkillObjectPrefab {
             yield return null;
         }
 
-        End();
+        ReturnObject();
     }
 
     void SearchEnemy() {
@@ -159,13 +159,13 @@ public class SpiritConvergenceMinion : SkillObjectPrefab {
         SearchEnemy();
 
     }
-    void End() {
+    public override void ReturnObject() {
 
         StopAllCoroutines();
 
         _followMelCoroutine = null; _followEnemyCoroutine = null; _target = null;
 
-        ReturnObject();
+        base.ReturnObject();
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
