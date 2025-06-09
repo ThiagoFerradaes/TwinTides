@@ -48,7 +48,6 @@ public class PlayerController : NetworkBehaviour {
     public static event Action OnStop;
     public static event Action OnPause;
     public event Action<SkillType, float> OnDashCooldown;
-    public event System.EventHandler OnAim;
     public event System.EventHandler OnInteractInGame;
     public static event System.EventHandler OnInteractOutGame;
 
@@ -89,6 +88,8 @@ public class PlayerController : NetworkBehaviour {
         if (LocalWhiteBoard.Instance.AnimationOn) return;
 
         if (context.phase == InputActionPhase.Performed) {
+            if (Time.timeScale == 0 && isAiming) ChangeMouseSprite(true);
+            else ChangeMouseSprite(false);
             OnPause?.Invoke();
         }
     }
@@ -140,12 +141,12 @@ public class PlayerController : NetworkBehaviour {
         if (context.phase == InputActionPhase.Started) {
             if (isAiming) {
                 isAiming = false;
-                Cursor.SetCursor(normalCursorTexture, Vector2.zero, CursorMode.Auto);
             }
             else {
                 isAiming = true;
-                Cursor.SetCursor(aimCursorTexture, Vector2.zero, CursorMode.Auto);
             }
+
+            ChangeMouseSprite(isAiming);
         }
     }
 
@@ -258,6 +259,13 @@ public class PlayerController : NetworkBehaviour {
         }
     }
 
+    #endregion
+
+    #region Aim
+    public void ChangeMouseSprite(bool isAim) {
+        if (isAim) Cursor.SetCursor(aimCursorTexture, Vector2.zero, CursorMode.Auto);
+        else Cursor.SetCursor(normalCursorTexture, Vector2.zero, CursorMode.Auto);
+    }
     #endregion
 
     #region Setters

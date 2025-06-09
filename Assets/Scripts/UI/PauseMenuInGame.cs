@@ -21,6 +21,7 @@ public class PauseMenuInGame : NetworkBehaviour {
     [SerializeField] GameObject loadingScreen, leavePopUp;
     [SerializeField] Button leaveButton, noButtonPopUpLeave;
 
+
     readonly NetworkVariable<bool> _isPaused = new(false);
     #endregion
 
