@@ -33,14 +33,14 @@ public class FallenBannerManager : SkillObjectPrefab {
 
             skillPos.y = GetFloorHeight(_context.Pos);
 
-            Transform aim = _maevis.GetComponent<PlayerController>().aimObject;
+            PlayerController controller = _maevis.GetComponent<PlayerController>();
             Vector3 direction = _context.PlayerRotation * Vector3.forward;
             Vector3 position = _context.Pos + (direction * _info.MaxRange);
 
-            if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_maevis.transform.position, aim.position) <= _info.MaxRange) {
-                Debug.Log("Aim on");
-                skillPos.x = aim.position.x;
-                skillPos.z = aim.position.z;
+            if (controller != null && controller.isAiming && Vector3.Distance(controller.mousePos, _maevis.transform.position) < _info.MaxRange) {
+
+                skillPos.x = controller.mousePos.x;
+                skillPos.z = controller.mousePos.z;
             }
             else {
                 skillPos.x = position.x;

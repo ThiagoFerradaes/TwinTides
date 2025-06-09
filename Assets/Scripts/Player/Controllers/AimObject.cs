@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class AimObject : MonoBehaviour {
@@ -11,7 +12,7 @@ public class AimObject : MonoBehaviour {
 
     private void PlayerSetUp_OnPlayerSpawned(GameObject obj) {
         _father = obj.GetComponent<PlayerController>();
-        _father.aimObject = this.gameObject.transform;
+        //_father.aimObject = this.gameObject.transform;
         _father.OnAim += AimObject_OnAim;
         gameObject.SetActive(false);
     }
@@ -37,8 +38,9 @@ public class AimObject : MonoBehaviour {
 
                 if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _father.FloorLayer)) {
                     Vector3 pos = new(hit.point.x, hit.point.y + 0.5f, hit.point.z);
-                    transform.position = pos;
+                    transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * 15f);
                 }
+
             }
             else {
                 Vector3 controlDirection = new Vector3(_father._rotationInput.x, 0, _father._rotationInput.y).normalized;

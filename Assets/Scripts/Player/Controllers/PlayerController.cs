@@ -15,7 +15,10 @@ public class PlayerController : NetworkBehaviour {
 
     [Header("Aim")]
     public LayerMask FloorLayer;
-    [HideInInspector] public Transform aimObject;
+    public Vector3 mousePos;
+    public Texture2D aimCursorTexture;
+    public Texture2D normalCursorTexture;
+    //[HideInInspector] public Transform aimObject;
 
     [Header("Dash")]
     [SerializeField] float dashForce;
@@ -116,10 +119,6 @@ public class PlayerController : NetworkBehaviour {
             isRotatingMouse = false;
             isAiming = true;
             _rotationInput = context.ReadValue<Vector2>();
-
-            if (!aimObject.gameObject.activeSelf && aimObject != null) {
-                StartAimMode();
-            }
         }
         else if (context.phase == InputActionPhase.Canceled) {
             isAiming = false;
@@ -141,11 +140,11 @@ public class PlayerController : NetworkBehaviour {
         if (context.phase == InputActionPhase.Started) {
             if (isAiming) {
                 isAiming = false;
-                StopAimMode();
+                Cursor.SetCursor(normalCursorTexture, Vector2.zero, CursorMode.Auto);
             }
             else {
-                StartAimMode();
                 isAiming = true;
+                Cursor.SetCursor(aimCursorTexture, Vector2.zero, CursorMode.Auto);
             }
         }
     }
@@ -236,13 +235,19 @@ public class PlayerController : NetworkBehaviour {
     public void Rotate() {
         if (!_canRotate) return;
 
-        if (aimObject != null && aimObject.gameObject.activeInHierarchy) {
-            Vector3 objectPosition = new(aimObject.position.x, transform.position.y, aimObject.position.z);
-            Vector3 aimDirection = (objectPosition - transform.position);
+        if (isAiming) {
 
-            if (aimDirection.sqrMagnitude > 0.01f) {
-                Quaternion direction = Quaternion.LookRotation(aimDirection);
-                transform.rotation = Quaternion.Slerp(transform.rotation, direction, Time.deltaTime * rotationSpeed);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray , out RaycastHit hit, Mathf.Infinity, FloorLayer)){
+
+                mousePos = new(hit.point.x, transform.position.y, hit.point.z);
+                Vector3 aimDirection = (mousePos - transform.position);
+
+                if (aimDirection.sqrMagnitude > 0.01f) {
+                    Quaternion direction = Quaternion.LookRotation(aimDirection);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, direction, Time.deltaTime * rotationSpeed);
+                }
             }
         }
         else {
@@ -253,18 +258,6 @@ public class PlayerController : NetworkBehaviour {
         }
     }
 
-    #endregion
-
-    #region Aim
-    public void StartAimMode() {
-        if (aimObject == null) return;
-        aimObject.gameObject.SetActive(true);
-        OnAim?.Invoke(this, EventArgs.Empty);
-    }
-    public void StopAimMode() {
-        if (aimObject == null) return;
-        aimObject.gameObject.SetActive(false);
-    }
     #endregion
 
     #region Setters

@@ -440,7 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3169238957
+  GlobalObjectIdHash: 1302872352
   InScenePlacedSourceGlobalObjectIdHash: 1302872352
   DeferredDespawnTick: 0
   Ownership: 1
@@ -555,7 +555,9 @@ MonoBehaviour:
   FloorLayer:
     serializedVersion: 2
     m_Bits: 8
-  aimObject: {fileID: 0}
+  mousePos: {x: 0, y: 0, z: 0}
+  aimCursorTexture: {fileID: 2800000, guid: a27ffa6376efffc44b06fc41a651983d, type: 3}
+  normalCursorTexture: {fileID: 2800000, guid: e975d750d6b9a4f4b818d03d6a607fb2, type: 3}
   dashForce: 20
   dashDuration: 0.25
   dashCooldown: 1
