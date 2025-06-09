@@ -60,7 +60,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Golpe Chao
+  m_Name: Ataque3
   m_Speed: 1.3
   m_CycleOffset: 0
   m_Transitions: []
@@ -87,8 +87,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 4
-    m_ConditionEvent: LifeCount
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsDead
     m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2424751363529583472}
@@ -174,7 +174,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.8214286
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -211,7 +211,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Espada1
+  m_Name: Ataque1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -651,7 +651,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 8591035336298643804}
-    m_Position: {x: 970, y: -130, z: 0}
+    m_Position: {x: 960, y: -130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4236846732422725488}
     m_Position: {x: 570, y: -150, z: 0}
@@ -696,7 +696,7 @@ AnimatorStateMachine:
     m_Position: {x: 280, y: 140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2820758906795803146}
-    m_Position: {x: 170, y: -130, z: 0}
+    m_Position: {x: 170, y: -120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2747786483569786951}
     m_Position: {x: -300, y: -150, z: 0}
@@ -732,10 +732,10 @@ AnimatorStateMachine:
     m_Position: {x: 780, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6765531661088985490}
-    m_Position: {x: 770, y: -150, z: 0}
+    m_Position: {x: 780, y: -200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8702808402033057910}
-    m_Position: {x: 770, y: -230, z: 0}
+    m_Position: {x: 780, y: -280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7342001107209309206}
     m_Position: {x: -300, y: -250, z: 0}
@@ -747,10 +747,10 @@ AnimatorStateMachine:
     m_Position: {x: -300, y: -300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9030350382386167684}
-    m_Position: {x: 770, y: -300, z: 0}
+    m_Position: {x: 780, y: -350, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1997827581553834690}
-    m_Position: {x: 170, y: -60, z: 0}
+    m_Position: {x: 170, y: -40, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 6174951897430118232}
@@ -832,10 +832,10 @@ AnimatorController:
   m_Name: AC_Maevis
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: LifeCount
-    m_Type: 3
+  - m_Name: IsDead
+    m_Type: 9
     m_DefaultFloat: 0
-    m_DefaultInt: 100
+    m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: IsWalking
@@ -858,12 +858,6 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - m_Name: AttackCount
     m_Type: 3
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: TriggerCombo
-    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -1302,7 +1296,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: LifeCount
+    m_ConditionEvent: AttackCount
     m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8702808402033057910}
@@ -1579,7 +1573,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Espada2
+  m_Name: Ataque2
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
