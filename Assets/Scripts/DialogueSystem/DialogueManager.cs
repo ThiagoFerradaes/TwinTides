@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -24,6 +25,7 @@ public class DialogueManager : NetworkBehaviour {
     [SerializeField] TextMeshProUGUI dialogueBox;
     [SerializeField] TextMeshProUGUI skipBox;
     [SerializeField] TextMeshProUGUI finishedBox;
+    bool isSkippingTyping = false;
 
     [Header("Sprites")]
     [SerializeField] Sprite melSprite;
@@ -42,6 +44,7 @@ public class DialogueManager : NetworkBehaviour {
     bool isHoldingSkip = false;
     bool hasVoted = false;
     Coroutine skipCoroutine;
+    Coroutine detectInputCoroutine;
 
     [Header("Sounds")]
     [SerializeField] EventReference melSoundPerLetter;
@@ -183,7 +186,7 @@ public class DialogueManager : NetworkBehaviour {
     }
 
     IEnumerator DialogueRoutine(DialogueSO dialogue) {
-        bool isSkippingTyping = false;
+        isSkippingTyping = false;
 
         while (amountOfPlayersFinishedWithDialogue.Value < NetworkManager.Singleton.ConnectedClientsList.Count) {
             for (int i = 0; i < dialogue.ListOfDialogues.Count; i++) {
@@ -210,9 +213,15 @@ public class DialogueManager : NetworkBehaviour {
 
                 characterName.text = dialogue.ListOfDialogues[i].Character.ToString(); // trocando o nome do personagem
 
+                yield return null;
+
+                detectInputCoroutine ??= StartCoroutine(DetectMouseInput());
+
                 for (int j = 0; j < dialogue.ListOfDialogues[i].Text.Length; j++) {
                     if (isSkippingTyping) { // Caso o jogador pule a digitação do texto
                         dialogueBox.text = dialogue.ListOfDialogues[i].Text;
+                        isSkippingTyping = false;
+                        yield return null;
                         break;
                     }
 
@@ -221,12 +230,27 @@ public class DialogueManager : NetworkBehaviour {
                     yield return new WaitForSecondsRealtime(timeBetweenEachLetter);
                 }
 
-                yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-
+                if (detectInputCoroutine != null) StopCoroutine(detectInputCoroutine);
+                detectInputCoroutine = null;
                 isSkippingTyping = false;
+
+                yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+                
+
             }
 
             PlayerFinishedDialogueRpc(); // Avisando o servidor que um player terminou o dialogo
+        }
+    }
+
+    IEnumerator DetectMouseInput() {
+        while (!isSkippingTyping) {
+            if (Input.GetMouseButtonDown(0)) {
+                isSkippingTyping = true;
+                yield break;
+            }
+
+            yield return null;
         }
     }
 
