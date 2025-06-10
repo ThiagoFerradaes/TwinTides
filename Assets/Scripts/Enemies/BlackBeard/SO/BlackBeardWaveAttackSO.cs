@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "BlackBeardAttack/ Jump Attack")]
@@ -10,6 +11,8 @@ public class BlackBeardWaveAttackSO : BlackBeardSO
     public float WaveDamage;
     public float WaveMaxRadius;
     public float WaveInitialRadius;
+    public EventReference WaveInstantiateSound;
+    public EventReference WaveExpansionSound;
 
     [Header("Attack Under 50%")]
     public int AmountOfWavesStronger;

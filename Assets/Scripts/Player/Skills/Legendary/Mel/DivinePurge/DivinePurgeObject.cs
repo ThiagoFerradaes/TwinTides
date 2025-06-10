@@ -61,10 +61,10 @@ public class DivinePurgeObject : SkillObjectPrefab
 
         yield return new WaitForSeconds(_info.Duration);
 
-        End();
+        ReturnObject();
     }
 
-    void End() {
+    public override void ReturnObject() {
         _mManager.AllowMovement();
 
         _maevisHealth = null;
@@ -75,7 +75,7 @@ public class DivinePurgeObject : SkillObjectPrefab
             sound.release();
         }
 
-        ReturnObject();
+        base.ReturnObject();
     }
 
     private void OnTriggerEnter(Collider other) {

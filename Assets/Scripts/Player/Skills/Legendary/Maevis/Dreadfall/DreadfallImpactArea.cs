@@ -60,12 +60,7 @@ public class DreadfallImpactArea : SkillObjectPrefab {
     IEnumerator Duration() {
         yield return new WaitForSeconds(_info.FieldDuration);
 
-        if (!_info.BurningAreaSound.IsNull) {
-            soundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            soundInstance.release();
-        }
-
-        End();
+        ReturnObject();
     }
 
     IEnumerator DamageCooldown() {
@@ -96,9 +91,16 @@ public class DreadfallImpactArea : SkillObjectPrefab {
         if (_listOfEnemies.Contains(health)) _listOfEnemies.Remove(health);
     }
 
-    void End() {
+    public override void ReturnObject() {
+
+        if (!_info.BurningAreaSound.IsNull) {
+            soundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            soundInstance.release();
+        }
+
         _listOfEnemies.Clear();
-        ReturnObject();
+
+        base.ReturnObject();
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

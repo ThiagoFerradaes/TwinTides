@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "BlackBeardAttack/ Bullet Rain")]
@@ -13,11 +14,13 @@ public class BlackBeardBulletRainSO : BlackBeardSO
     public float AttackTime;
     public float AttackRadius;
     public float AttackRadiusStronger;
+    public EventReference BulletFallingSound;
 
     [Header("Explosion")]
     public float ExplosionDamage;
     public float ExplosionRadius;
     public float ExplosionDuration;
+    public EventReference PrimaryExplosionSound;
 
     [Header("Field")]
     public float FieldDamage;
@@ -25,6 +28,7 @@ public class BlackBeardBulletRainSO : BlackBeardSO
     public float FieldDuration;
     public HealthDebuff BurningDebuff;
     public Vector2 FieldSize;
+    public EventReference FieldSound;
 
     [Header("Secondary Bullet")]
     public int AmountOfSecondaryBullets;
@@ -34,4 +38,6 @@ public class BlackBeardBulletRainSO : BlackBeardSO
     public float SecondaryBulletJumpPower;
     public float SecondaryBulletJumpDuration;
     public float SecondaryBulletSizeMultiplier;
+    public EventReference BounceSound;
+    public EventReference SecondaryExplosionSound;
 }

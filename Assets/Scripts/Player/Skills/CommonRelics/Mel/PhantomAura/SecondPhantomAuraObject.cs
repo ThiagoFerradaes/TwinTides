@@ -103,10 +103,10 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
 
         yield return new WaitForSeconds(duration);
 
-        End();
+        ReturnObject();
     }
 
-    void End() {
+    public override void ReturnObject() {
         _listOfEnemies.Clear();
         transform.SetParent(null);
 
@@ -115,7 +115,7 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
             sound.release();
         }
 
-        ReturnObject();
+        base.ReturnObject();
     }
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
         return;

@@ -95,7 +95,7 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
 
         yield return null;
 
-        End();
+        ReturnObject();
     }
 
     IEnumerator CooldownBetweenAttacks() {
@@ -109,10 +109,10 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
             yield return null;
         }
 
-        End();
+        ReturnObject();
     }
 
-    void End() {
+    public override void ReturnObject() {
         _currentAttackCombo = 1;
 
         _canAttackAgain = true;
@@ -125,7 +125,7 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
             _maevis.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, cooldown);
         }
 
-        ReturnObject();
+        base.ReturnObject();
     }
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
         return;

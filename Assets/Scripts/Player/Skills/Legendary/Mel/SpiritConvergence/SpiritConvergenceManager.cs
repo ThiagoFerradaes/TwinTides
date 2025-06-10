@@ -54,7 +54,7 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
             yield return null;
         }
 
-        End();
+        ReturnObject();
     }
 
     IEnumerator InstantiateMeleeMinion() {
@@ -105,13 +105,13 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
         }
     }
 
-    void End() {
+    public override void ReturnObject() {
         _canInstantiateRangedMinion = true;
 
         HealthManager.OnMelHealed -= OnMelHealed;
 
         _timesExtended = 0;
 
-        ReturnObject();
+        base.ReturnObject();
     }
 }

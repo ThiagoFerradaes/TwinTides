@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections.Generic;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
@@ -13,6 +14,10 @@ public class BlackBeardRunawaySO : BlackBeardSO
     public float AmountOfHealthRecoveredPerEnemy;
     public float JumpPower;
     public float JumpDuration;
+    public EventReference JumpSound;
+    public EventReference RunningSound;
+    public EventReference StunSound;
+    public EventReference JumpBackToShipSound;
 
     [Header("Enemies")]
     public List<GroupOfEnemies> ListOfGroups;

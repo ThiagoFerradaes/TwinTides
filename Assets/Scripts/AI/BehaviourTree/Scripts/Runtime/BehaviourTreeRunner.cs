@@ -18,7 +18,12 @@ public class BehaviourTreeRunner : MonoBehaviour {
         context = CreateBehaviourTreeContext();
         tree.Bind(context);
     }
-
+    private void Start() {
+        PlayersDeathManager.OnGameRestart += RestartBlackBoard;
+    }
+    private void OnDestroy() {
+        PlayersDeathManager.OnGameRestart -= RestartBlackBoard;
+    }
     void Update() {
         if (tree) {
             tree.Update();
@@ -30,7 +35,12 @@ public class BehaviourTreeRunner : MonoBehaviour {
     }
 
     public void RestartBlackBoard() {
+        GetComponent<HealthManager>().ReviveHandler(100);
         context.Blackboard.Restart();
+    }
+
+    public void RestartBlackBoardCamps() {
+        context.Blackboard.RestartPaths();
     }
 
     public void SetPath(Transform originPoint) {

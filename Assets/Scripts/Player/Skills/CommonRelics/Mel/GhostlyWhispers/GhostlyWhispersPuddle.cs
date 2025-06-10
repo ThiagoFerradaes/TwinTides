@@ -86,7 +86,7 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
             yield return new WaitForSeconds(_info.AreaDurationLevel4);
         }
 
-        End();
+        ReturnObject();
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -160,7 +160,7 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
         if (listOfEnemies.Contains(health)) listOfEnemies.Remove(health);
     }
 
-    void End() {
+    public override void ReturnObject() {
         ActiveSkills.Clear();
 
         _areaLevel = 0;
@@ -174,7 +174,7 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
             sound.release();
         }
 
-        ReturnObject();
+        base.ReturnObject();
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
