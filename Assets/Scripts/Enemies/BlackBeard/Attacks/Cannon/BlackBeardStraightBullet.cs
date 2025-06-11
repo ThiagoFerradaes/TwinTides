@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -23,6 +24,8 @@ public class BlackBeardStraightBullet : BlackBeardAttackPrefab {
         transform.SetPositionAndRotation(pos, canon.rotation);
 
         gameObject.SetActive(true);
+
+        if (!_info.ShootStraightSound.IsNull) RuntimeManager.PlayOneShot(_info.ShootStraightSound, transform.position);
 
         StartCoroutine(Duration());
     }

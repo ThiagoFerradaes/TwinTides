@@ -33,17 +33,7 @@ public class AudioManager : MonoBehaviour {
     #endregion
 
     #region Métodos
-    private void OnEnable() {
-        configurationScreen.GetComponent<ConfigurationScreen>().OnEnabled += ResetScreens;
-    }
-    private void OnDisable() {
-        configurationScreen.GetComponent<ConfigurationScreen>().OnEnabled -= ResetScreens;
-    }
-    void ResetScreens() {
-        foreach (var item in configurationScreens) {
-            item.SetActive(false);
-        }
-    }
+
     private void Start() {
         GetBus();
         SetSliders();

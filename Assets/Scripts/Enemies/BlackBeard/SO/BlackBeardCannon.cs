@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu (menuName = "BlackBeardAttack/ Cannon Attack")]
@@ -20,6 +21,9 @@ public class BlackBeardCannon : BlackBeardSO
     public float DistanceBetweenEachShootUpBullet;
     public float ShootUpBulletWarningDuration;
     public float ShootUpBulletWarningSize;
+    public EventReference ShootUpSound;
+    public EventReference ShootUpFallingSound;
+    public EventReference WarningSound;
 
     [Header("Shoot Straight")]
     public float AmountOfStraightBulletsAttacks;
@@ -36,6 +40,7 @@ public class BlackBeardCannon : BlackBeardSO
     public float StraightBulletSize;
     public float CannonMovementSpeed;
     public float CannonMovementRange;
+    public EventReference ShootStraightSound;
 
     [Header("Shoot Bomb")]
     public float AmountOfBombs;
@@ -55,4 +60,10 @@ public class BlackBeardCannon : BlackBeardSO
     public float TimeBetweenWarnings;
     public float WarningCooldown;
     public Material WarningMaterial;
+    public EventReference TickSound;
+    public EventReference ExplosionSound;
+    public EventReference BombFalingSound;
+    public EventReference BombGoingToShipSound;
+    public EventReference BombDamageToShipSound;
+    public EventReference BombShootUpSound;
 }

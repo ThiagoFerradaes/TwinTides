@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +9,8 @@ public class GirlXTwoHealingArea : EnemyAttackPrefab
 {
     GirlXTwo _info;
     HashSet<HealthManager> _listOfEnemies = new();
+
+    EventInstance sound;
     public override void StartAttack(int enemyId, int skillId) {
         base.StartAttack(enemyId, skillId);
 
@@ -23,6 +27,12 @@ public class GirlXTwoHealingArea : EnemyAttackPrefab
         transform.localScale = _info.healingSize * Vector3.one;
 
         gameObject.SetActive(true);
+
+        if (!_info.HealingAreaSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.HealingAreaSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
 
         StartCoroutine(Duration());
     }
@@ -70,6 +80,11 @@ public class GirlXTwoHealingArea : EnemyAttackPrefab
         parentContext.Blackboard.IsAttacking = false;
         parentContext.Blackboard.CanAttack = false;
         parentContext.Blackboard.Cooldowns[_info.ListOfAttacksNames[0]] = _info.cooldown;
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
 
         base.End();
     }

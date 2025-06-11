@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ public class ZombieTreeOnePunch : EnemyAttackPrefab
         transform.SetPositionAndRotation(pos, parent.transform.rotation);
 
         gameObject.SetActive(true);
+
+        if (!_info.NormalPunchSound.IsNull) RuntimeManager.PlayOneShot(_info.NormalPunchSound, transform.position);
 
         StartCoroutine(Duration());
     }

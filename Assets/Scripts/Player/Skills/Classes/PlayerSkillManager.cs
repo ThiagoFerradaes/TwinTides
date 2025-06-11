@@ -39,6 +39,14 @@ public class PlayerSkillManager : NetworkBehaviour {
         };
 
         _mManager = GetComponent<MovementManager>();
+
+        PlayersDeathManager.OnGameRestart += RestartAllCooldowns;
+    }
+
+    private void RestartAllCooldowns() {
+        for (int i = 0; i < _dictionaryOfCooldowns.Count; i++) {
+            ResetCooldown(i);
+        }
     }
 
     #region Inputs

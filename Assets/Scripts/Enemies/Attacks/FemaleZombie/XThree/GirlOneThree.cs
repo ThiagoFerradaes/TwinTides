@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "EnemyAttack/ Girl One Three")]
@@ -14,4 +15,5 @@ public class GirlOneThree : EnemyAttack
     public float timeBetweenDamages;
     public float puddleOffSett;
     public float cooldown;
+    public EventReference PuddleSound;
 }

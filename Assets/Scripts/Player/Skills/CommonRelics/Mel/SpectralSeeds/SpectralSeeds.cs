@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu (menuName = "CommonRelic/SpectralSeeds")]
@@ -18,6 +19,7 @@ public class SpectralSeeds : CommonRelic
     public float ExplosionRadius;
     public float ExplosionDuration;
     public float Damage;
+    public EventReference ExplosionSound;
 
     [Header("Spectral Seeds Level 2")]
     public int AmountOfSeedsLevel2;

@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ public class GirlXOneStrongerBullet : EnemyAttackPrefab {
         transform.SetPositionAndRotation(pos, parent.transform.rotation);
 
         gameObject.SetActive(true);
+
+        if (!_info.StrongerShootSound.IsNull) RuntimeManager.PlayOneShot(_info.StrongerShootSound, transform.position);
 
         StartCoroutine(Duration());
     }

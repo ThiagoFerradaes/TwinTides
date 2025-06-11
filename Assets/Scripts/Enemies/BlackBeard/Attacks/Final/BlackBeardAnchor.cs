@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -7,6 +9,8 @@ public class BlackBeardAnchor : BlackBeardAttackPrefab {
     Vector3 _direction;
     HealthManager health;
     bool isStronger;
+
+    EventInstance sound;
     public override void StartAttack(int enemyId, int skillId, Vector3 position) {
         base.StartAttack(enemyId, skillId);
 
@@ -31,6 +35,12 @@ public class BlackBeardAnchor : BlackBeardAttackPrefab {
 
         gameObject.SetActive(true);
 
+        if (!_info.AnchorMovementDownSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.AnchorMovementDownSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
+
         StartCoroutine(Duration());
     }
 
@@ -47,10 +57,28 @@ public class BlackBeardAnchor : BlackBeardAttackPrefab {
             yield return null;
         }
 
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
+
         if (isStronger) {
             transform.SetParent(parent.transform);
             EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 1, parent, transform.position);
+
+            if (_info.AnchorSpinningSound.IsNull) {
+                sound = RuntimeManager.CreateInstance(_info.AnchorSpinningSound);
+                RuntimeManager.AttachInstanceToGameObject(sound, parent);
+                sound.start();
+            }
+
             yield return new WaitForSeconds(_info.RotationDuration);
+
+            if (sound.isValid()) {
+                sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                sound.release();
+            }
+
             transform.SetParent(null);
         }
         else {
@@ -70,6 +98,16 @@ public class BlackBeardAnchor : BlackBeardAttackPrefab {
         End();
     }
 
+    public override void End() {
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
+
+        base.End();
+    }
+
     private void OnTriggerEnter(Collider other) {
         if (!other.CompareTag("Maevis") && !other.CompareTag("Mel")) return;
 
@@ -80,5 +118,7 @@ public class BlackBeardAnchor : BlackBeardAttackPrefab {
         if (!other.TryGetComponent<MovementManager>(out MovementManager move)) return;
 
         move.StunWithTime(_info.AnchorStunTime);
+
+        if (_info.AnchorHitSound.IsNull) RuntimeManager.PlayOneShot(_info.AnchorHitSound, transform.position);
     }
 }

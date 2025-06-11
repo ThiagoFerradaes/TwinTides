@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
+using FMODUnity;
 
 public class DreadfallManager : SkillObjectPrefab {
     Dreadfall _info;
@@ -29,19 +30,24 @@ public class DreadfallManager : SkillObjectPrefab {
         gameObject.SetActive(true);
 
         StartCoroutine(JumpCoroutine());
+
+        if (!_info.JumpSound.IsNull) RuntimeManager.PlayOneShot(_info.JumpSound, _maevis.transform.position);
     }
 
     IEnumerator JumpCoroutine() {
 
-        Transform aim = _maevis.GetComponent<PlayerController>().aimObject;
+        PlayerController controller = _maevis.GetComponent<PlayerController>();
         Vector3 targetPosition;
 
-        if (aim != null && aim.gameObject.activeInHierarchy) {
-            if (Vector3.Distance(_maevis.transform.position, aim.position) < _info.JumpMaxRange) targetPosition = aim.position;
+        if (controller != null && controller.gameObject.activeInHierarchy) {
+            if (Vector3.Distance(_maevis.transform.position, controller.mousePos) < _info.JumpMaxRange) targetPosition = controller.mousePos;
             else targetPosition = _maevis.transform.position + _maevis.transform.forward * _info.JumpMaxRange;
         }
         else targetPosition = _maevis.transform.position + _maevis.transform.forward * _info.JumpMaxRange;
 
+        targetPosition.y = GetFloorHeight(targetPosition) + 1f;
+
+        Debug.Log(targetPosition);
 
         _maevis.transform.DOJump(targetPosition, _info.JumpSpeed, 1, _info.JumpDuration);
 
@@ -52,6 +58,12 @@ public class DreadfallManager : SkillObjectPrefab {
         Explode();
 
         End();
+    }
+
+    float GetFloorHeight(Vector3 position) {
+        Ray ray = new(position + Vector3.up * 5f, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f, LayerMask.GetMask("Floor"))) return hit.point.y + 0.1f;
+        return position.y;
     }
 
     private void RecieveShield() {

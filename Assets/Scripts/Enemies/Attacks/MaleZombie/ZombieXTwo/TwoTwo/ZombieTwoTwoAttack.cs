@@ -1,9 +1,13 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
 public class ZombieTwoTwoAttack : EnemyAttackPrefab {
     ZombieTwoTwo _info;
     bool playerColision;
+
+    EventInstance sound;
 
     public override void StartAttack(int enemyId, int skillId) {
         base.StartAttack(enemyId, skillId);
@@ -33,6 +37,12 @@ public class ZombieTwoTwoAttack : EnemyAttackPrefab {
 
         float timer = 0;
 
+        if (!_info.DashSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.DashSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, parent);
+            sound.start();
+        }
+
         while (timer < dashDuration && !playerColision) {
             parent.transform.position += (_info.dashSpeed * Time.deltaTime * direction);
             timer += Time.deltaTime;
@@ -54,6 +64,8 @@ public class ZombieTwoTwoAttack : EnemyAttackPrefab {
         if (!other.TryGetComponent<MovementManager>(out MovementManager movement)) return;
 
         movement.StunWithTime(_info.stunTime);
+
+        if (!_info.AttackSound.IsNull) RuntimeManager.PlayOneShot(_info.AttackSound, transform.position);
     }
 
     void AttackEnd() {
@@ -66,5 +78,15 @@ public class ZombieTwoTwoAttack : EnemyAttackPrefab {
         parentContext.Blackboard.Cooldowns[_info.ListOfAttacksNames[0]] = _info.attackCooldown;
 
         End();
+    }
+
+    public override void End() {
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
+
+        base.End();
     }
 }

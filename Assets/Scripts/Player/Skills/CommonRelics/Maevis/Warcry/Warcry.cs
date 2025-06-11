@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "CommonRelic/WarCry")]
@@ -7,6 +8,7 @@ public class Warcry : CommonRelic {
     [Range(0, 100)] public float PercentAttackSpeed;
     public float ExplosionRadius;
     public float ExplosionDuration;
+    public EventReference CrySound;
 
     [Header("Warcry Level 2")]
     [Range(0, 200)] public float PercentAttackSpeedLevel2;

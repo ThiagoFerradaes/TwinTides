@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +12,8 @@ public class BlackBeardBullets : BlackBeardAttackPrefab
 
     HealthManager health;
     bool isStronger;
+
+    EventInstance sound;
 
     public override void StartAttack(int enemyId, int skillId, Vector3 position) {
         base.StartAttack(enemyId, skillId);
@@ -31,6 +35,12 @@ public class BlackBeardBullets : BlackBeardAttackPrefab
 
         gameObject.SetActive(true);
 
+        if (!_info.BulletsSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.BulletsSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, parent);
+            sound.start();
+        }
+
         StartCoroutine(Duration());
     }
 
@@ -46,6 +56,12 @@ public class BlackBeardBullets : BlackBeardAttackPrefab
     }
     public override void End() {
         _listOfPlayers.Clear();
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
+
         base.End();
     }
 
