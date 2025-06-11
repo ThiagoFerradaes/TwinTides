@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Mel Normal Attack
   UiSprite: {fileID: 0}
+  NameSpriteTotem: {fileID: 0}
   MinLevel: 1
   MaxLevel: 1
   Cooldown: 0.8
@@ -27,3 +28,10 @@ MonoBehaviour:
   SphereSpeed: 20
   SphereDistance: 12
   SphereDamage: 2
+  AttackSound:
+    Guid:
+      Data1: 2131183395
+      Data2: 1207923498
+      Data3: 1034895546
+      Data4: -463058489
+    Path: event:/Mel/AtaqueBasico

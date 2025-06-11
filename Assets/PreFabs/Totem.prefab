@@ -4970,27 +4970,22 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3057194824697141932, guid: 0dff60e361f087b40904d1aaf5c2cd6c, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0dff60e361f087b40904d1aaf5c2cd6c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8317866417903279670}
+      addedObject: {fileID: 5556036787648079585}
   m_SourcePrefab: {fileID: 100100000, guid: 0dff60e361f087b40904d1aaf5c2cd6c, type: 3}
---- !u!4 &2130107180738227905 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0dff60e361f087b40904d1aaf5c2cd6c, type: 3}
-  m_PrefabInstance: {fileID: 1874922740886292778}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3488115093049709446 stripped
+--- !u!1 &1640569881295942779 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 3057194824697141932, guid: 0dff60e361f087b40904d1aaf5c2cd6c, type: 3}
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0dff60e361f087b40904d1aaf5c2cd6c, type: 3}
   m_PrefabInstance: {fileID: 1874922740886292778}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &8317866417903279670
-MeshCollider:
+--- !u!136 &5556036787648079585
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3488115093049709446}
+  m_GameObject: {fileID: 1640569881295942779}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -5002,10 +4997,16 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 8012563891942627399, guid: 0dff60e361f087b40904d1aaf5c2cd6c, type: 3}
+  serializedVersion: 2
+  m_Radius: 10
+  m_Height: 100
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &2130107180738227905 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0dff60e361f087b40904d1aaf5c2cd6c, type: 3}
+  m_PrefabInstance: {fileID: 1874922740886292778}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4035495080040369493
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -30,13 +30,12 @@ public class PhantomAuraObject : SkillObjectPrefab {
 
     void DefineSizeAndParent() {
 
-        transform.localScale = _level < 4 ? _info.AuraSize : _info.AuraSizeLevel4;
-
         transform.SetParent(_mel.transform);
 
-        transform.SetLocalPositionAndRotation(Vector3.zero, _context.PlayerRotation);
+        transform.SetLocalPositionAndRotation(new Vector3(0, _info.PhantomAuraHeight, 0), Quaternion.Euler(0,0,0));
 
         gameObject.SetActive(true);
+        transform.localScale = _level < 4 ? _info.AuraSize : _info.AuraSizeLevel4;
 
         if (_level < 4) {
             if (!_info.AuraSound.IsNull) {
@@ -53,10 +52,11 @@ public class PhantomAuraObject : SkillObjectPrefab {
             }
         }
 
-            StartCoroutine(DamageTimer());
+        StartCoroutine(DamageTimer());
 
         StartCoroutine(Duration());
     }
+
 
     private void OnTriggerEnter(Collider other) {
 
