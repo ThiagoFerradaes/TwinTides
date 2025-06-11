@@ -25,7 +25,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-8923091851433797371
 MonoBehaviour:
@@ -52,7 +52,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-8693271596084353276
 MonoBehaviour:
@@ -79,7 +79,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-8488048235275472190
 MonoBehaviour:
@@ -133,7 +133,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-8161124285223327073
 MonoBehaviour:
@@ -147,13 +147,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/SFX.bank
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+  Path: Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638816347218920197
+  FileSizes: []
+=======
   Path: Assets/FMOD/TwinTides/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638852556515536886
+  lastModified: 638851517888062823
   FileSizes:
   - Name: Desktop
-    Value: 7604096
+    Value: 7604064
+>>>>>>> main
   Exists: 1
 --- !u!114 &-8072193126665044990
 MonoBehaviour:
@@ -167,6 +175,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/InimigoMelee/MeleeTomandoDano
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+  Path: Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 638816347218991688
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-5819652958376990923
+=======
   Path: event:/InimigoMelee/MeleeTomandoDano
   Guid:
     Data1: 1546890301
@@ -180,9 +197,10 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-8066194365741355226
+>>>>>>> main
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,6 +212,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/InimigoMelee/MeleeAtaque
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+  Path: Desktop/SFXs.bank
+  Name: SFXs
+  StudioPath: bank:/SFXs
+  lastModified: 638816347218999129
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-5143049347302004422
+=======
   Path: event:/InimigoMelee/MeleeAtaque
   Guid:
     Data1: -735897583
@@ -207,7 +234,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-7742101911322499481
 MonoBehaviour:
@@ -315,9 +342,10 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-7063816962255387914
+>>>>>>> main
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -332,10 +360,15 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Dialogue.bank
   Name: Dialogue
   StudioPath: bank:/Dialogue
-  lastModified: 638842016237025522
+<<<<<<< HEAD
+  lastModified: 638816347218873279
+  FileSizes: []
+=======
+  lastModified: 638845370058030830
   FileSizes:
   - Name: Desktop
     Value: 506
+>>>>>>> main
   Exists: 1
 --- !u!114 &-6981693847234676342
 MonoBehaviour:
@@ -389,7 +422,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-6235137153016358604
 MonoBehaviour:
@@ -416,7 +449,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-6223017423901345587
 MonoBehaviour:
@@ -470,7 +503,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-5623917826788224507
 MonoBehaviour:
@@ -497,7 +530,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-5603623505756103860
 MonoBehaviour:
@@ -514,7 +547,7 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Ambience.bank
   Name: Ambience
   StudioPath: bank:/Ambience
-  lastModified: 638844833083765759
+  lastModified: 638845370058030830
   FileSizes:
   - Name: Desktop
     Value: 506
@@ -571,7 +604,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-5313034276408024171
 MonoBehaviour:
@@ -625,7 +658,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-4467639422301923500
 MonoBehaviour:
@@ -669,7 +702,7 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638850018519398226
+  lastModified: 638850535886572410
   FileSizes:
   - Name: Desktop
     Value: 5662
@@ -723,10 +756,10 @@ MonoBehaviour:
   - {fileID: -8161124285223327073}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-3791989457783289002
 MonoBehaviour:
@@ -878,7 +911,7 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638848344095483725
+  lastModified: 638850535886561691
   FileSizes:
   - Name: Desktop
     Value: 1670
@@ -908,7 +941,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-3244296211165191175
 MonoBehaviour:
@@ -1043,7 +1076,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-2276382452250134370
 MonoBehaviour:
@@ -1097,7 +1130,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-1512630116210368011
 MonoBehaviour:
@@ -1202,10 +1235,10 @@ MonoBehaviour:
   - {fileID: -8161124285223327073}
   IsStream: 1
   Is3D: 1
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-628850819644672345
 MonoBehaviour:
@@ -1286,7 +1319,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &-304462062572513686
 MonoBehaviour:
@@ -1367,7 +1400,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -1481,9 +1514,15 @@ MonoBehaviour:
   MasterBanks:
   - {fileID: -3445118457318115062}
   StringsBanks:
+<<<<<<< HEAD
+  - {fileID: 7033191541010539315}
+  cacheTime: 638816347218999129
+  cacheVersion: 131621
+--- !u!114 &5662518714925561941
+=======
   - {fileID: -4047870932218031448}
   cacheVersion: 131847
-  cacheTime: 638852556515536886
+  cacheTime: 638851517888062823
   SerializableEventsDict:
   - key: event:/InimigoMelee/MeleeGemendo
     index: 0
@@ -1686,7 +1725,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &730164949706839595
 MonoBehaviour:
@@ -1713,7 +1752,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &733875815983240473
 MonoBehaviour:
@@ -1767,7 +1806,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &874582534559779321
 MonoBehaviour:
@@ -1821,9 +1860,10 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &1365137884315589294
+>>>>>>> main
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1835,10 +1875,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Musics.bank
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+  Path: Desktop/Ambience.bank
+  Name: Ambience
+  StudioPath: bank:/Ambience
+  lastModified: 638816347218854469
+  FileSizes: []
+  Exists: 1
+--- !u!114 &7033191541010539315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638816347218930603
+=======
   Path: Assets/FMOD/TwinTides/Build/Desktop/Musics.bank
   Name: Musics
   StudioPath: bank:/Musics
-  lastModified: 638852480455711154
+  lastModified: 638851441273331889
+>>>>>>> main
   FileSizes:
   - Name: Desktop
     Value: 1391680
@@ -1868,7 +1933,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &1653207753856793482
 MonoBehaviour:
@@ -1922,7 +1987,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &2224948459143773472
 MonoBehaviour:
@@ -1976,7 +2041,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &2383433226395904760
 MonoBehaviour:
@@ -2003,7 +2068,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &3097092541524078766
 MonoBehaviour:
@@ -2030,7 +2095,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &3332192597231463299
 MonoBehaviour:
@@ -2057,7 +2122,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &3446368256495712016
 MonoBehaviour:
@@ -2084,7 +2149,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &3702406785317834432
 MonoBehaviour:
@@ -2111,7 +2176,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &3785479899030557545
 MonoBehaviour:
@@ -2138,7 +2203,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &3993342595395990691
 MonoBehaviour:
@@ -2219,7 +2284,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &4346972299591126284
 MonoBehaviour:
@@ -2273,7 +2338,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &4973900988888002601
 MonoBehaviour:
@@ -2327,7 +2392,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &5255175907887183898
 MonoBehaviour:
@@ -2489,7 +2554,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &7753556423944640575
 MonoBehaviour:
@@ -2540,10 +2605,10 @@ MonoBehaviour:
   - {fileID: -8161124285223327073}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &7928037744480917015
 MonoBehaviour:
@@ -2570,7 +2635,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &8051129622409099704
 MonoBehaviour:
@@ -2705,7 +2770,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 20
   Length: 0
 --- !u!114 &8734582616290904938
 MonoBehaviour:
