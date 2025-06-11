@@ -19,19 +19,18 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
 
         if (_maevis == null) _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
 
-        DefineSizeAndParent();
+        if (_maevis != null) DefineSizeAndParent();
+        else ReturnObject();
     }
 
     void DefineSizeAndParent() {
-        transform.localScale = _level < 4 ? _info.AuraSize : _info.AuraSizeLevel4;
-
 
         transform.SetParent(_maevis.transform);
 
-        transform.SetLocalPositionAndRotation(Vector3.zero, _maevis.transform.rotation);
-
+        transform.SetLocalPositionAndRotation(new Vector3(0, _info.PhantomAuraHeight, 0), Quaternion.Euler(0, 0, 0));
 
         gameObject.SetActive(true);
+        transform.localScale = _level < 4 ? _info.AuraSize : _info.AuraSizeLevel4;
 
         if (_level < 4) {
             if (!_info.AuraSound.IsNull) {

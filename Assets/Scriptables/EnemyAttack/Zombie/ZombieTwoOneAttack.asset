@@ -33,6 +33,13 @@ MonoBehaviour:
   damageOfPunch: 1
   durationOfPunch: 0.15
   placementOfPunch: 2
+  NormalPunchSound:
+    Guid:
+      Data1: 49803093
+      Data2: 1226823249
+      Data3: -518459718
+      Data4: 572283286
+    Path: event:/InimigoMelee/MeleePunch
   damageOfFinalAttackPartOne: 1
   durationOfFinalAttackPartOne: 0.15
   placementOfFinalAttackPartOne: 2
@@ -40,3 +47,17 @@ MonoBehaviour:
   durationOfFinalAttackPartTwo: 0.2
   placementOfFinalAttackPartTwo: 2
   stunTimeFinalAttackTwo: 2
+  FinalPunchOneSound:
+    Guid:
+      Data1: 938021918
+      Data2: 1303896770
+      Data3: -1707898728
+      Data4: -436791012
+    Path: event:/InimigoMelee/MeleeSocoMaisForte
+  FinalPunchTwoSound:
+    Guid:
+      Data1: -1090157754
+      Data2: 1258563277
+      Data3: 1487367315
+      Data4: 783882963
+    Path: event:/InimigoMelee/MeleeStunPunch

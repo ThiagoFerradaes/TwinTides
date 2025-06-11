@@ -59,7 +59,11 @@
 			<destination>{6afd8936-1fe8-46db-a81a-8c9a8b805138}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{c1491f7e-bbe3-486c-a4e5-2e7096652ac1}" />
+	<object class="EventAutomatableProperties" id="{c1491f7e-bbe3-486c-a4e5-2e7096652ac1}">
+		<property name="maximumDistance">
+			<value>45</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{9138cc9d-6779-4118-9f25-40f03757c6b7}" />
 	<object class="Timeline" id="{2f8ccced-9d1a-4580-9f2d-25a4e155e5ef}">
 		<property name="isProxyEnabled">
@@ -114,9 +118,6 @@
 	<object class="SpatialiserEffect" id="{b6e24cc6-fc0d-472a-a56a-1406c1bbeaa0}">
 		<property name="maximumDistance">
 			<value>40</value>
-		</property>
-		<property name="overrideRange">
-			<value>true</value>
 		</property>
 	</object>
 	<object class="SingleSound" id="{f76d9683-a61d-45eb-90a7-0d7e4a535020}">

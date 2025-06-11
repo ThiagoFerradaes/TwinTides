@@ -47,6 +47,16 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
+        DefineSound();
+
+        StartCoroutine(AreaDuration());
+    }
+
+    void DefineSound() {
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
         switch (_areaLevel) {
             case 1:
                 if (!_info.NormalPuddleSound.IsNull) {
@@ -70,8 +80,6 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
                 }
                 break;
         }
-
-        StartCoroutine(AreaDuration());
     }
 
     IEnumerator AreaDuration() {
@@ -116,6 +124,7 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
             _areaLevel = 2;
         }
         DefineMaterial();
+        DefineSound();
     }
 
     void DefineMaterial() {
