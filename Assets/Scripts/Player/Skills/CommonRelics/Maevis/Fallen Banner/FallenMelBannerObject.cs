@@ -19,14 +19,19 @@ public class FallenMelBannerObject : SkillObjectPrefab {
         _context = context;
 
         if (_mel == null) {
-            _mel = PlayerSkillPooling.Instance.MelGameObject;
-            _damageManager = _mel.GetComponent<DamageManager>();
+            if (PlayerSkillPooling.Instance.MelGameObject != null) {
+                _mel = PlayerSkillPooling.Instance.MelGameObject;
+                _damageManager = _mel.GetComponent<DamageManager>();
+            }
+            else ReturnObject();
+
         }
 
+        if (_mel != null) {
+            FallenMaevisBannerObject.OnStacked += FallenMaevisBannerObject_OnStacked;
 
-        FallenMaevisBannerObject.OnStacked += FallenMaevisBannerObject_OnStacked;
-
-        InvocateBanner();
+            InvocateBanner();
+        }
 
     }
 
@@ -53,15 +58,20 @@ public class FallenMelBannerObject : SkillObjectPrefab {
 
         yield return new WaitForSeconds(duration);
 
-        End();
-    }
-
-    private void End() {
-        EndBuffs();
-        _amountOfBuffs = 0;
         ReturnObject();
     }
+
+    public override void ReturnObject() {
+        EndBuffs();
+
+        FallenMaevisBannerObject.OnStacked -= FallenMaevisBannerObject_OnStacked;
+
+        _amountOfBuffs = 0;
+
+        base.ReturnObject();
+    }
     void EndBuffs() {
+        if (_mel == null) return;
 
         for (int i = 0; i < _amountOfBuffs; i++) {
             _damageManager.DecreaseBaseAttack(_info.BaseAttackIncreaseLevel2);

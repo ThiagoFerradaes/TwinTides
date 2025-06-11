@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ public class BlackBeardShootUpBulletWarning : BlackBeardAttackPrefab {
         transform.localScale = new Vector3(_info.ShootUpBulletWarningSize, 0.35f, _info.ShootUpBulletWarningSize);
 
         gameObject.SetActive(true);
+
+        if (!_info.WarningSound.IsNull) RuntimeManager.PlayOneShot(_info.WarningSound, transform.position);
 
         StartCoroutine(Duration());
     }

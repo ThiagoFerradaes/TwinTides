@@ -32,13 +32,14 @@ public class EtherealShadeManager : SkillObjectPrefab
 
         skillPos.y = GetFloorHeight(_context.Pos);
 
-        Transform aim = _mel.GetComponent<PlayerController>().aimObject;
+        PlayerController controller = _mel.GetComponent<PlayerController>();
         Vector3 direction = _context.PlayerRotation * Vector3.forward;
         Vector3 position = _context.Pos + (direction * _info.MaxRangeToPlace);
 
-        if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_mel.transform.position, aim.position) <= _info.MaxRangeToPlace) {
-            skillPos.x = aim.position.x;
-            skillPos.z = aim.position.z;
+        if (LocalWhiteBoard.Instance.IsAiming && Vector3.Distance(controller.mousePos, _mel.transform.position) < _info.MaxRangeToPlace) {
+
+            skillPos.x = controller.mousePos.x;
+            skillPos.z = controller.mousePos.z;
         }
         else {
             skillPos.x = position.x;

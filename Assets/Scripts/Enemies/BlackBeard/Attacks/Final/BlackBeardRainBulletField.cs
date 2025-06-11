@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +7,8 @@ using UnityEngine;
 public class BlackBeardRainBulletField : BlackBeardAttackPrefab {
     BlackBeardBulletRainSO _info;
     HashSet<HealthManager> _listOfPlayers = new();
+
+    EventInstance sound;
     public override void StartAttack(int enemyId, int skillId, Vector3 position) {
         base.StartAttack(enemyId, skillId);
 
@@ -21,6 +25,12 @@ public class BlackBeardRainBulletField : BlackBeardAttackPrefab {
         transform.localScale = new Vector3(_info.FieldSize.x, _info.FieldSize.y, _info.FieldSize.x);
 
         gameObject.SetActive(true);
+
+        if (!_info.FieldSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.FieldSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
 
         StartCoroutine(Duration());
     }
@@ -41,6 +51,12 @@ public class BlackBeardRainBulletField : BlackBeardAttackPrefab {
 
     public override void End() {
         _listOfPlayers.Clear();
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
+
         base.End();
     }
     IEnumerator DamageRoutine() {

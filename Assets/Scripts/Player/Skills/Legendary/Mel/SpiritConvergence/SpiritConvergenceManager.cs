@@ -54,7 +54,7 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
             yield return null;
         }
 
-        End();
+        ReturnObject();
     }
 
     IEnumerator InstantiateMeleeMinion() {
@@ -95,23 +95,24 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
     }
 
     void InstantiateRangedMinion() {
-
+        Debug.Log("Ranged Minion Funcion Called");
         if (!_info.InvocationSound.IsNull) RuntimeManager.PlayOneShot(_info.InvocationSound, transform.position);
 
-        if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Mel) {
+        if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Mel) {
+            Debug.Log("Ranged Minion Instance");
             int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
             SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
             PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 2);
         }
     }
 
-    void End() {
+    public override void ReturnObject() {
         _canInstantiateRangedMinion = true;
 
         HealthManager.OnMelHealed -= OnMelHealed;
 
         _timesExtended = 0;
 
-        ReturnObject();
+        base.ReturnObject();
     }
 }

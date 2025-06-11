@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6528789054855577687}
   - component: {fileID: 3608099845411181977}
   - component: {fileID: 5922057501139914561}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: ReviveTimer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 3578425438809875130}
   - component: {fileID: 124657473349359597}
   - component: {fileID: 4085222169878975605}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -440,7 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1302872352
+  GlobalObjectIdHash: 1136335845
   InScenePlacedSourceGlobalObjectIdHash: 1302872352
   DeferredDespawnTick: 0
   Ownership: 1
@@ -555,7 +555,9 @@ MonoBehaviour:
   FloorLayer:
     serializedVersion: 2
     m_Bits: 8
-  aimObject: {fileID: 0}
+  mousePos: {x: 0, y: 0, z: 0}
+  aimCursorTexture: {fileID: 2800000, guid: a27ffa6376efffc44b06fc41a651983d, type: 3}
+  normalCursorTexture: {fileID: 2800000, guid: e975d750d6b9a4f4b818d03d6a607fb2, type: 3}
   dashForce: 20
   dashDuration: 0.25
   dashCooldown: 1
@@ -567,7 +569,6 @@ MonoBehaviour:
       Data4: 0
     Path: 
   isRotatingMouse: 0
-  isAiming: 0
   CanInteract: 0
   _rotationInput: {x: 0, y: 0}
 --- !u!114 &4203650123197868152
@@ -849,11 +850,11 @@ MonoBehaviour:
     Path: 
   RecieveShieldSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -587323120
+      Data2: 1294493454
+      Data3: -346183520
+      Data4: 1433184297
+    Path: event:/Maevis/Skills/HullBreaker/Escudo_HullBreaker
   healIndicatorCooldown: 0
   shieldIndicatorCooldown: 0
   timeBetweenDamageIndicators: 0
@@ -951,16 +952,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  baseMoveSpeed:
-    m_InternalValue: 3.5
+  moveSpeed: 3
   stunSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  cooldownStunSound: 0
+      Data1: 1336058290
+      Data2: 1304659730
+      Data3: -275068782
+      Data4: -1854863017
+    Path: event:/Maevis/Stunada
+  cooldownStunSound: 1
 --- !u!1001 &5054681171358996515
 PrefabInstance:
   m_ObjectHideFlags: 0

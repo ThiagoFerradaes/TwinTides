@@ -15,7 +15,9 @@ public class PlayerController : NetworkBehaviour {
 
     [Header("Aim")]
     public LayerMask FloorLayer;
-    [HideInInspector] public Transform aimObject;
+    public Vector3 mousePos;
+    public Texture2D aimCursorTexture;
+    public Texture2D normalCursorTexture;
 
     [Header("Dash")]
     [SerializeField] float dashForce;
@@ -31,7 +33,6 @@ public class PlayerController : NetworkBehaviour {
     bool _inDash = false;
 
     [HideInInspector] public bool isRotatingMouse;
-    [HideInInspector] public bool isAiming;
     [HideInInspector] public bool CanInteract;
     [HideInInspector] public Vector2 _rotationInput;
 
@@ -45,7 +46,6 @@ public class PlayerController : NetworkBehaviour {
     public static event Action OnStop;
     public static event Action OnPause;
     public event Action<SkillType, float> OnDashCooldown;
-    public event System.EventHandler OnAim;
     public event System.EventHandler OnInteractInGame;
     public static event System.EventHandler OnInteractOutGame;
 
@@ -86,14 +86,14 @@ public class PlayerController : NetworkBehaviour {
         if (LocalWhiteBoard.Instance.AnimationOn) return;
 
         if (context.phase == InputActionPhase.Performed) {
+            if (Time.timeScale == 0 && LocalWhiteBoard.Instance.IsAiming) ChangeMouseSprite(true);
+            else ChangeMouseSprite(false);
             OnPause?.Invoke();
         }
     }
     public void InputMove(InputAction.CallbackContext context) {
 
-        if (!CanDetectInputs()) return;
-
-        if (context.phase == InputActionPhase.Performed && _canWalk) {
+        if (context.phase == InputActionPhase.Performed && _canWalk && CanDetectInputs()) {
             _moveInput = context.ReadValue<Vector2>();
             OnMove?.Invoke();
         }
@@ -110,24 +110,7 @@ public class PlayerController : NetworkBehaviour {
             isRotatingMouse = true;
         }
     }
-    public void InputRotateController(InputAction.CallbackContext context) {
 
-        if (!CanDetectInputs()) return;
-
-        if (context.phase == InputActionPhase.Performed) {
-            isRotatingMouse = false;
-            isAiming = true;
-            _rotationInput = context.ReadValue<Vector2>();
-
-            if (!aimObject.gameObject.activeSelf && aimObject != null) {
-                StartAimMode();
-            }
-        }
-        else if (context.phase == InputActionPhase.Canceled) {
-            isAiming = false;
-            _rotationInput = Vector2.zero;
-        }
-    }
     public void InputDash(InputAction.CallbackContext context) {
 
         if (!CanDetectInputs()) return;
@@ -141,14 +124,9 @@ public class PlayerController : NetworkBehaviour {
         if (!CanDetectInputs()) return;
 
         if (context.phase == InputActionPhase.Started) {
-            if (isAiming) {
-                isAiming = false;
-                StopAimMode();
-            }
-            else {
-                StartAimMode();
-                isAiming = true;
-            }
+            LocalWhiteBoard.Instance.IsAiming = !LocalWhiteBoard.Instance.IsAiming;
+
+            ChangeMouseSprite(LocalWhiteBoard.Instance.IsAiming);
         }
     }
 
@@ -224,7 +202,7 @@ public class PlayerController : NetworkBehaviour {
     }
 
     void Moving() {
-        if (_moveInput == (Vector2.zero) || !_canWalk) {
+        if (_moveInput == Vector2.zero || !_canWalk) {
             if (!_inDash) _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);
             return;
         }
@@ -238,13 +216,19 @@ public class PlayerController : NetworkBehaviour {
     public void Rotate() {
         if (!_canRotate) return;
 
-        if (aimObject != null && aimObject.gameObject.activeInHierarchy) {
-            Vector3 objectPosition = new(aimObject.position.x, transform.position.y, aimObject.position.z);
-            Vector3 aimDirection = (objectPosition - transform.position);
+        if (LocalWhiteBoard.Instance.IsAiming) {
 
-            if (aimDirection.sqrMagnitude > 0.01f) {
-                Quaternion direction = Quaternion.LookRotation(aimDirection);
-                transform.rotation = Quaternion.Slerp(transform.rotation, direction, Time.deltaTime * rotationSpeed);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray , out RaycastHit hit, Mathf.Infinity, FloorLayer)){
+
+                mousePos = new(hit.point.x, transform.position.y, hit.point.z);
+                Vector3 aimDirection = (mousePos - transform.position);
+
+                if (aimDirection.sqrMagnitude > 0.01f) {
+                    Quaternion direction = Quaternion.LookRotation(aimDirection);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, direction, Time.deltaTime * rotationSpeed);
+                }
             }
         }
         else {
@@ -258,14 +242,9 @@ public class PlayerController : NetworkBehaviour {
     #endregion
 
     #region Aim
-    public void StartAimMode() {
-        if (aimObject == null) return;
-        aimObject.gameObject.SetActive(true);
-        OnAim?.Invoke(this, EventArgs.Empty);
-    }
-    public void StopAimMode() {
-        if (aimObject == null) return;
-        aimObject.gameObject.SetActive(false);
+    public void ChangeMouseSprite(bool isAim) {
+        if (isAim) Cursor.SetCursor(aimCursorTexture, Vector2.zero, CursorMode.Auto);
+        else Cursor.SetCursor(normalCursorTexture, Vector2.zero, CursorMode.Auto);
     }
     #endregion
 

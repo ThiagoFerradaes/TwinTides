@@ -52,7 +52,7 @@ public class BlackHoleObject : SkillObjectPrefab {
 
         yield return new WaitForSeconds(time);
 
-        End();
+        ReturnObject();
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -125,7 +125,7 @@ public class BlackHoleObject : SkillObjectPrefab {
         return;
     }
 
-    void End() {
+    public override void ReturnObject() {
 
         List<MovementManager> removed = new(_listOfMEnemies);
         _listOfMEnemies.Clear();
@@ -151,6 +151,6 @@ public class BlackHoleObject : SkillObjectPrefab {
 
         _listOfEnemies.Clear();
 
-        ReturnObject();
+        base.ReturnObject();
     }
 }

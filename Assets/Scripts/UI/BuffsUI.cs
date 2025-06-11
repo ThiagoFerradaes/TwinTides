@@ -22,6 +22,11 @@ public class BuffsUI : MonoBehaviour {
         _characterHealthManager = player.GetComponent<HealthManager>();
         _characterHealthManager.OnBuffAdded += AddBuff;
         _characterHealthManager.OnBuffRemoved += RemoveBuff;
+        _characterHealthManager.OnDeath += ClearBuffs;
+    }
+    void ClearBuffs() {
+        foreach (var buff in activeBuffsList.Values) buff.gameObject.SetActive(false);
+        activeBuffsList.Clear();
     }
     void AddBuff(Buff buffAdded, int stacks) {
         if (activeBuffsList.ContainsKey(buffAdded)) {

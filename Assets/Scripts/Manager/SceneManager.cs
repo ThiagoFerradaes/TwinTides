@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Netcode;
 using System.Collections.Generic;
+using System;
 
 public class SceneManager : NetworkBehaviour
 {
@@ -9,6 +10,8 @@ public class SceneManager : NetworkBehaviour
 
     [SerializeField] GameObject maevisPreFab;
     [SerializeField] GameObject melPreFab;
+
+    public static event Action OnPlayersSpawned;
     void Start()
     {
         if (IsServer) {
@@ -36,6 +39,8 @@ public class SceneManager : NetworkBehaviour
 
             playerIndex++;
         }
+
+        OnPlayersSpawned?.Invoke();
     }
     GameObject GetPrefab(int playerIndex) {
         if (playerIndex == 0) {

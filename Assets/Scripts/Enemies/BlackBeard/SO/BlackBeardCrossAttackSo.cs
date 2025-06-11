@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "BlackBeardAttack/ Cross Attack")]
@@ -13,10 +14,12 @@ public class BlackBeardCrossAttackSo : BlackBeardSO
     public float CutDamageStronger;
     public Vector3 CutSize;
     public float CutRange;
+    public EventReference CutSound;
 
     [Header("Field")]
     public float FieldDuration;
     public float FieldDamage;
     public float TimeBetweenDamage;
     public Vector2 FieldSize;
+    public EventReference FieldSound;
 }

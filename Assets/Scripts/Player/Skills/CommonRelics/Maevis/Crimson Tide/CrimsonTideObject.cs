@@ -40,7 +40,7 @@ public class CrimsonTideObject : SkillObjectPrefab {
                 PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
             }
 
-            End();
+            ReturnObject();
         }
         else {
             StartCoroutine(Dash());
@@ -78,7 +78,7 @@ public class CrimsonTideObject : SkillObjectPrefab {
             yield return new WaitForSeconds(_info.DashDuration);
         }
 
-        End();
+        ReturnObject();
     }
 
     IEnumerator SpawnPath() {
@@ -94,10 +94,10 @@ public class CrimsonTideObject : SkillObjectPrefab {
         }
     }
 
-    void End() {
+    public override void ReturnObject() {
         _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
         _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
         _maevis.GetComponent<PlayerController>().AllowMovement();
-        ReturnObject();
+        base.ReturnObject();
     }
 }

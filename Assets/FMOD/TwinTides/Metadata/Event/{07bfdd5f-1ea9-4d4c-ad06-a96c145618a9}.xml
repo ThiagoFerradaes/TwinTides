@@ -59,7 +59,11 @@
 			<destination>{c188c619-9cc8-42c7-8e25-973f3b6c8d0a}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{3bd742aa-8a27-4ca8-be40-94678b980d50}" />
+	<object class="EventAutomatableProperties" id="{3bd742aa-8a27-4ca8-be40-94678b980d50}">
+		<property name="maximumDistance">
+			<value>60</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{85c369f2-3c58-4e7d-a6f1-c09891e107ba}" />
 	<object class="Timeline" id="{117260c6-74c5-4ef0-abdc-33800dc568a4}">
 		<property name="isProxyEnabled">
@@ -101,6 +105,9 @@
 	</object>
 	<object class="MixerBusPanner" id="{7d4eb03b-ba0c-4abd-a073-5af57bf265f8}" />
 	<object class="SingleSound" id="{291aa5ee-fd3b-4068-884a-284084ebf02b}">
+		<property name="looping">
+			<value>true</value>
+		</property>
 		<relationship name="audioFile">
 			<destination>{fa3579c1-05d0-418e-a10b-90792772f0ca}</destination>
 		</relationship>

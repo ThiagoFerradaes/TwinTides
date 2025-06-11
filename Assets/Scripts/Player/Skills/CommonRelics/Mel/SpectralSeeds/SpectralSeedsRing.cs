@@ -68,10 +68,10 @@ public class SpectralSeedsRing : SkillObjectPrefab {
 
         foreach (var seed in listOfSeeds) {
             seed.transform.SetParent(null);
-            seed.End();
+            seed.ReturnObject();
         }
 
-        End();
+        ReturnObject();
     }
 
     private void SpectralSeedsObject_OnSphereMoved(object sender, EventArgs e) {
@@ -79,7 +79,7 @@ public class SpectralSeedsRing : SkillObjectPrefab {
             StartCoroutine(UpdateRotation());
         }
         else {
-            End();
+            ReturnObject();
         }
     }
 
@@ -107,14 +107,14 @@ public class SpectralSeedsRing : SkillObjectPrefab {
             InstantiateOneSeed();
         }
     }
-    void End() {
+    public override void ReturnObject() {
         SpectralSeedsObject.OnSphereMoved -= SpectralSeedsObject_OnSphereMoved;
 
         listOfSeeds.Clear();
 
         Cooldown();
 
-        ReturnObject();
+        base.ReturnObject();
     }
 
     void Cooldown() {
