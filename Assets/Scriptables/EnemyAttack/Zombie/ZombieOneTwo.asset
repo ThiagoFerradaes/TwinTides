@@ -29,6 +29,27 @@ MonoBehaviour:
   jumpExplosionDuration: 0.1
   jumpExplosionRadius: 6
   cooldown: 2
+  JumpSound:
+    Guid:
+      Data1: -1031213558
+      Data2: 1308096575
+      Data3: -1048463707
+      Data4: 147838527
+    Path: event:/InimigoMelee/MeleeGemendo
+  JumpImpactSound:
+    Guid:
+      Data1: 1777940790
+      Data2: 1173115136
+      Data3: -203304292
+      Data4: 831860756
+    Path: event:/InimigoMelee/MeleeImpacto
   normalAttackSize: 9
   normalAttackDuration: 0.1
   normalAttackDamage: 1
+  NormalAttackSound:
+    Guid:
+      Data1: -1108425453
+      Data2: 1236870943
+      Data3: 1018035840
+      Data4: -918100841
+    Path: event:/InimigoMelee/MeleeCorteCircular
