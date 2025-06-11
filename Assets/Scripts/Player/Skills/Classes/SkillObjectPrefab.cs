@@ -13,13 +13,16 @@ public abstract class SkillObjectPrefab : MonoBehaviour {
         ActivateSkill(skill, skillLevel, context);
 
         StartSkillCooldown(context, skill);
+
+        PlayersDeathManager.OnGameRestart += ReturnObject;
     }
     public abstract void ActivateSkill(Skill info, int skillLevel, SkillContext context);
 
     public void TurnOffSkill() {
         gameObject.SetActive(false);
     }
-    public void ReturnObject() {
+    public virtual void ReturnObject() {
+        PlayersDeathManager.OnGameRestart -= ReturnObject;
         PlayerSkillPooling.Instance.ReturnObjectToPool(gameObject);
 
     }

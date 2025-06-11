@@ -1,3 +1,4 @@
+using FMODUnity;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,12 +46,14 @@ public class EtherealShadeObject : SkillObjectPrefab
 
         gameObject.SetActive(true);
 
+        if (!_info.PositionSound.IsNull) RuntimeManager.PlayOneShot(_info.PositionSound, transform.position);
+
         StartCoroutine(Duration());
         StartCoroutine(HealAndGrow());
     }
 
     IEnumerator Duration() {
-        yield return new WaitForSeconds(_info.CloneDuration);
+        yield return new WaitForSeconds(_info.TotemDuration);
 
         StopCoroutine(HealAndGrow());
 
@@ -60,7 +63,7 @@ public class EtherealShadeObject : SkillObjectPrefab
 
         yield return new WaitForSeconds(_info.ExplosionDuration);
 
-        End();
+        ReturnObject();
     }
 
     IEnumerator HealAndGrow() {
@@ -71,6 +74,7 @@ public class EtherealShadeObject : SkillObjectPrefab
                 player.Heal(_info.Heal, false);
                 heal = true;
             }
+            
             StartCoroutine(HealingEffectTimer());
             if (heal) Grow();
         }
@@ -78,12 +82,14 @@ public class EtherealShadeObject : SkillObjectPrefab
 
     IEnumerator HealingEffectTimer() {
         _healingEffect.SetActive(true);
+        if (!_info.HealExplosionSound.IsNull) RuntimeManager.PlayOneShot(_info.HealExplosionSound, transform.position);
         yield return new WaitForSeconds(_info.HealingEffectDuration);
         _healingEffect.SetActive(false);
     }
 
     IEnumerator DamageEffectTimer() {
         _damageEffect.SetActive(true);
+        if (!_info.DamageExplosionSound.IsNull) RuntimeManager.PlayOneShot(_info.DamageExplosionSound, transform.position);
         yield return new WaitForSeconds(_info.ExplosionDuration);
         _damageEffect.SetActive(false);
     }
@@ -95,6 +101,9 @@ public class EtherealShadeObject : SkillObjectPrefab
 
         _healingEffect.transform.localScale *= (1 + _info.GrowthPercentage / 100);
         _damageEffect.transform.localScale *= (1 + _info.GrowthPercentage / 100);
+
+        if (!_info.GrowthSound.IsNull) RuntimeManager.PlayOneShot(_info.GrowthSound, transform.position );
+
     }
     void Explode() {
 
@@ -132,7 +141,7 @@ public class EtherealShadeObject : SkillObjectPrefab
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
         return;
     }
-    void End() {
+    public override void ReturnObject() {
 
         _healingEffect.SetActive(false);
         _damageEffect.SetActive(false);
@@ -140,6 +149,6 @@ public class EtherealShadeObject : SkillObjectPrefab
         _amountOfGrowths = 0;
         _playersList.Clear();
         _enemiesList.Clear();
-        ReturnObject();
+        base.ReturnObject();
     }
 }

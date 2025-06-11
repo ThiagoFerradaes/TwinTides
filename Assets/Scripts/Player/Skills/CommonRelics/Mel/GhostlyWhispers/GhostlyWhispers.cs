@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "CommonRelic/GhostlyWhispers")]
@@ -11,6 +12,7 @@ public class GhostlyWhispers : CommonRelic {
     public float Damage;
     public int AmountOfStacks;
     public Material NormalAreaMaterial;
+    public EventReference NormalPuddleSound;
 
     [Header ("Area Level 2")]
     public float DamageLevel2;
@@ -21,7 +23,8 @@ public class GhostlyWhispers : CommonRelic {
     public float AreaDurationLevel3;
     public float DamageIntervalLevel3;
     public Material SuperAreaMaterial;
-    
+    public EventReference SuperPuddleSound;
+
     [Header("Area Level 4")]
     public Vector3 AreaLevel4;
     public float AreaDurationLevel4;
@@ -29,4 +32,5 @@ public class GhostlyWhispers : CommonRelic {
     public int AmountOfStacksLevel4;
     public Material MegaAreaMaterial;
     public float ObjectDurationLevel4;
+    public EventReference MegaPuddleSound;
 }

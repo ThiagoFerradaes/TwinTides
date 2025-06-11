@@ -49,7 +49,7 @@ public class CrimsonTidePath : SkillObjectPrefab {
     IEnumerator Duration() {
         yield return new WaitForSeconds(_info.PathDuration);
 
-        End();
+        ReturnObject();
     }
 
     IEnumerator DamageCooldown() {
@@ -109,7 +109,7 @@ public class CrimsonTidePath : SkillObjectPrefab {
             _maevis.GetComponent<PlayerSkillManager>().ResetCooldown(_context.SkillIdInUI);
     }
 
-    void End() {
+    public override void ReturnObject() {
         if (_damageCoroutine != null) {
             StopCoroutine(_damageCoroutine);
             _damageCoroutine = null;
@@ -117,6 +117,6 @@ public class CrimsonTidePath : SkillObjectPrefab {
 
         _listOfEnemies.Clear();
 
-        ReturnObject();
+        base.ReturnObject();
     }
 }

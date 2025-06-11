@@ -1,4 +1,6 @@
 using DG.Tweening;
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -6,6 +8,8 @@ public class BlackBeardBulletRainSecondaryBomb : BlackBeardAttackPrefab {
     BlackBeardBulletRainSO _info;
     float amountOfBombsLeft;
     float _explosionMultiplier;
+
+    EventInstance sound;
 
     public override void StartAttack(int enemyId, int skillId, Vector3 position, float amountOfBombs) {
         base.StartAttack(enemyId, skillId);
@@ -28,6 +32,12 @@ public class BlackBeardBulletRainSecondaryBomb : BlackBeardAttackPrefab {
 
         gameObject.SetActive(true);
 
+        if (!_info.BounceSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.BounceSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
+
         FallRoutine();
     }
 
@@ -45,7 +55,15 @@ public class BlackBeardBulletRainSecondaryBomb : BlackBeardAttackPrefab {
 
             End();
         });
+    }
 
+    public override void End() {
 
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
+
+        base.End();
     }
 }

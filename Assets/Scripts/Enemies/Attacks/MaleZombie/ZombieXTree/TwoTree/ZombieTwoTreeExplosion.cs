@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.TerrainTools;
@@ -22,6 +23,8 @@ public class ZombieTwoTreeExplosion : EnemyAttackPrefab
         transform.localScale = _info.explosionSize * Vector3.one;
 
         gameObject.SetActive(true);
+
+        if (!_info.ExplosionSound.IsNull) RuntimeManager.PlayOneShot(_info.ExplosionSound, transform.position);
 
         StartCoroutine(Duration());
     }

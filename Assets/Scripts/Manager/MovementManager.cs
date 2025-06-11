@@ -1,13 +1,46 @@
+using FMODUnity;
 using System.Collections;
+using System.Threading;
 using Unity.Netcode;
 using UnityEngine;
 
 public class MovementManager : NetworkBehaviour {
 
-    [SerializeField] NetworkVariable<float> baseMoveSpeed = new(3);
+    [SerializeField] float moveSpeed = 3;
+    NetworkVariable<float> baseMoveSpeed = new(0);
     NetworkVariable<float> adicionalMoveSpeed = new(1);
     private NetworkVariable<bool> _isStunned = new(false);
 
+    [SerializeField] EventReference stunSound;
+    [SerializeField] float cooldownStunSound;
+    Coroutine stunSoundRooutine;
+    Coroutine stunRoutine;
+
+
+    private void Start() {
+        if (IsServer) {
+            baseMoveSpeed.Value = moveSpeed;
+            PlayersDeathManager.OnGameRestart += Reset;
+        }
+    }
+
+    private void Reset() {
+        if (!IsServer) return;
+
+        // Parar todas as corrotinas relacionadas
+        StopAllCoroutines();
+        stunRoutine = null;
+        stunSoundRooutine = null;
+
+        // Resetar variáveis
+        baseMoveSpeed.Value = moveSpeed;
+        adicionalMoveSpeed.Value = 1f;
+        _isStunned.Value = false;
+    }
+
+    public override void OnDestroy() {
+        if (IsServer) PlayersDeathManager.OnGameRestart -= Reset;
+    }
     /// <summary>
     /// Retorna o valor da velocidade base/minima + o valor da velocidade adicional, se o objeto estiver stunado retorna 0
     /// </summary>
@@ -84,12 +117,23 @@ public class MovementManager : NetworkBehaviour {
     /// </summary>
     public void Stun() {
         if (!IsServer) return;
+
+        stunSoundRooutine ??= StartCoroutine(StunSoundRoutine());
+
         _isStunned.Value = true;
     }
 
     public void UnStun() {
         if (!IsServer) return;
         _isStunned.Value = false;
+    }
+
+    IEnumerator StunSoundRoutine() {
+        if (!stunSound.IsNull) RuntimeManager.PlayOneShot(stunSound, transform.position);
+
+        yield return new WaitForSeconds(cooldownStunSound);
+
+        stunSoundRooutine = null;
     }
 
 
@@ -99,13 +143,20 @@ public class MovementManager : NetworkBehaviour {
     /// <param name="stunDuration"></param>
     public void StunWithTime(float stunDuration) {
         if (!IsServer) return;
-        StartCoroutine(StunWithTimeCoroutine(stunDuration));
+        if(stunRoutine == null) stunRoutine = StartCoroutine(StunWithTimeCoroutine(stunDuration));
+        else {
+            StopCoroutine(stunRoutine);
+            stunRoutine = null;
+            stunRoutine = StartCoroutine(StunWithTimeCoroutine(stunDuration));
+        }
     }
 
     IEnumerator StunWithTimeCoroutine(float stunDuration) {
-        _isStunned.Value = true;
+        Stun();
         yield return new WaitForSeconds(stunDuration);
-        _isStunned.Value = false;
+        UnStun();
+
+        stunRoutine = null;
     }
 
 }

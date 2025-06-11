@@ -49,6 +49,8 @@ public class HullbreakerObject : SkillObjectPrefab {
             yield return null;
         }
 
+        Explode();
+
         End();
     }
 
@@ -69,7 +71,6 @@ public class HullbreakerObject : SkillObjectPrefab {
         PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, newContext, _level, 1);
     }
     void End() {
-        Explode();
 
         if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter) {
             _maevis.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);

@@ -26,7 +26,7 @@ MonoBehaviour:
   skillPrefabs:
   - {fileID: 619666727076391552, guid: 26b04ad8f1ad28447bfd652d51a47e04, type: 3}
   - {fileID: 8863925194899843353, guid: 4eb00c0736ade8f4faadd355a5089ac8, type: 3}
-  CloneDuration: 10
+  TotemDuration: 11
   GrowthPercentage: 25
   HealCooldown: 2
   MaxAmountOfGrowths: 4
@@ -37,3 +37,31 @@ MonoBehaviour:
   ExplosionDuration: 0.1
   InicialRadius: 7
   HealingEffectDuration: 0.1
+  GrowthSound:
+    Guid:
+      Data1: 239055294
+      Data2: 1229703379
+      Data3: 426430607
+      Data4: -114816648
+    Path: event:/Mel/Skills/EtheralShade/TotemCrescendo_EtheralShade
+  DamageExplosionSound:
+    Guid:
+      Data1: 97543700
+      Data2: 1234791544
+      Data3: 1149841834
+      Data4: -753300923
+    Path: event:/Mel/Skills/EtheralShade/ExplosaoDeDano_EtheralShade
+  HealExplosionSound:
+    Guid:
+      Data1: 1052801316
+      Data2: 1168483555
+      Data3: -476703574
+      Data4: -419432387
+    Path: event:/Mel/Skills/EtheralShade/Cura_EtheralShade
+  PositionSound:
+    Guid:
+      Data1: -375565791
+      Data2: 1219966470
+      Data3: -1950408064
+      Data4: 628240842
+    Path: event:/Mel/Skills/EtheralShade/TotemNoChao_EtheralShade

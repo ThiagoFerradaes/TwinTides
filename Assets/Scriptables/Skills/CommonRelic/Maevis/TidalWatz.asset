@@ -38,15 +38,36 @@ MonoBehaviour:
   Damage: 1
   CutDuration: 0.5
   BleedingDebuff: {fileID: 11400000, guid: 811747b3cf3ece547a8d6f3bd782cfb3, type: 2}
+  CutSound:
+    Guid:
+      Data1: 848221794
+      Data2: 1316126524
+      Data3: 909420425
+      Data4: -1032557876
+    Path: event:/Maevis/Skills/TidalWaltz/Corte_TidalWaltz
   CutSizeLevel2: 10
   AmountOfCutsLevel2: 2
   CutInterval: 0.5
   AmountOfCutsLevel3: 3
   CutIntervalLevel3: 0.25
   CutDurationLevel3: 0.35
+  CutSoundFaster:
+    Guid:
+      Data1: 848221794
+      Data2: 1316126524
+      Data3: 909420425
+      Data4: -1032557876
+    Path: event:/Maevis/Skills/TidalWaltz/Corte_TidalWaltz
   AmountOfCutsLevel4: 4
   impactSize: {x: 4, y: 3, z: 7}
   BaseDamageImpact: 1
   ImpactDuration: 0.1
   ImpactOffset: 4
   PercentOfDamageToAcumulate: 30
+  ImpactSound:
+    Guid:
+      Data1: -1094576407
+      Data2: 1098728195
+      Data3: -1378642500
+      Data4: 1260479387
+    Path: event:/Maevis/Skills/TidalWaltz/Impacto_TidalWaltz

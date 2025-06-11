@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,13 @@ public class BlackBeardRainBulletExplosion : BlackBeardAttackPrefab
         transform.localScale = Vector3.one * explosionRadius;
 
         gameObject.SetActive(true);
+
+        if (_bombIndex == 0) {
+            if (!_info.PrimaryExplosionSound.IsNull) RuntimeManager.PlayOneShot(_info.PrimaryExplosionSound, transform.position);
+        }
+        else {
+            if (!_info.SecondaryExplosionSound.IsNull) RuntimeManager.PlayOneShot(_info.SecondaryExplosionSound, transform.position);
+        }
 
         StartCoroutine(Duration());
     }

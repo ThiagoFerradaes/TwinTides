@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -27,6 +28,8 @@ public class DreadfallExplosion : SkillObjectPrefab {
         transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
+
+        if (!_info.ImpactSound.IsNull) RuntimeManager.PlayOneShot(_info.ImpactSound, transform.position);
 
         StartCoroutine(Duration());
     }

@@ -1,4 +1,6 @@
 using DG.Tweening;
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -27,6 +29,9 @@ public class BlackBeardRunawayState : BlackBeardStates {
 
     // Health
     HealthManager _health;
+
+    // Sons
+    EventInstance sound;
 
     #endregion
     public override void StartState(BlackBeardMachineState parent) {
@@ -69,10 +74,21 @@ public class BlackBeardRunawayState : BlackBeardStates {
 
         _parent.transform.DOKill();
 
+        if (!_info.JumpSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.JumpSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, _parent.gameObject);
+            sound.start();
+        }
+
         _parent.transform.DOJump(_parent.LandPlace.position, _info.JumpPower, 1, _info.JumpDuration).OnComplete(() => {
             Vector3 fromCenter = _parent.transform.position - _parent.CenterOfArena.position;
             Vector3 clampedOffset = fromCenter.normalized * _info.ArenaRadius;
             Vector3 closestPointOnCircle = _parent.CenterOfArena.position + clampedOffset;
+
+            if (sound.isValid()) {
+                sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                sound.release();
+            }
 
             _parent.transform.DOMove(closestPointOnCircle, 0.5f).SetEase(Ease.OutSine).OnComplete(() => {
                 SpawnAllies();
@@ -94,6 +110,12 @@ public class BlackBeardRunawayState : BlackBeardStates {
 
         float angle = Mathf.Atan2(initialOffset.z, initialOffset.x) * Mathf.Rad2Deg;
 
+        if (!_info.RunningSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.RunningSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, _parent.gameObject);
+            sound.start();
+        }
+
         while (!isStuned && !changedState) {
             angle += _info.BlackBeardSpeed * Time.deltaTime;
 
@@ -105,6 +127,11 @@ public class BlackBeardRunawayState : BlackBeardStates {
             _parent.transform.forward = (targetPos - _parent.transform.position).normalized;
 
             yield return null;
+        }
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
         }
     }
 
@@ -126,7 +153,18 @@ public class BlackBeardRunawayState : BlackBeardStates {
         if (runCoroutine != null) _parent.StopCoroutine(runCoroutine);
         if (phaseCoroutine != null) _parent.StopCoroutine(phaseCoroutine);
 
+        if (!_info.StunSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.StunSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, _parent.gameObject);
+            sound.start();
+        }
+
         yield return new WaitForSeconds(_info.BlackBeardStunTime);
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
 
         if (!changedState) EndPhase();
     }
@@ -150,8 +188,19 @@ public class BlackBeardRunawayState : BlackBeardStates {
                 _parent.Health.Heal(_info.AmountOfHealthRecoveredPerEnemy * enemiesAlive, false);
             }
 
+            if (!_info.JumpBackToShipSound.IsNull) {
+                sound = RuntimeManager.CreateInstance(_info.JumpBackToShipSound);
+                RuntimeManager.AttachInstanceToGameObject(sound, _parent.gameObject);
+                sound.start();
+            }
+
             _parent.transform.DOJump(_parent.ShipPlace.position, _info.JumpPower, 1, _info.JumpDuration).OnComplete(() => {
                 _parent.Health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, true);
+
+                if (sound.isValid()) {
+                    sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                    sound.release();
+                }
 
                 ChangePhase();
             });

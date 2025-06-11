@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using NUnit.Framework;
 using System;
 using System.Collections;
@@ -16,6 +18,8 @@ public class DivinePurgeObject : SkillObjectPrefab
 
     List<HealthManager> _enemiesList = new();
     HealthManager _maevisHealth;
+
+    EventInstance sound;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as DivinePurge;
@@ -41,6 +45,12 @@ public class DivinePurgeObject : SkillObjectPrefab
 
         gameObject.SetActive(true);
 
+        if (!_info.LaserSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.LaserSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
+
         StartCoroutine(SkillDuration());
 
         StartCoroutine(DamageCoroutine());
@@ -51,16 +61,21 @@ public class DivinePurgeObject : SkillObjectPrefab
 
         yield return new WaitForSeconds(_info.Duration);
 
-        End();
+        ReturnObject();
     }
 
-    void End() {
+    public override void ReturnObject() {
         _mManager.AllowMovement();
 
         _maevisHealth = null;
         _enemiesList.Clear();
 
-        ReturnObject();
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            sound.release();
+        }
+
+        base.ReturnObject();
     }
 
     private void OnTriggerEnter(Collider other) {

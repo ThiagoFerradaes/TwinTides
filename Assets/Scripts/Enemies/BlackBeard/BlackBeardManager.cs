@@ -27,7 +27,7 @@ public class BlackBeardManager : NetworkBehaviour {
 
         Debug.Log("List count: " + _listOfPlayers.Count);
 
-        if (_listOfPlayers.Count == 2 && !hasStarted && IsServer) StartFightRpc();
+        if (_listOfPlayers.Count >= NetworkManager.Singleton.ConnectedClientsList.Count && !hasStarted && IsServer) StartFightRpc();
     }
 
     private void OnTriggerExit(Collider other) {
