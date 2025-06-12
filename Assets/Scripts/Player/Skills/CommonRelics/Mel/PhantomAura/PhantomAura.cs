@@ -10,6 +10,7 @@ public class PhantomAura : CommonRelic
     public float Duration;
     public float Damage;
     public float DamageInterval;
+    public float PhantomAuraHeight;
     public EventReference AuraSound;
 
     [Header("Aura Level 2")]

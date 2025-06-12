@@ -37,7 +37,22 @@ MonoBehaviour:
   Duration: 4
   Damage: 1
   DamageInterval: 0.4
+  PhantomAuraHeight: -0.5
+  AuraSound:
+    Guid:
+      Data1: -1640787804
+      Data2: 1158388322
+      Data3: -71888754
+      Data4: -2066528588
+    Path: event:/Mel/Skills/PhantomAura/PhantomAura1
   HealingPercent: 25
   AuraSizeLevel4: {x: 15, y: 15, z: 15}
   DurationLevel4: 6
   DamageLevel4: 1
+  StrongerAuraSound:
+    Guid:
+      Data1: 1250208362
+      Data2: 1226897386
+      Data3: -12112228
+      Data4: -1831001173
+    Path: event:/Mel/Skills/PhantomAura/PhantomAura2

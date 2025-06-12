@@ -31,6 +31,20 @@ MonoBehaviour:
   oilDamageInterval: 0.1
   oilNormalMaterial: {fileID: 2100000, guid: 9f5a452ef5edaf048be3381aeeec51f2, type: 2}
   oilBurningMaterial: {fileID: 2100000, guid: 40f1605a8ce356c47b1c8384560351cb, type: 2}
+  OilSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  OilFireSound:
+    Guid:
+      Data1: 1807250781
+      Data2: 1253334899
+      Data3: -2047970145
+      Data4: -53655572
+    Path: event:/InimigaRanged/RangedOleoPegandoFogo
   distanceToPunch: 2
   increaseInMoveSpeedToPunch: 100
   amountOfPunches: 2
@@ -40,3 +54,10 @@ MonoBehaviour:
   timeBetweenPunches: 0.3
   punchCooldown: 1
   rootationSpeedToPunch: 2
+  PunchSound:
+    Guid:
+      Data1: 49803093
+      Data2: 1226823249
+      Data3: -518459718
+      Data4: 572283286
+    Path: event:/InimigoMelee/MeleePunch

@@ -22,18 +22,27 @@ MonoBehaviour:
   - Girl Tree Two Explosion
   ListOfAttacksNames:
   - Bomb
-  distanceToDash: 4
-  targetDistance: 8
-  dashSpeed: 10
-  cooldownIfDashed: 1.6
-  timeBetweenBombAndDash: 0.4
   bombsSpeed: 20
   bombsRange: 8
   bombPlacement: 1
   amountOfBombs: 1
   timeBetweenBombs: 0.1
   cooldown: 1
+  ShootSound:
+    Guid:
+      Data1: -545915499
+      Data2: 1248120260
+      Data3: 1745904268
+      Data4: -221102414
+    Path: event:/InimigaRanged/TiroRanged
   explosionRadius: 6
   explosionDamage: 1
   explosionDuration: 0.1
   burningDebuff: {fileID: 11400000, guid: 86a385b2a33a4bf478a57b6cb16ca780, type: 2}
+  ExplosionSound:
+    Guid:
+      Data1: 444293421
+      Data2: 1232588191
+      Data3: -1295099766
+      Data4: 1506322715
+    Path: event:/InimigaRanged/RangedExplosao
