@@ -27,9 +27,23 @@ MonoBehaviour:
   timeBetweenEachBomb: 0.2
   rainCooldown: 10
   durationOfAttack: 4
+  FallingSound:
+    Guid:
+      Data1: -739574678
+      Data2: 1196072135
+      Data3: 1255430072
+      Data4: -1167005033
+    Path: event:/InimigoMelee/MeleeJogandoVeneno
   fallSpeed: 10
   bombHeight: 10
   explosionSize: 5
   explosionDamage: 1
   explosionDuration: 0.1
   poisonDebuff: {fileID: 11400000, guid: 07fecbce3982b1d48b25917e8424f895, type: 2}
+  ExplosionSound:
+    Guid:
+      Data1: 190361565
+      Data2: 1300094997
+      Data3: 1455686574
+      Data4: 1347441
+    Path: event:/InimigoMelee/MeleeBombaDeVeneno

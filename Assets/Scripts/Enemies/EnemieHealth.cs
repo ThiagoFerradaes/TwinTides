@@ -1,13 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemieHealth : MonoBehaviour
-{
+public class EnemieHealth : MonoBehaviour {
     HealthManager enemie;
     Canvas canvas;
     Image image;
-    void Start()
-    {
+    void Start() {
         // Pegando os componentes
         canvas = transform.parent.GetComponent<Canvas>();
         enemie = canvas.transform.parent.GetComponent<HealthManager>();
@@ -17,6 +15,11 @@ public class EnemieHealth : MonoBehaviour
         canvas.worldCamera = Camera.main;
         image.fillAmount = 1;
         enemie.OnHealthUpdate += UpdateHealth;
+        enemie.OnRevive += OnRevive;
+    }
+
+    private void OnRevive() {
+        UpdateHealth((enemie.ReturnMaxHealth(), enemie.ReturnCurrentHealth(), enemie.ReturnShieldAmount(), enemie.ReturnMaxShieldAmount()));
     }
 
     private void UpdateHealth((float maxHealth, float currentHealth, float currentShield, float maxShield) obj) {
@@ -28,7 +31,10 @@ public class EnemieHealth : MonoBehaviour
     }
 
     private void OnDestroy() {
-        if(gameObject.activeInHierarchy) enemie.OnHealthUpdate -= UpdateHealth;
+        if (gameObject.activeInHierarchy) {
+            enemie.OnHealthUpdate -= UpdateHealth;
+            enemie.OnRevive -= OnRevive;
+        }
     }
 
 }

@@ -563,13 +563,12 @@ MonoBehaviour:
   dashCooldown: 1
   dashSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -1203851180
+      Data2: 1327612659
+      Data3: -1111084387
+      Data4: -1657059031
+    Path: event:/Mel/MelDash
   isRotatingMouse: 0
-  isAiming: 0
   CanInteract: 0
   _rotationInput: {x: 0, y: 0}
 --- !u!114 &4203650123197868152
@@ -851,11 +850,11 @@ MonoBehaviour:
     Path: 
   RecieveShieldSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -587323120
+      Data2: 1294493454
+      Data3: -346183520
+      Data4: 1433184297
+    Path: event:/Maevis/Skills/HullBreaker/Escudo_HullBreaker
   healIndicatorCooldown: 0
   shieldIndicatorCooldown: 0
   timeBetweenDamageIndicators: 0
@@ -953,16 +952,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  baseMoveSpeed:
-    m_InternalValue: 3.5
+  moveSpeed: 3
   stunSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  cooldownStunSound: 0
+      Data1: 1336058290
+      Data2: 1304659730
+      Data3: -275068782
+      Data4: -1854863017
+    Path: event:/Maevis/Stunada
+  cooldownStunSound: 1
 --- !u!1001 &5054681171358996515
 PrefabInstance:
   m_ObjectHideFlags: 0

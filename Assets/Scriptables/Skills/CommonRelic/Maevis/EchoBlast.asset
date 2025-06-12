@@ -50,9 +50,23 @@ MonoBehaviour:
     Path: event:/Maevis/MaevisTiro
   StunTime: 3
   ExplosionRadiusLevel2: 10
+  ExplosionSound:
+    Guid:
+      Data1: 1057795556
+      Data2: 1279090359
+      Data3: 1656150956
+      Data4: -844427031
+    Path: event:/Maevis/Skills/EchoBlaast/Explosao_Echoblast
   ExplosionAmountLevel3: 2
   TimeBetweenEachExplosion: 0.3
   ExplodingDebuffDuration: 6
   ExplodingDebuffExplosionCooldown: 0.5
   ExplodingDebuffDelay: 1
   ExplodingDebuffHeight: 1.2
+  SecondExplosionSound:
+    Guid:
+      Data1: -1079480535
+      Data2: 1305995025
+      Data3: -216948081
+      Data4: -1637819489
+    Path: event:/Maevis/Skills/EchoBlaast/ExplosaoMenor_Exhoblast
