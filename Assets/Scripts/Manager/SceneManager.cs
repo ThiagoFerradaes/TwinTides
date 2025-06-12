@@ -10,6 +10,7 @@ public class SceneManager : NetworkBehaviour
 
     [SerializeField] GameObject maevisPreFab;
     [SerializeField] GameObject melPreFab;
+    [SerializeField] Transform originPos;
 
     public static event Action OnPlayersSpawned;
     void Start()
@@ -28,7 +29,7 @@ public class SceneManager : NetworkBehaviour
 
             GameObject prefab = GetPrefab(playerIndex);
             Characters typeOfCharacter = prefab == maevisPreFab ? Characters.Maevis : Characters.Mel;
-            Vector3 prefabPos = Vector3.zero + new Vector3(playerIndex * 2,8.1f,0);
+            Vector3 prefabPos = originPos.position + new Vector3(playerIndex * 3f, 8.1f, 0f);
 
             var playerObject = Instantiate(prefab, prefabPos, Quaternion.identity);
 
