@@ -244,21 +244,18 @@ public class TotemManager : MonoBehaviour {
     void EquipArrowFunction(SkillIndex relicIndex, ArrowDirection arrow) {
         switch (relicIndex) {
             case SkillIndex.firstCommon:
-                CommonRelic oldRelicOne = listOfCommonRelics[firstCommonIndex];
 
-                if (arrow == ArrowDirection.right) {
-                    firstCommonIndex++;
-                    if (firstCommonIndex >= listOfCommonRelics.Count) firstCommonIndex = 0;
-                }
-                else {
-                    firstCommonIndex--;
-                    if (firstCommonIndex < 0) firstCommonIndex = listOfCommonRelics.Count - 1;
-                }
+                do {
+                    if (arrow == ArrowDirection.right) {
+                        firstCommonIndex++;
+                        if (firstCommonIndex >= listOfCommonRelics.Count) firstCommonIndex = 0;
+                    }
+                    else {
+                        firstCommonIndex--;
+                        if (firstCommonIndex < 0) firstCommonIndex = listOfCommonRelics.Count - 1;
+                    }
+                } while (firstCommonIndex == secondCommonIndex);
 
-                if (firstCommonIndex == secondCommonIndex) {
-                    secondCommonIndex = listOfCommonRelics.IndexOf(oldRelicOne);
-                    DefineImagenAndDescription(oldRelicOne, SkillIndex.secondCommon);
-                }
 
                 CommonRelic relicOne = listOfCommonRelics[firstCommonIndex];
                 DefineImagenAndDescription(relicOne, SkillIndex.firstCommon);
@@ -267,21 +264,18 @@ public class TotemManager : MonoBehaviour {
                 break;
 
             case SkillIndex.secondCommon:
-                CommonRelic oldRelictwo = listOfCommonRelics[secondCommonIndex];
 
-                if (arrow == ArrowDirection.right) {
-                    secondCommonIndex++;
-                    if (secondCommonIndex >= listOfCommonRelics.Count) secondCommonIndex = 0;
-                }
-                else {
-                    secondCommonIndex--;
-                    if (secondCommonIndex < 0) secondCommonIndex = listOfCommonRelics.Count - 1;
-                }
+                do {
+                    if (arrow == ArrowDirection.right) {
+                        secondCommonIndex++;
+                        if (secondCommonIndex >= listOfCommonRelics.Count) secondCommonIndex = 0;
+                    }
+                    else {
+                        secondCommonIndex--;
+                        if (secondCommonIndex < 0) secondCommonIndex = listOfCommonRelics.Count - 1;
+                    }
+                } while (secondCommonIndex == firstCommonIndex);
 
-                if (firstCommonIndex == secondCommonIndex) {
-                    firstCommonIndex = listOfCommonRelics.IndexOf(oldRelictwo);
-                    DefineImagenAndDescription(oldRelictwo, SkillIndex.firstCommon);
-                }
 
                 CommonRelic relicTwo = listOfCommonRelics[secondCommonIndex];
                 DefineImagenAndDescription(relicTwo, SkillIndex.secondCommon);
