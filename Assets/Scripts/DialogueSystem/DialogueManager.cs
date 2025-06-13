@@ -46,11 +46,6 @@ public class DialogueManager : NetworkBehaviour {
     Coroutine skipCoroutine;
     Coroutine detectInputCoroutine;
 
-    [Header("Sounds")]
-    [SerializeField] EventReference melSoundPerLetter;
-    [SerializeField] EventReference maevisSoundPerLetter;
-    [SerializeField] EventReference blackBeardSoundPerLetter;
-
     #region Initialize
     private void Awake() {
         if (Instance == null) {
