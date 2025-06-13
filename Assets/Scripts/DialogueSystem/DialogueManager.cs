@@ -202,16 +202,9 @@ public class DialogueManager : NetworkBehaviour {
                     _ => null
                 };
 
-
-                //EventReference soundPerLetter = dialogue.ListOfDialogues[i].Character switch {
-                //    DialogueCharacter.MEL => melSoundPerLetter,
-                //    DialogueCharacter.MAEVIS => maevisSoundPerLetter,
-                //    DialogueCharacter.BLACKBEARD => blackBeardSoundPerLetter,
-                //    _ => melSoundPerLetter
-                //};
-
-
                 characterName.text = dialogue.ListOfDialogues[i].Character.ToString(); // trocando o nome do personagem
+
+                if (!dialogue.ListOfDialogues[i].InitialDialogueSound.IsNull) RuntimeManager.PlayOneShot(dialogue.ListOfDialogues[i].InitialDialogueSound);
 
                 yield return null;
 
