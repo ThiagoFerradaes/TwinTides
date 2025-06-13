@@ -29,7 +29,9 @@ public class SceneManager : NetworkBehaviour
 
             GameObject prefab = GetPrefab(playerIndex);
             Characters typeOfCharacter = prefab == maevisPreFab ? Characters.Maevis : Characters.Mel;
-            Vector3 prefabPos = originPos.position + new Vector3(playerIndex * 3f, 8.1f, 0f);
+            Vector3 prefabPos = originPos.position + new Vector3(playerIndex * 3f, 0f, 0f);
+
+            prefabPos.y = GetFloorHeight(prefabPos) + 1f;
 
             var playerObject = Instantiate(prefab, prefabPos, Quaternion.identity);
 
@@ -60,5 +62,11 @@ public class SceneManager : NetworkBehaviour
                 return melPreFab;
             }
         }
+    }
+
+    float GetFloorHeight(Vector3 position) {
+        Ray ray = new(position + Vector3.up * 5f, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f, LayerMask.GetMask("Floor"))) return hit.point.y + 0.1f;
+        return position.y;
     }
 }
