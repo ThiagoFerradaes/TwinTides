@@ -10,6 +10,7 @@ public class TidalWatzObject : SkillObjectPrefab {
     GameObject _maevis;
     PlayerSkillManager _skillManager;
     PlayerController _pController;
+    Animator anim;
     [HideInInspector] public float acumulativeDamage;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
@@ -20,6 +21,7 @@ public class TidalWatzObject : SkillObjectPrefab {
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
             _skillManager = _maevis.GetComponent<PlayerSkillManager>();
+            anim = _maevis.GetComponentInChildren<Animator>();
             _pController = _maevis.GetComponent<PlayerController>();
         }
 
@@ -54,6 +56,9 @@ public class TidalWatzObject : SkillObjectPrefab {
 
 
         for (int i = 0; i < amountOfCuts; i++) {
+
+            anim.SetTrigger("TidalWatz");
+
             if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis)
                 PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
 
@@ -68,9 +73,14 @@ public class TidalWatzObject : SkillObjectPrefab {
             }
         }
 
-        if (_level == 4 && LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
-            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 2);
-            yield return new WaitForSeconds(_info.ImpactDuration);
+        if (_level == 4) {
+
+            anim.SetTrigger("TidalWatz");
+
+            if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
+                PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 2);
+                yield return new WaitForSeconds(_info.ImpactDuration);
+            }
         }
 
         ReturnObject();

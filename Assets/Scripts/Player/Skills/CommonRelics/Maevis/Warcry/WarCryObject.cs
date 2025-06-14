@@ -9,6 +9,7 @@ public class WarCryObject : SkillObjectPrefab {
     GameObject _maevis;
     DamageManager _dManager;
     MovementManager _mManager;
+    Animator anim;
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as Warcry;
         _level = skillLevel;
@@ -17,6 +18,7 @@ public class WarCryObject : SkillObjectPrefab {
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
             _dManager = _maevis.GetComponent<DamageManager>();
+            anim = _maevis.GetComponentInChildren<Animator>();
             _mManager = _maevis.GetComponent<MovementManager>();
         }
 
@@ -28,8 +30,9 @@ public class WarCryObject : SkillObjectPrefab {
         transform.SetParent(_maevis.transform);
         transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
 
-
         gameObject.SetActive(true);
+
+        anim.SetTrigger("WarCry");
 
         Explode();
 
