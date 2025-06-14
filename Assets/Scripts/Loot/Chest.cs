@@ -169,9 +169,7 @@ public class Chest : NetworkBehaviour {
         }
     }
     void ChooseFragment() {
-        if (LocalWhiteBoard.Instance.CheckIfAllRelicsAreMaxed()) { fragment = null; Debug.Log("All fragments");  return; }
-
-        Debug.Log("Not all fragments");
+        if (LocalWhiteBoard.Instance.CheckIfAllRelicsAreMaxed()) { fragment = null;  return; }
 
         var commonSkills = PlayerSkillConverter.Instance.ReturnCommonSkillList(LocalWhiteBoard.Instance.PlayerCharacter);
         int skillCounter = 0;

@@ -59,7 +59,6 @@ public class PlayerSkillManager : NetworkBehaviour {
     }
     public void InputCommonRelicSkillOne(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed && _dictionaryOfCooldowns[1] <= 0 && _canUseSkill.Value) {
-            Debug.Log("Button pressed");
             UseSkill(1);
         }
         

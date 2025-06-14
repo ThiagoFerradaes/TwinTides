@@ -5,7 +5,7 @@
 			<value>LetsGo_Mel</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
 			<destination>{d7e4d4a3-7ce1-4755-86d5-967750318344}</destination>
@@ -32,7 +32,7 @@
 			<destination>{0a786d72-3332-4115-a067-f0b0fa1865d9}</destination>
 		</relationship>
 		<relationship name="banks">
-			<destination>{f1ee1cbb-84fa-4fcb-bd1b-9e7c0424206d}</destination>
+			<destination>{374cd320-3992-4c80-9d9f-fbbc34562077}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{50106875-af43-423c-928e-e2e81696b17a}">
@@ -100,7 +100,6 @@
 	<object class="MixerBusEffectChain" id="{ae0c1594-4c3c-4970-9855-6879b30128d0}">
 		<relationship name="effects">
 			<destination>{daebbabb-d0dd-478e-ae0d-64a7198f2594}</destination>
-			<destination>{f6456124-145a-4833-bb6f-1fe5b3b5c8dd}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{7669470e-b673-44a0-b1b6-f260cd7d4f0f}" />
@@ -111,5 +110,4 @@
 	</object>
 	<object class="MixerBusFader" id="{b9cdeede-a44d-4229-a443-e4c9c4cf6732}" />
 	<object class="MixerBusFader" id="{daebbabb-d0dd-478e-ae0d-64a7198f2594}" />
-	<object class="SpatialiserEffect" id="{f6456124-145a-4833-bb6f-1fe5b3b5c8dd}" />
 </objects>

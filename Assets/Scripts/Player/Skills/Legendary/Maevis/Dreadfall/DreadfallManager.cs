@@ -47,8 +47,6 @@ public class DreadfallManager : SkillObjectPrefab {
 
         targetPosition.y = GetFloorHeight(targetPosition) + 1f;
 
-        Debug.Log(targetPosition);
-
         _maevis.transform.DOJump(targetPosition, _info.JumpSpeed, 1, _info.JumpDuration);
 
         yield return new WaitForSeconds(_info.JumpDuration);
