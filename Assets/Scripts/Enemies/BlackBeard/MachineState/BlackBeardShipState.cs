@@ -339,7 +339,7 @@ public class BlackBeardShipState : BlackBeardStates {
 
     #region ChangeState
 
-    private void CheckHealthToChangeState((float maxHealth, float currentHealth, float currentShield) health) {
+    private void CheckHealthToChangeState((float maxHealth, float currentHealth, float currentShield, float maxShield) health) {
         if (_parent.Lifes > 1) {
             float newHealth = health.currentHealth;
 

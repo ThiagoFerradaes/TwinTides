@@ -7,17 +7,15 @@ public class Context {
     public GameObject GameObject;
     public Transform Transform;
     public NavMeshAgent Agent;
-    public AIPath Path;
     public MovementManager MManager;
     public Blackboard Blackboard;
     public MonoBehaviour CoroutineRunner;
 
-        public static Context CreateFromGameObject(GameObject gameObject, AIPath path, Blackboard blackboard, MonoBehaviour coroutineRunner) {
+    public static Context CreateFromGameObject(GameObject gameObject, Blackboard blackboard, MonoBehaviour coroutineRunner) {
         Context context = new() {
             GameObject = gameObject,
             Transform = gameObject.transform,
             Agent = gameObject.GetComponent<NavMeshAgent>(),
-            Path = path,
             MManager = gameObject.GetComponent<MovementManager>(),
             Blackboard = blackboard,
             CoroutineRunner = coroutineRunner,
@@ -25,4 +23,5 @@ public class Context {
 
         return context;
     }
+
 }
