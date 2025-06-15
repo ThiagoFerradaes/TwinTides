@@ -6,11 +6,13 @@ public class EarthBreakerManager : SkillObjectPrefab {
     SkillContext _context;
     GameObject _maevis;
     [HideInInspector] public int _amountOfImpactsSummoned;
+    Animator anim;
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as EarthBreaker;
         _context = context;
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
+            anim = _maevis.GetComponentInChildren<Animator>();
         }
 
         SetPosition();
@@ -22,6 +24,8 @@ public class EarthBreakerManager : SkillObjectPrefab {
         transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
+
+        if (_info.animationName != null) anim.SetTrigger(_info.animationName);
 
         StartCoroutine(Duration());
     }
