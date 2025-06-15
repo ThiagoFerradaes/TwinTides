@@ -13,6 +13,7 @@ public class MenuManager : NetworkBehaviour {
 
     [Header("Atributes")]
     [SerializeField] bool isSinglePlayer;
+    private MenuSoundsManager soundManager;
 
     [Header("Change scene")]
     [SerializeField] GameObject loadingScreen;
@@ -57,6 +58,8 @@ public class MenuManager : NetworkBehaviour {
     private void Awake() {
 
         SetButtonsFunctions();
+
+        soundManager = GetComponent<MenuSoundsManager>();
     }
 
     private void SetButtonsFunctions() {
@@ -355,6 +358,8 @@ public class MenuManager : NetworkBehaviour {
             joinByCodeScreen.SetActive(false);
             waitForHostOrJoinScreen.SetActive(false);
         }
+
+        soundManager.StartLobbySound();
     }
     public void FailedToJoinOrToCreate() {
         StopCoroutine(_joinOrCreateLobbyCoroutine); ;

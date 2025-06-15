@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -15,6 +17,8 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
     MeshRenderer _mesh;
     [HideInInspector] public List<GhostlyWhispersPuddle> ActiveSkills;
     List<HealthManager> listOfEnemies = new();
+
+    EventInstance sound;
     private void Awake() {
         _mesh = GetComponent<MeshRenderer>();
     }
@@ -43,7 +47,39 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
+        DefineSound();
+
         StartCoroutine(AreaDuration());
+    }
+
+    void DefineSound() {
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
+        switch (_areaLevel) {
+            case 1:
+                if (!_info.NormalPuddleSound.IsNull) {
+                    sound = RuntimeManager.CreateInstance(_info.NormalPuddleSound);
+                    RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+                    sound.start();
+                }
+                break;
+            case 2:
+                if (!_info.SuperPuddleSound.IsNull) {
+                    sound = RuntimeManager.CreateInstance(_info.SuperPuddleSound);
+                    RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+                    sound.start();
+                }
+                break;
+            case 3:
+                if (!_info.MegaPuddleSound.IsNull) {
+                    sound = RuntimeManager.CreateInstance(_info.MegaPuddleSound);
+                    RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+                    sound.start();
+                }
+                break;
+        }
     }
 
     IEnumerator AreaDuration() {
@@ -58,7 +94,7 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
             yield return new WaitForSeconds(_info.AreaDurationLevel4);
         }
 
-        End();
+        ReturnObject();
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -88,6 +124,7 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
             _areaLevel = 2;
         }
         DefineMaterial();
+        DefineSound();
     }
 
     void DefineMaterial() {
@@ -129,10 +166,10 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
         if (!other.CompareTag("Enemy")) return;
         if (!other.TryGetComponent<HealthManager>(out HealthManager health)) return;
 
-        if (listOfEnemies.Contains(health)) listOfEnemies.Remove(health); 
+        if (listOfEnemies.Contains(health)) listOfEnemies.Remove(health);
     }
 
-    void End() {
+    public override void ReturnObject() {
         ActiveSkills.Clear();
 
         _areaLevel = 0;
@@ -141,7 +178,12 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
 
         listOfEnemies.Clear();
 
-        ReturnObject();
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            sound.release();
+        }
+
+        base.ReturnObject();
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

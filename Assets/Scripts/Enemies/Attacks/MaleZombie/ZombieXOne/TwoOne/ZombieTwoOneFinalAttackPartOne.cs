@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ public class ZombieTwoOneFinalAttackPartOne : EnemyAttackPrefab
         transform.SetPositionAndRotation(pos, parent.transform.rotation);
 
         gameObject.SetActive(true);
+
+        if (!_info.FinalPunchOneSound.IsNull) RuntimeManager.PlayOneShot(_info.FinalPunchOneSound, transform.position);
 
         StartCoroutine(Duration());
     }

@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -26,6 +27,8 @@ public class CrimsonTideExplosion : SkillObjectPrefab {
         transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
+
+        if (!_info.ExplosionSound.IsNull) RuntimeManager.PlayOneShot(_info.ExplosionSound, transform.position);
 
         StartCoroutine(Duration());
     }

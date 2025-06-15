@@ -38,12 +38,33 @@ MonoBehaviour:
   PunchDamage: 10
   PunchAreaDuration: 0.3
   PunchAreaOffSett: 1.8
+  PunchSound:
+    Guid:
+      Data1: 394664348
+      Data2: 1262963481
+      Data3: 69703070
+      Data4: 1845273511
+    Path: event:/Maevis/Skills/CrimsonTide/Punch_CrimsonTide
   DashDuration: 0.2
   DashSpeed: 50
   DashDamage: 5
+  DashSound:
+    Guid:
+      Data1: -1070290619
+      Data2: 1162218078
+      Data3: 1708554145
+      Data4: -484682112
+    Path: event:/Maevis/Skills/CrimsonTide/Dash_CrimsonTide
   ExplosionDamage: 20
   ExplosionDuration: 0.1
   ExplosionRadius: 10
+  ExplosionSound:
+    Guid:
+      Data1: -1098904552
+      Data2: 1109317903
+      Data3: 1848451221
+      Data4: -994786650
+    Path: event:/Maevis/Skills/CrimsonTide/Explosao_CrimsonTide
   PathDamagePerTick: 1
   PathDuration: 1.8
   PathDamageInterval: 0.1

@@ -10,6 +10,7 @@ public class PauseMenuInGame : NetworkBehaviour {
     [SerializeField] GameObject pauseScreen;
     [SerializeField] Button pauseButton;
     [SerializeField] Button continueButton;
+    [SerializeField] Texture2D normalMouse, aimMouse;
 
     [Header("Configuration Menu")]
     [SerializeField] GameObject configurationScreen;
@@ -20,6 +21,7 @@ public class PauseMenuInGame : NetworkBehaviour {
     [SerializeField] float loadingTime;
     [SerializeField] GameObject loadingScreen, leavePopUp;
     [SerializeField] Button leaveButton, noButtonPopUpLeave;
+
 
     readonly NetworkVariable<bool> _isPaused = new(false);
     #endregion
@@ -79,10 +81,12 @@ public class PauseMenuInGame : NetworkBehaviour {
             Time.timeScale = 0f;
             ResetScreens();
             pauseScreen.SetActive(true);
+            Cursor.SetCursor(normalMouse, Vector2.zero, CursorMode.Auto);
         }
         else {
             Time.timeScale = 1f;
             TurnOffScreens();
+            if (LocalWhiteBoard.Instance.IsAiming) Cursor.SetCursor(aimMouse, Vector2.zero, CursorMode.Auto);
         }
     }
     void ResetScreens() {

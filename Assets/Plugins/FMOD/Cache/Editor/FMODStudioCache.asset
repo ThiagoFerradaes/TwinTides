@@ -1,78 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6378326184708481569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 638838967789518353
-  FileSizes: []
-  Exists: 1
---- !u!114 &-5964313129115909455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Music.bank
-  m_EditorClassIdentifier: 
-  Path: Desktop/Music.bank
-  Name: Music
-  StudioPath: bank:/Music
-  lastModified: 638838967789587414
-  FileSizes: []
-  Exists: 1
---- !u!114 &-5819652958376990923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/SFXs.bank
-  m_EditorClassIdentifier: 
-  Path: Desktop/SFXs.bank
-  Name: SFXs
-  StudioPath: bank:/SFXs
-  lastModified: 638838967789608963
-  FileSizes: []
-  Exists: 1
---- !u!114 &-5143049347302004422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Dialogue.bank
-  m_EditorClassIdentifier: 
-  Path: Desktop/Dialogue.bank
-  Name: Dialogue
-  StudioPath: bank:/Dialogue
-  lastModified: 638838967789461194
-  FileSizes: []
-  Exists: 1
---- !u!114 &-358159203547477836
+--- !u!114 &-9099750483014022574
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -82,24 +10,1960 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Test
+  m_Name: event:/Mel/Skills/EtheralShade/TotemCrescendo_EtheralShade
   m_EditorClassIdentifier: 
-  Path: event:/Test
+  Path: event:/Mel/Skills/EtheralShade/TotemCrescendo_EtheralShade
   Guid:
-    Data1: -42852159
-    Data2: 1217815492
-    Data3: 1373731768
-    Data4: 796129288
+    Data1: 239055294
+    Data2: 1229703379
+    Data3: 426430607
+    Data4: -114816648
   Banks:
-  - {fileID: -6378326184708481569}
-  - {fileID: -5964313129115909455}
-  IsStream: 1
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-8921200137414386814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/CenarioInteragiveis/UnlockTotem
+  m_EditorClassIdentifier: 
+  Path: event:/CenarioInteragiveis/UnlockTotem
+  Guid:
+    Data1: 1534284933
+    Data2: 1107189631
+    Data3: 1156681135
+    Data4: -48412866
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-8475909359442519919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Dash
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Dash
+  Guid:
+    Data1: -781312409
+    Data2: 1244788394
+    Data3: -60155259
+    Data4: -464690700
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &-8186526393818445235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/MaevisAndando
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/MaevisAndando
+  Guid:
+    Data1: -131346410
+    Data2: 1102067256
+    Data3: 21349549
+    Data4: -866388102
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-8128431926446193322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/PocoDeOferecimento/EntrarNoPoco
+  m_EditorClassIdentifier: 
+  Path: event:/UI/PocoDeOferecimento/EntrarNoPoco
+  Guid:
+    Data1: 434757097
+    Data2: 1144997662
+    Data3: 214612887
+    Data4: -1506899665
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 96052
+  Length: 0
+--- !u!114 &-7919375178253335840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/BombaCaindo_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/BombaCaindo_BarbaNegra
+  Guid:
+    Data1: -327990911
+    Data2: 1268459585
+    Data3: -1283377480
+    Data4: 1278835558
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7609549790648890686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/Passos_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/Passos_BarbaNegra
+  Guid:
+    Data1: -1917532991
+    Data2: 1159572844
+    Data3: -284539776
+    Data4: -1011081179
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7594323814935034840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Skills/GhostlyWhisper/PocaNivel2_GhostlyWhisper
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Skills/GhostlyWhisper/PocaNivel2_GhostlyWhisper
+  Guid:
+    Data1: 1199625969
+    Data2: 1097922496
+    Data3: 1390449042
+    Data4: 1364878661
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-7277186767684568596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/PocoDeOferecimento/Upar
+  m_EditorClassIdentifier: 
+  Path: event:/UI/PocoDeOferecimento/Upar
+  Guid:
+    Data1: -1721165663
+    Data2: 1292776659
+    Data3: -1480781691
+    Data4: -563574013
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7216071416404570559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Falas/TakeThat_Mel
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Falas/TakeThat_Mel
+  Guid:
+    Data1: -1473859739
+    Data2: 1185433333
+    Data3: 1957441456
+    Data4: -239846988
+  Banks:
+  - {fileID: 4668814101094752204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-7149868965433159037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MusicasDeFundo/MenuMusica
+  m_EditorClassIdentifier: 
+  Path: event:/MusicasDeFundo/MenuMusica
+  Guid:
+    Data1: 284535149
+    Data2: 1218399784
+    Data3: 2050892715
+    Data4: 1847705658
+  Banks:
+  - {fileID: 2242654011554485442}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7007898685832040225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Skills/WardStone/WardStone
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Skills/WardStone/WardStone
+  Guid:
+    Data1: 255997741
+    Data2: 1222480519
+    Data3: -13851986
+    Data4: 1144596322
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &-6999028848449864355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/CenarioInteragiveis/AbrirBauRaro
+  m_EditorClassIdentifier: 
+  Path: event:/CenarioInteragiveis/AbrirBauRaro
+  Guid:
+    Data1: -2035531863
+    Data2: 1210633020
+    Data3: 619114628
+    Data4: 456651314
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-6713872604805545446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigaRanged/RangedPocaDEDano
+  m_EditorClassIdentifier: 
+  Path: event:/InimigaRanged/RangedPocaDEDano
+  Guid:
+    Data1: -1219422011
+    Data2: 1188676843
+    Data3: 800914840
+    Data4: 744447112
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-6701382553224090541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeJump
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeJump
+  Guid:
+    Data1: 1140911699
+    Data2: 1113015371
+    Data3: -1707690880
+    Data4: 1471483734
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-6673856625755748219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MusicasDeFundo/Gaivotas
+  m_EditorClassIdentifier: 
+  Path: event:/MusicasDeFundo/Gaivotas
+  Guid:
+    Data1: 613359999
+    Data2: 1234793208
+    Data3: 1713279629
+    Data4: 718328064
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6531063613736132047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/Impacto_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/Impacto_BarbaNegra
+  Guid:
+    Data1: -469269154
+    Data2: 1074862752
+    Data3: -1776204902
+    Data4: 809206638
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &-6531009999355939750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Falas/Risada2_Mel
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Falas/Risada2_Mel
+  Guid:
+    Data1: 1021412727
+    Data2: 1186431107
+    Data3: 2014718370
+    Data4: -797254953
+  Banks:
+  - {fileID: 4668814101094752204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-6396874691012896376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeSocoBEMmaisForte
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeSocoBEMmaisForte
+  Guid:
+    Data1: 1099284116
+    Data2: 1101079443
+    Data3: -746467197
+    Data4: -1008573835
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-6188057655087446138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Skills/EtheralShade/TotemNoChao_EtheralShade
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Skills/EtheralShade/TotemNoChao_EtheralShade
+  Guid:
+    Data1: -375565791
+    Data2: 1219966470
+    Data3: -1950408064
+    Data4: 628240842
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-6092215849599768259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/ExAtaqueBalas_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/ExAtaqueBalas_BarbaNegra
+  Guid:
+    Data1: 1457374420
+    Data2: 1134969485
+    Data3: 1551568020
+    Data4: 507455337
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6072824650888237009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/BombaQuicando_barbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/BombaQuicando_barbaNegra
+  Guid:
+    Data1: -1662821407
+    Data2: 1234915045
+    Data3: 1147226290
+    Data4: -1738310906
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6024432668270723957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Skills/EtheralShade/Cura_EtheralShade
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Skills/EtheralShade/Cura_EtheralShade
+  Guid:
+    Data1: 1052801316
+    Data2: 1168483555
+    Data3: -476703574
+    Data4: -419432387
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-5870036940314282141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/TomandoDano
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/TomandoDano
+  Guid:
+    Data1: 1631325296
+    Data2: 1214333799
+    Data3: 943618481
+    Data4: -701322727
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5638447259976007548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/CenarioInteragiveis/AbrirBauNormal
+  m_EditorClassIdentifier: 
+  Path: event:/CenarioInteragiveis/AbrirBauNormal
+  Guid:
+    Data1: 666582501
+    Data2: 1083767298
+    Data3: 270471594
+    Data4: -1990137639
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-5605403626837457971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/TwinTides/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638855213826136261
+  FileSizes:
+  - Name: Desktop
+    Value: 8328
+  Exists: 1
+--- !u!114 &-5563174526674965604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/CrimsonTide/Punch_CrimsonTide
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/CrimsonTide/Punch_CrimsonTide
+  Guid:
+    Data1: 394664348
+    Data2: 1262963481
+    Data3: 69703070
+    Data4: 1845273511
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-5490957531832899977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/BombaMenorExplodindo_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/BombaMenorExplodindo_BarbaNegra
+  Guid:
+    Data1: -974265978
+    Data2: 1332893750
+    Data3: -595249510
+    Data4: -1734156967
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5349570898609177225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/CanhaoAtirandoPraCima_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/CanhaoAtirandoPraCima_BarbaNegra
+  Guid:
+    Data1: -1449308650
+    Data2: 1146755860
+    Data3: -892368235
+    Data4: -1300586858
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5239038965753804644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeAtaque
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeAtaque
+  Guid:
+    Data1: -735897583
+    Data2: 1197704776
+    Data3: -1710317892
+    Data4: 511372140
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-4745844212975708686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeStunPunch
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeStunPunch
+  Guid:
+    Data1: -1090157754
+    Data2: 1258563277
+    Data3: 1487367315
+    Data4: 783882963
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-4629851376720581949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Falas/BackOff_Maevis
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Falas/BackOff_Maevis
+  Guid:
+    Data1: -2012452670
+    Data2: 1185104746
+    Data3: 983164836
+    Data4: 1368203177
+  Banks:
+  - {fileID: 4668814101094752204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4627612509674217522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/MaevisEspada
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/MaevisEspada
+  Guid:
+    Data1: 1763486092
+    Data2: 1323628863
+    Data3: 1965671615
+    Data4: -1291891265
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &-4599313250934063125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/Smash_Melee
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/Smash_Melee
+  Guid:
+    Data1: -726125501
+    Data2: 1288663891
+    Data3: -1479377258
+    Data4: 1868275936
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4554645409572284632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeAndando 2
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeAndando 2
+  Guid:
+    Data1: -1118151243
+    Data2: 1314818339
+    Data3: -570306169
+    Data4: -1579902811
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-4529700040604668838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/PocoDeOferecimento/Cura
+  m_EditorClassIdentifier: 
+  Path: event:/UI/PocoDeOferecimento/Cura
+  Guid:
+    Data1: 1169665586
+    Data2: 1233528704
+    Data3: -591615318
+    Data4: -722960538
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4477231158120456043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Falas/Risada1_Mel
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Falas/Risada1_Mel
+  Guid:
+    Data1: 1658779453
+    Data2: 1126601190
+    Data3: -1214527574
+    Data4: -1981070732
+  Banks:
+  - {fileID: 4668814101094752204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-4374316722615339871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/TomandoDano_Mel
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/TomandoDano_Mel
+  Guid:
+    Data1: 1416337328
+    Data2: 1199306256
+    Data3: 2064043693
+    Data4: -1355207073
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-4363849271804971848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/SelecaoPersonagem/Ready
+  m_EditorClassIdentifier: 
+  Path: event:/UI/SelecaoPersonagem/Ready
+  Guid:
+    Data1: 377301712
+    Data2: 1092923435
+    Data3: 264698815
+    Data4: -1403690705
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4238057208626917724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/Dash_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/Dash_BarbaNegra
+  Guid:
+    Data1: 1549480682
+    Data2: 1124740857
+    Data3: 1623700359
+    Data4: 1395244272
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4223060449130654601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigaRanged/RangedAndando
+  m_EditorClassIdentifier: 
+  Path: event:/InimigaRanged/RangedAndando
+  Guid:
+    Data1: -1388392885
+    Data2: 1099323583
+    Data3: 969538185
+    Data4: 1298210483
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-3990671864349660720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/OleoDerramando_Melee
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/OleoDerramando_Melee
+  Guid:
+    Data1: -1192923092
+    Data2: 1260666919
+    Data3: 1592291497
+    Data4: 506662364
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &-3962703408280748240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigaRanged/TiroRanged
+  m_EditorClassIdentifier: 
+  Path: event:/InimigaRanged/TiroRanged
+  Guid:
+    Data1: -545915499
+    Data2: 1248120260
+    Data3: 1745904268
+    Data4: -221102414
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-3926348343217174053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Falas/Huh_Maevis
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Falas/Huh_Maevis
+  Guid:
+    Data1: -750429502
+    Data2: 1132503481
+    Data3: -202211444
+    Data4: 1139150650
+  Banks:
+  - {fileID: 4668814101094752204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &-3755568459609301000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/MaevisTiro
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/MaevisTiro
+  Guid:
+    Data1: 913774113
+    Data2: 1123739220
+    Data3: -254885729
+    Data4: -931922692
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &-3755302324760205906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigaRanged/Metralhadora_Ranged
+  m_EditorClassIdentifier: 
+  Path: event:/InimigaRanged/Metralhadora_Ranged
+  Guid:
+    Data1: 984526659
+    Data2: 1329987503
+    Data3: -415152249
+    Data4: 27480247
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &-3666319447083395245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Skills/EtheralShade/ExplosaoDeDano_EtheralShade
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Skills/EtheralShade/ExplosaoDeDano_EtheralShade
+  Guid:
+    Data1: 97543700
+    Data2: 1234791544
+    Data3: 1149841834
+    Data4: -753300923
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-3658786190843575165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Skills/SpiritCOnvergance/Sumonando_SpiritConvergence
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Skills/SpiritCOnvergance/Sumonando_SpiritConvergence
+  Guid:
+    Data1: -2050920873
+    Data2: 1129419035
+    Data3: 349377412
+    Data4: -733001419
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-3615276888813936949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/Onda_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/Onda_BarbaNegra
+  Guid:
+    Data1: 783914240
+    Data2: 1225428283
+    Data3: 83543689
+    Data4: 952639425
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3542005671387435258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/FallenBanner/Buff_FallenBanner
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/FallenBanner/Buff_FallenBanner
+  Guid:
+    Data1: 2035913683
+    Data2: 1300826412
+    Data3: 912042125
+    Data4: 179050556
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-3297126141330120525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Falas/Humpf_maevis
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Falas/Humpf_maevis
+  Guid:
+    Data1: 1363691982
+    Data2: 1239480265
+    Data3: -1832000860
+    Data4: -749422435
+  Banks:
+  - {fileID: 4668814101094752204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-3292164189314149288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/CriarOnda_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/CriarOnda_BarbaNegra
+  Guid:
+    Data1: 1944756294
+    Data2: 1184141824
+    Data3: 944308648
+    Data4: -2130279448
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3106327953497357577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/AncoraRodando
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/AncoraRodando
+  Guid:
+    Data1: 887535544
+    Data2: 1173676756
+    Data3: -104404561
+    Data4: -619494442
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3004092508317920299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/PocoDeOferecimento/Exit
+  m_EditorClassIdentifier: 
+  Path: event:/UI/PocoDeOferecimento/Exit
+  Guid:
+    Data1: -1271926234
+    Data2: 1191303697
+    Data3: -498701159
+    Data4: -318437566
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2916050629733194129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/EchoBlaast/ExplosaoMenor_Exhoblast
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/EchoBlaast/ExplosaoMenor_Exhoblast
+  Guid:
+    Data1: -1079480535
+    Data2: 1305995025
+    Data3: -216948081
+    Data4: -1637819489
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-2697389200558474117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Skills/PhantomAura/PhantomAura2
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Skills/PhantomAura/PhantomAura2
+  Guid:
+    Data1: 1250208362
+    Data2: 1226897386
+    Data3: -12112228
+    Data4: -1831001173
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-2410064725382925844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Skills/GhostlyWhisper/PocaNivel3_GhostlyWhisper
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Skills/GhostlyWhisper/PocaNivel3_GhostlyWhisper
+  Guid:
+    Data1: 1033561943
+    Data2: 1175714766
+    Data3: -941357422
+    Data4: -613472056
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-2376361267478015440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/PocoDeOferecimento/TrocarEquipado
+  m_EditorClassIdentifier: 
+  Path: event:/UI/PocoDeOferecimento/TrocarEquipado
+  Guid:
+    Data1: 1061541290
+    Data2: 1220698762
+    Data3: -1618937426
+    Data4: -139030179
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2356531216509250436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Skills/PhantomAura/PhantomAura1
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Skills/PhantomAura/PhantomAura1
+  Guid:
+    Data1: -1640787804
+    Data2: 1158388322
+    Data3: -71888754
+    Data4: -2066528588
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-2260100283989603420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/CrimsonTide/Dash_CrimsonTide
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/CrimsonTide/Dash_CrimsonTide
+  Guid:
+    Data1: -1070290619
+    Data2: 1162218078
+    Data3: 1708554145
+    Data4: -484682112
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-2219569490638369742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Stunada
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Stunada
+  Guid:
+    Data1: 1336058290
+    Data2: 1304659730
+    Data3: -275068782
+    Data4: -1854863017
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &-2206604240139514807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/MelAndandoAgua
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/MelAndandoAgua
+  Guid:
+    Data1: -2024618764
+    Data2: 1243081976
+    Data3: 1657994152
+    Data4: 1481566880
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &-2204599384381422343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/CampoDEFogo_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/CampoDEFogo_BarbaNegra
+  Guid:
+    Data1: -661797221
+    Data2: 1257832108
+    Data3: -1358274684
+    Data4: 2129359480
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1868736275310071508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeFumaca
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeFumaca
+  Guid:
+    Data1: 54483697
+    Data2: 1232518574
+    Data3: -2050270848
+    Data4: -561824459
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-1783462530172346267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/EchoBlaast/Explosao_Echoblast
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/EchoBlaast/Explosao_Echoblast
+  Guid:
+    Data1: 1057795556
+    Data2: 1279090359
+    Data3: 1656150956
+    Data4: -844427031
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-1635394613233149795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Falas/LetsGo_Mel
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Falas/LetsGo_Mel
+  Guid:
+    Data1: 324426447
+    Data2: 1176168687
+    Data3: 1785030841
+    Data4: -980142547
+  Banks:
+  - {fileID: 4668814101094752204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-1535776375547349496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/AncoraIndo
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/AncoraIndo
+  Guid:
+    Data1: 2045850958
+    Data2: 1335341013
+    Data3: 1713074560
+    Data4: -701090685
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1460511447121932358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/Warcry/Grito_WarCry
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/Warcry/Grito_WarCry
+  Guid:
+    Data1: 1165400176
+    Data2: 1241167054
+    Data3: -2050878048
+    Data4: 955552411
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-1348247967196300485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/TemporizadorBombas_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/TemporizadorBombas_BarbaNegra
+  Guid:
+    Data1: 1643814340
+    Data2: 1304969758
+    Data3: -833928040
+    Data4: 2082415748
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1172544431012775436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeJogandoVeneno
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeJogandoVeneno
+  Guid:
+    Data1: -739574678
+    Data2: 1196072135
+    Data3: 1255430072
+    Data4: -1167005033
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-627764541133770492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeAvanco
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeAvanco
+  Guid:
+    Data1: 1822475443
+    Data2: 1149959737
+    Data3: -286775920
+    Data4: 1913030399
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &-457434754357407961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Menu/SelecionarOpcao
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Menu/SelecionarOpcao
+  Guid:
+    Data1: 1910035298
+    Data2: 1088125791
+    Data3: 562281601
+    Data4: 1207720390
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-160310831223210492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigaRanged/RangedPocinhaDeSlow
+  m_EditorClassIdentifier: 
+  Path: event:/InimigaRanged/RangedPocinhaDeSlow
+  Guid:
+    Data1: 538440374
+    Data2: 1171355264
+    Data3: 957542811
+    Data4: 1231776236
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,22 +1977,1761 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 7033191541010539315}
-  - {fileID: -6378326184708481569}
-  - {fileID: 5662518714925561941}
-  - {fileID: -5143049347302004422}
-  - {fileID: -5964313129115909455}
-  - {fileID: -5819652958376990923}
+  - {fileID: -5605403626837457971}
+  - {fileID: 6405691610459641594}
+  - {fileID: 4668814101094752204}
+  - {fileID: 3442993752769086855}
+  - {fileID: 2242654011554485442}
+  - {fileID: 4076058165265293126}
   EditorEvents:
-  - {fileID: -358159203547477836}
+  - {fileID: -7149868965433159037}
+  - {fileID: 5278150872058308108}
+  - {fileID: 9060647231533534041}
+  - {fileID: -8186526393818445235}
+  - {fileID: 2890454717129226484}
+  - {fileID: 3803481216751544229}
+  - {fileID: -5239038965753804644}
+  - {fileID: 4427388642703608602}
+  - {fileID: -3666319447083395245}
+  - {fileID: 2862063979402000176}
+  - {fileID: -2206604240139514807}
+  - {fileID: -4627612509674217522}
+  - {fileID: 6669543523113570978}
+  - {fileID: 1219801978750155748}
+  - {fileID: -6188057655087446138}
+  - {fileID: 2845855567003293388}
+  - {fileID: 3924163281807560269}
+  - {fileID: -6024432668270723957}
+  - {fileID: -3004092508317920299}
+  - {fileID: -2916050629733194129}
+  - {fileID: 5339021907917381606}
+  - {fileID: 199731761863901689}
+  - {fileID: -7007898685832040225}
+  - {fileID: 5761117481126742202}
+  - {fileID: 7029376704809753778}
+  - {fileID: 1848360322189294350}
+  - {fileID: -4529700040604668838}
+  - {fileID: 2374571409046582956}
+  - {fileID: -5638447259976007548}
+  - {fileID: 2584368681195449509}
+  - {fileID: -2260100283989603420}
+  - {fileID: -4745844212975708686}
+  - {fileID: -4223060449130654601}
+  - {fileID: -6701382553224090541}
+  - {fileID: 7767844011508341747}
+  - {fileID: 6543122679345808285}
+  - {fileID: -3658786190843575165}
+  - {fileID: -2410064725382925844}
+  - {fileID: 6949718531951981031}
+  - {fileID: 1345187206770878385}
+  - {fileID: 8145489169916834829}
+  - {fileID: -457434754357407961}
+  - {fileID: 3815026615930711825}
+  - {fileID: 3870501483840656684}
+  - {fileID: -8475909359442519919}
+  - {fileID: -2697389200558474117}
+  - {fileID: -1172544431012775436}
+  - {fileID: 2300006846267218449}
+  - {fileID: -3755568459609301000}
+  - {fileID: -6673856625755748219}
+  - {fileID: -8921200137414386814}
+  - {fileID: 8172807993350042078}
+  - {fileID: -6396874691012896376}
+  - {fileID: -3962703408280748240}
+  - {fileID: 2120694234333438421}
+  - {fileID: -5563174526674965604}
+  - {fileID: 3815908726157725991}
+  - {fileID: -7277186767684568596}
+  - {fileID: 1101711551073252757}
+  - {fileID: 8873517080755955969}
+  - {fileID: -2356531216509250436}
+  - {fileID: 8220571703768222196}
+  - {fileID: 6558377722292996097}
+  - {fileID: 849625955589952182}
+  - {fileID: 9014943724434578892}
+  - {fileID: -2376361267478015440}
+  - {fileID: -2219569490638369742}
+  - {fileID: -627764541133770492}
+  - {fileID: -4554645409572284632}
+  - {fileID: -6999028848449864355}
+  - {fileID: -160310831223210492}
+  - {fileID: 778581119766249975}
+  - {fileID: 3036945067846086515}
+  - {fileID: 931822105912567865}
+  - {fileID: -9099750483014022574}
+  - {fileID: -6713872604805545446}
+  - {fileID: 984840412953070639}
+  - {fileID: -3542005671387435258}
+  - {fileID: 6655659588373765362}
+  - {fileID: 73225528144663759}
+  - {fileID: -1783462530172346267}
+  - {fileID: 5684399668444446472}
+  - {fileID: 2863080358005351372}
+  - {fileID: -1868736275310071508}
+  - {fileID: 8029246997314040591}
+  - {fileID: -7594323814935034840}
+  - {fileID: 1339603536798910720}
+  - {fileID: -4477231158120456043}
+  - {fileID: -7216071416404570559}
+  - {fileID: -6531009999355939750}
+  - {fileID: -3926348343217174053}
+  - {fileID: -4629851376720581949}
+  - {fileID: -3297126141330120525}
+  - {fileID: 5455167770195031556}
+  - {fileID: -1635394613233149795}
+  - {fileID: 4039982743890773924}
+  - {fileID: 185772377382215226}
+  - {fileID: 3182708855023567792}
+  - {fileID: -3615276888813936949}
+  - {fileID: -5349570898609177225}
+  - {fileID: 5785008431835810413}
+  - {fileID: 8628193840159586364}
+  - {fileID: 3163573397623626348}
+  - {fileID: 3991586637401937202}
+  - {fileID: -3990671864349660720}
+  - {fileID: 7610469383354105030}
+  - {fileID: -4599313250934063125}
+  - {fileID: -3755302324760205906}
+  - {fileID: -3292164189314149288}
+  - {fileID: -1535776375547349496}
+  - {fileID: 4448924059252043911}
+  - {fileID: -6531063613736132047}
+  - {fileID: 5347703676961848946}
+  - {fileID: 5388743822508095872}
+  - {fileID: 1379929482353859752}
+  - {fileID: -5870036940314282141}
+  - {fileID: -1460511447121932358}
+  - {fileID: -7919375178253335840}
+  - {fileID: 5380360797949747565}
+  - {fileID: -5490957531832899977}
+  - {fileID: 6977991588083868781}
+  - {fileID: -2204599384381422343}
+  - {fileID: 34607856170231742}
+  - {fileID: -4374316722615339871}
+  - {fileID: -3106327953497357577}
+  - {fileID: -7609549790648890686}
+  - {fileID: -1348247967196300485}
+  - {fileID: 223612383568884314}
+  - {fileID: -4363849271804971848}
+  - {fileID: 6582440375210502829}
+  - {fileID: -6092215849599768259}
+  - {fileID: 1845187137768095163}
+  - {fileID: 7809673516859330378}
+  - {fileID: -6072824650888237009}
+  - {fileID: -8128431926446193322}
+  - {fileID: -4238057208626917724}
+  - {fileID: 1014414513131976440}
+  - {fileID: 7651348895792641759}
+  - {fileID: 8710192123546511220}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -6378326184708481569}
+  - {fileID: 3442993752769086855}
   StringsBanks:
-  - {fileID: 7033191541010539315}
-  cacheTime: 638838967789608963
-  cacheVersion: 131621
---- !u!114 &5662518714925561941
+  - {fileID: -5605403626837457971}
+  cacheVersion: 131847
+  cacheTime: 638855213827027658
+  SerializableEventsDict:
+  - key: event:/MusicasDeFundo/MenuMusica
+    index: 0
+  - key: event:/InimigoMelee/MeleeGemendo
+    index: 1
+  - key: event:/CenarioInteragiveis/PocoDeOferecimento
+    index: 2
+  - key: event:/Maevis/MaevisAndando
+    index: 3
+  - key: event:/Maevis/Skills/FallenBanner/ColocarChao_FallenBanner
+    index: 4
+  - key: event:/Maevis/Skills/HullBreaker/Escudo_HullBreaker
+    index: 5
+  - key: event:/InimigoMelee/MeleeAtaque
+    index: 6
+  - key: event:/InimigoMelee/MeleeCorteCircular
+    index: 7
+  - key: event:/Mel/Skills/EtheralShade/ExplosaoDeDano_EtheralShade
+    index: 8
+  - key: event:/Maevis/Skills/CrimsonTide/Explosao_CrimsonTide
+    index: 9
+  - key: event:/Mel/MelAndandoAgua
+    index: 10
+  - key: event:/Maevis/MaevisEspada
+    index: 11
+  - key: event:/Maevis/Skills/EarthShatter/EarthShatter
+    index: 12
+  - key: event:/InimigoMelee/MeleeSocoMaisForte
+    index: 13
+  - key: event:/Mel/Skills/EtheralShade/TotemNoChao_EtheralShade
+    index: 14
+  - key: event:/Mel/AtaqueBasico
+    index: 15
+  - key: event:/MusicasDeFundo/Ondas
+    index: 16
+  - key: event:/Mel/Skills/EtheralShade/Cura_EtheralShade
+    index: 17
+  - key: event:/UI/PocoDeOferecimento/Exit
+    index: 18
+  - key: event:/Maevis/Skills/EchoBlaast/ExplosaoMenor_Exhoblast
+    index: 19
+  - key: event:/MusicasDeFundo/SelecaoDePersonagem
+    index: 20
+  - key: event:/UI/Menu/TrocarOpcao
+    index: 21
+  - key: event:/Mel/Skills/WardStone/WardStone
+    index: 22
+  - key: event:/InimigaRanged/RangedExplosao
+    index: 23
+  - key: event:/Maevis/Skills/DreadFall/Impacto_Dreadfall
+    index: 24
+  - key: event:/Mel/Skills/SpiritCOnvergance/Melee_SpiritConvergance
+    index: 25
+  - key: event:/UI/PocoDeOferecimento/Cura
+    index: 26
+  - key: event:/InimigoMelee/MeleeImpacto
+    index: 27
+  - key: event:/CenarioInteragiveis/AbrirBauNormal
+    index: 28
+  - key: event:/InimigoMelee/MeleeTomandoDano
+    index: 29
+  - key: event:/Maevis/Skills/CrimsonTide/Dash_CrimsonTide
+    index: 30
+  - key: event:/InimigoMelee/MeleeStunPunch
+    index: 31
+  - key: event:/InimigaRanged/RangedAndando
+    index: 32
+  - key: event:/InimigoMelee/MeleeJump
+    index: 33
+  - key: event:/Mel/MelDash
+    index: 34
+  - key: event:/InimigoMelee/MeleePunch
+    index: 35
+  - key: event:/Mel/Skills/SpiritCOnvergance/Sumonando_SpiritConvergence
+    index: 36
+  - key: event:/Mel/Skills/GhostlyWhisper/PocaNivel3_GhostlyWhisper
+    index: 37
+  - key: event:/Mel/Skills/SpiritCOnvergance/Ranged_SpiritConvergence
+    index: 38
+  - key: event:/InimigaRanged/RangedOleoPegandoFogo
+    index: 39
+  - key: event:/Maevis/Skills/DreadFall/Fogo_Dreadfall
+    index: 40
+  - key: event:/UI/Menu/SelecionarOpcao
+    index: 41
+  - key: event:/Maevis/Skills/TidalWaltz/Corte_TidalWaltz
+    index: 42
+  - key: event:/InimigaRanged/RangedBloqueiaBuff
+    index: 43
+  - key: event:/Maevis/Dash
+    index: 44
+  - key: event:/Mel/Skills/PhantomAura/PhantomAura2
+    index: 45
+  - key: event:/InimigoMelee/MeleeJogandoVeneno
+    index: 46
+  - key: event:/InimigoMelee/MeleeJogandoBarril
+    index: 47
+  - key: event:/Maevis/MaevisTiro
+    index: 48
+  - key: event:/MusicasDeFundo/Gaivotas
+    index: 49
+  - key: event:/CenarioInteragiveis/UnlockTotem
+    index: 50
+  - key: event:/Maevis/Skills/HullBreaker/Tremor_HullBreaker
+    index: 51
+  - key: event:/InimigoMelee/MeleeSocoBEMmaisForte
+    index: 52
+  - key: event:/InimigaRanged/TiroRanged
+    index: 53
+  - key: event:/Mel/Skills/DivinePurge/DivinePurge
+    index: 54
+  - key: event:/Maevis/Skills/CrimsonTide/Punch_CrimsonTide
+    index: 55
+  - key: event:/InimigoMelee/Stunado_Inimigo
+    index: 56
+  - key: event:/UI/PocoDeOferecimento/Upar
+    index: 57
+  - key: event:/InimigoMelee/MeleeJogandoBomba
+    index: 58
+  - key: event:/InimigaRanged/RangedPocaDEDano2
+    index: 59
+  - key: event:/Mel/Skills/PhantomAura/PhantomAura1
+    index: 60
+  - key: event:/Maevis/Skills/Warcry/Warcry
+    index: 61
+  - key: event:/CenarioInteragiveis/AbrirBauLendario
+    index: 62
+  - key: event:/InimigaRanged/RangedCura
+    index: 63
+  - key: event:/Mel/Skills/BlackHole/BlackHole
+    index: 64
+  - key: event:/UI/PocoDeOferecimento/TrocarEquipado
+    index: 65
+  - key: event:/Maevis/Stunada
+    index: 66
+  - key: event:/InimigoMelee/MeleeAvanco
+    index: 67
+  - key: event:/InimigoMelee/MeleeAndando 2
+    index: 68
+  - key: event:/CenarioInteragiveis/AbrirBauRaro
+    index: 69
+  - key: event:/InimigaRanged/RangedPocinhaDeSlow
+    index: 70
+  - key: event:/InimigaRanged/RangedTiroReforcado
+    index: 71
+  - key: event:/Mel/Skills/GhostlyWhisper/PocaNivel1_GhostlyWhisper
+    index: 72
+  - key: event:/Mel/Skills/SpectralSeeds/SpectralSeeds
+    index: 73
+  - key: event:/Mel/Skills/EtheralShade/TotemCrescendo_EtheralShade
+    index: 74
+  - key: event:/InimigaRanged/RangedPocaDEDano
+    index: 75
+  - key: event:/Mel/MelAndando
+    index: 76
+  - key: event:/Maevis/Skills/FallenBanner/Buff_FallenBanner
+    index: 77
+  - key: event:/InimigoMelee/MeleeBombaDeVeneno
+    index: 78
+  - key: event:/Maevis/MaevisAndandoAgua
+    index: 79
+  - key: event:/Maevis/Skills/EchoBlaast/Explosao_Echoblast
+    index: 80
+  - key: event:/Maevis/Skills/HullBreaker/Explosao_HullBreaker
+    index: 81
+  - key: event:/Maevis/Skills/TidalWaltz/Impacto_TidalWaltz
+    index: 82
+  - key: event:/InimigoMelee/MeleeFumaca
+    index: 83
+  - key: event:/InimigaRanged/RangedTomandoDano
+    index: 84
+  - key: event:/Mel/Skills/GhostlyWhisper/PocaNivel2_GhostlyWhisper
+    index: 85
+  - key: event:/InimigoMelee/MeleeRodando
+    index: 86
+  - key: event:/Mel/Falas/Risada1_Mel
+    index: 87
+  - key: event:/Mel/Falas/TakeThat_Mel
+    index: 88
+  - key: event:/Mel/Falas/Risada2_Mel
+    index: 89
+  - key: event:/Maevis/Falas/Huh_Maevis
+    index: 90
+  - key: event:/Maevis/Falas/BackOff_Maevis
+    index: 91
+  - key: event:/Maevis/Falas/Humpf_maevis
+    index: 92
+  - key: event:/Maevis/Falas/Die_Maevis
+    index: 93
+  - key: event:/Mel/Falas/LetsGo_Mel
+    index: 94
+  - key: event:/Maevis/Falas/Laugh_Maevis
+    index: 95
+  - key: event:/Mel/Falas/Alright_Mel
+    index: 96
+  - key: event:/Maevis/Falas/NiceOne_Maevis
+    index: 97
+  - key: event:/BarbaNegra/Onda_BarbaNegra
+    index: 98
+  - key: event:/BarbaNegra/CanhaoAtirandoPraCima_BarbaNegra
+    index: 99
+  - key: event:/BarbaNegra/AncoraImpacto_BarbaNegra
+    index: 100
+  - key: event:/BarbaNegra/BombaVoltandoProBarco_BarbaNegra
+    index: 101
+  - key: event:/BarbaNegra/CortesAndando_BarbaNegra
+    index: 102
+  - key: event:/BarbaNegra/BombaExplodindo_BarbaNegra
+    index: 103
+  - key: event:/InimigoMelee/OleoDerramando_Melee
+    index: 104
+  - key: event:/InimigoMelee/BombaVeneno_
+    index: 105
+  - key: event:/InimigoMelee/Smash_Melee
+    index: 106
+  - key: event:/InimigaRanged/Metralhadora_Ranged
+    index: 107
+  - key: event:/BarbaNegra/CriarOnda_BarbaNegra
+    index: 108
+  - key: event:/BarbaNegra/AncoraIndo
+    index: 109
+  - key: event:/UI/SelecaoPersonagem/TrocarPersonagem
+    index: 110
+  - key: event:/BarbaNegra/Impacto_BarbaNegra
+    index: 111
+  - key: event:/BarbaNegra/AncoraVoltando
+    index: 112
+  - key: event:/BarbaNegra/BarcoTomandoDano_BarbaNegra
+    index: 113
+  - key: event:/BarbaNegra/BombaImpactandoNoChao_BarbaNegra
+    index: 114
+  - key: event:/Maevis/TomandoDano
+    index: 115
+  - key: event:/Maevis/Skills/Warcry/Grito_WarCry
+    index: 116
+  - key: event:/BarbaNegra/BombaCaindo_BarbaNegra
+    index: 117
+  - key: event:/BarbaNegra/OndeBombaCai_BarbaNegra
+    index: 118
+  - key: event:/BarbaNegra/BombaMenorExplodindo_BarbaNegra
+    index: 119
+  - key: event:/Maevis/Skills/DreadFall/Pulando_DreadFall
+    index: 120
+  - key: event:/BarbaNegra/CampoDEFogo_BarbaNegra
+    index: 121
+  - key: event:/UI/PocoDeOferecimento/TrocarAba
+    index: 122
+  - key: event:/Mel/TomandoDano_Mel
+    index: 123
+  - key: event:/BarbaNegra/AncoraRodando
+    index: 124
+  - key: event:/BarbaNegra/Passos_BarbaNegra
+    index: 125
+  - key: event:/BarbaNegra/TemporizadorBombas_BarbaNegra
+    index: 126
+  - key: event:/BarbaNegra/Pula_BarbaNegra
+    index: 127
+  - key: event:/UI/SelecaoPersonagem/Ready
+    index: 128
+  - key: event:/BarbaNegra/CanhaoAtirandoPraFrente_BarbaNegra
+    index: 129
+  - key: event:/BarbaNegra/ExAtaqueBalas_BarbaNegra
+    index: 130
+  - key: event:/Maevis/Skills/TidalWaltz/CorteRapido_TidalWaltz
+    index: 131
+  - key: event:/Mel/Cura
+    index: 132
+  - key: event:/BarbaNegra/BombaQuicando_barbaNegra
+    index: 133
+  - key: event:/UI/PocoDeOferecimento/EntrarNoPoco
+    index: 134
+  - key: event:/BarbaNegra/Dash_BarbaNegra
+    index: 135
+  - key: event:/BarbaNegra/TransicaoFase_BarbaNegra
+    index: 136
+  - key: event:/BarbaNegra/Stunado_BarbaNegra
+    index: 137
+  - key: event:/UI/SelecaoPersonagem/SetSail
+    index: 138
+--- !u!114 &34607856170231742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/PocoDeOferecimento/TrocarAba
+  m_EditorClassIdentifier: 
+  Path: event:/UI/PocoDeOferecimento/TrocarAba
+  Guid:
+    Data1: -1854861399
+    Data2: 1161570856
+    Data3: 2055025332
+    Data4: -497708017
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &73225528144663759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/MaevisAndandoAgua
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/MaevisAndandoAgua
+  Guid:
+    Data1: -2001553348
+    Data2: 1229277853
+    Data3: -1323375438
+    Data4: -988480111
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &185772377382215226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Falas/Alright_Mel
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Falas/Alright_Mel
+  Guid:
+    Data1: 545034973
+    Data2: 1236024317
+    Data3: 1985970870
+    Data4: 514185434
+  Banks:
+  - {fileID: 4668814101094752204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &199731761863901689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Menu/TrocarOpcao
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Menu/TrocarOpcao
+  Guid:
+    Data1: -1510511828
+    Data2: 1255024176
+    Data3: -513902948
+    Data4: 1226173974
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &223612383568884314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/Pula_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/Pula_BarbaNegra
+  Guid:
+    Data1: -760330547
+    Data2: 1312377458
+    Data3: 1445443992
+    Data4: 366828517
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &778581119766249975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigaRanged/RangedTiroReforcado
+  m_EditorClassIdentifier: 
+  Path: event:/InimigaRanged/RangedTiroReforcado
+  Guid:
+    Data1: 2090998713
+    Data2: 1287344236
+    Data3: 512614564
+    Data4: -1149945678
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &849625955589952182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigaRanged/RangedCura
+  m_EditorClassIdentifier: 
+  Path: event:/InimigaRanged/RangedCura
+  Guid:
+    Data1: 1663980456
+    Data2: 1101890619
+    Data3: -939772485
+    Data4: -949240776
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &931822105912567865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Skills/SpectralSeeds/SpectralSeeds
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Skills/SpectralSeeds/SpectralSeeds
+  Guid:
+    Data1: 650309052
+    Data2: 1233730379
+    Data3: 555579297
+    Data4: 349775403
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &984840412953070639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/MelAndando
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/MelAndando
+  Guid:
+    Data1: 2114836013
+    Data2: 1102189525
+    Data3: 939819944
+    Data4: 605496253
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &1014414513131976440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/TransicaoFase_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/TransicaoFase_BarbaNegra
+  Guid:
+    Data1: 1529595886
+    Data2: 1083915720
+    Data3: -1635684689
+    Data4: 1153191586
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 9.400001
+  Length: 0
+--- !u!114 &1101711551073252757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeJogandoBomba
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeJogandoBomba
+  Guid:
+    Data1: 1115302562
+    Data2: 1132518644
+    Data3: 474814893
+    Data4: 1349560309
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &1219801978750155748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeSocoMaisForte
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeSocoMaisForte
+  Guid:
+    Data1: 938021918
+    Data2: 1303896770
+    Data3: -1707898728
+    Data4: -436791012
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &1339603536798910720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeRodando
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeRodando
+  Guid:
+    Data1: 1794960626
+    Data2: 1324628223
+    Data3: -873207874
+    Data4: -1523712288
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &1345187206770878385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigaRanged/RangedOleoPegandoFogo
+  m_EditorClassIdentifier: 
+  Path: event:/InimigaRanged/RangedOleoPegandoFogo
+  Guid:
+    Data1: 1807250781
+    Data2: 1253334899
+    Data3: -2047970145
+    Data4: -53655572
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &1379929482353859752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/BombaImpactandoNoChao_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/BombaImpactandoNoChao_BarbaNegra
+  Guid:
+    Data1: -1129034652
+    Data2: 1098464607
+    Data3: -1376095066
+    Data4: -1765592939
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &1845187137768095163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/TidalWaltz/CorteRapido_TidalWaltz
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/TidalWaltz/CorteRapido_TidalWaltz
+  Guid:
+    Data1: -334652710
+    Data2: 1241314191
+    Data3: -162960463
+    Data4: -303807081
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &1848360322189294350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Skills/SpiritCOnvergance/Melee_SpiritConvergance
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Skills/SpiritCOnvergance/Melee_SpiritConvergance
+  Guid:
+    Data1: -1558810320
+    Data2: 1167573233
+    Data3: -1910330716
+    Data4: -1498320518
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &2120694234333438421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Skills/DivinePurge/DivinePurge
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Skills/DivinePurge/DivinePurge
+  Guid:
+    Data1: 1338534806
+    Data2: 1277046991
+    Data3: 1131427461
+    Data4: 1317374863
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &2242654011554485442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Musics.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/TwinTides/Build/Desktop/Musics.bank
+  Name: Musics
+  StudioPath: bank:/Musics
+  lastModified: 638847161380102853
+  FileSizes:
+  - Name: Desktop
+    Value: 1391680
+  Exists: 1
+--- !u!114 &2300006846267218449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeJogandoBarril
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeJogandoBarril
+  Guid:
+    Data1: -475550101
+    Data2: 1107039000
+    Data3: 1191943083
+    Data4: 147161044
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &2374571409046582956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeImpacto
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeImpacto
+  Guid:
+    Data1: 1777940790
+    Data2: 1173115136
+    Data3: -203304292
+    Data4: 831860756
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &2584368681195449509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeTomandoDano
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeTomandoDano
+  Guid:
+    Data1: 1546890301
+    Data2: 1142906993
+    Data3: 1360575652
+    Data4: 1143295805
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &2845855567003293388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/AtaqueBasico
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/AtaqueBasico
+  Guid:
+    Data1: 2131183395
+    Data2: 1207923498
+    Data3: 1034895546
+    Data4: -463058489
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &2862063979402000176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/CrimsonTide/Explosao_CrimsonTide
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/CrimsonTide/Explosao_CrimsonTide
+  Guid:
+    Data1: -1098904552
+    Data2: 1109317903
+    Data3: 1848451221
+    Data4: -994786650
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &2863080358005351372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/TidalWaltz/Impacto_TidalWaltz
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/TidalWaltz/Impacto_TidalWaltz
+  Guid:
+    Data1: -1094576407
+    Data2: 1098728195
+    Data3: -1378642500
+    Data4: 1260479387
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &2890454717129226484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/FallenBanner/ColocarChao_FallenBanner
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/FallenBanner/ColocarChao_FallenBanner
+  Guid:
+    Data1: -971735793
+    Data2: 1114337170
+    Data3: 1623201153
+    Data4: 1274236772
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &3036945067846086515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Skills/GhostlyWhisper/PocaNivel1_GhostlyWhisper
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Skills/GhostlyWhisper/PocaNivel1_GhostlyWhisper
+  Guid:
+    Data1: 149789628
+    Data2: 1132641064
+    Data3: 550129335
+    Data4: -1637689118
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &3163573397623626348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/CortesAndando_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/CortesAndando_BarbaNegra
+  Guid:
+    Data1: 1682636067
+    Data2: 1288398855
+    Data3: 959840942
+    Data4: 1772487370
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3182708855023567792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Falas/NiceOne_Maevis
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Falas/NiceOne_Maevis
+  Guid:
+    Data1: -1365272848
+    Data2: 1339618223
+    Data3: -2137318753
+    Data4: -456917526
+  Banks:
+  - {fileID: 4668814101094752204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &3442993752769086855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/TwinTides/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638847161379768362
+  FileSizes:
+  - Name: Desktop
+    Value: 1670
+  Exists: 1
+--- !u!114 &3803481216751544229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/HullBreaker/Escudo_HullBreaker
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/HullBreaker/Escudo_HullBreaker
+  Guid:
+    Data1: -587323120
+    Data2: 1294493454
+    Data3: -346183520
+    Data4: 1433184297
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &3815026615930711825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/TidalWaltz/Corte_TidalWaltz
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/TidalWaltz/Corte_TidalWaltz
+  Guid:
+    Data1: 848221794
+    Data2: 1316126524
+    Data3: 909420425
+    Data4: -1032557876
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &3815908726157725991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/Stunado_Inimigo
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/Stunado_Inimigo
+  Guid:
+    Data1: 839482014
+    Data2: 1261978305
+    Data3: -425948737
+    Data4: -1469042463
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &3870501483840656684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigaRanged/RangedBloqueiaBuff
+  m_EditorClassIdentifier: 
+  Path: event:/InimigaRanged/RangedBloqueiaBuff
+  Guid:
+    Data1: 1063017062
+    Data2: 1247108830
+    Data3: 358514579
+    Data4: -1708052680
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &3924163281807560269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MusicasDeFundo/Ondas
+  m_EditorClassIdentifier: 
+  Path: event:/MusicasDeFundo/Ondas
+  Guid:
+    Data1: -1912740061
+    Data2: 1227338465
+    Data3: 1909103254
+    Data4: -1091015893
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 283416
+--- !u!114 &3991586637401937202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/BombaExplodindo_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/BombaExplodindo_BarbaNegra
+  Guid:
+    Data1: 918506283
+    Data2: 1236949446
+    Data3: 2050490529
+    Data4: -373919375
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4039982743890773924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Falas/Laugh_Maevis
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Falas/Laugh_Maevis
+  Guid:
+    Data1: -1625569583
+    Data2: 1288012434
+    Data3: -1658416215
+    Data4: 1284577751
+  Banks:
+  - {fileID: 4668814101094752204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4076058165265293126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/TwinTides/Build/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 638855213827027658
+  FileSizes:
+  - Name: Desktop
+    Value: 7879616
+  Exists: 1
+--- !u!114 &4427388642703608602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeCorteCircular
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeCorteCircular
+  Guid:
+    Data1: -1108425453
+    Data2: 1236870943
+    Data3: 1018035840
+    Data4: -918100841
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &4448924059252043911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/SelecaoPersonagem/TrocarPersonagem
+  m_EditorClassIdentifier: 
+  Path: event:/UI/SelecaoPersonagem/TrocarPersonagem
+  Guid:
+    Data1: 1484999254
+    Data2: 1151663691
+    Data3: 1421494182
+    Data4: -407222920
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4668814101094752204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Dialogue.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/TwinTides/Build/Desktop/Dialogue.bank
+  Name: Dialogue
+  StudioPath: bank:/Dialogue
+  lastModified: 638855213826125850
+  FileSizes:
+  - Name: Desktop
+    Value: 81024
+  Exists: 1
+--- !u!114 &5278150872058308108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeGemendo
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeGemendo
+  Guid:
+    Data1: -1031213558
+    Data2: 1308096575
+    Data3: -1048463707
+    Data4: 147838527
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &5339021907917381606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MusicasDeFundo/SelecaoDePersonagem
+  m_EditorClassIdentifier: 
+  Path: event:/MusicasDeFundo/SelecaoDePersonagem
+  Guid:
+    Data1: -2126509269
+    Data2: 1199613252
+    Data3: 1627745191
+    Data4: -27464976
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5347703676961848946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/AncoraVoltando
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/AncoraVoltando
+  Guid:
+    Data1: -1166515617
+    Data2: 1114866981
+    Data3: -37386070
+    Data4: 2127215156
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5380360797949747565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/OndeBombaCai_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/OndeBombaCai_BarbaNegra
+  Guid:
+    Data1: -1755937914
+    Data2: 1317986876
+    Data3: -10524287
+    Data4: 575015986
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5388743822508095872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/BarcoTomandoDano_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/BarcoTomandoDano_BarbaNegra
+  Guid:
+    Data1: 774279778
+    Data2: 1188021746
+    Data3: -1323521151
+    Data4: 1689030089
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5455167770195031556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Falas/Die_Maevis
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Falas/Die_Maevis
+  Guid:
+    Data1: -1911220529
+    Data2: 1206933567
+    Data3: -73285955
+    Data4: -1542400973
+  Banks:
+  - {fileID: 4668814101094752204}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5684399668444446472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/HullBreaker/Explosao_HullBreaker
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/HullBreaker/Explosao_HullBreaker
+  Guid:
+    Data1: -630288153
+    Data2: 1328899613
+    Data3: -748301682
+    Data4: 1435364756
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &5761117481126742202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigaRanged/RangedExplosao
+  m_EditorClassIdentifier: 
+  Path: event:/InimigaRanged/RangedExplosao
+  Guid:
+    Data1: 444293421
+    Data2: 1232588191
+    Data3: -1295099766
+    Data4: 1506322715
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &5785008431835810413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/AncoraImpacto_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/AncoraImpacto_BarbaNegra
+  Guid:
+    Data1: 496637727
+    Data2: 1184538141
+    Data3: -1963109222
+    Data4: 1493385889
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6405691610459641594
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,13 +3743,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Ambience.bank
   m_EditorClassIdentifier: 
-  Path: Desktop/Ambience.bank
+  Path: Assets/FMOD/TwinTides/Build/Desktop/Ambience.bank
   Name: Ambience
   StudioPath: bank:/Ambience
-  lastModified: 638838967789461194
-  FileSizes: []
+  lastModified: 638847161379768362
+  FileSizes:
+  - Name: Desktop
+    Value: 506
   Exists: 1
---- !u!114 &7033191541010539315
+--- !u!114 &6543122679345808285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,14 +3760,561 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleePunch
   m_EditorClassIdentifier: 
-  Path: Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 638838967789518353
-  FileSizes:
-  - Name: 
-    Value: 1074
-  Exists: 1
+  Path: event:/InimigoMelee/MeleePunch
+  Guid:
+    Data1: 49803093
+    Data2: 1226823249
+    Data3: -518459718
+    Data4: 572283286
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &6558377722292996097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/CenarioInteragiveis/AbrirBauLendario
+  m_EditorClassIdentifier: 
+  Path: event:/CenarioInteragiveis/AbrirBauLendario
+  Guid:
+    Data1: 2050845591
+    Data2: 1236801085
+    Data3: -1918417739
+    Data4: 1095500934
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &6582440375210502829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/CanhaoAtirandoPraFrente_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/CanhaoAtirandoPraFrente_BarbaNegra
+  Guid:
+    Data1: -994562092
+    Data2: 1300894449
+    Data3: -1801320058
+    Data4: 942824180
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6655659588373765362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/MeleeBombaDeVeneno
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/MeleeBombaDeVeneno
+  Guid:
+    Data1: 190361565
+    Data2: 1300094997
+    Data3: 1455686574
+    Data4: 1347441
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &6669543523113570978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/EarthShatter/EarthShatter
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/EarthShatter/EarthShatter
+  Guid:
+    Data1: -1063747811
+    Data2: 1211497293
+    Data3: 142788265
+    Data4: 214340708
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &6949718531951981031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Skills/SpiritCOnvergance/Ranged_SpiritConvergence
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Skills/SpiritCOnvergance/Ranged_SpiritConvergence
+  Guid:
+    Data1: 977744729
+    Data2: 1214285056
+    Data3: 1609337245
+    Data4: -1275492209
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &6977991588083868781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/DreadFall/Pulando_DreadFall
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/DreadFall/Pulando_DreadFall
+  Guid:
+    Data1: -2090825068
+    Data2: 1213986138
+    Data3: 176627647
+    Data4: -938531806
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &7029376704809753778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/DreadFall/Impacto_Dreadfall
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/DreadFall/Impacto_Dreadfall
+  Guid:
+    Data1: -1690531794
+    Data2: 1258764759
+    Data3: -1907229513
+    Data4: -1968004673
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &7610469383354105030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigoMelee/BombaVeneno_
+  m_EditorClassIdentifier: 
+  Path: event:/InimigoMelee/BombaVeneno_
+  Guid:
+    Data1: 736450097
+    Data2: 1122615951
+    Data3: -262160972
+    Data4: -42057821
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &7651348895792641759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/Stunado_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/Stunado_BarbaNegra
+  Guid:
+    Data1: -1353069326
+    Data2: 1202508882
+    Data3: -2053389937
+    Data4: -485552462
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7767844011508341747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/MelDash
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/MelDash
+  Guid:
+    Data1: -1203851180
+    Data2: 1327612659
+    Data3: -1111084387
+    Data4: -1657059031
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &7809673516859330378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Cura
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Cura
+  Guid:
+    Data1: -428631588
+    Data2: 1283169494
+    Data3: -1317631054
+    Data4: 102064063
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &8029246997314040591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigaRanged/RangedTomandoDano
+  m_EditorClassIdentifier: 
+  Path: event:/InimigaRanged/RangedTomandoDano
+  Guid:
+    Data1: -2033011215
+    Data2: 1230866384
+    Data3: -1696750418
+    Data4: 1742793303
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &8145489169916834829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/DreadFall/Fogo_Dreadfall
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/DreadFall/Fogo_Dreadfall
+  Guid:
+    Data1: 130014559
+    Data2: 1296834217
+    Data3: 1823016621
+    Data4: -1458022892
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 60
+  Length: 0
+--- !u!114 &8172807993350042078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/HullBreaker/Tremor_HullBreaker
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/HullBreaker/Tremor_HullBreaker
+  Guid:
+    Data1: -1649689196
+    Data2: 1206889760
+    Data3: 1110718361
+    Data4: 390724883
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 60
+  Length: 0
+--- !u!114 &8220571703768222196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Maevis/Skills/Warcry/Warcry
+  m_EditorClassIdentifier: 
+  Path: event:/Maevis/Skills/Warcry/Warcry
+  Guid:
+    Data1: -1714838364
+    Data2: 1146605832
+    Data3: 712795272
+    Data4: -1624452789
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &8628193840159586364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BarbaNegra/BombaVoltandoProBarco_BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/BarbaNegra/BombaVoltandoProBarco_BarbaNegra
+  Guid:
+    Data1: 393374754
+    Data2: 1238102449
+    Data3: -793950316
+    Data4: -1662206107
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8710192123546511220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/SelecaoPersonagem/SetSail
+  m_EditorClassIdentifier: 
+  Path: event:/UI/SelecaoPersonagem/SetSail
+  Guid:
+    Data1: -344806154
+    Data2: 1340605690
+    Data3: 2074384303
+    Data4: -1273776958
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8873517080755955969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InimigaRanged/RangedPocaDEDano2
+  m_EditorClassIdentifier: 
+  Path: event:/InimigaRanged/RangedPocaDEDano2
+  Guid:
+    Data1: 2062590627
+    Data2: 1268681507
+    Data3: -657964113
+    Data4: -1232750033
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &9014943724434578892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Mel/Skills/BlackHole/BlackHole
+  m_EditorClassIdentifier: 
+  Path: event:/Mel/Skills/BlackHole/BlackHole
+  Guid:
+    Data1: -1004166742
+    Data2: 1114055605
+    Data3: -1162687553
+    Data4: 147945831
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0
+--- !u!114 &9060647231533534041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/CenarioInteragiveis/PocoDeOferecimento
+  m_EditorClassIdentifier: 
+  Path: event:/CenarioInteragiveis/PocoDeOferecimento
+  Guid:
+    Data1: 1411877644
+    Data2: 1134946408
+    Data3: 1576671641
+    Data4: -2087511804
+  Banks:
+  - {fileID: 4076058165265293126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 0

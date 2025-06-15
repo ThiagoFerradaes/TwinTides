@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +13,8 @@ public class PhantomAuraObject : SkillObjectPrefab {
     bool _canDamage;
 
     List<HealthManager> _listOfEnemies = new();
+
+    EventInstance sound;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as PhantomAura;
@@ -26,18 +30,33 @@ public class PhantomAuraObject : SkillObjectPrefab {
 
     void DefineSizeAndParent() {
 
-        transform.localScale = _level < 4 ? _info.AuraSize : _info.AuraSizeLevel4;
-
         transform.SetParent(_mel.transform);
 
-        transform.SetLocalPositionAndRotation(Vector3.zero, _context.PlayerRotation);
+        transform.SetLocalPositionAndRotation(new Vector3(0, _info.PhantomAuraHeight, 0), Quaternion.Euler(0,0,0));
 
         gameObject.SetActive(true);
+        transform.localScale = _level < 4 ? _info.AuraSize : _info.AuraSizeLevel4;
+
+        if (_level < 4) {
+            if (!_info.AuraSound.IsNull) {
+                sound = RuntimeManager.CreateInstance(_info.AuraSound);
+                RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+                sound.start();
+            }
+        }
+        else {
+            if (!_info.StrongerAuraSound.IsNull) {
+                sound = RuntimeManager.CreateInstance(_info.StrongerAuraSound);
+                RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+                sound.start();
+            }
+        }
 
         StartCoroutine(DamageTimer());
 
         StartCoroutine(Duration());
     }
+
 
     private void OnTriggerEnter(Collider other) {
 
@@ -89,13 +108,18 @@ public class PhantomAuraObject : SkillObjectPrefab {
 
         yield return new WaitForSeconds(duration);
 
-        End();
+        ReturnObject();
     }
 
 
-    void End() {
+    public override void ReturnObject() {
         _listOfEnemies.Clear();
 
-        ReturnObject();
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            sound.release();
+        }
+
+        base.ReturnObject();
     }
 }

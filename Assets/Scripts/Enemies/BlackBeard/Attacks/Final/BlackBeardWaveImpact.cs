@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -6,6 +8,8 @@ public class BlackBeardWaveImpact : BlackBeardAttackPrefab {
     Vector3 pos;
     HealthManager _health;
     bool isStronger;
+
+    EventInstance sound;
     public override void StartAttack(int enemyId, int skillId, Vector3 position) {
         base.StartAttack(enemyId, skillId);
 
@@ -28,6 +32,14 @@ public class BlackBeardWaveImpact : BlackBeardAttackPrefab {
 
         gameObject.SetActive(true);
 
+        if (!_info.WaveInstantiateSound.IsNull) RuntimeManager.PlayOneShot(_info.WaveInstantiateSound, parent.transform.position);
+
+        if (!_info.WaveExpansionSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.WaveExpansionSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
+
         StartCoroutine(Duration());
     }
 
@@ -45,6 +57,16 @@ public class BlackBeardWaveImpact : BlackBeardAttackPrefab {
         }
 
         End();
+    }
+
+    public override void End() {
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
+
+        base.End();
     }
 
     private void OnTriggerEnter(Collider other) {

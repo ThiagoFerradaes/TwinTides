@@ -6,7 +6,7 @@ public class DebuffsUI : MonoBehaviour
 {
     [SerializeField] Image iconPrefab;
     HealthManager _characterHealthManager;
-    readonly Dictionary<Debuff, Image> activeBuffsList = new();
+    readonly Dictionary<Debuff, Image> activeDebuffsList = new();
     readonly List<Image> listOfIcons = new();
 
     private void Start() {
@@ -22,23 +22,29 @@ public class DebuffsUI : MonoBehaviour
         _characterHealthManager = player.GetComponent<HealthManager>();
         _characterHealthManager.OnDebuffAdded += AddDebuff;
         _characterHealthManager.OnDebuffRemoved += RemoveDebuff;
+        _characterHealthManager.OnDeath += ClearDebuffs;
+    }
+
+    void ClearDebuffs() {
+        foreach (var debuff in activeDebuffsList.Values) debuff.gameObject.SetActive(false);
+        activeDebuffsList.Clear();
     }
     void AddDebuff(Debuff debuffAdded, int stacks) {
-        if (activeBuffsList.ContainsKey(debuffAdded)) {
-            activeBuffsList[debuffAdded].GetComponent<BuffAndDebuffIcon>().UpdateIcon(debuffAdded.DebuffColor, stacks);
+        if (activeDebuffsList.ContainsKey(debuffAdded)) {
+            activeDebuffsList[debuffAdded].GetComponent<BuffAndDebuffIcon>().UpdateIcon(debuffAdded.DebuffColor, stacks);
         }
         else {
             Image icon = GetIconFromPooling();
-            activeBuffsList.Add(debuffAdded, icon);
+            activeDebuffsList.Add(debuffAdded, icon);
             icon.GetComponent<BuffAndDebuffIcon>().UpdateIcon(debuffAdded.DebuffColor, stacks);
             icon.gameObject.SetActive(true);
         }
     }
 
     void RemoveDebuff(Debuff debuffRemoved, int stacks) {
-        if (activeBuffsList.ContainsKey(debuffRemoved)) {
-            activeBuffsList[debuffRemoved].gameObject.SetActive(false);
-            activeBuffsList.Remove(debuffRemoved);
+        if (activeDebuffsList.ContainsKey(debuffRemoved)) {
+            activeDebuffsList[debuffRemoved].gameObject.SetActive(false);
+            activeDebuffsList.Remove(debuffRemoved);
         };
     }
 

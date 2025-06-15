@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +13,8 @@ public class DreadfallImpactArea : SkillObjectPrefab {
     DamageManager _dManager;
 
     List<HealthManager> _listOfEnemies = new();
+
+    EventInstance soundInstance;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as Dreadfall;
@@ -34,6 +38,12 @@ public class DreadfallImpactArea : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
+        if (!_info.BurningAreaSound.IsNull) {
+            soundInstance = RuntimeManager.CreateInstance(_info.BurningAreaSound);
+            RuntimeManager.AttachInstanceToGameObject(soundInstance, this.gameObject);
+            soundInstance.start();
+        }
+
         StartCoroutine(Duration());
 
         StartCoroutine(DamageCooldown());
@@ -50,7 +60,7 @@ public class DreadfallImpactArea : SkillObjectPrefab {
     IEnumerator Duration() {
         yield return new WaitForSeconds(_info.FieldDuration);
 
-        End();
+        ReturnObject();
     }
 
     IEnumerator DamageCooldown() {
@@ -81,9 +91,16 @@ public class DreadfallImpactArea : SkillObjectPrefab {
         if (_listOfEnemies.Contains(health)) _listOfEnemies.Remove(health);
     }
 
-    void End() {
+    public override void ReturnObject() {
+
+        if (!_info.BurningAreaSound.IsNull) {
+            soundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            soundInstance.release();
+        }
+
         _listOfEnemies.Clear();
-        ReturnObject();
+
+        base.ReturnObject();
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

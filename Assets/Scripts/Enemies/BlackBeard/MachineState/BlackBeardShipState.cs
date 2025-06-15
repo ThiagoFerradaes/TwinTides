@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -160,6 +161,7 @@ public class BlackBeardShipState : BlackBeardStates {
         Queue<Vector3> recentPositions = new();
         int maxAttempts = 10;
         int recentCheckCount = 3;
+        int cannonCounter = 0;
 
         for (int i = 0; i < _info.AmountOfShootUpBullets; i++) {
             Vector3 pos = Vector3.zero;
@@ -188,6 +190,13 @@ public class BlackBeardShipState : BlackBeardStates {
             }
             else {
                 pos = _parent.CenterOfArena.position;
+            }
+
+            if (!_info.ShootUpSound.IsNull) {
+                cannonCounter++;
+                if (cannonCounter >= _parent.CannonsPosition.Count()) cannonCounter = 0;
+
+                RuntimeManager.PlayOneShot(_info.ShootUpSound, _parent.CannonsPosition[cannonCounter].position);
             }
 
             EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 0, _parent.gameObject, pos);
@@ -237,7 +246,7 @@ public class BlackBeardShipState : BlackBeardStates {
     IEnumerator MoveCannons() {
         _isStraightShooting = true;
 
-        if (initialCannonPosition == null) initialCannonPosition = new Vector3[_parent.CannonsPosition.Length];
+        initialCannonPosition ??= new Vector3[_parent.CannonsPosition.Length];
 
         int[] movementDirections = new int[_parent.CannonsPosition.Length];
 
@@ -287,6 +296,7 @@ public class BlackBeardShipState : BlackBeardStates {
         Queue<Vector3> recentPositions = new();
         int maxAttempts = 10;
         int recentCheckCount = 3;
+        int cannonCounter = 0;
 
         for (int i = 0; i < _info.AmountOfBombs; i++) {
             Vector3 pos = Vector3.zero;
@@ -315,6 +325,13 @@ public class BlackBeardShipState : BlackBeardStates {
             }
             else {
                 pos = _parent.CenterOfArena.position;
+            }
+
+            if (!_info.BombShootUpSound.IsNull) {
+                cannonCounter++;
+                if (cannonCounter >= _parent.CannonsPosition.Count()) cannonCounter = 0;
+
+                RuntimeManager.PlayOneShot(_info.BombShootUpSound, _parent.CannonsPosition[cannonCounter].position);
             }
 
             EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 3, _parent.gameObject, pos);

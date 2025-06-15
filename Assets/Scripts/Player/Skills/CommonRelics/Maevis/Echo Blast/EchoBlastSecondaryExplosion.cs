@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -28,6 +29,8 @@ public class EchoBlastSecondaryExplosion : SkillObjectPrefab {
         transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
+
+        if (!_info.SecondExplosionSound.IsNull) RuntimeManager.PlayOneShot(_info.SecondExplosionSound, transform.position);
 
         StartCoroutine(ExplosionDuration());
     }

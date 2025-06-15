@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +9,8 @@ public class BlackBeardCrossAttackField : BlackBeardAttackPrefab {
     Vector3 pos;
 
     HashSet<HealthManager> _listOfPlayers = new();
+
+    EventInstance sound;
 
     public override void StartAttack(int enemyId, int skillId, Vector3 position) {
         base.StartAttack(enemyId, skillId);
@@ -37,6 +41,12 @@ public class BlackBeardCrossAttackField : BlackBeardAttackPrefab {
 
         gameObject.SetActive(true);
 
+        if (!_info.FieldSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.FieldSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
+
         StartCoroutine(Duration());
     }
 
@@ -56,6 +66,11 @@ public class BlackBeardCrossAttackField : BlackBeardAttackPrefab {
 
     public override void End() {
         _listOfPlayers.Clear();
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
 
         base.End();
     }

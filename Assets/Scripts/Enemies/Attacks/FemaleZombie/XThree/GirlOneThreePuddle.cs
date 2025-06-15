@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +8,8 @@ public class GirlOneThreePuddle : EnemyAttackPrefab
 {
     GirlOneThree _info;
     HashSet<HealthManager> _listOfPlayers = new();
+
+    EventInstance sound;
 
     public override void StartAttack(int enemyId, int skillId) {
         base.StartAttack(enemyId, skillId);
@@ -33,6 +37,12 @@ public class GirlOneThreePuddle : EnemyAttackPrefab
         transform.position = pos;
 
         gameObject.SetActive(true);
+
+        if (!_info.PuddleSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.PuddleSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
 
         StartCoroutine(Duration());
 
@@ -64,6 +74,11 @@ public class GirlOneThreePuddle : EnemyAttackPrefab
 
     public override void End() {
         _listOfPlayers.Clear();
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
 
         base.End();
     }

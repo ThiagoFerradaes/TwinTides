@@ -1,9 +1,13 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
 public class BlackBeardShootUpBullet : BlackBeardAttackPrefab {
     BlackBeardCannon _info;
     bool collided;
+
+    EventInstance sound;
 
     public override void StartAttack(int enemyId, int skillId, Vector3 position) {
         base.StartAttack(enemyId, skillId);
@@ -20,6 +24,12 @@ public class BlackBeardShootUpBullet : BlackBeardAttackPrefab {
 
         gameObject.SetActive(true);
 
+        if (!_info.ShootUpFallingSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.ShootUpFallingSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
+
         StartCoroutine(FallRoutine());
     }
 
@@ -32,6 +42,16 @@ public class BlackBeardShootUpBullet : BlackBeardAttackPrefab {
         collided = false;
 
         End();
+    }
+
+    public override void End() {
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
+
+        base.End();
     }
 
     private void OnTriggerEnter(Collider other) {

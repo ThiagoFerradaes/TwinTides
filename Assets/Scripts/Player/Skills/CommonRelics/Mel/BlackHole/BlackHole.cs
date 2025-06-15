@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "CommonRelic/BlackHole")]
@@ -10,6 +11,7 @@ public class BlackHole : CommonRelic
     [Range(0,100)]public float SlowPercent;
     public float MaxRange;
     public float DamageInterval;
+    public EventReference BlackHoleSound;
 
     [Header("Black Hole Level 2")]
     public float StunInterval;

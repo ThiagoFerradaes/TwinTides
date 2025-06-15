@@ -1,4 +1,6 @@
 using DG.Tweening;
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +23,9 @@ public class BlackBeardFinalState : BlackBeardStates {
 
     // Listas
     List<BlackBeardFinalFormAttacks> _attacks;
+
+    // Som
+    EventInstance sound;
     #endregion
 
     #region Initiate
@@ -187,7 +192,7 @@ public class BlackBeardFinalState : BlackBeardStates {
         float minDist = float.MaxValue;
         Transform nearest = null;
 
-        foreach (var player in SceneManager.ActivePlayers) {
+        foreach (var player in SceneManager.ActivePlayers.Values) {
             float dist = Vector3.Distance(_parent.transform.position, player.transform.position);
             if (dist < minDist) {
                 minDist = dist;
@@ -231,18 +236,29 @@ public class BlackBeardFinalState : BlackBeardStates {
         Vector3 lookDirection = new(direction.x, 0, direction.z);
         _parent.transform.rotation = Quaternion.LookRotation(lookDirection);
 
+        if (!_bulletsInfo.DashSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_bulletsInfo.DashSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, _parent.gameObject);
+            sound.start();
+        }
+
         while (elapsed < duration) {
             _parent.transform.position += direction * (speed * Time.deltaTime);
             elapsed += Time.deltaTime;
             yield return null;
         }
         _parent.transform.position = targetPosition;
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sound.release();
+        }
     }
     private Transform FindFarthestPlayer() {
         float maxDist = float.MinValue;
         Transform farthest = null;
 
-        foreach (var player in SceneManager.ActivePlayers) {
+        foreach (var player in SceneManager.ActivePlayers.Values) {
             float dist = Vector3.Distance(_parent.transform.position, player.transform.position);
             if (dist > maxDist) {
                 maxDist = dist;

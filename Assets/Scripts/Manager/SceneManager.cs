@@ -1,14 +1,18 @@
 using UnityEngine;
 using Unity.Netcode;
 using System.Collections.Generic;
+using System;
 
 public class SceneManager : NetworkBehaviour
 {
 
-    public static List<GameObject> ActivePlayers = new();
+    public static Dictionary<Characters ,GameObject> ActivePlayers = new();
 
     [SerializeField] GameObject maevisPreFab;
     [SerializeField] GameObject melPreFab;
+    [SerializeField] Transform originPos;
+
+    public static event Action OnPlayersSpawned;
     void Start()
     {
         if (IsServer) {
@@ -24,17 +28,22 @@ public class SceneManager : NetworkBehaviour
             ulong clientID = client.ClientId;
 
             GameObject prefab = GetPrefab(playerIndex);
-            Vector3 prefabPos = Vector3.zero + new Vector3(playerIndex * 2,8.1f,0);
+            Characters typeOfCharacter = prefab == maevisPreFab ? Characters.Maevis : Characters.Mel;
+            Vector3 prefabPos = originPos.position + new Vector3(playerIndex * 3f, 0f, 0f);
+
+            prefabPos.y = GetFloorHeight(prefabPos) + 1f;
 
             var playerObject = Instantiate(prefab, prefabPos, Quaternion.identity);
 
             var playerNetworkObject = playerObject.GetComponent<NetworkObject>();
             playerNetworkObject.SpawnWithOwnership(clientID, true);
 
-            ActivePlayers.Add(playerObject);
+            ActivePlayers[typeOfCharacter] = (playerObject);
 
             playerIndex++;
         }
+
+        OnPlayersSpawned?.Invoke();
     }
     GameObject GetPrefab(int playerIndex) {
         if (playerIndex == 0) {
@@ -53,5 +62,11 @@ public class SceneManager : NetworkBehaviour
                 return melPreFab;
             }
         }
+    }
+
+    float GetFloorHeight(Vector3 position) {
+        Ray ray = new(position + Vector3.up * 5f, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f, LayerMask.GetMask("Floor"))) return hit.point.y + 0.1f;
+        return position.y;
     }
 }

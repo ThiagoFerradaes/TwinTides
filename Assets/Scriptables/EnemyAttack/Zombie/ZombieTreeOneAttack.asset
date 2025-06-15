@@ -31,12 +31,33 @@ MonoBehaviour:
   damagePerPunch: 1
   durationOfPunch: 0.1
   placementOfPunch: 2
+  NormalPunchSound:
+    Guid:
+      Data1: 49803093
+      Data2: 1226823249
+      Data3: -518459718
+      Data4: 572283286
+    Path: event:/InimigoMelee/MeleePunch
   amountOfTicksPerSpin: 15
   totalSpinDuration: 1.5
   damagePerTick: 1
   timeBetweenSpinAndSmash: 2
+  TentacleSpinSound:
+    Guid:
+      Data1: 1794960626
+      Data2: 1324628223
+      Data3: -873207874
+      Data4: -1523712288
+    Path: event:/InimigoMelee/MeleeRodando
   smashDamage: 1
   smashDuration: 0.3
   smashPlacement: 3
   smashStunTime: 3
   smashCooldown: 4
+  SmashSound:
+    Guid:
+      Data1: 1099284116
+      Data2: 1101079443
+      Data3: -746467197
+      Data4: -1008573835
+    Path: event:/InimigoMelee/MeleeSocoBEMmaisForte

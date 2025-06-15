@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,25 +11,41 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
 
     List<HealthManager> _listOfEnemies = new();
 
+    EventInstance sound;
+
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as PhantomAura;
         _level = skillLevel;
 
         if (_maevis == null) _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
 
-        DefineSizeAndParent();
+        if (_maevis != null) DefineSizeAndParent();
+        else ReturnObject();
     }
 
     void DefineSizeAndParent() {
-        transform.localScale = _level < 4 ? _info.AuraSize : _info.AuraSizeLevel4;
-
 
         transform.SetParent(_maevis.transform);
 
-        transform.SetLocalPositionAndRotation(Vector3.zero, _maevis.transform.rotation);
-
+        transform.SetLocalPositionAndRotation(new Vector3(0, _info.PhantomAuraHeight, 0), Quaternion.Euler(0, 0, 0));
 
         gameObject.SetActive(true);
+        transform.localScale = _level < 4 ? _info.AuraSize : _info.AuraSizeLevel4;
+
+        if (_level < 4) {
+            if (!_info.AuraSound.IsNull) {
+                sound = RuntimeManager.CreateInstance(_info.AuraSound);
+                RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+                sound.start();
+            }
+        }
+        else {
+            if (!_info.StrongerAuraSound.IsNull) {
+                sound = RuntimeManager.CreateInstance(_info.StrongerAuraSound);
+                RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+                sound.start();
+            }
+        }
 
         StartCoroutine(DamageTimer());
 
@@ -84,13 +102,19 @@ public class SecondPhantomAuraObject : SkillObjectPrefab {
 
         yield return new WaitForSeconds(duration);
 
-        End();
+        ReturnObject();
     }
 
-    void End() {
+    public override void ReturnObject() {
         _listOfEnemies.Clear();
         transform.SetParent(null);
-        ReturnObject();
+
+        if (sound.isValid()) {
+            sound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            sound.release();
+        }
+
+        base.ReturnObject();
     }
     public override void StartSkillCooldown(SkillContext context, Skill skill) {
         return;

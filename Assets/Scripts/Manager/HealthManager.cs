@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,6 +15,12 @@ public class HealthManager : NetworkBehaviour {
     [SerializeField] private float maxShieldAmount;
     [SerializeField] DeathBehaviour deathBehaviour;
     [SerializeField] Material damageMaterial;
+    [SerializeField] EventReference RecieveHealSound;
+    [SerializeField] EventReference RecieveDamageSound;
+    [SerializeField] EventReference RecieveShieldSound;
+    [SerializeField] float healIndicatorCooldown;
+    [SerializeField] float shieldIndicatorCooldown;
+    [SerializeField] float timeBetweenDamageIndicators;
     Material originalMaterial;
 
     // Network
@@ -50,13 +57,16 @@ public class HealthManager : NetworkBehaviour {
     // Corrotina
     Coroutine _timeToEndShieldCoroutine;
     Coroutine damageIndicatorCoroutine;
+    Coroutine healIndicatorCoroutine;
+    Coroutine shieldIndicatorCoroutine;
 
     // Eventos
     public event Action<(float maxHealth, float currentHealth, float currentShield, float maxShield)> OnHealthUpdate;
     public event Action OnDeath;
+    public event Action OnRevive;
     public event Action<Buff, int> OnBuffAdded, OnBuffRemoved;
     public event Action<Debuff, int> OnDebuffAdded, OnDebuffRemoved;
-    public static event EventHandler OnMelHealed;
+    public static event System.EventHandler OnMelHealed;
 
     #endregion
 
@@ -168,7 +178,22 @@ public class HealthManager : NetworkBehaviour {
 
         if (!IsServer) return;
 
+        StartHealIndicatorRpc();
         _currentHealth.Value = Mathf.Clamp((_currentHealth.Value + healAmount * _healMultiply.Value), 0, _maxHealth.Value);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    void StartHealIndicatorRpc() {
+        healIndicatorCoroutine ??= StartCoroutine(HealIndicatorRoutine());
+    }
+
+    IEnumerator HealIndicatorRoutine() {
+
+        if (!RecieveHealSound.IsNull) RuntimeManager.PlayOneShot(RecieveHealSound, transform.position);
+
+        yield return new WaitForSeconds(healIndicatorCooldown);
+
+        healIndicatorCoroutine = null;
     }
 
     // Revive
@@ -186,8 +211,11 @@ public class HealthManager : NetworkBehaviour {
             _currentShieldAmount.Value = 0f;
 
         }
+        GetComponent<MovementManager>().UnStun();
 
         GetComponent<MeshRenderer>().material = originalMaterial;
+
+        OnRevive?.Invoke();
 
     }
 
@@ -199,12 +227,13 @@ public class HealthManager : NetworkBehaviour {
     }
     IEnumerator DamageIndicator() {
         MeshRenderer mesh = GetComponent<MeshRenderer>();
+        if (!RecieveDamageSound.IsNull) RuntimeManager.PlayOneShot(RecieveDamageSound, transform.position);
 
         for (int i = 0; i < 3; i++) {
             mesh.material = damageMaterial;
-            yield return new WaitForSeconds(0.06f);
+            yield return new WaitForSeconds(timeBetweenDamageIndicators);
             mesh.material = originalMaterial;
-            yield return new WaitForSeconds(0.06f);
+            yield return new WaitForSeconds(timeBetweenDamageIndicators);
         }
 
         yield return new WaitForSeconds(0.1f);
@@ -234,7 +263,10 @@ public class HealthManager : NetworkBehaviour {
 
         if (_timeToEndShieldCoroutine != null) StopCoroutine(_timeToEndShieldCoroutine);
 
-        if (gameObject.activeInHierarchy) _timeToEndShieldCoroutine = StartCoroutine(RemoveShieldAfterDuration(durationOfShield));
+        if (gameObject.activeInHierarchy) {
+            _timeToEndShieldCoroutine = StartCoroutine(RemoveShieldAfterDuration(durationOfShield));
+            StartShieldIndicatorCoroutineRpc();
+        }
     }
     public void BreakShield() {
         if (!IsServer) return;
@@ -246,6 +278,18 @@ public class HealthManager : NetworkBehaviour {
         yield return new WaitForSeconds(time);
         _currentShieldAmount.Value = 0;
         _isShielded.Value = false;
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    void StartShieldIndicatorCoroutineRpc() {
+        shieldIndicatorCoroutine ??= StartCoroutine(ShieldIndicator());
+    }
+    IEnumerator ShieldIndicator() {
+        if (!RecieveShieldSound.IsNull) RuntimeManager.PlayOneShot(RecieveShieldSound, transform.position);
+
+        yield return new WaitForSeconds(shieldIndicatorCooldown);
+
+        shieldIndicatorCoroutine = null;
     }
 
     #endregion

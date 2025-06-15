@@ -39,6 +39,14 @@ public class PlayerSkillManager : NetworkBehaviour {
         };
 
         _mManager = GetComponent<MovementManager>();
+
+        PlayersDeathManager.OnGameRestart += RestartAllCooldowns;
+    }
+
+    private void RestartAllCooldowns() {
+        for (int i = 0; i < _dictionaryOfCooldowns.Count; i++) {
+            ResetCooldown(i);
+        }
     }
 
     #region Inputs
@@ -51,7 +59,6 @@ public class PlayerSkillManager : NetworkBehaviour {
     }
     public void InputCommonRelicSkillOne(InputAction.CallbackContext context) {
         if (context.phase == InputActionPhase.Performed && _dictionaryOfCooldowns[1] <= 0 && _canUseSkill.Value) {
-            Debug.Log("Button pressed");
             UseSkill(1);
         }
         

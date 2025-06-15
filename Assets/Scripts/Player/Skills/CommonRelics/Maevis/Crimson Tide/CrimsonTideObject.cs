@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -39,7 +40,7 @@ public class CrimsonTideObject : SkillObjectPrefab {
                 PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
             }
 
-            End();
+            ReturnObject();
         }
         else {
             StartCoroutine(Dash());
@@ -53,6 +54,8 @@ public class CrimsonTideObject : SkillObjectPrefab {
         _playerController.BlockMovement();
 
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+
+        if (!_info.DashSound.IsNull) RuntimeManager.PlayOneShot(_info.DashSound, transform.position);
 
         if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
             PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 2);
@@ -75,7 +78,7 @@ public class CrimsonTideObject : SkillObjectPrefab {
             yield return new WaitForSeconds(_info.DashDuration);
         }
 
-        End();
+        ReturnObject();
     }
 
     IEnumerator SpawnPath() {
@@ -91,10 +94,10 @@ public class CrimsonTideObject : SkillObjectPrefab {
         }
     }
 
-    void End() {
+    public override void ReturnObject() {
         _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
         _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
         _maevis.GetComponent<PlayerController>().AllowMovement();
-        ReturnObject();
+        base.ReturnObject();
     }
 }

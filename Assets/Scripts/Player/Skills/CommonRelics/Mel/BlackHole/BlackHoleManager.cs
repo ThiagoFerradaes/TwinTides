@@ -31,13 +31,14 @@ public class BlackHoleManager : SkillObjectPrefab
 
         skillPos.y = GetFloorHeight(_context.Pos);
 
-        Transform aim = _mel.GetComponent<PlayerController>().aimObject;
+        PlayerController controller = _mel.GetComponent<PlayerController>();
         Vector3 direction = _context.PlayerRotation * Vector3.forward;
         Vector3 position = _context.Pos + (direction * _info.MaxRange);
 
-        if (aim != null && aim.gameObject.activeInHierarchy && Vector3.Distance(_mel.transform.position, aim.position) <= _info.MaxRange) {
-            skillPos.x = aim.position.x;
-            skillPos.z = aim.position.z;
+        if (LocalWhiteBoard.Instance.IsAiming && Vector3.Distance(controller.mousePos, _mel.transform.position) < _info.MaxRange) {
+
+            skillPos.x = controller.mousePos.x;
+            skillPos.z = controller.mousePos.z;
         }
         else {
             skillPos.x = position.x;

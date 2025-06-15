@@ -1,3 +1,4 @@
+using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class PhantomAura : CommonRelic
     public float Duration;
     public float Damage;
     public float DamageInterval;
+    public float PhantomAuraHeight;
+    public EventReference AuraSound;
 
     [Header("Aura Level 2")]
     [Range(0,100)]public float HealingPercent;
@@ -17,4 +20,5 @@ public class PhantomAura : CommonRelic
     public Vector3 AuraSizeLevel4;
     public float DurationLevel4;
     public float DamageLevel4;
+    public EventReference StrongerAuraSound;
 }

@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d0e5fccdd6ba2441a8361b7d8a17cf4, type: 3}
+  m_Name: Dialogue08
+  m_EditorClassIdentifier: 
+  ListOfDialogues:
+  - Character: 1
+    InitialDialogueSound:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+    Text: "Hm. I feel like this isn\u2019t over yet. Where\u2019s the other part
+      of your necklace?"
+  - Character: 0
+    InitialDialogueSound:
+      Guid:
+        Data1: 1416337328
+        Data2: 1199306256
+        Data3: 2064043693
+        Data4: -1355207073
+      Path: event:/Mel/TomandoDano_Mel
+    Text: "Sis, I hate to break it to ya\u2019, but I think it\u2019s with that Blackbeard
+      guy. "
+  - Character: 1
+    InitialDialogueSound:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+    Text: "That would make sense\u2026Let\u2019s try to find him and finish this
+      once and for all. "

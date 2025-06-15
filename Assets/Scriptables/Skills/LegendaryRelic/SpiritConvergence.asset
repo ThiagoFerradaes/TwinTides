@@ -34,6 +34,13 @@ MonoBehaviour:
   RangedMinionCooldown: 2
   AmountOfTimesDurationCanExtend: 3
   DurationExtensionTime: 2
+  InvocationSound:
+    Guid:
+      Data1: -2050920873
+      Data2: 1129419035
+      Data3: 349377412
+      Data4: -733001419
+    Path: event:/Mel/Skills/SpiritCOnvergance/Sumonando_SpiritConvergence
   CooldownForSearchEnemy: 0.2
   RangeToMel: 4
   meleeMinionSpeed: 8
@@ -45,6 +52,13 @@ MonoBehaviour:
   MeleeAttackOffSet: 1
   MeleeAttackDuration: 0.1
   MeleeAttackDamage: 1
+  MeleeMinionHitSound:
+    Guid:
+      Data1: -1558810320
+      Data2: 1167573233
+      Data3: -1910330716
+      Data4: -1498320518
+    Path: event:/Mel/Skills/SpiritCOnvergance/Melee_SpiritConvergance
   RangedMinionAttackRange: 10
   RangedMinionAttackCooldown: 1
   RangedMinionDuration: 4
@@ -52,3 +66,10 @@ MonoBehaviour:
   RangedAttackSpeed: 20
   RangedAttackDuration: 2
   RangedAttackDamage: 1
+  RangedMinionHitSound:
+    Guid:
+      Data1: 977744729
+      Data2: 1214285056
+      Data3: 1609337245
+      Data4: -1275492209
+    Path: event:/Mel/Skills/SpiritCOnvergance/Ranged_SpiritConvergence

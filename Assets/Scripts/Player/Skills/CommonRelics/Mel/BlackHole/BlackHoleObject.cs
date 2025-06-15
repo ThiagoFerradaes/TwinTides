@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +12,8 @@ public class BlackHoleObject : SkillObjectPrefab {
 
     List<HealthManager> _listOfEnemies = new();
     List<MovementManager> _listOfMEnemies = new();
+
+    EventInstance sound;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as BlackHole;
@@ -30,6 +34,12 @@ public class BlackHoleObject : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
+        if (!_info.BlackHoleSound.IsNull) {
+            sound = RuntimeManager.CreateInstance(_info.BlackHoleSound);
+            RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);
+            sound.start();
+        }
+
         StartCoroutine(DurationOfBlackHole());
 
         StartCoroutine(DamageTimer());
@@ -42,7 +52,7 @@ public class BlackHoleObject : SkillObjectPrefab {
 
         yield return new WaitForSeconds(time);
 
-        End();
+        ReturnObject();
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -115,7 +125,7 @@ public class BlackHoleObject : SkillObjectPrefab {
         return;
     }
 
-    void End() {
+    public override void ReturnObject() {
 
         List<MovementManager> removed = new(_listOfMEnemies);
         _listOfMEnemies.Clear();
@@ -134,8 +144,13 @@ public class BlackHoleObject : SkillObjectPrefab {
             }
         }
 
+        if (!_info.BlackHoleSound.IsNull) {
+            sound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            sound.release();
+        }
+
         _listOfEnemies.Clear();
 
-        ReturnObject();
+        base.ReturnObject();
     }
 }
