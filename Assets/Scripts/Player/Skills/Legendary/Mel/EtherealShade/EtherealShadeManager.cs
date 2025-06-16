@@ -6,7 +6,7 @@ public class EtherealShadeManager : SkillObjectPrefab
     int _level;
     SkillContext _context;
     GameObject _mel;
-
+    Animator anim;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as EtherealShade;
@@ -15,6 +15,7 @@ public class EtherealShadeManager : SkillObjectPrefab
 
         if (_mel == null) {
             _mel = PlayerSkillPooling.Instance.MelGameObject;
+            anim = _mel.GetComponentInChildren<Animator>();
         }
 
         gameObject.SetActive(true);
@@ -45,6 +46,8 @@ public class EtherealShadeManager : SkillObjectPrefab
             skillPos.x = position.x;
             skillPos.z = position.z;
         }
+
+        if (_info.animationName != null) anim.SetTrigger(_info.animationName);
 
         SkillContext newContext = new(skillPos, transform.rotation, _context.SkillIdInUI);
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);

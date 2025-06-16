@@ -14,6 +14,7 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
     float _currentTime = 1;
 
     public event EventHandler OnEndOfAttack;
+    Animator anim;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as MaevisNormalAttack;
@@ -21,6 +22,7 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
 
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
+            anim = _maevis.GetComponentInChildren<Animator>();
             _dManager = _maevis.GetComponent<DamageManager>();
         }
 
@@ -59,6 +61,8 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
 
         _maevis.GetComponent<PlayerController>().BlockMovement();
 
+        anim.SetInteger("AttackCount", _currentAttackCombo);
+
         yield return new WaitForSeconds(duration);
 
         _maevis.GetComponent<PlayerController>().AllowMovement();
@@ -85,6 +89,8 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
 
         _maevis.GetComponent<PlayerController>().BlockMovement();
         _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(true);
+
+        anim.SetInteger("AttackCount", _currentAttackCombo);
 
         yield return new WaitForSeconds(duration);
 

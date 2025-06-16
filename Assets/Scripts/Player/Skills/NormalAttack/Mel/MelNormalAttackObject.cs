@@ -13,6 +13,7 @@ public class MelNormalAttackObject : SkillObjectPrefab {
     public static event System.EventHandler OnNormalAttackHit;
     GameObject _mel;
     DamageManager _dManager;
+    Animator anim;
 
     public class NormalAtackEventArgs : EventArgs {
         public Vector3 FinalPosition;
@@ -29,6 +30,7 @@ public class MelNormalAttackObject : SkillObjectPrefab {
         if (_mel == null) {
             _mel = PlayerSkillPooling.Instance.MelGameObject;
             _dManager = _mel.GetComponent<DamageManager>();
+            anim = _mel.GetComponentInChildren<Animator>();
         }
 
         DefineSizeAndPosition();
@@ -48,6 +50,8 @@ public class MelNormalAttackObject : SkillObjectPrefab {
         transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
 
         gameObject.SetActive(true);
+
+        if(_info.animationName != null) anim.SetTrigger(_info.animationName);
 
         if (!_info.AttackSound.IsNull) RuntimeManager.PlayOneShot(_info.AttackSound, transform.position);
 

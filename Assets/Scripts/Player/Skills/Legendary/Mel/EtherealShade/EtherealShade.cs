@@ -20,4 +20,7 @@ public class EtherealShade : LegendaryRelic
     public EventReference DamageExplosionSound;
     public EventReference HealExplosionSound;
     public EventReference PositionSound;
+
+    [Header("Animation")]
+    public string animationName;
 }

@@ -5,7 +5,7 @@
 			<value>Die_Maevis</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
 			<destination>{1ddcaf1d-aa5d-4180-aa8b-f13d946a5ba2}</destination>
@@ -32,7 +32,7 @@
 			<destination>{695693bb-c1a6-462d-b34f-6aca2784a345}</destination>
 		</relationship>
 		<relationship name="banks">
-			<destination>{f1ee1cbb-84fa-4fcb-bd1b-9e7c0424206d}</destination>
+			<destination>{374cd320-3992-4c80-9d9f-fbbc34562077}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{f1363cf4-53b8-420f-bfbf-f81cc805f1e5}">
@@ -96,7 +96,6 @@
 	<object class="MixerBusEffectChain" id="{74121519-b3ab-42a1-8467-b1b334a2a9b4}">
 		<relationship name="effects">
 			<destination>{a821903b-1e1a-4a54-b575-8fa7034ce377}</destination>
-			<destination>{973ad5df-e6c0-44e9-a265-525400fdbf13}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{6f0cdd57-ebef-4e9d-857e-a8754000db6f}" />
@@ -107,5 +106,4 @@
 	</object>
 	<object class="MixerBusFader" id="{0d72f6b0-1e78-4908-a195-0ee81aaa7c7e}" />
 	<object class="MixerBusFader" id="{a821903b-1e1a-4a54-b575-8fa7034ce377}" />
-	<object class="SpatialiserEffect" id="{973ad5df-e6c0-44e9-a265-525400fdbf13}" />
 </objects>

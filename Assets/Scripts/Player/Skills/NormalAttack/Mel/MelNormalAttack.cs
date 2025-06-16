@@ -10,4 +10,7 @@ public class MelNormalAttack : AttackSkill
     public float SphereDistance;
     public float SphereDamage;
     public EventReference AttackSound;
+
+    [Header("Animation")]
+    public string animationName;
 }

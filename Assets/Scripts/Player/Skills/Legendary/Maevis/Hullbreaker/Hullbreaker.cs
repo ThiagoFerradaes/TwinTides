@@ -16,4 +16,7 @@ public class Hullbreaker : LegendaryRelic
     public float EarthquakeRadius;
     public EventReference EarthquakeSound;
     public EventReference ExplosionSound;
+
+    [Header("Animation")]
+    public string animationName;
 }

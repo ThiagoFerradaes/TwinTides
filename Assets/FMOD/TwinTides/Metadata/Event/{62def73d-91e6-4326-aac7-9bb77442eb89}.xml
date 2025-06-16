@@ -5,7 +5,7 @@
 			<value>Risada1_Mel</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
 			<destination>{d7e4d4a3-7ce1-4755-86d5-967750318344}</destination>
@@ -32,7 +32,7 @@
 			<destination>{32eb1c5e-d587-4d41-9e06-8d2077764eb2}</destination>
 		</relationship>
 		<relationship name="banks">
-			<destination>{f1ee1cbb-84fa-4fcb-bd1b-9e7c0424206d}</destination>
+			<destination>{374cd320-3992-4c80-9d9f-fbbc34562077}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{2f22c59e-cd84-4dd8-bdc2-ea4b63c5af94}">
@@ -100,7 +100,6 @@
 	<object class="MixerBusEffectChain" id="{dd87f477-91c0-4fea-9ad2-b8dbf67f7f4c}">
 		<relationship name="effects">
 			<destination>{dab2e731-6273-474c-bdcd-dfe7806480ba}</destination>
-			<destination>{e7838fd9-cece-44b5-9beb-d092ecaa9c61}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{b1a8cf16-9bfc-48c2-9d86-2623b1f90534}" />
@@ -111,5 +110,4 @@
 	</object>
 	<object class="MixerBusFader" id="{ad50c03a-e4e5-4ea9-bf3c-36fe83cdac00}" />
 	<object class="MixerBusFader" id="{dab2e731-6273-474c-bdcd-dfe7806480ba}" />
-	<object class="SpatialiserEffect" id="{e7838fd9-cece-44b5-9beb-d092ecaa9c61}" />
 </objects>

@@ -11,6 +11,7 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
     HealthManager _hManager;
     float _timer, _durationTime;
     bool _canInstantiateRangedMinion = true;
+    Animator anim;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as SpiritConvergence;
@@ -20,6 +21,7 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
         if (_mel == null) {
             _mel = PlayerSkillPooling.Instance.MelGameObject;
             _hManager = _mel.GetComponent<HealthManager>();
+            anim = _mel.GetComponentInChildren<Animator>();
         }
 
         HealthManager.OnMelHealed += OnMelHealed;
@@ -34,6 +36,8 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
         transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
 
         gameObject.SetActive(true);
+
+        if (_info.animationName != null) anim.SetTrigger(_info.animationName);
 
         StartCoroutine(WaitAFrame(SkillDuration()));
     }

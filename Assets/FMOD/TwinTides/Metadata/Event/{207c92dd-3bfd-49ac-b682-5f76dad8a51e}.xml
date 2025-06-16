@@ -5,7 +5,7 @@
 			<value>Alright_Mel</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
 			<destination>{d7e4d4a3-7ce1-4755-86d5-967750318344}</destination>
@@ -32,7 +32,7 @@
 			<destination>{e9580a63-99bf-4866-8df2-8e7532bee4b7}</destination>
 		</relationship>
 		<relationship name="banks">
-			<destination>{f1ee1cbb-84fa-4fcb-bd1b-9e7c0424206d}</destination>
+			<destination>{374cd320-3992-4c80-9d9f-fbbc34562077}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{0a0454dc-173f-4173-a5af-2a6ad57a3a9c}">
@@ -100,7 +100,6 @@
 	<object class="MixerBusEffectChain" id="{8f83e5f0-3a95-478d-8f24-25777f8db962}">
 		<relationship name="effects">
 			<destination>{3796ed82-7ddf-454c-afdc-c30dea8cc2ae}</destination>
-			<destination>{32249290-293c-4b55-a002-1105a88b3f14}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{89ab3203-6068-4e30-894d-448537bb067f}" />
@@ -111,5 +110,4 @@
 	</object>
 	<object class="MixerBusFader" id="{8fab5e30-260c-47f7-a7ac-150d3fbdbd7b}" />
 	<object class="MixerBusFader" id="{3796ed82-7ddf-454c-afdc-c30dea8cc2ae}" />
-	<object class="SpatialiserEffect" id="{32249290-293c-4b55-a002-1105a88b3f14}" />
 </objects>

@@ -10,6 +10,7 @@ public class CrimsonTideObject : SkillObjectPrefab {
     GameObject _maevis;
     PlayerSkillManager _skillManager;
     PlayerController _playerController;
+    Animator anim;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as CrimsonTide;
@@ -19,6 +20,7 @@ public class CrimsonTideObject : SkillObjectPrefab {
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
             _skillManager = _maevis.GetComponent<PlayerSkillManager>();
+            anim = _maevis.GetComponentInChildren<Animator>();
             _playerController = _maevis.GetComponent<PlayerController>();
         }
 
@@ -54,6 +56,8 @@ public class CrimsonTideObject : SkillObjectPrefab {
         _playerController.BlockMovement();
 
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+
+        anim.SetTrigger("CrimsonTide");
 
         if (!_info.DashSound.IsNull) RuntimeManager.PlayOneShot(_info.DashSound, transform.position);
 
