@@ -12,16 +12,23 @@ public class SelectorComposite : CompositeNode
 
     protected override State OnUpdate() {
         if (children == null || children.Count == 0) return State.Failure;
-
+        
         for (int i = currentChild; i < children.Count; i++) {
             State temp = children[i].Update();
-
             if (temp == State.Running) {
-                for (int j = currentChild + 1; j < children.Count; j++) { children[j].Abort(); }
+                for (int j = currentChild + 1; j < children.Count; j++) {
+                    if (children[j].started) {
+                        children[j].Abort();
+                    }
+                }
                 return State.Running;
             }
             else if (temp == State.Success) {
-                for (int j = currentChild + 1; j < children.Count; j++) { children[j].Abort(); }
+                for (int j = currentChild + 1; j < children.Count; j++) {
+                    if (children[j].started) {
+                        children[j].Abort();
+                    }
+                }
                 return State.Success;
             }
 

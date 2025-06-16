@@ -7,7 +7,7 @@ public class BlackHoleManager : SkillObjectPrefab
     int _level;
     SkillContext _context;
     GameObject _mel;
-
+    Animator anim;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as BlackHole;
@@ -16,7 +16,10 @@ public class BlackHoleManager : SkillObjectPrefab
 
         if (_mel == null) {
             _mel = PlayerSkillPooling.Instance.MelGameObject;
+            anim = _mel.GetComponentInChildren<Animator>();
         }
+
+        if (_info.animationName != null) anim.SetTrigger(_info.animationName);
 
         gameObject.SetActive(true);
 

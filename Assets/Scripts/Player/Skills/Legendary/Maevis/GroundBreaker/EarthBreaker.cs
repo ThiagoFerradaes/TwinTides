@@ -13,5 +13,8 @@ public class EarthBreaker : LegendaryRelic
     public float StunDuration;
     public Vector3 InicialImpactSize;
     public EventReference EarthImpactSound;
+
+    [Header("Animation")]
+    public string animationName;
     
 }

@@ -8,6 +8,7 @@ public class DreadfallManager : SkillObjectPrefab {
     int _level;
     SkillContext _context;
     GameObject _maevis;
+    Animator anim;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as Dreadfall;
@@ -16,6 +17,7 @@ public class DreadfallManager : SkillObjectPrefab {
 
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
+            anim = _maevis.GetComponentInChildren<Animator>();
         }
 
         SetParentAndPosition();
@@ -29,12 +31,12 @@ public class DreadfallManager : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        StartCoroutine(JumpCoroutine());
+        Jump();
 
         if (!_info.JumpSound.IsNull) RuntimeManager.PlayOneShot(_info.JumpSound, _maevis.transform.position);
     }
 
-    IEnumerator JumpCoroutine() {
+    void Jump() {
 
         PlayerController controller = _maevis.GetComponent<PlayerController>();
         Vector3 targetPosition;
@@ -47,17 +49,22 @@ public class DreadfallManager : SkillObjectPrefab {
 
         targetPosition.y = GetFloorHeight(targetPosition) + 1f;
 
-        Debug.Log(targetPosition);
+        if (_info.impactAnimationName != null) anim.SetBool(_info.jumpAnimationName, true);
 
-        _maevis.transform.DOJump(targetPosition, _info.JumpSpeed, 1, _info.JumpDuration);
+        _maevis.transform.DOJump(targetPosition, _info.JumpSpeed, 1, _info.JumpDuration).OnComplete(() => {
 
-        yield return new WaitForSeconds(_info.JumpDuration);
+            if(_info.impactAnimationName != null) anim.SetBool(_info.jumpAnimationName, false);
 
-        RecieveShield();
+            if (_info.impactAnimationName != null)  anim.SetTrigger(_info.impactAnimationName);
 
-        Explode();
+            RecieveShield();
 
-        End();
+            Explode();
+
+            End();
+        });
+
+
     }
 
     float GetFloorHeight(Vector3 position) {

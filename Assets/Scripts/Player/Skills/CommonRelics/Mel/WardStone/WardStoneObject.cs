@@ -7,10 +7,17 @@ public class WardStoneObject : SkillObjectPrefab {
     WardStone _info;
     int _level;
     SkillContext _context;
+    Animator anim;
+    GameObject _mel;
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as WardStone;
         _level = skillLevel;
         _context = context;
+
+        if (_mel == null) {
+            _mel = PlayerSkillPooling.Instance.MelGameObject;
+            anim = _mel.GetComponentInChildren<Animator>();
+        }
 
         DefineSizeAndPosition();
 
@@ -20,6 +27,8 @@ public class WardStoneObject : SkillObjectPrefab {
         transform.localScale = _level < 3 ? _info.ExplosionRadius : _info.ExplosionRadiusLevel3;
 
         transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
+
+        if (_info.animationName != null) anim.SetTrigger(_info.animationName);
 
         gameObject.SetActive(true);
 

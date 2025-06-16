@@ -30,4 +30,7 @@ public class WardStone : CommonRelic {
     public float AreaDurationLevel4;
     public float ExtraShieldDuration;
     public EventReference AreaSound;
+
+    [Header("Animation")]
+    public string animationName;
 }

@@ -11,13 +11,18 @@ public class SpectralSeedsRing : SkillObjectPrefab {
     int _AmountOfSeeds;
     GameObject _mel;
 
+    Animator anim;
+
     [HideInInspector] public List<SpectralSeedsObject> listOfSeeds = new();
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as SpectralSeeds;
         _level = skillLevel;
         _context = context;
 
-        if (_mel == null) _mel = PlayerSkillPooling.Instance.MelGameObject;
+        if (_mel == null) {
+            _mel = PlayerSkillPooling.Instance.MelGameObject;
+            anim = _mel.GetComponentInChildren<Animator>();
+        }
 
         DefineSizeAndPosition();
 
@@ -31,6 +36,7 @@ public class SpectralSeedsRing : SkillObjectPrefab {
 
         transform.SetLocalPositionAndRotation(_info.RingPosition, Quaternion.Euler(0, 0, 0));
 
+        if (_info.animationName != null) anim.SetTrigger(_info.animationName);
 
         gameObject.SetActive(true);
 
