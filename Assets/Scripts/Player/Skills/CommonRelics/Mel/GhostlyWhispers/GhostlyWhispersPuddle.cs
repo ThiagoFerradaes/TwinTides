@@ -20,7 +20,7 @@ public class GhostlyWhispersPuddle : SkillObjectPrefab {
 
     EventInstance sound;
     private void Awake() {
-        _mesh = GetComponent<MeshRenderer>();
+        _mesh = GetComponentInChildren<MeshRenderer>();
     }
 
 

@@ -150,8 +150,10 @@ public class HealthManager : NetworkBehaviour {
 
     // Death Handling
     public void Kill() {
-        if (IsServer)
+        if (IsServer) {
+            _isDead.Value = true;
             HandleDeathRpc();
+        }
     }
 
     [Rpc(SendTo.ClientsAndHost)]

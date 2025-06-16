@@ -7,7 +7,6 @@ public abstract class SkillObjectPrefab : MonoBehaviour {
     public void TurnOnSkill(int skillId, int skillLevel, SkillContext context) {
 
         Skill skill = PlayerSkillConverter.Instance.TransformIdInSkill(skillId);
-
         ActivateSkill(skill, skillLevel, context);
 
         StartSkillCooldown(context, skill);

@@ -58,7 +58,7 @@ public class PlayerSkillManager : NetworkBehaviour {
         }
     }
     public void InputCommonRelicSkillOne(InputAction.CallbackContext context) {
-        if (context.phase == InputActionPhase.Performed && _dictionaryOfCooldowns[1] <= 0 && _canUseSkill.Value) {
+        if (context.phase == InputActionPhase.Started && _dictionaryOfCooldowns[1] <= 0 && _canUseSkill.Value) {
             UseSkill(1);
         }
         
