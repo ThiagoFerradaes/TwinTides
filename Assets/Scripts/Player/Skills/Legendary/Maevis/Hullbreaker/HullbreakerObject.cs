@@ -7,6 +7,7 @@ public class HullbreakerObject : SkillObjectPrefab {
     int _level;
     SkillContext _context;
     GameObject _maevis;
+    Animator anim;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as Hullbreaker;
@@ -15,6 +16,7 @@ public class HullbreakerObject : SkillObjectPrefab {
 
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
+            anim = _maevis.GetComponentInChildren<Animator>();
         }
 
         SetParentAndPosition();
@@ -26,8 +28,9 @@ public class HullbreakerObject : SkillObjectPrefab {
 
         transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, 0));
 
-
         gameObject.SetActive(true);
+
+        if (_info.animationName != null) anim.SetTrigger(_info.animationName);
 
         StartCoroutine(ShieldDuration());
 

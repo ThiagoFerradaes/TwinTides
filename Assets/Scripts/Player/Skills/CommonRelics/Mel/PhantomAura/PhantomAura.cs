@@ -21,4 +21,7 @@ public class PhantomAura : CommonRelic
     public float DurationLevel4;
     public float DamageLevel4;
     public EventReference StrongerAuraSound;
+
+    [Header("Animation")]
+    public string animationName;
 }

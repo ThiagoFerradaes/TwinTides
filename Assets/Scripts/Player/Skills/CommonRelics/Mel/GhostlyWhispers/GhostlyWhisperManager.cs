@@ -2,12 +2,13 @@ using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
-public class GhostlyWhisperObject : SkillObjectPrefab {
+public class GhostlyWhisperManager : SkillObjectPrefab {
     GhostlyWhispers _info;
     int _level;
     SkillContext _context;
     GameObject _mel;
     int amountOfPuddles;
+    Animator anim;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as GhostlyWhispers;
@@ -16,6 +17,7 @@ public class GhostlyWhisperObject : SkillObjectPrefab {
 
         if (_mel == null) {
             _mel = PlayerSkillPooling.Instance.MelGameObject;
+            anim = _mel.GetComponentInChildren<Animator>();
         }
 
         DefinePosition();
@@ -40,6 +42,8 @@ public class GhostlyWhisperObject : SkillObjectPrefab {
     void InstantiatePuddle() {
 
         amountOfPuddles--;
+
+        if (_info.animationName != null) anim.SetTrigger(_info.animationName);
 
         if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Mel) return;
 

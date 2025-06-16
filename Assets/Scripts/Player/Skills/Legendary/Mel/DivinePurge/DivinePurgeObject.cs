@@ -21,6 +21,8 @@ public class DivinePurgeObject : SkillObjectPrefab
 
     EventInstance sound;
 
+    Animator anim;
+
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as DivinePurge;
         _level = skillLevel;
@@ -31,6 +33,7 @@ public class DivinePurgeObject : SkillObjectPrefab
             _mManager = _mel.GetComponent<PlayerController>();
             _hManager = _mel.GetComponent<HealthManager>();
             _dManager = _mel.GetComponent<DamageManager>();
+            anim = _mel.GetComponentInChildren<Animator>();
         }
 
         DefinePosition();
@@ -44,6 +47,8 @@ public class DivinePurgeObject : SkillObjectPrefab
         transform.SetPositionAndRotation(position, _context.PlayerRotation * Quaternion.Euler(90,0,0));
 
         gameObject.SetActive(true);
+
+        if (_info.animationName != null) anim.SetBool(_info.animationName, true);
 
         if (!_info.LaserSound.IsNull) {
             sound = RuntimeManager.CreateInstance(_info.LaserSound);
@@ -60,6 +65,8 @@ public class DivinePurgeObject : SkillObjectPrefab
         _mManager.BlockMovement();
 
         yield return new WaitForSeconds(_info.Duration);
+
+        if (_info.animationName != null) anim.SetBool(_info.animationName, false);
 
         ReturnObject();
     }

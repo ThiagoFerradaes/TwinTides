@@ -37,4 +37,7 @@ public class SpiritConvergence : LegendaryRelic
     public float RangedAttackDuration;
     public float RangedAttackDamage;
     public EventReference RangedMinionHitSound;
+
+    [Header("Animation")]
+    public string animationName;
 }

@@ -24,4 +24,7 @@ public class BlackHole : CommonRelic
     public Vector3 SizeLevel4;
     public float StunDurationLevel4;
     [Range(0,100)]public float HealReductionPercent;
+
+    [Header("Animation")]
+    public string animationName;
 }
