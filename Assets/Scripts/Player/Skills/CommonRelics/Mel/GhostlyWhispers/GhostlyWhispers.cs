@@ -33,4 +33,7 @@ public class GhostlyWhispers : CommonRelic {
     public Material MegaAreaMaterial;
     public float ObjectDurationLevel4;
     public EventReference MegaPuddleSound;
+
+    [Header("Animation")]
+    public string animationName;
 }

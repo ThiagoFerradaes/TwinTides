@@ -13,4 +13,7 @@ public class DivinePurge : LegendaryRelic {
     [Range(0, 100)] public float PercentOfHealingBasedOnDamage;
     public float ZOffSett;
     public EventReference LaserSound;
+
+    [Header("Animation")]
+    public string animationName;
 }
