@@ -9,23 +9,25 @@ public class DesactiveDeath : DeathBehaviour
         deadObject.GetComponent<HealthManager>().StartCoroutine(WaitToDie(deadObject));
     }
     IEnumerator WaitToDie(GameObject deadObject) {
-        Animator anim = deadObject.GetComponentInChildren<Animator>();
-        anim.SetTrigger("IsDead");
+        if (deadObject.TryGetComponent<Animator>(out Animator anim) && anim.enabled) {
+            
+            anim.SetTrigger("IsDead");
 
-        // Espera a transição para o estado começar (evita pegar o estado anterior)
-        yield return new WaitForSeconds(0.1f); // ou: yield return null;
+            // Espera a transição para o estado começar (evita pegar o estado anterior)
+            yield return new WaitForSeconds(0.1f); // ou: yield return null;
 
-        // Espera até que a animação realmente esteja no estado "IsDead"
-        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-        while (stateInfo.IsName("Dead") == false) {
-            yield return null;
-            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-        }
+            // Espera até que a animação realmente esteja no estado "IsDead"
+            AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+            while (stateInfo.IsName("Dead") == false) {
+                yield return null;
+                stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+            }
 
-        // Espera a animação terminar
-        while (stateInfo.normalizedTime < 1f) {
-            yield return null;
-            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+            // Espera a animação terminar
+            while (stateInfo.normalizedTime < 1f) {
+                yield return null;
+                stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+            }
         }
 
         deadObject.SetActive(false);
