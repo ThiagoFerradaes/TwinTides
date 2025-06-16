@@ -11,7 +11,6 @@ public class FallenBannerManager : SkillObjectPrefab {
         _info = info as FallenBanner;
         _level = skillLevel;
         _context = context;
-
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
         }
@@ -20,7 +19,7 @@ public class FallenBannerManager : SkillObjectPrefab {
 
         InstantiateBanners();
 
-        End();
+       Invoke(nameof(End), 0.1f);
     }
 
     void InstantiateBanners() {

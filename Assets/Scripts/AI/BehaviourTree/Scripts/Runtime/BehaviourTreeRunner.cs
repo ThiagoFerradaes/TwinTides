@@ -8,7 +8,7 @@ public class BehaviourTreeRunner : MonoBehaviour {
 
     public BehaviourTree tree;
     public AIPath path;
-
+    HealthManager health;
     public Context context;
 
     [SerializeField] bool isPatrol;
@@ -17,6 +17,7 @@ public class BehaviourTreeRunner : MonoBehaviour {
         tree = tree.Clone();
         context = CreateBehaviourTreeContext();
         tree.Bind(context);
+        health = GetComponent<HealthManager>();
     }
     private void Start() {
         PlayersDeathManager.OnGameRestart += RestartBlackBoard;
@@ -25,7 +26,7 @@ public class BehaviourTreeRunner : MonoBehaviour {
         PlayersDeathManager.OnGameRestart -= RestartBlackBoard;
     }
     void Update() {
-        if (tree) {
+        if (tree && !health.ReturnDeathState()) {
             tree.Update();
         }
     }
