@@ -6489,17 +6489,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3514461983938647512, guid: e785c04e5e7342a48abbab058837189e, type: 3}
-      propertyPath: m_Size.y
-      value: 1000
-      objectReference: {fileID: 0}
     - target: {fileID: 6487302238753222856, guid: e785c04e5e7342a48abbab058837189e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 27.85
       objectReference: {fileID: 0}
     - target: {fileID: 6487302238753222856, guid: e785c04e5e7342a48abbab058837189e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 6487302238753222856, guid: e785c04e5e7342a48abbab058837189e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -18422,10 +18418,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 720357531105213366, guid: 7cf3b305bbab3604290fb6d087c5cc59, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 720357531105213366, guid: 7cf3b305bbab3604290fb6d087c5cc59, type: 3}
       propertyPath: m_LocalPosition.x
       value: 45.010002
       objectReference: {fileID: 0}
@@ -18468,22 +18460,6 @@ PrefabInstance:
     - target: {fileID: 2888966623609141944, guid: 7cf3b305bbab3604290fb6d087c5cc59, type: 3}
       propertyPath: m_Name
       value: BlackBeardRainBulletField
-      objectReference: {fileID: 0}
-    - target: {fileID: 4593456312067290674, guid: 7cf3b305bbab3604290fb6d087c5cc59, type: 3}
-      propertyPath: m_Height
-      value: 453.46918
-      objectReference: {fileID: 0}
-    - target: {fileID: 4593456312067290674, guid: 7cf3b305bbab3604290fb6d087c5cc59, type: 3}
-      propertyPath: m_Center.x
-      value: 0.000000047683717
-      objectReference: {fileID: 0}
-    - target: {fileID: 4593456312067290674, guid: 7cf3b305bbab3604290fb6d087c5cc59, type: 3}
-      propertyPath: m_Center.y
-      value: -32.122536
-      objectReference: {fileID: 0}
-    - target: {fileID: 4593456312067290674, guid: 7cf3b305bbab3604290fb6d087c5cc59, type: 3}
-      propertyPath: m_Center.z
-      value: -0.00000009536743
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -46402,6 +46378,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 426079369514953975, guid: 304d7df5592d44b4387a692395e34306, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 6487302238753222856, guid: 304d7df5592d44b4387a692395e34306, type: 3}
       propertyPath: m_LocalPosition.x
       value: 31.49
