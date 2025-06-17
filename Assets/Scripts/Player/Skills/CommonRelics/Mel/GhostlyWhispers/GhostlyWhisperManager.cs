@@ -35,8 +35,8 @@ public class GhostlyWhisperManager : SkillObjectPrefab {
 
         InstantiatePuddle();
 
-        if (_level > 1) StartCoroutine(Duration());
-        else ReturnObject();
+        StartCoroutine(Duration());
+        
     }
 
     void InstantiatePuddle() {
@@ -71,7 +71,7 @@ public class GhostlyWhisperManager : SkillObjectPrefab {
     }
 
     float GetFloorHeight(Vector3 position) {
-        Ray ray = new(position + Vector3.up * 5f, Vector3.down);
+        Ray ray = new(position + Vector3.up * 15f, Vector3.down);
         if (Physics.Raycast(ray, out RaycastHit hit, 10f, LayerMask.GetMask("Floor"))) return hit.point.y + 0.1f;
         return position.y;
     }
@@ -89,15 +89,19 @@ public class GhostlyWhisperManager : SkillObjectPrefab {
     }
 
     IEnumerator Duration() {
-        float elapsedTime = 0f;
-        float duration;
-        if (_level < 4) duration = _info.ObjectDurationLevel2;
-        else duration = _info.ObjectDurationLevel4;
+        if (_level > 1) {
+            float elapsedTime = 0f;
+            float duration;
+            if (_level < 4) duration = _info.ObjectDurationLevel2;
+            else duration = _info.ObjectDurationLevel4;
 
-        while (amountOfPuddles > 0 && elapsedTime < duration) {
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            while (amountOfPuddles > 0 && elapsedTime < duration) {
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
         }
+
+        yield return null;
 
         ReturnObject();
     }

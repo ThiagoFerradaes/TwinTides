@@ -20,4 +20,7 @@ public class GirlXOne : EnemyAttack
     public float StrongerBulletRange;
     public float StrongerBulletCooldown;
     public EventReference StrongerShootSound;
+
+    [Header("Animations")]
+    public string normalBulletAnimation;
 }

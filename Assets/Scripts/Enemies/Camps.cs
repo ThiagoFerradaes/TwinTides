@@ -60,7 +60,7 @@ public class Camps : NetworkBehaviour {
     }
 
     void StartCamp(bool all) {
-        if (all) {
+        if (all) { // Campo não é aleatorio, spawna todos os inimigos
             int[] listWithEveryEnemy = new int[listOfEnemies.Count];
             for (int i = 0; i < listOfEnemies.Count; i++) {
                 listWithEveryEnemy[i] = i;
@@ -68,7 +68,7 @@ public class Camps : NetworkBehaviour {
 
             StartCampWithIndex(listWithEveryEnemy);
         }
-        else {
+        else { // Campo é aleatório, spawna uma quantia dos inimigos
             List<int> randomIndexes = new();
 
             List<int> allIndexes = new();
@@ -112,17 +112,33 @@ public class Camps : NetworkBehaviour {
         currentActiveEnemies = new List<GameObject>();
         aliveCount = 0;
 
-        foreach (int i in index) {
-            if (i < 0 || i >= listOfEnemies.Count) continue;
+        for (int i = 0; i < index.Length; i++) {
+            int enemyIndex = index[i];
+            if (i >= pointIndexes.Length) {
+                Debug.LogWarning($"pointIndexes não tem índice {i}. Ignorando este inimigo.");
+                continue;
+            }
 
-            var enemy = listOfEnemies[i];
+            int pointIndex = pointIndexes[i];
+
+            if (enemyIndex < 0 || enemyIndex >= listOfEnemies.Count) {
+                Debug.LogWarning($"enemyIndex {enemyIndex} fora dos limites.");
+                continue;
+            }
+
+            if (pointIndex < 0 || pointIndex >= listOfPoints.Count) {
+                Debug.LogWarning($"pointIndex {pointIndex} fora dos limites.");
+                continue;
+            }
+
+            var enemy = listOfEnemies[enemyIndex];
             if (!enemy.TryGetComponent<HealthManager>(out var health)) continue;
 
             health.OnDeath += HandleEnemyDeath;
             currentActiveEnemies.Add(enemy);
             aliveCount++;
 
-            enemy.transform.position = listOfPoints[pointIndexes[i]].position;
+            enemy.transform.position = listOfPoints[pointIndex].position;
 
             Vector3 directionToCenter = transform.position - enemy.transform.position;
             directionToCenter.y = 0;
@@ -133,11 +149,12 @@ public class Camps : NetworkBehaviour {
             BehaviourTreeRunner behaviour = enemy.GetComponent<BehaviourTreeRunner>();
             behaviour.RestartBlackBoard();
             behaviour.RestartBlackBoardCamps();
-            behaviour.SetPath(listOfPoints[pointIndexes[i]]);
+            behaviour.SetPath(listOfPoints[pointIndex]);
 
             enemy.SetActive(true);
         }
     }
+
     private void ClearPreviousEvents() {
         foreach (var enemy in currentActiveEnemies) {
             if (!enemy.TryGetComponent<HealthManager>(out var health)) continue;
