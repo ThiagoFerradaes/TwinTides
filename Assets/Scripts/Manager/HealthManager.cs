@@ -482,6 +482,18 @@ public class HealthManager : NetworkBehaviour {
                 break;
         }
     }
+
+    [Rpc(SendTo.Server)]
+    public void InvulnerabilityRpc(bool on) {
+        if (on) {
+            _canBeDamaged.Value = false;
+            _canReceiveDebuff.Value = false;
+        }
+        else {
+            _canBeDamaged.Value = true;
+            _canReceiveDebuff.Value = true;
+        }
+    }
     #endregion
 
 
