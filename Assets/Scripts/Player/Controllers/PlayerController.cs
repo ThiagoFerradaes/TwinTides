@@ -153,15 +153,38 @@ public class PlayerController : NetworkBehaviour {
         _inDash = true;
 
         float startTime = Time.time;
+
         OnDashCooldown?.Invoke(SkillType.Dash, dashCooldown);
 
-        Vector3 moveDirection = (_moveInput.magnitude >= 0.1f) ? new Vector3(_moveInput.x, 0, _moveInput.y).normalized : transform.forward;
+        Vector3 moveDirection;
+
+        if (LocalWhiteBoard.Instance.IsAiming && _moveInput != Vector2.zero) { // Parte que verifica se ela ta andando para trás
+            moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
+
+            Vector3 moveDir = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
+            Vector3 lookDir = new Vector3(aimDirection.x, 0, aimDirection.z).normalized;
+
+            float dot = Vector3.Dot(moveDir, lookDir);
+
+            // Se dot < 0, o ângulo entre eles é maior que 90 graus, ou seja, andando para trás
+            if (dot < 0) {
+                anim.SetTrigger("DashTras");
+            }
+            else {
+                anim.SetTrigger("DashFrente");
+            }
+        }
+
+        else {
+            moveDirection = transform.forward;
+            anim.SetTrigger("DashFrente");
+        }
 
         _rb.linearVelocity = moveDirection * dashForce;
 
         OnDashCooldown?.Invoke(SkillType.Dash, dashCooldown);
 
-        if (!dashSound.IsNull) {
+        if (!dashSound.IsNull) { // Som
             dashSoundInstance = RuntimeManager.CreateInstance(dashSound);
             RuntimeManager.AttachInstanceToGameObject(dashSoundInstance, this.gameObject);
             dashSoundInstance.start();
@@ -173,7 +196,7 @@ public class PlayerController : NetworkBehaviour {
             yield return new WaitForFixedUpdate();
         }
 
-        if (dashSoundInstance.isValid()) {
+        if (dashSoundInstance.isValid()) { // Som
             dashSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             dashSoundInstance.release();
         }
@@ -200,7 +223,7 @@ public class PlayerController : NetworkBehaviour {
         if (_mManager.ReturnStunnedValue()) { // Stunado
             _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);
             anim.SetBool("IsWalking", false);
-            return; 
+            return;
         }
 
         Moving();
@@ -234,7 +257,7 @@ public class PlayerController : NetworkBehaviour {
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray , out RaycastHit hit, Mathf.Infinity, FloorLayer)){
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, FloorLayer)) {
 
                 mousePos = new(hit.point.x, transform.position.y, hit.point.z);
                 aimDirection = (mousePos - transform.position);
