@@ -7,13 +7,12 @@ public class SpiritConvergenceMinion : SkillObjectPrefab {
     int _level;
     SkillContext _context;
     GameObject _mel;
-    NavMeshAgent _agent;
     Transform _target;
-
-    Coroutine _followMelCoroutine, _followEnemyCoroutine;
+    bool _isAttacking;
 
     [SerializeField] bool isRanged;
 
+    Coroutine _mainLoopCoroutine;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as SpiritConvergence;
@@ -22,25 +21,32 @@ public class SpiritConvergenceMinion : SkillObjectPrefab {
 
         if (_mel == null) {
             _mel = PlayerSkillPooling.Instance.MelGameObject;
-            _agent = GetComponent<NavMeshAgent>();
         }
 
         Initiate();
     }
 
     void Initiate() {
+        Vector3 offsetDir = (transform.position - _mel.transform.position).normalized;
+        Vector3 spawnPos = _mel.transform.position + (offsetDir * 1.5f);
 
-        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
+        if (NavMesh.SamplePosition(spawnPos, out NavMeshHit hit, 2f, NavMesh.AllAreas)) {
+            transform.position = hit.position;
+        }
+        else {
+            transform.position = _mel.transform.position + Vector3.right * 2f; 
+        }
 
+        transform.rotation = _context.PlayerRotation;
         gameObject.SetActive(true);
 
-        
+        _mainLoopCoroutine = StartCoroutine(MinionBehaviorLoop());
         StartCoroutine(Duration());
-        SearchEnemy();
     }
 
+
     IEnumerator Duration() {
-        float elapsedTime = 0;
+        float elapsedTime = 0f;
         float duration = isRanged ? _info.RangedMinionDuration : _info.MeleeMinionDuration;
 
         while (elapsedTime < duration) {
@@ -51,124 +57,126 @@ public class SpiritConvergenceMinion : SkillObjectPrefab {
         ReturnObject();
     }
 
-    void SearchEnemy() {
+    IEnumerator MinionBehaviorLoop() {
+        float rangeToMel = _info.RangeToMel;
+        float moveSpeed = isRanged ? _info.RangedMinionSpeed : _info.MeleeMinionSpeed;
+        float attackRange = isRanged ? _info.RangedMinionAttackRange : _info.MeleeMinionAttackRange;
 
-        _target = FindClosestEnemy();
+        while (true) {
+            _target = FindClosestEnemy();
 
-        if (_target != null) {
-            _followEnemyCoroutine ??= StartCoroutine(FollowEnemy());
-        }
-        else _followMelCoroutine ??= StartCoroutine(FollowMel());
+            Vector3 targetPos;
 
-    }
+            if (_target != null) {
+                float distance = Vector3.Distance(transform.position, _target.position);
 
-    IEnumerator FollowEnemy() {
-        float range = isRanged ? _info.RangedMinionAttackRange : _info.MeleeMinionAttackRange;
+                if (distance > attackRange + 0.1f) {
+                    targetPos = _target.position;
+                    MoveTowards(targetPos, moveSpeed);
+                }
+                else {
+                    StopMoving();
+                    Attack();
+                }
+            }
+            else {
+                float distanceToMel = Vector3.Distance(transform.position, _mel.transform.position);
 
-        while (_target != null && Vector3.Distance(transform.position, _target.position) > range) {
-
-            _agent.isStopped = false;
-            _agent.speed = isRanged ? _info.meleeMinionSpeed : _info.rangedMinionSpeed;
-            _agent.destination = _target.position;
+                if (distanceToMel > rangeToMel + 0.1f) {
+                    targetPos = _mel.transform.position;
+                    MoveTowards(targetPos, moveSpeed);
+                }
+                else {
+                    StopMoving();
+                }
+            }
 
             yield return null;
         }
+    }
+    [SerializeField] LayerMask floorLayer;
 
-        _agent.isStopped = true;
-        _agent.SetDestination(_agent.transform.position);
+    void MoveTowards(Vector3 targetPos, float speed) {
+        Vector3 direction = (targetPos - transform.position).normalized;
+        direction.y = 0;
 
-        if (_target != null) Attack();
+        Vector3 nextPosition = transform.position + direction * speed * Time.deltaTime;
 
-        else {
-            float duration = isRanged ? _info.RangedMinionAttackCooldown : _info.MeleMinionAttackCooldown;
-            yield return new WaitForSeconds(duration);
-            _followEnemyCoroutine = null;
-            SearchEnemy();
+        if (Physics.Raycast(nextPosition + Vector3.up * 1f, Vector3.down, out RaycastHit hit, 3f, floorLayer)) {
+            nextPosition.y = hit.point.y + 1;
+        }
+
+        transform.position = nextPosition;
+
+        if (direction != Vector3.zero) {
+            Quaternion targetRot = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 10f);
         }
     }
 
-    IEnumerator FollowMel() {
-        while (_target == null) {
-            if (Vector3.Distance(transform.position, _mel.transform.position) > _info.RangeToMel) {
-                _agent.isStopped = false;
-                _agent.speed = isRanged ? _info.meleeMinionSpeed : _info.rangedMinionSpeed;
-                _agent.destination = _mel.transform.position;
-            }
-            else {
-                _agent.isStopped = true;
-                _agent.SetDestination(_agent.transform.position);
-            }
 
-            yield return new WaitForSeconds(_info.CooldownForSearchEnemy);
-            SearchEnemy();
-        }
 
-        _followMelCoroutine = null;
-    }
+
+    void StopMoving() { }
+
 
     Transform FindClosestEnemy() {
-        float radius = isRanged ? _info.MeleeMinionRangeToFindEnemy : _info.RangedMinionRangeToFindEnemy;
+        float radius = isRanged ? _info.RangedMinionRangeToFindEnemy : _info.MeleeMinionRangeToFindEnemy;
         Collider[] enemies = Physics.OverlapSphere(_mel.transform.position, radius);
+
         Transform closestEnemy = null;
         float closestDistance = Mathf.Infinity;
 
         foreach (Collider enemy in enemies) {
-            if (enemy.CompareTag("Enemy")) {
-                enemy.TryGetComponent<HealthManager>(out HealthManager health);
-                float distance = Vector3.Distance(transform.position, enemy.transform.position);
+            if (!enemy.CompareTag("Enemy")) continue;
+            if (!enemy.TryGetComponent(out HealthManager health)) continue;
+            if (health.ReturnDeathState() || !enemy.gameObject.activeInHierarchy) continue;
 
-                if (distance < closestDistance && !health.ReturnDeathState()) {
-                    closestDistance = distance;
-                    closestEnemy = enemy.transform;
-                }
+            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestEnemy = enemy.transform;
             }
         }
-
         return closestEnemy;
     }
 
     void Attack() {
-
-        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-        SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
+        if (_isAttacking || _target == null) return;
+        _isAttacking = true;
 
         Vector3 direction = _target.position;
-        direction.y = 0;
+        direction.y = transform.position.y;
         transform.LookAt(direction);
 
-        if (isRanged) {
-            if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Mel)
-                PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 4);
-        }
-        else {
-            if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Mel)
-                PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, 3);
+        if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Mel) {
+            int variant = isRanged ? 4 : 3;
+            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+            SkillContext newContext = new(transform.position, transform.rotation, _context.SkillIdInUI);
+            PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, _level, variant);
         }
 
         StartCoroutine(AttackCooldown());
-
     }
 
     IEnumerator AttackCooldown() {
-        float duration = isRanged ? _info.RangedMinionAttackCooldown : _info.MeleMinionAttackCooldown;
-
-        yield return new WaitForSeconds(duration);
-
-        _followEnemyCoroutine = null;
-
-        SearchEnemy();
-
+        float cooldown = isRanged ? _info.RangedMinionAttackCooldown : _info.MeleeMinionAttackCooldown;
+        yield return new WaitForSeconds(cooldown);
+        _isAttacking = false;
     }
+
     public override void ReturnObject() {
+        if (_mainLoopCoroutine != null) {
+            StopCoroutine(_mainLoopCoroutine);
+            _mainLoopCoroutine = null;
+        }
 
-        StopAllCoroutines();
-
-        _followMelCoroutine = null; _followEnemyCoroutine = null; _target = null;
+        _isAttacking = false;
+        _target = null;
 
         base.ReturnObject();
     }
 
-    public override void StartSkillCooldown(SkillContext context, Skill skill) {
-        return;
-    }
+    public override void StartSkillCooldown(SkillContext context, Skill skill) { }
 }
+
