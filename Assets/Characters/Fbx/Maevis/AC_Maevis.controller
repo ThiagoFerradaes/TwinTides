@@ -160,10 +160,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsWalking
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4236846732422725488}
   m_Solo: 0
@@ -566,7 +563,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EchoBlast
-  m_Speed: 1.3
+  m_Speed: 3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8338571472726063393}
@@ -974,7 +971,7 @@ AnimatorStateMachine:
     m_Position: {x: -700, y: -250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4939346036949706862}
-    m_Position: {x: 1220, y: 230, z: 0}
+    m_Position: {x: 1310, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4554028148194334696}
     m_Position: {x: -700, y: 90, z: 0}
@@ -1819,7 +1816,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
