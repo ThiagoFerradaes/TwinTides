@@ -217,7 +217,31 @@ public class HealthManager : NetworkBehaviour {
 
         GetComponent<MeshRenderer>().material = originalMaterial;
 
+        ReviveAnimation();
+
         OnRevive?.Invoke();
+
+    }
+
+    void ReviveAnimation() {
+        Animator anim = GetComponentInChildren<Animator>();
+        if (anim != null) {
+            bool hasTrigger = false;
+
+            foreach (var param in anim.parameters) {
+                if (param.name == "Reviveu" && param.type == AnimatorControllerParameterType.Trigger) {
+                    hasTrigger = true;
+                    break;
+                }
+            }
+
+            if (hasTrigger) {
+                anim.SetTrigger("Reviveu");
+            }
+            else {
+                Debug.LogWarning("Trigger 'Reviveu' não existe no Animator Controller.");
+            }
+        }
 
     }
 
