@@ -27,8 +27,6 @@ public class CrimsonTidePunch : SkillObjectPrefab
         Vector3 position = _context.Pos + (direction * _info.PunchAreaOffSett);
         transform.SetPositionAndRotation(position, _context.PlayerRotation);
 
-        anim.SetTrigger("CrimsonTide");
-
         gameObject.SetActive(true);
 
         if (!_info.PunchSound.IsNull) RuntimeManager.PlayOneShot(_info.PunchSound, transform.position) ;

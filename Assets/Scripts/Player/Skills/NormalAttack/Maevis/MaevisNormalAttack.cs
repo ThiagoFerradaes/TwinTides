@@ -8,7 +8,6 @@ public class MaevisNormalAttack : AttackSkill
     public float DurationOfFirstAttack;
     public float DurationOfSecondAttack;
     public float DurationOfThirdAtack;
-    //public float CooldownBetweenEachAttack;
 
     public float AttackPosition;
     public float ThirdAttackPosition;
