@@ -6,8 +6,8 @@ public class DamageManager : NetworkBehaviour {
 
     [SerializeField] float baseAttackSpeed = 1;
     [SerializeField] float baseAttack;
-    [SerializeField] private NetworkVariable<float> attack = new(0);
-    private NetworkVariable<float> attackSpeed = new();
+    private NetworkVariable<float> attack = new(0);
+    public NetworkVariable<float> attackSpeed = new();
 
     #region Métodos Relacionados ao Ataque Base
     public float ReturnBaseAttack() {
