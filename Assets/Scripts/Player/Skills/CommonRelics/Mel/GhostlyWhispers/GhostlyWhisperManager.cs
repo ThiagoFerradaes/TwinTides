@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Multiplayer.Center.NetcodeForGameObjectsExample.DistributedAuthority;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class GhostlyWhisperManager : SkillObjectPrefab {
     GameObject _mel;
     int amountOfPuddles;
     Animator anim;
+    PlayerController _pController;
+    PlayerSkillManager _sManager;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as GhostlyWhispers;
@@ -18,6 +21,8 @@ public class GhostlyWhisperManager : SkillObjectPrefab {
         if (_mel == null) {
             _mel = PlayerSkillPooling.Instance.MelGameObject;
             anim = _mel.GetComponentInChildren<Animator>();
+            _pController = _mel.GetComponentInChildren<PlayerController>();
+            _sManager = _mel.GetComponentInChildren<PlayerSkillManager>();
         }
 
         DefinePosition();
@@ -33,17 +38,53 @@ public class GhostlyWhisperManager : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
+        StartCoroutine(AttackRoutine());
+
+        if (_level > 1) { Debug.Log("Skill level > 1"); StartCoroutine(Duration()); }
+    }
+
+    IEnumerator AttackRoutine() {
+        _pController.BlockMovement();
+        _sManager.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(true);
+        _sManager.GetComponent<PlayerSkillManager>().BlockSkillsRpc(true);
+        anim.SetTrigger("GhostlyWhisper");
+
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+
+        while (anim.IsInTransition(0)) yield return null;
+
+        while (stateInfo.IsName(_info.AnimationName) == false) {
+            Debug.Log("Esperando entrar");
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        // Espera a animação terminar
+        while (stateInfo.normalizedTime < _info.AnimationPercentToAttack) {
+            Debug.Log("Esperando chegar");
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
         InstantiatePuddle();
 
-        StartCoroutine(Duration());
-        
+        while (stateInfo.normalizedTime < 1f && stateInfo.IsName(_info.AnimationName)) {
+            Debug.Log("Esperando terminar");
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        _pController.AllowMovement();
+        _sManager.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
+        _sManager.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
+
+        if (_level == 1) ReturnObject();
     }
 
     void InstantiatePuddle() {
+        Debug.Log("Instanciando");
 
         amountOfPuddles--;
-
-        if (_info.animationName != null) anim.SetTrigger(_info.animationName);
 
         if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Mel) return;
 
@@ -107,6 +148,9 @@ public class GhostlyWhisperManager : SkillObjectPrefab {
     }
 
     public override void ReturnObject() {
+        _pController.AllowMovement();
+        _sManager.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
+        _sManager.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
         amountOfPuddles = 0;
         if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter) {
             _mel.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, _info);
@@ -115,7 +159,7 @@ public class GhostlyWhisperManager : SkillObjectPrefab {
     }
 
     public override void AddStack() {
-        InstantiatePuddle();
+        StartCoroutine(AttackRoutine());
     }
 
     public override void StartSkillCooldown(SkillContext context, Skill skill) {

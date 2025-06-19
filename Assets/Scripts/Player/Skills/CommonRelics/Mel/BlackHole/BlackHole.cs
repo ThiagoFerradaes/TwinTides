@@ -26,5 +26,6 @@ public class BlackHole : CommonRelic
     [Range(0,100)]public float HealReductionPercent;
 
     [Header("Animation")]
-    public string animationName;
+    public string AnimationName;
+    [Range(0, 1)] public float AnimationPercentToAttack;
 }

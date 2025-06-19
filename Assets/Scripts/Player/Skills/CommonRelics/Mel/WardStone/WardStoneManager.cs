@@ -1,26 +1,25 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.Multiplayer.Center.NetcodeForGameObjectsExample.DistributedAuthority;
 using UnityEngine;
 
-public class PhantomAuraManager : SkillObjectPrefab {
-    PhantomAura _info;
+public class WardStoneManager : SkillObjectPrefab
+{
+    WardStone _info;
     int _level;
     SkillContext _context;
     GameObject _mel;
-    Animator anim;
     PlayerController _pController;
     PlayerSkillManager _sManager;
+    Animator anim;
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
-        _info = info as PhantomAura;
+        _info = info as WardStone;
         _level = skillLevel;
         _context = context;
 
         if (_mel == null) {
             _mel = PlayerSkillPooling.Instance.MelGameObject;
+            _pController = _mel.GetComponent<PlayerController>();
+            _sManager = _mel.GetComponent<PlayerSkillManager>();
             anim = _mel.GetComponentInChildren<Animator>();
-            _pController = _mel.GetComponentInChildren<PlayerController>();
-            _sManager = _mel.GetComponentInChildren<PlayerSkillManager>();
         }
 
         gameObject.SetActive(true);
@@ -33,7 +32,7 @@ public class PhantomAuraManager : SkillObjectPrefab {
         _pController.BlockMovement();
         _sManager.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(true);
         _sManager.GetComponent<PlayerSkillManager>().BlockSkillsRpc(true);
-        anim.SetTrigger("PhantomAura");
+        anim.SetTrigger("WardStone");
 
         AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
@@ -50,29 +49,18 @@ public class PhantomAuraManager : SkillObjectPrefab {
             stateInfo = anim.GetCurrentAnimatorStateInfo(0);
         }
 
-        InstantiateAuras();
+        if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter) {
+            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
+        }
 
         while (stateInfo.normalizedTime < 1f && stateInfo.IsName(_info.AnimationName)) {
             yield return null;
             stateInfo = anim.GetCurrentAnimatorStateInfo(0);
         }
 
+
         ReturnObject();
-    }
-
-    void InstantiateAuras() {
-        if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Mel) return;
-
-        int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-
-        if (_level > 2) {
-            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
-
-            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 2);
-        }
-        else {
-            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
-        }
     }
 
     public override void ReturnObject() {
