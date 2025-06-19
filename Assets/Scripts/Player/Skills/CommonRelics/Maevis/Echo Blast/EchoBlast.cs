@@ -28,4 +28,8 @@ public class EchoBlast : CommonRelic
     public float ExplodingDebuffDelay;
     public float ExplodingDebuffHeight;
     public EventReference SecondExplosionSound;
+
+    [Header("Animation")]
+    public string AnimationName;
+    [Range(0, 1)] public float AnimationPercentToAttack;
 }

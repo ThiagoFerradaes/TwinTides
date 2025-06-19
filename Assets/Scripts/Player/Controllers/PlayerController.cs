@@ -43,6 +43,7 @@ public class PlayerController : NetworkBehaviour {
     MovementManager _mManager;
     Rigidbody _rb;
     Animator anim;
+    HealthManager _hManager;
 
     // eventos 
     public static event Action OnMove; // Esses dois aqui são pra camera
@@ -59,7 +60,7 @@ public class PlayerController : NetworkBehaviour {
         _mManager = GetComponent<MovementManager>();
         _rb = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
-
+        _hManager = GetComponent<HealthManager>();
     }
     void FixedUpdate() {
         if (!IsOwner) return;
@@ -150,6 +151,8 @@ public class PlayerController : NetworkBehaviour {
     IEnumerator DashCoroutine() {
         BlockMovement();
 
+        _hManager.InvulnerabilityRpc(true);
+
         _inDash = true;
 
         float startTime = Time.time;
@@ -204,6 +207,8 @@ public class PlayerController : NetworkBehaviour {
         _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);
 
         AllowMovement();
+
+        _hManager.InvulnerabilityRpc(false);
 
         yield return new WaitForSeconds(dashCooldown - dashDuration);
         _inDash = false;

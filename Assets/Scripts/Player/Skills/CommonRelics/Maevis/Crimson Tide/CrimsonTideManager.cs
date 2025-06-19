@@ -2,7 +2,7 @@ using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
-public class CrimsonTideObject : SkillObjectPrefab {
+public class CrimsonTideManager : SkillObjectPrefab {
 
     CrimsonTide _info;
     int _level;
@@ -11,6 +11,7 @@ public class CrimsonTideObject : SkillObjectPrefab {
     PlayerSkillManager _skillManager;
     PlayerController _playerController;
     Animator anim;
+    HealthManager _hManager;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as CrimsonTide;
@@ -22,6 +23,7 @@ public class CrimsonTideObject : SkillObjectPrefab {
             _skillManager = _maevis.GetComponent<PlayerSkillManager>();
             anim = _maevis.GetComponentInChildren<Animator>();
             _playerController = _maevis.GetComponent<PlayerController>();
+            _hManager = _maevis.GetComponent<HealthManager>();
         }
 
         DefineParent();
@@ -37,18 +39,48 @@ public class CrimsonTideObject : SkillObjectPrefab {
         _skillManager.BlockSkillsRpc(true);
 
         if (_level < 2) {
-            if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
-                int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-                PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
-            }
-
-            ReturnObject();
+            StartCoroutine(PunchRoutine());
         }
         else {
             StartCoroutine(Dash());
 
             if (_level == 4) StartCoroutine(SpawnPath());
         }
+    }
+    IEnumerator PunchRoutine() {
+
+        anim.SetTrigger("CrimsonTide");
+
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+
+        while (anim.IsInTransition(0)) yield return null;
+
+        _playerController.BlockMovement();
+
+        while (stateInfo.IsName(_info.PunchAnimationName) == false) {
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        while (stateInfo.normalizedTime < _info.PunchAnimationPercentToAttack) { // Espera a animação terminar
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
+            int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
+            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
+        }
+
+        while (stateInfo.normalizedTime < 1) {
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        _playerController.AllowMovement();
+
+        ReturnObject();
+
     }
     IEnumerator Dash() {
         float elapsedTime = 0f;
@@ -57,7 +89,8 @@ public class CrimsonTideObject : SkillObjectPrefab {
 
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
 
-        anim.SetTrigger("CrimsonTide");
+        anim.SetBool("CrimsonTideDash", true);
+        _hManager.InvulnerabilityRpc(true);
 
         if (!_info.DashSound.IsNull) RuntimeManager.PlayOneShot(_info.DashSound, transform.position);
 
@@ -65,7 +98,7 @@ public class CrimsonTideObject : SkillObjectPrefab {
             PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 2);
         }
 
-            while (elapsedTime < _info.DashDuration) {
+        while (elapsedTime < _info.DashDuration) {
             elapsedTime += Time.deltaTime;
             _maevis.transform.position += _info.DashSpeed * Time.deltaTime * _maevis.transform.forward;
             yield return null;
@@ -78,9 +111,6 @@ public class CrimsonTideObject : SkillObjectPrefab {
             }
         }
 
-        else {
-            yield return new WaitForSeconds(_info.DashDuration);
-        }
 
         ReturnObject();
     }
@@ -102,6 +132,8 @@ public class CrimsonTideObject : SkillObjectPrefab {
         _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
         _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
         _maevis.GetComponent<PlayerController>().AllowMovement();
+        anim.SetBool("CrimsonTideDash", false);
+        _hManager.InvulnerabilityRpc(false);
         base.ReturnObject();
     }
 }
