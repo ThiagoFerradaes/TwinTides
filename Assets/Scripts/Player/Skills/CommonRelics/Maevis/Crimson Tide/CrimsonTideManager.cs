@@ -2,7 +2,7 @@ using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
-public class CrimsonTideObject : SkillObjectPrefab {
+public class CrimsonTideManager : SkillObjectPrefab {
 
     CrimsonTide _info;
     int _level;

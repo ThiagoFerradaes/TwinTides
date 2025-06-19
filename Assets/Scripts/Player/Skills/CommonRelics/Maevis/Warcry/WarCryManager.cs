@@ -2,7 +2,7 @@ using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
-public class WarCryObject : SkillObjectPrefab {
+public class WarCryManager : SkillObjectPrefab {
     Warcry _info;
     int _level;
     SkillContext _context;
@@ -40,6 +40,8 @@ public class WarCryObject : SkillObjectPrefab {
     }
     IEnumerator CryRoutine() {
         _pController.BlockMovement();
+        _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(true);
+        _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(true);
 
         anim.SetTrigger("WarCry");
 
@@ -65,6 +67,8 @@ public class WarCryObject : SkillObjectPrefab {
         }
 
         _pController.AllowMovement();
+        _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
+        _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
 
     }
     private void Explode() {
@@ -119,6 +123,9 @@ public class WarCryObject : SkillObjectPrefab {
 
     public override void ReturnObject() {
         RemoveBuffs();
+        _pController.AllowMovement();
+        _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
+        _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
         base.ReturnObject();
     }
 }

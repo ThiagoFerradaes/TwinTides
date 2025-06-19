@@ -31,6 +31,8 @@ public class EchoBlastManager : SkillObjectPrefab {
 
     IEnumerator AttackRoutine() {
         _pController.BlockMovement();
+        _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(true);
+        _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(true);
 
         anim.SetTrigger("EchoBlast");
 
@@ -59,6 +61,8 @@ public class EchoBlastManager : SkillObjectPrefab {
         }
 
         _pController.AllowMovement();
+        _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
+        _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
     }
     private void EchoBlastStunExplosion_OnSecondaryExplosion(object sender, EchoBlastStunExplosion.ExplosionPosition e) {
         StartCoroutine(SecondaryExplosion(e.context));
@@ -82,6 +86,8 @@ public class EchoBlastManager : SkillObjectPrefab {
 
     public override void ReturnObject() {
         _pController.AllowMovement();
+        _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
+        _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
         base.ReturnObject();
     }
 }

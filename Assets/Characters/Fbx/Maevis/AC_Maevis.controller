@@ -209,7 +209,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: GroundBreaker
+    m_ConditionEvent: EarthShatter
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -330178713097988427}
@@ -217,7 +217,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
@@ -932,7 +932,7 @@ AnimatorStateMachine:
     m_Position: {x: -700, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -330178713097988427}
-    m_Position: {x: 990, y: 150, z: 0}
+    m_Position: {x: 1050, y: 150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9134592403008084817}
     m_Position: {x: -700, y: -200, z: 0}
@@ -953,7 +953,7 @@ AnimatorStateMachine:
     m_Position: {x: 710, y: 300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6941798669266033295}
-    m_Position: {x: 1100, y: 190, z: 0}
+    m_Position: {x: 1190, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6054225973669517359}
     m_Position: {x: -700, y: -80, z: 0}
@@ -971,7 +971,7 @@ AnimatorStateMachine:
     m_Position: {x: -700, y: -250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4939346036949706862}
-    m_Position: {x: 1310, y: 280, z: 0}
+    m_Position: {x: 1430, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4554028148194334696}
     m_Position: {x: -700, y: 90, z: 0}
@@ -1112,8 +1112,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GroundBreaker
-  m_Speed: 1
+  m_Name: EarthShatter
+  m_Speed: 3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4368249622621364845}
@@ -1223,7 +1223,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: GroundBreaker
+  - m_Name: EarthShatter
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0

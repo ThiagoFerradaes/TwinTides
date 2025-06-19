@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class TidalWatzObject : SkillObjectPrefab {
+public class TidalWatzManager : SkillObjectPrefab {
 
     TidalWatz _info;
     int _level;
@@ -53,7 +53,6 @@ public class TidalWatzObject : SkillObjectPrefab {
         };
 
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-
 
         for (int i = 0; i < amountOfCuts; i++) {
 

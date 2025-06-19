@@ -51,6 +51,7 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
 
         _canAttackAgain = false;
         _maevis.GetComponent<PlayerController>().BlockMovement();
+        _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(true);
         #endregion
 
         #region Animation
@@ -92,6 +93,7 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
 
         #region Resets Do Final
         _maevis.GetComponent<PlayerController>().AllowMovement();
+        _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
 
         _currentAttackCombo++;
 
