@@ -57,7 +57,11 @@ public class TidalWatzObject : SkillObjectPrefab {
 
         for (int i = 0; i < amountOfCuts; i++) {
 
-            anim.SetTrigger("TidalWatz");
+
+            float animationSpeed = _level < 3 ? 1f : _info.CutDuration / _info.CutDurationLevel3;
+
+            anim.SetFloat("TidalWatzSpeed", animationSpeed);
+            anim.SetInteger("TidalWatzCounter", i + 1);
 
             if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis)
                 PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
@@ -91,6 +95,7 @@ public class TidalWatzObject : SkillObjectPrefab {
         _skillManager.BlockSkillsRpc(false);
         _skillManager.BlockNormalAttackRpc(false);
         _pController.BlockRotate(true);
+        anim.SetInteger("TidalWatzCounter", 0);
         base.ReturnObject();
     }
 }
