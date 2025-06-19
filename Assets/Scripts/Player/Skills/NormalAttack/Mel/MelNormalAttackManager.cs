@@ -40,7 +40,6 @@ public class MelNormalAttackManager : SkillObjectPrefab
 
         float atkSpeedVar = currentAttackSpeed / originalAttackSpeed;
 
-        _pController.BlockMovement();
         _sManager.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(true);
         _sManager.GetComponent<PlayerSkillManager>().BlockSkillsRpc(true);
 
@@ -86,7 +85,6 @@ public class MelNormalAttackManager : SkillObjectPrefab
         }
 
         StopAllCoroutines();
-        _pController.AllowMovement();
         _sManager.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
         _sManager.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
         base.ReturnObject();

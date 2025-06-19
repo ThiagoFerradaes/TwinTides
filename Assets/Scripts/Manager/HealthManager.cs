@@ -403,7 +403,6 @@ public class HealthManager : NetworkBehaviour {
             _listOfActiveBuffs.Add(buff.GetType(), newBuff); // adicionamos ao dicionario
 
             if (gameObject.activeInHierarchy) StartCoroutine(newBuff.Coroutine); // começamos a corrotina 
-            Debug.Log("Buff added: " + buff.name);
         }
 
         OnBuffAdded?.Invoke(buff, _listOfActiveBuffs[buff.GetType()].Stack);
@@ -413,7 +412,6 @@ public class HealthManager : NetworkBehaviour {
             if (currentBuff.Coroutine != null) { StopCoroutine(currentBuff.Coroutine); currentBuff.Coroutine = null; }
             _listOfActiveBuffs.Remove(buff.GetType());
         }
-        Debug.Log("Buff removed: " + buff.name);
         OnBuffRemoved?.Invoke(buff, 0);
     }
     public void CleanAllBuffs() {
