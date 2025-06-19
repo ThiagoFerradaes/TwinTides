@@ -10,6 +10,7 @@ public class WarCryObject : SkillObjectPrefab {
     DamageManager _dManager;
     MovementManager _mManager;
     Animator anim;
+    PlayerController _pController;
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as Warcry;
         _level = skillLevel;
@@ -20,6 +21,7 @@ public class WarCryObject : SkillObjectPrefab {
             _dManager = _maevis.GetComponent<DamageManager>();
             anim = _maevis.GetComponentInChildren<Animator>();
             _mManager = _maevis.GetComponent<MovementManager>();
+            _pController = _maevis.GetComponent<PlayerController>();
         }
 
         DefineParentAndPosition();
@@ -32,13 +34,39 @@ public class WarCryObject : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        anim.SetTrigger("WarCry");
-
-        Explode();
+        StartCoroutine(CryRoutine());
 
         StartCoroutine(Duration());
     }
+    IEnumerator CryRoutine() {
+        _pController.BlockMovement();
 
+        anim.SetTrigger("WarCry");
+
+        while (anim.IsInTransition(0)) yield return null;
+
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        while (stateInfo.IsName(_info.AnimationName) == false) {
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        // Espera a animação terminar
+        while (stateInfo.normalizedTime < _info.AnimationPercentToAttack) {
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        Explode();
+
+        while (stateInfo.normalizedTime < 1) {
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        _pController.AllowMovement();
+
+    }
     private void Explode() {
         if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Maevis) return;
 
