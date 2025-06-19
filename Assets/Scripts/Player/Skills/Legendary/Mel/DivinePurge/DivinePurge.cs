@@ -15,5 +15,6 @@ public class DivinePurge : LegendaryRelic {
     public EventReference LaserSound;
 
     [Header("Animation")]
-    public string animationName;
+    public string AnimationName;
+    [Range(0, 1)] public float AnimationPercentToAttack;
 }
