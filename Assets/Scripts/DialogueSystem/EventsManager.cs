@@ -28,6 +28,10 @@ public class EventsManager : NetworkBehaviour
     [SerializeField] DialogueSO usedAllKeysDialogue;
     bool hasUsedAllKeys = false;
 
+    [Header("End of tutorial Event")]
+    [SerializeField] DialogueSO endOfTutorialEvent;
+    bool hasSeenEndOfTutorialEvent = false;
+
     #region Initialize
 
     public override void OnNetworkSpawn() {
@@ -39,7 +43,9 @@ public class EventsManager : NetworkBehaviour
         Camps.OnLegendaryCampDefeat += LegendaryCampEvent;
         BlackBeardMachineState.OnFinal += BlackBeardFinalFormEvent;
         BlackBeardMachineState.OnDeath += BlackBeardDeathEvent;
+        TutorialManager.OnTutorialClosed += TutorialEvent;
     }
+
 
     public override void OnDestroy() {
         try {
@@ -48,6 +54,7 @@ public class EventsManager : NetworkBehaviour
             Camps.OnLegendaryCampDefeat -= LegendaryCampEvent;
             BlackBeardMachineState.OnFinal -= BlackBeardFinalFormEvent;
             BlackBeardMachineState.OnDeath -= BlackBeardDeathEvent;
+            TutorialManager.OnTutorialClosed -= TutorialEvent;
         }
         catch { }
     }
@@ -105,5 +112,9 @@ public class EventsManager : NetworkBehaviour
     }
     #endregion
 
-
+    #region EndOfTutorialEvent
+    private void TutorialEvent() {
+        EventDialogue(ref hasSeenEndOfTutorialEvent, endOfTutorialEvent);
+    }
+    #endregion
 }
