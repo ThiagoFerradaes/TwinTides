@@ -1250,7 +1250,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &400942593
 Transform:
   m_ObjectHideFlags: 0
@@ -6218,6 +6218,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1413868909}
+  - component: {fileID: 1413868911}
   - component: {fileID: 1413868910}
   m_Layer: 0
   m_Name: "Miss\xF5es"
@@ -6225,7 +6226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1413868909
 Transform:
   m_ObjectHideFlags: 0
@@ -6258,7 +6259,36 @@ MonoBehaviour:
   keyDialogue: {fileID: 11400000, guid: 642661c087ed619469504de2daf5659d, type: 2}
   firstCampDialogue: {fileID: 11400000, guid: 9bda5c6615075cf4f9898a1d1ae247df, type: 2}
   secondCampDialogue: {fileID: 11400000, guid: 2e89532cee0a88a4f87bbdf61be92b88, type: 2}
+  amountOfCampsDefeated: 0
   legendaryCampDialogue: {fileID: 11400000, guid: 086545bd611c0674ab4d929b44965d9d, type: 2}
+  blackBeardFinalFormDialogue: {fileID: 0}
+  blackBeardDeathDialogue: {fileID: 0}
+  usedAllKeysDialogue: {fileID: 0}
+--- !u!114 &1413868911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413868908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2529318513
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1001 &1453289595
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13179,14 +13209,6 @@ PrefabInstance:
     - target: {fileID: 186971171951761156, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2190202172
-      objectReference: {fileID: 0}
-    - target: {fileID: 649353164632820841, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
-      propertyPath: listOfDialogues.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 649353164632820841, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
-      propertyPath: 'listOfDialogues.Array.data[0]'
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2089184698251057778, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
       propertyPath: positionOffSet

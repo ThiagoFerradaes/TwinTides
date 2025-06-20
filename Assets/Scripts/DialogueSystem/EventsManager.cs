@@ -12,29 +12,53 @@ public class EventsManager : NetworkBehaviour
     [SerializeField] DialogueSO secondCampDialogue;
     bool hasSeenFirstCampDialogue = false;
     bool hasSeenSecondCampDialogue = false;
-    int amountOfCampsDefeated = 0;
+    public int amountOfCampsDefeated = 0;
 
     [Header("Legendary Camp")]
     [SerializeField] DialogueSO legendaryCampDialogue;
     bool hasSeenLegendaryCampDialogue = false;
 
+    [Header("BlackBeard Events")]
+    [SerializeField] DialogueSO blackBeardFinalFormDialogue;
+    [SerializeField] DialogueSO blackBeardDeathDialogue;
+    bool hasSeenBBFinalFormDialogue = false;
+    bool hasSeenBBDeathDialogue = false;
+
+    [Header("Used all Keys Event")]
+    [SerializeField] DialogueSO usedAllKeysDialogue;
+    bool hasUsedAllKeys = false;
+
     #region Initialize
-    void Start()
-    {
+
+    public override void OnNetworkSpawn() {
+        base.OnNetworkSpawn();
+
+
         Chest.OnKeyObtain += OnObteinKey;
         Camps.OnAllEnemiesDeadStatic += CheckAmountOfCamps;
         Camps.OnLegendaryCampDefeat += LegendaryCampEvent;
+        BlackBeardMachineState.OnFinal += BlackBeardFinalFormEvent;
+        BlackBeardMachineState.OnDeath += BlackBeardDeathEvent;
     }
-
-
 
     public override void OnDestroy() {
         try {
             Chest.OnKeyObtain -= OnObteinKey;
             Camps.OnAllEnemiesDeadStatic -= CheckAmountOfCamps;
             Camps.OnLegendaryCampDefeat -= LegendaryCampEvent;
+            BlackBeardMachineState.OnFinal -= BlackBeardFinalFormEvent;
+            BlackBeardMachineState.OnDeath -= BlackBeardDeathEvent;
         }
         catch { }
+    }
+
+    void EventDialogue(ref bool flag, DialogueSO dialogue) {
+        if (!IsServer || flag) return;
+
+        flag = true;
+
+        int dialogueId = DialogueManager.Instance.DialogueToInt(dialogue);
+        DialogueManager.Instance.TurnCanvasOn(dialogueId);
     }
     #endregion
     #region KeyEvent
@@ -60,31 +84,26 @@ public class EventsManager : NetworkBehaviour
 
         amountOfCampsDefeated++;
 
-        if (amountOfCampsDefeated == 1 && !hasSeenFirstCampDialogue) FirstCampEvent();
-        else if (amountOfCampsDefeated == 2 && !hasSeenSecondCampDialogue) SecondCampEvent();
-    }
-
-    void FirstCampEvent() {
-        hasSeenFirstCampDialogue = true;
-        int dialogueId = DialogueManager.Instance.DialogueToInt(firstCampDialogue);
-        DialogueManager.Instance.TurnCanvasOn(dialogueId);
-    }
-
-    void SecondCampEvent() {
-        hasSeenSecondCampDialogue = true;
-        int dialogueId = DialogueManager.Instance.DialogueToInt(secondCampDialogue);
-        DialogueManager.Instance.TurnCanvasOn(dialogueId);
+        if (amountOfCampsDefeated == 1 && !hasSeenFirstCampDialogue) EventDialogue(ref hasSeenFirstCampDialogue, firstCampDialogue);
+        else if (amountOfCampsDefeated == 2 && !hasSeenSecondCampDialogue) EventDialogue(ref hasSeenSecondCampDialogue, secondCampDialogue);
     }
     #endregion
 
     #region LegendaryCampEvent
     private void LegendaryCampEvent() {
-        if (!IsServer || hasSeenLegendaryCampDialogue) return;
-
-        hasSeenLegendaryCampDialogue = true;
-
-        int dialogueId = DialogueManager.Instance.DialogueToInt(legendaryCampDialogue);
-        DialogueManager.Instance.TurnCanvasOn(dialogueId);
+        EventDialogue(ref hasSeenLegendaryCampDialogue, legendaryCampDialogue);
     }
     #endregion
+
+    #region BlackBeardEvents
+    private void BlackBeardDeathEvent() {
+        EventDialogue(ref hasSeenBBDeathDialogue, blackBeardDeathDialogue);
+    }
+
+    private void BlackBeardFinalFormEvent() {
+        EventDialogue(ref hasSeenBBFinalFormDialogue, blackBeardFinalFormDialogue);
+    }
+    #endregion
+
+
 }

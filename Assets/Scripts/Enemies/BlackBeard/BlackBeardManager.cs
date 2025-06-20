@@ -9,7 +9,7 @@ public class BlackBeardManager : NetworkBehaviour {
     bool hasStarted;
 
     public override void OnNetworkSpawn() {
-        blackBeard.OnDeath += BlackBeardDeath;
+        BlackBeardMachineState.OnDeath += BlackBeardDeath;
     }
 
     private void BlackBeardDeath() {
