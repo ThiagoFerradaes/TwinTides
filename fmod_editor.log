@@ -73,3 +73,4 @@
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='Laugh_Maevis', format=5, channels=1, frequency=48000, lengthbytes=13728, lengthpcm=75441, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.456268.
 [LOG] SoundI::release                          :  (00000181AD9BC608)
 [LOG] SoundI::release                          :     Laugh_Maevis (000001812D2414E8)
+[ERR] ~Global                                  : assertion: 'gSystemInitCount == 0' failed
