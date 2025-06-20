@@ -23,7 +23,9 @@ public class Camps : NetworkBehaviour {
     [SerializeField, Tooltip("Deixa 0 se n quiser que ele respawne")] float respawnTime;
     Chest chest;
 
+    public static event Action OnAllEnemiesDeadStatic;
     public event Action OnAllEnemiesDead;
+    public static event Action OnLegendaryCampDefeat;
 
     #endregion
 
@@ -166,6 +168,8 @@ public class Camps : NetworkBehaviour {
         aliveCount--;
         if (aliveCount <= 0) {
             OnAllEnemiesDead?.Invoke();
+            OnAllEnemiesDeadStatic?.Invoke();
+            if (chest.rarity == Chest.ChestRarity.Rare) OnLegendaryCampDefeat?.Invoke();
             chest.UnlockChest();
             if (respawnTime > 0) StartCoroutine(RespawnCampTimer());
         }
