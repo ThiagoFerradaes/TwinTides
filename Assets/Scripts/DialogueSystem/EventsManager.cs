@@ -44,6 +44,8 @@ public class EventsManager : NetworkBehaviour
         BlackBeardMachineState.OnFinal += BlackBeardFinalFormEvent;
         BlackBeardMachineState.OnDeath += BlackBeardDeathEvent;
         TutorialManager.OnTutorialClosed += TutorialEvent;
+        KeyLockManager.OnAllKeysUsed += AllKeysUsedEvent;
+
     }
 
 
@@ -55,6 +57,7 @@ public class EventsManager : NetworkBehaviour
             BlackBeardMachineState.OnFinal -= BlackBeardFinalFormEvent;
             BlackBeardMachineState.OnDeath -= BlackBeardDeathEvent;
             TutorialManager.OnTutorialClosed -= TutorialEvent;
+            KeyLockManager.OnAllKeysUsed -= AllKeysUsedEvent;
         }
         catch { }
     }
@@ -115,6 +118,12 @@ public class EventsManager : NetworkBehaviour
     #region EndOfTutorialEvent
     private void TutorialEvent() {
         EventDialogue(ref hasSeenEndOfTutorialEvent, endOfTutorialEvent);
+    }
+    #endregion
+
+    #region AllKeysUsedEvent
+    private void AllKeysUsedEvent() {
+        EventDialogue(ref hasUsedAllKeys, usedAllKeysDialogue);
     }
     #endregion
 }
