@@ -78,7 +78,7 @@ public class TidalWatzManager : SkillObjectPrefab {
 
         if (_level == 4) {
 
-            anim.SetTrigger("TidalWatz");
+            anim.SetInteger("TidalWatzCounter", 5);
 
             if (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) {
                 PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 2);

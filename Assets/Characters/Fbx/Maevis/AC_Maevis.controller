@@ -61,10 +61,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsWalking
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4236846732422725488}
   m_Solo: 0
@@ -86,10 +83,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsWalking
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4236846732422725488}
   m_Solo: 0
@@ -217,7 +211,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
@@ -257,10 +251,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsWalking
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4236846732422725488}
   m_Solo: 0
@@ -283,7 +274,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: HullBreaker
-  m_Speed: 2.3
+  m_Speed: 3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8806030957150005818}
@@ -590,10 +581,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsWalking
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4236846732422725488}
   m_Solo: 0
@@ -802,7 +790,7 @@ AnimatorStateMachine:
     m_Position: {x: 100, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5377936900123252471}
-    m_Position: {x: 470, y: 560, z: 0}
+    m_Position: {x: 320, y: 650, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -330178713097988427}
     m_Position: {x: 850, y: -320, z: 0}
@@ -814,10 +802,10 @@ AnimatorStateMachine:
     m_Position: {x: 890, y: 380, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2820758906795803146}
-    m_Position: {x: -110, y: 410, z: 0}
+    m_Position: {x: -50, y: 490, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2747786483569786951}
-    m_Position: {x: 500, y: 490, z: 0}
+    m_Position: {x: 480, y: 740, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4939346036949706862}
     m_Position: {x: 980, y: 290, z: 0}
@@ -844,19 +832,19 @@ AnimatorStateMachine:
     m_Position: {x: 90, y: 560, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3274811375533255131}
-    m_Position: {x: 10, y: -240, z: 0}
+    m_Position: {x: -80, y: -230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 727912035691826512}
     m_Position: {x: -10, y: -350, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4970741009950253058}
-    m_Position: {x: 850, y: -190, z: 0}
+    m_Position: {x: 960, y: -210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8353770182827511169}
-    m_Position: {x: 880, y: -110, z: 0}
+    m_Position: {x: 990, y: -90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7768820435274303392}
-    m_Position: {x: 770, y: 560, z: 0}
+    m_Position: {x: 780, y: 560, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6795022013930373701}
     m_Position: {x: 900, y: 50, z: 0}
@@ -1025,18 +1013,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: DreadFallPulo
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: DreadFall
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   - m_Name: EarthShatter
     m_Type: 9
     m_DefaultFloat: 0
@@ -1094,6 +1070,12 @@ AnimatorController:
   - m_Name: TidalWatzSpeed
     m_Type: 1
     m_DefaultFloat: 1
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: DreadFall
+    m_Type: 4
+    m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
@@ -1192,7 +1174,7 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
+  - m_ConditionMode: 2
     m_ConditionEvent: DreadFall
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
@@ -1201,10 +1183,10 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -1216,10 +1198,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsWalking
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4236846732422725488}
   m_Solo: 0
@@ -1263,10 +1242,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsWalking
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4236846732422725488}
   m_Solo: 0
@@ -1315,10 +1291,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsWalking
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4236846732422725488}
   m_Solo: 0
@@ -1394,7 +1367,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: DreadFallPulo
+    m_ConditionEvent: DreadFall
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4970741009950253058}
@@ -1402,7 +1375,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
@@ -1479,7 +1452,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
@@ -1494,10 +1467,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsWalking
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4236846732422725488}
   m_Solo: 0
@@ -1673,7 +1643,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 'DreadFall '
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2129423922259802062}
@@ -1699,10 +1669,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsWalking
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4236846732422725488}
   m_Solo: 0
