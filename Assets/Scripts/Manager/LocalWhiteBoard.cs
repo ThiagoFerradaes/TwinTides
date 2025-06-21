@@ -179,10 +179,11 @@ public class LocalWhiteBoard : MonoBehaviour {
         return Gold;
     }
 
+    public static event Action<int> OnAddKey;
     public void AddKey(int keyAmount) {
         AmountOsKeys += keyAmount;
+        OnAddKey?.Invoke(AmountOsKeys);
     }
-
 
     public int ReturnAmountOfKeys() {
         return AmountOsKeys;
@@ -195,6 +196,7 @@ public class LocalWhiteBoard : MonoBehaviour {
     public void UseAllKeys() {
         AmountOsKeys = 0;
         allKeysUsed = true;
+        OnAddKey?.Invoke(AmountOsKeys);
     }
 
     public int ReturnSkillLevel(Skill skill) {
