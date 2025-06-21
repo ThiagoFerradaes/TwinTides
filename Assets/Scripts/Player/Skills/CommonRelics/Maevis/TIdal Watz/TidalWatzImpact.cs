@@ -8,7 +8,7 @@ public class TidalWatzImpact : SkillObjectPrefab {
     SkillContext _context;
     GameObject _maevis;
 
-    TidalWatzObject _father;
+    TidalWatzManager _father;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as TidalWatz;
@@ -19,7 +19,7 @@ public class TidalWatzImpact : SkillObjectPrefab {
         }
 
         if (_father == null) {
-            _father = FindAnyObjectByType<TidalWatzObject>();
+            _father = FindAnyObjectByType<TidalWatzManager>();
         }
 
         SetSizeAndPosition();

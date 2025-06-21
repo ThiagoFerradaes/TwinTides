@@ -4,12 +4,11 @@ using UnityEngine.UI;
 public class EnemieHealth : MonoBehaviour {
     HealthManager enemie;
     Canvas canvas;
-    Image image;
+    [SerializeField] Image image;
     void Start() {
         // Pegando os componentes
         canvas = transform.parent.GetComponent<Canvas>();
         enemie = canvas.transform.parent.GetComponent<HealthManager>();
-        image = GetComponent<Image>();
 
         // Setando outras coisas
         canvas.worldCamera = Camera.main;

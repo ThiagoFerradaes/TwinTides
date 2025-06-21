@@ -41,6 +41,8 @@ public class MovementManager : NetworkBehaviour {
     public override void OnDestroy() {
         if (IsServer) PlayersDeathManager.OnGameRestart -= Reset;
     }
+
+    #region Getters
     /// <summary>
     /// Retorna o valor da velocidade base/minima + o valor da velocidade adicional, se o objeto estiver stunado retorna 0
     /// </summary>
@@ -60,6 +62,9 @@ public class MovementManager : NetworkBehaviour {
     /// <returns></returns>
     public bool ReturnStunnedValue() => _isStunned.Value;
 
+    public float ReturnOriginalMoveSpeed() => baseMoveSpeed.Value * 3;
+    #endregion
+    #region Increase and Decrease speed
     /// <summary>
     /// Multiplica a velocidade adicional por uma porcentam - o valor passado tem que estar entre 0 e 100
     /// </summary>
@@ -110,8 +115,9 @@ public class MovementManager : NetworkBehaviour {
         yield return new WaitForSeconds(duration);
         adicionalMoveSpeed.Value *= speeMultiplier;
     }
+    #endregion
 
-
+    #region Stun
     /// <summary>
     /// Stuna o objeto, ou seja, faz o retorno da velocidade total desse objeto ser 0
     /// </summary>
@@ -158,5 +164,5 @@ public class MovementManager : NetworkBehaviour {
 
         stunRoutine = null;
     }
-
+    #endregion
 }

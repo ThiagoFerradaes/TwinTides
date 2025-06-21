@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class DialogueSO : ScriptableObject
 [System.Serializable]
 public class DialogueClass {
     public DialogueCharacter Character;
+    public EventReference InitialDialogueSound;
     [TextArea(5,10)]public string Text;
 }
 

@@ -17,12 +17,13 @@ MonoBehaviour:
   NameSpriteTotem: {fileID: 0}
   MinLevel: 1
   MaxLevel: 1
-  Cooldown: 0.8
+  Cooldown: 0.2
   IsStackable: 1
   Character: 1
   SkillsDescriptions: []
   UpgradesDescriptions: []
   skillPrefabs:
+  - {fileID: 2174601154887654499, guid: a9ae2921782314a489650df50673d839, type: 3}
   - {fileID: 1244048917828174641, guid: a9e545f534d84f14eb2455188f1becad, type: 3}
   SphereSize: {x: 1, y: 1, z: 1}
   SphereSpeed: 20
@@ -35,3 +36,5 @@ MonoBehaviour:
       Data3: 1034895546
       Data4: -463058489
     Path: event:/Mel/AtaqueBasico
+  AnimationName: AttackTree
+  AnimationPercentToAttack: 0.3

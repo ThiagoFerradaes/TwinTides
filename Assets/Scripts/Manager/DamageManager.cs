@@ -4,16 +4,18 @@ using System.Collections;
 
 public class DamageManager : NetworkBehaviour {
 
-    [SerializeField] private NetworkVariable<float> baseAttack = new(0);
-    [SerializeField] private NetworkVariable<float> attackSpeed = new(1);
+    [SerializeField] float baseAttackSpeed = 1;
+    [SerializeField] float baseAttack;
+    private NetworkVariable<float> attack = new(0);
+    public NetworkVariable<float> attackSpeed = new();
 
     #region Métodos Relacionados ao Ataque Base
     public float ReturnBaseAttack() {
-        return baseAttack.Value;
+        return attack.Value;
     }
 
     public float ReturnTotalAttack(float skillDamage) {
-        return (1 + baseAttack.Value) * skillDamage;
+        return (1 + attack.Value) * skillDamage;
     }
 
 
@@ -23,12 +25,12 @@ public class DamageManager : NetworkBehaviour {
     /// <param name="damageIncreaseMultiplier"></param>
     public void IncreaseBaseAttack(float damageIncreaseMultiplier) {
         if (IsServer)
-            baseAttack.Value *= damageIncreaseMultiplier;
+            attack.Value *= damageIncreaseMultiplier;
     }
 
     public void DecreaseBaseAttack(float damageDecreaseMultiplier) {
         if (IsServer)
-            baseAttack.Value /= damageDecreaseMultiplier;
+            attack.Value /= damageDecreaseMultiplier;
     }
 
     public void IncreaseBaseAttackWithTime(float damageMultiplier, float duration) {
@@ -42,19 +44,22 @@ public class DamageManager : NetworkBehaviour {
     }
 
     IEnumerator IncreaseAttackCoroutine(float damageMultipiler, float duration) {
-        baseAttack.Value *= damageMultipiler;
+        attack.Value *= damageMultipiler;
         yield return new WaitForSeconds(duration);
-        baseAttack.Value /= damageMultipiler;
+        attack.Value /= damageMultipiler;
     }
     IEnumerator DecreaseAttackCoroutine(float damageMultipiler, float duration) {
-        baseAttack.Value /= damageMultipiler;
+        attack.Value /= damageMultipiler;
         yield return new WaitForSeconds(duration);
-        baseAttack.Value *= damageMultipiler;
+        attack.Value *= damageMultipiler;
     }
 
     #endregion
 
     #region Métodos Relacionados ao Cooldown do Ataque/ Velocidade do Ataque
+
+    public float ReturnAttackSpeed() => attackSpeed.Value;
+    public float ReturnBaseAttackSpeed() => baseAttackSpeed;
     /// <summary>
     /// Retorna a divisão do número passado pela velocidade de ataque atual
     /// </summary>
@@ -116,14 +121,18 @@ public class DamageManager : NetworkBehaviour {
     #region Reset
 
     private void Start() {
-        if (IsServer) PlayersDeathManager.OnGameRestart += ResetStats;
+        if (IsServer) {
+            PlayersDeathManager.OnGameRestart += ResetStats;
+            attackSpeed.Value = baseAttackSpeed;
+            attack.Value = baseAttack;
+        }
     }
     public void ResetStats() {
         if (!IsServer) return;
 
         StopAllCoroutines();
-        baseAttack.Value = 0f;
-        attackSpeed.Value = 1f;
+        attack.Value = baseAttack;
+        attackSpeed.Value = baseAttackSpeed;
        
     }
 

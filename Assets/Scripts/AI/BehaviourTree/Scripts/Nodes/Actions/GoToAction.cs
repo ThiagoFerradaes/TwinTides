@@ -22,10 +22,13 @@ public class GoToAction : ActionNode {
         targetPosition = blackboard.path[blackboard.CurrentPathIndex];
         context.Agent.SetDestination(targetPosition.position);
 
+        if (context.anim != null && context.anim.enabled) context.anim.SetBool("IsWalking", true);
     }
 
     protected override State OnUpdate() {
-        if (state == State.Failure) return State.Failure;
+        if (state == State.Failure) {
+            return State.Failure;
+        }
 
         context.Agent.speed = context.MManager.ReturnMoveSpeed();
 
@@ -40,5 +43,11 @@ public class GoToAction : ActionNode {
         }
 
         return State.Success;
+    }
+
+    public override void OnStop() {
+        if (context.anim != null && context.anim.enabled) {
+            context.anim.SetBool("IsWalking", false);
+        }
     }
 }

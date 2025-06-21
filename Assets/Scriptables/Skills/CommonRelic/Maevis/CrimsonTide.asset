@@ -21,10 +21,12 @@ MonoBehaviour:
   IsStackable: 1
   Character: 0
   SkillsDescriptions:
-  - "Crimson Tide n\xEDvel 1 "
-  - "Crimson Tide n\xEDvel 2"
-  - "Crimson Tide n\xEDvel 3"
-  - "Crimson Tide n\xEDvel 4"
+  - Maevis punches forward, dealing damage to enemies in front of her.
+  - Maevis dashes forward, damaging all enemies in her path.
+  - Maevis dashes forward, damaging enemies in her path. An explosion occurs at the
+    end of the dash.
+  - "Maevis dashes forward, damaging enemies along the way. A damaging explosion
+    occurs at the end of the dash. Eliminating enemies resets this skill\u2019s cooldown."
   UpgradesDescriptions:
   - "Crimson Tide vai virar n\xEDvel 2"
   - "Crimson Tide vai virar n\xEDvel 3"
@@ -71,3 +73,5 @@ MonoBehaviour:
   PathSpawnInterval: 0.3
   PathSize: {x: 2.5, y: 0.1, z: 0.35}
   PercentToExecute: 50
+  PunchAnimationName: CrimsonTide
+  PunchAnimationPercentToAttack: 0.4

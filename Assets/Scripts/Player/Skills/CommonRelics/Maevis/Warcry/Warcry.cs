@@ -23,4 +23,8 @@ public class Warcry : CommonRelic {
     public AttackSkill EnhancedMaevisAttack;
     [Range(0,200)]public float PercentAttackSpeedLevel4;
     public float DurationLevel4;
+
+    [Header("Animation")]
+    public string AnimationName;
+    [Range(0,1)]public float AnimationPercentToAttack;
 }

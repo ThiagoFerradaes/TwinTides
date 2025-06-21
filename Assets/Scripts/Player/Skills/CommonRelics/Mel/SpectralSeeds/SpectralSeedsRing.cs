@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Multiplayer.Center.NetcodeForGameObjectsExample.DistributedAuthority;
 using UnityEngine;
 
 public class SpectralSeedsRing : SkillObjectPrefab {
@@ -11,13 +12,21 @@ public class SpectralSeedsRing : SkillObjectPrefab {
     int _AmountOfSeeds;
     GameObject _mel;
 
+    Animator anim;
+    PlayerController _pController;
+    PlayerSkillManager _sManager;
     [HideInInspector] public List<SpectralSeedsObject> listOfSeeds = new();
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as SpectralSeeds;
         _level = skillLevel;
         _context = context;
 
-        if (_mel == null) _mel = PlayerSkillPooling.Instance.MelGameObject;
+        if (_mel == null) {
+            _mel = PlayerSkillPooling.Instance.MelGameObject;
+            anim = _mel.GetComponentInChildren<Animator>();
+            _pController = _mel.GetComponentInChildren<PlayerController>();
+            _sManager = _mel.GetComponentInChildren<PlayerSkillManager>();
+        }
 
         DefineSizeAndPosition();
 
@@ -31,12 +40,44 @@ public class SpectralSeedsRing : SkillObjectPrefab {
 
         transform.SetLocalPositionAndRotation(_info.RingPosition, Quaternion.Euler(0, 0, 0));
 
-
         gameObject.SetActive(true);
 
-        InstantiateSeeds();
+        StartCoroutine(AttackRoutine());
 
         StartCoroutine(Duration());
+    }
+
+    IEnumerator AttackRoutine() {
+        _pController.BlockMovement();
+        _sManager.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(true);
+        _sManager.GetComponent<PlayerSkillManager>().BlockSkillsRpc(true);
+        anim.SetTrigger("SpectralSeeds");
+
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+
+        while (anim.IsInTransition(0)) yield return null;
+
+        while (stateInfo.IsName(_info.AnimationName) == false) {
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        // Espera a animação terminar
+        while (stateInfo.normalizedTime < _info.AnimationPercentToAttack) {
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        InstantiateSeeds(); 
+
+        while (stateInfo.normalizedTime < 1f && stateInfo.IsName(_info.AnimationName)) {
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        _pController.AllowMovement();
+        _sManager.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
+        _sManager.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
     }
 
     private void InstantiateSeeds() {
@@ -108,6 +149,10 @@ public class SpectralSeedsRing : SkillObjectPrefab {
         }
     }
     public override void ReturnObject() {
+        _pController.AllowMovement();
+        _sManager.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
+        _sManager.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
+
         SpectralSeedsObject.OnSphereMoved -= SpectralSeedsObject_OnSphereMoved;
 
         listOfSeeds.Clear();

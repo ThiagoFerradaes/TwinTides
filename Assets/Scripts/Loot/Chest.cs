@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 public class Chest : NetworkBehaviour {
 
     [Header("Chest Atributes")]
-    [SerializeField] ChestRarity rarity;
+    public ChestRarity rarity;
     [SerializeField] bool isLocked;
     bool locked;
     [SerializeField] EventReference openChestSound;
@@ -33,6 +33,7 @@ public class Chest : NetworkBehaviour {
     List<PlayerController> players = new();
 
     public static event System.EventHandler MediumChestOpened;
+    public static event Action OnKeyObtain;
 
     public enum ChestRarity {
         Common,
@@ -169,9 +170,7 @@ public class Chest : NetworkBehaviour {
         }
     }
     void ChooseFragment() {
-        if (LocalWhiteBoard.Instance.CheckIfAllRelicsAreMaxed()) { fragment = null; Debug.Log("All fragments");  return; }
-
-        Debug.Log("Not all fragments");
+        if (LocalWhiteBoard.Instance.CheckIfAllRelicsAreMaxed()) { fragment = null;  return; }
 
         var commonSkills = PlayerSkillConverter.Instance.ReturnCommonSkillList(LocalWhiteBoard.Instance.PlayerCharacter);
         int skillCounter = 0;
@@ -228,6 +227,8 @@ public class Chest : NetworkBehaviour {
 
         if (rng <= (ChestManager.Instance.ReturnAmountOfMediumChestOpened() + 2) * 10) { amountOfKeys = 1; }
         else amountOfKeys = 0;
+
+        if (amountOfKeys > 0) OnKeyObtain?.Invoke();
 
         LocalWhiteBoard.Instance.AddKey(amountOfKeys);
     }

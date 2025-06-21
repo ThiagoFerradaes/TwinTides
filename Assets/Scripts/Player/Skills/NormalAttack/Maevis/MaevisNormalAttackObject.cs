@@ -30,8 +30,9 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
         End();
     }
 
-    void DefinePosition() { 
-        transform.localScale = _currentAttackCombo == 3 ? _info.ThirdAttackSize : _info.FirstAndSecondAttackSize;
+    void DefinePosition() {
+        BoxCollider col = GetComponent<BoxCollider>();
+        col.size = _currentAttackCombo == 3 ? _info.ThirdAttackSize : _info.FirstAndSecondAttackSize;
 
         transform.SetParent(_father.transform);
 

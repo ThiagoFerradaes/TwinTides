@@ -12,6 +12,7 @@ public class PlayerController : NetworkBehaviour {
     #region Variables
     [Header("Movement")]
     [SerializeField] float rotationSpeed;
+    [SerializeField] float walkingAnimationBaseSpeed = 1.1f;
 
     [Header("Aim")]
     public LayerMask FloorLayer;
@@ -38,8 +39,11 @@ public class PlayerController : NetworkBehaviour {
 
     // Componentes
     Vector2 _moveInput;
+    Vector3 aimDirection;
     MovementManager _mManager;
     Rigidbody _rb;
+    Animator anim;
+    HealthManager _hManager;
 
     // eventos 
     public static event Action OnMove; // Esses dois aqui são pra camera
@@ -55,7 +59,8 @@ public class PlayerController : NetworkBehaviour {
     void Start() {
         _mManager = GetComponent<MovementManager>();
         _rb = GetComponent<Rigidbody>();
-
+        anim = GetComponentInChildren<Animator>();
+        _hManager = GetComponent<HealthManager>();
     }
     void FixedUpdate() {
         if (!IsOwner) return;
@@ -146,18 +151,43 @@ public class PlayerController : NetworkBehaviour {
     IEnumerator DashCoroutine() {
         BlockMovement();
 
+        _hManager.InvulnerabilityRpc(true);
+
         _inDash = true;
 
         float startTime = Time.time;
+
         OnDashCooldown?.Invoke(SkillType.Dash, dashCooldown);
 
-        Vector3 moveDirection = (_moveInput.magnitude >= 0.1f) ? new Vector3(_moveInput.x, 0, _moveInput.y).normalized : transform.forward;
+        Vector3 moveDirection;
+
+        if (LocalWhiteBoard.Instance.IsAiming && _moveInput != Vector2.zero) { // Parte que verifica se ela ta andando para trás
+            moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
+
+            Vector3 moveDir = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
+            Vector3 lookDir = new Vector3(aimDirection.x, 0, aimDirection.z).normalized;
+
+            float dot = Vector3.Dot(moveDir, lookDir);
+
+            // Se dot < 0, o ângulo entre eles é maior que 90 graus, ou seja, andando para trás
+            if (dot < 0) {
+                anim.SetTrigger("DashTras");
+            }
+            else {
+                anim.SetTrigger("DashFrente");
+            }
+        }
+
+        else {
+            moveDirection = transform.forward;
+            anim.SetTrigger("DashFrente");
+        }
 
         _rb.linearVelocity = moveDirection * dashForce;
 
         OnDashCooldown?.Invoke(SkillType.Dash, dashCooldown);
 
-        if (!dashSound.IsNull) {
+        if (!dashSound.IsNull) { // Som
             dashSoundInstance = RuntimeManager.CreateInstance(dashSound);
             RuntimeManager.AttachInstanceToGameObject(dashSoundInstance, this.gameObject);
             dashSoundInstance.start();
@@ -169,7 +199,7 @@ public class PlayerController : NetworkBehaviour {
             yield return new WaitForFixedUpdate();
         }
 
-        if (dashSoundInstance.isValid()) {
+        if (dashSoundInstance.isValid()) { // Som
             dashSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             dashSoundInstance.release();
         }
@@ -177,6 +207,8 @@ public class PlayerController : NetworkBehaviour {
         _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);
 
         AllowMovement();
+
+        _hManager.InvulnerabilityRpc(false);
 
         yield return new WaitForSeconds(dashCooldown - dashDuration);
         _inDash = false;
@@ -189,11 +221,15 @@ public class PlayerController : NetworkBehaviour {
 
 
     private void MoveAndRotate() {
-        if (_rb.linearVelocity.y < 0) {
-            _rb.linearVelocity += Vector3.up * Physics.gravity.y * (2) * Time.deltaTime;
+        if (_rb.linearVelocity.y < 0) { // Gravidade
+            _rb.linearVelocity += (2) * Physics.gravity.y * Time.deltaTime * Vector3.up;
         }
 
-        if (_mManager.ReturnStunnedValue()) { _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f); return; }
+        if (_mManager.ReturnStunnedValue()) { // Stunado
+            _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);
+            anim.SetBool("IsWalking", false);
+            return;
+        }
 
         Moving();
 
@@ -202,15 +238,21 @@ public class PlayerController : NetworkBehaviour {
     }
 
     void Moving() {
-        if (_moveInput == Vector2.zero || !_canWalk) {
-            if (!_inDash) _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);
+        if (_moveInput == Vector2.zero || !_canWalk) { // parado
+            if (!_inDash) { // verificando se está em dash
+                _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);
+            }
+            anim.SetBool("IsWalking", false);
             return;
         }
 
+        // andando
         Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
         Vector3 velocity = moveDirection * _mManager.ReturnMoveSpeed();
         velocity.y = _rb.linearVelocity.y;
         _rb.linearVelocity = velocity;
+
+        AnimatorWalkingSpeed();
     }
 
     public void Rotate() {
@@ -220,10 +262,10 @@ public class PlayerController : NetworkBehaviour {
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray , out RaycastHit hit, Mathf.Infinity, FloorLayer)){
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, FloorLayer)) {
 
                 mousePos = new(hit.point.x, transform.position.y, hit.point.z);
-                Vector3 aimDirection = (mousePos - transform.position);
+                aimDirection = (mousePos - transform.position);
 
                 if (aimDirection.sqrMagnitude > 0.01f) {
                     Quaternion direction = Quaternion.LookRotation(aimDirection);
@@ -237,6 +279,30 @@ public class PlayerController : NetworkBehaviour {
                 transform.rotation = Quaternion.Euler(0, angle, 0);
             }
         }
+    }
+
+    void AnimatorWalkingSpeed() { // Ajustando a velocidade da animação
+        float currentSpeed = _mManager.ReturnMoveSpeed();
+        float originalSpeed = _mManager.ReturnOriginalMoveSpeed();
+
+        float speedRatio = currentSpeed / originalSpeed;
+
+        float animationSpeed = speedRatio * walkingAnimationBaseSpeed;
+
+        if (LocalWhiteBoard.Instance.IsAiming && _moveInput != Vector2.zero) { // Parte que verifica se ela ta andando para trás
+            Vector3 moveDir = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
+            Vector3 lookDir = new Vector3(aimDirection.x, 0, aimDirection.z).normalized;
+
+            float dot = Vector3.Dot(moveDir, lookDir);
+
+            // Se dot < 0, o ângulo entre eles é maior que 90 graus, ou seja, andando para trás
+            if (dot < 0) {
+                animationSpeed *= -1;
+            }
+        }
+
+        anim.SetFloat("Speed", animationSpeed);
+        anim.SetBool("IsWalking", true);
     }
 
     #endregion

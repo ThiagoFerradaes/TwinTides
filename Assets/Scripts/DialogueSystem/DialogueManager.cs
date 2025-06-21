@@ -14,8 +14,8 @@ public class DialogueManager : NetworkBehaviour {
     public static DialogueManager Instance;
 
     [Header("List of dialogues")]
-    [SerializeField] List<DialogueTrigger> listOfDialogues = new();
-    DialogueTrigger currentDialogue;
+    [SerializeField] List<DialogueSO> listOfDialogues = new();
+    DialogueSO currentDialogue;
 
     [Header("Dialogue Components")]
     [SerializeField] GameObject dialogueCanvas;
@@ -45,11 +45,6 @@ public class DialogueManager : NetworkBehaviour {
     bool hasVoted = false;
     Coroutine skipCoroutine;
     Coroutine detectInputCoroutine;
-
-    [Header("Sounds")]
-    [SerializeField] EventReference melSoundPerLetter;
-    [SerializeField] EventReference maevisSoundPerLetter;
-    [SerializeField] EventReference blackBeardSoundPerLetter;
 
     #region Initialize
     private void Awake() {
@@ -169,13 +164,11 @@ public class DialogueManager : NetworkBehaviour {
 
         amountOfPlayersFinishedWithDialogue.OnValueChanged += ChangeFinishedText;
 
-        DialogueTrigger dialogueHit = IntToDialogue(dialogueId);
+        DialogueSO dialogue = IntToDialogue(dialogueId);
 
-        currentDialogue = dialogueHit;
+        currentDialogue = dialogue;
 
-        DialogueSO dialogue = dialogueHit.Dialogue;
-
-        dialogueCanvas.gameObject.SetActive(true);
+        dialogueCanvas.SetActive(true);
 
         StartCoroutine(DialogueRoutine(dialogue));
     }
@@ -202,16 +195,9 @@ public class DialogueManager : NetworkBehaviour {
                     _ => null
                 };
 
-
-                //EventReference soundPerLetter = dialogue.ListOfDialogues[i].Character switch {
-                //    DialogueCharacter.MEL => melSoundPerLetter,
-                //    DialogueCharacter.MAEVIS => maevisSoundPerLetter,
-                //    DialogueCharacter.BLACKBEARD => blackBeardSoundPerLetter,
-                //    _ => melSoundPerLetter
-                //};
-
-
                 characterName.text = dialogue.ListOfDialogues[i].Character.ToString(); // trocando o nome do personagem
+
+                if (!dialogue.ListOfDialogues[i].InitialDialogueSound.IsNull) RuntimeManager.PlayOneShot(dialogue.ListOfDialogues[i].InitialDialogueSound);
 
                 yield return null;
 
@@ -265,8 +251,6 @@ public class DialogueManager : NetworkBehaviour {
 
         amountOfPlayersFinishedWithDialogue.OnValueChanged -= ChangeFinishedText;
 
-        if (currentDialogue is DialogueHitBox) currentDialogue.gameObject.SetActive(false);
-
         dialogueCanvas.gameObject.SetActive(false);
 
         Time.timeScale = 1f;
@@ -277,9 +261,9 @@ public class DialogueManager : NetworkBehaviour {
 
     #region Getters
 
-    public int DialogueToInt(DialogueTrigger dialogue) => listOfDialogues.IndexOf(dialogue);
+    public int DialogueToInt(DialogueSO dialogue) => listOfDialogues.IndexOf(dialogue);
 
-    DialogueTrigger IntToDialogue(int dialogueId) => listOfDialogues[dialogueId];
+    DialogueSO IntToDialogue(int dialogueId) => listOfDialogues[dialogueId];
 
     #endregion
 }

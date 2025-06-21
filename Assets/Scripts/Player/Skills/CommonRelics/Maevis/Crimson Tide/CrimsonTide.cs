@@ -29,4 +29,8 @@ public class CrimsonTide : CommonRelic
     public float PathSpawnInterval;
     public Vector3 PathSize;
     [Range(0,100)]public float PercentToExecute;
+
+    [Header("Animation")]
+    public string PunchAnimationName;
+    [Range(0,1)]public float PunchAnimationPercentToAttack;
 }

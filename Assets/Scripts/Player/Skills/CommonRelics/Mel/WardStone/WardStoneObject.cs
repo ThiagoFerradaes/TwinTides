@@ -7,10 +7,15 @@ public class WardStoneObject : SkillObjectPrefab {
     WardStone _info;
     int _level;
     SkillContext _context;
+    GameObject _mel;
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as WardStone;
         _level = skillLevel;
         _context = context;
+
+        if (_mel == null) {
+            _mel = PlayerSkillPooling.Instance.MelGameObject;
+        }
 
         DefineSizeAndPosition();
 
@@ -39,7 +44,7 @@ public class WardStoneObject : SkillObjectPrefab {
     private void CreateArea() {
         if (_level >= 3 && LocalWhiteBoard.Instance.PlayerCharacter == Characters.Mel) {
             int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
-            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 1);
+            PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 2);
         }
     }
 
@@ -65,5 +70,9 @@ public class WardStoneObject : SkillObjectPrefab {
             }
 
         }
+    }
+
+    public override void StartSkillCooldown(SkillContext context, Skill skill) {
+        return;
     }
 }

@@ -6,11 +6,17 @@ public class EarthBreakerManager : SkillObjectPrefab {
     SkillContext _context;
     GameObject _maevis;
     [HideInInspector] public int _amountOfImpactsSummoned;
+    Animator anim;
+    PlayerController _pController;
+    PlayerSkillManager _sManager;
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as EarthBreaker;
         _context = context;
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
+            anim = _maevis.GetComponentInChildren<Animator>();
+            _pController = _maevis.GetComponentInChildren<PlayerController>();
+            _sManager = _maevis.GetComponentInChildren<PlayerSkillManager>();
         }
 
         SetPosition();
@@ -23,9 +29,41 @@ public class EarthBreakerManager : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        StartCoroutine(Duration());
+        StartCoroutine(AttackRoutine());
     }
 
+    IEnumerator AttackRoutine() {
+        _pController.BlockMovement();
+        _sManager.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(true);
+        _sManager.GetComponent<PlayerSkillManager>().BlockSkillsRpc(true);
+        anim.SetTrigger("EarthShatter");
+
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+
+        while (anim.IsInTransition(0)) yield return null;
+
+        while (stateInfo.IsName(_info.AnimationName) == false) {
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        // Espera a animação terminar
+        while (stateInfo.normalizedTime < _info.AnimationPercentToAttack) {
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        StartCoroutine(Duration());
+
+        while (stateInfo.normalizedTime < 1) {
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        _pController.AllowMovement();
+        _sManager.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
+        _sManager.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
+    }
 
     IEnumerator Duration() {
         for (int i = 0; i < _info.AmountOfImpacts; i++) {
@@ -33,7 +71,7 @@ public class EarthBreakerManager : SkillObjectPrefab {
             yield return new WaitForSeconds(_info.CooldownBetweenEachImpact);
         }
 
-        End();
+        ReturnObject();
     }
     void SummonImpact() {
 
@@ -50,8 +88,12 @@ public class EarthBreakerManager : SkillObjectPrefab {
         PlayerSkillPooling.Instance.RequestInstantiateNoChecksRpc(skillId, newContext, 1, 1);
     }
 
-    void End() {
-        ReturnObject();
+
+    public override void ReturnObject() {
+        _pController.AllowMovement();
+        _sManager.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
+        _sManager.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
+        base.ReturnObject();
     }
 
 }

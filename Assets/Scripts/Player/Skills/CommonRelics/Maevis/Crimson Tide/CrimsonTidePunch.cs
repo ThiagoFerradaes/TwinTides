@@ -8,7 +8,7 @@ public class CrimsonTidePunch : SkillObjectPrefab
     int _level;
     SkillContext _context;
     GameObject _maevis;
-
+    Animator anim;
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as CrimsonTide;
         _level = skillLevel;
@@ -16,6 +16,7 @@ public class CrimsonTidePunch : SkillObjectPrefab
 
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
+            anim = _maevis.GetComponentInChildren<Animator>();
         }
 
         DefinePosition();

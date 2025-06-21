@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class BlackHoleManager : SkillObjectPrefab
@@ -7,7 +7,9 @@ public class BlackHoleManager : SkillObjectPrefab
     int _level;
     SkillContext _context;
     GameObject _mel;
-
+    Animator anim;
+    PlayerController _pController;
+    PlayerSkillManager _sManager;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as BlackHole;
@@ -16,13 +18,46 @@ public class BlackHoleManager : SkillObjectPrefab
 
         if (_mel == null) {
             _mel = PlayerSkillPooling.Instance.MelGameObject;
+            anim = _mel.GetComponentInChildren<Animator>();
+            _pController = _mel.GetComponentInChildren<PlayerController>();
+            _sManager = _mel.GetComponentInChildren<PlayerSkillManager>();
         }
 
         gameObject.SetActive(true);
 
-        InstantiateBlackHole();
+        StartCoroutine(AttackRoutine());
     }
 
+    IEnumerator AttackRoutine() {
+        _pController.BlockMovement();
+        _sManager.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(true);
+        _sManager.GetComponent<PlayerSkillManager>().BlockSkillsRpc(true);
+        anim.SetTrigger("BlackHole");
+
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+
+        while (anim.IsInTransition(0)) yield return null;
+
+        while (stateInfo.IsName(_info.AnimationName) == false) {
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        // Espera a animação terminar
+        while (stateInfo.normalizedTime < _info.AnimationPercentToAttack) {
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        InstantiateBlackHole();
+
+        while (stateInfo.normalizedTime < 1f && stateInfo.IsName(_info.AnimationName)) {
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        ReturnObject();
+    }
     void InstantiateBlackHole() {
 
         if (LocalWhiteBoard.Instance.PlayerCharacter != Characters.Mel) return;
@@ -49,17 +84,19 @@ public class BlackHoleManager : SkillObjectPrefab
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
         PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, newContext, _level, 1);
 
-        End();
     }
 
     float GetFloorHeight(Vector3 position) {
-        Ray ray = new(position + Vector3.up * 5f, Vector3.down);
+        Ray ray = new(position + Vector3.up * 15f, Vector3.down);
         if (Physics.Raycast(ray, out RaycastHit hit, 10f, LayerMask.GetMask("Floor"))) return hit.point.y + 0.1f;
         return position.y;
     }
 
-    void End() {
-        ReturnObject();
+    public override void ReturnObject() {
+        _pController.AllowMovement();
+        _sManager.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
+        _sManager.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
+        base.ReturnObject();
     }
 
 }

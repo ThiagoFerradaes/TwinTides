@@ -24,9 +24,10 @@ MonoBehaviour:
   - Divine Purge
   UpgradesDescriptions: []
   skillPrefabs:
+  - {fileID: 3978335951850848976, guid: 3e95432c424a2d14383dec245ccc58bb, type: 3}
   - {fileID: 2297734193293577024, guid: cbaa6c36fbdcf284eaf13f1980ccbbfc, type: 3}
   SkillSize: {x: 7, y: 15, z: 7}
-  Duration: 3
+  Duration: 2.5
   DamagePerTick: 0.2
   DamageCooldown: 0.1
   AmountOfHealToMaevis: 0.2
@@ -39,3 +40,5 @@ MonoBehaviour:
       Data3: 1131427461
       Data4: 1317374863
     Path: event:/Mel/Skills/DivinePurge/DivinePurge
+  AnimationName: DivinePurge
+  AnimationPercentToAttack: 0.25

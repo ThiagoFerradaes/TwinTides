@@ -33,4 +33,8 @@ public class SpectralSeeds : CommonRelic
     [Header("Spectral Seeds Level 4")]
     public float DurationLevel4;
     public float ExplosionsInterval;
+
+    [Header("Animation")]
+    public string AnimationName;
+    [Range(0, 1)] public float AnimationPercentToAttack;
 }

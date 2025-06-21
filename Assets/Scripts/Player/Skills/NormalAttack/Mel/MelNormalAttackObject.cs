@@ -34,10 +34,6 @@ public class MelNormalAttackObject : SkillObjectPrefab {
         DefineSizeAndPosition();
 
 
-        if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter) {
-            float cooldown = _dManager.ReturnDivisionAttackSpeed(_info.Cooldown);
-            _mel.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, cooldown);
-        }
 
     }
 
@@ -45,7 +41,7 @@ public class MelNormalAttackObject : SkillObjectPrefab {
 
         transform.localScale = _info.SphereSize;
 
-        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_mel.transform.position, _context.PlayerRotation);
 
         gameObject.SetActive(true);
 
