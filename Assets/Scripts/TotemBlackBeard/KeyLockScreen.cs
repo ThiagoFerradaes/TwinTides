@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class KeyLockScreen : MonoBehaviour
@@ -18,8 +19,6 @@ public class KeyLockScreen : MonoBehaviour
     [Header("Sprites")]
     [SerializeField] Sprite maevisSprite;
     [SerializeField] Sprite melSprite;
-    [SerializeField] Sprite maevisTitleSprite;
-    [SerializeField] Sprite melTitleSprite;
 
     bool isMaevis;
 
@@ -48,6 +47,7 @@ public class KeyLockScreen : MonoBehaviour
 
     void GiveKeysButton() {
         giveKeysButton.interactable = false;
+        keysText.text = " 3 / 3";
         LocalWhiteBoard.Instance.UseAllKeys();
         OnGiveAllKeys?.Invoke(isMaevis);
     }
@@ -56,14 +56,12 @@ public class KeyLockScreen : MonoBehaviour
     void TurnScreenOn(bool isMaevis, bool hasAllKeys) {
         this.isMaevis = isMaevis;
         characterImage.sprite = isMaevis ? maevisSprite : melSprite;
-        //title.sprite = isMaevis ? maevisTitleSprite : melTitleSprite;
         keysText.text = hasAllKeys ? " 3 / 3" : " 0 / 3";
         giveKeysButton.interactable = CanGiveKeys();
 
         LocalWhiteBoard.Instance.AnimationOn = true;
         screen.SetActive(true);
     }
-
     bool CanGiveKeys() {
         bool isCorrectTotem = (LocalWhiteBoard.Instance.PlayerCharacter == Characters.Maevis) == isMaevis;
         bool hasAllKeys = LocalWhiteBoard.Instance.ReturnAmountOfKeys() == 3;

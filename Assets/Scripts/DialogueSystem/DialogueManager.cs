@@ -23,14 +23,15 @@ public class DialogueManager : NetworkBehaviour {
     [SerializeField] Image SkipImage;
     [SerializeField] TextMeshProUGUI characterName;
     [SerializeField] TextMeshProUGUI dialogueBox;
-    [SerializeField] TextMeshProUGUI skipBox;
-    [SerializeField] TextMeshProUGUI finishedBox;
+    [SerializeField] Image[] arrayOfChecks;
     bool isSkippingTyping = false;
 
     [Header("Sprites")]
     [SerializeField] Sprite melSprite;
     [SerializeField] Sprite maevisSprite;
     [SerializeField] Sprite blackBeardSprite;
+    [SerializeField] Sprite zombieSprite;
+    [SerializeField] Sprite crewSprite;
 
     [Header("Dialogue Atributes")]
     [SerializeField] float timeBetweenEachLetter;
@@ -116,7 +117,7 @@ public class DialogueManager : NetworkBehaviour {
     }
 
     void ChangeSkipText(int oldInt, int newInt) {
-        skipBox.text = $"Skip {newInt} / 2";
+        if (newInt == 1) arrayOfChecks[0].gameObject.SetActive(true);
         if (newInt == NetworkManager.Singleton.ConnectedClientsList.Count) EndDialogueRpc();
     }
 
@@ -154,8 +155,7 @@ public class DialogueManager : NetworkBehaviour {
     }
 
     void ClearTexts() {
-        skipBox.text = "Skip 0 / 2";
-        finishedBox.text = "Players finished: 0 / 2";
+        foreach (var check in arrayOfChecks) check.gameObject.SetActive(false);
         dialogueBox.text = "";
         SkipImage.fillAmount = 0 / timeToSkipDialogue;
     }
@@ -174,7 +174,7 @@ public class DialogueManager : NetworkBehaviour {
     }
 
     void ChangeFinishedText(int oldInt, int newInt) {
-        finishedBox.text = $"Players finished: {newInt} / 2";
+        if (newInt == 1) arrayOfChecks[2].gameObject.SetActive(true);
         if (amountOfPlayersFinishedWithDialogue.Value >= NetworkManager.Singleton.ConnectedClientsList.Count) EndDialogueRpc(); // verificando se os dois jogadores terminaram o dialogo
     }
 
@@ -192,7 +192,8 @@ public class DialogueManager : NetworkBehaviour {
                     DialogueCharacter.MEL => melSprite,
                     DialogueCharacter.MAEVIS => maevisSprite,
                     DialogueCharacter.BLACKBEARD => blackBeardSprite,
-                    _ => null
+                    DialogueCharacter.CREW => crewSprite,
+                    _ => zombieSprite
                 };
 
                 characterName.text = dialogue.ListOfDialogues[i].Character.ToString(); // trocando o nome do personagem
