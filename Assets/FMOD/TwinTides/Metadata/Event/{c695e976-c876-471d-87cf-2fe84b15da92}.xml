@@ -106,10 +106,39 @@
 		<property name="looping">
 			<value>true</value>
 		</property>
+		<relationship name="modulators">
+			<destination>{c9d3614b-6499-4a46-9fb3-a8f845e3ca90}</destination>
+		</relationship>
 		<relationship name="audioFile">
 			<destination>{abfb43ad-84d8-4cf4-b295-34c64fbb93eb}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{0df29a62-4c7c-44f9-b63f-f16171f738cd}" />
 	<object class="MixerBusFader" id="{6b6f5ff8-a1f5-46d9-9a27-8a0a8bc05539}" />
+	<object class="ADSRModulator" id="{c9d3614b-6499-4a46-9fb3-a8f845e3ca90}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>volume</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="attackTime">
+			<value>2000</value>
+		</property>
+		<property name="holdTime">
+			<value>0</value>
+		</property>
+		<property name="decayTime">
+			<value>0</value>
+		</property>
+		<property name="sustainValue">
+			<value>1</value>
+		</property>
+		<property name="releaseTime">
+			<value>2000</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
+	</object>
 </objects>

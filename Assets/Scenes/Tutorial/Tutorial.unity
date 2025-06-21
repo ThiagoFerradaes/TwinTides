@@ -17573,6 +17573,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4296963664878829859, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1524849345580859645}
+    - targetCorrespondingSourceObject: {fileID: 4296963664878829859, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1524849345580859646}
   m_SourcePrefab: {fileID: 100100000, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
 --- !u!1 &1524849345580859644 stripped
 GameObject:
@@ -17593,6 +17596,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 1441333665}
   finalDoorPosition: {fileID: 144428122}
+--- !u!114 &1524849345580859646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524849345580859644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e836b709e23bc245b7809353a2d0c1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  explorationEvent:
+    Guid:
+      Data1: -779152519
+      Data2: 1231086424
+      Data3: 1409614978
+      Data4: 155977669
+    Path: event:/MusicasDeFundo/ExplorationMusic
+  combatEvent:
+    Guid:
+      Data1: -2011310227
+      Data2: 1110866125
+      Data3: -746378830
+      Data4: -81759789
+    Path: event:/MusicasDeFundo/FightMusic
+  bossEvent:
+    Guid:
+      Data1: -963253898
+      Data2: 1193134198
+      Data3: -399519865
+      Data4: -1831201461
+    Path: event:/MusicasDeFundo/BarbaNegra
 --- !u!1001 &4205046361093412740
 PrefabInstance:
   m_ObjectHideFlags: 0
