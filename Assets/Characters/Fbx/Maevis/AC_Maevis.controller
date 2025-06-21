@@ -742,7 +742,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: RolarLento
-  m_Speed: 1
+  m_Speed: 3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 6703550302767073106}
@@ -768,10 +768,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsWalking
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4236846732422725488}
   m_Solo: 0
@@ -794,7 +791,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PuloDash
-  m_Speed: 1
+  m_Speed: 3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2368285389114207940}
@@ -842,7 +839,7 @@ AnimatorStateMachine:
     m_Position: {x: 890, y: 380, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2820758906795803146}
-    m_Position: {x: 50, y: 510, z: 0}
+    m_Position: {x: -140, y: 480, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2747786483569786951}
     m_Position: {x: 500, y: 490, z: 0}
@@ -875,7 +872,7 @@ AnimatorStateMachine:
     m_Position: {x: 90, y: 560, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3274811375533255131}
-    m_Position: {x: -50, y: -220, z: 0}
+    m_Position: {x: -130, y: -220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 727912035691826512}
     m_Position: {x: -50, y: -330, z: 0}
@@ -1568,10 +1565,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsWalking
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4236846732422725488}
   m_Solo: 0

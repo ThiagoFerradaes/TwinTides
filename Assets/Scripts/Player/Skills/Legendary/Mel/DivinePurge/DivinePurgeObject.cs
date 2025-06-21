@@ -6,13 +6,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DivinePurgeObject : SkillObjectPrefab
-{
+public class DivinePurgeObject : SkillObjectPrefab {
     DivinePurge _info;
     int _level;
     SkillContext _context;
     GameObject _mel;
-    PlayerController _mManager;
     HealthManager _hManager;
     DamageManager _dManager;
 
@@ -21,7 +19,6 @@ public class DivinePurgeObject : SkillObjectPrefab
 
     EventInstance sound;
 
-    Animator anim;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as DivinePurge;
@@ -30,10 +27,8 @@ public class DivinePurgeObject : SkillObjectPrefab
 
         if (_mel == null) {
             _mel = PlayerSkillPooling.Instance.MelGameObject;
-            _mManager = _mel.GetComponent<PlayerController>();
             _hManager = _mel.GetComponent<HealthManager>();
             _dManager = _mel.GetComponent<DamageManager>();
-            anim = _mel.GetComponentInChildren<Animator>();
         }
 
         DefinePosition();
@@ -43,12 +38,10 @@ public class DivinePurgeObject : SkillObjectPrefab
         transform.localScale = _info.SkillSize;
 
         Vector3 direction = _context.PlayerRotation * Vector3.forward;
-        Vector3 position = _context.Pos + (direction * (_info.ZOffSett + _info.SkillSize.y/2));
-        transform.SetPositionAndRotation(position, _context.PlayerRotation * Quaternion.Euler(90,0,0));
+        Vector3 position = _context.Pos + (direction * (_info.ZOffSett + _info.SkillSize.y / 2));
+        transform.SetPositionAndRotation(position, _context.PlayerRotation * Quaternion.Euler(90, 0, 0));
 
         gameObject.SetActive(true);
-
-        if (_info.animationName != null) anim.SetBool(_info.animationName, true);
 
         if (!_info.LaserSound.IsNull) {
             sound = RuntimeManager.CreateInstance(_info.LaserSound);
@@ -62,17 +55,12 @@ public class DivinePurgeObject : SkillObjectPrefab
     }
 
     IEnumerator SkillDuration() {
-        _mManager.BlockMovement();
-
         yield return new WaitForSeconds(_info.Duration);
-
-        if (_info.animationName != null) anim.SetBool(_info.animationName, false);
 
         ReturnObject();
     }
 
     public override void ReturnObject() {
-        _mManager.AllowMovement();
 
         _maevisHealth = null;
         _enemiesList.Clear();
@@ -91,7 +79,7 @@ public class DivinePurgeObject : SkillObjectPrefab
 
         if (other.CompareTag("Maevis")) _maevisHealth = health;
 
-        else if (other.CompareTag("Enemy") && !_enemiesList.Contains(health)) _enemiesList.Add(health); 
+        else if (other.CompareTag("Enemy") && !_enemiesList.Contains(health)) _enemiesList.Add(health);
     }
 
     private void OnTriggerExit(Collider other) {
@@ -116,8 +104,8 @@ public class DivinePurgeObject : SkillObjectPrefab
                     totalDamage += damage;
                 }
             }
-            _hManager.Heal(totalDamage * _info.PercentOfHealingBasedOnDamage/100, true);
-            if(_maevisHealth != null)_maevisHealth.Heal(_info.AmountOfHealToMaevis, true);
+            _hManager.Heal(totalDamage * _info.PercentOfHealingBasedOnDamage / 100, true);
+            if (_maevisHealth != null) _maevisHealth.Heal(_info.AmountOfHealToMaevis, true);
         }
     }
 }

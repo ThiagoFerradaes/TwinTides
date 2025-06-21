@@ -391,7 +391,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  listOfDialogues: []
+  listOfDialogues:
+  - {fileID: 11400000, guid: 0f813ca57623ebe46a3cb714c163ae9f, type: 2}
+  - {fileID: 11400000, guid: c1c88adc91a1ebb43a0dc63fdae3b8ac, type: 2}
+  - {fileID: 11400000, guid: 9bda5c6615075cf4f9898a1d1ae247df, type: 2}
+  - {fileID: 11400000, guid: 2e89532cee0a88a4f87bbdf61be92b88, type: 2}
+  - {fileID: 11400000, guid: 642661c087ed619469504de2daf5659d, type: 2}
+  - {fileID: 11400000, guid: 086545bd611c0674ab4d929b44965d9d, type: 2}
+  - {fileID: 11400000, guid: aa074e96216992e4f86bd362d69ed222, type: 2}
+  - {fileID: 11400000, guid: 16eb9eb612d4ecd4ca0b2c7ad733751c, type: 2}
+  - {fileID: 11400000, guid: a04fa9358a9a85d48bbf821487ec99d2, type: 2}
+  - {fileID: 11400000, guid: 13d6a360b9a8fd348b1a2ddcebe7592f, type: 2}
+  - {fileID: 11400000, guid: b82088d30037d524594a955123c457b3, type: 2}
   dialogueCanvas: {fileID: 3088655169939533036}
   characterImage: {fileID: 3564553929936694941}
   SkipImage: {fileID: 4189335996708664117}
@@ -421,27 +432,6 @@ MonoBehaviour:
       m_Action: Skip
       m_Flags: 0
     m_Flags: 0
-  melSoundPerLetter:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  maevisSoundPerLetter:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  blackBeardSoundPerLetter:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
 --- !u!114 &2089184698251057778
 MonoBehaviour:
   m_ObjectHideFlags: 0

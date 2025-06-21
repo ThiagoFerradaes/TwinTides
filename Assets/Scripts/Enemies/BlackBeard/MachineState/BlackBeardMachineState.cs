@@ -25,9 +25,9 @@ public class BlackBeardMachineState : NetworkBehaviour {
 
     public int Lifes = 2;
 
-    public event Action OnFinal;
+    public static event Action OnFinal;
     public event Action OnChangedPhase;
-    public event Action OnDeath;
+    public static event Action OnDeath;
     public void StartFight() {
         Debug.Log("BlackBeard Started");
         StartCoroutine(WaitToStart());

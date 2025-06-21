@@ -21,10 +21,13 @@ MonoBehaviour:
   IsStackable: 0
   Character: 0
   SkillsDescriptions:
-  - "Uma bandeira\t\n"
-  - "Uma bandeira n\xEDvel 2"
-  - "Uma bandeira n\xEDvel 3"
-  - "Uma bandeira n\xEDvel 4"
+  - Maevis plants a flag on the ground. Players inside its area deal increased damage.
+  - Maevis summons a flag that follows her. Players within its area deal increased
+    damage.
+  - Maevis summons a flag for herself and for Mel. Both players gain increased damage.
+  - Maevis summons a flag for herself and for Mel. Both players gain increased damage.
+    The damage boost stacks each time Maevis uses the skill while already having
+    a flag.
   UpgradesDescriptions:
   - "Fallen Banner vai virar n\xEDvel 2"
   - "Fallen Banner vai virar n\xEDvel 3"
