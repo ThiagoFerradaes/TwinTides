@@ -4,11 +4,8 @@ using UnityEngine;
 public class BehaviourTreeRunner : MonoBehaviour {
 
     public BehaviourTree tree;
-    public AIPath path;
     HealthManager health;
     public Context context;
-
-    [SerializeField] bool isPatrol;
 
     void Awake() {
         tree = tree.Clone();
@@ -47,17 +44,7 @@ public class BehaviourTreeRunner : MonoBehaviour {
             return;
         }
 
-        List<Transform> listOfPoints = new();
+        context.Blackboard.OriginPoint(originPoint);
 
-        if (!isPatrol) { listOfPoints.Add(originPoint); }
-        else {
-            foreach (Waypoints.PathTag tag in path.Waypoints) {
-                Transform targetPosition = Waypoints.Instance.GetPointByTag(tag);
-                listOfPoints.Add(targetPosition);
-            }
-        }
-
-        context.Blackboard.SetPath(listOfPoints);
-        
     }
 }

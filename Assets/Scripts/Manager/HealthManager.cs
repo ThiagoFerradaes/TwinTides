@@ -223,6 +223,24 @@ public class HealthManager : NetworkBehaviour {
 
     }
 
+    public void RestartHealth(float percentOfMaxHealth) {
+        if (IsServer) {
+            _currentHealth.Value = Mathf.Clamp((percentOfMaxHealth / 100 * _maxHealth.Value), 0.2f * _maxHealth.Value, _maxHealth.Value);
+
+            _canBeDamaged.Value = true;
+
+            _isShielded.Value = false;
+
+            _isDead.Value = false;
+
+            _currentShieldAmount.Value = 0f;
+
+        }
+        GetComponent<MovementManager>().UnStun();
+
+        GetComponent<MeshRenderer>().material = originalMaterial;
+    }
+
     void ReviveAnimation() {
         Animator anim = GetComponentInChildren<Animator>();
         if (anim != null) {

@@ -18,16 +18,19 @@ MonoBehaviour:
   position: {x: -554.4, y: 332.92004}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   child: {fileID: -1232385359316088806}
 --- !u!114 &-6793917620370379804
@@ -48,16 +51,19 @@ MonoBehaviour:
   position: {x: -34.202362, y: -71.2}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   children:
   - {fileID: -5468306153279131312}
@@ -81,18 +87,20 @@ MonoBehaviour:
   position: {x: 728.80005, y: 397.31604}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
-  maxDistance: 20
 --- !u!114 &-5468306153279131312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,16 +119,19 @@ MonoBehaviour:
   position: {x: -261.40237, y: 63.199978}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   children:
   - {fileID: -1778014092064343986}
@@ -143,16 +154,19 @@ MonoBehaviour:
   position: {x: 637.79755, y: 55.200016}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   child: {fileID: 7714920069465493131}
   cooldown: 0.1
@@ -174,16 +188,19 @@ MonoBehaviour:
   position: {x: -35.246994, y: -220.74893}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   child: {fileID: -6793917620370379804}
 --- !u!114 &-3838604061852570075
@@ -204,16 +221,19 @@ MonoBehaviour:
   position: {x: -459.06802, y: 639.9432}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   minRange: 4
 --- !u!114 &-3690868420404818733
@@ -234,16 +254,19 @@ MonoBehaviour:
   position: {x: 467.2, y: 723.19995}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   conditions: 0100000002000000
   changeToTrue: 0
@@ -265,16 +288,19 @@ MonoBehaviour:
   position: {x: -555.8024, y: 209.59998}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   child: {fileID: -8737707627873100344}
   conditions: 000000000100000002000000
@@ -296,16 +322,19 @@ MonoBehaviour:
   position: {x: -553.0113, y: 464.9091}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 1
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   children:
   - {fileID: 3781917414317124037}
@@ -328,16 +357,19 @@ MonoBehaviour:
   position: {x: -176.60236, y: 516}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   StoppingDistance: 1
 --- !u!114 &-820351757826398512
@@ -358,16 +390,19 @@ MonoBehaviour:
   position: {x: 221, y: 136.59998}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 1
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
 --- !u!114 &-461729228651206470
 MonoBehaviour:
@@ -387,16 +422,19 @@ MonoBehaviour:
   position: {x: 959.3975, y: 390.39996}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   detectionRadius: 8
   detectionAngle: 360
@@ -447,16 +485,19 @@ MonoBehaviour:
   - {fileID: -820351757826398512}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 1
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 1
     AttackRange: 6
     AttackCooldown: 1
+    maxDistanceToPath: 10
     GlobalAttackTimer: 0
 --- !u!114 &2000049473197180753
 MonoBehaviour:
@@ -476,16 +517,19 @@ MonoBehaviour:
   position: {x: -35.494015, y: -340.15552}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   child: {fileID: -4685175796735353712}
 --- !u!114 &2904676501843714341
@@ -506,16 +550,19 @@ MonoBehaviour:
   position: {x: -57.402424, y: 204.79999}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   children:
   - {fileID: 8593820219457342453}
@@ -537,16 +584,19 @@ MonoBehaviour:
   position: {x: 652.8, y: 717.6}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   cooldown: 2.5
 --- !u!114 &3781917414317124037
@@ -567,16 +617,19 @@ MonoBehaviour:
   position: {x: -729.9772, y: 619.5456}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 1
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   child: {fileID: 5098730227991954732}
   conditions: 0500000004000000
@@ -598,16 +651,19 @@ MonoBehaviour:
   position: {x: 547.2, y: 560.8}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   children:
   - {fileID: -3690868420404818733}
@@ -631,16 +687,19 @@ MonoBehaviour:
   position: {x: 549.04, y: 389.84003}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   child: {fileID: 3936397415506213515}
   conditions: 00000000
@@ -662,16 +721,19 @@ MonoBehaviour:
   position: {x: -727.4516, y: 768.6044}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 1
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   attack: {fileID: 11400000, guid: 645e7c98dfc11d146b90368bb1fd0abc, type: 2}
 --- !u!114 &5731827953410687217
@@ -692,16 +754,19 @@ MonoBehaviour:
   position: {x: 81.79761, y: 509.59995}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   cooldown: 1
 --- !u!114 &7714920069465493131
@@ -722,16 +787,19 @@ MonoBehaviour:
   position: {x: 636.1976, y: 199.99998}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 1
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   children:
   - {fileID: 4989918386672694049}
@@ -755,16 +823,19 @@ MonoBehaviour:
   position: {x: -58.20241, y: 335.2}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   children:
   - {fileID: -832071066040792598}
@@ -787,16 +858,19 @@ MonoBehaviour:
   position: {x: 839.2, y: 716.8}
   blackboard:
     Target: {fileID: 0}
+    originPoint: {fileID: 0}
     IsCloseToPath: 0
     IsTargetInRange: 0
     CanFollowPlayer: 1
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
+    IsTargetForcedByCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
+    maxDistanceToPath: 0
     GlobalAttackTimer: 0
   conditions: 02000000
   changeToTrue: 1

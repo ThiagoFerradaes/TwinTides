@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -11,7 +12,7 @@ public class Blackboard {
     public Transform Target;
 
     // Listas
-    public List<Transform> path = new();
+    public Transform originPoint;
 
     // Condicionais
     public bool IsCloseToPath = true;
@@ -20,12 +21,14 @@ public class Blackboard {
     public bool IsAttacking = false;
     public bool IsInAttackRange = false;
     public bool CanAttack = true;
+    public bool IsTargetForcedByCamp = false;
 
     // Atributos
     public int CurrentPathIndex;
     public int CurrentComboIndex;
     public float AttackRange;
     public float AttackCooldown;
+    public float maxDistanceToPath;
     [HideInInspector] public float GlobalAttackTimer;
 
     // Cooldowns
@@ -70,8 +73,8 @@ public class Blackboard {
         }
     }
 
-    public void SetPath(List<Transform> path) {
-        this.path = path;
+    public void OriginPoint(Transform origin) {
+        this.originPoint = origin;
     }
 
     public void Restart() {
@@ -97,6 +100,6 @@ public class Blackboard {
 
     public void RestartPaths() {
         // Resetar listas
-        path?.Clear();
+        originPoint = null;
     }
 }
