@@ -21,4 +21,11 @@ public class BlackBeardAnchorAttackSO : BlackBeardSO
     public float RotationDuration;
     public Vector2 ChainSize;
     public EventReference AnchorSpinningSound;
+
+    [Header("Animation")]
+    public string AnimationName;
+    public string SpinningAnimationName;
+    public string AnimationTrigger;
+    public string SpinningAnimationTrigger;
+    public float PercentOfAnimationToAttack;
 }

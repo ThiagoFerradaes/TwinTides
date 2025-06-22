@@ -125,7 +125,7 @@ public class BlackBeardFinalState : BlackBeardStates {
 
         }
 
-        foreach(var typeOfAttack in _attacks) {
+        foreach (var typeOfAttack in _attacks) {
             if (typeOfAttack.Attack == attack) typeOfAttack.Use();
         }
     }
@@ -136,8 +136,7 @@ public class BlackBeardFinalState : BlackBeardStates {
         Vector3 centerOfArena = _parent.CenterOfArena.position;
         float distanceToCenter = Vector3.Distance(_parent.transform.position, centerOfArena);
 
-        if (distanceToCenter > 0.5f) 
-{
+        if (distanceToCenter > 0.5f) {
             yield return DashToPosition(centerOfArena);
         }
 
@@ -153,22 +152,28 @@ public class BlackBeardFinalState : BlackBeardStates {
             }
         }
 
-        Vector3 center = _parent.transform.position;
-        int amountOfCuts = _health.ReturnCurrentHealth() > (_health.ReturnMaxHealth() / 2) ? _crossInfo.AmountOfCuts : _crossInfo.AmountOfCutsStronger;
+        string animationTriggerName = _health.ReturnCurrentHealth() > (_health.ReturnMaxHealth() / 2) ? _crossInfo.AnimationTriggerName : _crossInfo.AnimationTriggerName2;
+        string animationName = _health.ReturnCurrentHealth() > (_health.ReturnMaxHealth() / 2) ? _crossInfo.AnimationName : _crossInfo.AnimationName2;
+        yield return _parent.StartCoroutine(_parent.AttackAnimation(animationTriggerName, animationName, _crossInfo.AnimationPercentToAttack, () => {
+            Vector3 center = _parent.transform.position;
+            int amountOfCuts = _health.ReturnCurrentHealth() > (_health.ReturnMaxHealth() / 2)
+                ? _crossInfo.AmountOfCuts
+                : _crossInfo.AmountOfCutsStronger;
 
-        float baseAngle = Mathf.Atan2(_parent.transform.forward.z, _parent.transform.forward.x) * Mathf.Rad2Deg;
-        float angleStep = 360f / amountOfCuts;
+            float baseAngle = Mathf.Atan2(_parent.transform.forward.z, _parent.transform.forward.x) * Mathf.Rad2Deg;
+            float angleStep = 360f / amountOfCuts;
 
-        for (int i = 0; i < amountOfCuts; i++) {
-            float angle = baseAngle + angleStep * i;
-            float radAngles = Mathf.Deg2Rad * angle;
+            for (int i = 0; i < amountOfCuts; i++) {
+                float angle = baseAngle + angleStep * i;
+                float rad = Mathf.Deg2Rad * angle;
 
-            float x = center.x + Mathf.Cos(radAngles) * _crossInfo.DistanceToCenter;
-            float z = center.z + Mathf.Sin(radAngles) * _crossInfo.DistanceToCenter;
+                float x = center.x + Mathf.Cos(rad) * _crossInfo.DistanceToCenter;
+                float z = center.z + Mathf.Sin(rad) * _crossInfo.DistanceToCenter;
 
-            Vector3 spawnPosition = new(x, center.y, z);
-            EnemySkillPooling.Instance.RequestInstantiateAttack(_crossInfo, 0, _parent.gameObject, spawnPosition);
-        }
+                Vector3 spawnPosition = new(x, center.y, z);
+                EnemySkillPooling.Instance.RequestInstantiateAttack(_crossInfo, 0, _parent.gameObject, spawnPosition);
+            }
+        }));
 
 
         _parent.StartCoroutine(CooldownBetweenAttacks());
@@ -215,9 +220,11 @@ public class BlackBeardFinalState : BlackBeardStates {
 
             yield return DashToTarget(target.position);
 
+            _parent.anim.SetBool(_bulletsInfo.AnimationTriggerName, true);
             EnemySkillPooling.Instance.RequestInstantiateAttack(_bulletsInfo, 0, _parent.gameObject, _parent.transform.position);
 
             yield return new WaitForSeconds(duration + _bulletsInfo.TimeBetweenOneAttackAndTheNext);
+            _parent.anim.SetBool(_bulletsInfo.AnimationTriggerName, false);
         }
 
         _parent.StartCoroutine(CooldownBetweenAttacks());
@@ -277,8 +284,7 @@ public class BlackBeardFinalState : BlackBeardStates {
         Vector3 centerOfArena = _parent.CenterOfArena.position;
         float distanceToCenter = Vector3.Distance(_parent.transform.position, centerOfArena);
 
-        if (distanceToCenter > 0.5f) 
-{
+        if (distanceToCenter > 0.5f) {
             yield return DashToPosition(centerOfArena);
         }
 
@@ -296,34 +302,54 @@ public class BlackBeardFinalState : BlackBeardStates {
                 }
             }
 
-            Vector3 anchorPosition = _parent.transform.position + _parent.transform.forward * _anchorInfo.AnchorOffset;
+            _parent.anim.SetFloat("AnchorAnimationSpeed", 1);
+            yield return _parent.StartCoroutine(_parent.AttackAnimation(_anchorInfo.AnimationTrigger, _anchorInfo.AnimationName, _anchorInfo.PercentOfAnimationToAttack, () => {
+                Vector3 anchorPosition = _parent.transform.position + _parent.transform.forward * _anchorInfo.AnchorOffset;
 
-            EnemySkillPooling.Instance.RequestInstantiateAttack(_anchorInfo, 0, _parent.gameObject, anchorPosition);
+                EnemySkillPooling.Instance.RequestInstantiateAttack(_anchorInfo, 0, _parent.gameObject, anchorPosition);
+            }));
 
-            float attackDuration = (_anchorInfo.AnchorSpeed / _anchorInfo.AnchorRange);
+            _parent.anim.SetFloat("AnchorAnimationSpeed", -1);
+            yield return _parent.StartCoroutine(_parent.AttackAnimation(_anchorInfo.AnimationTrigger, _anchorInfo.AnimationName, _anchorInfo.PercentOfAnimationToAttack, () => {
 
-            float duration = 2 * attackDuration + _anchorInfo.TimeBetweenAttacks;
+            }));
+            //float attackDuration = (_anchorInfo.AnchorSpeed / _anchorInfo.AnchorRange);
 
-            yield return new WaitForSeconds(duration);
+            //float duration = 2 * attackDuration + _anchorInfo.TimeBetweenAttacks;
+
+            //yield return new WaitForSeconds(duration);
         }
 
-        else { 
+        else {
 
             Vector3 southDirection = new(0f, 0f, -1f);
             Quaternion targetRotation = Quaternion.LookRotation(southDirection);
             _parent.transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
 
-            Vector3 anchorPosition = _parent.transform.forward * _anchorInfo.AnchorOffset;
 
-            EnemySkillPooling.Instance.RequestInstantiateAttack(_anchorInfo, 0, _parent.gameObject, anchorPosition);
+            _parent.anim.SetFloat("AnchorAnimationSpeed", 1);
+            yield return _parent.StartCoroutine(_parent.AttackAnimation(_anchorInfo.AnimationTrigger, _anchorInfo.AnimationName, _anchorInfo.PercentOfAnimationToAttack, () => {
+                Vector3 anchorPosition = _parent.transform.forward * _anchorInfo.AnchorOffset;
 
-            float attackDuration = (_anchorInfo.AnchorSpeed / _anchorInfo.AnchorRange);
+                EnemySkillPooling.Instance.RequestInstantiateAttack(_anchorInfo, 0, _parent.gameObject, anchorPosition);
+            }));
 
-            yield return new WaitForSeconds(attackDuration);
+            //float attackDuration = (_anchorInfo.AnchorSpeed / _anchorInfo.AnchorRange);
+
+            //yield return new WaitForSeconds(attackDuration);
+
+            _parent.anim.SetBool(_anchorInfo.SpinningAnimationTrigger, true);
 
             yield return Rotate(_anchorInfo.RotationDuration);
 
-            yield return new WaitForSeconds(attackDuration);
+            _parent.anim.SetBool(_anchorInfo.SpinningAnimationTrigger, false);
+
+            //yield return new WaitForSeconds(attackDuration);
+
+            _parent.anim.SetFloat("AnchorAnimationSpeed", -2);
+            yield return _parent.StartCoroutine(_parent.AttackAnimation(_anchorInfo.AnimationTrigger, _anchorInfo.AnimationName, _anchorInfo.PercentOfAnimationToAttack, () => {
+
+            }));
 
             _parent.transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
         }
@@ -334,7 +360,7 @@ public class BlackBeardFinalState : BlackBeardStates {
     IEnumerator Rotate(float duration) {
         float elapsed = 0f;
 
-        float rotationSpeed = _anchorInfo.AnchorRotationSPeed; 
+        float rotationSpeed = _anchorInfo.AnchorRotationSPeed;
 
         while (elapsed < duration) {
             elapsed += Time.deltaTime;
@@ -362,11 +388,18 @@ public class BlackBeardFinalState : BlackBeardStates {
         _parent.transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
 
         int amountOfWaves = IsStronger() ? _waveInfo.AmountOfWavesStronger : _waveInfo.AmountOfWaves;
-        float timeBetweenEachWave = IsStronger() ? _waveInfo.TimeBetweenEachWaveStronger : _waveInfo.TimeBetweenEachWave;
+        float animationSpeed = IsStronger() ? _waveInfo.AnimationSpeedWhenStronger : 1f;
 
+        _parent.anim.SetFloat(_waveInfo.AnimationSpeedName, animationSpeed);
         for (int i = 0; i < amountOfWaves; i++) {
-            EnemySkillPooling.Instance.RequestInstantiateAttack(_waveInfo, 0, _parent.gameObject, _parent.transform.position);
-            yield return new WaitForSeconds(timeBetweenEachWave);
+            yield return _parent.StartCoroutine(_parent.AttackAnimation(
+                _waveInfo.AnimationTriggerName,
+                _waveInfo.AnimationName,
+                _waveInfo.AnimationPercentToAttack,
+                () => {
+                    EnemySkillPooling.Instance.RequestInstantiateAttack(_waveInfo, 0, _parent.gameObject, _parent.transform.position);
+                }
+            ));
         }
 
         _parent.StartCoroutine(CooldownBetweenAttacks());
@@ -376,15 +409,17 @@ public class BlackBeardFinalState : BlackBeardStates {
 
     #region RainBulletAttack
     IEnumerator RainBulletAttack() {
+      
+        yield return _parent.StartCoroutine(_parent.AttackAnimation(_bulletRainInfo.AnimationTriggerName,_bulletRainInfo.AnimationName,_bulletRainInfo.PercentOfAnimationToAttack , () =>{
+            EnemySkillPooling.Instance.RequestInstantiateAttack(_bulletRainInfo, 0, _parent.gameObject);
 
-        EnemySkillPooling.Instance.RequestInstantiateAttack(_bulletRainInfo, 0, _parent.gameObject);
-
-        yield return new WaitForSeconds(_bulletRainInfo.AttackTime);
+        }));
 
         _parent.StartCoroutine(CooldownBetweenAttacks());
     }
     #endregion
 
+    #region Auxiliar Functions
     bool IsStronger() {
         return _parent.Health.ReturnCurrentHealth() < _parent.Health.ReturnMaxHealth() / 2;
     }
@@ -394,7 +429,7 @@ public class BlackBeardFinalState : BlackBeardStates {
 
         TryAttack();
     }
-
+    #endregion
     #endregion
 
 }
