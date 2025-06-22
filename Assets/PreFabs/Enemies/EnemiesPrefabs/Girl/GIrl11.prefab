@@ -225,8 +225,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tree: {fileID: 11400000, guid: 3bab64ed720ad2943be13d969eef9380, type: 2}
-  path: {fileID: 11400000, guid: c4ca2331c2ee93e4f8c7a068f96250a6, type: 2}
-  isPatrol: 0
 --- !u!54 &-8015809491459835981
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -508,6 +506,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4757646871818118107}
     m_Modifications:
+    - target: {fileID: -8470855526027262752, guid: 4afd6ae240bbb5a499b2fa01c39b88be, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9d0f31642800c0b45a3ee72635cf987f, type: 2}
     - target: {fileID: 1395263335164170629, guid: 4afd6ae240bbb5a499b2fa01c39b88be, type: 3}
       propertyPath: m_Name
       value: Ranged 1 Roxa

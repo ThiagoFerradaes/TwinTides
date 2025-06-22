@@ -225,8 +225,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tree: {fileID: 11400000, guid: b14514f2f22afef4aab36d25e5990bc3, type: 2}
-  path: {fileID: 11400000, guid: c4ca2331c2ee93e4f8c7a068f96250a6, type: 2}
-  isPatrol: 0
 --- !u!54 &-8015809491459835981
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -422,6 +420,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4757646871818118107}
     m_Modifications:
+    - target: {fileID: -5414348333352835314, guid: fa49ed3c7a3a5364faa2e81b2ef5610f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b6be1116384ed694f8d3b19a3c8b3f79, type: 2}
     - target: {fileID: 1532862943536063469, guid: fa49ed3c7a3a5364faa2e81b2ef5610f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
