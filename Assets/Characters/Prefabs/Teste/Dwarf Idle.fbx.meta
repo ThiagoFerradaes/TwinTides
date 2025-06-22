@@ -1,0 +1,471 @@
+fileFormatVersion: 2
+guid: 1306c00a08015174fb59203cacba0104
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: mixamo.com
+      takeName: mixamo.com
+      internalID: -203655887218126122
+      firstFrame: 0
+      lastFrame: 210
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: Dwarf Idle(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EnemyRange2:EnemyRange2:EnemyRange_2
+      parentName: Dwarf Idle(Clone)
+      position: {x: 0.0007365576, y: 0, z: 0}
+      rotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+      scale: {x: 66.12324, y: 66.12324, z: 66.12324}
+    - name: EnemyRange2:EnemyRange2:Hips
+      parentName: Dwarf Idle(Clone)
+      position: {x: 0.000000029802322, y: 7.610276, z: -0.052863043}
+      rotation: {x: -6.7974293e-10, y: -0.000000005633859, z: -0.0000000021126974, w: 1}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: EnemyRange2:EnemyRange2:Spine
+      parentName: EnemyRange2:EnemyRange2:Hips
+      position: {x: -0, y: 0.533678, z: -0.03329773}
+      rotation: {x: -0.031151064, y: 0.000000005541318, z: 0.000000003057053, w: 0.9995147}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: EnemyRange2:EnemyRange2:Spine1
+      parentName: EnemyRange2:EnemyRange2:Spine
+      position: {x: -0, y: 0.623834, z: -0.0000000019945445}
+      rotation: {x: 0.0000000055879354, y: -0.0000000055859237, z: -9.438744e-10, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EnemyRange2:EnemyRange2:Spine2
+      parentName: EnemyRange2:EnemyRange2:Spine1
+      position: {x: -0, y: 0.71295345, z: -0.0000000018358874}
+      rotation: {x: -0.0000000018626451, y: 0.000000011300669, z: -1.769194e-10, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EnemyRange2:EnemyRange2:LeftShoulder
+      parentName: EnemyRange2:EnemyRange2:Spine2
+      position: {x: -0.3657411, y: 0.7158024, z: -0.023293631}
+      rotation: {x: 0.55505395, y: -0.42707363, z: 0.59357625, w: 0.39647242}
+      scale: {x: 1.0000001, y: 1.0000005, z: 1.0000004}
+    - name: EnemyRange2:EnemyRange2:LeftArm
+      parentName: EnemyRange2:EnemyRange2:LeftShoulder
+      position: {x: -2.76259e-13, y: 0.74390644, z: -5.375386e-10}
+      rotation: {x: -0.1376319, y: 0.07413698, z: -0.036789123, w: 0.98701966}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EnemyRange2:EnemyRange2:LeftForeArm
+      parentName: EnemyRange2:EnemyRange2:LeftArm
+      position: {x: 4.2996617e-10, y: 1.8879266, z: 0.000000014602733}
+      rotation: {x: -0.014260397, y: 0.0014325381, z: -0.040412452, w: 0.9990803}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1.0000001}
+    - name: EnemyRange2:EnemyRange2:LeftHand
+      parentName: EnemyRange2:EnemyRange2:LeftForeArm
+      position: {x: -0.000000018751338, y: 1.5657798, z: -0.00000001595845}
+      rotation: {x: -0.009893671, y: -0.13070706, z: 0.10252763, w: 0.98605573}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: EnemyRange2:EnemyRange2:LeftHandMiddle1
+      parentName: EnemyRange2:EnemyRange2:LeftHand
+      position: {x: 0.1020996, y: 0.9181566, z: 0.0053661377}
+      rotation: {x: -0.044469494, y: -0.00015099347, z: 0.0033930428, w: 0.99900496}
+      scale: {x: 1.0000005, y: 1.0000007, z: 1.0000006}
+    - name: EnemyRange2:EnemyRange2:LeftHandMiddle2
+      parentName: EnemyRange2:EnemyRange2:LeftHandMiddle1
+      position: {x: -0.00037177137, y: 0.21932964, z: 0.0000000043658646}
+      rotation: {x: 0.038068675, y: -0.0000070080405, z: 0.0010502036, w: 0.99927455}
+      scale: {x: 1.0000001, y: 1.0000007, z: 1}
+    - name: EnemyRange2:EnemyRange2:LeftHandMiddle3
+      parentName: EnemyRange2:EnemyRange2:LeftHandMiddle2
+      position: {x: 0.00030904388, y: 0.20548946, z: -0.000000016926386}
+      rotation: {x: -0.040776536, y: -0.00000010148794, z: -0.000000053160214, w: 0.99916834}
+      scale: {x: 1.0000004, y: 0.99999994, z: 1.0000002}
+    - name: EnemyRange2:EnemyRange2:LeftHandMiddle4
+      parentName: EnemyRange2:EnemyRange2:LeftHandMiddle3
+      position: {x: 0.00006272598, y: 0.19125246, z: 8.6358795e-11}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EnemyRange2:EnemyRange2:LeftHandIndex1
+      parentName: EnemyRange2:EnemyRange2:LeftHand
+      position: {x: 0.25082925, y: 0.91605437, z: 0.008828684}
+      rotation: {x: 0.083061494, y: -0.00642988, z: -0.07332568, w: 0.99382234}
+      scale: {x: 1.0000004, y: 1.0000008, z: 1.0000002}
+    - name: EnemyRange2:EnemyRange2:LeftHandIndex2
+      parentName: EnemyRange2:EnemyRange2:LeftHandIndex1
+      position: {x: 0.00037001644, y: 0.18767568, z: -0.00000000442212}
+      rotation: {x: -0.040388644, y: -0.000011444555, z: -0.00055856677, w: 0.9991839}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000004}
+    - name: EnemyRange2:EnemyRange2:LeftHandIndex3
+      parentName: EnemyRange2:EnemyRange2:LeftHandIndex2
+      position: {x: -0.00017783146, y: 0.17547628, z: -0.000000003602506}
+      rotation: {x: -0.0042686313, y: -0.00000014454713, z: -0.000000027683793, w: 0.99999094}
+      scale: {x: 0.99999994, y: 1.0000001, z: 0.9999998}
+    - name: EnemyRange2:EnemyRange2:LeftHandIndex4
+      parentName: EnemyRange2:EnemyRange2:LeftHandIndex3
+      position: {x: -0.00019218198, y: 0.16095653, z: 0.000000004577821}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EnemyRange2:EnemyRange2:LeftHandRing1
+      parentName: EnemyRange2:EnemyRange2:LeftHand
+      position: {x: -0.09566426, y: 0.9821754, z: -0.031300128}
+      rotation: {x: 0.01938651, y: 0.00017617641, z: 0.009080539, w: 0.9997708}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000002}
+    - name: EnemyRange2:EnemyRange2:LeftHandRing2
+      parentName: EnemyRange2:EnemyRange2:LeftHandRing1
+      position: {x: -0.00045494406, y: 0.18735705, z: -0.0000000020795607}
+      rotation: {x: 0.038541973, y: -0.000056251694, z: 0.0009530889, w: 0.99925655}
+      scale: {x: 1.0000004, y: 1.0000006, z: 1.0000004}
+    - name: EnemyRange2:EnemyRange2:LeftHandRing3
+      parentName: EnemyRange2:EnemyRange2:LeftHandRing2
+      position: {x: 0.000111653586, y: 0.17354333, z: -7.5729417e-10}
+      rotation: {x: -0.036057554, y: -0.000000062296564, z: 0.000000016841526, w: 0.9993498}
+      scale: {x: 1.0000002, y: 1.0000007, z: 1.0000002}
+    - name: EnemyRange2:EnemyRange2:LeftHandRing4
+      parentName: EnemyRange2:EnemyRange2:LeftHandRing3
+      position: {x: 0.0003432906, y: 0.15626359, z: 0.0000000039192263}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EnemyRange2:EnemyRange2:LeftHandPinky1
+      parentName: EnemyRange2:EnemyRange2:LeftHand
+      position: {x: -0.25726458, y: 0.8085964, z: 0.023275455}
+      rotation: {x: 0.02720895, y: 0.0036735157, z: 0.021954732, w: 0.99938196}
+      scale: {x: 1.0000001, y: 1.0000006, z: 1.0000002}
+    - name: EnemyRange2:EnemyRange2:LeftHandPinky2
+      parentName: EnemyRange2:EnemyRange2:LeftHandPinky1
+      position: {x: 0.000031669148, y: 0.20870548, z: -1.9878711e-10}
+      rotation: {x: 0.005995213, y: -0.000000015832482, z: -0.000000055122648, w: 0.999982}
+      scale: {x: 1.0000002, y: 1.0000005, z: 1.0000007}
+    - name: EnemyRange2:EnemyRange2:LeftHandPinky3
+      parentName: EnemyRange2:EnemyRange2:LeftHandPinky2
+      position: {x: 0.000046558085, y: 0.18274122, z: -0.0000000013556871}
+      rotation: {x: -0.041294053, y: 0.0000005096229, z: -0.000040404673, w: 0.99914706}
+      scale: {x: 1.0000005, y: 1.0000005, z: 1.0000002}
+    - name: EnemyRange2:EnemyRange2:LeftHandPinky4
+      parentName: EnemyRange2:EnemyRange2:LeftHandPinky3
+      position: {x: -0.0000782282, y: 0.16981868, z: 0.000000008299577}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EnemyRange2:EnemyRange2:LeftHandThumb1
+      parentName: EnemyRange2:EnemyRange2:LeftHand
+      position: {x: 0.18022436, y: 0.2826862, z: 0.10284214}
+      rotation: {x: 0.043533567, y: -0.0036757514, z: -0.41108015, w: 0.9105517}
+      scale: {x: 1, y: 1.0000002, z: 1.0000004}
+    - name: EnemyRange2:EnemyRange2:LeftHandThumb2
+      parentName: EnemyRange2:EnemyRange2:LeftHandThumb1
+      position: {x: -0.016693182, y: 0.2800381, z: -0.000000015534509}
+      rotation: {x: 0.028469667, y: -0.00021810105, z: 0.012368317, w: 0.99951816}
+      scale: {x: 0.99999994, y: 1.0000004, z: 1}
+    - name: EnemyRange2:EnemyRange2:LeftHandThumb3
+      parentName: EnemyRange2:EnemyRange2:LeftHandThumb2
+      position: {x: 0.005336477, y: 0.22713703, z: 0.0000000032591572}
+      rotation: {x: -0.039016474, y: -0.0011687124, z: 0.007214837, w: 0.99921185}
+      scale: {x: 1.0000005, y: 1.0000007, z: 1}
+    - name: EnemyRange2:EnemyRange2:LeftHandThumb4
+      parentName: EnemyRange2:EnemyRange2:LeftHandThumb3
+      position: {x: 0.011356745, y: 0.19769014, z: -0.000000011295477}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EnemyRange2:EnemyRange2:RightShoulder
+      parentName: EnemyRange2:EnemyRange2:Spine2
+      position: {x: 0.3657411, y: 0.713576, z: 0.012389374}
+      rotation: {x: -0.58465844, y: -0.40504548, z: 0.56701297, w: -0.41546243}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: EnemyRange2:EnemyRange2:RightArm
+      parentName: EnemyRange2:EnemyRange2:RightShoulder
+      position: {x: 2.1936727e-11, y: 0.74390644, z: 0.0000000059629404}
+      rotation: {x: 0.14091039, y: -0.08027018, z: 0.01857671, w: -0.98658806}
+      scale: {x: 1, y: 0.9999999, z: 1}
+    - name: EnemyRange2:EnemyRange2:RightForeArm
+      parentName: EnemyRange2:EnemyRange2:RightArm
+      position: {x: 0.0000000065208052, y: 1.8852574, z: -0.000000056222987}
+      rotation: {x: -0.026512297, y: -0.0066020912, z: 0.035262518, w: 0.9990046}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: EnemyRange2:EnemyRange2:RightHand
+      parentName: EnemyRange2:EnemyRange2:RightForeArm
+      position: {x: 0.000000022429255, y: 1.5664421, z: 0.000000009547059}
+      rotation: {x: 0.063744366, y: -0.028911259, z: -0.099614754, w: 0.9925612}
+      scale: {x: 1.0000001, y: 1.0000005, z: 1.0000004}
+    - name: EnemyRange2:EnemyRange2:RightHandThumb1
+      parentName: EnemyRange2:EnemyRange2:RightHand
+      position: {x: -0.17787752, y: 0.26756638, z: 0.13380548}
+      rotation: {x: 0.06849274, y: -0.00066229113, z: 0.37976092, w: 0.9225454}
+      scale: {x: 1, y: 1, z: 0.9999998}
+    - name: EnemyRange2:EnemyRange2:RightHandThumb2
+      parentName: EnemyRange2:EnemyRange2:RightHandThumb1
+      position: {x: -0.0011046001, y: 0.2784341, z: -0.0000000086371195}
+      rotation: {x: -0.018797377, y: 0.0004933622, z: -0.016712695, w: 0.99968356}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1}
+    - name: EnemyRange2:EnemyRange2:RightHandThumb3
+      parentName: EnemyRange2:EnemyRange2:RightHandThumb2
+      position: {x: -0.027311342, y: 0.24825206, z: 8.8786806e-10}
+      rotation: {x: -0.022646502, y: -0.002547293, z: 0.10979902, w: 0.9936926}
+      scale: {x: 1.0000002, y: 1.000001, z: 1.0000007}
+    - name: EnemyRange2:EnemyRange2:RightHandThumb4
+      parentName: EnemyRange2:EnemyRange2:RightHandThumb3
+      position: {x: 0.02841593, y: 0.17283878, z: 0.000000006945436}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EnemyRange2:EnemyRange2:RightHandIndex1
+      parentName: EnemyRange2:EnemyRange2:RightHand
+      position: {x: -0.25468296, y: 0.84268093, z: 0.03499536}
+      rotation: {x: -0.059147175, y: -0.0052272123, z: 0.074478954, w: 0.9954533}
+      scale: {x: 0.9999999, y: 0.99999994, z: 0.9999996}
+    - name: EnemyRange2:EnemyRange2:RightHandIndex2
+      parentName: EnemyRange2:EnemyRange2:RightHandIndex1
+      position: {x: -0.0004936631, y: 0.21200272, z: -0.0000000043762713}
+      rotation: {x: 0.041344505, y: -0.0000003678722, z: 0.00015398418, w: 0.999145}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000001}
+    - name: EnemyRange2:EnemyRange2:RightHandIndex3
+      parentName: EnemyRange2:EnemyRange2:RightHandIndex2
+      position: {x: 0.00040154989, y: 0.19936974, z: 0.000000014659894}
+      rotation: {x: -0.013926178, y: -0.000000082528494, z: 0.000000002840714, w: 0.999903}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000001}
+    - name: EnemyRange2:EnemyRange2:RightHandIndex4
+      parentName: EnemyRange2:EnemyRange2:RightHandIndex3
+      position: {x: 0.00009210901, y: 0.14491752, z: 4.879382e-10}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EnemyRange2:EnemyRange2:RightHandRing1
+      parentName: EnemyRange2:EnemyRange2:RightHand
+      position: {x: 0.07578014, y: 0.91622627, z: -0.012455857}
+      rotation: {x: -0.057825398, y: 0.003419189, z: 0.012878615, w: 0.99823785}
+      scale: {x: 1, y: 1, z: 0.9999998}
+    - name: EnemyRange2:EnemyRange2:RightHandRing2
+      parentName: EnemyRange2:EnemyRange2:RightHandRing1
+      position: {x: -0.00052368175, y: 0.19615257, z: 6.0644767e-10}
+      rotation: {x: 0.035424, y: 0.00016238251, z: 0.003082963, w: 0.99936765}
+      scale: {x: 0.9999998, y: 1.0000001, z: 1}
+    - name: EnemyRange2:EnemyRange2:RightHandRing3
+      parentName: EnemyRange2:EnemyRange2:RightHandRing2
+      position: {x: 0.00095746334, y: 0.18410894, z: 0.000000008462127}
+      rotation: {x: -0.03714131, y: -0.00007122051, z: -0.0031532024, w: 0.99930507}
+      scale: {x: 1.0000004, y: 1.0000005, z: 1.0000002}
+    - name: EnemyRange2:EnemyRange2:RightHandRing4
+      parentName: EnemyRange2:EnemyRange2:RightHandRing3
+      position: {x: -0.0004337788, y: 0.11881603, z: -0.0000000032321406}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EnemyRange2:EnemyRange2:RightHandPinky1
+      parentName: EnemyRange2:EnemyRange2:RightHand
+      position: {x: 0.2582253, y: 0.78100646, z: 0.037304357}
+      rotation: {x: -0.03394403, y: 0.0013331152, z: -0.020576725, w: 0.9992111}
+      scale: {x: 1, y: 0.99999946, z: 0.9999996}
+    - name: EnemyRange2:EnemyRange2:RightHandPinky2
+      parentName: EnemyRange2:EnemyRange2:RightHandPinky1
+      position: {x: 0.00016816243, y: 0.18708998, z: -0.000000016830011}
+      rotation: {x: -0.034361966, y: 0.000000006868502, z: 0.000000021609589, w: 0.9994095}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: EnemyRange2:EnemyRange2:RightHandPinky3
+      parentName: EnemyRange2:EnemyRange2:RightHandPinky2
+      position: {x: -0.00013892692, y: 0.17200561, z: -0.000000017725318}
+      rotation: {x: 0.013532157, y: 0.000000056510405, z: 0.00000011301812, w: 0.99990845}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+    - name: EnemyRange2:EnemyRange2:RightHandPinky4
+      parentName: EnemyRange2:EnemyRange2:RightHandPinky3
+      position: {x: -0.00002923524, y: 0.101088256, z: -0.000000003369538}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EnemyRange2:EnemyRange2:RightHandMiddle1
+      parentName: EnemyRange2:EnemyRange2:RightHand
+      position: {x: -0.079322524, y: 0.89367634, z: 0.029965917}
+      rotation: {x: -0.060120575, y: 0.0037596691, z: 0.027511166, w: 0.9978049}
+      scale: {x: 1.0000001, y: 0.9999998, z: 0.9999997}
+    - name: EnemyRange2:EnemyRange2:RightHandMiddle2
+      parentName: EnemyRange2:EnemyRange2:RightHandMiddle1
+      position: {x: -0.0022086834, y: 0.23272961, z: 0.000000018342291}
+      rotation: {x: 0.033170216, y: -0.00038144557, z: 0.006153404, w: 0.9994307}
+      scale: {x: 1.0000004, y: 1.0000007, z: 1.0000005}
+    - name: EnemyRange2:EnemyRange2:RightHandMiddle3
+      parentName: EnemyRange2:EnemyRange2:RightHandMiddle2
+      position: {x: 0.0010770072, y: 0.20923181, z: -0.0000000118033165}
+      rotation: {x: 0.021308698, y: 0.000000011802956, z: -0.00000002083019, w: 0.999773}
+      scale: {x: 0.9999997, y: 0.99999994, z: 0.99999994}
+    - name: EnemyRange2:EnemyRange2:RightHandMiddle4
+      parentName: EnemyRange2:EnemyRange2:RightHandMiddle3
+      position: {x: 0.0011316739, y: 0.15785009, z: -0.0000000041467283}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EnemyRange2:EnemyRange2:Neck
+      parentName: EnemyRange2:EnemyRange2:Spine2
+      position: {x: -0, y: 0.80207294, z: 0.000000014558935}
+      rotation: {x: 0.03115106, y: -7.458798e-10, z: 0.000000023932282, w: 0.9995147}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EnemyRange2:EnemyRange2:Head
+      parentName: EnemyRange2:EnemyRange2:Neck
+      position: {x: -0, y: 0.78152466, z: 0.18706508}
+      rotation: {x: 3.4972025e-15, y: -0.0000000070423236, z: -0.000000028521413, w: 1}
+      scale: {x: 0.99999994, y: 1.0000001, z: 1}
+    - name: EnemyRange2:EnemyRange2:HeadTop_End
+      parentName: EnemyRange2:EnemyRange2:Head
+      position: {x: -0, y: 1.330559, z: 0.3184815}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EnemyRange2:EnemyRange2:RightUpLeg
+      parentName: EnemyRange2:EnemyRange2:Hips
+      position: {x: 1.4421754, y: -0.30807617, z: -0.11265821}
+      rotation: {x: 0.00012735942, y: -0.010665596, z: 0.99987185, w: 0.011938953}
+      scale: {x: 1.0000002, y: 1, z: 1}
+    - name: EnemyRange2:EnemyRange2:RightLeg
+      parentName: EnemyRange2:EnemyRange2:RightUpLeg
+      position: {x: -2.2364105e-10, y: 3.2356453, z: -0.0000000018035742}
+      rotation: {x: 0.012232836, y: 0.00009392667, z: 0.007677181, w: 0.99989575}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+    - name: EnemyRange2:EnemyRange2:RightFoot
+      parentName: EnemyRange2:EnemyRange2:RightLeg
+      position: {x: -3.2284617e-10, y: 3.485938, z: -1.8870715e-10}
+      rotation: {x: 0.53543204, y: -0.101781644, z: 0.065197006, w: 0.8358842}
+      scale: {x: 1.0000005, y: 1.0000004, z: 1.0000001}
+    - name: EnemyRange2:EnemyRange2:RightToeBase
+      parentName: EnemyRange2:EnemyRange2:RightFoot
+      position: {x: -0.000000010767928, y: 0.88622487, z: -0.000000031431654}
+      rotation: {x: 0.1892937, y: 0.013246752, z: 0.068540685, w: 0.9794359}
+      scale: {x: 0.9999996, y: 0.9999999, z: 0.9999999}
+    - name: EnemyRange2:EnemyRange2:RightToe_End
+      parentName: EnemyRange2:EnemyRange2:RightToeBase
+      position: {x: 0.0000000013532048, y: 0.4557212, z: 9.4006504e-11}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EnemyRange2:EnemyRange2:LeftUpLeg
+      parentName: EnemyRange2:EnemyRange2:Hips
+      position: {x: -1.4421754, y: -0.30807617, z: -0.07603407}
+      rotation: {x: -0.00010480824, y: -0.008779077, z: 0.9998902, w: -0.011940074}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1}
+    - name: EnemyRange2:EnemyRange2:LeftLeg
+      parentName: EnemyRange2:EnemyRange2:LeftUpLeg
+      position: {x: 0.0000000044191686, y: 3.2354078, z: 0.0000000038450807}
+      rotation: {x: 0.04758707, y: -0.00036515467, z: -0.0076647345, w: 0.9988376}
+      scale: {x: 1.0000002, y: 1.0000004, z: 0.9999999}
+    - name: EnemyRange2:EnemyRange2:LeftFoot
+      parentName: EnemyRange2:EnemyRange2:LeftLeg
+      position: {x: 0.000000001507619, y: 3.4964507, z: 0.0000000015856016}
+      rotation: {x: 0.21423136, y: 0.24729715, z: -0.03895319, w: 0.9441566}
+      scale: {x: 0.9999999, y: 0.9999997, z: 0.99999994}
+    - name: EnemyRange2:EnemyRange2:LeftToeBase
+      parentName: EnemyRange2:EnemyRange2:LeftFoot
+      position: {x: 9.462378e-10, y: 0.42301178, z: -0.000000009587552}
+      rotation: {x: 0.45464766, y: -0.052280635, z: 0.026745044, w: 0.8887334}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: EnemyRange2:EnemyRange2:LeftToe_End
+      parentName: EnemyRange2:EnemyRange2:LeftToeBase
+      position: {x: -0.0000000015540017, y: 0.17759058, z: 5.578089e-10}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
