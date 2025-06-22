@@ -21,14 +21,19 @@ MonoBehaviour:
   IsStackable: 0
   Character: 1
   SkillsDescriptions:
-  - "Ghostly Whispers n\xEDvel 1"
-  - "Ghostly Whispers n\xEDvel 2"
-  - "Ghostly Whispers n\xEDvel 3"
-  - "Ghostly Whispers n\xEDvel 4"
+  - Mel creates a field on the ground that damages enemies.
+  - Mel can create up to two fields on the ground, each dealing damage to enemies.
+  - Mel can create up to three fields on the ground that damage enemies. Placing
+    a field on top of another transforms them into a super field, which deals increased
+    damage.
+  - Mel can create up to four super fields on the ground. Placing one field over
+    another transforms them into MEGA fields, which deal even greater damage.
   UpgradesDescriptions:
-  - "Ghostly Whispers vai para o n\xEDvel 2"
-  - "Ghostly Whispers vai para o n\xEDvel 3"
-  - "Ghostly Whispers vai para o n\xEDvel 4"
+  - Mel can place two damaging fields at once.
+  - Mel can now place three fields. Placing one on top of another turns them into
+    Super Fields that deal increased damage.
+  - Mel can create up to four Super Fields. Overlapping Super Fields become MEGA
+    Fields, dealing even greater damage.
   skillPrefabs:
   - {fileID: 1100393366828500542, guid: d477ed308cbb3ec4fb507264d691e8d5, type: 3}
   - {fileID: 3828274567235449187, guid: 9edb9891debbbde43bb8c4539dcf8e57, type: 3}
