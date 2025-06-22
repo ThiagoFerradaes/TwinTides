@@ -21,14 +21,19 @@ MonoBehaviour:
   IsStackable: 1
   Character: 1
   SkillsDescriptions:
-  - "Phantom Aura n\xEDvel 1"
-  - "Phantom Aura n\xEDvel 2"
-  - "Phantom Aura n\xEDvel 3"
-  - "Phantom Aura n\xEDvel 4"
+  - Creates an aura around Mel that deals damage to nearby enemies.
+  - Creates an aura around Mel that deals damage to nearby enemies and heals Mel
+    for a percentage of the damage dealt.
+  - Creates an aura around both Mel and Maevis that deals damage to nearby enemies
+    and heals Mel for a percentage of the damage dealt.
+  - Creates a large aura around both Mel and Maevis that deals heavy damage to nearby
+    enemies. The aura also heals Mel for a percentage of the damage dealt.
   UpgradesDescriptions:
-  - "Phantom Aura vai para o n\xEDvel 2"
-  - "Phantom Aura vai para o n\xEDvel 3"
-  - "Phantom Aura vai para o n\xEDvel 4"
+  - The aura now heals Mel for a percentage of the damage it deals.
+  - The aura also surrounds Maevis, damaging enemies and healing Mel based on the
+    damage done.
+  - The aura becomes larger and more powerful, greatly increasing damage. Mel continues
+    to heal from damage dealt, and the effect also applies to Maevis.
   skillPrefabs:
   - {fileID: 1653853747601609538, guid: 69dad15640118824baf226ed5ece4006, type: 3}
   - {fileID: 2219329152401619148, guid: ffcbd79cd22afc14cb8d684b832ee423, type: 3}

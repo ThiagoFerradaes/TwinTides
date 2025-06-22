@@ -351,6 +351,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 45
   Length: 0
+--- !u!114 &-6944269241985466638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MusicasDeFundo/FightMusic
+  m_EditorClassIdentifier: 
+  Path: event:/MusicasDeFundo/FightMusic
+  Guid:
+    Data1: -2011310227
+    Data2: 1110866125
+    Data3: -746378830
+    Data4: -81759789
+  Banks:
+  - {fileID: 2242654011554485442}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 7169555141344929078}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 225697
 --- !u!114 &-6713872604805545446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,6 +460,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-6664494810076076088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MusicasDeFundo/ExplorationMusic
+  m_EditorClassIdentifier: 
+  Path: event:/MusicasDeFundo/ExplorationMusic
+  Guid:
+    Data1: -779152519
+    Data2: 1231086424
+    Data3: 1409614978
+    Data4: 155977669
+  Banks:
+  - {fileID: 2242654011554485442}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -2314875514389054632}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 181028
 --- !u!114 &-6531063613736132047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,10 +746,10 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638855213826136261
+  lastModified: 638861252454886013
   FileSizes:
   - Name: Desktop
-    Value: 8328
+    Value: 8510
   Exists: 1
 --- !u!114 &-5563174526674965604
 MonoBehaviour:
@@ -1586,6 +1642,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 45
   Length: 0
+--- !u!114 &-2314875514389054632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/ExplorationMusic/TrackIndex
+  m_EditorClassIdentifier: 
+  Name: TrackIndex
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 364290757
+    data2: 3229146396
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-2260100283989603420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2123,13 +2203,16 @@ MonoBehaviour:
   - {fileID: 1014414513131976440}
   - {fileID: 7651348895792641759}
   - {fileID: 8710192123546511220}
+  - {fileID: 7334024294272261785}
+  - {fileID: -6944269241985466638}
+  - {fileID: -6664494810076076088}
   EditorParameters: []
   MasterBanks:
   - {fileID: 3442993752769086855}
   StringsBanks:
   - {fileID: -5605403626837457971}
   cacheVersion: 131847
-  cacheTime: 638855213827027658
+  cacheTime: 638861252455509122
   SerializableEventsDict:
   - key: event:/MusicasDeFundo/MenuMusica
     index: 0
@@ -2409,6 +2492,12 @@ MonoBehaviour:
     index: 137
   - key: event:/UI/SelecaoPersonagem/SetSail
     index: 138
+  - key: event:/MusicasDeFundo/BarbaNegra
+    index: 139
+  - key: event:/MusicasDeFundo/FightMusic
+    index: 140
+  - key: event:/MusicasDeFundo/ExplorationMusic
+    index: 141
 --- !u!114 &34607856170231742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2910,10 +2999,10 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Musics.bank
   Name: Musics
   StudioPath: bank:/Musics
-  lastModified: 638847161380102853
+  lastModified: 638861252455509122
   FileSizes:
   - Name: Desktop
-    Value: 1391680
+    Value: 14549120
   Exists: 1
 --- !u!114 &2300006846267218449
 MonoBehaviour:
@@ -3200,7 +3289,7 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638847161379768362
+  lastModified: 638861183781564394
   FileSizes:
   - Name: Desktop
     Value: 1670
@@ -3409,7 +3498,7 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638855213827027658
+  lastModified: 638855026421480320
   FileSizes:
   - Name: Desktop
     Value: 7879616
@@ -3483,7 +3572,7 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Dialogue.bank
   Name: Dialogue
   StudioPath: bank:/Dialogue
-  lastModified: 638855213826125850
+  lastModified: 638855026420826783
   FileSizes:
   - Name: Desktop
     Value: 81024
@@ -3746,7 +3835,7 @@ MonoBehaviour:
   Path: Assets/FMOD/TwinTides/Build/Desktop/Ambience.bank
   Name: Ambience
   StudioPath: bank:/Ambience
-  lastModified: 638847161379768362
+  lastModified: 638852683981260156
   FileSizes:
   - Name: Desktop
     Value: 506
@@ -3966,6 +4055,57 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 40
+  Length: 0
+--- !u!114 &7169555141344929078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FightMusic/TrackIndex
+  m_EditorClassIdentifier: 
+  Name: TrackIndex
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 364290757
+    data2: 3229146396
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &7334024294272261785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MusicasDeFundo/BarbaNegra
+  m_EditorClassIdentifier: 
+  Path: event:/MusicasDeFundo/BarbaNegra
+  Guid:
+    Data1: -963253898
+    Data2: 1193134198
+    Data3: -399519865
+    Data4: -1831201461
+  Banks:
+  - {fileID: 2242654011554485442}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
   Length: 0
 --- !u!114 &7610469383354105030
 MonoBehaviour:

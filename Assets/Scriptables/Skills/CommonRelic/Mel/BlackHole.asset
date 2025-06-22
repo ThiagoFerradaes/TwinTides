@@ -21,14 +21,17 @@ MonoBehaviour:
   IsStackable: 1
   Character: 1
   SkillsDescriptions:
-  - "Black Hole n\xEDvel 1"
-  - "Black Hole n\xEDvel 2"
-  - "Black Hole n\xEDvel 3"
-  - "Black Hole n\xEDvel 4"
+  - Creates a slowing field on the ground that deals minor damage to enemies.
+  - Creates a slowing field on the ground that deals minor damage and stuns enemies.
+  - Creates a slowing field on the ground that deals minor damage, stuns enemies,
+    and breaks their shields.
+  - Creates a large slowing field on the ground that deals minor damage, stuns enemies,
+    breaks their shields, and reduces the healing they receive.
   UpgradesDescriptions:
-  - "Black Hole vai para o n\xEDvel 2"
-  - "Black Hole vai para o n\xEDvel 3"
-  - "Black Hole vai para o n\xEDvel 4"
+  - The field now also stuns enemies caught within it.
+  - In addition to damage and stun, the field now breaks enemy shields.
+  - The field becomes larger and also reduces healing received by enemies inside
+    it.
   skillPrefabs:
   - {fileID: 8789776391258815317, guid: 71d4166a2a607404899918d82c4acf0c, type: 3}
   - {fileID: 3221236505909682620, guid: b8ac69ff26c7995438de07eff57b92a4, type: 3}

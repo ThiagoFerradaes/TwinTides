@@ -21,14 +21,19 @@ MonoBehaviour:
   IsStackable: 1
   Character: 0
   SkillsDescriptions:
-  - "Warcry n\xEDvel 1"
-  - "Warcry n\xEDvel 2"
-  - "Warcry n\xEDvel 3"
-  - "Warcry n\xEDvel 4"
+  - Maevis lets out a battle cry that increases her attack speed.
+  - Maevis lets out a battle cry that increases her attack speed, and Mel also receives
+    the same boost.
+  - Maevis lets out a battle cry that increases both her and Mel's attack speed.
+    Enemies in the area are stunned, and Maevis and Mel also gain movement speed.
+  - Maevis lets out a battle cry that increases both her and Mel's attack speed.
+    Enemies nearby are stunned, and both Maevis and Mel gain movement speed. Additionally,
+    Maevis's sword grows in size, increasing her attack range and damage.
   UpgradesDescriptions:
-  - "Warcry vai virar n\xEDvel 2"
-  - "Warcry vai virar n\xEDvel 3"
-  - "Warcry vai virar n\xEDvel 4"
+  - Both Maevis and Mel receive the attack speed boost.
+  - Nearby enemies are stunned. Maevis and Mel also gain movement speed.
+  - Maevis's sword grows in size, increasing her attack range and damage, while keeping
+    all previous effects.
   skillPrefabs:
   - {fileID: 5383756882683347849, guid: 51035b909087d9a4f8cd630d2ec289d6, type: 3}
   - {fileID: 5210610992638295791, guid: 32ddb45e81ed22044870a125584130d5, type: 3}

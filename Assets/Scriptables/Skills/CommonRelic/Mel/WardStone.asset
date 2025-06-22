@@ -21,14 +21,25 @@ MonoBehaviour:
   IsStackable: 1
   Character: 1
   SkillsDescriptions:
-  - "Ward Stone n\xEDvel 1"
-  - "Ward Stone n\xEDvel 2"
-  - "Ward Stone n\xEDvel 3"
-  - "Ward Stone n\xEDvel 4"
+  - Mel summons a protective explosion. Allies affected by the blast are healed and
+    become immune to negative effects for a short duration.
+  - Mel summons a protective explosion. Allies are healed, receive a shield, become
+    immune to negative effects for a short time, and have their incoming healing
+    and shielding increased.
+  - Mel summons a protective explosion. Allies receive a large heal and a powerful
+    shield, become immune to negative effects for a short time, and have their healing
+    and shielding further enhanced.
+  - Mel summons a protective explosion. Allies receive a large heal and a powerful
+    shield, become immune to negative effects for a short time, and have their healing
+    and shielding further enhanced. Additionally, a healing zone is created; allies
+    inside it who are at full health gain extra shields.
   UpgradesDescriptions:
-  - "Ward Stone vai para o n\xEDvel 2"
-  - "Ward Stone vai para o n\xEDvel 3"
-  - "Ward Stone vai para o n\xEDvel 4"
+  - The explosion also grants allies a shield and increases the healing and shields
+    they receive.
+  - Allies receive a large heal and a stronger shield. Bonus healing and shielding
+    are further enhanced.
+  - In addition to the powerful heal and shield, a healing zone is created. Allies
+    inside the zone who are at full health receive bonus shielding.
   skillPrefabs:
   - {fileID: 3492987863503400079, guid: 7435636b8544d194294fa67844ab1fe2, type: 3}
   - {fileID: 6896458585964205320, guid: bd5e0ee7507ef004c8ecf7a29231dd66, type: 3}

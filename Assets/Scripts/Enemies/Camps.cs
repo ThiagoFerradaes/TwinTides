@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 using Random = UnityEngine.Random;
 
 public class Camps : NetworkBehaviour {
@@ -21,7 +22,12 @@ public class Camps : NetworkBehaviour {
     [SerializeField] bool randomCamp;
     [SerializeField, Tooltip("Só necessário quando é random")] int numberOfEnemies;
     [SerializeField, Tooltip("Deixa 0 se n quiser que ele respawne")] float respawnTime;
+    [SerializeField] float timeToRestartCamp;
+
     Chest chest;
+    Coroutine restartRoutineCampRoutine;
+
+    HashSet<GameObject> listOfPlayers = new();
 
     public static event Action OnAllEnemiesDeadStatic;
     public event Action OnAllEnemiesDead;
@@ -29,6 +35,7 @@ public class Camps : NetworkBehaviour {
 
     #endregion
 
+    #region Initialize
     void Awake() {
         listOfEnemies.Clear();
 
@@ -54,7 +61,9 @@ public class Camps : NetworkBehaviour {
     private void Start() {
         if (activateOnStart) StartCamp(!randomCamp);
     }
+    #endregion
 
+    #region CampSetUp
     void TurnChestOn() {
         if (chest == null) return;
 
@@ -164,17 +173,33 @@ public class Camps : NetworkBehaviour {
                 health.OnDeath -= HandleEnemyDeath;
         }
     }
+    #endregion
+
+    #region CampDead
     private void HandleEnemyDeath() {
         aliveCount--;
         if (aliveCount <= 0) {
+
             OnAllEnemiesDead?.Invoke();
             OnAllEnemiesDeadStatic?.Invoke();
             if (chest.rarity == Chest.ChestRarity.Rare) OnLegendaryCampDefeat?.Invoke();
+
             chest.UnlockChest();
+
             if (respawnTime > 0) StartCoroutine(RespawnCampTimer());
+
+            MusicInGameManager.Instance.SetMusicState(MusicState.Exploration);
         }
 
     }
+
+    public void KillCamp() {
+        foreach (var enemy in currentActiveEnemies) {
+            var health = enemy.GetComponent<HealthManager>();
+            health?.Kill();
+        }
+    }
+    #endregion
 
     #region Respawn
     IEnumerator RespawnCampTimer() {
@@ -188,12 +213,82 @@ public class Camps : NetworkBehaviour {
     }
     #endregion
 
-    public void KillCamp() {
+    #region CampDetection
+
+    private void OnTriggerEnter(Collider other) {
+        if (!other.CompareTag("Mel") && !other.CompareTag("Maevis")) return;
+
+        listOfPlayers.Add(other.gameObject);
+
+        MusicInGameManager.Instance.SetMusicState(MusicState.Combat);
+
         foreach (var enemy in currentActiveEnemies) {
-            var health = enemy.GetComponent<HealthManager>();
-            health?.Kill();
+            BehaviourTreeRunner behaviour = enemy.GetComponent<BehaviourTreeRunner>();
+            behaviour.context.Blackboard.Target = other.transform;
+            behaviour.context.Blackboard.IsTargetForcedByCamp = true;
+            behaviour.context.Blackboard.IsTargetInRange = true; // Garante comportamento de perseguição
+        }
+
+        if (restartRoutineCampRoutine != null) {
+            StopCoroutine(restartRoutineCampRoutine);
+            restartRoutineCampRoutine = null;
         }
     }
+
+    private void OnTriggerExit(Collider other) {
+        if (!other.CompareTag("Mel") && !other.CompareTag("Maevis")) return;
+
+        listOfPlayers.Remove(other.gameObject);
+
+        if (listOfPlayers.Count <= 0) {
+            restartRoutineCampRoutine ??= StartCoroutine(CheckIfShouldRestartCamp());
+        }
+    }
+
+    IEnumerator CheckIfShouldRestartCamp() {
+        // Espera até todos os inimigos saírem do estado de combate
+        while (AnyEnemyStillInCombat()) {
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        // Depois, espera o tempo configurado antes de resetar
+        yield return new WaitForSeconds(timeToRestartCamp);
+
+        RestartCamp();
+    }
+    IEnumerator WaitToRestartCamp() {
+        yield return new WaitForSeconds(timeToRestartCamp);
+        RestartCamp();
+    }
+
+    void RestartCamp() {
+        restartRoutineCampRoutine = null;
+        MusicInGameManager.Instance.SetMusicState(MusicState.Exploration);
+
+        foreach (var enemy in currentActiveEnemies) {
+            enemy.GetComponent<HealthManager>().RestartHealth(100);
+            var behaviour = enemy.GetComponent<BehaviourTreeRunner>();
+            behaviour.context.Blackboard.IsTargetForcedByCamp = false;
+        }
+    }
+
+    private bool AnyEnemyStillInCombat() {
+        foreach (var enemy in currentActiveEnemies) {
+            if (!enemy.activeSelf) continue;
+
+            var bt = enemy.GetComponent<BehaviourTreeRunner>();
+            var bb = bt?.context?.Blackboard;
+
+            if (bb == null) continue;
+
+            if (bb.IsCloseToPath && bb.IsTargetInRange && bb.CanFollowPlayer)
+                return true;
+        }
+
+        return false;
+    }
+
+    #endregion
 
     public int ReturnAliveCount() {
         return aliveCount;

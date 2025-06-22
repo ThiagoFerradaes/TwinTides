@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 2089184698251057778}
   - component: {fileID: 8228927664607018245}
   - component: {fileID: 5167733912515190823}
+  - component: {fileID: 6815090514441070357}
+  - component: {fileID: 3170715845177795313}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -473,8 +475,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  listOfTotensInGame: []
-  transformOffSett: {x: -5, y: 0, z: -5}
+  listOfTotensInGame:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  transformOffSett: {x: -2, y: 0, z: -2}
 --- !u!114 &5167733912515190823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,6 +495,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountOfKeysText: {fileID: 6440674645253850632}
+--- !u!114 &6815090514441070357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4296963664878829859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebcc54590efc45d44a416af0f0dacb37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 0}
+  finalDoorPosition: {fileID: 0}
+--- !u!114 &3170715845177795313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4296963664878829859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e836b709e23bc245b7809353a2d0c1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  explorationEvent:
+    Guid:
+      Data1: -779152519
+      Data2: 1231086424
+      Data3: 1409614978
+      Data4: 155977669
+    Path: event:/MusicasDeFundo/ExplorationMusic
+  combatEvent:
+    Guid:
+      Data1: -2011310227
+      Data2: 1110866125
+      Data3: -746378830
+      Data4: -81759789
+    Path: event:/MusicasDeFundo/FightMusic
+  bossEvent:
+    Guid:
+      Data1: -963253898
+      Data2: 1193134198
+      Data3: -399519865
+      Data4: -1831201461
+    Path: event:/MusicasDeFundo/BarbaNegra
 --- !u!1 &7214388736521335965
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,6 +721,10 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5475409883467005655}
+    - target: {fileID: 1949740367986292341, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2190202172
+      objectReference: {fileID: 0}
     - target: {fileID: 2562555292400112733, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -718,6 +777,10 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5475409883467005655}
+    - target: {fileID: 5845764706874278566, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1815611791
+      objectReference: {fileID: 0}
     - target: {fileID: 5895376566390528508, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
