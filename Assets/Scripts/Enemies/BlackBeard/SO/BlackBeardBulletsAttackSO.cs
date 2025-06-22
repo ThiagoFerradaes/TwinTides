@@ -20,4 +20,7 @@ public class BlackBeardBulletsAttackSO : BlackBeardSO
     public int AmountOfAttacksStronger;
     public float BulletSizeStronger;
     public EventReference BulletsSound;
+
+    [Header("Animation")]
+    public string AnimationTriggerName;
 }

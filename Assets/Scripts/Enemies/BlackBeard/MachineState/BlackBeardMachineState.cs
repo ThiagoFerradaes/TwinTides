@@ -22,6 +22,7 @@ public class BlackBeardMachineState : NetworkBehaviour {
     public Camps ShipCamp;
 
     public HealthManager Health;
+    public Animator anim;
 
     public int Lifes = 2;
 
@@ -31,6 +32,8 @@ public class BlackBeardMachineState : NetworkBehaviour {
     public void StartFight() {
         Debug.Log("BlackBeard Started");
         StartCoroutine(WaitToStart());
+
+        anim = GetComponentInChildren<Animator>();
     }
 
     IEnumerator WaitToStart() {
@@ -90,4 +93,49 @@ public class BlackBeardMachineState : NetworkBehaviour {
 
         gameObject.SetActive(false);
     }
+
+
+    public IEnumerator AttackAnimation(string animationTrigger, string animationName, float percentToAttack, Action attack) {
+        anim.SetTrigger(animationTrigger);
+
+        // Espera sair de qualquer transição
+        while (anim.IsInTransition(0)) yield return null;
+
+        float timeout = 1f;
+        float timer = 0f;
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+
+        // Espera entrar na animação correta
+        while (!stateInfo.IsName(animationName)) {
+            if (timer > timeout) {
+                Debug.LogWarning($"[EnemyAnim] Falha ao entrar na animação '{animationName}' com trigger '{animationTrigger}'.");
+                yield break;
+            }
+            yield return null;
+            timer += Time.deltaTime;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        bool attackExecuted = false;
+
+        // Espera o ponto certo da animação para atacar
+        while (true) {
+            if (!stateInfo.IsName(animationName)) {
+                Debug.LogWarning($"[EnemyAnim] Saiu da animação '{animationName}' antes do ataque.");
+                yield break;
+            }
+
+            if (!attackExecuted && stateInfo.normalizedTime >= percentToAttack) {
+                attackExecuted = true;
+                attack?.Invoke();
+            }
+
+            if (stateInfo.normalizedTime >= 1f)
+                break;
+
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+    }
+
 }

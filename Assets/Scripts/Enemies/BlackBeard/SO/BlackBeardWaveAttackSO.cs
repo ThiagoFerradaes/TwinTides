@@ -20,4 +20,11 @@ public class BlackBeardWaveAttackSO : BlackBeardSO
     public float WaveSpeedStronger;
     public float AmountOfShieldGainPerWaveHit;
     public float ShieldDuration;
+
+    [Header("Animation")]
+    public string AnimationName;
+    public string AnimationTriggerName;
+    public string AnimationSpeedName;
+    public float AnimationPercentToAttack;
+    public float AnimationSpeedWhenStronger;
 }
