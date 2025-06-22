@@ -10,7 +10,7 @@ public class Context {
     public MovementManager MManager;
     public Blackboard Blackboard;
     public MonoBehaviour CoroutineRunner;
-    public Animator anim;
+    public Animator Anim;
 
     public static Context CreateFromGameObject(GameObject gameObject, Blackboard blackboard, MonoBehaviour coroutineRunner) {
         Context context = new() {
@@ -20,7 +20,7 @@ public class Context {
             MManager = gameObject.GetComponent<MovementManager>(),
             Blackboard = blackboard,
             CoroutineRunner = coroutineRunner,
-            anim = gameObject.GetComponentInChildren<Animator>()
+            Anim = gameObject.GetComponentInChildren<Animator>()
         };
 
         return context;

@@ -17,8 +17,8 @@ public class GoToAction : ActionNode {
         targetPosition = blackboard.originPoint;
         context.Agent.SetDestination(targetPosition.position);
 
-        if (context.anim != null && context.anim.enabled) {
-            context.anim.SetBool("IsWalking", true);
+        if (context.Anim != null && context.Anim.enabled) {
+            context.Anim.SetBool("IsWalking", true);
         }
     }
 
@@ -37,8 +37,8 @@ public class GoToAction : ActionNode {
     }
 
     public override void OnStop() {
-        if (context.anim != null && context.anim.enabled) {
-            context.anim.SetBool("IsWalking", false);
+        if (context.Anim != null && context.Anim.enabled) {
+            context.Anim.SetBool("IsWalking", false);
         }
     }
 }

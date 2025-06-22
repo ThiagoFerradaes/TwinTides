@@ -256,11 +256,7 @@ public class HealthManager : NetworkBehaviour {
             if (hasTrigger) {
                 anim.SetTrigger("Reviveu");
             }
-            else {
-                Debug.LogWarning("Trigger 'Reviveu' não existe no Animator Controller.");
-            }
         }
-
     }
 
     // Visual

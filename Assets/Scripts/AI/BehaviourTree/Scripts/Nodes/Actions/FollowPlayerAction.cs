@@ -16,8 +16,8 @@ public class FollowPlayerAction : ActionNode {
         if (distance >= blackboard.AttackRange && canRetreat) { // Perguntando se o inimigo já esta perto o suficiente do jogador
             context.Agent.speed = context.MManager.ReturnMoveSpeed();
             context.Agent.SetDestination(blackboard.Target.position);
-            if (context.anim != null && context.anim.enabled) {
-                context.anim.SetBool("IsWalking", true);
+            if (context.Anim != null && context.Anim.enabled) {
+                context.Anim.SetBool("IsWalking", true);
             }
             blackboard.IsInAttackRange = false;
             return State.Running;
@@ -29,7 +29,7 @@ public class FollowPlayerAction : ActionNode {
                 retreatPosition = blackboard.Target.position + retreatDirection * blackboard.AttackRange;
                 isRetreating = true;
                 canRetreat = false;
-                if (context.anim != null && context.anim.enabled) context.anim.SetBool("IsWalking", true);
+                if (context.Anim != null && context.Anim.enabled) context.Anim.SetBool("IsWalking", true);
                 return State.Running;
             }
             else if (isRetreating) {
@@ -37,7 +37,7 @@ public class FollowPlayerAction : ActionNode {
 
                 context.Agent.speed = context.MManager.ReturnMoveSpeed();
                 context.Agent.SetDestination(retreatPosition);
-                if (context.anim != null && context.anim.enabled) context.anim.SetBool("IsWalking", true);
+                if (context.Anim != null && context.Anim.enabled) context.Anim.SetBool("IsWalking", true);
 
                 Quaternion targetRotation = Quaternion.LookRotation(blackboard.Target.position - context.Agent.transform.position);
                 context.Agent.transform.rotation = Quaternion.RotateTowards(
@@ -48,8 +48,8 @@ public class FollowPlayerAction : ActionNode {
 
                 if (!context.Agent.pathPending && context.Agent.remainingDistance <= context.Agent.stoppingDistance) {
                     isRetreating = false;
-                    if (context.anim != null && context.anim.enabled) {
-                        context.anim.SetBool("IsWalking", false);
+                    if (context.Anim != null && context.Anim.enabled) {
+                        context.Anim.SetBool("IsWalking", false);
                     }
                 }
 
@@ -63,8 +63,8 @@ public class FollowPlayerAction : ActionNode {
                 context.Agent.ResetPath();
                 context.Agent.velocity = Vector3.zero; // Esses três parecem ser necessários para parar completamente a movimentação do inimigo
 
-                if (context.anim != null && context.anim.enabled) {
-                    context.anim.SetBool("IsWalking", false);
+                if (context.Anim != null && context.Anim.enabled) {
+                    context.Anim.SetBool("IsWalking", false);
                 }
 
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -86,6 +86,6 @@ public class FollowPlayerAction : ActionNode {
         canRetreat = true;
         isRetreating = false;
         context.Agent.updateRotation = true;
-        if (context.anim != null && context.anim.enabled) context.anim.SetBool("IsWalking", false);
+        if (context.Anim != null && context.Anim.enabled) context.Anim.SetBool("IsWalking", false);
     }
 }
