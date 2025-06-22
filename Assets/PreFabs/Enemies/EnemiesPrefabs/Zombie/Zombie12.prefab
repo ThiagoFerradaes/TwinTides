@@ -225,8 +225,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tree: {fileID: 11400000, guid: e71b8ff953c705a4f8e910d80c9aa603, type: 2}
-  path: {fileID: 11400000, guid: c4ca2331c2ee93e4f8c7a068f96250a6, type: 2}
-  isPatrol: 0
 --- !u!54 &-8015809491459835981
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -422,6 +420,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4757646871818118107}
     m_Modifications:
+    - target: {fileID: -3537422536103893717, guid: 98835bcfe0cb0e54a84c0bd570b00cb7, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 0f9ae5d9242d8214c99f993709d671f7, type: 2}
     - target: {fileID: 8587773940075808472, guid: 98835bcfe0cb0e54a84c0bd570b00cb7, type: 3}
       propertyPath: m_Name
       value: Melee 1 Roxo

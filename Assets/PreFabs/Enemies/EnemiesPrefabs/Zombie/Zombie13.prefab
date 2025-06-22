@@ -225,8 +225,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tree: {fileID: 11400000, guid: 6458eaeb1d4b75340ab7f9b150769b7c, type: 2}
-  path: {fileID: 11400000, guid: c4ca2331c2ee93e4f8c7a068f96250a6, type: 2}
-  isPatrol: 0
 --- !u!54 &-8015809491459835981
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -320,6 +318,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4757646871818118107}
     m_Modifications:
+    - target: {fileID: 2221613233042133450, guid: c72969018140c7743887b9be6c6510ef, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: bc50fc406153f5846af7a01c0260fe75, type: 2}
     - target: {fileID: 3847219970786225883, guid: c72969018140c7743887b9be6c6510ef, type: 3}
       propertyPath: m_Name
       value: Melee 1 Vermelho
