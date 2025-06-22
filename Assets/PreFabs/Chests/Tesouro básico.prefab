@@ -104,6 +104,7 @@ MonoBehaviour:
       Data3: 270471594
       Data4: -1990137639
     Path: event:/CenarioInteragiveis/AbrirBauNormal
+  closedEffect: {fileID: 2162291316134021082}
   chestTimerToTurnOffAfterUnlock: 20
   mandatoryMaevisLegendaryRelic: {fileID: 0}
   mandatoryMelLegendaryRelic: {fileID: 0}
@@ -146,7 +147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2261210184243677116, guid: 3f04fc2eebeae6645b32b23ca67c170a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.92
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 2261210184243677116, guid: 3f04fc2eebeae6645b32b23ca67c170a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -188,6 +189,11 @@ PrefabInstance:
 --- !u!4 &1533986750566030688 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2261210184243677116, guid: 3f04fc2eebeae6645b32b23ca67c170a, type: 3}
+  m_PrefabInstance: {fileID: 732044382990228188}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2162291316134021082 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1453182746534305030, guid: 3f04fc2eebeae6645b32b23ca67c170a, type: 3}
   m_PrefabInstance: {fileID: 732044382990228188}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3796309744100685290
