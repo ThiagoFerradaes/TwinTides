@@ -21,20 +21,39 @@ MonoBehaviour:
   IsStackable: 1
   Character: 1
   SkillsDescriptions:
-  - "Ward Stone n\xEDvel 1"
-  - "Ward Stone n\xEDvel 2"
-  - "Ward Stone n\xEDvel 3"
-  - "Ward Stone n\xEDvel 4"
+  - Mel summons a protective explosion. Allies affected by the blast are healed and
+    become immune to negative effects for a short duration.
+  - Mel summons a protective explosion. Allies are healed, receive a shield, become
+    immune to negative effects for a short time, and have their incoming healing
+    and shielding increased.
+  - Mel summons a protective explosion. Allies receive a large heal and a powerful
+    shield, become immune to negative effects for a short time, and have their healing
+    and shielding further enhanced.
+  - Mel summons a protective explosion. Allies receive a large heal and a powerful
+    shield, become immune to negative effects for a short time, and have their healing
+    and shielding further enhanced. Additionally, a healing zone is created; allies
+    inside it who are at full health gain extra shields.
   UpgradesDescriptions:
-  - "Ward Stone vai para o n\xEDvel 2"
-  - "Ward Stone vai para o n\xEDvel 3"
-  - "Ward Stone vai para o n\xEDvel 4"
+  - The explosion also grants allies a shield and increases the healing and shields
+    they receive.
+  - Allies receive a large heal and a stronger shield. Bonus healing and shielding
+    are further enhanced.
+  - In addition to the powerful heal and shield, a healing zone is created. Allies
+    inside the zone who are at full health receive bonus shielding.
   skillPrefabs:
+  - {fileID: 3492987863503400079, guid: 7435636b8544d194294fa67844ab1fe2, type: 3}
   - {fileID: 6896458585964205320, guid: bd5e0ee7507ef004c8ecf7a29231dd66, type: 3}
   - {fileID: 6293810736354995997, guid: 1725e2d2690f80642af1dc863ef0ec1c, type: 3}
   ExplosionRadius: {x: 10, y: 10, z: 10}
   Debuffblocker: {fileID: 11400000, guid: f5221119b6ed2a740b69deb30ed33caf, type: 2}
-  ExplosionDuration: 0.1
+  ExplosionDuration: 0.3
+  ExplosionSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   HealingIncreaseBuff: {fileID: 11400000, guid: b1a570f16eb58dd4db1b50cedcea3399, type: 2}
   ShieldIncreaseBuff: {fileID: 11400000, guid: ec99b0e5626bf2549ba351a6368cf18d, type: 2}
   AmountOfShield: 20
@@ -49,3 +68,12 @@ MonoBehaviour:
   PercentOfShieldFromExtraHealing: 60
   AreaDurationLevel4: 8
   ExtraShieldDuration: 3
+  AreaSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  AnimationName: WardStone
+  AnimationPercentToAttack: 0.4

@@ -14,8 +14,8 @@ public class DialogueManager : NetworkBehaviour {
     public static DialogueManager Instance;
 
     [Header("List of dialogues")]
-    [SerializeField] List<DialogueTrigger> listOfDialogues = new();
-    DialogueTrigger currentDialogue;
+    [SerializeField] List<DialogueSO> listOfDialogues = new();
+    DialogueSO currentDialogue;
 
     [Header("Dialogue Components")]
     [SerializeField] GameObject dialogueCanvas;
@@ -23,14 +23,15 @@ public class DialogueManager : NetworkBehaviour {
     [SerializeField] Image SkipImage;
     [SerializeField] TextMeshProUGUI characterName;
     [SerializeField] TextMeshProUGUI dialogueBox;
-    [SerializeField] TextMeshProUGUI skipBox;
-    [SerializeField] TextMeshProUGUI finishedBox;
+    [SerializeField] Image[] arrayOfChecks;
     bool isSkippingTyping = false;
 
     [Header("Sprites")]
     [SerializeField] Sprite melSprite;
     [SerializeField] Sprite maevisSprite;
     [SerializeField] Sprite blackBeardSprite;
+    [SerializeField] Sprite zombieSprite;
+    [SerializeField] Sprite crewSprite;
 
     [Header("Dialogue Atributes")]
     [SerializeField] float timeBetweenEachLetter;
@@ -116,7 +117,7 @@ public class DialogueManager : NetworkBehaviour {
     }
 
     void ChangeSkipText(int oldInt, int newInt) {
-        skipBox.text = $"Skip {newInt} / 2";
+        if (newInt == 1) arrayOfChecks[0].gameObject.SetActive(true);
         if (newInt == NetworkManager.Singleton.ConnectedClientsList.Count) EndDialogueRpc();
     }
 
@@ -154,8 +155,7 @@ public class DialogueManager : NetworkBehaviour {
     }
 
     void ClearTexts() {
-        skipBox.text = "Skip 0 / 2";
-        finishedBox.text = "Players finished: 0 / 2";
+        foreach (var check in arrayOfChecks) check.gameObject.SetActive(false);
         dialogueBox.text = "";
         SkipImage.fillAmount = 0 / timeToSkipDialogue;
     }
@@ -164,19 +164,17 @@ public class DialogueManager : NetworkBehaviour {
 
         amountOfPlayersFinishedWithDialogue.OnValueChanged += ChangeFinishedText;
 
-        DialogueTrigger dialogueHit = IntToDialogue(dialogueId);
+        DialogueSO dialogue = IntToDialogue(dialogueId);
 
-        currentDialogue = dialogueHit;
+        currentDialogue = dialogue;
 
-        DialogueSO dialogue = dialogueHit.Dialogue;
-
-        dialogueCanvas.gameObject.SetActive(true);
+        dialogueCanvas.SetActive(true);
 
         StartCoroutine(DialogueRoutine(dialogue));
     }
 
     void ChangeFinishedText(int oldInt, int newInt) {
-        finishedBox.text = $"Players finished: {newInt} / 2";
+        if (newInt == 1) arrayOfChecks[2].gameObject.SetActive(true);
         if (amountOfPlayersFinishedWithDialogue.Value >= NetworkManager.Singleton.ConnectedClientsList.Count) EndDialogueRpc(); // verificando se os dois jogadores terminaram o dialogo
     }
 
@@ -194,7 +192,8 @@ public class DialogueManager : NetworkBehaviour {
                     DialogueCharacter.MEL => melSprite,
                     DialogueCharacter.MAEVIS => maevisSprite,
                     DialogueCharacter.BLACKBEARD => blackBeardSprite,
-                    _ => null
+                    DialogueCharacter.CREW => crewSprite,
+                    _ => zombieSprite
                 };
 
                 characterName.text = dialogue.ListOfDialogues[i].Character.ToString(); // trocando o nome do personagem
@@ -253,8 +252,6 @@ public class DialogueManager : NetworkBehaviour {
 
         amountOfPlayersFinishedWithDialogue.OnValueChanged -= ChangeFinishedText;
 
-        if (currentDialogue is DialogueHitBox) currentDialogue.gameObject.SetActive(false);
-
         dialogueCanvas.gameObject.SetActive(false);
 
         Time.timeScale = 1f;
@@ -265,9 +262,9 @@ public class DialogueManager : NetworkBehaviour {
 
     #region Getters
 
-    public int DialogueToInt(DialogueTrigger dialogue) => listOfDialogues.IndexOf(dialogue);
+    public int DialogueToInt(DialogueSO dialogue) => listOfDialogues.IndexOf(dialogue);
 
-    DialogueTrigger IntToDialogue(int dialogueId) => listOfDialogues[dialogueId];
+    DialogueSO IntToDialogue(int dialogueId) => listOfDialogues[dialogueId];
 
     #endregion
 }

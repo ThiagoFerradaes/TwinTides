@@ -28,9 +28,8 @@ MonoBehaviour:
   DurationOfFirstAttack: 0.4
   DurationOfSecondAttack: 0.4
   DurationOfThirdAtack: 0.6
-  CooldownBetweenEachAttack: 0.2
-  AttackPosition: 3
-  ThirdAttackPosition: 6
+  AttackPosition: 1.8
+  ThirdAttackPosition: 2.5
   FirstAndSecondAttackSize: {x: 7, y: 1, z: 5}
   ThirdAttackSize: {x: 4, y: 1, z: 10}
   FirstAttackDamage: 1
@@ -44,3 +43,8 @@ MonoBehaviour:
       Data3: 1965671615
       Data4: -1291891265
     Path: event:/Maevis/MaevisEspada
+  AnimationParameterName: AttackCount
+  AnimationName: Ataque1
+  AnimationName2: Ataque2
+  AnimationName3: Ataque3
+  AnimationPercentToAttack: 0.5

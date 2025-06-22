@@ -10,38 +10,52 @@ public class PlayerDetectionAction : ActionNode
     [SerializeField] LayerMask obstacleLayer;
 
     protected override State OnUpdate() {
-        Collider[] detectedPlayers = Physics.OverlapSphere(context.Transform.position, detectionRadius, playerLayer);
+        if (blackboard.IsTargetForcedByCamp && blackboard.Target != null) {
+            return State.Success; // Confia no que o acampamento definiu
+        }
 
-        if (detectedPlayers.Length == 0) blackboard.IsTargetInRange = false;
+        Collider[] detectedPlayers = Physics.OverlapSphere(context.Transform.position, detectionRadius, playerLayer);
+        if (detectedPlayers.Length == 0) {
+            blackboard.IsTargetInRange = false;
+            blackboard.Target = null;
+            return State.Failure;
+        }
 
         float closestPlayerDistance = Mathf.Infinity;
         Transform closestPlayer = null;
 
         foreach (var player in detectedPlayers) {
-            Vector3 directionToPlayer = (player.transform.position - context.Transform.position);
+            Vector3 directionToPlayer = player.transform.position - context.Transform.position;
             float angleToPlayer = Vector3.Angle(context.Transform.forward, directionToPlayer);
 
             if (angleToPlayer <= detectionAngle / 2) {
+                if (Physics.Raycast(context.Transform.position, directionToPlayer.normalized, out RaycastHit hit, detectionRadius)) {
+                    if (((1 << hit.collider.gameObject.layer) & obstacleLayer) != 0) {
+                        continue; // Obstáculo no caminho
+                    }
 
-                if (Physics.Raycast(context.Transform.position, directionToPlayer, out RaycastHit ray, detectionRadius, obstacleLayer)) {
-                    blackboard.IsTargetInRange = false;
-                }
+                    if (((1 << hit.collider.gameObject.layer) & playerLayer) != 0 &&
+                        (hit.collider.CompareTag("Maevis") || hit.collider.CompareTag("Mel"))) {
 
-                if (Physics.Raycast(context.Transform.position, directionToPlayer, out ray, detectionRadius, playerLayer)) {
-                    if (ray.collider != null && (ray.collider.CompareTag("Maevis") || ray.collider.CompareTag("Mel"))) {
-                        if (Vector3.Distance(context.Transform.position, ray.collider.transform.position) < closestPlayerDistance) {
-                            closestPlayer = ray.collider.transform;
-                            closestPlayerDistance = Vector3.Distance(context.Transform.position, ray.collider.transform.position);
+                        float dist = Vector3.Distance(context.Transform.position, hit.collider.transform.position);
+                        if (dist < closestPlayerDistance) {
+                            closestPlayer = hit.collider.transform;
+                            closestPlayerDistance = dist;
                         }
-                        blackboard.Target = closestPlayer;
-                        blackboard.IsTargetInRange = true;
                     }
                 }
-
             }
         }
 
+        if (closestPlayer != null) {
+            blackboard.Target = closestPlayer;
+            blackboard.IsTargetInRange = true;
+            return State.Success;
+        }
 
-        return State.Success;
+        blackboard.IsTargetInRange = false;
+        blackboard.Target = null;
+        return State.Failure;
     }
+
 }

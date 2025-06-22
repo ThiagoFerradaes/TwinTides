@@ -22,4 +22,11 @@ public class BlackBeardCrossAttackSo : BlackBeardSO
     public float TimeBetweenDamage;
     public Vector2 FieldSize;
     public EventReference FieldSound;
+
+    [Header("Animation")]
+    public string AnimationName;
+    public string AnimationName2;
+    public string AnimationTriggerName;
+    public string AnimationTriggerName2;
+    [Range(0, 1)] public float AnimationPercentToAttack;
 }

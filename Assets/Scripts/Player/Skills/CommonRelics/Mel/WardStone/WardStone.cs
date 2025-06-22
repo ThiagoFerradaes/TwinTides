@@ -32,5 +32,6 @@ public class WardStone : CommonRelic {
     public EventReference AreaSound;
 
     [Header("Animation")]
-    public string animationName;
+    public string AnimationName;
+    [Range(0, 1)] public float AnimationPercentToAttack;
 }

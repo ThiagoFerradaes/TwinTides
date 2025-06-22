@@ -21,7 +21,8 @@ MonoBehaviour:
   IsStackable: 0
   Character: 0
   SkillsDescriptions:
-  - Hullbreaker
+  - Maevis gains a shield. While the shield is active, she generates earthquakes
+    around her. When the shield breaks or the ability duration ends, it explodes.
   UpgradesDescriptions: []
   skillPrefabs:
   - {fileID: 221680419640250693, guid: 62107aa32eaf20c46a6cfc420d74fbbf, type: 3}
@@ -50,3 +51,5 @@ MonoBehaviour:
       Data3: -748301682
       Data4: 1435364756
     Path: event:/Maevis/Skills/HullBreaker/Explosao_HullBreaker
+  AnimationName: HullBreaker
+  AnimationPercentToAttack: 0.7

@@ -12,5 +12,6 @@ public class MelNormalAttack : AttackSkill
     public EventReference AttackSound;
 
     [Header("Animation")]
-    public string animationName;
+    public string AnimationName;
+    [Range(0, 1)] public float AnimationPercentToAttack;
 }

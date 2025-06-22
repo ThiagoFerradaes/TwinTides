@@ -21,14 +21,18 @@ MonoBehaviour:
   IsStackable: 1
   Character: 0
   SkillsDescriptions:
-  - "Echo Blast n\xEDvel 1"
-  - "Echo Blast n\xEDvel 2"
-  - "Echo Blast n\xEDvel 3"
-  - "Echo Blast n\xEDvel 4"
+  - Maevis fires a shot forward that explodes upon hitting the first enemy.
+  - Maevis fires a shot that explodes on contact with an enemy, stunning nearby enemies.
+  - Maevis fires a shot that explodes on contact, stunning nearby enemies. Two additional
+    explosions occur shortly after.
+  - Maevis fires a shot that explodes on contact, stunning nearby enemies. Two more
+    explosions follow. Enemies hit are marked, and the mark detonates when they take
+    damage.
   UpgradesDescriptions:
-  - "Echo Blast vai virar n\xEDvel 2"
-  - "Echo Blast vai virar n\xEDvel 3"
-  - "Echo Blast vai virar n\xEDvel 4"
+  - The explosion stuns nearby enemies on contact.
+  - After the initial explosion and stun, two delayed secondary explosions occur.
+  - Enemies hit are marked. The mark detonates when they take further damage, dealing
+    bonus damage.
   skillPrefabs:
   - {fileID: 7325298707147500695, guid: f3f67616373c32e40bc05161271044c3, type: 3}
   - {fileID: 1216444296226801471, guid: 3cea9e0884da14740bc2f27a498834a4, type: 3}
@@ -70,3 +74,5 @@ MonoBehaviour:
       Data3: -216948081
       Data4: -1637819489
     Path: event:/Maevis/Skills/EchoBlaast/ExplosaoMenor_Exhoblast
+  AnimationName: EchoBlast
+  AnimationPercentToAttack: 0.5

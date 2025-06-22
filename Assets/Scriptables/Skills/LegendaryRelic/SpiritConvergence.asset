@@ -17,11 +17,12 @@ MonoBehaviour:
   NameSpriteTotem: {fileID: 21300000, guid: 5004328f909788847a4dfd8e89f1260a, type: 3}
   MinLevel: 1
   MaxLevel: 1
-  Cooldown: 30
+  Cooldown: 15
   IsStackable: 1
   Character: 1
   SkillsDescriptions:
-  - Spirit Convergence
+  - Mel enters a summoning state, calling upon her spirit allies to assist in combat.
+    Whenever Mel heals herself or Maevis, she summons a special spirit.
   UpgradesDescriptions: []
   skillPrefabs:
   - {fileID: 7874063244427218275, guid: a628e6e447a8078428bfb263959027fa, type: 3}
@@ -43,10 +44,10 @@ MonoBehaviour:
     Path: event:/Mel/Skills/SpiritCOnvergance/Sumonando_SpiritConvergence
   CooldownForSearchEnemy: 0.2
   RangeToMel: 4
-  meleeMinionSpeed: 8
-  rangedMinionSpeed: 6
-  MeleeMinionAttackRange: 2
-  MeleMinionAttackCooldown: 0.7
+  MeleeMinionSpeed: 8
+  RangedMinionSpeed: 6
+  MeleeMinionAttackRange: 2.5
+  MeleeMinionAttackCooldown: 1
   MeleeMinionDuration: 6
   MeleeMinionRangeToFindEnemy: 20
   MeleeAttackOffSet: 1
@@ -73,3 +74,5 @@ MonoBehaviour:
       Data3: 1609337245
       Data4: -1275492209
     Path: event:/Mel/Skills/SpiritCOnvergance/Ranged_SpiritConvergence
+  AnimationName: SpiritConvergence
+  AnimationPercentToAttack: 0.6

@@ -13,7 +13,6 @@ public class MelNormalAttackObject : SkillObjectPrefab {
     public static event System.EventHandler OnNormalAttackHit;
     GameObject _mel;
     DamageManager _dManager;
-    Animator anim;
 
     public class NormalAtackEventArgs : EventArgs {
         public Vector3 FinalPosition;
@@ -30,16 +29,11 @@ public class MelNormalAttackObject : SkillObjectPrefab {
         if (_mel == null) {
             _mel = PlayerSkillPooling.Instance.MelGameObject;
             _dManager = _mel.GetComponent<DamageManager>();
-            anim = _mel.GetComponentInChildren<Animator>();
         }
 
         DefineSizeAndPosition();
 
 
-        if (_info.Character == LocalWhiteBoard.Instance.PlayerCharacter) {
-            float cooldown = _dManager.ReturnDivisionAttackSpeed(_info.Cooldown);
-            _mel.GetComponent<PlayerSkillManager>().StartCooldown(_context.SkillIdInUI, cooldown);
-        }
 
     }
 
@@ -47,11 +41,9 @@ public class MelNormalAttackObject : SkillObjectPrefab {
 
         transform.localScale = _info.SphereSize;
 
-        transform.SetPositionAndRotation(_context.Pos, _context.PlayerRotation);
+        transform.SetPositionAndRotation(_mel.transform.position, _context.PlayerRotation);
 
         gameObject.SetActive(true);
-
-        if(_info.animationName != null) anim.SetTrigger(_info.animationName);
 
         if (!_info.AttackSound.IsNull) RuntimeManager.PlayOneShot(_info.AttackSound, transform.position);
 

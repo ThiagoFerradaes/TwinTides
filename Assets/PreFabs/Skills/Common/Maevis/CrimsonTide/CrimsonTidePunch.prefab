@@ -190,29 +190,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2744484457063551969}
     m_Modifications:
-    - target: {fileID: 8061711922788524661, guid: 47cf3452f12e4d042b0afe2517f9f2c0, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 758bee558ebfe42488ae8ac9703078e0, type: 2}
-    - target: {fileID: 8061711922788524661, guid: 47cf3452f12e4d042b0afe2517f9f2c0, type: 3}
-      propertyPath: 'm_Materials.Array.data[1]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 7ca04efcff658bc469e2561bdc5a958d, type: 2}
-    - target: {fileID: 8061711922788524661, guid: 47cf3452f12e4d042b0afe2517f9f2c0, type: 3}
-      propertyPath: 'm_Materials.Array.data[2]'
-      value: 
-      objectReference: {fileID: 2100000, guid: c7c16590a9abead4cbfdeb2acc0c17e4, type: 2}
     - target: {fileID: 8421740339156009888, guid: 47cf3452f12e4d042b0afe2517f9f2c0, type: 3}
       propertyPath: m_Name
       value: SocoCrimsonTideEfeito
-      objectReference: {fileID: 0}
-    - target: {fileID: 9199684825194731802, guid: 47cf3452f12e4d042b0afe2517f9f2c0, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 5.5099998
-      objectReference: {fileID: 0}
-    - target: {fileID: 9199684825194731802, guid: 47cf3452f12e4d042b0afe2517f9f2c0, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5.5099998
       objectReference: {fileID: 0}
     - target: {fileID: 9199684825194731802, guid: 47cf3452f12e4d042b0afe2517f9f2c0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -257,31 +237,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8421740339156009888, guid: 47cf3452f12e4d042b0afe2517f9f2c0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9209059129452662047}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47cf3452f12e4d042b0afe2517f9f2c0, type: 3}
---- !u!1 &2577813786457996014 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8421740339156009888, guid: 47cf3452f12e4d042b0afe2517f9f2c0, type: 3}
-  m_PrefabInstance: {fileID: 6279763685021202766}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &9209059129452662047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2577813786457996014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e84b033ecd571274baebfda03ea8bcfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialScale: {x: 4, y: 1, z: 4}
-  finalScale: {x: 5.51, y: 5.51, z: 5.51}
-  duration: 0.15
 --- !u!4 &2922250494348795988 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9199684825194731802, guid: 47cf3452f12e4d042b0afe2517f9f2c0, type: 3}

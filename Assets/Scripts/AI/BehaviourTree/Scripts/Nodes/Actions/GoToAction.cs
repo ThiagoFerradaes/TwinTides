@@ -9,20 +9,17 @@ public class GoToAction : ActionNode {
 
     public override void OnStart() {
 
-        if (blackboard.path == null || blackboard.path.Count == 0) {
+        if (blackboard.originPoint == null) {
             state = State.Failure;
             return;
         }
 
-        // Garante que o índice está dentro do intervalo
-        if (blackboard.CurrentPathIndex >= blackboard.path.Count) {
-            blackboard.CurrentPathIndex = 0;
-        }
-
-        targetPosition = blackboard.path[blackboard.CurrentPathIndex];
+        targetPosition = blackboard.originPoint;
         context.Agent.SetDestination(targetPosition.position);
 
-        if (context.anim != null && context.anim.enabled) context.anim.SetBool("IsWalking", true);
+        if (context.anim != null && context.anim.enabled) {
+            context.anim.SetBool("IsWalking", true);
+        }
     }
 
     protected override State OnUpdate() {
@@ -36,12 +33,6 @@ public class GoToAction : ActionNode {
 
         if (context.Agent.remainingDistance > StoppingDistance) return State.Running;
 
-        // Avança para o próximo ponto
-        blackboard.CurrentPathIndex++;
-        if (blackboard.CurrentPathIndex >= blackboard.path.Count) {
-            blackboard.CurrentPathIndex = 0;
-        }
-
         return State.Success;
     }
 
@@ -51,3 +42,4 @@ public class GoToAction : ActionNode {
         }
     }
 }
+

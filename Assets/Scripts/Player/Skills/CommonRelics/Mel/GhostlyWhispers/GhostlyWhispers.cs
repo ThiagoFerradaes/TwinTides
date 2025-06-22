@@ -35,5 +35,6 @@ public class GhostlyWhispers : CommonRelic {
     public EventReference MegaPuddleSound;
 
     [Header("Animation")]
-    public string animationName;
+    public string AnimationName;
+    [Range(0, 1)] public float AnimationPercentToAttack;
 }

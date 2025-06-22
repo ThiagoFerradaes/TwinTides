@@ -18,5 +18,7 @@ public class Hullbreaker : LegendaryRelic
     public EventReference ExplosionSound;
 
     [Header("Animation")]
-    public string animationName;
+    public string AnimationName;
+    [Range(0, 1)] public float AnimationPercentToAttack;
+
 }

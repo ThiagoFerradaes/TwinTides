@@ -11,7 +11,7 @@ public class LocalWhiteBoard : MonoBehaviour {
     public Characters PlayerCharacter;
     public bool IsSinglePlayer;
     public bool AnimationOn;
-    bool finalDoorOpened;
+    bool allKeysUsed;
     public bool IsAiming = false;
 
     public CommonRelic PlayerCommonRelicSkillOne;
@@ -179,12 +179,10 @@ public class LocalWhiteBoard : MonoBehaviour {
         return Gold;
     }
 
+    public static event Action<int> OnAddKey;
     public void AddKey(int keyAmount) {
         AmountOsKeys += keyAmount;
-    }
-
-    public void RemoveKey(int keyAmount) {
-        AmountOsKeys -= keyAmount;
+        OnAddKey?.Invoke(AmountOsKeys);
     }
 
     public int ReturnAmountOfKeys() {
@@ -192,7 +190,13 @@ public class LocalWhiteBoard : MonoBehaviour {
     }
 
     public bool ReturnFinalDoorOpened() {
-        return finalDoorOpened;
+        return allKeysUsed;
+    }
+
+    public void UseAllKeys() {
+        AmountOsKeys = 0;
+        allKeysUsed = true;
+        OnAddKey?.Invoke(AmountOsKeys);
     }
 
     public int ReturnSkillLevel(Skill skill) {

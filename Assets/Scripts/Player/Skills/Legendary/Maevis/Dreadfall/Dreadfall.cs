@@ -22,7 +22,4 @@ public class Dreadfall : LegendaryRelic
     public EventReference ImpactSound;
     public EventReference BurningAreaSound;
 
-    [Header("Animação")]
-    public string jumpAnimationName;
-    public string impactAnimationName;
 }

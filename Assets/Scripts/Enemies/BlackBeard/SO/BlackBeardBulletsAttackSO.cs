@@ -1,5 +1,4 @@
 using FMODUnity;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "BlackBeardAttack/ Bullets Attack")]
@@ -21,4 +20,7 @@ public class BlackBeardBulletsAttackSO : BlackBeardSO
     public int AmountOfAttacksStronger;
     public float BulletSizeStronger;
     public EventReference BulletsSound;
+
+    [Header("Animation")]
+    public string AnimationTriggerName;
 }

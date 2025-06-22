@@ -23,5 +23,6 @@ public class PhantomAura : CommonRelic
     public EventReference StrongerAuraSound;
 
     [Header("Animation")]
-    public string animationName;
+    public string AnimationName;
+    [Range(0, 1)] public float AnimationPercentToAttack;
 }

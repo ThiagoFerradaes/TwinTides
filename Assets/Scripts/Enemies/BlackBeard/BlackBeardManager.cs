@@ -9,7 +9,7 @@ public class BlackBeardManager : NetworkBehaviour {
     bool hasStarted;
 
     public override void OnNetworkSpawn() {
-        blackBeard.OnDeath += BlackBeardDeath;
+        BlackBeardMachineState.OnDeath += BlackBeardDeath;
     }
 
     private void BlackBeardDeath() {
@@ -44,5 +44,6 @@ public class BlackBeardManager : NetworkBehaviour {
         hasStarted = true;
         UI.TurnUIOn();
         blackBeard.StartFight();
+        MusicInGameManager.Instance.SetMusicState(MusicState.Boss);
     }
 }

@@ -7,7 +7,7 @@ public class TidalWatzCut : SkillObjectPrefab {
     TidalWatz _info;
     int _level;
     GameObject _maevis;
-    TidalWatzObject _father;
+    TidalWatzManager _father;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as TidalWatz;
@@ -21,7 +21,7 @@ public class TidalWatzCut : SkillObjectPrefab {
 
     private void SetSizeAndPosition() {
         if (_father == null) {
-            _father = GameObject.FindAnyObjectByType<TidalWatzObject>();
+            _father = GameObject.FindAnyObjectByType<TidalWatzManager>();
         }
 
         transform.localScale = _level == 1 ? Vector3.one * _info.CutSize : Vector3.one * _info.CutSizeLevel2;

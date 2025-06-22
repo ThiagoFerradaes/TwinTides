@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class ScaleOverTime : MonoBehaviour
 {
-    public Vector3 initialScale = Vector3.one;   // Tamanho inicial (X)
-    public Vector3 finalScale = Vector3.one * 2; // Tamanho final (Y)
-    public float duration = 2f;                  // Duração em segundos (Z)
+    public Vector3 initialScale = Vector3.one;
+    public Vector3 finalScale = Vector3.one * 2;
+    public float duration = 2f;
 
     private float elapsedTime = 0f;
     private bool isScaling = false;
 
-    void Start()
+    void OnEnable()
     {
         transform.localScale = initialScale;
         StartScaling();
@@ -35,4 +35,3 @@ public class ScaleOverTime : MonoBehaviour
         }
     }
 }
-

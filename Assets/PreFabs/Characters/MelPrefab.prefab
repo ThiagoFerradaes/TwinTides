@@ -552,6 +552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   rotationSpeed: 8
+  walkingAnimationBaseSpeed: 1.1
   FloorLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -935,10 +936,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  baseAttack:
-    m_InternalValue: 1
-  attackSpeed:
-    m_InternalValue: 1
+  baseAttackSpeed: 1
+  baseAttack: 0
+  attack:
+    m_InternalValue: 0
 --- !u!114 &5611954115521582333
 MonoBehaviour:
   m_ObjectHideFlags: 0

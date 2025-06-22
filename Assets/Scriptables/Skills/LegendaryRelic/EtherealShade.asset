@@ -21,7 +21,10 @@ MonoBehaviour:
   IsStackable: 1
   Character: 1
   SkillsDescriptions:
-  - Ethereal Shade
+  - Mel summons a totem that heals all players within its area. Each time the totem
+    heals, its healing radius increases. When its duration ends, the totem explodes,
+    dealing damage to all enemies in the area. The explosion's damage increases based
+    on how many times the totem grew.
   UpgradesDescriptions: []
   skillPrefabs:
   - {fileID: 619666727076391552, guid: 26b04ad8f1ad28447bfd652d51a47e04, type: 3}
@@ -65,3 +68,5 @@ MonoBehaviour:
       Data3: -1950408064
       Data4: 628240842
     Path: event:/Mel/Skills/EtheralShade/TotemNoChao_EtheralShade
+  AnimationName: EtherealShade
+  AnimationPercentToAttack: 0.5

@@ -44,6 +44,7 @@ public class PlayerSkillPooling : NetworkBehaviour {
 
     [Rpc(SendTo.ClientsAndHost)]
     private void InstantiateRpc(int skillId, SkillContext context, int skillsLevel, int objectIndex) {
+
         Skill skill = PlayerSkillConverter.Instance.TransformIdInSkill(skillId);
         string prefabName = skill.skillPrefabs[objectIndex].name;
 
@@ -74,8 +75,8 @@ public class PlayerSkillPooling : NetworkBehaviour {
     private void InstantiateNoCheckRpc(int skillId, SkillContext context, int skillsLevel, int objectIndex) {
         Skill skill = PlayerSkillConverter.Instance.TransformIdInSkill(skillId);
         GameObject spawnedObject = GetFromPool(skill.skillPrefabs[objectIndex]);
-        spawnedObject.GetComponent<SkillObjectPrefab>().TurnOnSkill(skillId, skillsLevel, context);
         AddToActiveList(skill.skillPrefabs[objectIndex].name, spawnedObject);
+        spawnedObject.GetComponent<SkillObjectPrefab>().TurnOnSkill(skillId, skillsLevel, context);
     }
 
     private GameObject GetFromPool(GameObject prefab) {
@@ -104,7 +105,6 @@ public class PlayerSkillPooling : NetworkBehaviour {
 
     public void ReturnObjectToPool(GameObject objectToReturn) {
         string objectName = objectToReturn.name.Replace("(Clone)", "");
-
         // Remove da lista de ativos
         if (activeSkills.ContainsKey(objectName)) {
             activeSkills[objectName].Remove(objectToReturn);

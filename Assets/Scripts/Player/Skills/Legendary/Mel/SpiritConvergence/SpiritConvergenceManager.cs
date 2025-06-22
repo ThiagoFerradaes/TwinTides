@@ -1,6 +1,7 @@
 using FMODUnity;
 using System.Collections;
 using System.Threading;
+using Unity.Multiplayer.Center.NetcodeForGameObjectsExample.DistributedAuthority;
 using UnityEngine;
 
 public class SpiritConvergenceManager : SkillObjectPrefab {
@@ -12,7 +13,7 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
     float _timer, _durationTime;
     bool _canInstantiateRangedMinion = true;
     Animator anim;
-
+    PlayerSkillManager _sManager;
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as SpiritConvergence;
         _level = skillLevel;
@@ -21,6 +22,7 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
         if (_mel == null) {
             _mel = PlayerSkillPooling.Instance.MelGameObject;
             _hManager = _mel.GetComponent<HealthManager>();
+            _sManager = _mel.GetComponent<PlayerSkillManager>();
             anim = _mel.GetComponentInChildren<Animator>();
         }
 
@@ -37,11 +39,39 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
 
         gameObject.SetActive(true);
 
-        if (_info.animationName != null) anim.SetTrigger(_info.animationName);
+        StartCoroutine(AttackRoutine());
+
+    }
+    IEnumerator AttackRoutine() {
+        _sManager.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(true);
+        _sManager.GetComponent<PlayerSkillManager>().BlockSkillsRpc(true);
+        anim.SetTrigger("SpiritConvergence");
+
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+
+        while (anim.IsInTransition(0)) yield return null;
+
+        while (stateInfo.IsName(_info.AnimationName) == false) {
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        // Espera a animação terminar
+        while (stateInfo.normalizedTime < _info.AnimationPercentToAttack) {
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
 
         StartCoroutine(WaitAFrame(SkillDuration()));
-    }
 
+        while (stateInfo.normalizedTime < 1f && stateInfo.IsName(_info.AnimationName)) {
+            yield return null;
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        _sManager.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
+        _sManager.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
+    }
     IEnumerator WaitAFrame(IEnumerator corroutine) {
         yield return null;
 
@@ -111,6 +141,10 @@ public class SpiritConvergenceManager : SkillObjectPrefab {
     }
 
     public override void ReturnObject() {
+
+        _sManager.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
+        _sManager.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
+
         _canInstantiateRangedMinion = true;
 
         HealthManager.OnMelHealed -= OnMelHealed;

@@ -40,4 +40,9 @@ public class BlackBeardBulletRainSO : BlackBeardSO
     public float SecondaryBulletSizeMultiplier;
     public EventReference BounceSound;
     public EventReference SecondaryExplosionSound;
+
+    [Header("Animation")]
+    public string AnimationTriggerName;
+    public string AnimationName;
+    public float PercentOfAnimationToAttack;
 }

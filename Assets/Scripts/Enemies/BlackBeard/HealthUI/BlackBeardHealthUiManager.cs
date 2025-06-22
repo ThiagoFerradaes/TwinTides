@@ -9,7 +9,7 @@ public class BlackBeardHealthUiManager : MonoBehaviour
 
     private void Start() {
         BlackBeardHealthManager.OnHealthUpdate += HealthUpdate;
-        BlackBeardHealthManager.GetComponent<BlackBeardMachineState>().OnFinal += BlackBeardHealthUiManager_OnFinal;
+        BlackBeardMachineState.OnFinal += BlackBeardHealthUiManager_OnFinal;
     }
 
     private void HealthUpdate((float maxHealth, float currentHealth, float currentShield, float maxShield) obj) {

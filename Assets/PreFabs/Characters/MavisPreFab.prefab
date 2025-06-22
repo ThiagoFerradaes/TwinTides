@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 437343071292776981}
   - component: {fileID: 1533348276428178750}
   m_Layer: 6
-  m_Name: ReiveZone
+  m_Name: ReviveZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -552,6 +552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   rotationSpeed: 8
+  walkingAnimationBaseSpeed: 1.1
   FloorLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -935,10 +936,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  baseAttack:
-    m_InternalValue: 1
-  attackSpeed:
-    m_InternalValue: 1
+  baseAttackSpeed: 1
+  baseAttack: 0
+  attack:
+    m_InternalValue: 0
 --- !u!114 &86682155894086494
 MonoBehaviour:
   m_ObjectHideFlags: 0

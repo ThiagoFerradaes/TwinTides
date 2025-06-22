@@ -49,13 +49,11 @@ public class DreadfallManager : SkillObjectPrefab {
 
         targetPosition.y = GetFloorHeight(targetPosition) + 1f;
 
-        if (_info.impactAnimationName != null) anim.SetBool(_info.jumpAnimationName, true);
+        anim.SetBool("DreadFall", true);
 
         _maevis.transform.DOJump(targetPosition, _info.JumpSpeed, 1, _info.JumpDuration).OnComplete(() => {
 
-            if(_info.impactAnimationName != null) anim.SetBool(_info.jumpAnimationName, false);
-
-            if (_info.impactAnimationName != null)  anim.SetTrigger(_info.impactAnimationName);
+            anim.SetBool("DreadFall", false);
 
             RecieveShield();
 

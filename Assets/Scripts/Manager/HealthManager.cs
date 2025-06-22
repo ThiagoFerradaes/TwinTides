@@ -150,8 +150,10 @@ public class HealthManager : NetworkBehaviour {
 
     // Death Handling
     public void Kill() {
-        if (IsServer)
+        if (IsServer) {
+            _isDead.Value = true;
             HandleDeathRpc();
+        }
     }
 
     [Rpc(SendTo.ClientsAndHost)]
@@ -215,7 +217,49 @@ public class HealthManager : NetworkBehaviour {
 
         GetComponent<MeshRenderer>().material = originalMaterial;
 
+        ReviveAnimation();
+
         OnRevive?.Invoke();
+
+    }
+
+    public void RestartHealth(float percentOfMaxHealth) {
+        if (IsServer) {
+            _currentHealth.Value = Mathf.Clamp((percentOfMaxHealth / 100 * _maxHealth.Value), 0.2f * _maxHealth.Value, _maxHealth.Value);
+
+            _canBeDamaged.Value = true;
+
+            _isShielded.Value = false;
+
+            _isDead.Value = false;
+
+            _currentShieldAmount.Value = 0f;
+
+        }
+        GetComponent<MovementManager>().UnStun();
+
+        GetComponent<MeshRenderer>().material = originalMaterial;
+    }
+
+    void ReviveAnimation() {
+        Animator anim = GetComponentInChildren<Animator>();
+        if (anim != null) {
+            bool hasTrigger = false;
+
+            foreach (var param in anim.parameters) {
+                if (param.name == "Reviveu" && param.type == AnimatorControllerParameterType.Trigger) {
+                    hasTrigger = true;
+                    break;
+                }
+            }
+
+            if (hasTrigger) {
+                anim.SetTrigger("Reviveu");
+            }
+            else {
+                Debug.LogWarning("Trigger 'Reviveu' não existe no Animator Controller.");
+            }
+        }
 
     }
 
@@ -401,7 +445,6 @@ public class HealthManager : NetworkBehaviour {
             _listOfActiveBuffs.Add(buff.GetType(), newBuff); // adicionamos ao dicionario
 
             if (gameObject.activeInHierarchy) StartCoroutine(newBuff.Coroutine); // começamos a corrotina 
-            Debug.Log("Buff added: " + buff.name);
         }
 
         OnBuffAdded?.Invoke(buff, _listOfActiveBuffs[buff.GetType()].Stack);
@@ -411,7 +454,6 @@ public class HealthManager : NetworkBehaviour {
             if (currentBuff.Coroutine != null) { StopCoroutine(currentBuff.Coroutine); currentBuff.Coroutine = null; }
             _listOfActiveBuffs.Remove(buff.GetType());
         }
-        Debug.Log("Buff removed: " + buff.name);
         OnBuffRemoved?.Invoke(buff, 0);
     }
     public void CleanAllBuffs() {
@@ -478,6 +520,18 @@ public class HealthManager : NetworkBehaviour {
             case HealthMultipliers.Damage:
                 _damageMultiply.Value *= Mathf.Clamp(newHealMultiply, 0, 2);
                 break;
+        }
+    }
+
+    [Rpc(SendTo.Server)]
+    public void InvulnerabilityRpc(bool on) {
+        if (on) {
+            _canBeDamaged.Value = false;
+            _canReceiveDebuff.Value = false;
+        }
+        else {
+            _canBeDamaged.Value = true;
+            _canReceiveDebuff.Value = true;
         }
     }
     #endregion
