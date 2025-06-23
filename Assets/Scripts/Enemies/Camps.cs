@@ -33,6 +33,7 @@ public class Camps : NetworkBehaviour {
     public event Action OnAllEnemiesDead;
     public static event Action OnLegendaryCampDefeat;
 
+    bool campIsActive;
     #endregion
 
     #region Initialize
@@ -122,6 +123,7 @@ public class Camps : NetworkBehaviour {
         ClearPreviousEvents();
         currentActiveEnemies = new List<GameObject>();
         aliveCount = 0;
+        campIsActive = true;
 
         for (int i = 0; i < index.Length; i++) {
             int enemyIndex = index[i];
@@ -188,6 +190,8 @@ public class Camps : NetworkBehaviour {
 
             if (respawnTime > 0) StartCoroutine(RespawnCampTimer());
 
+            campIsActive = false;
+
             MusicInGameManager.Instance.SetMusicState(MusicState.Exploration);
         }
 
@@ -220,7 +224,7 @@ public class Camps : NetworkBehaviour {
 
         listOfPlayers.Add(other.gameObject);
 
-        MusicInGameManager.Instance.SetMusicState(MusicState.Combat);
+        if(campIsActive) MusicInGameManager.Instance.SetMusicState(MusicState.Combat);
 
         foreach (var enemy in currentActiveEnemies) {
             BehaviourTreeRunner behaviour = enemy.GetComponent<BehaviourTreeRunner>();
@@ -256,14 +260,10 @@ public class Camps : NetworkBehaviour {
 
         RestartCamp();
     }
-    IEnumerator WaitToRestartCamp() {
-        yield return new WaitForSeconds(timeToRestartCamp);
-        RestartCamp();
-    }
 
     void RestartCamp() {
         restartRoutineCampRoutine = null;
-        MusicInGameManager.Instance.SetMusicState(MusicState.Exploration);
+        if(campIsActive) MusicInGameManager.Instance.SetMusicState(MusicState.Exploration);
 
         foreach (var enemy in currentActiveEnemies) {
             enemy.GetComponent<HealthManager>().RestartHealth(100);

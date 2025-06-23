@@ -17,9 +17,6 @@ public class GoToAction : ActionNode {
         targetPosition = blackboard.originPoint;
         context.Agent.SetDestination(targetPosition.position);
 
-        if (context.anim != null && context.anim.enabled) {
-            context.anim.SetBool("IsWalking", true);
-        }
     }
 
     protected override State OnUpdate() {
@@ -29,16 +26,26 @@ public class GoToAction : ActionNode {
 
         context.Agent.speed = context.MManager.ReturnMoveSpeed();
 
-        if (context.Agent.pathPending) return State.Running;
+        if (context.Agent.pathPending) {
+            if (context.Anim != null && context.Anim.enabled) {
+                context.Anim.SetBool("IsWalking", true);
+            }
+            return State.Running;
+        }
 
-        if (context.Agent.remainingDistance > StoppingDistance) return State.Running;
+        if (context.Agent.remainingDistance > StoppingDistance) {
+            if (context.Anim != null && context.Anim.enabled) {
+                context.Anim.SetBool("IsWalking", true);
+            }
+            return State.Running;
+        }
 
         return State.Success;
     }
 
     public override void OnStop() {
-        if (context.anim != null && context.anim.enabled) {
-            context.anim.SetBool("IsWalking", false);
+        if (context.Anim != null && context.Anim.enabled) {
+            context.Anim.SetBool("IsWalking", false);
         }
     }
 }

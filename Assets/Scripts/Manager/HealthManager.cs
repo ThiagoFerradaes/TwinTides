@@ -256,11 +256,7 @@ public class HealthManager : NetworkBehaviour {
             if (hasTrigger) {
                 anim.SetTrigger("Reviveu");
             }
-            else {
-                Debug.LogWarning("Trigger 'Reviveu' não existe no Animator Controller.");
-            }
         }
-
     }
 
     // Visual
@@ -372,7 +368,6 @@ public class HealthManager : NetworkBehaviour {
             _listOfActiveDebuffs.Add(debuff.GetType(), newDebuff); // adicionamos ao dicionario
 
             if (gameObject.activeInHierarchy) StartCoroutine(newDebuff.Coroutine); // começamos a corrotina 
-            Debug.Log("Debuff added: " + debuff.name);
         }
 
         OnDebuffAdded?.Invoke(debuff, _listOfActiveDebuffs[debuff.GetType()].Stack);
@@ -382,7 +377,6 @@ public class HealthManager : NetworkBehaviour {
             if (currentDebuff.Coroutine != null) { StopCoroutine(currentDebuff.Coroutine); currentDebuff.Coroutine = null; }
             _listOfActiveDebuffs.Remove(debuff.GetType());
         }
-        Debug.Log("Debuff removed: " + debuff.name);
         OnDebuffRemoved?.Invoke(debuff, 0);
     }
 

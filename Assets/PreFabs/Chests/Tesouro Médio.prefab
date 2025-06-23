@@ -104,6 +104,7 @@ MonoBehaviour:
       Data3: 619114628
       Data4: 456651314
     Path: event:/CenarioInteragiveis/AbrirBauRaro
+  closedEffect: {fileID: 1089978808935249699}
   chestTimerToTurnOffAfterUnlock: 1000
   mandatoryMaevisLegendaryRelic: {fileID: 0}
   mandatoryMelLegendaryRelic: {fileID: 0}
@@ -284,7 +285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2261210184243677116, guid: 3f04fc2eebeae6645b32b23ca67c170a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.95
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 2261210184243677116, guid: 3f04fc2eebeae6645b32b23ca67c170a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -326,5 +327,10 @@ PrefabInstance:
 --- !u!4 &318543221279534489 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2261210184243677116, guid: 3f04fc2eebeae6645b32b23ca67c170a, type: 3}
+  m_PrefabInstance: {fileID: 1948616017650297381}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1089978808935249699 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1453182746534305030, guid: 3f04fc2eebeae6645b32b23ca67c170a, type: 3}
   m_PrefabInstance: {fileID: 1948616017650297381}
   m_PrefabAsset: {fileID: 0}

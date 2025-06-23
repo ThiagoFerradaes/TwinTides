@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class GirlTreeTwoManager : EnemyAttackPrefab {
     GirlTreeTwo _info;
-
+    Animator anim;
     public override void StartAttack(int enemyId, int skillId) {
         base.StartAttack(enemyId, skillId);
 
         _info = EnemySkillConverter.Instance.TransformIdInSkill(skillId) as GirlTreeTwo;
+
+        if (anim == null) anim = parentContext.Anim;
 
         gameObject.SetActive(true);
 
@@ -20,25 +22,49 @@ public class GirlTreeTwoManager : EnemyAttackPrefab {
     IEnumerator BombsRoutine() {
 
         for (int i = 0; i < _info.amountOfBombs; i++) {
+
+            anim.SetTrigger("IsAttacking");
+
+            AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+
+            while (anim.IsInTransition(0)) yield return null;
+
+            while (stateInfo.IsName("Tiro") == false) {
+                yield return null;
+                stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+            }
+
+            // Espera a animação terminar
+            while (stateInfo.normalizedTime < 0.5f) {
+                yield return null;
+                stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+            }
+
             EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 1, parent);
 
-            if (i < _info.amountOfBombs - 1) yield return new WaitForSeconds(_info.timeBetweenBombs);
+            if (i < _info.amountOfBombs - 1) {
+                while (stateInfo.normalizedTime < 1f && stateInfo.IsName("Tiro")) {
+                    yield return null;
+                    stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+                }
+
+            }
+
+            EndOfAttack(_info.cooldown, _info.ListOfAttacksNames[0]);
+
+
+            parentContext.Blackboard.CurrentComboIndex++;
+
+            End();
         }
 
-        EndOfAttack(_info.cooldown, _info.ListOfAttacksNames[0]);
 
+        void EndOfAttack(float cooldown, string attackName) {
+            parentContext.Blackboard.IsAttacking = false;
 
-        parentContext.Blackboard.CurrentComboIndex++;
+            parentContext.Blackboard.CanAttack = false;
 
-        End();
-    }
-
-
-    void EndOfAttack(float cooldown, string attackName) {
-        parentContext.Blackboard.IsAttacking = false;
-
-        parentContext.Blackboard.CanAttack = false;
-
-        parentContext.Blackboard.Cooldowns[attackName] = cooldown;
+            parentContext.Blackboard.Cooldowns[attackName] = cooldown;
+        }
     }
 }

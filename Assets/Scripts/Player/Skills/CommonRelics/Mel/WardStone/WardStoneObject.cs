@@ -69,6 +69,7 @@ public class WardStoneObject : SkillObjectPrefab {
                 health.AddBuffToList(_info.Debuffblocker);
             }
 
+            health.Heal(_info.BaseHealing, true);
         }
     }
 
