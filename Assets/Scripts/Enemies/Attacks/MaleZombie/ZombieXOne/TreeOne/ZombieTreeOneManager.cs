@@ -20,6 +20,31 @@ public class ZombieTreeOneManager : EnemyAttackPrefab
 
     IEnumerator NormalPunchRoutine() {
 
+        parentContext.Anim.SetTrigger("IsAttacking");
+        float enterAnimTimeout = 1f;
+        float timer = 0f;
+
+        while (parentContext.Anim.IsInTransition(0)) {
+            yield return null;
+            timer += Time.deltaTime;
+            if (timer > enterAnimTimeout) {
+                Debug.LogWarning("Transição para animação nunca começou.");
+                break;
+            }
+        }
+
+        timer = 0f;
+        AnimatorStateInfo stateInfo = parentContext.Anim.GetCurrentAnimatorStateInfo(0);
+        while (!stateInfo.IsName("StrongAttack")) {
+            yield return null;
+            timer += Time.deltaTime;
+            stateInfo = parentContext.Anim.GetCurrentAnimatorStateInfo(0);
+            if (timer > enterAnimTimeout) {
+                Debug.LogWarning("Animação correta nunca entrou. Cancelando CryRoutine.");
+                break;
+            }
+        }
+
         for (int i = 0; i < _info.amountOfPunchesPerCombo; i++) {
             EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 1, parent);
 

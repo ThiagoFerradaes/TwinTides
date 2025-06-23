@@ -24,7 +24,7 @@ AnimatorStateTransition:
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
+  m_CanTransitionToSelf: 0
 --- !u!1101 &-6668214573724126076
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -97,7 +97,7 @@ AnimatorStateTransition:
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
+  m_CanTransitionToSelf: 0
 --- !u!1101 &-5055086511719728766
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -122,7 +122,7 @@ AnimatorStateTransition:
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
+  m_CanTransitionToSelf: 0
 --- !u!1102 &-4905817511284018487
 AnimatorState:
   serializedVersion: 6
@@ -157,7 +157,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Tiro
+  m_Name: Shoot
   m_Speed: 0.87
   m_CycleOffset: 0
   m_Transitions:
@@ -231,7 +231,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Tiro Rapido
+  m_Name: Tiro
   m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions:
@@ -385,7 +385,7 @@ AnimatorStateTransition:
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
+  m_CanTransitionToSelf: 0
 --- !u!1101 &3990510464067057090
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -535,13 +535,13 @@ AnimatorStateMachine:
     m_Position: {x: 340, y: 270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4905817511284018487}
-    m_Position: {x: 640, y: 480, z: 0}
+    m_Position: {x: 640, y: 580, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3406577775732074840}
     m_Position: {x: -210, y: 480, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -331608450568278288}
-    m_Position: {x: 50, y: 480, z: 0}
+    m_Position: {x: 40, y: 580, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -8499726179975454372}

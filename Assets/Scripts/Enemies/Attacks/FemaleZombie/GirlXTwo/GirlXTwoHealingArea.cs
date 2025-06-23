@@ -29,7 +29,7 @@ public class GirlXTwoHealingArea : EnemyAttackPrefab
 
         transform.localScale = _info.healingSize * Vector3.one;
 
-        anim.SetTrigger("Anim");
+        anim.SetBool("Curando", true);
 
         gameObject.SetActive(true);
 
@@ -81,6 +81,8 @@ public class GirlXTwoHealingArea : EnemyAttackPrefab
 
     public override void End() {
         _listOfEnemies.Clear();
+
+        anim.SetBool("Curando", false);
 
         parentContext.Blackboard.IsAttacking = false;
         parentContext.Blackboard.CanAttack = false;

@@ -43,6 +43,31 @@ public class ZombieTwoTwoAttack : EnemyAttackPrefab {
             sound.start();
         }
 
+        parentContext.Anim.SetTrigger("StrongAttack");
+        float enterAnimTimeout = 1f;
+        float animtimer = 0f;
+
+        while (parentContext.Anim.IsInTransition(0)) {
+            yield return null;
+            animtimer += Time.deltaTime;
+            if (animtimer > enterAnimTimeout) {
+                Debug.LogWarning("Transição para animação nunca começou.");
+                break;
+            }
+        }
+
+        animtimer = 0f;
+        AnimatorStateInfo stateInfo = parentContext.Anim.GetCurrentAnimatorStateInfo(0);
+        while (!stateInfo.IsName("StrongAttack")) {
+            yield return null;
+            animtimer += Time.deltaTime;
+            stateInfo = parentContext.Anim.GetCurrentAnimatorStateInfo(0);
+            if (animtimer > enterAnimTimeout) {
+                Debug.LogWarning("Animação correta nunca entrou. Cancelando CryRoutine.");
+                break;
+            }
+        }
+
         while (timer < dashDuration && !playerColision) {
             parent.transform.position += (_info.dashSpeed * Time.deltaTime * direction);
             timer += Time.deltaTime;

@@ -43,6 +43,31 @@ public class ZombieTreeTwoManager : EnemyAttackPrefab
 
         parentContext.MManager.DecreaseMoveSpeed(_info.increaseInMoveSpeedToPunch);
 
+        parentContext.Anim.SetTrigger("IsAttacking");
+        float enterAnimTimeout = 1f;
+        float timer = 0f;
+
+        while (parentContext.Anim.IsInTransition(0)) {
+            yield return null;
+            timer += Time.deltaTime;
+            if (timer > enterAnimTimeout) {
+                Debug.LogWarning("Transição para animação nunca começou.");
+                break;
+            }
+        }
+
+        timer = 0f;
+        AnimatorStateInfo stateInfo = parentContext.Anim.GetCurrentAnimatorStateInfo(0);
+        while (!stateInfo.IsName("Soco")) {
+            yield return null;
+            timer += Time.deltaTime;
+            stateInfo = parentContext.Anim.GetCurrentAnimatorStateInfo(0);
+            if (timer > enterAnimTimeout) {
+                Debug.LogWarning("Animação correta nunca entrou. Cancelando CryRoutine.");
+                break;
+            }
+        }
+
         for (int i = 0; i < _info.amountOfPunches; i++) {
             EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 1, parent);
 
@@ -56,7 +81,41 @@ public class ZombieTreeTwoManager : EnemyAttackPrefab
 
     IEnumerator OilRoutine() {
 
-        yield return null; // Aqui pode ter alguma animação etc
+        parentContext.Anim.SetTrigger("Arremesso");
+        float enterAnimTimeout = 1f;
+        float timer = 0f;
+
+        while (parentContext.Anim.IsInTransition(0)) {
+            yield return null;
+            timer += Time.deltaTime;
+            if (timer > enterAnimTimeout) {
+                Debug.LogWarning("Transição para animação nunca começou.");
+                break;
+            }
+        }
+
+        timer = 0f;
+        AnimatorStateInfo stateInfo = parentContext.Anim.GetCurrentAnimatorStateInfo(0);
+        while (!stateInfo.IsName("Arremesso")) {
+            yield return null;
+            timer += Time.deltaTime;
+            stateInfo = parentContext.Anim.GetCurrentAnimatorStateInfo(0);
+            if (timer > enterAnimTimeout) {
+                Debug.LogWarning("Animação correta nunca entrou. Cancelando CryRoutine.");
+                break;
+            }
+        }
+
+        timer = 0f;
+        while (stateInfo.normalizedTime <= 1) {
+            yield return null;
+            timer += Time.deltaTime;
+            stateInfo = parentContext.Anim.GetCurrentAnimatorStateInfo(0);
+            if (timer > enterAnimTimeout) {
+                Debug.LogWarning("Animação correta nunca entrou. Cancelando CryRoutine.");
+                break;
+            }
+        }
 
         EnemySkillPooling.Instance.RequestInstantiateAttack(_info, 2, parent, target.position);
 
