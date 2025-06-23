@@ -36,13 +36,28 @@ public class EchoBlastManager : SkillObjectPrefab {
 
         anim.SetTrigger("EchoBlast");
 
-        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        float enterAnimTimeout = 1f;
+        float timer = 0f;
 
-        while (anim.IsInTransition(0)) yield return null;
-
-        while (stateInfo.IsName(_info.AnimationName) == false) {
+        while (anim.IsInTransition(0)) {
             yield return null;
+            timer += Time.deltaTime;
+            if (timer > enterAnimTimeout) {
+                Debug.LogWarning("Transição para animação nunca começou.");
+                break;
+            }
+        }
+
+        timer = 0f;
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        while (!stateInfo.IsName(_info.AnimationName)) {
+            yield return null;
+            timer += Time.deltaTime;
             stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+            if (timer > enterAnimTimeout) {
+                Debug.LogWarning("Animação correta nunca entrou. Cancelando CryRoutine.");
+                break;
+            }
         }
 
         while (stateInfo.normalizedTime < _info.AnimationPercentToAttack) {
