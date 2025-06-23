@@ -35,7 +35,7 @@ public class BlackBeardStraightBullet : BlackBeardAttackPrefab {
 
         float timer = 0;
 
-        Vector3 direction = -transform.forward;
+        Vector3 direction = transform.forward;
 
         while (timer < duration) {
             timer += Time.deltaTime;

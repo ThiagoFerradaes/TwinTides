@@ -31,6 +31,14 @@ public class BlackBeardCannonBomb : BlackBeardAttackPrefab {
 
         transform.localScale = Vector3.one * _info.BombSize;
 
+        Vector3 directionToShip = parent.GetComponent<BlackBeardMachineState>().Ship.position - transform.position;
+        Vector3 awayFromShip = -directionToShip;
+        awayFromShip.y = 0; // Mantém a rotação apenas no plano horizontal
+
+        if (awayFromShip != Vector3.zero) {
+            transform.rotation = Quaternion.LookRotation(awayFromShip);
+        }
+
         gameObject.SetActive(true);
 
         if (!_info.BombFalingSound.IsNull) {
