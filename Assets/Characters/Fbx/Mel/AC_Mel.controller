@@ -206,10 +206,10 @@ AnimatorStateMachine:
     m_Position: {x: -330, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6882124980392720523}
-    m_Position: {x: 260, y: 180, z: 0}
+    m_Position: {x: 340, y: 180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2625076899891596399}
-    m_Position: {x: 570, y: 160, z: 0}
+    m_Position: {x: 720, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2131649235617571350}
     m_Position: {x: 840, y: -470, z: 0}
@@ -583,7 +583,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Voando
+  m_Name: Walk
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -597,7 +597,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: be72e5d50f009e244a95c14896a8f2ad, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: e728392cf8aedfd4eb891c8d0e7d5e32, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -830,7 +830,7 @@ AnimatorController:
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
