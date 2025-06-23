@@ -3,6 +3,7 @@ using Unity.Netcode;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine.Video;
 
 public class TutorialManager : NetworkBehaviour {
     [Header("Captions")]
@@ -13,6 +14,14 @@ public class TutorialManager : NetworkBehaviour {
     [SerializeField] Sprite legendaryRelicCaption;
     [SerializeField] Sprite interactCaption;
 
+    [Header("Videos")]
+    [SerializeField] VideoClip movementVideo;
+    [SerializeField] VideoClip baseAttackVideo;
+    [SerializeField] VideoClip aimModeVideo;
+    [SerializeField] VideoClip commonRelicVideo;
+    [SerializeField] VideoClip legendaryRelicVideo;
+    [SerializeField] VideoClip interactVideo;
+
     [Header("Buttons")]
     [SerializeField] Button closeButton;
     [SerializeField] Button leftArrowButton;
@@ -21,6 +30,7 @@ public class TutorialManager : NetworkBehaviour {
     [Header("Components")]
     [SerializeField] Image captionImage;
     [SerializeField] TextMeshProUGUI playersVoteToCloseText;
+    [SerializeField] VideoPlayer tutorialVideoPlayer;
 
     int tutorialPageIndex = 1;
     readonly NetworkVariable<int> playerVotedToCloseTutorial = new();
@@ -73,31 +83,47 @@ public class TutorialManager : NetworkBehaviour {
     #endregion
 
     #region Functions
-    void UpdateTutorialPageUI() {
+    private void UpdateTutorialPageUI() {
         switch (tutorialPageIndex) {
             case 1:
                 captionImage.sprite = movementCaption;
+                tutorialVideoPlayer.clip = movementVideo;
                 leftArrowButton.gameObject.SetActive(false);
                 break;
             case 2:
                 captionImage.sprite = baseAttackCaption;
+                tutorialVideoPlayer.clip = baseAttackVideo;
                 leftArrowButton.gameObject.SetActive(true);
                 break;
             case 3:
                 captionImage.sprite = aimModeCaption;
+                tutorialVideoPlayer.clip = aimModeVideo;
                 break;
             case 4:
                 captionImage.sprite = commonRelicCaption;
+                tutorialVideoPlayer.clip = commonRelicVideo;
                 break;
             case 5:
                 captionImage.sprite = legendaryRelicCaption;
+                tutorialVideoPlayer.clip = legendaryRelicVideo;
                 rightArrowButton.gameObject.SetActive(true);
                 break;
             case 6:
                 captionImage.sprite = interactCaption;
+                tutorialVideoPlayer.clip = interactVideo;
                 rightArrowButton.gameObject.SetActive(false);
                 break;
         }
+
+        PlayTutorialVideo();
+    }
+
+    private void PlayTutorialVideo() {
+        if (tutorialVideoPlayer.clip == null) return;
+
+        tutorialVideoPlayer.Stop();
+        tutorialVideoPlayer.isLooping = true;
+        tutorialVideoPlayer.Play();
     }
 
     [Rpc(SendTo.Server)]
