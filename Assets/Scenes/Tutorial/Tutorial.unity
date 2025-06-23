@@ -9319,7 +9319,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1806162258
 Transform:
   m_ObjectHideFlags: 0
@@ -9760,10 +9760,34 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 2190202172
       objectReference: {fileID: 0}
+    - target: {fileID: 286231527928743463, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.45434672
+      objectReference: {fileID: 0}
+    - target: {fileID: 286231527928743463, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.73678553
+      objectReference: {fileID: 0}
+    - target: {fileID: 286231527928743463, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.90188676
+      objectReference: {fileID: 0}
+    - target: {fileID: 286231527928743463, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4285840614
+      objectReference: {fileID: 0}
     - target: {fileID: 649353164632820841, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
       propertyPath: 'listOfDialogues.Array.data[8]'
       value: 
       objectReference: {fileID: 11400000, guid: eccee233d2092264d991d336dd5cd0ac, type: 2}
+    - target: {fileID: 1165419908099366940, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165419908099366940, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fbb399f135633924287fc045b8ece10c, type: 3}
     - target: {fileID: 2286058956107053135, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1970041173
@@ -9856,6 +9880,10 @@ PrefabInstance:
       propertyPath: originPos
       value: 
       objectReference: {fileID: 249246937}
+    - target: {fileID: 9201468072732723382, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
