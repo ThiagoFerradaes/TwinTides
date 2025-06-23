@@ -5,17 +5,17 @@ using System.Collections;
 public class DamageManager : NetworkBehaviour {
 
     [SerializeField] float baseAttackSpeed = 1;
-    [SerializeField] float baseAttack;
-    private NetworkVariable<float> attack = new(0);
+    float baseAttack = 1;
+    private NetworkVariable<float> attack = new(1);
     public NetworkVariable<float> attackSpeed = new();
 
     #region Métodos Relacionados ao Ataque Base
     public float ReturnBaseAttack() {
-        return attack.Value;
+        return baseAttack;
     }
 
     public float ReturnTotalAttack(float skillDamage) {
-        return (1 + attack.Value) * skillDamage;
+        return (baseAttack + attack.Value) * skillDamage;
     }
 
 

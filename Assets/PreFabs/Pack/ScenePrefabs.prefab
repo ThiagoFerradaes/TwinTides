@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 5167733912515190823}
   - component: {fileID: 6815090514441070357}
   - component: {fileID: 3170715845177795313}
+  - component: {fileID: 3611730994943911718}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -543,6 +544,38 @@ MonoBehaviour:
       Data3: -399519865
       Data4: -1831201461
     Path: event:/MusicasDeFundo/BarbaNegra
+--- !u!114 &3611730994943911718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4296963664878829859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ef97e7ca4386e84b8ad19f51dc2d152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goalsImage: {fileID: 6918353977748254378}
+  missions:
+  - name: FightZombies
+    sprite: {fileID: 21300000, guid: 69a2a1f425fd22d48aa368ff778a0801, type: 3}
+    isCompleted: 0
+  - name: OpenChest
+    sprite: {fileID: 21300000, guid: a47bddc27bae8c543b12e7e44838b980, type: 3}
+    isCompleted: 0
+  - name: UpgradeRelic
+    sprite: {fileID: 21300000, guid: 7d2602384b9f5e4428fbdce18d37b00d, type: 3}
+    isCompleted: 0
+  - name: FindKey
+    sprite: {fileID: 21300000, guid: 85a84bcb95cb25a4b81311cb117fc54a, type: 3}
+    isCompleted: 0
+  - name: UseKeys
+    sprite: {fileID: 21300000, guid: a7147d180277ebb47b497a805ff4db42, type: 3}
+    isCompleted: 0
+  - name: FindBlackBeard
+    sprite: {fileID: 21300000, guid: 35c9443d4bd3b234d9874fe748aeb189, type: 3}
+    isCompleted: 0
 --- !u!1 &7214388736521335965
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,10 +754,6 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5475409883467005655}
-    - target: {fileID: 1949740367986292341, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 2190202172
-      objectReference: {fileID: 0}
     - target: {fileID: 2562555292400112733, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -757,7 +786,7 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5475409883467005655}
-    - target: {fileID: 4179616987082467726, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+    - target: {fileID: 3818752689401625223, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -777,10 +806,6 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5475409883467005655}
-    - target: {fileID: 5845764706874278566, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 1815611791
-      objectReference: {fileID: 0}
     - target: {fileID: 5895376566390528508, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -789,18 +814,10 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5475409883467005655}
-    - target: {fileID: 6429325559190497205, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6511694642239295315, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2089184698251057778}
-    - target: {fileID: 7360203092550658503, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7916975731089533215, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1218,6 +1235,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6918353977748254378 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8760752017820602331, guid: 053fec74b6fd7384aa04c5c345a91601, type: 3}
+  m_PrefabInstance: {fileID: 1843836755600712049}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &7176113310620851122 stripped
