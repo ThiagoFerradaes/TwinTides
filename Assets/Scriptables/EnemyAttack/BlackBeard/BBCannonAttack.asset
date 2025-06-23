@@ -39,6 +39,27 @@ MonoBehaviour:
   DistanceBetweenEachShootUpBullet: 3
   ShootUpBulletWarningDuration: 0.6
   ShootUpBulletWarningSize: 6
+  ShootUpSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  ShootUpFallingSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  WarningSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   AmountOfStraightBulletsAttacks: 4
   StraightBulletSpeed: 30
   StraightBulletDamage: 1
@@ -46,10 +67,17 @@ MonoBehaviour:
   TimeBetweenStraightBulletsAttacks: 0.8
   TimeBetweenStraightBulletsSequence: 0.3
   StraightBulletRange: 40
-  StraightBulletStunTime: 2
+  StraightBulletStunTime: 0.5
   StraightBulletSize: 4
   CannonMovementSpeed: 4
   CannonMovementRange: 4
+  ShootStraightSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   AmountOfBombs: 3
   BombHeight: 26
   BombFallSpeed: 25
@@ -67,3 +95,45 @@ MonoBehaviour:
   TimeBetweenWarnings: 0.2
   WarningCooldown: 0.5
   WarningMaterial: {fileID: 2100000, guid: bd260d75cd071d94cb8da51f88f1f28c, type: 2}
+  TickSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  ExplosionSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  BombFalingSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  BombGoingToShipSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  BombDamageToShipSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  BombShootUpSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
