@@ -1583,6 +1583,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3678807841
       objectReference: {fileID: 0}
+    - target: {fileID: 970777496440646358, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
+      propertyPath: UI
+      value: 
+      objectReference: {fileID: 1524849345580859644}
     - target: {fileID: 985711539601268883, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3849010723
@@ -1995,6 +1999,14 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3755489644
       objectReference: {fileID: 0}
+    - target: {fileID: 3904995531248342940, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
+      propertyPath: mandatoryMelLegendaryRelic
+      value: 
+      objectReference: {fileID: 11400000, guid: a85acff5cacdc974cba69e4412be4b60, type: 2}
+    - target: {fileID: 3904995531248342940, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
+      propertyPath: mandatoryMaevisLegendaryRelic
+      value: 
+      objectReference: {fileID: 11400000, guid: dfc2f2fa96da9e84f8d8abff72bd6ce2, type: 2}
     - target: {fileID: 3940688086418570715, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3290047285
@@ -2467,6 +2479,14 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3479837900
       objectReference: {fileID: 0}
+    - target: {fileID: 8625294056675845954, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
+      propertyPath: mandatoryMelLegendaryRelic
+      value: 
+      objectReference: {fileID: 11400000, guid: 0a86121ff89588146b41a5b842c52c0a, type: 2}
+    - target: {fileID: 8625294056675845954, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
+      propertyPath: mandatoryMaevisLegendaryRelic
+      value: 
+      objectReference: {fileID: 11400000, guid: 13e8eb0ce28631f4cb13a8e072c5bc82, type: 2}
     - target: {fileID: 8685089911110013123, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 167013074
@@ -9812,6 +9832,10 @@ PrefabInstance:
       value: 1970041173
       objectReference: {fileID: 0}
     - target: {fileID: 3100458363457463577, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      propertyPath: HealthEffect
+      value: 
+      objectReference: {fileID: 1524849345580859645}
+    - target: {fileID: 3100458363457463577, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
       propertyPath: BlackBeardHealthManager
       value: 
       objectReference: {fileID: 1412150414}
@@ -9900,6 +9924,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+--- !u!114 &1524849345580859644 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3100458363457463577, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+  m_PrefabInstance: {fileID: 1524849345580859643}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98eb6ec5b1921c2488628d49671558f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1524849345580859645 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6493774356749188375, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+  m_PrefabInstance: {fileID: 1524849345580859643}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4205046361093412740
 PrefabInstance:
   m_ObjectHideFlags: 0
