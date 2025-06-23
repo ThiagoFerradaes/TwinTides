@@ -9,6 +9,7 @@ public class WardStone : CommonRelic {
     public HealthBuff Debuffblocker;
     public float ExplosionDuration;
     public EventReference ExplosionSound;
+    public float BaseHealing;
 
     [Header("WardStone Level 2")]
     public HealthBuff HealingIncreaseBuff;

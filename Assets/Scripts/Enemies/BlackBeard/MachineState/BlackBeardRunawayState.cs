@@ -116,6 +116,7 @@ public class BlackBeardRunawayState : BlackBeardStates {
             sound.start();
         }
 
+        _parent.anim.SetBool("IsWalking", true);
         while (!isStuned && !changedState) {
             angle += _info.BlackBeardSpeed * Time.deltaTime;
 
@@ -128,6 +129,7 @@ public class BlackBeardRunawayState : BlackBeardStates {
 
             yield return null;
         }
+        _parent.anim.SetBool("IsWalking", false);
 
         if (sound.isValid()) {
             sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
@@ -149,6 +151,7 @@ public class BlackBeardRunawayState : BlackBeardStates {
 
         isStuned = true;
         _parent.Health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, true);
+        _parent.anim.SetBool("Stun", true);
 
         if (runCoroutine != null) _parent.StopCoroutine(runCoroutine);
         if (phaseCoroutine != null) _parent.StopCoroutine(phaseCoroutine);
@@ -160,6 +163,7 @@ public class BlackBeardRunawayState : BlackBeardStates {
         }
 
         yield return new WaitForSeconds(_info.BlackBeardStunTime);
+        _parent.anim.SetBool("Stun", false);
 
         if (sound.isValid()) {
             sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);

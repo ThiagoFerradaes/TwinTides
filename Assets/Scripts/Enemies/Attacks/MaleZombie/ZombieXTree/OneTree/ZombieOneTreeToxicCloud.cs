@@ -37,6 +37,8 @@ public class ZombieOneTreeToxicCloud : EnemyAttackPrefab
 
         gameObject.SetActive(true);
 
+        parentContext.Anim.SetTrigger("IsAttacking");
+
         if (!_info.ToxicCloundSound.IsNull) {
             sound = RuntimeManager.CreateInstance(_info.ToxicCloundSound);
             RuntimeManager.AttachInstanceToGameObject(sound, this.gameObject);

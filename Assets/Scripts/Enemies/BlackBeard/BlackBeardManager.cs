@@ -44,6 +44,5 @@ public class BlackBeardManager : NetworkBehaviour {
         hasStarted = true;
         UI.TurnUIOn();
         blackBeard.StartFight();
-        MusicInGameManager.Instance.SetMusicState(MusicState.Boss);
     }
 }

@@ -20,6 +20,7 @@ public class Camps : NetworkBehaviour {
 
     [SerializeField] bool activateOnStart;
     [SerializeField] bool randomCamp;
+    [SerializeField] bool isBlackBeard;
     [SerializeField, Tooltip("Só necessário quando é random")] int numberOfEnemies;
     [SerializeField, Tooltip("Deixa 0 se n quiser que ele respawne")] float respawnTime;
     [SerializeField] float timeToRestartCamp;
@@ -32,7 +33,9 @@ public class Camps : NetworkBehaviour {
     public static event Action OnAllEnemiesDeadStatic;
     public event Action OnAllEnemiesDead;
     public static event Action OnLegendaryCampDefeat;
+    public static event Action OnBlackBeardFound;
 
+    bool campIsActive;
     #endregion
 
     #region Initialize
@@ -122,6 +125,7 @@ public class Camps : NetworkBehaviour {
         ClearPreviousEvents();
         currentActiveEnemies = new List<GameObject>();
         aliveCount = 0;
+        campIsActive = true;
 
         for (int i = 0; i < index.Length; i++) {
             int enemyIndex = index[i];
@@ -182,11 +186,13 @@ public class Camps : NetworkBehaviour {
 
             OnAllEnemiesDead?.Invoke();
             OnAllEnemiesDeadStatic?.Invoke();
-            if (chest.rarity == Chest.ChestRarity.Rare) OnLegendaryCampDefeat?.Invoke();
+            if (chest != null && chest.rarity == Chest.ChestRarity.Rare) OnLegendaryCampDefeat?.Invoke();
 
-            chest.UnlockChest();
+            if(chest != null) chest.UnlockChest();
 
             if (respawnTime > 0) StartCoroutine(RespawnCampTimer());
+
+            campIsActive = false;
 
             MusicInGameManager.Instance.SetMusicState(MusicState.Exploration);
         }
@@ -194,11 +200,22 @@ public class Camps : NetworkBehaviour {
     }
 
     public void KillCamp() {
+
+        Debug.Log("KillCamp chamado");
+
         foreach (var enemy in currentActiveEnemies) {
+            Debug.Log($"Tentando matar: {enemy.name}");
+
             var health = enemy.GetComponent<HealthManager>();
-            health?.Kill();
+            if (health == null) {
+                Debug.LogWarning($"{enemy.name} não tem HealthManager");
+                continue;
+            }
+
+            health.Kill();
         }
     }
+
     #endregion
 
     #region Respawn
@@ -220,7 +237,13 @@ public class Camps : NetworkBehaviour {
 
         listOfPlayers.Add(other.gameObject);
 
-        MusicInGameManager.Instance.SetMusicState(MusicState.Combat);
+        if (campIsActive) {
+            if (!isBlackBeard) MusicInGameManager.Instance.SetMusicState(MusicState.Combat);
+            else {
+                OnBlackBeardFound?.Invoke();
+                MusicInGameManager.Instance.SetMusicState(MusicState.Boss);
+            }
+        }
 
         foreach (var enemy in currentActiveEnemies) {
             BehaviourTreeRunner behaviour = enemy.GetComponent<BehaviourTreeRunner>();
@@ -256,14 +279,10 @@ public class Camps : NetworkBehaviour {
 
         RestartCamp();
     }
-    IEnumerator WaitToRestartCamp() {
-        yield return new WaitForSeconds(timeToRestartCamp);
-        RestartCamp();
-    }
 
     void RestartCamp() {
         restartRoutineCampRoutine = null;
-        MusicInGameManager.Instance.SetMusicState(MusicState.Exploration);
+        if(campIsActive) MusicInGameManager.Instance.SetMusicState(MusicState.Exploration);
 
         foreach (var enemy in currentActiveEnemies) {
             enemy.GetComponent<HealthManager>().RestartHealth(100);

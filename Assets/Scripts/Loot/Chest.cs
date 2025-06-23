@@ -13,6 +13,7 @@ public class Chest : NetworkBehaviour {
     [SerializeField] bool isLocked;
     bool locked;
     [SerializeField] EventReference openChestSound;
+    [SerializeField] GameObject closedEffect;
 
     [Header("Common chest atributes")]
     [SerializeField] float chestTimerToTurnOffAfterUnlock;
@@ -34,6 +35,7 @@ public class Chest : NetworkBehaviour {
 
     public static event System.EventHandler MediumChestOpened;
     public static event Action OnKeyObtain;
+    public static event Action OnFindRelics;
 
     public enum ChestRarity {
         Common,
@@ -53,6 +55,7 @@ public class Chest : NetworkBehaviour {
             amountOfGold.Value = RandomizeGold();
         }
         locked = isLocked;
+        closedEffect.SetActive(true);
     }
     int RandomizeGold() {
         float gold = 0f;
@@ -111,6 +114,7 @@ public class Chest : NetworkBehaviour {
         InvokeEvents();
 
         CloseChest();
+
     }
 
     void SoundEffect() {
@@ -136,10 +140,13 @@ public class Chest : NetworkBehaviour {
         LockChest();
 
         gameObject.SetActive(false);
+
+        closedEffect.SetActive(true);
     }
 
     public void UnlockChest() {
         locked = false;
+        closedEffect.SetActive(false);
         StartCoroutine(ChestTimer());
     }
 
@@ -175,6 +182,8 @@ public class Chest : NetworkBehaviour {
         var commonSkills = PlayerSkillConverter.Instance.ReturnCommonSkillList(LocalWhiteBoard.Instance.PlayerCharacter);
         int skillCounter = 0;
         int rng = Random.Range(0, commonSkills.Count);
+
+        OnFindRelics?.Invoke();
 
         while (skillCounter < commonSkills.Count) {
             CommonRelic relic = commonSkills[rng] as CommonRelic;

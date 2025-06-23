@@ -42,7 +42,7 @@ public class PlayerController : NetworkBehaviour {
     Vector3 aimDirection;
     MovementManager _mManager;
     Rigidbody _rb;
-    Animator anim;
+    AnimationControoler anim;
     HealthManager _hManager;
 
     // eventos 
@@ -59,7 +59,7 @@ public class PlayerController : NetworkBehaviour {
     void Start() {
         _mManager = GetComponent<MovementManager>();
         _rb = GetComponent<Rigidbody>();
-        anim = GetComponentInChildren<Animator>();
+        anim = GetComponent<AnimationControoler>();
         _hManager = GetComponent<HealthManager>();
     }
     void FixedUpdate() {
@@ -171,16 +171,16 @@ public class PlayerController : NetworkBehaviour {
 
             // Se dot < 0, o ângulo entre eles é maior que 90 graus, ou seja, andando para trás
             if (dot < 0) {
-                anim.SetTrigger("DashTras");
+                anim.HandleAnimationRpc(true, "DashTras", true);
             }
             else {
-                anim.SetTrigger("DashFrente");
+                anim.HandleAnimationRpc(true, "DashFrente", true);
             }
         }
 
         else {
             moveDirection = transform.forward;
-            anim.SetTrigger("DashFrente");
+            anim.HandleAnimationRpc(true, "DashFrente", true);
         }
 
         _rb.linearVelocity = moveDirection * dashForce;
@@ -227,7 +227,7 @@ public class PlayerController : NetworkBehaviour {
 
         if (_mManager.ReturnStunnedValue()) { // Stunado
             _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);
-            anim.SetBool("IsWalking", false);
+            anim.HandleAnimationRpc(false, "IsWalking", false);
             return;
         }
 
@@ -242,7 +242,7 @@ public class PlayerController : NetworkBehaviour {
             if (!_inDash) { // verificando se está em dash
                 _rb.linearVelocity = new(0f, _rb.linearVelocity.y, 0f);
             }
-            anim.SetBool("IsWalking", false);
+            anim.HandleAnimationRpc(false, "IsWalking", false);
             return;
         }
 
@@ -301,8 +301,8 @@ public class PlayerController : NetworkBehaviour {
             }
         }
 
-        anim.SetFloat("Speed", animationSpeed);
-        anim.SetBool("IsWalking", true);
+        anim.HandleAnimationSpeedRpc("Speed", animationSpeed);
+        anim.HandleAnimationRpc(false, "IsWalking", true);
     }
 
     #endregion

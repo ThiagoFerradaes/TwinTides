@@ -17,7 +17,7 @@ MonoBehaviour:
   NameSpriteTotem: {fileID: 0}
   MinLevel: 1
   MaxLevel: 1
-  Cooldown: 1
+  Cooldown: 0.3
   IsStackable: 0
   Character: 0
   SkillsDescriptions: []
@@ -25,16 +25,16 @@ MonoBehaviour:
   skillPrefabs:
   - {fileID: 696985852626401227, guid: 05d38e9a039dabd4cbd62005bfed018a, type: 3}
   - {fileID: 2860564341574629790, guid: 038e9730e6b978049a895446de491be6, type: 3}
-  DurationOfFirstAttack: 0.4
-  DurationOfSecondAttack: 0.4
-  DurationOfThirdAtack: 0.6
+  DurationOfFirstAttack: 0.2
+  DurationOfSecondAttack: 0.24
+  DurationOfThirdAtack: 0.4
   AttackPosition: 1.8
   ThirdAttackPosition: 2.5
   FirstAndSecondAttackSize: {x: 7, y: 1, z: 5}
   ThirdAttackSize: {x: 4, y: 1, z: 10}
-  FirstAttackDamage: 1
-  SecondAttackDamage: 1
-  ThirdAttackDamage: 1
+  FirstAttackDamage: 3
+  SecondAttackDamage: 5
+  ThirdAttackDamage: 8
   TimeLimitBetweenEachAttack: 0.5
   attackSound:
     Guid:

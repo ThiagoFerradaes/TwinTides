@@ -39,6 +39,8 @@ public class TotemManager : MonoBehaviour {
 
     PlayerController _player;
 
+    public static event Action OnUpgradeRelic;
+
     #region Initialize
     private void Awake() {
         if (Instance == null) {
@@ -393,6 +395,8 @@ public class TotemManager : MonoBehaviour {
         LocalWhiteBoard.Instance.UpdateCommonRelicLevel(listOfCommonRelics[updateIndex], skillLevel + 2);
 
         ChangeDescriptionPrinceAndImages();
+
+        OnUpgradeRelic?.Invoke();
     }
 
 

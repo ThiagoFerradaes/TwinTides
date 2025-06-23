@@ -9,12 +9,15 @@ public class GirlXTwoHealingArea : EnemyAttackPrefab
 {
     GirlXTwo _info;
     HashSet<HealthManager> _listOfEnemies = new();
+    Animator anim;
 
     EventInstance sound;
     public override void StartAttack(int enemyId, int skillId) {
         base.StartAttack(enemyId, skillId);
 
         _info = EnemySkillConverter.Instance.TransformIdInSkill(skillId) as GirlXTwo;
+
+        if (anim == null) anim = parentContext.Anim;
 
         parentContext.Blackboard.IsAttacking = true;
 
@@ -25,6 +28,8 @@ public class GirlXTwoHealingArea : EnemyAttackPrefab
         transform.position = parent.transform.position;
 
         transform.localScale = _info.healingSize * Vector3.one;
+
+        anim.SetBool("Curando", true);
 
         gameObject.SetActive(true);
 
@@ -76,6 +81,8 @@ public class GirlXTwoHealingArea : EnemyAttackPrefab
 
     public override void End() {
         _listOfEnemies.Clear();
+
+        anim.SetBool("Curando", false);
 
         parentContext.Blackboard.IsAttacking = false;
         parentContext.Blackboard.CanAttack = false;
