@@ -33,6 +33,7 @@ public class Camps : NetworkBehaviour {
     public static event Action OnAllEnemiesDeadStatic;
     public event Action OnAllEnemiesDead;
     public static event Action OnLegendaryCampDefeat;
+    public static event Action OnBlackBeardFound;
 
     bool campIsActive;
     #endregion
@@ -238,7 +239,10 @@ public class Camps : NetworkBehaviour {
 
         if (campIsActive) {
             if (!isBlackBeard) MusicInGameManager.Instance.SetMusicState(MusicState.Combat);
-            else MusicInGameManager.Instance.SetMusicState(MusicState.Boss);
+            else {
+                OnBlackBeardFound?.Invoke();
+                MusicInGameManager.Instance.SetMusicState(MusicState.Boss);
+            }
         }
 
         foreach (var enemy in currentActiveEnemies) {
