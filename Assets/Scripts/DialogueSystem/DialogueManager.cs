@@ -61,6 +61,7 @@ public class DialogueManager : NetworkBehaviour {
     void EnableSkipAction() {
         hasVoted = false;
 
+        skipTimer = 0;
         skipAction.Enable();
         skipAction.performed += ctx => StartSkipCheck();
         skipAction.canceled += ctx => CancelSkipCheck();

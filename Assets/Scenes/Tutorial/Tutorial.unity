@@ -9089,6 +9089,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1626974049}
+  - component: {fileID: 1626974051}
   - component: {fileID: 1626974050}
   m_Layer: 0
   m_Name: MissionManager
@@ -9131,10 +9132,35 @@ MonoBehaviour:
   secondCampDialogue: {fileID: 11400000, guid: 2e89532cee0a88a4f87bbdf61be92b88, type: 2}
   amountOfCampsDefeated: 0
   legendaryCampDialogue: {fileID: 11400000, guid: 086545bd611c0674ab4d929b44965d9d, type: 2}
-  blackBeardFinalFormDialogue: {fileID: 11400000, guid: a04fa9358a9a85d48bbf821487ec99d2, type: 2}
-  blackBeardDeathDialogue: {fileID: 11400000, guid: 955666a652767d94089e324d8192eafd, type: 2}
+  blackBeardFinalFormDialogue: {fileID: 11400000, guid: 13d6a360b9a8fd348b1a2ddcebe7592f, type: 2}
+  blackBeardDeathDialogue: {fileID: 11400000, guid: b82088d30037d524594a955123c457b3, type: 2}
   usedAllKeysDialogue: {fileID: 11400000, guid: 16eb9eb612d4ecd4ca0b2c7ad733751c, type: 2}
   endOfTutorialEvent: {fileID: 11400000, guid: 0f813ca57623ebe46a3cb714c163ae9f, type: 2}
+--- !u!114 &1626974051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626974048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3145144336
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1001 &1656789792
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9777,6 +9803,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 2190202172
       objectReference: {fileID: 0}
+    - target: {fileID: 649353164632820841, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
+      propertyPath: 'listOfDialogues.Array.data[8]'
+      value: 
+      objectReference: {fileID: 11400000, guid: eccee233d2092264d991d336dd5cd0ac, type: 2}
     - target: {fileID: 2286058956107053135, guid: ca85d5ee267e2b444a6bbb14abaa5408, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1970041173
