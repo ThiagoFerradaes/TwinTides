@@ -7,7 +7,7 @@ public class ReviveZone : NetworkBehaviour
 {
     HealthManager _parent;
     [SerializeField] Canvas canvas;
-    [SerializeField] Image TimerImage;
+    [SerializeField] Image TimerImage, arrowImage, titleImage;
     [SerializeField] float timeToRevive;
     [SerializeField] float amountOfReviveHealthPercent;
     float timer;
@@ -43,7 +43,10 @@ public class ReviveZone : NetworkBehaviour
 
         if (IsOwner) {
             canvas.worldCamera = Camera.main;
+
             TimerImage.transform.rotation = canvas.worldCamera.transform.rotation;
+            arrowImage.transform.rotation = canvas.worldCamera.transform.rotation;
+            titleImage.transform.rotation = canvas.worldCamera.transform.rotation;
         }
     }
 
