@@ -6281,6 +6281,7 @@ GameObject:
   - component: {fileID: 373875512348504652}
   - component: {fileID: 5567926487654320631}
   - component: {fileID: 5845764706874278566}
+  - component: {fileID: 7159847182847341669}
   m_Layer: 5
   m_Name: Tutorial
   m_TagString: Untagged
@@ -6301,6 +6302,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4580336685168665429}
+  - {fileID: 1740873610277902219}
   - {fileID: 5339118942145944984}
   - {fileID: 2411880579099273076}
   - {fileID: 5166797389108770330}
@@ -6332,11 +6334,18 @@ MonoBehaviour:
   commonRelicCaption: {fileID: 21300000, guid: 9bc44fd01075d744d98bf7dfd9bec53e, type: 3}
   legendaryRelicCaption: {fileID: 21300000, guid: 4361b623b62a4724f8e21a70bae1cc45, type: 3}
   interactCaption: {fileID: 21300000, guid: c85dc07ca74336244bd124b73d1a3804, type: 3}
+  movementVideo: {fileID: 32900000, guid: ed7ee538762a0c64fa6cf9e70830ddad, type: 3}
+  baseAttackVideo: {fileID: 32900000, guid: 98ce2b0e3d7b6504dbfbfb0a9489d2f4, type: 3}
+  aimModeVideo: {fileID: 32900000, guid: b4647be6b2428184c88cfe1d7f9ad39a, type: 3}
+  commonRelicVideo: {fileID: 32900000, guid: c4c107012121421448f1e411c8a988ae, type: 3}
+  legendaryRelicVideo: {fileID: 32900000, guid: 4e2b659dd1be01c42a23d73c39b65fc1, type: 3}
+  interactVideo: {fileID: 32900000, guid: 48d1aea4b1a761b44a349386791f9d2c, type: 3}
   closeButton: {fileID: 3475901941552996604}
   leftArrowButton: {fileID: 8890830311458583812}
   rightArrowButton: {fileID: 7469952448857420933}
   captionImage: {fileID: 7868439944313504037}
   playersVoteToCloseText: {fileID: 5780084327510111251}
+  tutorialVideoPlayer: {fileID: 7159847182847341669}
 --- !u!114 &5845764706874278566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6362,6 +6371,42 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!328 &7159847182847341669
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3818752689401625223}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 0}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 3655a704c83aa6d4ca92a434907c3061, type: 2}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 0
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
+  m_Url: 
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1 &3896470661211614403
 GameObject:
   m_ObjectHideFlags: 0
@@ -9050,6 +9095,78 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &5323953264473347166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1740873610277902219}
+  - component: {fileID: 7572057989736146439}
+  - component: {fileID: 6200698038349959238}
+  m_Layer: 5
+  m_Name: VideoTutorial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1740873610277902219
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5323953264473347166}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 373875512348504652}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 19, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7572057989736146439
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5323953264473347166}
+  m_CullTransparentMesh: 1
+--- !u!114 &6200698038349959238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5323953264473347166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 8400000, guid: 3655a704c83aa6d4ca92a434907c3061, type: 2}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &5331019799239877670
 GameObject:
   m_ObjectHideFlags: 0
