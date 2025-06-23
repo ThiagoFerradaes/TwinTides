@@ -15,4 +15,4 @@ public class DialogueClass {
     [TextArea(5,10)]public string Text;
 }
 
-public enum DialogueCharacter { MEL, MAEVIS, BLACKBEARD, RANDOMZOMBIE, RANDOMNOISE, CREW }
+public enum DialogueCharacter { MEL, MAEVIS, BLACKBEARD, ZOMBIE, RANDOMNOISE, CREW }
