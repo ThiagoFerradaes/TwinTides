@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1228607540
+  GlobalObjectIdHash: 3920877444
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -168,6 +168,8 @@ MonoBehaviour:
   healIndicatorCooldown: 0
   shieldIndicatorCooldown: 0
   timeBetweenDamageIndicators: 0
+  meshes:
+  - {fileID: 3046672281744922732}
 --- !u!114 &2049203172403124494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,6 +369,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d70e3bff33fbf14419b3f735227548b4, type: 3}
+--- !u!137 &3046672281744922732 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 579942585848069830, guid: d70e3bff33fbf14419b3f735227548b4, type: 3}
+  m_PrefabInstance: {fileID: 2471256810589726378}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7942805288538847064 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5508229631125524978, guid: d70e3bff33fbf14419b3f735227548b4, type: 3}

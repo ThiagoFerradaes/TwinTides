@@ -142,6 +142,34 @@ MonoBehaviour:
   maxShieldAmount: 10
   deathBehaviour: {fileID: 11400000, guid: a42cb83f27232bf448507fc899231a6b, type: 2}
   damageMaterial: {fileID: 2100000, guid: bd260d75cd071d94cb8da51f88f1f28c, type: 2}
+  RecieveHealSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  RecieveDamageSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  RecieveShieldSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  healIndicatorCooldown: 0
+  shieldIndicatorCooldown: 0
+  timeBetweenDamageIndicators: 0
+  meshes:
+  - {fileID: 6246293252815126394}
+  - {fileID: 6751475746063592477}
+  - {fileID: 926371750756214613}
 --- !u!114 &2049203172403124494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,8 +183,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  baseMoveSpeed:
-    m_InternalValue: 2
+  moveSpeed: 3
+  stunSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  cooldownStunSound: 0
 --- !u!195 &6996127898566676975
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -284,6 +319,7 @@ MonoBehaviour:
   LandPlace: {fileID: 0}
   ShipCamp: {fileID: 0}
   Health: {fileID: 5586428718235828075}
+  anim: {fileID: 0}
   Lifes: 2
 --- !u!1001 &8320514019483114792
 PrefabInstance:
@@ -354,8 +390,23 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: deb90115203b57540a7dee0fdaf45da1, type: 3}
+--- !u!137 &926371750756214613 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 9197271109659343485, guid: deb90115203b57540a7dee0fdaf45da1, type: 3}
+  m_PrefabInstance: {fileID: 8320514019483114792}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5700078773377745429 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4351277800487788349, guid: deb90115203b57540a7dee0fdaf45da1, type: 3}
+  m_PrefabInstance: {fileID: 8320514019483114792}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &6246293252815126394 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2726698626180194898, guid: deb90115203b57540a7dee0fdaf45da1, type: 3}
+  m_PrefabInstance: {fileID: 8320514019483114792}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &6751475746063592477 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3371621625588609333, guid: deb90115203b57540a7dee0fdaf45da1, type: 3}
   m_PrefabInstance: {fileID: 8320514019483114792}
   m_PrefabAsset: {fileID: 0}

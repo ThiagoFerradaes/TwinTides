@@ -21,7 +21,10 @@ public class HealthManager : NetworkBehaviour {
     [SerializeField] float healIndicatorCooldown;
     [SerializeField] float shieldIndicatorCooldown;
     [SerializeField] float timeBetweenDamageIndicators;
-    Material originalMaterial;
+    List<Material> originalMaterials = new();
+
+    [Header("Components")]
+    [SerializeField] List<SkinnedMeshRenderer> meshes;
 
     // Network
 
@@ -76,7 +79,9 @@ public class HealthManager : NetworkBehaviour {
     public override void OnNetworkSpawn() {
         Initialize();
 
-        originalMaterial = GetComponent<MeshRenderer>().material;
+        for (int i = 0; i < meshes.Count; i++) {
+            originalMaterials.Add(meshes[i].sharedMaterial);
+        }
     }
     void Initialize() {
         if (IsServer) {
@@ -215,7 +220,9 @@ public class HealthManager : NetworkBehaviour {
         }
         GetComponent<MovementManager>().UnStun();
 
-        GetComponent<MeshRenderer>().material = originalMaterial;
+        for (int j = 0; j < meshes.Count; j++) {
+            meshes[j].material = originalMaterials[j];
+        }
 
         ReviveAnimation();
 
@@ -238,7 +245,9 @@ public class HealthManager : NetworkBehaviour {
         }
         GetComponent<MovementManager>().UnStun();
 
-        GetComponent<MeshRenderer>().material = originalMaterial;
+        for (int j = 0; j < meshes.Count; j++) {
+            meshes[j].material = originalMaterials[j];
+        }
     }
 
     void ReviveAnimation() {
@@ -266,13 +275,16 @@ public class HealthManager : NetworkBehaviour {
             damageIndicatorCoroutine = StartCoroutine(DamageIndicator());
     }
     IEnumerator DamageIndicator() {
-        MeshRenderer mesh = GetComponent<MeshRenderer>();
         if (!RecieveDamageSound.IsNull) RuntimeManager.PlayOneShot(RecieveDamageSound, transform.position);
 
         for (int i = 0; i < 3; i++) {
-            mesh.material = damageMaterial;
+            for (int j = 0; j < meshes.Count; j++) {
+                meshes[j].material = damageMaterial;
+            }
             yield return new WaitForSeconds(timeBetweenDamageIndicators);
-            mesh.material = originalMaterial;
+            for (int j = 0; j < meshes.Count; j++) {
+                meshes[j].material = originalMaterials[j];
+            }
             yield return new WaitForSeconds(timeBetweenDamageIndicators);
         }
 

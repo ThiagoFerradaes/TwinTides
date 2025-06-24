@@ -411,6 +411,8 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   canvas: {fileID: 3578425438809875130}
   TimerImage: {fileID: 5922057501139914561}
+  arrowImage: {fileID: 0}
+  titleImage: {fileID: 0}
   timeToRevive: 4
   amountOfReviveHealthPercent: 50
 --- !u!1 &7979977661230229930
@@ -921,6 +923,8 @@ MonoBehaviour:
   healIndicatorCooldown: 0
   shieldIndicatorCooldown: 0
   timeBetweenDamageIndicators: 0
+  meshes:
+  - {fileID: 6324890896565714268}
 --- !u!114 &2402475289913472152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -999,7 +1003,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   baseAttackSpeed: 1
-  baseAttack: 0
   attackSpeed:
     m_InternalValue: 0
 --- !u!114 &86682155894086494
@@ -1184,5 +1187,10 @@ PrefabInstance:
 --- !u!4 &77122485479876021 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5130773994022927766, guid: 5c78dbd616486c549a9849a8357a649c, type: 3}
+  m_PrefabInstance: {fileID: 5054681171358996515}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &6324890896565714268 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1288965714347287935, guid: 5c78dbd616486c549a9849a8357a649c, type: 3}
   m_PrefabInstance: {fileID: 5054681171358996515}
   m_PrefabAsset: {fileID: 0}

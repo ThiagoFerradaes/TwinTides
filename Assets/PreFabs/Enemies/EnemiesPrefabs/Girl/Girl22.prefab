@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 6996127898566676975}
   - component: {fileID: 2950631235440392704}
   - component: {fileID: -8015809491459835981}
-  - component: {fileID: -7364718638753744062}
   - component: {fileID: 1890691810115916106}
   m_Layer: 8
   m_Name: Girl22
@@ -78,7 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 720993623
+  GlobalObjectIdHash: 817747544
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -168,6 +167,8 @@ MonoBehaviour:
   healIndicatorCooldown: 1
   shieldIndicatorCooldown: 1
   timeBetweenDamageIndicators: 0.06
+  meshes:
+  - {fileID: 7861945542740885415}
 --- !u!114 &2049203172403124494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,51 +253,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!23 &-7364718638753744062
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3638960116113353898}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1890691810115916106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,5 +444,10 @@ PrefabInstance:
 --- !u!4 &4135828140031802840 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8581240039632075048, guid: d23fbeb73edb2e044a5ef36d84c4770a, type: 3}
+  m_PrefabInstance: {fileID: 5653101230512669936}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &7861945542740885415 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2551540217706265431, guid: d23fbeb73edb2e044a5ef36d84c4770a, type: 3}
   m_PrefabInstance: {fileID: 5653101230512669936}
   m_PrefabAsset: {fileID: 0}
