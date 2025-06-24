@@ -32,6 +32,8 @@ public class DialogueManager : NetworkBehaviour {
     [SerializeField] Sprite blackBeardSprite;
     [SerializeField] Sprite zombieSprite;
     [SerializeField] Sprite crewSprite;
+    [SerializeField] Texture2D normalMouseSprite;
+    [SerializeField] Texture2D aimMouseSprite;
 
     [Header("Dialogue Atributes")]
     [SerializeField] float timeBetweenEachLetter;
@@ -148,6 +150,7 @@ public class DialogueManager : NetworkBehaviour {
 
         HandleDialogue(dialogueID); // Fazendo conversões e iniciando a corrotina de dialogo
 
+        if (LocalWhiteBoard.Instance.IsAiming) Cursor.SetCursor(normalMouseSprite, Vector3.zero, CursorMode.Auto);
     }
 
     void StopTime() {
@@ -253,11 +256,13 @@ public class DialogueManager : NetworkBehaviour {
 
         amountOfPlayersFinishedWithDialogue.OnValueChanged -= ChangeFinishedText;
 
-        dialogueCanvas.gameObject.SetActive(false);
+        dialogueCanvas.SetActive(false);
 
         Time.timeScale = 1f;
 
         LocalWhiteBoard.Instance.AnimationOn = false;
+
+        if (LocalWhiteBoard.Instance.IsAiming) Cursor.SetCursor(aimMouseSprite, new Vector2(32, 32), CursorMode.Auto);
     }
     #endregion
 

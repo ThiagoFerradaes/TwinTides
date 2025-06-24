@@ -7,7 +7,6 @@ using UnityEngine;
 public class LocalWhiteBoard : MonoBehaviour {
     public static LocalWhiteBoard Instance;
 
-
     public Characters PlayerCharacter;
     public bool IsSinglePlayer;
     public bool AnimationOn;
@@ -36,7 +35,7 @@ public class LocalWhiteBoard : MonoBehaviour {
     public static event EventHandler OnRelicEquiped;
     public static event EventHandler OnGoldChanged;
 
-
+    #region Initialize
     private void Awake() {  // Singleton, só vai ter um LocalWhiteBoard no jogo
         if (Instance != null && Instance != this) {
             Destroy(gameObject);
@@ -45,7 +44,9 @@ public class LocalWhiteBoard : MonoBehaviour {
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+    #endregion
 
+    #region Reliquias
     // Adicionando a relíquia ao dicionário de relíquias
     // Só é pra ser chamado 1 vez, na primeira vez que o jogador recebe a relíquia
     public void AddToCommonDictionary(CommonRelic relic) {
@@ -99,21 +100,13 @@ public class LocalWhiteBoard : MonoBehaviour {
 
         OnRelicEquiped?.Invoke(this, EventArgs.Empty);
     }
-
-    public Skill ReturnCurrentSkill(int skillIndex) {
-        return skillIndex switch {
-            1 => PlayerCommonRelicSkillOne,
-            2 => PlayerCommonRelicSkillTwo,
-            _ => PlayerLegendarySkill,
-        };
-    }
-
-    public int ReturnCurrentSkillLevel(int skillIndex) {
-        return skillIndex switch {
-            1 => CommonRelicInventory[PlayerCommonRelicSkillOne],
-            2 => CommonRelicInventory[PlayerCommonRelicSkillTwo],
-            _ => LegendaryRelicInventory[PlayerLegendarySkill],
-        };
+    public int ReturnSkillLevel(Skill skill) {
+        if (skill is CommonRelic) {
+            return CommonRelicInventory[skill as CommonRelic];
+        }
+        else {
+            return LegendaryRelicInventory[skill as LegendaryRelic];
+        }
     }
 
     /// <summary>
@@ -164,7 +157,9 @@ public class LocalWhiteBoard : MonoBehaviour {
     public int ReturnFragmentsAmount(CommonRelic relic) {
         return FragmentsInventory[relic];
     }
+    #endregion
 
+    #region Gold
     public void AddGold(float goldAmount) {
         Gold += goldAmount;
         OnGoldChanged?.Invoke(this, EventArgs.Empty);
@@ -178,7 +173,9 @@ public class LocalWhiteBoard : MonoBehaviour {
     public float ReturnGoldAmount() {
         return Gold;
     }
+    #endregion
 
+    #region Keys
     public static event Action<int> OnAddKey;
     public void AddKey(int keyAmount) {
         AmountOsKeys += keyAmount;
@@ -198,13 +195,30 @@ public class LocalWhiteBoard : MonoBehaviour {
         allKeysUsed = true;
         OnAddKey?.Invoke(AmountOsKeys);
     }
+    #endregion
 
-    public int ReturnSkillLevel(Skill skill) {
-        if (skill is CommonRelic) {
-            return CommonRelicInventory[skill as CommonRelic];
-        }
-        else {
-            return LegendaryRelicInventory[skill as LegendaryRelic];
-        }
+    #region Reset
+    public void ResetData() {
+        PlayerCommonRelicSkillOne = null;
+        PlayerCommonRelicSkillTwo = null;
+        PlayerLegendarySkill = null;
+        PlayerAttackSkill = null;
+
+        CommonRelicInventory.Clear();
+        LegendaryRelicInventory.Clear();
+        FragmentsInventory.Clear();
+
+        AttackLevel = 0;
+        AmountOsKeys = 0;
+        allKeysUsed = false;
+
+        Gold = 0;
+
+        IsAiming = false;
+        AnimationOn = false;
+        IsSinglePlayer = false;
+
     }
+    #endregion
+
 }
