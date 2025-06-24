@@ -5,14 +5,24 @@ using System;
 
 public class SceneManager : NetworkBehaviour
 {
-
+    public static SceneManager Instance;
     public static Dictionary<Characters ,GameObject> ActivePlayers = new();
 
     [SerializeField] GameObject maevisPreFab;
     [SerializeField] GameObject melPreFab;
     [SerializeField] Transform originPos;
 
-    public static event Action OnPlayersSpawned;
+    public static Action OnPlayersSpawned;
+
+    void Awake() {
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
+
     void Start()
     {
         if (IsServer) {

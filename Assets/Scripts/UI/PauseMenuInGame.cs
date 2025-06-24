@@ -86,7 +86,7 @@ public class PauseMenuInGame : NetworkBehaviour {
         else {
             Time.timeScale = 1f;
             TurnOffScreens();
-            if (LocalWhiteBoard.Instance.IsAiming) Cursor.SetCursor(aimMouse, Vector2.zero, CursorMode.Auto);
+            if (LocalWhiteBoard.Instance.IsAiming) Cursor.SetCursor(aimMouse, new Vector2(32, 32), CursorMode.Auto);
         }
     }
     void ResetScreens() {
@@ -112,12 +112,32 @@ public class PauseMenuInGame : NetworkBehaviour {
     IEnumerator ServerShutdown() {
         Time.timeScale = 1f;
         loadingScreen.GetComponent<LoadingScreen>().Activate(loadingTime);
+
         yield return new WaitForSecondsRealtime(loadingTime);
+
+        // Limpa jogadores ativos
+        SceneManager.ActivePlayers?.Clear();
+
+        // Remove callbacks
+        SceneManager.OnPlayersSpawned = null;
+
+        // Destroi SceneManager se necessário
+        if (SceneManager.Instance != null)
+            Destroy(SceneManager.Instance.gameObject);
+
+        // Desliga a rede
         NetworkManager.Singleton.Shutdown();
-        if (NetworkManager.Singleton != null) {
+
+        // Destroi o NetworkManager
+        if (NetworkManager.Singleton != null)
             Destroy(NetworkManager.Singleton.gameObject);
-        }
+
+        // Reseta o LocalWhiteBoard
+        LocalWhiteBoard.Instance.ResetData();
+
+        // Agora sim carrega o menu
         UnityEngine.SceneManagement.SceneManager.LoadScene(menuSceneName);
     }
+
     #endregion
 }

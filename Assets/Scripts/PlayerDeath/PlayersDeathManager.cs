@@ -31,7 +31,8 @@ public class PlayersDeathManager : NetworkBehaviour {
     #endregion
 
     #region Initialize
-    void Start() {
+    public override void OnNetworkSpawn() {
+        base.OnNetworkSpawn();
         if (SceneManager.ActivePlayers.Count == 0) {
             SceneManager.OnPlayersSpawned += Init;
         }
@@ -51,14 +52,17 @@ public class PlayersDeathManager : NetworkBehaviour {
         }
     }
     public override void OnDestroy() {
-        base.OnDestroy();
+        try {
+            SceneManager.OnPlayersSpawned -= Init;
 
-        SceneManager.OnPlayersSpawned -= Init;
-
-        foreach (var player in listOfPlayers) {
-            player.OnDeath -= PlayerDeath;
-            player.OnRevive -= PlayerRevived;
+            foreach (var player in listOfPlayers) {
+                player.OnDeath -= PlayerDeath;
+                player.OnRevive -= PlayerRevived;
+            }
         }
+        catch { }
+
+        base.OnDestroy();
     }
 
     #endregion

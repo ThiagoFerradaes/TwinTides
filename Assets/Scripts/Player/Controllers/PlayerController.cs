@@ -309,7 +309,7 @@ public class PlayerController : NetworkBehaviour {
 
     #region Aim
     public void ChangeMouseSprite(bool isAim) {
-        if (isAim) Cursor.SetCursor(aimCursorTexture, Vector2.zero, CursorMode.Auto);
+        if (isAim) Cursor.SetCursor(aimCursorTexture, new Vector2(32, 32), CursorMode.Auto);
         else Cursor.SetCursor(normalCursorTexture, Vector2.zero, CursorMode.Auto);
     }
     #endregion
