@@ -46,8 +46,10 @@ public class DialogueManager : NetworkBehaviour {
     float skipTimer = 0f;
     bool isHoldingSkip = false;
     bool hasVoted = false;
+
     Coroutine skipCoroutine;
     Coroutine detectInputCoroutine;
+    Coroutine dialogueRoutine;
 
     #region Initialize
     private void Awake() {
@@ -68,6 +70,7 @@ public class DialogueManager : NetworkBehaviour {
         skipAction.performed += ctx => StartSkipCheck();
         skipAction.canceled += ctx => CancelSkipCheck();
 
+        amountOfPlayersVotedToSkipDialogue.OnValueChanged -= ChangeSkipText;
         amountOfPlayersVotedToSkipDialogue.OnValueChanged += ChangeSkipText;
     }
 
@@ -77,6 +80,8 @@ public class DialogueManager : NetworkBehaviour {
         skipAction.canceled -= ctx => CancelSkipCheck();
 
         amountOfPlayersVotedToSkipDialogue.OnValueChanged -= ChangeSkipText;
+
+        SkipImage.fillAmount = 0f;
     }
 
     void StartSkipCheck() {
@@ -162,10 +167,24 @@ public class DialogueManager : NetworkBehaviour {
         foreach (var check in arrayOfChecks) check.gameObject.SetActive(false);
         dialogueBox.text = "";
         SkipImage.fillAmount = 0 / timeToSkipDialogue;
+
+        isSkippingTyping = false;
+        hasVoted = false;
+        isHoldingSkip = false;
+
+        if (dialogueRoutine != null) {
+            StopCoroutine(dialogueRoutine);
+            dialogueRoutine = null;
+        }
+
+        if (detectInputCoroutine != null) {
+            StopCoroutine(detectInputCoroutine);
+            detectInputCoroutine = null;
+        }
     }
 
     void HandleDialogue(int dialogueId) {
-
+        amountOfPlayersFinishedWithDialogue.OnValueChanged -= ChangeFinishedText;
         amountOfPlayersFinishedWithDialogue.OnValueChanged += ChangeFinishedText;
 
         DialogueSO dialogue = IntToDialogue(dialogueId);
@@ -174,7 +193,7 @@ public class DialogueManager : NetworkBehaviour {
 
         dialogueCanvas.SetActive(true);
 
-        StartCoroutine(DialogueRoutine(dialogue));
+        dialogueRoutine = StartCoroutine(DialogueRoutine(dialogue));
     }
 
     void ChangeFinishedText(int oldInt, int newInt) {
@@ -255,6 +274,16 @@ public class DialogueManager : NetworkBehaviour {
         DisableSkipAction();
 
         amountOfPlayersFinishedWithDialogue.OnValueChanged -= ChangeFinishedText;
+
+        if (dialogueRoutine != null) {
+            StopCoroutine(dialogueRoutine);
+            dialogueRoutine = null;
+        }
+
+        if (detectInputCoroutine != null) {
+            StopCoroutine(detectInputCoroutine);
+            detectInputCoroutine = null;
+        }
 
         dialogueCanvas.SetActive(false);
 
