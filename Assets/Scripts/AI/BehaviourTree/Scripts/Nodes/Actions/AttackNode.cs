@@ -25,7 +25,6 @@ public class AttackNode : ActionNode {
     }
 
     IEnumerator AttackRoutine() {
-        Debug.Log("Entered coroutine");
         context.Blackboard.IsAttacking = true;
 
         context.Anim.SetTrigger(AnimationTriggerName);
