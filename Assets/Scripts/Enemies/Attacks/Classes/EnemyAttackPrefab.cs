@@ -66,6 +66,11 @@ public class EnemyAttackPrefab : MonoBehaviour {
             parentContext = bRunner.context;
         }
 
+        enemyHealth.OnDeath -= End;
+        enemyHealth.OnDeath += End;
+        enemyHealth.OnRevive -= End;
+        enemyHealth.OnRevive += End;
+
         EnemyAttack skill = EnemySkillConverter.Instance.TransformIdInSkill(skillId);
 
         if (parentContext != null && parentContext.Blackboard.Cooldowns.Count == 0) {
