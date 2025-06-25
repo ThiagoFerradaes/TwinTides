@@ -143,7 +143,7 @@ MonoBehaviour:
   health: 10
   maxShieldAmount: 10
   deathBehaviour: {fileID: 11400000, guid: 423c7756fe1a21440b2dd50698a1add2, type: 2}
-  damageMaterial: {fileID: 2100000, guid: bd260d75cd071d94cb8da51f88f1f28c, type: 2}
+  damageMaterial: {fileID: 2100000, guid: aa239e885e80a0b468dde76f88b204d2, type: 2}
   RecieveHealSound:
     Guid:
       Data1: 0
@@ -168,6 +168,8 @@ MonoBehaviour:
   healIndicatorCooldown: 0
   shieldIndicatorCooldown: 0
   timeBetweenDamageIndicators: 0
+  meshes:
+  - {fileID: 975662775090616083}
 --- !u!114 &2049203172403124494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,6 +369,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d78f3b04fa8f5bb43be6d61ea970dc4e, type: 3}
+--- !u!137 &975662775090616083 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8480832021357234483, guid: d78f3b04fa8f5bb43be6d61ea970dc4e, type: 3}
+  m_PrefabInstance: {fileID: 8663720436470160928}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5329789157336545319 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3588384658173027847, guid: d78f3b04fa8f5bb43be6d61ea970dc4e, type: 3}

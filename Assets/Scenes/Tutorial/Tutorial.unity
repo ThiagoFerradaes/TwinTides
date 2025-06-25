@@ -1493,6 +1493,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 4074807516
       objectReference: {fileID: 0}
+    - target: {fileID: 36533278681019596, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
+      propertyPath: 'm_CapsuleColliders.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1054157693}
     - target: {fileID: 38760386909637439, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 453939148
@@ -2929,6 +2933,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8276311763597065715, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
+      propertyPath: 'm_CapsuleColliders.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1054157692}
     - target: {fileID: 8320277083318259049, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 321532900
@@ -3893,6 +3901,16 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2777727618571592303, guid: 55c82dcd6b5f99d47935d6a8a7ae0630, type: 3}
   m_PrefabInstance: {fileID: 1037573778}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1054157692 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 2569917504996186501, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
+  m_PrefabInstance: {fileID: 542767130}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1054157693 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 5904422774110081210, guid: 4896b0871c3e75e42884dd5eefa6f2ac, type: 3}
+  m_PrefabInstance: {fileID: 542767130}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1097279729
 PrefabInstance:
