@@ -78,8 +78,7 @@ public class EnemyAttackPrefab : MonoBehaviour {
     }
 
     public virtual void End() {
-        if (parentContext != null)
-            parentContext.Blackboard.GlobalAttackTimer = parentContext.Blackboard.AttackCooldown;
+        if (parentContext != null) parentContext.Blackboard.GlobalAttackTimer = parentContext.Blackboard.AttackCooldown;
 
         enemyHealth.OnDeath -= End;
         enemyHealth.OnRevive -= End;
