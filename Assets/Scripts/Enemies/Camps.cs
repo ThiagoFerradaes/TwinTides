@@ -153,6 +153,8 @@ public class Camps : NetworkBehaviour {
             currentActiveEnemies.Add(enemy);
             aliveCount++;
 
+            enemy.SetActive(true);
+
             enemy.transform.position = listOfPoints[pointIndex].position;
 
             Vector3 directionToCenter = transform.position - enemy.transform.position;
@@ -166,7 +168,6 @@ public class Camps : NetworkBehaviour {
             behaviour.RestartBlackBoardCamps();
             behaviour.SetPath(listOfPoints[pointIndex]);
 
-            enemy.SetActive(true);
         }
     }
 
