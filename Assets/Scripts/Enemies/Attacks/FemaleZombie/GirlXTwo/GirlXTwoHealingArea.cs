@@ -81,7 +81,7 @@ public class GirlXTwoHealingArea : EnemyAttackPrefab
 
     public override void End() {
         _listOfEnemies.Clear();
-
+        Debug.Log("Healing End");
         anim.SetBool("Curando", false);
 
         parentContext.Blackboard.IsAttacking = false;
