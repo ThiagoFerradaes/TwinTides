@@ -66,6 +66,10 @@ public class EnemyAttackPrefab : MonoBehaviour {
             parentContext = bRunner.context;
         }
 
+        if (enemyHealth == null && parent.TryGetComponent(out HealthManager health)) {
+            enemyHealth = health;
+        }
+
         enemyHealth.OnDeath -= End;
         enemyHealth.OnDeath += End;
         enemyHealth.OnRevive -= End;

@@ -191,7 +191,8 @@ public class HealthManager : NetworkBehaviour {
 
     [Rpc(SendTo.ClientsAndHost)]
     void StartHealIndicatorRpc() {
-        healIndicatorCoroutine ??= StartCoroutine(HealIndicatorRoutine());
+        try { healIndicatorCoroutine ??= StartCoroutine(HealIndicatorRoutine()); }
+        catch { }
     }
 
     IEnumerator HealIndicatorRoutine() {

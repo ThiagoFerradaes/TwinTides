@@ -7,8 +7,8 @@ public class BuffAndDebuffIcon : MonoBehaviour {
     public TextMeshProUGUI stacksText;
     [SerializeField] RectTransform rectTransform;
 
-    public void UpdateIcon(Color color, int stacks) {
-        image.color = color;
+    public void UpdateIcon(Sprite sprite, int stacks) {
+        image.sprite = sprite;
         if (stacks <= 1) {
             stacksText.text = "";
         }

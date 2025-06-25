@@ -1,6 +1,7 @@
 using FMODUnity;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CrimsonTideManager : SkillObjectPrefab {
 
@@ -12,6 +13,7 @@ public class CrimsonTideManager : SkillObjectPrefab {
     PlayerController _playerController;
     Animator anim;
     HealthManager _hManager;
+    Rigidbody _rb;
 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as CrimsonTide;
@@ -24,6 +26,7 @@ public class CrimsonTideManager : SkillObjectPrefab {
             anim = _maevis.GetComponentInChildren<Animator>();
             _playerController = _maevis.GetComponent<PlayerController>();
             _hManager = _maevis.GetComponent<HealthManager>();
+            _rb = GetComponent<Rigidbody>();
         }
 
         DefineParent();
@@ -113,9 +116,11 @@ public class CrimsonTideManager : SkillObjectPrefab {
             PlayerSkillPooling.Instance.RequestInstantiateRpc(skillId, _context, _level, 2);
         }
 
+        _rb.linearVelocity = _maevis.transform.forward * _info.DashSpeed;
+
         while (elapsedTime < _info.DashDuration) {
             elapsedTime += Time.deltaTime;
-            _maevis.transform.position += _info.DashSpeed * Time.deltaTime * _maevis.transform.forward;
+            //_maevis.transform.position += _info.DashSpeed * Time.deltaTime * _maevis.transform.forward;
             yield return null;
         }
 

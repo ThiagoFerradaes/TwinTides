@@ -30,12 +30,12 @@ public class BuffsUI : MonoBehaviour {
     }
     void AddBuff(Buff buffAdded, int stacks) {
         if (activeBuffsList.ContainsKey(buffAdded)) {
-            activeBuffsList[buffAdded].GetComponent<BuffAndDebuffIcon>().UpdateIcon(buffAdded.BuffColor, stacks);   
+            activeBuffsList[buffAdded].GetComponent<BuffAndDebuffIcon>().UpdateIcon(buffAdded.BuffSprite, stacks);   
         }
         else {
             Image icon = GetIconFromPooling();
             activeBuffsList.Add(buffAdded, icon);
-            icon.GetComponent<BuffAndDebuffIcon>().UpdateIcon(buffAdded.BuffColor, stacks);
+            icon.GetComponent<BuffAndDebuffIcon>().UpdateIcon(buffAdded.BuffSprite, stacks);
             icon.gameObject.SetActive(true);
         }
     }

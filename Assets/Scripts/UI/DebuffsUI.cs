@@ -31,12 +31,12 @@ public class DebuffsUI : MonoBehaviour
     }
     void AddDebuff(Debuff debuffAdded, int stacks) {
         if (activeDebuffsList.ContainsKey(debuffAdded)) {
-            activeDebuffsList[debuffAdded].GetComponent<BuffAndDebuffIcon>().UpdateIcon(debuffAdded.DebuffColor, stacks);
+            activeDebuffsList[debuffAdded].GetComponent<BuffAndDebuffIcon>().UpdateIcon(debuffAdded.debuffSprite, stacks);
         }
         else {
             Image icon = GetIconFromPooling();
             activeDebuffsList.Add(debuffAdded, icon);
-            icon.GetComponent<BuffAndDebuffIcon>().UpdateIcon(debuffAdded.DebuffColor, stacks);
+            icon.GetComponent<BuffAndDebuffIcon>().UpdateIcon(debuffAdded.debuffSprite, stacks);
             icon.gameObject.SetActive(true);
         }
     }
