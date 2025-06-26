@@ -99,7 +99,7 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
         if (!other.CompareTag("Enemy") && !other.CompareTag("BlackBeardBomb")) return;
 
         if (other.TryGetComponent<BlackBeardCannonBomb>(out var bomb)) {
-            bomb.TryPush(transform.position);
+            bomb.TryPush();
             return;
         }
 
