@@ -135,7 +135,7 @@ public class MaevisNormalAttackManager : SkillObjectPrefab {
         }
 
         // Espera a animação chegar a um ponto
-        while (stateInfo.normalizedTime < _info.AnimationPercentToAttack) {
+        while (stateInfo.normalizedTime < _info.ThirdAnimationPercentToAttack) {
             yield return null;
             stateInfo = anim.GetCurrentAnimatorStateInfo(0);
         }

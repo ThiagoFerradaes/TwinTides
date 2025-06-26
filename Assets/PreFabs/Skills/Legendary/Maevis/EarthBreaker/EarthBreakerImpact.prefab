@@ -110,7 +110,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 20, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &8050858446605733276
 Rigidbody:
@@ -205,19 +205,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6340091126219032004, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.4
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6340091126219032004, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
       propertyPath: InitialModule.startSizeY.scalar
-      value: 0.3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6340091126219032004, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
       propertyPath: InitialModule.startSizeZ.scalar
-      value: 0.4
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6340091126219032004, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
       propertyPath: InitialModule.startSize.minScalar
-      value: 1.3
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6340091126219032004, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
@@ -229,11 +229,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6340091126219032004, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
       propertyPath: InitialModule.startSizeY.minScalar
-      value: 1.2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6340091126219032004, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
       propertyPath: InitialModule.startSizeZ.minScalar
-      value: 1.3
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6340091126219032004, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
       propertyPath: InitialModule.startRotationX.scalar
@@ -419,6 +419,14 @@ PrefabInstance:
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].tangentMode
       value: 34
       objectReference: {fileID: 0}
+    - target: {fileID: 6600615774134786913, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 7702779526387289552, guid: 68021191217d7b64b976b8473e23845f, type: 3}
+    - target: {fileID: 6600615774134786913, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0b2e306bba98620439a54ae8aa8f3310, type: 2}
     - target: {fileID: 7357193125562972744, guid: 0a8205b7b8963d64898a6422212762e6, type: 3}
       propertyPath: m_Name
       value: EarthBreakerEfeito

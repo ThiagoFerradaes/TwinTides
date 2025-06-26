@@ -204,10 +204,7 @@ public class Camps : NetworkBehaviour {
 
     public void KillCamp() {
 
-        Debug.Log("KillCamp chamado");
-
         foreach (var enemy in currentActiveEnemies) {
-            Debug.Log($"Tentando matar: {enemy.name}");
 
             var health = enemy.GetComponent<HealthManager>();
             if (health == null) {

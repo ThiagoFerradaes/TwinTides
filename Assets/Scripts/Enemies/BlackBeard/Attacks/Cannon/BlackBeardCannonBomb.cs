@@ -103,15 +103,13 @@ public class BlackBeardCannonBomb : BlackBeardAttackPrefab {
         mrenderer.material = originalMaterial;
     }
 
-    public void TryPush(Vector3 attackerPosition) {
-        Vector3 toAttacker = (attackerPosition - transform.position).normalized;
-        float dot = Vector3.Dot(toAttacker, -transform.forward); 
-
-        if (dot > 0.5f && !pushed) {
+    public void TryPush() {
+        if (!pushed) {
             pushed = true;
             StartCoroutine(PushTowardsShip());
         }
     }
+
 
     IEnumerator PushTowardsShip() {
         Transform ship = parent.GetComponent<BlackBeardMachineState>().Ship;

@@ -8,7 +8,8 @@ public class BuffAndDebuffIcon : MonoBehaviour {
     [SerializeField] RectTransform rectTransform;
 
     public void UpdateIcon(Sprite sprite, int stacks) {
-        image.sprite = sprite;
+        try { image.sprite = sprite; }
+        catch { }
         if (stacks <= 1) {
             stacksText.text = "";
         }
