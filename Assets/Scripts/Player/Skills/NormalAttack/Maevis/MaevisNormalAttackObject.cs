@@ -1,5 +1,6 @@
 using FMODUnity;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MaevisNormalAttackObject : SkillObjectPrefab {
@@ -8,6 +9,8 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
     GameObject _maevis;
     MaevisNormalAttackManager _father;
     DamageManager _dManager;
+    Animator anim;
+    Transform VFX; 
     public override void ActivateSkill(Skill info, int skillLevel, SkillContext context) {
         _info = info as MaevisNormalAttack;
         _currentAttackCombo = skillLevel;
@@ -15,6 +18,7 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
         if (_maevis == null) {
             _maevis = PlayerSkillPooling.Instance.MaevisGameObject;
             _dManager = _maevis.GetComponent<DamageManager>();
+            anim = _maevis.GetComponentInChildren<Animator>();
         }
         if (_father == null) {
             _father = GameObject.FindAnyObjectByType<MaevisNormalAttackManager>();
@@ -40,9 +44,47 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
 
         transform.localRotation = Quaternion.Euler(0, 0, 0);
 
-        transform.GetChild(0).gameObject.SetActive(_currentAttackCombo == 1);
-        transform.GetChild(1).gameObject.SetActive(_currentAttackCombo == 2);
-        transform.GetChild(2).gameObject.SetActive(_currentAttackCombo == 3);
+        string animaName = _currentAttackCombo switch
+        {
+            1 => _info.AnimationName,
+            2 => _info.AnimationName2,
+            3 => _info.AnimationName3,
+            _ => null
+        };
+
+        float baseAtkSpeed = _dManager.ReturnBaseAttackSpeed();
+        float currentAtkSpeed = _dManager.ReturnAttackSpeed();
+        float atkSpeedVar = currentAtkSpeed / baseAtkSpeed;
+
+        AnimationClip clip = null;
+        foreach (var c in anim.runtimeAnimatorController.animationClips)
+        {
+            if (c.name == animaName)
+            {
+                clip = c;
+                break;
+            }
+        }
+
+        if (clip != null)
+        {
+            float realDuration = clip.length / atkSpeedVar;
+
+            VFX = _currentAttackCombo switch
+            {
+                1 => transform.GetChild(0),
+                2 => transform.GetChild(1),
+                3 => transform.GetChild(2),
+                _ => null
+            };
+
+            if (VFX != null)
+            {
+                VFX.GetComponent<MaterialVariableAnimatorUm>().duracao = realDuration;
+                VFX.gameObject.SetActive(true);
+                Debug.Log(_currentAttackCombo);
+            }
+        }
 
         gameObject.SetActive(true);
 
@@ -78,6 +120,10 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
 
         _father.OnEndOfAttack -= Father_OnEndOfAttack;
 
+        if (VFX != null)
+        {
+            VFX.gameObject.SetActive(false);
+        }
         ReturnObject();
     }
 }
