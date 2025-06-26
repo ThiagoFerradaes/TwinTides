@@ -38,7 +38,7 @@ MonoBehaviour:
   - {fileID: 7330250002249305520, guid: 945641f4698269e4ab34b27bb811c501, type: 3}
   - {fileID: 5886304405825794377, guid: 491fb94b68e579e4f9ffe93d81c00831, type: 3}
   - {fileID: 7827558229107636768, guid: 1f2a9df7e5edf73408042e70ea45edc2, type: 3}
-  PunchDamage: 3
+  PunchDamage: 4
   PunchAreaDuration: 0.3
   PunchAreaOffSett: 1.8
   PunchSound:
@@ -58,7 +58,7 @@ MonoBehaviour:
       Data3: 1708554145
       Data4: -484682112
     Path: event:/Maevis/Skills/CrimsonTide/Dash_CrimsonTide
-  ExplosionDamage: 20
+  ExplosionDamage: 5
   ExplosionDuration: 0.1
   ExplosionRadius: 10
   ExplosionSound:
@@ -70,8 +70,8 @@ MonoBehaviour:
     Path: event:/Maevis/Skills/CrimsonTide/Explosao_CrimsonTide
   PathDamagePerTick: 1
   PathDuration: 1.8
-  PathDamageInterval: 0.1
-  PathSpawnInterval: 0.3
+  PathDamageInterval: 0.7
+  PathSpawnInterval: 0.4
   PathSize: {x: 2.5, y: 0.1, z: 0.35}
   PercentToExecute: 50
   PunchAnimationName: CrimsonTide
