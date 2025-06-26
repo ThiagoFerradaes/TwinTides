@@ -249,8 +249,8 @@ public class Camps : NetworkBehaviour {
         foreach (var enemy in currentActiveEnemies) {
             BehaviourTreeRunner behaviour = enemy.GetComponent<BehaviourTreeRunner>();
             behaviour.context.Blackboard.Target = other.transform;
-            behaviour.context.Blackboard.IsTargetForcedByCamp = true;
-            behaviour.context.Blackboard.IsTargetInRange = true; // Garante comportamento de perseguição
+            behaviour.context.Blackboard.TargetInsideCamp = true;
+            behaviour.context.Blackboard.IsTargetInRange = true; 
         }
 
         if (restartRoutineCampRoutine != null) {
@@ -270,28 +270,21 @@ public class Camps : NetworkBehaviour {
     }
 
     IEnumerator CheckIfShouldRestartCamp() {
-        // Espera até todos os inimigos saírem do estado de combate
-        while (AnyEnemyStillInCombat()) {
-            yield return new WaitForSeconds(0.5f);
-        }
-
         // Depois, espera o tempo configurado antes de resetar
         yield return new WaitForSeconds(timeToRestartCamp);
-
-        RestartCamp();
-    }
-
-    void RestartCamp() {
-        restartRoutineCampRoutine = null;
-        if(campIsActive) MusicInGameManager.Instance.SetMusicState(MusicState.Exploration);
 
         foreach (var enemy in currentActiveEnemies) {
             enemy.GetComponent<HealthManager>().RestartHealth(100);
             var behaviour = enemy.GetComponent<BehaviourTreeRunner>();
-            behaviour.context.Blackboard.IsTargetForcedByCamp = false;
+            behaviour.context.Blackboard.TargetInsideCamp = false;
         }
-    }
 
+        while (AnyEnemyStillInCombat()) {
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        RestartCamp();
+    }
     private bool AnyEnemyStillInCombat() {
         foreach (var enemy in currentActiveEnemies) {
             if (!enemy.activeSelf) continue;
@@ -301,12 +294,27 @@ public class Camps : NetworkBehaviour {
 
             if (bb == null) continue;
 
-            if (bb.IsCloseToPath && bb.IsTargetInRange && bb.CanFollowPlayer)
+            if (bb.IsCloseToPath && bb.CanFollowPlayer)
                 return true;
         }
 
         return false;
     }
+
+    void RestartCamp() {
+        restartRoutineCampRoutine = null;
+        if(campIsActive) MusicInGameManager.Instance.SetMusicState(MusicState.Exploration);
+
+        foreach (var enemy in currentActiveEnemies) {
+            enemy.GetComponent<HealthManager>().RestartHealth(100);
+            var behaviour = enemy.GetComponent<BehaviourTreeRunner>();
+            behaviour.context.Blackboard.TargetInsideCamp = false;
+            behaviour.context.Blackboard.IsTargetInRange = false;
+            behaviour.context.Blackboard.Target = null;
+        }
+    }
+
+
 
     #endregion
 

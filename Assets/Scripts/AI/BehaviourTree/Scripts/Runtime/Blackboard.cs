@@ -20,7 +20,7 @@ public class Blackboard {
     public bool IsAttacking = false;
     public bool IsInAttackRange = false;
     public bool CanAttack = true;
-    public bool IsTargetForcedByCamp = false;
+    public bool TargetInsideCamp = false;
 
     // Atributos
     public int CurrentPathIndex;
@@ -39,7 +39,8 @@ public class Blackboard {
         canFollowPlayer,
         isAttacking,
         isInAttackRange,
-        canAttack
+        canAttack,
+        targetInsideCamp
     }
 
     public bool ReturnBoolByTag(BlackBoardBools tag) {
@@ -50,6 +51,7 @@ public class Blackboard {
             BlackBoardBools.isInAttackRange => IsInAttackRange,
             BlackBoardBools.canAttack => CanAttack,
             BlackBoardBools.isAttacking => IsAttacking,
+            BlackBoardBools.targetInsideCamp => TargetInsideCamp,
             _ => false,
         };
     }
@@ -68,6 +70,8 @@ public class Blackboard {
                 return ref CanAttack;
             case BlackBoardBools.isAttacking:
                 return ref IsAttacking;
+            case BlackBoardBools.targetInsideCamp:
+                return ref TargetInsideCamp;
             default: return ref IsCloseToPath;
         }
     }
@@ -87,6 +91,7 @@ public class Blackboard {
         IsAttacking = false;
         IsInAttackRange = false;
         CanAttack = true;
+        TargetInsideCamp = false;
 
         // Resetar atributos
         CurrentPathIndex = 0;

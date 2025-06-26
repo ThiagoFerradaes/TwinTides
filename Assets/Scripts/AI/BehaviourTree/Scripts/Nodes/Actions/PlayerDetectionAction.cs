@@ -10,7 +10,7 @@ public class PlayerDetectionAction : ActionNode
     [SerializeField] LayerMask obstacleLayer;
 
     protected override State OnUpdate() {
-        if (blackboard.IsTargetForcedByCamp && blackboard.Target != null) {
+        if (blackboard.TargetInsideCamp && blackboard.Target != null) {
             return State.Success; // Confia no que o acampamento definiu
         }
 

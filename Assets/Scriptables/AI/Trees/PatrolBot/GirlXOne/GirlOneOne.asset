@@ -25,7 +25,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -58,7 +58,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -84,7 +84,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 864663180707fb64dafe3d315d50757b
-  position: {x: 725.50195, y: 397}
+  position: {x: 767.4791, y: 549.04175}
   blackboard:
     Target: {fileID: 0}
     originPoint: {fileID: 0}
@@ -94,7 +94,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -195,7 +195,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -203,6 +203,40 @@ MonoBehaviour:
     maxDistanceToPath: 0
     GlobalAttackTimer: 0
   child: {fileID: -6793917620370379804}
+--- !u!114 &-4229325631920454139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a70d27f161e59429d3689e1e4084f0, type: 3}
+  m_Name: FalseGateDecorator
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: e761750fd9466ab4ba7cfdadd6595c6e
+  position: {x: 794, y: 408}
+  blackboard:
+    Target: {fileID: 0}
+    originPoint: {fileID: 0}
+    IsCloseToPath: 1
+    IsTargetInRange: 0
+    CanFollowPlayer: 1
+    IsAttacking: 0
+    IsInAttackRange: 0
+    CanAttack: 1
+    TargetInsideCamp: 0
+    CurrentPathIndex: 0
+    CurrentComboIndex: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    maxDistanceToPath: 0
+    GlobalAttackTimer: 0
+  child: {fileID: -6369592398114237754}
+  conditions: 06000000
 --- !u!114 &-3838604061852570075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,7 +262,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -261,7 +295,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -295,7 +329,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -329,7 +363,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -364,7 +398,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -397,53 +431,13 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
     AttackCooldown: 0
     maxDistanceToPath: 0
     GlobalAttackTimer: 0
---- !u!114 &-461729228651206470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87e10bc11a5078247a916b6712ee88a8, type: 3}
-  m_Name: PlayerDetectionAction
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 0595ca967afea794c872126f81cc83af
-  position: {x: 955.502, y: 386.50195}
-  blackboard:
-    Target: {fileID: 0}
-    originPoint: {fileID: 0}
-    IsCloseToPath: 0
-    IsTargetInRange: 0
-    CanFollowPlayer: 1
-    IsAttacking: 0
-    IsInAttackRange: 0
-    CanAttack: 1
-    IsTargetForcedByCamp: 0
-    CurrentPathIndex: 0
-    CurrentComboIndex: 0
-    AttackRange: 0
-    AttackCooldown: 0
-    maxDistanceToPath: 0
-    GlobalAttackTimer: 0
-  detectionRadius: 12
-  detectionAngle: 360
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,7 +457,6 @@ MonoBehaviour:
   - {fileID: -4685175796735353712}
   - {fileID: -6793917620370379804}
   - {fileID: -5112378745571010503}
-  - {fileID: -461729228651206470}
   - {fileID: -6369592398114237754}
   - {fileID: -5468306153279131312}
   - {fileID: 2904676501843714341}
@@ -483,6 +476,7 @@ MonoBehaviour:
   - {fileID: -1232385359316088806}
   - {fileID: 5098730227991954732}
   - {fileID: -820351757826398512}
+  - {fileID: -4229325631920454139}
   blackboard:
     Target: {fileID: 0}
     originPoint: {fileID: 0}
@@ -492,7 +486,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 1
     AttackRange: 6
@@ -524,7 +518,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -557,7 +551,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -591,7 +585,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -624,7 +618,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -658,7 +652,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -694,7 +688,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -728,7 +722,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -736,6 +730,10 @@ MonoBehaviour:
     maxDistanceToPath: 0
     GlobalAttackTimer: 0
   attack: {fileID: 11400000, guid: a84789795f5da0e419aede264c2ccbbb, type: 2}
+  animated: 0
+  AnimationTriggerName: 
+  AnimationName: 
+  animationPercent: 0
 --- !u!114 &5731827953410687217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,7 +759,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -794,7 +792,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -802,9 +800,7 @@ MonoBehaviour:
     maxDistanceToPath: 0
     GlobalAttackTimer: 0
   children:
-  - {fileID: 4989918386672694049}
-  - {fileID: -6369592398114237754}
-  - {fileID: -461729228651206470}
+  - {fileID: -4229325631920454139}
 --- !u!114 &8593820219457342453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -830,7 +826,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0
@@ -865,7 +861,7 @@ MonoBehaviour:
     IsAttacking: 0
     IsInAttackRange: 0
     CanAttack: 1
-    IsTargetForcedByCamp: 0
+    TargetInsideCamp: 0
     CurrentPathIndex: 0
     CurrentComboIndex: 0
     AttackRange: 0

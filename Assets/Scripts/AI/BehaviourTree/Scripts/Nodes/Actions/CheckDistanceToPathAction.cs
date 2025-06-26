@@ -5,6 +5,11 @@ using UnityEngine;
 public class CheckDistanceToPathAction : ActionNode
 {
     protected override State OnUpdate() {
+        if (blackboard.TargetInsideCamp) {
+            blackboard.IsCloseToPath = true;
+            return State.Success;
+        }
+
         if (blackboard.originPoint == null) {
             blackboard.IsCloseToPath = true; 
             return State.Success;
