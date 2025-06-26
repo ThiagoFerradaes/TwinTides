@@ -21,6 +21,8 @@ public class EnemyAttackPrefab : MonoBehaviour {
         enemyHealth.OnDeath += End;
         enemyHealth.OnRevive -= End;
         enemyHealth.OnRevive += End;
+        parentContext.Camp.OnCampRestarted -= End;
+        parentContext.Camp.OnCampRestarted += End;
 
         if (parentContext != null && parentContext.Blackboard.Cooldowns.Count == 0) {
             foreach (var attack in skill.ListOfAttacksNames) {
@@ -48,6 +50,8 @@ public class EnemyAttackPrefab : MonoBehaviour {
         enemyHealth.OnDeath += End;
         enemyHealth.OnRevive -= End;
         enemyHealth.OnRevive += End;
+        parentContext.Camp.OnCampRestarted -= End;
+        parentContext.Camp.OnCampRestarted += End;
 
         EnemyAttack skill = EnemySkillConverter.Instance.TransformIdInSkill(skillId);
 
@@ -74,6 +78,8 @@ public class EnemyAttackPrefab : MonoBehaviour {
         enemyHealth.OnDeath += End;
         enemyHealth.OnRevive -= End;
         enemyHealth.OnRevive += End;
+        parentContext.Camp.OnCampRestarted -= End;
+        parentContext.Camp.OnCampRestarted += End;
 
         EnemyAttack skill = EnemySkillConverter.Instance.TransformIdInSkill(skillId);
 
@@ -91,6 +97,7 @@ public class EnemyAttackPrefab : MonoBehaviour {
 
         enemyHealth.OnDeath -= End;
         enemyHealth.OnRevive -= End;
+        parentContext.Camp.OnCampRestarted -= End;
 
         gameObject.SetActive(false);
     }

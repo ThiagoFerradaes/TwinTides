@@ -27,13 +27,15 @@ public class Camps : NetworkBehaviour {
 
     Chest chest;
     Coroutine restartRoutineCampRoutine;
+    Coroutine updateTargetRoutine;
 
     HashSet<GameObject> listOfPlayers = new();
 
     public static event Action OnAllEnemiesDeadStatic;
-    public event Action OnAllEnemiesDead;
     public static event Action OnLegendaryCampDefeat;
     public static event Action OnBlackBeardFound;
+    public event Action OnAllEnemiesDead;
+    public event Action OnCampRestarted;
 
     bool campIsActive;
     #endregion
@@ -257,6 +259,10 @@ public class Camps : NetworkBehaviour {
             StopCoroutine(restartRoutineCampRoutine);
             restartRoutineCampRoutine = null;
         }
+
+        if (updateTargetRoutine == null && listOfPlayers.Count > 0) {
+            updateTargetRoutine = StartCoroutine(UpdateClosestTargets());
+        }
     }
 
     private void OnTriggerExit(Collider other) {
@@ -266,6 +272,42 @@ public class Camps : NetworkBehaviour {
 
         if (listOfPlayers.Count <= 0) {
             restartRoutineCampRoutine ??= StartCoroutine(CheckIfShouldRestartCamp());
+
+            if (updateTargetRoutine != null) {
+                StopCoroutine(updateTargetRoutine);
+                updateTargetRoutine = null;
+            }
+        }
+    }
+    IEnumerator UpdateClosestTargets() {
+        var wait = new WaitForSeconds(1f);
+
+        while (listOfPlayers.Count > 0) {
+            foreach (var enemy in currentActiveEnemies) {
+                if (enemy == null || !enemy.activeSelf) continue;
+
+                var bt = enemy.GetComponent<BehaviourTreeRunner>();
+                var bb = bt?.context?.Blackboard;
+                if (bb == null) continue;
+
+                Transform closestPlayer = null;
+                float minDistance = Mathf.Infinity;
+
+                foreach (var player in listOfPlayers) {
+                    float dist = Vector3.Distance(enemy.transform.position, player.transform.position);
+                    if (dist < minDistance) {
+                        minDistance = dist;
+                        closestPlayer = player.transform;
+                    }
+                }
+
+                if (closestPlayer != null) {
+                    bb.Target = closestPlayer;
+                    bb.IsTargetInRange = true; // manter sempre true enquanto estiver no acampamento
+                }
+            }
+
+            yield return wait;
         }
     }
 
@@ -301,6 +343,7 @@ public class Camps : NetworkBehaviour {
         return false;
     }
 
+
     void RestartCamp() {
         restartRoutineCampRoutine = null;
         if(campIsActive) MusicInGameManager.Instance.SetMusicState(MusicState.Exploration);
@@ -308,9 +351,8 @@ public class Camps : NetworkBehaviour {
         foreach (var enemy in currentActiveEnemies) {
             enemy.GetComponent<HealthManager>().RestartHealth(100);
             var behaviour = enemy.GetComponent<BehaviourTreeRunner>();
-            behaviour.context.Blackboard.TargetInsideCamp = false;
-            behaviour.context.Blackboard.IsTargetInRange = false;
-            behaviour.context.Blackboard.Target = null;
+            behaviour.context.Blackboard.Restart();
+            OnCampRestarted?.Invoke();
         }
     }
 

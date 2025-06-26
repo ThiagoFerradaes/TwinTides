@@ -23,7 +23,6 @@ public class Blackboard {
     public bool TargetInsideCamp = false;
 
     // Atributos
-    public int CurrentPathIndex;
     public int CurrentComboIndex;
     public float AttackRange;
     public float AttackCooldown;
@@ -94,7 +93,6 @@ public class Blackboard {
         TargetInsideCamp = false;
 
         // Resetar atributos
-        CurrentPathIndex = 0;
         CurrentComboIndex = 0;
         GlobalAttackTimer = 0f;
 
