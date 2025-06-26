@@ -57,10 +57,8 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
         float atkSpeedVar = currentAtkSpeed / baseAtkSpeed;
 
         AnimationClip clip = null;
-        foreach (var c in anim.runtimeAnimatorController.animationClips)
-        {
-            if (c.name == animaName)
-            {
+        foreach (var c in anim.runtimeAnimatorController.animationClips) {
+            if (c.name == animaName) {
                 clip = c;
                 break;
             }
@@ -68,7 +66,15 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
 
         if (clip != null)
         {
-            float realDuration = clip.length / atkSpeedVar;
+            float baseClipSpeed = _currentAttackCombo switch {
+                1 => 1.5f,
+                2 => 1.5f,
+                3 => 2f,
+                _ => 1f
+            };
+            float animationPercent = _info.AnimationPercentToAttack;
+            float totalSpeedMultiplier = atkSpeedVar * baseClipSpeed;
+            float realDuration = (1f - animationPercent) * (clip.length / totalSpeedMultiplier);
 
             VFX = _currentAttackCombo switch
             {
@@ -82,7 +88,6 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
             {
                 VFX.GetComponent<MaterialVariableAnimatorUm>().duracao = realDuration;
                 VFX.gameObject.SetActive(true);
-                Debug.Log(_currentAttackCombo);
             }
         }
 

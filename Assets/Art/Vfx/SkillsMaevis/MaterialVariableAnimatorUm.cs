@@ -36,7 +36,8 @@ public class MaterialVariableAnimatorUm : MonoBehaviour
     private void OnDisable()
     {
         if (animacaoAtual != null) StopCoroutine(animacaoAtual);
-        animacaoAtual = StartCoroutine(AnimarValores(angleFinal, angleInicial, aberturaFinal, aberturaInicial, powerFinal, powerInicial));
+        animacaoAtual = null;
+        //animacaoAtual = StartCoroutine(AnimarValores(angleFinal, angleInicial, aberturaFinal, aberturaInicial, powerFinal, powerInicial));
     }
 
     private IEnumerator AnimarValores(float aStart, float aEnd, float abStart, float abEnd, float pStart, float pEnd)

@@ -27,5 +27,6 @@ public class MaevisNormalAttack : AttackSkill
     public string AnimationName2;
     public string AnimationName3;
     [Range(0,1)]public float AnimationPercentToAttack;
+    [Range(0,1)]public float ThirdAnimationPercentToAttack;
 
 }
