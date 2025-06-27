@@ -34,14 +34,35 @@ MonoBehaviour:
   AttackTime: 2
   AttackRadius: 20
   AttackRadiusStronger: 18
-  ExplosionDamage: 1
+  BulletFallingSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  ExplosionDamage: 10
   ExplosionRadius: 10
   ExplosionDuration: 0.1
-  FieldDamage: 1
+  PrimaryExplosionSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  FieldDamage: 0.1
   TimeBetweenFieldDamage: 0.1
   FieldDuration: 15
   BurningDebuff: {fileID: 11400000, guid: 86a385b2a33a4bf478a57b6cb16ca780, type: 2}
   FieldSize: {x: 10, y: 0.3}
+  FieldSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   AmountOfSecondaryBullets: 3
   SecondaryBulletDistanceToMainBullet: 4
   SecondaryBulletSize: 2.5
@@ -49,3 +70,20 @@ MonoBehaviour:
   SecondaryBulletJumpPower: 8
   SecondaryBulletJumpDuration: 0.5
   SecondaryBulletSizeMultiplier: 8
+  BounceSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  SecondaryExplosionSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  AnimationTriggerName: TiroBalas
+  AnimationName: TiroBalas
+  PercentOfAnimationToAttack: 0.5

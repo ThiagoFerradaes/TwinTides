@@ -150,6 +150,7 @@ public class BlackBeardRunawayState : BlackBeardStates {
         if (isStuned || changedState) yield break;
 
         isStuned = true;
+        _parent.anim.SetBool("IsWalking", false);
         _parent.Health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, true);
         _parent.anim.SetBool("Stun", true);
 
@@ -163,7 +164,7 @@ public class BlackBeardRunawayState : BlackBeardStates {
         }
 
         yield return new WaitForSeconds(_info.BlackBeardStunTime);
-        _parent.anim.SetBool("Stun", false);
+        _parent.anim.SetBool("IsWalking", false);
 
         if (sound.isValid()) {
             sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
@@ -178,6 +179,9 @@ public class BlackBeardRunawayState : BlackBeardStates {
     }
     void EndPhase() {
         if (changedState) return;
+
+        _parent.anim.SetBool("IsWalking", false);
+        _parent.anim.SetBool("IsWalking", false);
 
         camp.OnAllEnemiesDead -= Camp_OnAllEnemiesDead;
 

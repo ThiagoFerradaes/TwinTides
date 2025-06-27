@@ -21,12 +21,38 @@ MonoBehaviour:
   ListOfAttacksNames: []
   AnchorRange: 18
   AnchorSpeed: 22
-  AnchorDamage: 1
+  AnchorDamage: 10
   AnchorStunTime: 2
   TimeBetweenAttacks: 2
   AnchorSize: {x: 8, y: 2, z: 4}
   AnchorOffset: 1
+  AnchorMovementDownSound:
+    Guid:
+      Data1: 2045850958
+      Data2: 1335341013
+      Data3: 1713074560
+      Data4: -701090685
+    Path: event:/BarbaNegra/AncoraIndo
+  AnchorHitSound:
+    Guid:
+      Data1: 496637727
+      Data2: 1184538141
+      Data3: -1963109222
+      Data4: 1493385889
+    Path: event:/BarbaNegra/AncoraImpacto_BarbaNegra
   AnchorRotationSPeed: 180
   ChainDamage: 1
   RotationDuration: 4.4
   ChainSize: {x: 1, y: 1}
+  AnchorSpinningSound:
+    Guid:
+      Data1: 887535544
+      Data2: 1173676756
+      Data3: -104404561
+      Data4: -619494442
+    Path: event:/BarbaNegra/AncoraRodando
+  AnimationName: JogandoCorrente
+  SpinningAnimationName: GirandoAncora
+  AnimationTrigger: JogandoCorrente
+  SpinningAnimationTrigger: Girando a ancora
+  PercentOfAnimationToAttack: 0.4
