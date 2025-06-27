@@ -17,7 +17,7 @@ MonoBehaviour:
   NameSpriteTotem: {fileID: 21300000, guid: 5004328f909788847a4dfd8e89f1260a, type: 3}
   MinLevel: 1
   MaxLevel: 1
-  Cooldown: 20
+  Cooldown: 30
   IsStackable: 1
   Character: 1
   SkillsDescriptions:
@@ -52,7 +52,7 @@ MonoBehaviour:
   MeleeMinionRangeToFindEnemy: 20
   MeleeAttackOffSet: 1
   MeleeAttackDuration: 0.1
-  MeleeAttackDamage: 1
+  MeleeAttackDamage: 5
   MeleeMinionHitSound:
     Guid:
       Data1: -1558810320
@@ -66,7 +66,7 @@ MonoBehaviour:
   RangedMinionRangeToFindEnemy: 20
   RangedAttackSpeed: 20
   RangedAttackDuration: 2
-  RangedAttackDamage: 1
+  RangedAttackDamage: 3
   RangedMinionHitSound:
     Guid:
       Data1: 977744729

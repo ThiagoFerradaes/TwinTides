@@ -17,7 +17,7 @@ MonoBehaviour:
   NameSpriteTotem: {fileID: 21300000, guid: 8b6bc81b200aee343a1680b6353efeb4, type: 3}
   MinLevel: 1
   MaxLevel: 1
-  Cooldown: 3
+  Cooldown: 30
   IsStackable: 1
   Character: 0
   SkillsDescriptions:
@@ -38,7 +38,7 @@ MonoBehaviour:
   AmountOfShiled: 20
   ShieldDuration: 6
   FieldDuration: 4
-  FieldDamagePerTick: 1
+  FieldDamagePerTick: 0.01
   FieldRadius: 16
   DamageCooldown: 0.6
   BleedDebuff: {fileID: 11400000, guid: 811747b3cf3ece547a8d6f3bd782cfb3, type: 2}
