@@ -32,6 +32,8 @@ public class BlackBeardFinalState : BlackBeardStates {
     public override void StartState(BlackBeardMachineState parent) {
         base.StartState(parent);
 
+        _parent.anim.SetBool("Stun", false);
+
         _parent.Lifes = 0;
 
         RestartState();

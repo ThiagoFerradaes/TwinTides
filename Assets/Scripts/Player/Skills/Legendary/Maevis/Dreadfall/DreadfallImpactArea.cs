@@ -70,8 +70,6 @@ public class DreadfallImpactArea : SkillObjectPrefab {
 
             foreach (var health in _listOfEnemies) {
                 health.DealDamage(damage, true, true);
-
-                health.AddDebuffToList(_info.BleedDebuff);
             }
         }
     }
