@@ -73,6 +73,7 @@ public class BlackBeardFinalState : BlackBeardStates {
     IEnumerator HealFullLife() {
 
         _health.ReviveHandler(0);
+        _health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, false);
 
         float timer = 0f;
         float duration = _info.HealTimer;
@@ -94,6 +95,7 @@ public class BlackBeardFinalState : BlackBeardStates {
         }
 
         _health.Heal(maxHealth - _health.ReturnCurrentHealth(), false);
+        _health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, true);
 
         yield return new WaitForSeconds(_info.TimeBetweenHealingAndAttacking);
 
