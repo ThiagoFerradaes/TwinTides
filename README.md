@@ -23,6 +23,9 @@ Twin Tides é um jogo de ação e aventura cooperativo, desenvolvido na Unity, o
 
 ![Gameplay do Twin Tides](media/Gif_Totem.gif)
 
+![Gameplay do Twin Tides](media/Gif_Skills.gif)
+
+![Gameplay do Twin Tides](media/Gif_Ultimates.gif)
 
 ## Build
 
