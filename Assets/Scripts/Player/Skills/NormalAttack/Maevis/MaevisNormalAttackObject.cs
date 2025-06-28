@@ -67,9 +67,9 @@ public class MaevisNormalAttackObject : SkillObjectPrefab {
         if (clip != null)
         {
             float baseClipSpeed = _currentAttackCombo switch {
-                1 => 1.5f,
-                2 => 1.5f,
-                3 => 2f,
+                1 => 1.8f,
+                2 => 1.8f,
+                3 => 3f,
                 _ => 1f
             };
             float animationPercent = _info.AnimationPercentToAttack;

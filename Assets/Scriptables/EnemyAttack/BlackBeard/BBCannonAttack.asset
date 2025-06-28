@@ -32,7 +32,7 @@ MonoBehaviour:
   AmountOfShootUpBullets: 30
   ShootUpBulletHeigh: 26
   ShootUpBulletSpeedToFall: 35
-  ShootUpBulletDamage: 1
+  ShootUpBulletDamage: 5
   TimeBetweenShootUpBullets: 0.5
   ShootUpRadius: 16
   ShootUpBulletSize: 6
@@ -62,9 +62,9 @@ MonoBehaviour:
     Path: 
   AmountOfStraightBulletsAttacks: 4
   StraightBulletSpeed: 30
-  StraightBulletDamage: 1
+  StraightBulletDamage: 10
   TimeBetweenStraightBullets: 0.2
-  TimeBetweenStraightBulletsAttacks: 0.8
+  TimeBetweenStraightBulletsAttacks: 1
   TimeBetweenStraightBulletsSequence: 0.3
   StraightBulletRange: 40
   StraightBulletStunTime: 0.5
@@ -82,15 +82,15 @@ MonoBehaviour:
   BombHeight: 26
   BombFallSpeed: 25
   BombExplosionRadius: 14
-  BombExplosionDamage: 1
-  BombExplosionDuration: 0.1
-  TimeBetweenBombs: 0.6
+  BombExplosionDamage: 25
+  BombExplosionDuration: 0.2
+  TimeBetweenBombs: 1
   TimeToBombExplode: 5
-  BombDamageToShip: 1
+  BombDamageToShip: 20
   ShootBombRadius: 13
   BombSize: 3
   BombSpeed: 25
-  DistanceBetweenBombs: 5
+  DistanceBetweenBombs: 7
   CooldownAfterBomb: 3
   TimeBetweenWarnings: 0.2
   WarningCooldown: 0.5

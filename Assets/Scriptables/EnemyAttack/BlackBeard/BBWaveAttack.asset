@@ -20,12 +20,30 @@ MonoBehaviour:
   AmountOfWaves: 4
   TimeBetweenEachWave: 1
   WaveSpeed: 28
-  WaveDamage: 1
+  WaveDamage: 5
   WaveMaxRadius: 50
   WaveInitialRadius: 5
-  Cooldown: 10
+  WaveInstantiateSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  WaveExpansionSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   AmountOfWavesStronger: 8
   TimeBetweenEachWaveStronger: 0.6
   WaveSpeedStronger: 38
-  AmountOfShieldGainPerWaveHit: 1
+  AmountOfShieldGainPerWaveHit: 0
   ShieldDuration: 1e+15
+  AnimationName: OndaImpacto
+  AnimationTriggerName: OndaImpacto
+  AnimationSpeedName: WaveAnimationSpeed
+  AnimationPercentToAttack: 0.5
+  AnimationSpeedWhenStronger: 2

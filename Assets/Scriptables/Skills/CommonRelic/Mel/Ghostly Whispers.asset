@@ -41,7 +41,7 @@ MonoBehaviour:
   MaxRange: 12
   AreaDuration: 4
   DamageInterval: 1
-  Damage: 1
+  Damage: 2
   AmountOfStacks: 1
   NormalAreaMaterial: {fileID: 2100000, guid: f4dad3aac65201444aa2103b10d7b52a, type: 2}
   NormalPuddleSound:
@@ -51,11 +51,11 @@ MonoBehaviour:
       Data3: 550129335
       Data4: -1637689118
     Path: event:/Mel/Skills/GhostlyWhisper/PocaNivel1_GhostlyWhisper
-  DamageLevel2: 10
+  DamageLevel2: 3
   AmountOfStacksLevel2: 2
   ObjectDurationLevel2: 4
   AreaDurationLevel3: 5
-  DamageIntervalLevel3: 0.5
+  DamageIntervalLevel3: 0.6
   SuperAreaMaterial: {fileID: 2100000, guid: c0bac8b2a41dbd147bf7e334440a8b8b, type: 2}
   SuperPuddleSound:
     Guid:
@@ -66,7 +66,7 @@ MonoBehaviour:
     Path: event:/Mel/Skills/GhostlyWhisper/PocaNivel2_GhostlyWhisper
   AreaLevel4: {x: 6, y: 0.1, z: 6}
   AreaDurationLevel4: 6
-  DamageIntervalLevel4: 0.2
+  DamageIntervalLevel4: 0.4
   AmountOfStacksLevel4: 4
   MegaAreaMaterial: {fileID: 2100000, guid: 7e8a787dead827a47b95425366339de0, type: 2}
   ObjectDurationLevel4: 8

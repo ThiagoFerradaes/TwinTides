@@ -26,7 +26,7 @@ public class CrimsonTideManager : SkillObjectPrefab {
             anim = _maevis.GetComponentInChildren<Animator>();
             _playerController = _maevis.GetComponent<PlayerController>();
             _hManager = _maevis.GetComponent<HealthManager>();
-            _rb = GetComponent<Rigidbody>();
+            _rb = _maevis.GetComponent<Rigidbody>();
         }
 
         DefineParent();
@@ -63,7 +63,7 @@ public class CrimsonTideManager : SkillObjectPrefab {
             yield return null;
             timer += Time.deltaTime;
             if (timer > enterAnimTimeout) {
-                Debug.LogWarning("Transição para animação nunca começou.");
+                Debug.LogWarning("Transiï¿½ï¿½o para animaï¿½ï¿½o nunca comeï¿½ou.");
                 break;
             }
         }
@@ -75,12 +75,12 @@ public class CrimsonTideManager : SkillObjectPrefab {
             timer += Time.deltaTime;
             stateInfo = anim.GetCurrentAnimatorStateInfo(0);
             if (timer > enterAnimTimeout) {
-                Debug.LogWarning("Animação correta nunca entrou. Cancelando CryRoutine.");
+                Debug.LogWarning("Animaï¿½ï¿½o correta nunca entrou. Cancelando CryRoutine.");
                 break;
             }
         }
 
-        while (stateInfo.normalizedTime < _info.PunchAnimationPercentToAttack) { // Espera a animação terminar
+        while (stateInfo.normalizedTime < _info.PunchAnimationPercentToAttack) { // Espera a animaï¿½ï¿½o terminar
             yield return null;
             stateInfo = anim.GetCurrentAnimatorStateInfo(0);
         }
@@ -104,6 +104,7 @@ public class CrimsonTideManager : SkillObjectPrefab {
         float elapsedTime = 0f;
 
         _playerController.BlockMovement();
+        _playerController.InDash(true);
 
         int skillId = PlayerSkillConverter.Instance.TransformSkillInInt(_info);
 
@@ -119,8 +120,8 @@ public class CrimsonTideManager : SkillObjectPrefab {
         _rb.linearVelocity = _maevis.transform.forward * _info.DashSpeed;
 
         while (elapsedTime < _info.DashDuration) {
+            _rb.linearVelocity = _maevis.transform.forward * _info.DashSpeed;
             elapsedTime += Time.deltaTime;
-            //_maevis.transform.position += _info.DashSpeed * Time.deltaTime * _maevis.transform.forward;
             yield return null;
         }
 
@@ -152,6 +153,7 @@ public class CrimsonTideManager : SkillObjectPrefab {
         _maevis.GetComponent<PlayerSkillManager>().BlockNormalAttackRpc(false);
         _maevis.GetComponent<PlayerSkillManager>().BlockSkillsRpc(false);
         _maevis.GetComponent<PlayerController>().AllowMovement();
+        _playerController.InDash(false);
         anim.SetBool("CrimsonTideDash", false);
         _hManager.InvulnerabilityRpc(false);
         base.ReturnObject();

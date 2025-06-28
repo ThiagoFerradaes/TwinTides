@@ -24,11 +24,30 @@ MonoBehaviour:
   AmountOfCutsStronger: 8
   CutSpeed: 30
   CutSpeedStronger: 40
-  CutDamage: 1
-  CutDamageStronger: 1
+  CutDamage: 5
+  CutDamageStronger: 15
   CutSize: {x: 3, y: 4, z: 1}
   CutRange: 25
+  CutSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   FieldDuration: 5
-  FieldDamage: 1
+  FieldDamage: 0.01
   TimeBetweenDamage: 0.1
   FieldSize: {x: 3.5, y: 0.3}
+  FieldSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  AnimationName: AtaqueCruzado1
+  AnimationName2: AtaqueCruzado2
+  AnimationTriggerName: AtaqueCruzado1
+  AnimationTriggerName2: AtaqueCruzado2
+  AnimationPercentToAttack: 0.5

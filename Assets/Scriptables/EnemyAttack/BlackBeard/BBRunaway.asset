@@ -18,10 +18,38 @@ MonoBehaviour:
   BlackBeardSpeed: 30
   ArenaRadius: 15
   BlackBeardStunTime: 6
-  PhaseDuration: 10
-  AmountOfHealthRecoveredPerEnemy: 0
+  PhaseDuration: 180
+  AmountOfHealthRecoveredPerEnemy: 5
   JumpPower: 8
   JumpDuration: 1
+  JumpSound:
+    Guid:
+      Data1: -760330547
+      Data2: 1312377458
+      Data3: 1445443992
+      Data4: 366828517
+    Path: event:/BarbaNegra/Pula_BarbaNegra
+  RunningSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  StunSound:
+    Guid:
+      Data1: -1353069326
+      Data2: 1202508882
+      Data3: -2053389937
+      Data4: -485552462
+    Path: event:/BarbaNegra/Stunado_BarbaNegra
+  JumpBackToShipSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   ListOfGroups:
   - {fileID: 11400000, guid: 617d425b4f92b0d42a45edb97b256766, type: 2}
   - {fileID: 11400000, guid: c974c84495592ca48b5e7d18fde8bc1b, type: 2}

@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  health: 35
+  health: 50
   maxShieldAmount: 10
   deathBehaviour: {fileID: 11400000, guid: 423c7756fe1a21440b2dd50698a1add2, type: 2}
   damageMaterial: {fileID: 2100000, guid: aa239e885e80a0b468dde76f88b204d2, type: 2}
@@ -165,9 +165,9 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  healIndicatorCooldown: 0
-  shieldIndicatorCooldown: 0
-  timeBetweenDamageIndicators: 0
+  healIndicatorCooldown: 1
+  shieldIndicatorCooldown: 1
+  timeBetweenDamageIndicators: 0.06
   meshes:
   - {fileID: 6058828575323542530}
 --- !u!114 &2049203172403124494

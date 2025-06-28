@@ -595,7 +595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 860857098
+  GlobalObjectIdHash: 2599662631
   InScenePlacedSourceGlobalObjectIdHash: 2599662631
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1025,9 +1025,9 @@ MonoBehaviour:
       Data3: -346183520
       Data4: 1433184297
     Path: event:/Maevis/Skills/HullBreaker/Escudo_HullBreaker
-  healIndicatorCooldown: 0
-  shieldIndicatorCooldown: 0
-  timeBetweenDamageIndicators: 0
+  healIndicatorCooldown: 1
+  shieldIndicatorCooldown: 1
+  timeBetweenDamageIndicators: 0.06
   meshes:
   - {fileID: 268391378322898968}
 --- !u!54 &5911823821045647350

@@ -10,49 +10,36 @@ public class BlackBeardRunawayState : BlackBeardStates {
 
     #region Variables
 
-    // Booleanas
     bool isStuned;
     bool changedState;
 
-    // Camp
     Camps camp;
-
-    // SO
     BlackBeardRunawaySO _info;
 
-    // float
     public float PhaseTimer;
 
-    // Corrotinas
     Coroutine runCoroutine;
     Coroutine phaseCoroutine;
 
-    // Health
     HealthManager _health;
 
-    // Sons
     EventInstance sound;
 
     #endregion
+
     public override void StartState(BlackBeardMachineState parent) {
         base.StartState(parent);
-
         RestartState();
-
         LeaveShip();
     }
 
     void RestartState() {
-
         if (camp == null) camp = _parent.ShipCamp;
-
         if (_info == null) _info = _parent.ListOfAttacks[1] as BlackBeardRunawaySO;
-
         if (_health == null) _health = _parent.Health;
 
         isStuned = false;
         changedState = false;
-
         PhaseTimer = _info.PhaseDuration;
 
         camp.OnAllEnemiesDead -= Camp_OnAllEnemiesDead;
@@ -62,8 +49,6 @@ public class BlackBeardRunawayState : BlackBeardStates {
         _health.OnDeath += OnDeath;
     }
 
-
-
     private void Camp_OnAllEnemiesDead() {
         if (!changedState && !isStuned) {
             _parent.StartCoroutine(StunTimer());
@@ -71,7 +56,6 @@ public class BlackBeardRunawayState : BlackBeardStates {
     }
 
     void LeaveShip() {
-
         _parent.transform.DOKill();
 
         if (!_info.JumpSound.IsNull) {
@@ -80,10 +64,14 @@ public class BlackBeardRunawayState : BlackBeardStates {
             sound.start();
         }
 
-        _parent.transform.DOJump(_parent.LandPlace.position, _info.JumpPower, 1, _info.JumpDuration).OnComplete(() => {
+        Vector3 landPos = _parent.LandPlace.position;
+        landPos.y = GetFloorHeight(landPos); // Corrige a altura do salto
+
+        _parent.transform.DOJump(landPos, _info.JumpPower, 1, _info.JumpDuration).OnComplete(() => {
             Vector3 fromCenter = _parent.transform.position - _parent.CenterOfArena.position;
             Vector3 clampedOffset = fromCenter.normalized * _info.ArenaRadius;
             Vector3 closestPointOnCircle = _parent.CenterOfArena.position + clampedOffset;
+            closestPointOnCircle.y = GetFloorHeight(closestPointOnCircle); // Corrige altura
 
             if (sound.isValid()) {
                 sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
@@ -95,13 +83,11 @@ public class BlackBeardRunawayState : BlackBeardStates {
                 runCoroutine = _parent.StartCoroutine(Runnaway(fromCenter));
                 phaseCoroutine = _parent.StartCoroutine(PhaseTimerRoutine());
             });
-        }
-      );
+        });
     }
 
     void SpawnAllies() {
         int rng = Random.Range(0, _info.ListOfGroups.Count);
-
         camp.StartCampWithIndex(_info.ListOfGroups[rng].ListOfEnemies.ToArray());
     }
 
@@ -123,12 +109,16 @@ public class BlackBeardRunawayState : BlackBeardStates {
             float rad = angle * Mathf.Deg2Rad;
             Vector3 offset = new Vector3(Mathf.Cos(rad), 0, Mathf.Sin(rad)) * _info.ArenaRadius;
             Vector3 targetPos = _parent.CenterOfArena.position + offset;
+            targetPos.y = GetFloorHeight(targetPos); // Mantém o boss colado ao chão
 
-            _parent.transform.position = Vector3.Lerp(_parent.transform.position, targetPos, Time.deltaTime * 5f);
-            _parent.transform.forward = (targetPos - _parent.transform.position).normalized;
+            Vector3 currentPos = _parent.transform.position;
+            Vector3 nextPos = Vector3.Lerp(currentPos, targetPos, Time.deltaTime * 5f);
+            _parent.transform.position = nextPos;
+            _parent.transform.forward = (targetPos - currentPos).normalized;
 
             yield return null;
         }
+
         _parent.anim.SetBool("IsWalking", false);
 
         if (sound.isValid()) {
@@ -150,6 +140,7 @@ public class BlackBeardRunawayState : BlackBeardStates {
         if (isStuned || changedState) yield break;
 
         isStuned = true;
+        _parent.anim.SetBool("IsWalking", false);
         _parent.Health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, true);
         _parent.anim.SetBool("Stun", true);
 
@@ -163,7 +154,7 @@ public class BlackBeardRunawayState : BlackBeardStates {
         }
 
         yield return new WaitForSeconds(_info.BlackBeardStunTime);
-        _parent.anim.SetBool("Stun", false);
+        _parent.anim.SetBool("IsWalking", false);
 
         if (sound.isValid()) {
             sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
@@ -176,8 +167,12 @@ public class BlackBeardRunawayState : BlackBeardStates {
     void OnDeath() {
         EndPhase();
     }
+
     void EndPhase() {
         if (changedState) return;
+
+        _parent.anim.SetBool("Stun", false);
+        _parent.anim.SetBool("IsWalking", false);
 
         camp.OnAllEnemiesDead -= Camp_OnAllEnemiesDead;
 
@@ -188,7 +183,6 @@ public class BlackBeardRunawayState : BlackBeardStates {
 
             if (enemiesAlive > 0) {
                 camp.KillCamp();
-
                 _parent.Health.Heal(_info.AmountOfHealthRecoveredPerEnemy * enemiesAlive, false);
             }
 
@@ -198,7 +192,10 @@ public class BlackBeardRunawayState : BlackBeardStates {
                 sound.start();
             }
 
-            _parent.transform.DOJump(_parent.ShipPlace.position, _info.JumpPower, 1, _info.JumpDuration).OnComplete(() => {
+            Vector3 shipPos = _parent.ShipPlace.position;
+            shipPos.y = GetFloorHeight(shipPos);
+
+            _parent.transform.DOJump(shipPos, _info.JumpPower, 1, _info.JumpDuration).OnComplete(() => {
                 _parent.Health.SetPermissionServerRpc(HealthPermissions.CanTakeDamage, true);
 
                 if (sound.isValid()) {
@@ -211,11 +208,7 @@ public class BlackBeardRunawayState : BlackBeardStates {
         }
         else {
             int enemiesAlive = camp.ReturnAliveCount();
-
-            if (enemiesAlive > 0) {
-                camp.KillCamp();
-            }
-
+            if (enemiesAlive > 0) camp.KillCamp();
             ChangePhase();
         }
     }
@@ -226,4 +219,12 @@ public class BlackBeardRunawayState : BlackBeardStates {
             else _parent.ChangeState(BlackBeardState.FINAL);
         }
     }
+
+    float GetFloorHeight(Vector3 position) {
+        Ray ray = new(position + Vector3.up * 15f, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f, LayerMask.GetMask("Floor")))
+            return hit.point.y + 1f;
+        return position.y;
+    }
 }
+

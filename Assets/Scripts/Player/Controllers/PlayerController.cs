@@ -327,6 +327,10 @@ public class PlayerController : NetworkBehaviour {
         _canRotate = true;
     }
 
+    public void InDash(bool inDash) {
+        _inDash = inDash;
+    }
+
     public void BlockRotate(bool canRotate) => _canRotate = canRotate;
     #endregion
 }

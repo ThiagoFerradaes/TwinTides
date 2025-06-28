@@ -17,7 +17,6 @@ public class Dreadfall : LegendaryRelic
     public float FieldDamagePerTick;
     public float FieldRadius;
     public float DamageCooldown;
-    public HealthDebuff BleedDebuff;
     public EventReference JumpSound;
     public EventReference ImpactSound;
     public EventReference BurningAreaSound;

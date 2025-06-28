@@ -17,7 +17,7 @@ MonoBehaviour:
   NameSpriteTotem: {fileID: 21300000, guid: ae07bdc74de6ef64e88feaef29c36987, type: 3}
   MinLevel: 1
   MaxLevel: 1
-  Cooldown: 3
+  Cooldown: 30
   IsStackable: 1
   Character: 1
   SkillsDescriptions:
@@ -29,9 +29,9 @@ MonoBehaviour:
   - {fileID: 2297734193293577024, guid: cbaa6c36fbdcf284eaf13f1980ccbbfc, type: 3}
   SkillSize: {x: 7, y: 15, z: 7}
   Duration: 2.5
-  DamagePerTick: 0.2
-  DamageCooldown: 0.1
-  AmountOfHealToMaevis: 0.2
+  DamagePerTick: 0.3
+  DamageCooldown: 0.2
+  AmountOfHealToMaevis: 0.5
   PercentOfHealingBasedOnDamage: 20
   ZOffSett: 9
   LaserSound:
